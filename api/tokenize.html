@@ -108,6 +108,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.tokenize</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tokenization-engines">Tokenization Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sentence-level">Sentence level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythainlp.tokenize.crfcut">crfcut</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#word-level">Word level</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">attacut</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">deepcut</a></li>
@@ -633,6 +635,58 @@ after initiation:</p>
 </div>
 <div class="section" id="tokenization-engines">
 <h2>Tokenization Engines<a class="headerlink" href="#tokenization-engines" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="sentence-level">
+<h2>Sentence level<a class="headerlink" href="#sentence-level" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pythainlp.tokenize.crfcut">
+<span id="crfcut"></span><h2>crfcut<a class="headerlink" href="#module-pythainlp.tokenize.crfcut" title="Permalink to this headline">¶</a></h2>
+<p>CRFCut - Thai sentence segmenter.</p>
+<p>Thai sentence segmentation using conditional random field,
+default model trained on TED dataset</p>
+<p>Performance:
+- ORCHID - space-correct accuracy 87% vs 95% state-of-the-art</p>
+<blockquote>
+<div><p>(Zhou et al, 2016; <a class="reference external" href="https://www.aclweb.org/anthology/C16-1031.pdf">https://www.aclweb.org/anthology/C16-1031.pdf</a>)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>TED dataset - space-correct accuracy 82%</p></li>
+</ul>
+<p>See development notebooks at <a class="reference external" href="https://github.com/vistec-AI/ted_crawler">https://github.com/vistec-AI/ted_crawler</a>;
+POS features are not used due to unreliable POS tagging available</p>
+<dl class="py function">
+<dt id="pythainlp.tokenize.crfcut.extract_features">
+<code class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.crfcut.</span></code><code class="sig-name descname"><span class="pre">extract_features</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_gram</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/crfcut.html#extract_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.crfcut.extract_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract features for CRF by sliding <cite>max_n_gram</cite> of tokens
+for +/- <cite>window</cite> from the current token</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>doc</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – tokens from which features are to be extracted from</p></li>
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – size of window before and after the current token</p></li>
+<li><p><strong>max_n_gram</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – create n_grams from 1-gram to <cite>max_n_gram</cite>-gram     within the <cite>window</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of lists of features to be fed to CRF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pythainlp.tokenize.crfcut.segment">
+<code class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.crfcut.</span></code><code class="sig-name descname"><span class="pre">segment</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/crfcut.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.crfcut.segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>CRF-based sentence segmentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – text to be tokenized to sentences</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of words, tokenized from the text</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="word-level">
 <h2>Word level<a class="headerlink" href="#word-level" title="Permalink to this headline">¶</a></h2>
