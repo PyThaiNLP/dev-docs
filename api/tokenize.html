@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>pythainlp.tokenize &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
@@ -89,7 +88,7 @@
               
             
             
-              <p><span class="caption-text">Notes</span></p>
+              <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../notes/FAQ.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/command_line.html">Command Line</a></li>
@@ -98,7 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/license.html">License</a></li>
 </ul>
-<p><span class="caption-text">Package reference:</span></p>
+<p class="caption"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
@@ -202,10 +201,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="pythainlp-tokenize">
+  <div class="section" id="pythainlp-tokenize">
 <span id="tokenize-doc"></span><h1>pythainlp.tokenize<a class="headerlink" href="#pythainlp-tokenize" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.tokenize</span></code> contains multiple functions for tokenizing a chunk of Thai text into desirable units.</p>
-<section id="modules">
+<div class="section" id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="pythainlp.tokenize.clause_tokenize">
@@ -339,6 +338,8 @@ into ‘ข’, ‘น’, ‘ม’, and ‘ชั้น’.</p>
 <li><p><em>tcc</em> (default) -  Thai Character Cluster (Theeramunkong et al. 2000)</p></li>
 <li><p><em>etcc</em> - Enhanced Thai Character Cluster (Inrut et al. 2001)</p></li>
 <li><p><em>wangchanberta</em> - SentencePiece from wangchanberta model.</p></li>
+<li><p><em>dict</em> - newmm word tokenizer with a syllable dictionary</p></li>
+<li><p><em>ssg</em> - CRF syllable segmenter for Thai</p></li>
 </ul>
 </dd>
 </dl>
@@ -390,6 +391,7 @@ into ‘ข’, ‘น’, ‘ม’, and ‘ชั้น’.</p>
 <dt id="pythainlp.tokenize.syllable_tokenize">
 <code class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></code><code class="sig-name descname"><span class="pre">syllable_tokenize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'dict'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_whitespace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#syllable_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.syllable_tokenize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Syllable tokenizer.</p>
+<p><strong>syllable_tokenize is deprecated, use subword_tokenize instead</strong></p>
 <p>Tokenizes text into syllable (Thai: พยางค์), a unit of
 pronunciation having one vowel sound.  For example, the word ‘รถไฟ’
 contains two syallbles including ‘รถ’, and ‘ไฟ’.</p>
@@ -633,14 +635,14 @@ after initiation:</p>
 
 </dd></dl>
 
-</section>
-<section id="tokenization-engines">
+</div>
+<div class="section" id="tokenization-engines">
 <h2>Tokenization Engines<a class="headerlink" href="#tokenization-engines" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="sentence-level">
+</div>
+<div class="section" id="sentence-level">
 <h2>Sentence level<a class="headerlink" href="#sentence-level" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-pythainlp.tokenize.crfcut">
+</div>
+<div class="section" id="module-pythainlp.tokenize.crfcut">
 <span id="crfcut"></span><h2>crfcut<a class="headerlink" href="#module-pythainlp.tokenize.crfcut" title="Permalink to this headline">¶</a></h2>
 <p>CRFCut - Thai sentence segmenter.</p>
 <p>Thai sentence segmentation using conditional random field,
@@ -688,10 +690,10 @@ for +/- <cite>window</cite> from the current token</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="word-level">
+</div>
+<div class="section" id="word-level">
 <h2>Word level<a class="headerlink" href="#word-level" title="Permalink to this headline">¶</a></h2>
-<section id="id1">
+<div class="section" id="id1">
 <h3>attacut<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-pythainlp.tokenize.attacut"></span><p>Wrapper for AttaCut - Fast and Reasonably Accurate Word Tokenizer for Thai</p>
 <dl class="field-list simple">
@@ -706,11 +708,11 @@ for +/- <cite>window</cite> from the current token</p>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.attacut.</span></code><code class="sig-name descname"><span class="pre">AttacutTokenizer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'attacut-sc'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/attacut.html#AttacutTokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.attacut.AttacutTokenizer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h3>deepcut<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="module-pythainlp.tokenize.multi_cut">
+</div>
+<div class="section" id="module-pythainlp.tokenize.multi_cut">
 <span id="multi-cut"></span><h3>multi_cut<a class="headerlink" href="#module-pythainlp.tokenize.multi_cut" title="Permalink to this headline">¶</a></h3>
 <p>Multi cut – Thai word segmentation with maximum matching. The original source
 code is from Korakot Chaovavanich.</p>
@@ -753,8 +755,8 @@ code is from Korakot Chaovavanich.</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pythainlp.tokenize.longest">
+</div>
+<div class="section" id="module-pythainlp.tokenize.longest">
 <span id="longest"></span><h3>longest<a class="headerlink" href="#module-pythainlp.tokenize.longest" title="Permalink to this headline">¶</a></h3>
 <p>Dictionary-based longest-matching Thai word segmentation. Implementation based
 on the code from Patorn Utenpattanun.</p>
@@ -782,8 +784,8 @@ on the code from Patorn Utenpattanun.</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pythainlp.tokenize.pyicu">
+</div>
+<div class="section" id="module-pythainlp.tokenize.pyicu">
 <span id="pyicu"></span><h3>pyicu<a class="headerlink" href="#module-pythainlp.tokenize.pyicu" title="Permalink to this headline">¶</a></h3>
 <p>Wrapper for PyICU word segmentation. This wrapper module uses
 <code class="xref py py-class docutils literal notranslate"><span class="pre">icu.BreakIterator</span></code> with Thai as <code class="xref py py-class docutils literal notranslate"><span class="pre">icu.Local</span></code>
@@ -795,8 +797,8 @@ to locate boundaries between words from the text.</p>
 </ul>
 </dd>
 </dl>
-</section>
-<section id="module-pythainlp.tokenize.nercut">
+</div>
+<div class="section" id="module-pythainlp.tokenize.nercut">
 <span id="nercut"></span><h3>nercut<a class="headerlink" href="#module-pythainlp.tokenize.nercut" title="Permalink to this headline">¶</a></h3>
 <p>nercut 0.1</p>
 <p>Dictionary-based maximal matching word segmentation, constrained with
@@ -822,8 +824,8 @@ parts of the same named-entity.</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="newmm">
+</div>
+<div class="section" id="newmm">
 <h3>newmm<a class="headerlink" href="#newmm" title="Permalink to this headline">¶</a></h3>
 <p>The default word tokenization engine.</p>
 <span class="target" id="module-pythainlp.tokenize.newmm"></span><p>Dictionary-based maximal matching word segmentation, constrained with
@@ -857,11 +859,11 @@ Thai Character Cluster boundaries.</p>
 </dl>
 </dd></dl>
 
-</section>
-</section>
-<section id="subword-level">
+</div>
+</div>
+<div class="section" id="subword-level">
 <h2>Subword level<a class="headerlink" href="#subword-level" title="Permalink to this headline">¶</a></h2>
-<section id="module-pythainlp.tokenize.tcc">
+<div class="section" id="module-pythainlp.tokenize.tcc">
 <span id="tcc"></span><h3>tcc<a class="headerlink" href="#module-pythainlp.tokenize.tcc" title="Permalink to this headline">¶</a></h3>
 <p>The implementation of tokenizer accorinding to Thai Character Clusters (TCCs)
 rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548">Theeramunkong et al. 2000.</a></p>
@@ -924,8 +926,8 @@ rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.e
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pythainlp.tokenize.etcc">
+</div>
+<div class="section" id="module-pythainlp.tokenize.etcc">
 <span id="etcc"></span><h3>etcc<a class="headerlink" href="#module-pythainlp.tokenize.etcc" title="Permalink to this headline">¶</a></h3>
 <p>Segmenting text to Enhanced Thai Character Cluster (ETCC)
 Python implementation by Wannaphong Phatthiyaphaibun</p>
@@ -964,9 +966,9 @@ and Information Technology (ISCIT), pp. 37-40. 2001.</p>
 </dl>
 </dd></dl>
 
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

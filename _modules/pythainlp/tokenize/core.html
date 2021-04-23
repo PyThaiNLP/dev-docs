@@ -86,7 +86,7 @@
               
             
             
-              <p><span class="caption-text">Notes</span></p>
+              <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/FAQ.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/command_line.html">Command Line</a></li>
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/license.html">License</a></li>
 </ul>
-<p><span class="caption-text">Package reference:</span></p>
+<p class="caption"><span class="caption-text">Package reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
@@ -183,6 +183,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DEFAULT_SENT_TOKENIZE_ENGINE</span><span class="p">,</span>
@@ -481,6 +482,8 @@
 <span class="sd">        * *tcc* (default) -  Thai Character Cluster (Theeramunkong et al. 2000)</span>
 <span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
 <span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model.</span>
+<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
+<span class="sd">        * *ssg* - CRF syllable segmenter for Thai</span>
 
 <span class="sd">    :Example:</span>
 
@@ -525,19 +528,32 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
 
+    <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;etcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.etcc</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.wangchanberta</span> <span class="kn">import</span> <span class="n">segment</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>  <span class="c1"># use syllable dictionary</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">segments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="n">word_tokenize</span><span class="p">(</span>
+                    <span class="n">text</span><span class="o">=</span><span class="n">word</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">DEFAULT_SYLLABLE_DICT_TRIE</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ssg&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.ssg</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
 <span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">segments</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">segments</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)]</span>
@@ -552,6 +568,8 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Syllable tokenizer.</span>
+
+<span class="sd">    **syllable_tokenize is deprecated, use subword_tokenize instead**</span>
 
 <span class="sd">    Tokenizes text into syllable (Thai: พยางค์), a unit of</span>
 <span class="sd">    pronunciation having one vowel sound.  For example, the word &#39;รถไฟ&#39;</span>
@@ -582,6 +600,11 @@
 <span class="sd">        [&#39;รถ&#39;, &#39;ไฟ&#39;, &#39;สมัย&#39;, &#39;ใหม่&#39;, &#39;ใช้&#39;, &#39;กำ&#39;, &#39;ลัง&#39;, &#39;จาก&#39;, &#39;หัว&#39;,</span>
 <span class="sd">        &#39;รถ&#39;, &#39;จักร&#39;, &#39;ดี&#39;, &#39;เซล&#39;, &#39; &#39;, &#39;หรือ&#39;, &#39;จาก&#39;, &#39;ไฟ&#39;, &#39;ฟ้า&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="sd">&quot;&quot;&quot;syllable_tokenize will be deprecated in PyThaiNLP version 2.4,</span>
+<span class="sd">        use subword_tokenize instead&quot;&quot;&quot;</span><span class="p">,</span>
+        <span class="ne">PendingDeprecationWarning</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
