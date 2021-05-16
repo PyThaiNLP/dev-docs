@@ -201,18 +201,20 @@
 
 <div class="viewcode-block" id="collate"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.collate">[docs]</a><span class="k">def</span> <span class="nf">collate</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function sorts a list of strings according to Thai alphabets.</span>
+<span class="sd">    This function sorts strings (almost) according to Thai dictionary.</span>
 
-<span class="sd">    :param list[str] data: a list of words to be sorted</span>
-<span class="sd">    :param bool reverse: If `reverse` is set to **True** the result will be</span>
-<span class="sd">                         sorted in descending order. Otherwise, the result will</span>
-<span class="sd">                         be sorted in ascending order.</span>
-<span class="sd">                         By default, the parameter `reverse` is set to</span>
-<span class="sd">                         **False**, sorting alphabettically in ascending order.</span>
+<span class="sd">    Important notes: this implementation ignores tone marks and symbols</span>
 
-<span class="sd">    :return: a list of strings, sorted alphabetically, according to</span>
-<span class="sd">             Thai alphabets</span>
-<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    :param data: a list of words to be sorted</span>
+<span class="sd">    :type data: Iterable</span>
+<span class="sd">    :param reverse: If `reverse` is set to **True** the result will be</span>
+<span class="sd">                         sorted in descending order. Otherwise, the result</span>
+<span class="sd">                         will be sorted in ascending order, defaults to False</span>
+<span class="sd">    :type reverse: bool, optional</span>
+
+<span class="sd">    :return: a list of strings, sorted alphabetically, (almost) according to</span>
+<span class="sd">             Thai dictionary</span>
+<span class="sd">    :rtype: List[str]</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
