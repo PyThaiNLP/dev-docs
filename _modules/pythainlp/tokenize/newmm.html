@@ -207,10 +207,10 @@
 <span class="c1"># match non-Thai tokens</span>
 <span class="n">_PAT_NONTHAI</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;(?x)</span>
-<span class="sd">[-a-zA-Z]+|   # Latin characters</span>
-<span class="sd">\d[\d,\.]*|   # number</span>
-<span class="sd">[ \t]+|       # space</span>
-<span class="sd">\r?\n         # newline</span>
+<span class="sd">[-a-zA-Z]+|        # Latin characters</span>
+<span class="sd">\d+([,\.]\d+)*|    # number</span>
+<span class="sd">[ \t]+|            # space</span>
+<span class="sd">\r?\n              # newline</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="p">)</span>
 
@@ -320,16 +320,23 @@
     <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span><span class="p">,</span>
     <span class="n">safe_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Dictionary-based maximal matching word segmentation, constrained with</span>
-<span class="sd">    Thai Character Cluster boundaries.</span>
+    <span class="sd">&quot;&quot;&quot;Maximal-matching word segmentation, Thai Character Cluster constrained.</span>
 
-<span class="sd">    :param str text: text to be tokenized to words</span>
-<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary for tokenization</span>
-<span class="sd">    :param bool safe_mode: True to help avoid long wait for text with long\</span>
-<span class="sd">        and continuous ambiguous breaking points. Long wait may still able\</span>
-<span class="sd">        to occur. Default is False.</span>
-<span class="sd">    :return: list of words, tokenized from the text</span>
+<span class="sd">    A dictionary-based word segmentation using maximal matching algorithm,</span>
+<span class="sd">    constrained to Thai Character Cluster boundaries.</span>
+
+<span class="sd">    A custom dictionary can be supplied.</span>
+
+<span class="sd">    :param text: text to be tokenized</span>
+<span class="sd">    :type text: str</span>
+<span class="sd">    :param custom_dict: tokenization dictionary,\</span>
+<span class="sd">        defaults to DEFAULT_WORD_DICT_TRIE</span>
+<span class="sd">    :type custom_dict: Trie, optional</span>
+<span class="sd">    :param safe_mode: reduce chance for long processing time in long text\</span>
+<span class="sd">        with many ambiguous breaking points, defaults to False</span>
+<span class="sd">    :type safe_mode: bool, optional</span>
+<span class="sd">    :return: list of tokens</span>
+<span class="sd">    :rtype: List[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>

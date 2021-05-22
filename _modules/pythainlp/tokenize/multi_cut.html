@@ -182,8 +182,8 @@
   <h1>Source code for pythainlp.tokenize.multi_cut</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Multi cut -- Thai word segmentation with maximum matching. The original source</span>
-<span class="sd">code is from Korakot Chaovavanich.</span>
+<span class="sd">Multi cut -- Thai word segmentation with maximum matching.</span>
+<span class="sd">Original code from Korakot Chaovavanich.</span>
 
 <span class="sd">:See Also:</span>
 <span class="sd">    * `Facebook post \</span>
@@ -194,16 +194,14 @@
 
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">Trie</span>
 
 
 <span class="k">class</span> <span class="nc">LatticeString</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    String subclass เพื่อเก็บวิธีตัดหลายๆ วิธี</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;String that keeps possible tokenizations&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">multi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
@@ -216,22 +214,22 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">unique</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">multi</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">in_dict</span> <span class="o">=</span> <span class="n">in_dict</span>  <span class="c1"># บอกว่าเป็นคำมีในดิกหรือเปล่า</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_dict</span> <span class="o">=</span> <span class="n">in_dict</span>  <span class="c1"># if in dictionary</span>
 
 
 <span class="n">_RE_NONTHAI</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;(?x)</span>
-<span class="s2">[-a-zA-Z]+|   # Latin</span>
-<span class="s2">\d[\d,\.]*|   # number</span>
-<span class="s2">[ \t]+|       # space</span>
-<span class="s2">\r?\n         # newline</span>
+<span class="s2">[-a-zA-Z]+|       # Latin characters</span>
+<span class="s2">\d+([,\.]\d+)*|   # number</span>
+<span class="s2">[ \t]+|           # space</span>
+<span class="s2">\r?\n             # newline</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="n">_PAT_NONTHAI</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">_RE_NONTHAI</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_multicut</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    ส่งคืน LatticeString คืนมาเป็นก้อนๆ</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">_multicut</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">LatticeString</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return LatticeString&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_dict</span><span class="p">:</span>
         <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
 
@@ -282,7 +280,7 @@
             <span class="n">q</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">mmcut</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">mmcut</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">_multicut</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
         <span class="n">mm</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">multi</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
@@ -290,7 +288,7 @@
     <span class="k">return</span> <span class="n">res</span>
 
 
-<span class="k">def</span> <span class="nf">_combine</span><span class="p">(</span><span class="n">ww</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_combine</span><span class="p">(</span><span class="n">ww</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LatticeString</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="k">if</span> <span class="n">ww</span> <span class="o">==</span> <span class="p">[]:</span>
         <span class="k">yield</span> <span class="s2">&quot;&quot;</span>
     <span class="k">else</span><span class="p">:</span>
@@ -306,12 +304,15 @@
 <div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.multi_cut.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Dictionary-based maximum matching word segmentation.</span>
+    <span class="sd">&quot;&quot;&quot;Dictionary-based maximum matching word segmentation.</span>
 
-<span class="sd">    :param str text: text to be tokenized to words</span>
-<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary for tokenization</span>
-<span class="sd">    :return: list of words, tokenized from the text</span>
+<span class="sd">    :param text: text to be tokenized</span>
+<span class="sd">    :type text: str</span>
+<span class="sd">    :param custom_dict: tokenization dictionary,\</span>
+<span class="sd">        defaults to DEFAULT_WORD_DICT_TRIE</span>
+<span class="sd">    :type custom_dict: Trie, optional</span>
+<span class="sd">    :return: list of segmented tokens</span>
+<span class="sd">    :rtype: List[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
@@ -322,11 +323,15 @@
 <div class="viewcode-block" id="find_all_segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.multi_cut.find_all_segment">[docs]</a><span class="k">def</span> <span class="nf">find_all_segment</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get all possible segment variations</span>
+    <span class="sd">&quot;&quot;&quot;Get all possible segment variations.</span>
 
-<span class="sd">    :param str text: input string to be tokenized</span>
-<span class="sd">    :return: returns list of segment variations</span>
+<span class="sd">    :param text: input string to be tokenized</span>
+<span class="sd">    :type text: str</span>
+<span class="sd">    :param custom_dict: tokenization dictionary,\</span>
+<span class="sd">        defaults to DEFAULT_WORD_DICT_TRIE</span>
+<span class="sd">    :type custom_dict: Trie, optional</span>
+<span class="sd">    :return: list of segment variations</span>
+<span class="sd">    :rtype: List[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
