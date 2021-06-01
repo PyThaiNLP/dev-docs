@@ -234,7 +234,7 @@
 
 <span class="sd">    &gt;&gt;&gt; from pythainlp.word_vector import doesnt_match</span>
 <span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; words = [&#39;อาหารเช้า&#39;,&#39;อาหารเที่ยง&#39;,&#39;อาหารเย็น&#39;,&#39;พริกไทย&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; words = [&#39;อาหารเช้า&#39;, &#39;อาหารเที่ยง&#39;, &#39;อาหารเย็น&#39;, &#39;พริกไทย&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; doesnt_match(words)</span>
 <span class="sd">    พริกไทย</span>
 
@@ -370,7 +370,7 @@
 <span class="sd">    (train and electric train).</span>
 
 <span class="sd">    &gt;&gt;&gt; from pythainlp.word_vector import similarity</span>
-<span class="sd">    &gt;&gt;&gt; similarity(&#39;รถไฟ&#39;,&#39;รถไฟฟ้า&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; similarity(&#39;รถไฟ&#39;, &#39;รถไฟฟ้า&#39;)</span>
 <span class="sd">    0.43387136</span>
 
 
@@ -378,7 +378,7 @@
 <span class="sd">    (leopard and electric train).</span>
 
 <span class="sd">    &gt;&gt;&gt; from pythainlp.word_vector import similarity</span>
-<span class="sd">    &gt;&gt;&gt; similarity(&#39;เสือดาว&#39;,&#39;รถไฟฟ้า&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; similarity(&#39;เสือดาว&#39;, &#39;รถไฟฟ้า&#39;)</span>
 <span class="sd">    0.04300258</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -440,7 +440,7 @@
             <span class="n">word</span> <span class="o">=</span> <span class="n">_TK_EOL</span>
 
         <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">:</span>
-            <span class="n">vec</span> <span class="o">+=</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">word_vec</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">vec</span> <span class="o">+=</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">use_mean</span><span class="p">:</span>
         <span class="n">vec</span> <span class="o">/=</span> <span class="n">len_words</span>
