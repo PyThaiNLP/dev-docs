@@ -341,8 +341,12 @@ to ease readability.</p>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<p>display_thai_char(“้”)
-# output: “_้”</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">display_thai_char</span>
+
+<span class="n">display_thai_char</span><span class="p">(</span><span class="s2">&quot;้&quot;</span><span class="p">)</span>
+<span class="c1"># output: &quot;_้&quot;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -463,15 +467,21 @@ where stopword is excluded and returns as a frequency dictionary.</p>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<p>from pythainlp.util import countthai</p>
-<p>countthai(“ไทยเอ็นแอลพี 2.3”) 
-# output: 100.0</p>
-<p>countthai(“PyThaiNLP 2.3”) 
-# output: 0.0</p>
-<p>countthai(“ใช้งาน PyThaiNLP 2.3”) 
-# output: 40.0</p>
-<p>countthai(“ใช้งาน PyThaiNLP 2.3”, ignore_chars=””)
-# output: 30.0</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">countthai</span>
+
+<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ไทยเอ็นแอลพี 2.3&quot;</span><span class="p">)</span> 
+<span class="c1"># output: 100.0</span>
+
+<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP 2.3&quot;</span><span class="p">)</span> 
+<span class="c1"># output: 0.0</span>
+
+<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ใช้งาน PyThaiNLP 2.3&quot;</span><span class="p">)</span> 
+<span class="c1"># output: 40.0</span>
+
+<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ใช้งาน PyThaiNLP 2.3&quot;</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="c1"># output: 30.0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -537,15 +547,21 @@ otherwise False.</p>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<p>from pythainlp.util import isthai</p>
-<p>isthai(“กาลเวลา”)
-# output: True</p>
-<p>isthai(“กาลเวลา.”)
-# output: True</p>
-<p>isthai(“กาล-เวลา”)
-# output: False</p>
-<p>isthai(“กาล-เวลา +66”, ignore_chars=”01234567890+-.,”)
-# output: True</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">isthai</span>
+
+<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาลเวลา&quot;</span><span class="p">)</span>
+<span class="c1"># output: True</span>
+
+<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาลเวลา.&quot;</span><span class="p">)</span>
+<span class="c1"># output: True</span>
+
+<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาล-เวลา&quot;</span><span class="p">)</span>
+<span class="c1"># output: False</span>
+
+<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาล-เวลา +66&quot;</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="o">=</span><span class="s2">&quot;01234567890+-.,&quot;</span><span class="p">)</span>
+<span class="c1"># output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1255,18 +1271,20 @@ such as ‘1’, ‘2’, ‘3’</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p>thaiword_to_time”บ่ายโมงครึ่ง”)
-# output:
-# 13:30</p>
-</dd>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thaiword_to_time</span><span class="s2">&quot;บ่ายโมงครึ่ง&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># 13:30</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.time_to_thaiword">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">time_to_thaiword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.9)"><span class="pre">datetime.time</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><span class="pre">datetime.datetime</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'24h'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/time.html#time_to_thaiword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.time_to_thaiword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Spell out time to Thai words.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>time_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – time input, can be a datetime.time object         or a datetime.datetime object         or a string (in H:M or H:M:S format, using 24-hour clock)</p></li>
@@ -1287,26 +1305,33 @@ such as ‘1’, ‘2’, ‘3’</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p>time_to_thaiword(“8:17”)
-# output:
-# แปดนาฬิกาสิบเจ็ดนาที</p>
-<p>time_to_thaiword(“8:17”, “6h”)
-# output:
-# สองโมงเช้าสิบเจ็ดนาที</p>
-<p>time_to_thaiword(“8:17”, “m6h”)
-# output:
-# แปดโมงสิบเจ็ดนาที</p>
-<p>time_to_thaiword(“18:30”, fmt=”m6h”)
-# output:
-# หกโมงครึ่ง</p>
-<p>time_to_thaiword(datetime.time(12, 3, 0))
-# output:
-# สิบสองนาฬิกาสามนาที</p>
-<p>time_to_thaiword(datetime.time(12, 3, 0), precision=”s”)
-# output:
-# สิบสองนาฬิกาสามนาทีศูนย์วินาที</p>
-</dd>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time_to_thaiword</span><span class="p">(</span><span class="s2">&quot;8:17&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># แปดนาฬิกาสิบเจ็ดนาที</span>
+
+<span class="n">time_to_thaiword</span><span class="p">(</span><span class="s2">&quot;8:17&quot;</span><span class="p">,</span> <span class="s2">&quot;6h&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># สองโมงเช้าสิบเจ็ดนาที</span>
+
+<span class="n">time_to_thaiword</span><span class="p">(</span><span class="s2">&quot;8:17&quot;</span><span class="p">,</span> <span class="s2">&quot;m6h&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># แปดโมงสิบเจ็ดนาที</span>
+
+<span class="n">time_to_thaiword</span><span class="p">(</span><span class="s2">&quot;18:30&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;m6h&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># หกโมงครึ่ง</span>
+
+<span class="n">time_to_thaiword</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="c1"># output:</span>
+<span class="c1"># สิบสองนาฬิกาสามนาที</span>
+
+<span class="n">time_to_thaiword</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">precision</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># สิบสองนาฬิกาสามนาทีศูนย์วินาที</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py class">
