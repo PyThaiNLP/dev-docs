@@ -181,119 +181,80 @@
             
   <h1>Source code for pythainlp.translate.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">tarfile</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-
-<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">download</span><span class="p">,</span> <span class="n">get_corpus_path</span>
-<span class="kn">from</span> <span class="nn">pythainlp.tools</span> <span class="kn">import</span> <span class="n">get_full_data_path</span><span class="p">,</span> <span class="n">get_pythainlp_data_path</span>
-
-<span class="kn">from</span> <span class="nn">fairseq.models.transformer</span> <span class="kn">import</span> <span class="n">TransformerModel</span>
-<span class="kn">from</span> <span class="nn">sacremoses</span> <span class="kn">import</span> <span class="n">MosesTokenizer</span>
 
 
-<span class="n">_EN_TH_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;scb_1m_en-th_moses&quot;</span>
-<span class="c1"># SCB_1M-MT_OPUS+TBASE_en-th_moses-spm_130000-16000_v1.0.tar.gz</span>
-<span class="n">_EN_TH_FILE_NAME</span> <span class="o">=</span> <span class="s2">&quot;SCB_1M-MT_OPUS+TBASE_en-th_moses-spm_130000-16000_v1.0&quot;</span>
-
-<span class="n">_TH_EN_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;scb_1m_th-en_spm&quot;</span>
-<span class="c1"># SCB_1M-MT_OPUS+TBASE_th-en_spm-spm_32000-joined_v1.0.tar.gz</span>
-<span class="n">_TH_EN_FILE_NAME</span> <span class="o">=</span> <span class="s2">&quot;SCB_1M-MT_OPUS+TBASE_th-en_spm-spm_32000-joined_v1.0&quot;</span>
-
-
-<span class="k">def</span> <span class="nf">_get_translate_path</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_download_install</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
-        <span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s2">&quot;r:gz&quot;</span><span class="p">)</span>
-        <span class="n">tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
-        <span class="n">tar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
-            <span class="n">tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-
-
-<div class="viewcode-block" id="download_model_all"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.download_model_all">[docs]</a><span class="k">def</span> <span class="nf">download_model_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.Translate">[docs]</a><span class="k">class</span> <span class="nc">Translate</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download all translation models in advanced</span>
+<span class="sd">    Machine Translation</span>
+
+<span class="sd">    :param str src_lang: source language</span>
+<span class="sd">    :param str target_lang: target language</span>
+
+<span class="sd">    **Options for source &amp; target language**</span>
+<span class="sd">        * *th* - *en* - Thai to English</span>
+<span class="sd">        * *en* - *th* - English to Thai</span>
+<span class="sd">        * *th* - *zh* - Thai to Chinese</span>
+<span class="sd">        * *zh* - *th* - Chinese to Thai</span>
+
+<span class="sd">    :Example:</span>
+
+<span class="sd">    Translate text from Thai to English::</span>
+
+<span class="sd">        from pythainlp.translate import Translate</span>
+<span class="sd">        th2en = Translate(&#39;th&#39;, &#39;en&#39;)</span>
+
+<span class="sd">        th2en.translate(&quot;ฉันรักแมว&quot;)</span>
+<span class="sd">        # output: I love cat.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_download_install</span><span class="p">(</span><span class="n">_EN_TH_MODEL_NAME</span><span class="p">)</span>
-    <span class="n">_download_install</span><span class="p">(</span><span class="n">_TH_EN_MODEL_NAME</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="EnThTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.EnThTranslator">[docs]</a><span class="k">class</span> <span class="nc">EnThTranslator</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">MosesTokenizer</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span> <span class="o">=</span> <span class="n">_EN_TH_MODEL_NAME</span>
-
-        <span class="n">_download_install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">TransformerModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">model_name_or_path</span><span class="o">=</span><span class="n">_get_translate_path</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
-                <span class="n">_EN_TH_FILE_NAME</span><span class="p">,</span>
-                <span class="s2">&quot;models&quot;</span><span class="p">,</span>
-            <span class="p">),</span>
-            <span class="n">checkpoint_file</span><span class="o">=</span><span class="s2">&quot;checkpoint.pt&quot;</span><span class="p">,</span>
-            <span class="n">data_name_or_path</span><span class="o">=</span><span class="n">_get_translate_path</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
-                <span class="n">_EN_TH_FILE_NAME</span><span class="p">,</span>
-                <span class="s2">&quot;vocab&quot;</span><span class="p">,</span>
-            <span class="p">),</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="EnThTranslator.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.EnThTranslator.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Translate text from English to Thai</span>
+<span class="sd">        :param str src_lang: source language</span>
+<span class="sd">        :param str target_lang: target language</span>
+
+<span class="sd">        **Options for source &amp; target language**</span>
+<span class="sd">            * *th* - *en* - Thai to English</span>
+<span class="sd">            * *en* - *th* - English to Thai</span>
+<span class="sd">            * *th* - *zh* - Thai to Chinese</span>
+<span class="sd">            * *zh* - *th* - Chinese to Thai</span>
+
+<span class="sd">        :Example:</span>
+
+<span class="sd">        Translate text from Thai to English::</span>
+
+<span class="sd">            from pythainlp.translate import Translate</span>
+<span class="sd">            th2en = Translate(&#39;th&#39;, &#39;en&#39;)</span>
+
+<span class="sd">            th2en.translate(&quot;ฉันรักแมว&quot;)</span>
+<span class="sd">            # output: I love cat.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">src_lang</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.translate.en_th</span> <span class="kn">import</span> <span class="n">ThEnTranslator</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThEnTranslator</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.translate.en_th</span> <span class="kn">import</span> <span class="n">EnThTranslator</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">EnThTranslator</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;zh&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.translate.zh_th</span> <span class="kn">import</span> <span class="n">ThZhTranslator</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThZhTranslator</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;zh&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.translate.zh_th</span> <span class="kn">import</span> <span class="n">ZhThTranslator</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ZhThTranslator</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not support language!&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Translate.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.Translate.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Translate text</span>
 
 <span class="sd">        :param str text: input text in source language</span>
 <span class="sd">        :return: translated text in target language</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-        <span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">translated</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;▁&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div></div>
-
-
-<div class="viewcode-block" id="ThEnTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.ThEnTranslator">[docs]</a><span class="k">class</span> <span class="nc">ThEnTranslator</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span> <span class="o">=</span> <span class="n">_TH_EN_MODEL_NAME</span>
-
-        <span class="n">_download_install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">TransformerModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">model_name_or_path</span><span class="o">=</span><span class="n">_get_translate_path</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
-                <span class="n">_TH_EN_FILE_NAME</span><span class="p">,</span>
-                <span class="s2">&quot;models&quot;</span><span class="p">,</span>
-            <span class="p">),</span>
-            <span class="n">checkpoint_file</span><span class="o">=</span><span class="s2">&quot;checkpoint.pt&quot;</span><span class="p">,</span>
-            <span class="n">data_name_or_path</span><span class="o">=</span><span class="n">_get_translate_path</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
-                <span class="n">_TH_EN_FILE_NAME</span><span class="p">,</span>
-                <span class="s2">&quot;vocab&quot;</span><span class="p">,</span>
-            <span class="p">),</span>
-            <span class="n">bpe</span><span class="o">=</span><span class="s2">&quot;sentencepiece&quot;</span><span class="p">,</span>
-            <span class="n">sentencepiece_model</span><span class="o">=</span><span class="n">_get_translate_path</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
-                <span class="n">_TH_EN_FILE_NAME</span><span class="p">,</span>
-                <span class="s2">&quot;bpe&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;spm.th.model&quot;</span><span class="p">,</span>
-            <span class="p">),</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="ThEnTranslator.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.ThEnTranslator.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Translate text from Thai to English</span>
-
-<span class="sd">        :param str text: input text in source language</span>
-<span class="sd">        :return: translated text in target language</span>
-<span class="sd">        :rtype: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>
