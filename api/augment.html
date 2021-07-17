@@ -195,7 +195,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.augment.WordNetAug">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pythainlp.augment.</span></span><span class="sig-name descname"><span class="pre">WordNetAug</span></span><a class="reference internal" href="../_modules/pythainlp/augment/wordnet.html#WordNetAug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.WordNetAug" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Text Augment using wordnet</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.augment.WordNetAug.augment">
 <span class="sig-name descname"><span class="pre">augment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sentence:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">tokenize:</span> <span class="pre">object</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">word_tokenize&gt;</span></em>, <em class="sig-param"><span class="pre">max_syn_sent:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">6</span></em>, <em class="sig-param"><span class="pre">postag:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">postag_corpus:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'lst20'</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/augment/wordnet.html#WordNetAug.augment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.WordNetAug.augment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Text Augment using wordnet</p>
@@ -215,7 +216,21 @@
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]]</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment</span> <span class="kn">import</span> <span class="n">WordNetAug</span>
+
+<span class="n">aug</span> <span class="o">=</span> <span class="n">WordNetAug</span><span class="p">()</span>
+<span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;เราชอบไปโรงเรียน&quot;</span><span class="p">)</span>
+<span class="c1"># output: [(&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;ร.ร.&#39;),</span>
+ <span class="p">(</span><span class="s1">&#39;เรา&#39;</span><span class="p">,</span> <span class="s1">&#39;ชอบ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไป&#39;</span><span class="p">,</span> <span class="s1">&#39;รร.&#39;</span><span class="p">),</span>
+ <span class="p">(</span><span class="s1">&#39;เรา&#39;</span><span class="p">,</span> <span class="s1">&#39;ชอบ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไป&#39;</span><span class="p">,</span> <span class="s1">&#39;โรงเรียน&#39;</span><span class="p">),</span>
+ <span class="p">(</span><span class="s1">&#39;เรา&#39;</span><span class="p">,</span> <span class="s1">&#39;ชอบ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไป&#39;</span><span class="p">,</span> <span class="s1">&#39;อาคารเรียน&#39;</span><span class="p">),</span>
+ <span class="p">(</span><span class="s1">&#39;เรา&#39;</span><span class="p">,</span> <span class="s1">&#39;ชอบ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไปยัง&#39;</span><span class="p">,</span> <span class="s1">&#39;ร.ร.&#39;</span><span class="p">),</span>
+ <span class="p">(</span><span class="s1">&#39;เรา&#39;</span><span class="p">,</span> <span class="s1">&#39;ชอบ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไปยัง&#39;</span><span class="p">,</span> <span class="s1">&#39;รร.&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -306,7 +321,16 @@
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]]</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment.word2vec</span> <span class="kn">import</span> <span class="n">Thai2fitAug</span>
+
+<span class="n">aug</span> <span class="o">=</span> <span class="n">Thai2fitAug</span><span class="p">()</span>
+<span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;ผมเรียน&quot;</span><span class="p">,</span> <span class="n">n_sent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># output: [(&#39;พวกเรา&#39;, &#39;เรียน&#39;), (&#39;ฉัน&#39;, &#39;เรียน&#39;)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

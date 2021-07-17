@@ -318,6 +318,9 @@
 
 
 <div class="viewcode-block" id="WordNetAug"><a class="viewcode-back" href="../../../api/augment.html#pythainlp.augment.WordNetAug">[docs]</a><span class="k">class</span> <span class="nc">WordNetAug</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Text Augment using wordnet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
@@ -374,9 +377,23 @@
 
 <span class="sd">        :return: list of synonyms</span>
 <span class="sd">        :rtype: List[Tuple[str]]</span>
+
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            from pythainlp.augment import WordNetAug</span>
+
+<span class="sd">            aug = WordNetAug()</span>
+<span class="sd">            aug.augment(&quot;เราชอบไปโรงเรียน&quot;)</span>
+<span class="sd">            # output: [(&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;ร.ร.&#39;),</span>
+<span class="sd">             (&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;รร.&#39;),</span>
+<span class="sd">             (&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;โรงเรียน&#39;),</span>
+<span class="sd">             (&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;อาคารเรียน&#39;),</span>
+<span class="sd">             (&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไปยัง&#39;, &#39;ร.ร.&#39;),</span>
+<span class="sd">             (&#39;เรา&#39;, &#39;ชอบ&#39;, &#39;ไปยัง&#39;, &#39;รร.&#39;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_sentences</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">list_words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list_words</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list_synonym</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p_all</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">postag</span><span class="p">:</span>
