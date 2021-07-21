@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pythainlp.corpus.ttc &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
+  <title>pythainlp.corpus.oscar &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
   
 
   
@@ -166,7 +166,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>pythainlp.corpus.ttc</li>
+      <li>pythainlp.corpus.oscar</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,13 +181,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for pythainlp.corpus.ttc</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.corpus.oscar</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Thai Textbook Corpus (TTC) word frequency</span>
+<span class="sd">Thai unigram word frequency from OSCAR Corpus (icu word tokenize)</span>
 
-<span class="sd">Credit: Korakot Chaovavanich‎</span>
-<span class="sd">https://www.facebook.com/photo.php?fbid=363640477387469&amp;set=gm.434330506948445&amp;type=3&amp;permPage=1</span>
+<span class="sd">Credit: Korakot Chaovavanich</span>
+<span class="sd">https://web.facebook.com/groups/colab.thailand/permalink/1524070061101680/</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
@@ -198,37 +198,46 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus_path</span>
 
-<span class="n">_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;ttc_freq.txt&quot;</span>
+<span class="n">_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;oscar_icu&quot;</span>
 
 
-<div class="viewcode-block" id="word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.ttc.word_freqs">[docs]</a><span class="k">def</span> <span class="nf">word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<div class="viewcode-block" id="word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.oscar.word_freqs">[docs]</a><span class="k">def</span> <span class="nf">word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get word frequency from Thai Textbook Corpus (TTC)</span>
-<span class="sd">    \n(See: `dev/pythainlp/corpus/ttc_freq.txt\</span>
-<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/ttc_freq.txt&gt;`_)</span>
+<span class="sd">    Get word frequency from OSCAR Corpus (icu word tokenize)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">get_corpus</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">))</span>
     <span class="n">word_freqs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-        <span class="n">word_freq</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_freq</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">word_freqs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word_freq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">word_freq</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="n">_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="k">del</span> <span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">_data</span><span class="p">:</span>
+            <span class="n">_temp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">word_freqs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+                <span class="k">elif</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                    <span class="n">word_freqs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;&lt;s/&gt;&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 
     <span class="k">return</span> <span class="n">word_freqs</span></div>
 
 
-<div class="viewcode-block" id="unigram_word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.ttc.unigram_word_freqs">[docs]</a><span class="k">def</span> <span class="nf">unigram_word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">defaultdict</span><span class="p">:</span>
+<div class="viewcode-block" id="unigram_word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.oscar.unigram_word_freqs">[docs]</a><span class="k">def</span> <span class="nf">unigram_word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">defaultdict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get unigram word frequency from Thai Textbook Corpus (TTC)</span>
+<span class="sd">    Get unigram word frequency from OSCAR Corpus (icu word tokenize)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">get_corpus</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">))</span>
+    <span class="n">_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">)</span>
     <span class="n">_word_freqs</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-        <span class="n">_temp</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;	&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">_word_freqs</span><span class="p">[</span><span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_temp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="k">del</span> <span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_data</span><span class="p">:</span>
+            <span class="n">_temp</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">_word_freqs</span><span class="p">[</span><span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_temp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                <span class="n">_word_freqs</span><span class="p">[</span><span class="s2">&quot;&lt;s/&gt;&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_temp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">_word_freqs</span></div>
 </pre></div>
