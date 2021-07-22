@@ -379,7 +379,16 @@
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]]</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment.word2vec</span> <span class="kn">import</span> <span class="n">LTW2VAug</span>
+
+<span class="n">aug</span> <span class="o">=</span> <span class="n">LTW2VAug</span><span class="p">()</span>
+<span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;ผมเรียน&quot;</span><span class="p">,</span> <span class="n">n_sent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># output: [(&#39;เขา&#39;, &#39;เรียนหนังสือ&#39;), (&#39;เขา&#39;, &#39;สมัครเรียน&#39;)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -485,7 +494,21 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment.lm</span> <span class="kn">import</span> <span class="n">Thai2transformersAug</span>
+
+<span class="n">aug</span><span class="o">=</span><span class="n">Thai2transformersAug</span><span class="p">()</span>
+
+<span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;ช้างมีทั้งหมด 50 ตัว บน&quot;</span><span class="p">)</span>
+<span class="c1"># output: [&#39;ช้างมีทั้งหมด 50 ตัว บนโลกใบนี้&#39;,</span>
+ <span class="s1">&#39;ช้างมีทั้งหมด 50 ตัว บนสุด&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ช้างมีทั้งหมด 50 ตัว บนบก&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ช้างมีทั้งหมด 50 ตัว บนนั้น&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ช้างมีทั้งหมด 50 ตัว บนหัว&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -512,9 +535,18 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 <dd class="field-even"><p>list of synonyms</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment.word2vec.bpemb_wv</span> <span class="kn">import</span> <span class="n">BPEmbAug</span>
+
+<span class="n">aug</span> <span class="o">=</span> <span class="n">BPEmbAug</span><span class="p">()</span>
+<span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;ผมเรียน&quot;</span><span class="p">,</span> <span class="n">n_sent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># output: [&#39;ผมสอน&#39;, &#39;ผมเข้าเรียน&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

@@ -246,6 +246,20 @@
 
 <span class="sd">        :return: list of text augment</span>
 <span class="sd">        :rtype: List[str]</span>
+
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            from pythainlp.augment.lm import Thai2transformersAug</span>
+
+<span class="sd">            aug=Thai2transformersAug()</span>
+
+<span class="sd">            aug.augment(&quot;ช้างมีทั้งหมด 50 ตัว บน&quot;)</span>
+<span class="sd">            # output: [&#39;ช้างมีทั้งหมด 50 ตัว บนโลกใบนี้&#39;,</span>
+<span class="sd">             &#39;ช้างมีทั้งหมด 50 ตัว บนสุด&#39;,</span>
+<span class="sd">             &#39;ช้างมีทั้งหมด 50 ตัว บนบก&#39;,</span>
+<span class="sd">             &#39;ช้างมีทั้งหมด 50 ตัว บนนั้น&#39;,</span>
+<span class="sd">             &#39;ช้างมีทั้งหมด 50 ตัว บนหัว&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">num_replace_tokens</span><span class="p">)</span>

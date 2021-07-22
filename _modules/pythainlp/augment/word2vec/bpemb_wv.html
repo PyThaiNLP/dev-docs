@@ -226,7 +226,15 @@
 <span class="sd">        :param float p: Probability of word</span>
 
 <span class="sd">        :return: list of synonyms</span>
-<span class="sd">        :rtype: List[Tuple[str]]</span>
+<span class="sd">        :rtype: List[str]</span>
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            from pythainlp.augment.word2vec.bpemb_wv import BPEmbAug</span>
+
+<span class="sd">            aug = BPEmbAug()</span>
+<span class="sd">            aug.augment(&quot;ผมเรียน&quot;, n_sent=2, p=0.5)</span>
+<span class="sd">            # output: [&#39;ผมสอน&#39;, &#39;ผมเข้าเรียน&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;▁&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sentence</span><span class="p">,</span> <span class="n">n_sent</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
