@@ -184,6 +184,7 @@
   <h1>Source code for pythainlp.word_vector.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">KeyedVectors</span>
 <span class="kn">from</span> <span class="nn">gensim.models.keyedvectors</span> <span class="kn">import</span> <span class="n">Word2VecKeyedVectors</span>
@@ -201,11 +202,17 @@
 
 <div class="viewcode-block" id="get_model"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.get_model">[docs]</a><span class="k">def</span> <span class="nf">get_model</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Word2VecKeyedVectors</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **DEPRECATED: use WordVector class instead**</span>
+
 <span class="sd">    Get word vector model.</span>
 
 <span class="sd">    :return: `gensim` word2vec model</span>
 <span class="sd">    :rtype: gensim.models.keyedvectors.Word2VecKeyedVectors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;get_model is deprecated, use WordVector class instead&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_MODEL_NAME</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">KeyedVectors</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
@@ -215,6 +222,8 @@
 
 <div class="viewcode-block" id="doesnt_match"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.doesnt_match">[docs]</a><span class="k">def</span> <span class="nf">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **DEPRECATED: use WordVector class instead**</span>
+
 <span class="sd">    This function returns one word that is mostly unrelated to other words</span>
 <span class="sd">    in the list. We use the function :func:`doesnt_match` from :mod:`gensim`.</span>
 
@@ -250,6 +259,10 @@
 <span class="sd">    เรือ</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;doesnt_match is deprecated, use WordVector class instead&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">)</span></div>
 
 
@@ -257,6 +270,8 @@
     <span class="n">positive</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">negative</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **DEPRECATED: use WordVector class instead**</span>
+
 <span class="sd">    This function find the top-10 words that are most similar with respect</span>
 <span class="sd">    to from two lists of words labeled as positive and negative.</span>
 <span class="sd">    The top-10 most similar words are obtained using multiplication</span>
@@ -346,12 +361,17 @@
 <span class="sd">    &gt;&gt;&gt; most_similar_cosmul(list_positive, list_negative)</span>
 <span class="sd">    KeyError: &quot;word &#39;เมนูอาหารไทย&#39; not in vocabulary&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;most_similar_cosmul is deprecated, use WordVector class instead&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">most_similar_cosmul</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="n">negative</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="similarity"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.similarity">[docs]</a><span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **DEPRECATED: use WordVector class instead**</span>
+
 <span class="sd">    This function computae cosine similarity between two words.</span>
 
 <span class="sd">    :param str word1: first word to be compared</span>
@@ -384,11 +404,17 @@
 <span class="sd">    0.04300258</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;similarity is deprecated, use WordVector class instead&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="sentence_vectorizer"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.sentence_vectorizer">[docs]</a><span class="k">def</span> <span class="nf">sentence_vectorizer</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_mean</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **DEPRECATED: use WordVector class instead**</span>
+
 <span class="sd">    This function convert a Thai sentence into vector.</span>
 <span class="sd">    Specifically, it first tokenize that text and map each tokenized words</span>
 <span class="sd">    with the word vectors from the model.</span>
@@ -427,6 +453,10 @@
 <span class="sd">        0.40506999,  1.58591403,  0.63869202, -0.702155  ,  1.62977601,</span>
 <span class="sd">        4.52269109, -0.70760502,  0.50952601, -0.914392  ,  0.70673105]])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;sentence_vectorizer is deprecated, use WordVector class instead&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">WV_DIM</span><span class="p">))</span>
 
     <span class="n">words</span> <span class="o">=</span> <span class="n">THAI2FIT_TOKENIZER</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
