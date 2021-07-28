@@ -392,6 +392,29 @@
 <span class="sd">    :param list itos_new: list of new vocab</span>
 
 <span class="sd">    :return: merged torch model weights</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.ulmfit import merge_wgts</span>
+<span class="sd">        import torch</span>
+
+<span class="sd">        wgts = {&#39;0.encoder.weight&#39;: torch.randn(5,3)}</span>
+<span class="sd">        itos_pre = [&quot;แมว&quot;, &quot;คน&quot;, &quot;หนู&quot;]</span>
+<span class="sd">        itos_new = [&quot;ปลา&quot;, &quot;เต่า&quot;, &quot;นก&quot;]</span>
+<span class="sd">        em_sz = 3</span>
+
+<span class="sd">        merge_wgts(em_sz, wgts, itos_pre, itos_new)</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # {&#39;0.encoder.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011]]),</span>
+<span class="sd">        # &#39;0.encoder_dp.emb.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011]]),</span>
+<span class="sd">        # &#39;1.decoder.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011],</span>
+<span class="sd">        # [0.5952, 0.4453, 0.0011]])}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">itos_new</span><span class="p">)</span>
     <span class="n">enc_wgts</span> <span class="o">=</span> <span class="n">wgts</span><span class="p">[</span><span class="s2">&quot;0.encoder.weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>

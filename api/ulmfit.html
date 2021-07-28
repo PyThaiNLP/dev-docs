@@ -307,7 +307,30 @@ of weights and vocab; use average if vocab not in pretrained vocab</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>merged torch model weights</p>
 </dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.ulmfit</span> <span class="kn">import</span> <span class="n">merge_wgts</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">wgts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0.encoder.weight&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)}</span>
+<span class="n">itos_pre</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;แมว&quot;</span><span class="p">,</span> <span class="s2">&quot;คน&quot;</span><span class="p">,</span> <span class="s2">&quot;หนู&quot;</span><span class="p">]</span>
+<span class="n">itos_new</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ปลา&quot;</span><span class="p">,</span> <span class="s2">&quot;เต่า&quot;</span><span class="p">,</span> <span class="s2">&quot;นก&quot;</span><span class="p">]</span>
+<span class="n">em_sz</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">merge_wgts</span><span class="p">(</span><span class="n">em_sz</span><span class="p">,</span> <span class="n">wgts</span><span class="p">,</span> <span class="n">itos_pre</span><span class="p">,</span> <span class="n">itos_new</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># {&#39;0.encoder.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011]]),</span>
+<span class="c1"># &#39;0.encoder_dp.emb.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011]]),</span>
+<span class="c1"># &#39;1.decoder.weight&#39;: tensor([[0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011],</span>
+<span class="c1"># [0.5952, 0.4453, 0.0011]])}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
