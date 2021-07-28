@@ -235,8 +235,6 @@
             <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span>
 
         <span class="k">if</span> <span class="n">curr_tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">taglist</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">combining_word</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combining_word</span><span class="p">)</span>
             <span class="n">combining_word</span> <span class="o">=</span> <span class="n">curr_word</span>
         <span class="k">elif</span> <span class="p">(</span>
             <span class="n">curr_tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;I-&quot;</span><span class="p">)</span>
@@ -254,9 +252,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">combining_word</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_word</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">combining_word</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combining_word</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">words</span></div>
 </pre></div>
