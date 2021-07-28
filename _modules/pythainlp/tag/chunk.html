@@ -198,6 +198,17 @@
 
 <span class="sd">    :return: a list of tuple (word,part-of-speech,chunking)</span>
 <span class="sd">    :rtype: List[str]</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.tag import chunk_parse, pos_tag</span>
+
+<span class="sd">        tokens = [&quot;ผม&quot;, &quot;รัก&quot;, &quot;คุณ&quot;]</span>
+<span class="sd">        tokens_pos = pos_tag(tokens, engine=&quot;perceptron&quot;, corpus=&quot;orchid&quot;)</span>
+
+<span class="sd">        print(chunk_parse(tokens_pos))</span>
+<span class="sd">        # output: [&#39;B-NP&#39;, &#39;B-VP&#39;, &#39;I-VP&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.crfchunk</span> <span class="kn">import</span> <span class="n">CRFchunk</span>
     <span class="n">_engine</span> <span class="o">=</span> <span class="n">CRFchunk</span><span class="p">()</span>

@@ -250,6 +250,14 @@
 <span class="sd">    :param str text: input text</span>
 <span class="sd">    :return: text without dangling Thai characters at the beginning</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import remove_dangling</span>
+
+<span class="sd">        remove_dangling(&#39;๊ก&#39;)</span>
+<span class="sd">        # output: &#39;ก&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_RE_REMOVE_DANGLINGS</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
 
@@ -264,6 +272,14 @@
 <span class="sd">    :param str text: input text</span>
 <span class="sd">    :return: text without duplicated spaces and newlines</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import remove_dup_spaces</span>
+
+<span class="sd">        remove_dup_spaces(&#39;ก    ข    ค&#39;)</span>
+<span class="sd">        # output: &#39;ก ข ค&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="s2">&quot;  &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
