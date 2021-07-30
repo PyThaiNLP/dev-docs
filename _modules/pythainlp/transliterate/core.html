@@ -207,6 +207,7 @@
 <span class="sd">          Transcription issued by Royal Institute of Thailand.</span>
 <span class="sd">        * *thai2rom* - a deep learning-based Thai romanization engine</span>
 <span class="sd">          (require PyTorch).</span>
+<span class="sd">        * *tltk* - TLTK: Thai Language Toolkit</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -217,6 +218,9 @@
 <span class="sd">        # output: &#39;samant&#39;</span>
 
 <span class="sd">        romanize(&quot;สามารถ&quot;, engine=&quot;thai2rom&quot;)</span>
+<span class="sd">        # output: &#39;samat&#39;</span>
+
+<span class="sd">        romanize(&quot;สามารถ&quot;, engine=&quot;tltk&quot;)</span>
 <span class="sd">        # output: &#39;samat&#39;</span>
 
 <span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;royin&quot;)</span>
@@ -231,6 +235,8 @@
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom</span> <span class="kn">import</span> <span class="n">romanize</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">romanize</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine &quot;royin&quot;</span>
         <span class="kn">from</span> <span class="nn">pythainlp.transliterate.royin</span> <span class="kn">import</span> <span class="n">romanize</span>
 
@@ -251,10 +257,13 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Options for engines:</span>
-<span class="sd">        * *icu* - pyicu, based on International Components for Unicode (ICU)</span>
-<span class="sd">        * *ipa* - epitran, output is International Phonetic Alphabet (IPA)</span>
 <span class="sd">        * *thaig2p* - (default) Thai Grapheme-to-Phoneme,</span>
 <span class="sd">          output is IPA (require PyTorch)</span>
+<span class="sd">        * *icu* - pyicu, based on International Components for Unicode (ICU)</span>
+<span class="sd">        * *ipa* - epitran, output is International Phonetic Alphabet (IPA)</span>
+<span class="sd">        * *tltk_g2p* - Thai Grapheme-to-Phoneme from\</span>
+<span class="sd">            `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
+<span class="sd">        * *tltk_ipa* - tltk, output is International Phonetic Alphabet (IPA)</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -269,6 +278,12 @@
 
 <span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;thaig2p&quot;)</span>
 <span class="sd">        # output: &#39;s aː ˩˩˦ . m aː t̚ ˥˩&#39;</span>
+
+<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_ipa&quot;)</span>
+<span class="sd">        # output: &#39;saː5.maːt3&#39;</span>
+
+<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_g2p&quot;)</span>
+<span class="sd">        # output: &#39;saa4~maat2&#39;</span>
 
 <span class="sd">        transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;icu&quot;)</span>
 <span class="sd">        # output: &#39;p̣hāphyntr̒&#39;</span>
@@ -287,6 +302,10 @@
         <span class="kn">from</span> <span class="nn">pythainlp.transliterate.pyicu</span> <span class="kn">import</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ipa&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.transliterate.ipa</span> <span class="kn">import</span> <span class="n">transliterate</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk_g2p&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">tltk_g2p</span> <span class="k">as</span> <span class="n">transliterate</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk_ipa&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">tltk_ipa</span> <span class="k">as</span> <span class="n">transliterate</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine: &quot;thaig2p&quot;</span>
         <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thaig2p</span> <span class="kn">import</span> <span class="n">transliterate</span>
 

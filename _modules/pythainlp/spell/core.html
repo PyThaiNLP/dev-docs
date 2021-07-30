@@ -206,6 +206,7 @@
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
 <span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
+<span class="sd">        * *tltk* - wrapper for `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
 
 <span class="sd">    :return: list of possible correct words within 1 or 2 edit distance and</span>
 <span class="sd">             sorted by frequency of word occurrences in the spelling dictionary</span>
@@ -221,6 +222,9 @@
 <span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
 
 <span class="sd">        spell(&quot;เส้นตรบ&quot;)</span>
+<span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
+
+<span class="sd">        spell(&quot;เส้นตรบ&quot;,  engine=&quot;tltk&quot;)</span>
 <span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
 
 <span class="sd">        spell(&quot;ครัช&quot;)</span>
@@ -241,6 +245,9 @@
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;symspellpy&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.spell.symspellpy</span> <span class="kn">import</span> <span class="n">spell</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
+        <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.spell.tltk</span> <span class="kn">import</span> <span class="n">spell</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">DEFAULT_SPELL_CHECKER</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>

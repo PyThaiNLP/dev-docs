@@ -833,6 +833,7 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
 <li><p><em>wangchanberta</em> - wangchanberta model (support lst20 corpus only             and it supports a string only. if you input a list of word,             it will convert list word to a string.</p></li>
+<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpus only.            if you choose other corpus, It’s change to TNC corpus.)</p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the corpus that used to create the language model for tagger
@@ -840,7 +841,8 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 * <em>lst20_ud</em> - LST20 text, with tags mapped to Universal POS tag             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
 * <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
 * <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
-* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags</p></li>
+* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
+* <em>tnc</em> - Thai National Corpus (support tltk engine only)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -918,6 +920,8 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <ul>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
+<li><p><em>wangchanberta</em>  - wangchanberta model (support lst20 corpus only)</p></li>
+<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpus only.            if you choose other corpus, It’s change to TNC corpus.)</p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <p>the corpus that used to create the language model for tagger
@@ -925,7 +929,8 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 * <em>lst20_ud</em> - LST20 text, with tags mapped to Universal POS tags             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
 * <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
 * <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
-* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags</p>
+* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
+* <em>tnc</em> - Thai National Corpus (support tltk engine only)</p>
 </p></li>
 </ul>
 </dd>
@@ -1098,6 +1103,53 @@ and corpus as orchid_ud`.</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tag.tltk.get_ner">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tag.tltk.</span></span><span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/tltk.html#get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.tltk.get_ner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Named-entity recognizer from <strong>TLTK</strong></p>
+<p>This function tags named-entitiy from text in IOB format.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – text in Thai to be tagged</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – To include POS tags in the results (<cite>True</cite>) or
+exclude (<cite>False</cite>). The defualt value is <cite>True</cite></p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – output like html tag.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of tuple associated with tokenized word, NER tag,
+POS tag (if the parameter <cite>pos</cite> is specified as <cite>True</cite>),
+and output like html tag (if the parameter <cite>tag</cite> is
+specified as <cite>True</cite>).
+Otherwise, return a list of tuple associated with tokenized
+word and NER tag</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]]], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.tag.tltk</span> <span class="kn">import</span> <span class="n">get_ner</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;เขาเรียนที่โรงเรียนนางรอง&quot;</span><span class="p">)</span>
+<span class="go">[(&#39;เขา&#39;, &#39;PRON&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;เรียน&#39;, &#39;VERB&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;ที่&#39;, &#39;SCONJ&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;โรงเรียน&#39;, &#39;NOUN&#39;, &#39;B-L&#39;),</span>
+<span class="go">(&#39;นางรอง&#39;, &#39;VERB&#39;, &#39;I-L&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;เขาเรียนที่โรงเรียนนางรอง&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[(&#39;เขา&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;เรียน&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;ที่&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;โรงเรียน&#39;, &#39;B-L&#39;),</span>
+<span class="go">(&#39;นางรอง&#39;, &#39;I-L&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;เขาเรียนที่โรงเรียนนางรอง&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;เขาเรียนที่&lt;L&gt;โรงเรียนนางรอง&lt;/L&gt;&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

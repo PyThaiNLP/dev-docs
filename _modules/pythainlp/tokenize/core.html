@@ -270,6 +270,8 @@
 <span class="sd">          and combining tokens that are parts of the same named-entity.</span>
 <span class="sd">        * *sefr_cut* - wrapper for</span>
 <span class="sd">          `SEFR CUT &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_.,</span>
+<span class="sd">        * *tltk* - wrapper for</span>
+<span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
 
 <span class="sd">    :Note:</span>
 <span class="sd">        - The parameter **custom_dict** can be provided as an argument \</span>
@@ -367,6 +369,10 @@
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.sefr_cut</span> <span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tltk</span> <span class="kn">import</span> <span class="n">segment</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -399,6 +405,7 @@
 <span class="sd">        * *whitespace+newline* - split by whitespaces and newline.</span>
 <span class="sd">        * *whitespace* - split by whitespaces. Specifiaclly, with \</span>
 <span class="sd">                         :class:`regex` pattern  ``r&quot; +&quot;``</span>
+<span class="sd">        * *tltk* - split by `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Split the text based on *whitespace*::</span>
@@ -455,6 +462,10 @@
         <span class="n">segments</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; +&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;whitespace+newline&quot;</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tltk</span> <span class="kn">import</span> <span class="n">sent_tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -498,6 +509,7 @@
 <span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model.</span>
 <span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
 <span class="sd">        * *ssg* - CRF syllable segmenter for Thai</span>
+<span class="sd">        * *tltk* - syllable tokenizer from tltk</span>
 
 <span class="sd">    :Example:</span>
 
@@ -560,6 +572,8 @@
             <span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ssg&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.ssg</span> <span class="kn">import</span> <span class="n">segment</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tltk</span> <span class="kn">import</span> <span class="n">syllable_tokenize</span> <span class="k">as</span> <span class="n">segment</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>

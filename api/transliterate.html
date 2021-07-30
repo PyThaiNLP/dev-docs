@@ -231,6 +231,7 @@ by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษา�
 Transcription issued by Royal Institute of Thailand.</p></li>
 <li><p><em>thai2rom</em> - a deep learning-based Thai romanization engine
 (require PyTorch).</p></li>
+<li><p><em>tltk</em> - TLTK: Thai Language Toolkit</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Example</dt>
@@ -242,6 +243,9 @@ Transcription issued by Royal Institute of Thailand.</p></li>
 <span class="c1"># output: &#39;samant&#39;</span>
 
 <span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;สามารถ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;thai2rom&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;samat&#39;</span>
+
+<span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;สามารถ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tltk&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;samat&#39;</span>
 
 <span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ภาพยนตร์&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;royin&quot;</span><span class="p">)</span>
@@ -273,10 +277,12 @@ how the input text should be pronounced.</p>
 </dd>
 <dt class="field-even">Options for engines</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><em>icu</em> - pyicu, based on International Components for Unicode (ICU)</p></li>
-<li><p><em>ipa</em> - epitran, output is International Phonetic Alphabet (IPA)</p></li>
 <li><p><em>thaig2p</em> - (default) Thai Grapheme-to-Phoneme,
 output is IPA (require PyTorch)</p></li>
+<li><p><em>icu</em> - pyicu, based on International Components for Unicode (ICU)</p></li>
+<li><p><em>ipa</em> - epitran, output is International Phonetic Alphabet (IPA)</p></li>
+<li><p><em>tltk_g2p</em> - Thai Grapheme-to-Phoneme from            <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a>.,</p></li>
+<li><p><em>tltk_ipa</em> - tltk, output is International Phonetic Alphabet (IPA)</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Example</dt>
@@ -292,6 +298,12 @@ output is IPA (require PyTorch)</p></li>
 
 <span class="n">transliterate</span><span class="p">(</span><span class="s2">&quot;สามารถ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;thaig2p&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;s aː ˩˩˦ . m aː t̚ ˥˩&#39;</span>
+
+<span class="n">transliterate</span><span class="p">(</span><span class="s2">&quot;สามารถ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tltk_ipa&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;saː5.maːt3&#39;</span>
+
+<span class="n">transliterate</span><span class="p">(</span><span class="s2">&quot;สามารถ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tltk_g2p&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;saa4~maat2&#39;</span>
 
 <span class="n">transliterate</span><span class="p">(</span><span class="s2">&quot;ภาพยนตร์&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;icu&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;p̣hāphyntr̒&#39;</span>
