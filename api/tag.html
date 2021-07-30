@@ -1016,8 +1016,77 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="pythainlp.tag.named_entity.ThaiNameTagger">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.named_entity.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'1.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.named_entity.ThaiNameTagger" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pythainlp.tag.named_entity.NER">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.named_entity.</span></span><span class="sig-name descname"><span class="pre">NER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.named_entity.NER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Named-entity recognizer class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Named-entity recognizer engine</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – corpus</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
+<li><p><em>thainer</em> - Thai NER engine</p></li>
+<li><p><em>wangchanberta</em> - wangchanberta model</p></li>
+</ul>
+</dd>
+<dt><strong>Options for corpus</strong></dt><dd><ul class="simple">
+<li><p><em>thaimer</em> - Thai NER corpus</p></li>
+<li><p><em>lst20</em> - lst20 corpus (wangchanberta only)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.named_entity.NER.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.named_entity.NER.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function tags named-entitiy from text in IOB format.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – text in Thai to be tagged</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – output with part-of-speech tag.            (wangchanberta is not support)</p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – output like html tag.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of tuple associated with tokenized word, NER tag,
+POS tag (if the parameter <cite>pos</cite> is specified as <cite>True</cite>),
+and output like html tag (if the parameter <cite>tag</cite> is
+specified as <cite>True</cite>).
+Otherwise, return a list of tuple associated with tokenized
+word and NER tag</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]], List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.tag</span> <span class="kn">import</span> <span class="n">NER</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ner</span> <span class="o">=</span> <span class="n">NER</span><span class="p">(</span><span class="s2">&quot;thainer&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ner</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">&quot;ทดสอบยนายวรรณพงษ์ ภัททิยไพบูลย์&quot;</span><span class="p">)</span>
+<span class="go">[(&#39;ทดสอบ&#39;, &#39;VV&#39;, &#39;O&#39;),</span>
+<span class="go">(&#39;นาย&#39;, &#39;NN&#39;, &#39;B-PERSON&#39;),</span>
+<span class="go">(&#39;วรรณ&#39;, &#39;NN&#39;, &#39;I-PERSON&#39;),</span>
+<span class="go">(&#39;พงษ์&#39;, &#39;NN&#39;, &#39;I-PERSON&#39;),</span>
+<span class="go">(&#39; &#39;, &#39;PU&#39;, &#39;I-PERSON&#39;),</span>
+<span class="go">(&#39;ภัททิย&#39;, &#39;NN&#39;, &#39;I-PERSON&#39;),</span>
+<span class="go">(&#39;ไพบูลย์&#39;, &#39;NN&#39;, &#39;I-PERSON&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ner</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">&quot;ทดสอบยนายวรรณพงษ์ ภัททิยไพบูลย์&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;ทดสอบย&lt;PERSON&gt;นายวรรณพงษ์ ภัททิยไพบูลย์&lt;/PERSON&gt;&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.thainer.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'1.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Thai named-entity recognizer.
 :param str version: Thai NER version.</p>
 <blockquote>
@@ -1038,8 +1107,8 @@ The defualt value is <cite>1.5</cite></p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="pythainlp.tag.named_entity.ThaiNameTagger.get_ner">
-<span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#ThaiNameTagger.get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.named_entity.ThaiNameTagger.get_ner" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.get_ner">
+<span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.get_ner" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function tags named-entitiy from text in IOB format.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -1096,7 +1165,8 @@ and corpus as orchid_ud`.</p></li>
 <span class="go">(&#39;น.&#39;, &#39;I-TIME&#39;)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ner</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;</span><span class="p">,</span>
 <span class="go">                tag=True)</span>
-<span class="go">&#39;วันที่ &lt;DATE&gt;15 ก.ย. 61&lt;/DATE&gt; ทดสอบระบบเวลา &lt;TIME&gt;14:49 น.&lt;/TIME&gt;&#39;</span>
+<span class="go">&#39;วันที่ &lt;DATE&gt;15 ก.ย. 61&lt;/DATE&gt; ทดสอบระบบเวลา &lt;TIME&gt;</span>
+<span class="go">14:49 น.&lt;/TIME&gt;&#39;</span>
 </pre></div>
 </div>
 </dd>
