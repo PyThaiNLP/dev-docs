@@ -188,13 +188,15 @@
 
 <div class="viewcode-block" id="chunk_parse"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.chunk_parse">[docs]</a><span class="k">def</span> <span class="nf">chunk_parse</span><span class="p">(</span>
     <span class="n">sent</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
-    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;crf&quot;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">&quot;orchidpp&quot;</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;crf&quot;</span><span class="p">,</span>
+    <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;orchidpp&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function parse thai sentence to phrase structure in IOB format.</span>
 
 <span class="sd">    :param list sent: list [(word,part-of-speech)]</span>
-<span class="sd">    :param str engine: chunk parse engine (now, it has orchidpp only)</span>
+<span class="sd">    :param str engine: chunk parse engine (now, it has crf only)</span>
+<span class="sd">    :param str corpus: chunk parse corpus (now, it has orchidpp only)</span>
 
 <span class="sd">    :return: a list of tuple (word,part-of-speech,chunking)</span>
 <span class="sd">    :rtype: List[str]</span>
