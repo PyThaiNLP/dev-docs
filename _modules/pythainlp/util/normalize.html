@@ -96,6 +96,7 @@
 <span class="sd">Text normalization</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_above_vowels</span> <span class="k">as</span> <span class="n">above_v</span>
@@ -103,6 +104,7 @@
 <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_follow_vowels</span> <span class="k">as</span> <span class="n">follow_v</span>
 <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_lead_vowels</span> <span class="k">as</span> <span class="n">lead_v</span>
 <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_tonemarks</span> <span class="k">as</span> <span class="n">tonemarks</span>
+<span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 
 
 <span class="n">_DANGLING_CHARS</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">above_v</span><span class="si">}{</span><span class="n">below_v</span><span class="si">}{</span><span class="n">tonemarks</span><span class="si">}</span><span class="se">\u0e3a\u0e4c\u0e4d\u0e4e</span><span class="s2">&quot;</span>
@@ -347,6 +349,48 @@
         <span class="ne">DeprecationWarning</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">remove_tonemark</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="maiyamok"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.maiyamok">[docs]</a><span class="k">def</span> <span class="nf">maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Thai MaiYaMok</span>
+
+<span class="sd">    MaiYaMok (ๆ) is the mark of duplicate word in Thai language.</span>
+<span class="sd">    This function is preprocessing MaiYaMok in Thai sentence.</span>
+
+<span class="sd">    :param Union[str, List[str]] sent: input sentence (list or str)</span>
+<span class="sd">    :return: List of words</span>
+<span class="sd">    :rtype: List[str]</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import maiyamok</span>
+
+<span class="sd">        maiyamok(&quot;เด็กๆชอบไปโรงเรียน&quot;)</span>
+<span class="sd">        # output: [&#39;เด็ก&#39;, &#39;เด็ก&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;โรงเรียน&#39;]</span>
+
+<span class="sd">        maiyamok([&quot;ทำไม&quot;,&quot;คน&quot;,&quot;ดี&quot;,&quot; &quot;,&quot;ๆ&quot;,&quot;ๆ&quot;,&quot; &quot;,&quot;ถึง&quot;,&quot;ทำ&quot;,&quot;ไม่ได้&quot;])</span>
+<span class="sd">        # output: [&#39;ทำไม&#39;, &#39;คน&#39;, &#39;ดี&#39;, &#39;ดี&#39;, &#39;ดี&#39;, &#39; &#39;, &#39;ถึง&#39;, &#39;ทำ&#39;, &#39;ไม่ได้&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">sent</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+    <span class="n">_list_word</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;ๆ&quot;</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="s2">&quot; ๆ&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; ๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;ๆ&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;ๆ&quot;</span> <span class="o">==</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">_list_word</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s2">&quot;ๆ&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">_list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">_list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">_list_word</span></div>
 </pre></div>
 
            </div>

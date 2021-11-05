@@ -599,6 +599,36 @@ to be applied, they can choose to call those functions by themselves.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.maiyamok">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">maiyamok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/normalize.html#maiyamok"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.maiyamok" title="Permalink to this definition"></a></dt>
+<dd><p>Thai MaiYaMok</p>
+<p>MaiYaMok (ๆ) is the mark of duplicate word in Thai language.
+This function is preprocessing MaiYaMok in Thai sentence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sent</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>]</em>) – input sentence (list or str)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of words</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">maiyamok</span>
+
+<span class="n">maiyamok</span><span class="p">(</span><span class="s2">&quot;เด็กๆชอบไปโรงเรียน&quot;</span><span class="p">)</span>
+<span class="c1"># output: [&#39;เด็ก&#39;, &#39;เด็ก&#39;, &#39;ชอบ&#39;, &#39;ไป&#39;, &#39;โรงเรียน&#39;]</span>
+
+<span class="n">maiyamok</span><span class="p">([</span><span class="s2">&quot;ทำไม&quot;</span><span class="p">,</span><span class="s2">&quot;คน&quot;</span><span class="p">,</span><span class="s2">&quot;ดี&quot;</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;ๆ&quot;</span><span class="p">,</span><span class="s2">&quot;ๆ&quot;</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;ถึง&quot;</span><span class="p">,</span><span class="s2">&quot;ทำ&quot;</span><span class="p">,</span><span class="s2">&quot;ไม่ได้&quot;</span><span class="p">])</span>
+<span class="c1"># output: [&#39;ทำไม&#39;, &#39;คน&#39;, &#39;ดี&#39;, &#39;ดี&#39;, &#39;ดี&#39;, &#39; &#39;, &#39;ถึง&#39;, &#39;ทำ&#39;, &#39;ไม่ได้&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.rank">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_stopwords</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.Counter" title="(in Python v3.10)"><span class="pre">collections.Counter</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/keywords.html#rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.rank" title="Permalink to this definition"></a></dt>
 <dd><p>Count word frequecy given a list of Thai words with an option
