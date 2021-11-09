@@ -162,6 +162,7 @@
 <span class="sd">          Thai Character Cluster</span>
 <span class="sd">        * *newmm-safe* - newmm, with a mechanism to help avoid long</span>
 <span class="sd">          processing time for text with continuous ambiguous breaking points</span>
+<span class="sd">        * *nlpo3* - Python binding for nlpO3. It is newmm engine in Rust.</span>
 <span class="sd">        * *longest* - dictionary-based, Longest Matching</span>
 <span class="sd">        * *icu* - wrapper for ICU (International Components for Unicode,</span>
 <span class="sd">          using PyICU), dictionary-based</span>
@@ -285,6 +286,19 @@
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.oskut</span> <span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;nlpo3&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.nlpo3</span> <span class="kn">import</span> <span class="n">segment</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">custom_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">:</span>
+<span class="s2">                custom_dict must be a str.</span>
+<span class="s2">                It is a dictionary name as assigned with load_dict().</span>
+<span class="s2">                See pythainlp.tokenize.nlpo3.load_dict()&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>

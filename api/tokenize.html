@@ -68,6 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">attacut</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">deepcut</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.multi_cut">multi_cut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nlpo3">nlpo3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.longest">longest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.pyicu">pyicu</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nercut">nercut</a></li>
@@ -387,6 +388,7 @@ Otherwise, whitespaces are omitted.</p></li>
 Thai Character Cluster</p></li>
 <li><p><em>newmm-safe</em> - newmm, with a mechanism to help avoid long
 processing time for text with continuous ambiguous breaking points</p></li>
+<li><p><em>nlpo3</em> - Python binding for nlpO3. It is newmm engine in Rust.</p></li>
 <li><p><em>longest</em> - dictionary-based, Longest Matching</p></li>
 <li><p><em>icu</em> - wrapper for ICU (International Components for Unicode,
 using PyICU), dictionary-based</p></li>
@@ -687,6 +689,61 @@ Original code from Korakot Chaovavanich.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythainlp.tokenize.nlpo3">
+<span id="nlpo3"></span><h3>nlpo3<a class="headerlink" href="#module-pythainlp.tokenize.nlpo3" title="Permalink to this headline"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.nlpo3.load_dict">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.nlpo3.</span></span><span class="sig-name descname"><span class="pre">load_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/nlpo3.html#load_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.nlpo3.load_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Load a dictionary file into an in-memory dictionary collection.</p>
+<p>The loaded dictionary will be accessible throught the assigned dict_name.
+<strong>* This function does not override an existing dict name. *</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Path to a dictionary file</p></li>
+<li><p><strong>dict_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – A unique dictionary name, use for reference.</p></li>
+</ul>
+</dd>
+</dl>
+<p>:return bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">See Also</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PyThaiNLP/nlpo3">https://github.com/PyThaiNLP/nlpo3</a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.nlpo3.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.nlpo3.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'_67a47bf9'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/nlpo3.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.nlpo3.segment" title="Permalink to this definition"></a></dt>
+<dd><p>Break text into tokens.</p>
+<p>Python binding for nlpO3. It is newmm engine in Rust.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – text to be tokenized</p></li>
+<li><p><strong>custom_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – dictionary name, as assigned with load_dict(),        defaults to pythainlp/corpus/common/words_th.txt</p></li>
+<li><p><strong>safe_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – reduce chance for long processing time in long text        with many ambiguous breaking points, defaults to False</p></li>
+<li><p><strong>parallel_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Use multithread mode, defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of tokens</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
+</dd>
+<dt class="field-even">See Also</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PyThaiNLP/nlpo3">https://github.com/PyThaiNLP/nlpo3</a></p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
