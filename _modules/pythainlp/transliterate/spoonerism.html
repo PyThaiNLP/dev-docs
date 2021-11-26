@@ -103,7 +103,6 @@
 <span class="sd">    Thai Spoonerism</span>
 
 <span class="sd">    This function converts Thai word to spoonerism word.</span>
-<span class="sd">    It only supports words with 2 to 3 syllables.</span>
 
 <span class="sd">    :param str word: Thai word to be spoonerized</span>
 <span class="sd">    :param bool show_pronunciation: True (default) or False</span>
@@ -157,12 +156,16 @@
             <span class="n">list_w_char</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_w_char</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># &gt; 3 syllables</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sd">&quot;&quot;&quot;{0} is more than 3 syllables.\n</span>
-<span class="sd">            It only supports words with 2 to 3 syllables.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">_list_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">_list_pron</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">list_w_char</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_w_char</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_w_char</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">_list_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_list_pron</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">_list_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_list_pron</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="n">list_w_char</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">list_w_char</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">show_pronunciation</span><span class="p">:</span>
-        <span class="n">_list_w</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;หฺ&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_list_w</span><span class="p">]</span>
+        <span class="n">_list_w</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;หฺ&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ฺ&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_list_w</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">_mix_list</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_list_w</span><span class="p">)</span></div>
 </pre></div>
 
