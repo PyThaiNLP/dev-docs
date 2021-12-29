@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.zh_th &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
+  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -82,7 +82,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>pythainlp.translate.zh_th</li>
+      <li>pythainlp.translate.th_fr</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -91,35 +91,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.translate.zh_th</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.translate.th_fr</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Lalita Chinese-Thai Machine Translation</span>
+<span class="sd">Thai-French Machine Translation</span>
 
-<span class="sd">from AI builder</span>
+<span class="sd">Trained by OPUS Corpus</span>
 
-<span class="sd">- GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth</span>
-<span class="sd">- Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822</span>
+<span class="sd">Model from Language Technology Research Group at the University of Helsinki</span>
+
+<span class="sd">BLEU 20.4</span>
+
+<span class="sd">- Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
 
 
-<div class="viewcode-block" id="ThZhTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ThZhTranslator">[docs]</a><span class="k">class</span> <span class="nc">ThZhTranslator</span><span class="p">:</span>
+<div class="viewcode-block" id="ThFrTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator">[docs]</a><span class="k">class</span> <span class="nc">ThFrTranslator</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Thai-Chinese Machine Translation</span>
+<span class="sd">    Thai-French Machine Translation</span>
 
-<span class="sd">    from Lalita @ AI builder</span>
+<span class="sd">    Trained by OPUS Corpus</span>
 
-<span class="sd">    - GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth</span>
-<span class="sd">    - Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822</span>
+<span class="sd">    Model from Language Technology Research Group at the University of Helsinki</span>
+
+<span class="sd">    BLEU 20.4</span>
+
+<span class="sd">    - Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-th-zh_cn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Helsinki-NLP/opus-mt-th-fr&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Translate text from Thai to Chinese</span>
+<span class="sd">        Translate text from Thai to French</span>
 
 <span class="sd">        :param str text: input text in source language</span>
 <span class="sd">        :return: translated text in target language</span>
@@ -127,14 +133,14 @@
 
 <span class="sd">        :Example:</span>
 
-<span class="sd">        Translate text from Thai to Chinese::</span>
+<span class="sd">        Translate text from Thai to French::</span>
 
-<span class="sd">            from pythainlp.translate import ThZhTranslator</span>
+<span class="sd">            from pythainlp.translate.th_fr import ThFrTranslator</span>
 
-<span class="sd">            thzh = ThZhTranslator()</span>
+<span class="sd">            thfr = ThFrTranslator()</span>
 
-<span class="sd">            thzh.translate(&quot;ผมรักคุณ&quot;)</span>
-<span class="sd">            # output: 我爱你</span>
+<span class="sd">            thfr.translate(&quot;ทดสอบระบบ&quot;)</span>
+<span class="sd">            # output: &quot;Test du système.&quot;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
@@ -142,49 +148,6 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
-                <span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
-        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="ZhThTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ZhThTranslator">[docs]</a><span class="k">class</span> <span class="nc">ZhThTranslator</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Chinese-Thai Machine Translation</span>
-
-<span class="sd">    from Lalita @ AI builder</span>
-
-<span class="sd">    - GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth</span>
-<span class="sd">    - Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-zh_cn-th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Translate text from Chinese to Thai</span>
-
-<span class="sd">        :param str text: input text in source language</span>
-<span class="sd">        :return: translated text in target language</span>
-<span class="sd">        :rtype: str</span>
-
-<span class="sd">        :Example:</span>
-
-<span class="sd">        Translate text from Chinese to Thai::</span>
-
-<span class="sd">            from pythainlp.translate import ZhThTranslator</span>
-
-<span class="sd">            zhth = ZhThTranslator()</span>
-
-<span class="sd">            zhth.translate(&quot;我爱你&quot;)</span>
-<span class="sd">            # output: ผมรักคุณนะ</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
                 <span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
         <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
