@@ -293,11 +293,11 @@
         <span class="k">return</span> <span class="n">default_path</span>
 
     <span class="c1"># check if the corpus is in local catalog, download if not</span>
-    <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">):</span>
-        <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>  <span class="n">version</span> <span class="o">=</span>  <span class="n">version</span><span class="p">)</span>
-        <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>  <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
+        <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">corpus_db_detail</span> <span class="ow">and</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">):</span>
         <span class="c1"># corpus is in the local catalog, get full path to the file</span>
