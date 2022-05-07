@@ -190,6 +190,74 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="NNER"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER">[docs]</a><span class="k">class</span> <span class="nc">NNER</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Nested Named Entity Recognition</span>
+
+<span class="sd">    :param str engine: Nested Named entity recognizer engine</span>
+<span class="sd">    :param str corpus: corpus</span>
+
+<span class="sd">    **Options for engine**</span>
+<span class="sd">        * *thai_nner* - Thai NER engine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thai_nner&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thai_nner&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tag.thai_nner</span> <span class="kn">import</span> <span class="n">Thai_NNER</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">Thai_NNER</span><span class="p">()</span>
+
+<div class="viewcode-block" id="NNER.tag"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER.tag">[docs]</a>    <span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function tags nested named-entitiy.</span>
+
+<span class="sd">        :param str text: text in Thai to be tagged</span>
+
+<span class="sd">        :return: a list of tuple associated with tokenized word, NNER tag.</span>
+<span class="sd">        :rtype: Tuple[List[str], List[dict]]</span>
+
+<span class="sd">        :Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; from pythainlp.tag.named_entity import NNER</span>
+<span class="sd">            &gt;&gt;&gt; nner = NNER()</span>
+<span class="sd">            &gt;&gt;&gt; nner.tag(&quot;แมวทำอะไรตอนห้าโมงเช้า&quot;)</span>
+<span class="sd">            ([</span>
+<span class="sd">                &#39;&lt;s&gt;&#39;,</span>
+<span class="sd">                &#39;&#39;,</span>
+<span class="sd">                &#39;แมว&#39;,</span>
+<span class="sd">                &#39;ทํา&#39;,</span>
+<span class="sd">                &#39;&#39;,</span>
+<span class="sd">                &#39;อะไร&#39;,</span>
+<span class="sd">                &#39;ตอน&#39;,</span>
+<span class="sd">                &#39;&#39;,</span>
+<span class="sd">                &#39;ห้า&#39;,</span>
+<span class="sd">                &#39;&#39;,</span>
+<span class="sd">                &#39;โมง&#39;,</span>
+<span class="sd">                &#39;&#39;,</span>
+<span class="sd">                &#39;เช้า&#39;,</span>
+<span class="sd">                &#39;&lt;/s&gt;&#39;</span>
+<span class="sd">            ],</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &#39;text&#39;: [&#39;&#39;, &#39;ห้า&#39;],</span>
+<span class="sd">                    &#39;span&#39;: [7, 9],</span>
+<span class="sd">                    &#39;entity_type&#39;: &#39;cardinal&#39;</span>
+<span class="sd">                },</span>
+<span class="sd">                {</span>
+<span class="sd">                    &#39;text&#39;: [&#39;&#39;, &#39;ห้า&#39;, &#39;&#39;, &#39;โมง&#39;],</span>
+<span class="sd">                    &#39;span&#39;: [7, 11],</span>
+<span class="sd">                    &#39;entity_type&#39;: &#39;time&#39;</span>
+<span class="sd">                },</span>
+<span class="sd">                {</span>
+<span class="sd">                    &#39;text&#39;: [&#39;&#39;, &#39;โมง&#39;],</span>
+<span class="sd">                    &#39;span&#39;: [9, 11],</span>
+<span class="sd">                    &#39;entity_type&#39;: &#39;unit&#39;</span>
+<span class="sd">                }</span>
+<span class="sd">            ])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>
