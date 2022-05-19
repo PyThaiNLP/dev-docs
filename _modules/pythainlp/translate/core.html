@@ -101,6 +101,7 @@
 
 <span class="sd">    :param str src_lang: source language</span>
 <span class="sd">    :param str target_lang: target language</span>
+<span class="sd">    :param bool use_gpu: load model to gpu (Default is False)</span>
 
 <span class="sd">    **Options for source &amp; target language**</span>
 <span class="sd">        * *th* - *en* - Thai to English</span>
@@ -119,10 +120,14 @@
 <span class="sd">        th2en.translate(&quot;ฉันรักแมว&quot;)</span>
 <span class="sd">        # output: I love cat.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param str src_lang: source language</span>
 <span class="sd">        :param str target_lang: target language</span>
+<span class="sd">        :param bool use_gpu: load model to gpu (Default is False)</span>
 
 <span class="sd">        **Options for source &amp; target language**</span>
 <span class="sd">            * *th* - *en* - Thai to English</span>
@@ -142,24 +147,24 @@
 <span class="sd">            # output: I love cat.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">src_lang</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">src_lang</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">,</span> <span class="n">use_gpu</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.translate.en_th</span> <span class="kn">import</span> <span class="n">ThEnTranslator</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThEnTranslator</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThEnTranslator</span><span class="p">(</span><span class="n">use_gpu</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.translate.en_th</span> <span class="kn">import</span> <span class="n">EnThTranslator</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">EnThTranslator</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">EnThTranslator</span><span class="p">(</span><span class="n">use_gpu</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;zh&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.translate.zh_th</span> <span class="kn">import</span> <span class="n">ThZhTranslator</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThZhTranslator</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThZhTranslator</span><span class="p">(</span><span class="n">use_gpu</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;zh&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.translate.zh_th</span> <span class="kn">import</span> <span class="n">ZhThTranslator</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ZhThTranslator</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ZhThTranslator</span><span class="p">(</span><span class="n">use_gpu</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">src_lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span> <span class="ow">and</span> <span class="n">target_lang</span> <span class="o">==</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.translate.th_fr</span> <span class="kn">import</span> <span class="n">ThFrTranslator</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThFrTranslator</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">ThFrTranslator</span><span class="p">(</span><span class="n">use_gpu</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not support language!&quot;</span><span class="p">)</span>
 

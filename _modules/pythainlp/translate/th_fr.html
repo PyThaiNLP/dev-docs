@@ -118,11 +118,16 @@
 <span class="sd">    BLEU 20.4</span>
 
 <span class="sd">    - Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
+
+<span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Helsinki-NLP/opus-mt-th-fr&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Helsinki-NLP/opus-mt-th-fr&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-
+        <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate text from Thai to French</span>

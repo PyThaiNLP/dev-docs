@@ -112,11 +112,16 @@
 
 <span class="sd">    - GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth</span>
 <span class="sd">    - Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822</span>
+
+<span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-th-zh_cn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-th-zh_cn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-
+        <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate text from Thai to Chinese</span>
@@ -155,11 +160,16 @@
 
 <span class="sd">    - GitHub: https://github.com/LalitaDeelert/lalita-mt-zhth</span>
 <span class="sd">    - Facebook post https://web.facebook.com/aibuildersx/posts/166736255494822</span>
+
+<span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-zh_cn-th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-zh_cn-th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-
+        <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate text from Chinese to Thai</span>
