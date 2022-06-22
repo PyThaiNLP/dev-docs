@@ -101,7 +101,7 @@
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.summarize</span> <span class="kn">import</span> <span class="n">DEFAULT_SUMMARIZE_ENGINE</span>
+<span class="kn">from</span> <span class="nn">pythainlp.summarize</span> <span class="kn">import</span> <span class="n">DEFAULT_SUMMARIZE_ENGINE</span><span class="p">,</span> <span class="n">CPE_KMUTT_THAI_SENTENCE_SUM</span>
 <span class="kn">from</span> <span class="nn">pythainlp.summarize.freq</span> <span class="kn">import</span> <span class="n">FrequencySummarizer</span>
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
 
@@ -143,6 +143,7 @@
 <span class="sd">            * *mt5-large* - mT5-large model</span>
 <span class="sd">            * *mt5-xl* - mT5-xl model</span>
 <span class="sd">            * *mt5-xxl* - mT5-xxl model</span>
+<span class="sd">            * *mt5-cpe-kmutt-thai-sentence-sum* - mT5 Thai sentence summarization by CPE KMUTT</span>
 
 <span class="sd">        :Example:</span>
 <span class="sd">        ::</span>
@@ -177,6 +178,10 @@
 <span class="sd">            # output: [&#39;&lt;extra_id_0&gt; ท่าช้าง หรือ วังถนนพระอาทิตย์</span>
 <span class="sd">            # เขตพระนคร กรุงเทพมหานคร ฯลฯ ดังนี้:</span>
 <span class="sd">            # ที่อยู่ - ศิลปวัฒนธรรม&#39;]</span>
+
+<span class="sd">            text = &quot;ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ&quot;</span>
+<span class="sd">            summarize(text, engine=&quot;mt5-cpe-kmutt-thai-sentence-sum&quot;)</span>
+<span class="sd">            # output: [&#39;น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
@@ -184,6 +189,9 @@
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="n">DEFAULT_SUMMARIZE_ENGINE</span><span class="p">:</span>
         <span class="n">sents</span> <span class="o">=</span> <span class="n">FrequencySummarizer</span><span class="p">()</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="n">CPE_KMUTT_THAI_SENTENCE_SUM</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.mt5</span> <span class="kn">import</span> <span class="n">mT5Summarizer</span>
+        <span class="n">sents</span> <span class="o">=</span> <span class="n">mT5Summarizer</span><span class="p">(</span><span class="n">pretrained_mt5_model_name</span><span class="o">=</span><span class="n">CPE_KMUTT_THAI_SENTENCE_SUM</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;mt5-&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;mt5&quot;</span><span class="p">:</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;mt5-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">.mt5</span> <span class="kn">import</span> <span class="n">mT5Summarizer</span>
