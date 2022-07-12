@@ -105,7 +105,7 @@
 
 
 <div class="viewcode-block" id="Thai2transformersAug"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.lm.Thai2transformersAug">[docs]</a><span class="k">class</span> <span class="nc">Thai2transformersAug</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Thai2transformersAug.__init__"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.lm.Thai2transformersAug.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;airesearch/wangchanberta-base-att-spm-uncased&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_tokenizer</span> <span class="o">=</span> <span class="n">CamembertTokenizer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">CamembertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
@@ -122,9 +122,9 @@
             <span class="n">model</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="n">revision</span><span class="o">=</span><span class="s1">&#39;main&#39;</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MASK_TOKEN</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">mask_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MASK_TOKEN</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">mask_token</span></div>
 
-    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_replace_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
+<div class="viewcode-block" id="Thai2transformersAug.generate"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.lm.Thai2transformersAug.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_replace_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_text</span> <span class="o">=</span> <span class="n">sentence</span>
         <span class="n">sent</span> <span class="o">=</span> <span class="p">[</span>
@@ -144,7 +144,7 @@
                 <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span>
             <span class="p">]</span>
             <span class="n">masked_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_text</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span></div>
 
 <div class="viewcode-block" id="Thai2transformersAug.augment"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.lm.Thai2transformersAug.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_replace_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>

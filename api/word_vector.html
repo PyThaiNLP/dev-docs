@@ -391,6 +391,49 @@ of the model.</p>
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai2fit_wv'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Word Vector class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – model name</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>Options for model_name</strong></dt><dd><ul class="simple">
+<li><p><em>thai2fit_wv</em> (default) - word vector from thai2fit</p></li>
+<li><p><em>ltw2v</em> - word vector from LTW2V: The Large Thai Word2Vec</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.load_wordvector">
+<span class="sig-name descname"><span class="pre">load_wordvector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.load_wordvector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.load_wordvector" title="Permalink to this definition"></a></dt>
+<dd><p>Load word vector model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – model name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">KeyedVectors</span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.get_model" title="Permalink to this definition"></a></dt>
+<dd><p>Get word vector model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>gensim</cite> word2vec model</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>gensim.models.keyedvectors.Word2VecKeyedVectors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.doesnt_match">
 <span class="sig-name descname"><span class="pre">doesnt_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.doesnt_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.doesnt_match" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns one word that is mostly unrelated to other words
@@ -437,31 +480,6 @@ related to occupation (“ดีไซน์เนอร์”, “พนัก�
 <span class="go">เรือ</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.get_model">
-<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">KeyedVectors</span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.get_model" title="Permalink to this definition"></a></dt>
-<dd><p>Get word vector model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><cite>gensim</cite> word2vec model</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>gensim.models.keyedvectors.Word2VecKeyedVectors</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.load_wordvector">
-<span class="sig-name descname"><span class="pre">load_wordvector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.load_wordvector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.load_wordvector" title="Permalink to this definition"></a></dt>
-<dd><p>Load word vector model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – model name</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -576,6 +594,55 @@ is not in the vocabulary.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.similarity">
+<span class="sig-name descname"><span class="pre">similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.similarity" title="Permalink to this definition"></a></dt>
+<dd><p>This function computae cosine similarity between two words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>word1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – first word to be compared</p></li>
+<li><p><strong>word2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – second word to be compared</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><strong>KeyError</strong></a> – if either <cite>word1</cite> or <cite>word2</cite> is not in the
+vocabulary of the model.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the cosine similarity between the two word vectors</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+<dt class="field-odd">Note</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>If a word in <cite>word1</cite> or <cite>word2</cite> is not in the vocabulary,
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></a> will be raised.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>Compute consine similarity between two words: “รถไฟ” and “รถไฟฟ้า”
+(train and electric train).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.word_vector</span> <span class="kn">import</span> <span class="n">WordVector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;รถไฟ&#39;</span><span class="p">,</span> <span class="s1">&#39;รถไฟฟ้า&#39;</span><span class="p">)</span>
+<span class="go">0.43387136</span>
+</pre></div>
+</div>
+<p>Compute consine similarity between two words: “เสือดาว” and “รถไฟฟ้า”
+(leopard and electric train).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.word_vector</span> <span class="kn">import</span> <span class="n">WordVector</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;เสือดาว&#39;</span><span class="p">,</span> <span class="s1">&#39;รถไฟฟ้า&#39;</span><span class="p">)</span>
+<span class="go">0.04300258</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.sentence_vectorizer">
 <span class="sig-name descname"><span class="pre">sentence_vectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.sentence_vectorizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.sentence_vectorizer" title="Permalink to this definition"></a></dt>
 <dd><p>This function convert a Thai sentence into vector.
@@ -626,55 +693,6 @@ into one sentence vector with two aggregation meanthods: mean</p>
 <span class="go">    ...</span>
 <span class="go">    0.40506999,  1.58591403,  0.63869202, -0.702155  ,  1.62977601,</span>
 <span class="go">    4.52269109, -0.70760502,  0.50952601, -0.914392  ,  0.70673105]])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.similarity">
-<span class="sig-name descname"><span class="pre">similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.similarity" title="Permalink to this definition"></a></dt>
-<dd><p>This function computae cosine similarity between two words.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>word1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – first word to be compared</p></li>
-<li><p><strong>word2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – second word to be compared</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><strong>KeyError</strong></a> – if either <cite>word1</cite> or <cite>word2</cite> is not in the
-vocabulary of the model.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the cosine similarity between the two word vectors</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
-</dd>
-<dt class="field-odd">Note</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p>If a word in <cite>word1</cite> or <cite>word2</cite> is not in the vocabulary,
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></a> will be raised.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<p>Compute consine similarity between two words: “รถไฟ” and “รถไฟฟ้า”
-(train and electric train).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.word_vector</span> <span class="kn">import</span> <span class="n">WordVector</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;รถไฟ&#39;</span><span class="p">,</span> <span class="s1">&#39;รถไฟฟ้า&#39;</span><span class="p">)</span>
-<span class="go">0.43387136</span>
-</pre></div>
-</div>
-<p>Compute consine similarity between two words: “เสือดาว” and “รถไฟฟ้า”
-(leopard and electric train).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.word_vector</span> <span class="kn">import</span> <span class="n">WordVector</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;เสือดาว&#39;</span><span class="p">,</span> <span class="s1">&#39;รถไฟฟ้า&#39;</span><span class="p">)</span>
-<span class="go">0.04300258</span>
 </pre></div>
 </div>
 </dd></dl>

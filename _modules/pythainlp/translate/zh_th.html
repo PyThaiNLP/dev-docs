@@ -116,14 +116,14 @@
 
 <span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ThZhTranslator.__init__"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ThZhTranslator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                  <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-th-zh_cn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
+<div class="viewcode-block" id="ThZhTranslator.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ThZhTranslator.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate text from Thai to Chinese</span>
 
@@ -150,7 +150,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
                 <span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
-        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div></div>
 
 
 <div class="viewcode-block" id="ZhThTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ZhThTranslator">[docs]</a><span class="k">class</span> <span class="nc">ZhThTranslator</span><span class="p">:</span>
@@ -164,14 +164,14 @@
 
 <span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ZhThTranslator.__init__"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ZhThTranslator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                  <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lalita/marianmt-zh_cn-th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_zhth</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
+<div class="viewcode-block" id="ZhThTranslator.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ZhThTranslator.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate text from Chinese to Thai</span>
 
@@ -198,7 +198,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_zhth</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
                 <span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
-        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div></div>
 </pre></div>
 
            </div>

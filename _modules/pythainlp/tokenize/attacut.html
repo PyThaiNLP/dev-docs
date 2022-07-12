@@ -106,19 +106,19 @@
 
 
 <div class="viewcode-block" id="AttacutTokenizer"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.attacut.AttacutTokenizer">[docs]</a><span class="k">class</span> <span class="nc">AttacutTokenizer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;attacut-sc&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="AttacutTokenizer.__init__"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.attacut.AttacutTokenizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;attacut-sc&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;attacut-sc&quot;</span>
 
         <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;attacut-c&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;attacut-c&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_MODEL_NAME</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_MODEL_NAME</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+<div class="viewcode-block" id="AttacutTokenizer.tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.attacut.AttacutTokenizer.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;attacut-sc&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.attacut.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;attacut-sc&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper for AttaCut - Fast and Reasonably Accurate Word Tokenizer for Thai</span>
 <span class="sd">    :param str text: text to be tokenized to words</span>
@@ -134,7 +134,7 @@
 
     <span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">AttacutTokenizer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">_tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

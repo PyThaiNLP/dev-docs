@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
+  <title>pythainlp.tokenize.sefr_cut &mdash; PyThaiNLP &lt;unknown&gt; documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -83,7 +83,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>pythainlp.translate.th_fr</li>
+      <li>pythainlp.tokenize.sefr_cut</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -92,71 +92,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.translate.th_fr</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.tokenize.sefr_cut</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Thai-French Machine Translation</span>
+<span class="sd">Wrapper for SEFR CUT Thai word segmentation. SEFR CUT is a</span>
+<span class="sd">Thai Word Segmentation Models using Stacked Ensemble.</span>
 
-<span class="sd">Trained by OPUS Corpus</span>
-
-<span class="sd">Model from Language Technology Research Group at the University of Helsinki</span>
-
-<span class="sd">BLEU 20.4</span>
-
-<span class="sd">- Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
+<span class="sd">:See Also:</span>
+<span class="sd">    * `GitHub repository &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">sefr_cut</span>
+
+<span class="n">DEFAULT_ENGINE</span> <span class="o">=</span> <span class="s1">&#39;ws1000&#39;</span>
+<span class="n">sefr_cut</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">DEFAULT_ENGINE</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ThFrTranslator"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator">[docs]</a><span class="k">class</span> <span class="nc">ThFrTranslator</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Thai-French Machine Translation</span>
-
-<span class="sd">    Trained by OPUS Corpus</span>
-
-<span class="sd">    Model from Language Technology Research Group at the University of Helsinki</span>
-
-<span class="sd">    BLEU 20.4</span>
-
-<span class="sd">    - Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
-
-<span class="sd">    :param bool use_gpu : load model to gpu (Default is False)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ThFrTranslator.__init__"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">use_gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Helsinki-NLP/opus-mt-th-fr&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
-<div class="viewcode-block" id="ThFrTranslator.translate"><a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Translate text from Thai to French</span>
-
-<span class="sd">        :param str text: input text in source language</span>
-<span class="sd">        :return: translated text in target language</span>
-<span class="sd">        :rtype: str</span>
-
-<span class="sd">        :Example:</span>
-
-<span class="sd">        Translate text from Thai to French::</span>
-
-<span class="sd">            from pythainlp.translate.th_fr import ThFrTranslator</span>
-
-<span class="sd">            thfr = ThFrTranslator()</span>
-
-<span class="sd">            thfr.translate(&quot;ทดสอบระบบ&quot;)</span>
-<span class="sd">            # output: &quot;Test du système.&quot;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
-                <span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
-        <span class="p">][</span><span class="mi">0</span><span class="p">]</span></div></div>
+<div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.sefr_cut.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;ws1000&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">global</span> <span class="n">DEFAULT_ENGINE</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">DEFAULT_ENGINE</span><span class="p">:</span>
+        <span class="n">DEFAULT_ENGINE</span> <span class="o">=</span> <span class="n">engine</span>
+        <span class="n">sefr_cut</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">DEFAULT_ENGINE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sefr_cut</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 </pre></div>
 
            </div>

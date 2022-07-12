@@ -109,6 +109,48 @@
 <dd><p>Wrapper around a frozen newmm tokenizer to make it a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">fastai.BaseTokenizer</span></code>.
 (see: <a class="reference external" href="https://docs.fast.ai/text.transform#BaseTokenizer">https://docs.fast.ai/text.transform#BaseTokenizer</a>)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.ulmfit.ThaiTokenizer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'th'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/ulmfit/tokenizer.html#ThaiTokenizer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.ThaiTokenizer.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.ulmfit.ThaiTokenizer.tokenizer">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/tokenizer.html#ThaiTokenizer.tokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.ThaiTokenizer.tokenizer" title="Permalink to this definition"></a></dt>
+<dd><p>This function tokenizes text with <em>newmm</em> engine and the dictionary
+specifically for <cite>ulmfit</cite> related functions
+(see: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/words_th_thai2fit_201810.txt">Dictonary file (.txt)</a>).
+:meth: tokenize text with a frozen newmm engine
+:param str text: text to tokenize
+:return: tokenized text
+:rtype: list[str]</p>
+<dl class="field-list">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p>Using <a class="reference internal" href="#pythainlp.ulmfit.ThaiTokenizer.tokenizer" title="pythainlp.ulmfit.ThaiTokenizer.tokenizer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.ulmfit.ThaiTokenizer.tokenizer()</span></code></a> is
+similar to <a class="reference internal" href="tokenize.html#pythainlp.tokenize.word_tokenize" title="pythainlp.tokenize.word_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code></a>
+with <em>ulmfit</em> engine.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.ulmfit</span> <span class="kn">import</span> <span class="n">ThaiTokenizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;อาภรณ์, จินตมยปัญญา ภาวนามยปัญญา&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ThaiTokenizer</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go"> [&#39;อาภรณ์&#39;, &#39;,&#39;, &#39; &#39;, &#39;จิน&#39;, &#39;ตม&#39;, &#39;ย&#39;, &#39;ปัญญา&#39;,</span>
+<span class="go"> &#39; &#39;, &#39;ภาวนามยปัญญา&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;ulmfit&#39;</span><span class="p">)</span>
+<span class="go">[&#39;อาภรณ์&#39;, &#39;,&#39;, &#39; &#39;, &#39;จิน&#39;, &#39;ตม&#39;, &#39;ย&#39;, &#39;ปัญญา&#39;,</span>
+<span class="go"> &#39; &#39;, &#39;ภาวนามยปัญญา&#39;]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.ulmfit.ThaiTokenizer.add_special_cases">
+<span class="sig-name descname"><span class="pre">add_special_cases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/ulmfit/tokenizer.html#ThaiTokenizer.add_special_cases"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.ThaiTokenizer.add_special_cases" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
