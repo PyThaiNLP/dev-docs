@@ -616,6 +616,7 @@
 
 <span class="sd">        text = &quot;อะเฟเซีย (Aphasia*) เป็นอาการผิดปกติของการพูด&quot;</span>
 <span class="sd">        _tokenizer = Tokenizer(custom_dict=trie, engine=&#39;newmm&#39;)</span>
+<span class="sd">        _tokenizer.word_tokenize(text)</span>
 <span class="sd">        # output: [&#39;อะเฟเซีย&#39;, &#39; &#39;, &#39;(&#39;, &#39;Aphasia&#39;, &#39;)&#39;, &#39; &#39;, &#39;เป็น&#39;, &#39;อาการ&#39;,</span>
 <span class="sd">        &#39;ผิดปกติ&#39;, &#39;ของ&#39;, &#39;การ&#39;, &#39;พูด&#39;]</span>
 
@@ -670,7 +671,7 @@
 <span class="sd">                    used to create a trie, or an instantiated</span>
 <span class="sd">                    :class:`pythainlp.util.Trie` object.</span>
 <span class="sd">        :param str engine: choose between different options of engine to token</span>
-<span class="sd">                           (i.e.  *newmm*, *longest*, *attacut*)</span>
+<span class="sd">                           (i.e.  *newmm*, *mm*, *longest*, *deepcut*)</span>
 <span class="sd">        :param bool keep_whitespace: True to keep whitespaces, a common mark</span>
 <span class="sd">                                    for end of phrase in Thai</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -680,6 +681,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">engine</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="s2">&quot;mm&quot;</span><span class="p">,</span> <span class="s2">&quot;longest&quot;</span><span class="p">,</span> <span class="s2">&quot;deepcut&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                The Tokenizer class is not support %s for custom tokenizer</span>
+<span class="sd">                &quot;&quot;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__keep_whitespace</span> <span class="o">=</span> <span class="n">keep_whitespace</span>
 
 <div class="viewcode-block" id="Tokenizer.word_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer.word_tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">word_tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -702,7 +709,7 @@
 <span class="sd">        Set the tokenizer&#39;s engine.</span>
 
 <span class="sd">        :param str engine: choose between different options of engine to token</span>
-<span class="sd">                           (i.e. *newmm*, *longest*, *attacut*)</span>
+<span class="sd">                           (i.e. *newmm*, *mm*, *longest*, *deepcut*)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">engine</span></div></div>
 </pre></div>
