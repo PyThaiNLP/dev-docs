@@ -98,8 +98,11 @@
 <span class="sd">Check if it is Thai text</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_above_vowels</span><span class="p">,</span> <span class="n">thai_tonemarks</span>
+<span class="kn">from</span> <span class="nn">pythainlp.transliterate</span> <span class="kn">import</span> <span class="n">pronunciate</span>
+<span class="kn">from</span> <span class="nn">pythainlp.util.syllable</span> <span class="kn">import</span> <span class="n">tone_detector</span>
 
 <span class="n">_DEFAULT_IGNORE_CHARS</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
 <span class="n">_TH_FIRST_CHAR_ASCII</span> <span class="o">=</span> <span class="mi">3584</span>
@@ -247,6 +250,33 @@
         <span class="k">return</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">ch</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ch</span></div>
+
+
+<div class="viewcode-block" id="thai_word_tone_detector"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thai_word_tone_detector">[docs]</a><span class="k">def</span> <span class="nf">thai_word_tone_detector</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Thai tone detector for word.</span>
+
+<span class="sd">    It use pythainlp.transliterate.pronunciate for convert word to\</span>
+<span class="sd">        pronunciation.</span>
+
+<span class="sd">    :param str word: Thai word.</span>
+<span class="sd">    :return: Thai pronunciation with tone each syllables.\</span>
+<span class="sd">        (l, m, h, r, f or empty if it cannot detector)</span>
+<span class="sd">    :rtype: Tuple[str, str]</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import thai_word_tone_detector</span>
+
+<span class="sd">        print(thai_word_tone_detector(&quot;คนดี&quot;))</span>
+<span class="sd">        # output: [(&#39;คน&#39;, &#39;m&#39;), (&#39;ดี&#39;, &#39;m&#39;)]</span>
+
+<span class="sd">        print(thai_word_tone_detector(&quot;มือถือ&quot;))</span>
+<span class="sd">        # output: [(&#39;มือ&#39;, &#39;m&#39;), (&#39;ถือ&#39;, &#39;r&#39;)]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_pronunciate</span> <span class="o">=</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">tone_detector</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;หฺ&#39;</span><span class="p">,</span> <span class="s1">&#39;ห&#39;</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_pronunciate</span><span class="p">]</span></div>
 </pre></div>
 
            </div>
