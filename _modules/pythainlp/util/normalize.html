@@ -224,9 +224,9 @@
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import delete_tone</span>
+<span class="sd">        from pythainlp.util import remove_tonemark</span>
 
-<span class="sd">        delete_tone(&#39;สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด&#39;)</span>
+<span class="sd">        remove_tonemark(&#39;สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด&#39;)</span>
 <span class="sd">        # output: สองพันหนึงรอยสีสิบเจ็ดลานสีแสนแปดหมืนสามพันหกรอยสีสิบเจ็ด</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">tonemarks</span><span class="p">:</span>
@@ -341,17 +341,6 @@
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_dangling</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">text</span></div>
-
-
-<span class="k">def</span> <span class="nf">delete_tone</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    DEPRECATED: Please use remove_tonemark().</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-        <span class="s2">&quot;delete_tone is deprecated, use remove_tonemark instead&quot;</span><span class="p">,</span>
-        <span class="ne">DeprecationWarning</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">remove_tonemark</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="maiyamok"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.maiyamok">[docs]</a><span class="k">def</span> <span class="nf">maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>

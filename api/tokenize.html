@@ -314,56 +314,6 @@ into ‘ข’, ‘น’, ‘ม’, and ‘ชั้น’.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pythainlp.tokenize.syllable_tokenize">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">syllable_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dict'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_whitespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#syllable_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.syllable_tokenize" title="Permalink to this definition"></a></dt>
-<dd><p>Syllable tokenizer.</p>
-<p><strong>syllable_tokenize is deprecated, use subword_tokenize instead</strong></p>
-<p>Tokenizes text into syllable (Thai: พยางค์), a unit of
-pronunciation having one vowel sound.  For example, the word ‘รถไฟ’
-contains two syallbles including ‘รถ’, and ‘ไฟ’.</p>
-<p>Under the hood, this function uses <a class="reference internal" href="#pythainlp.tokenize.word_tokenize" title="pythainlp.tokenize.word_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code></a>
-with <em>newmm</em> as a tokenizer. The function tokenize the text with
-the dictionary of Thai words from
-<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.common.thai_words()</span></code>
-and then dictionary of Thai syllable from
-<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.common.thai_syllables()</span></code>.
-As a result, only syllables are obtained.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – input string to be tokenized</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of the syllable tokenizer</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list of syllables where whitespaces in the text <strong>are included</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
-<li><p><em>dict</em> (default) - newmm word tokenizer with a syllable dictionary</p></li>
-<li><p><em>ssg</em> - CRF syllable segmenter for Thai</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Example:</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">syllable_tokenize</span>
-
-<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;รถไฟสมัยใหม่จะใช้กำลังจากหัวรถจักรดีเซล หรือจากไฟฟ้า&#39;</span>
-<span class="n">syllable_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="p">[</span><span class="s1">&#39;รถ&#39;</span><span class="p">,</span> <span class="s1">&#39;ไฟ&#39;</span><span class="p">,</span> <span class="s1">&#39;สมัย&#39;</span><span class="p">,</span> <span class="s1">&#39;ใหม่&#39;</span><span class="p">,</span> <span class="s1">&#39;ใช้&#39;</span><span class="p">,</span> <span class="s1">&#39;กำ&#39;</span><span class="p">,</span> <span class="s1">&#39;ลัง&#39;</span><span class="p">,</span> <span class="s1">&#39;จาก&#39;</span><span class="p">,</span> <span class="s1">&#39;หัว&#39;</span><span class="p">,</span>
-<span class="s1">&#39;รถ&#39;</span><span class="p">,</span> <span class="s1">&#39;จักร&#39;</span><span class="p">,</span> <span class="s1">&#39;ดี&#39;</span><span class="p">,</span> <span class="s1">&#39;เซล&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;หรือ&#39;</span><span class="p">,</span> <span class="s1">&#39;จาก&#39;</span><span class="p">,</span> <span class="s1">&#39;ไฟ&#39;</span><span class="p">,</span> <span class="s1">&#39;ฟ้า&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tokenize.word_tokenize">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">word_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="util.html#pythainlp.util.Trie" title="pythainlp.util.trie.Trie"><span class="pre">Trie</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_whitespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#word_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.word_tokenize" title="Permalink to this definition"></a></dt>
 <dd><p>Word tokenizer.</p>
