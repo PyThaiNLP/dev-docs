@@ -494,10 +494,11 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="n">corpus_versions</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">]</span>
         <span class="n">file_name</span> <span class="o">=</span> <span class="n">corpus_versions</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
-        <span class="n">found</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">version</span><span class="p">:</span>
-                <span class="c1"># Record corpus no. if found</span>
+            <span class="c1"># Do not check version here</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="c1"># Record corpus no. if found in local database</span>
                 <span class="n">found</span> <span class="o">=</span> <span class="n">i</span>
                 <span class="k">break</span>
 
@@ -540,7 +541,9 @@
                 <span class="c1"># This awkward behavior is for backward-compatibility with</span>
                 <span class="c1"># database files generated previously using TinyDB</span>
                 <span class="k">if</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]:</span>
-                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span>
+                        <span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span>
+                    <span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">corpus_no</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">corpus_no</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span>
@@ -553,8 +556,10 @@
 
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">local_db</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Check if versions match if the corpus is found in local database</span>
+        <span class="c1"># but a re-download is not forced</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">current_ver</span> <span class="o">=</span> <span class="n">local_db</span><span class="p">[</span><span class="s1">&#39;_default&#39;</span><span class="p">][</span><span class="n">found</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+            <span class="n">current_ver</span> <span class="o">=</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="n">found</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">current_ver</span> <span class="o">==</span> <span class="n">version</span><span class="p">:</span>
                 <span class="c1"># Already has the same version</span>
@@ -614,8 +619,8 @@
             <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
-                <span class="k">del</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;_default&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
 
