@@ -102,18 +102,21 @@
 <span class="kn">from</span> <span class="nn">pythainlp.soundex.lk82</span> <span class="kn">import</span> <span class="n">lk82</span>
 <span class="kn">from</span> <span class="nn">pythainlp.soundex.metasound</span> <span class="kn">import</span> <span class="n">metasound</span>
 <span class="kn">from</span> <span class="nn">pythainlp.soundex.udom83</span> <span class="kn">import</span> <span class="n">udom83</span>
+<span class="kn">from</span> <span class="nn">pythainlp.soundex.prayut_and_somchaip</span> <span class="kn">import</span> <span class="n">prayut_and_somchaip</span>
 <span class="kn">from</span> <span class="nn">pythainlp.soundex</span> <span class="kn">import</span> <span class="n">DEFAULT_SOUNDEX_ENGINE</span>
 
 <span class="c1"># Other Thai soundex systems (not implemented yet): Arun91, KSS97</span>
 <span class="c1"># [KSS97] https://linux.thai.net/~thep/soundex/soundex.html</span>
 
 
-<div class="viewcode-block" id="soundex"><a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.soundex">[docs]</a><span class="k">def</span> <span class="nf">soundex</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SOUNDEX_ENGINE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="soundex"><a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.soundex">[docs]</a><span class="k">def</span> <span class="nf">soundex</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SOUNDEX_ENGINE</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function converts Thai text into phonetic code.</span>
 
 <span class="sd">    :param str text: word</span>
 <span class="sd">    :param str engine: soundex engine</span>
+<span class="sd">    :param int length: preferred length of the Soundex code (default is 4)\</span>
+<span class="sd">        for metasound and prayut_and_somchaip only</span>
 <span class="sd">    :return: Soundex code</span>
 <span class="sd">    :rtype: str</span>
 
@@ -124,6 +127,8 @@
 <span class="sd">          Wannee Udompanich [#lk82]_</span>
 <span class="sd">        * *metasound* - Thai soundex algorithm based on a combination</span>
 <span class="sd">          of Metaphone and Soundex proposed by Snae &amp; Brückner [#metasound]_</span>
+<span class="sd">        * *prayut_and_somchaip* - Thai-English Cross-Language Transliterated</span>
+<span class="sd">          Word Retrieval using Soundex Technique  [#prayut_and_somchaip]_</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -149,15 +154,21 @@
 <span class="sd">        soundex(&quot;ปัจจุบัน&quot;), soundex(&quot;ปัจจุบัน&quot;, engine=&#39;lk82&#39;), \\</span>
 <span class="sd">            soundex(&quot;ปัจจุบัน&quot;, engine=&#39;metasound&#39;)</span>
 <span class="sd">        # output: (&#39;ป775300&#39;, &#39;ป3E54&#39;, &#39;ป223&#39;)</span>
+
+<span class="sd">        soundex(&quot;vp&quot;, engine=&quot;prayut_and_somchaip&quot;)</span>
+<span class="sd">        # output: &#39;11&#39;</span>
+<span class="sd">        soundex(&quot;วีพี&quot;, engine=&quot;prayut_and_somchaip&quot;)</span>
+<span class="sd">        # output: &#39;11&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;lk82&quot;</span><span class="p">:</span>
-        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">lk82</span>
+        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">lk82</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;prayut_and_somchaip&quot;</span><span class="p">:</span>
+        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">prayut_and_somchaip</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;metasound&quot;</span><span class="p">:</span>
-        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">metasound</span>
+        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">metasound</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># default, use &quot;udom83&quot;</span>
-        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">udom83</span>
-
-    <span class="k">return</span> <span class="n">_soundex</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+        <span class="n">_soundex</span> <span class="o">=</span> <span class="n">udom83</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_soundex</span></div>
 </pre></div>
 
            </div>
