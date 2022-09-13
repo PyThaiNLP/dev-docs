@@ -284,7 +284,10 @@
 <span class="sd">    :param str text: text to be tokenized to sentences</span>
 <span class="sd">    :return: list of words, tokenized from the text</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">toks</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">toks</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">toks</span> <span class="o">=</span> <span class="n">text</span>
     <span class="n">feat</span> <span class="o">=</span> <span class="n">extract_features</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span>
     <span class="n">labs</span> <span class="o">=</span> <span class="n">_tagger</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
     <span class="n">labs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>  <span class="c1"># make sure it cuts the last sentence</span>
