@@ -109,6 +109,7 @@
     <span class="n">DEFAULT_WORD_DICT_TRIE</span><span class="p">,</span>
     <span class="n">DEFAULT_WORD_TOKENIZE_ENGINE</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_characters</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util.trie</span> <span class="kn">import</span> <span class="n">Trie</span><span class="p">,</span> <span class="n">dict_trie</span>
 
 
@@ -140,6 +141,64 @@
     <span class="k">return</span> <span class="n">segment</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="word_detokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_detokenize">[docs]</a><span class="k">def</span> <span class="nf">word_detokenize</span><span class="p">(</span><span class="n">segments</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;str&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Word detokenizer.</span>
+
+<span class="sd">    This function will detokenize the list word in each sentence to text.</span>
+
+<span class="sd">    :param str segments: List sentences with list words.</span>
+<span class="sd">    :param str output: the output type (str or list)</span>
+<span class="sd">    :return: the thai text</span>
+<span class="sd">    :rtype: Union[str,List[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_list_all</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segments</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
+        <span class="n">_list_sents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_add_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_space_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_mark_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># previous word</span>
+                <span class="n">p_w</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># if w is number or other language and not be space</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span>
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="c1"># if previous word is number or other language and not be space</span>
+                <span class="k">elif</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="c1"># if word is Thai iteration mark</span>
+                <span class="k">elif</span> <span class="n">w</span> <span class="o">==</span> <span class="s2">&quot;ๆ&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+                        <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">_mark_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_space_index</span><span class="p">:</span>
+                    <span class="n">_space_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">_mark_index</span><span class="p">:</span>
+                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">_list_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_list_sents</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_list_all</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_text</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_list_all</span><span class="p">:</span>
+            <span class="n">_temp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">_temp</span> <span class="o">+=</span> <span class="n">j</span>
+            <span class="n">_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_text</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="word_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_tokenize">[docs]</a><span class="k">def</span> <span class="nf">word_tokenize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -158,7 +217,7 @@
 <span class="sd">                                 for end of phrase in Thai.</span>
 <span class="sd">                                 Otherwise, whitespaces are omitted.</span>
 <span class="sd">    :return: list of words</span>
-<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    :rtype: List[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *newmm* (default) - dictionary-based, Maximum Matching +</span>
 <span class="sd">          Thai Character Cluster</span>
