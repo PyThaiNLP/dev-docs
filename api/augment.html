@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -54,7 +55,55 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.augment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.WordNetAug"><code class="docutils literal notranslate"><span class="pre">WordNetAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.__init__"><code class="docutils literal notranslate"><span class="pre">WordNetAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.find_synonyms"><code class="docutils literal notranslate"><span class="pre">WordNetAug.find_synonyms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.augment"><code class="docutils literal notranslate"><span class="pre">WordNetAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug"><code class="docutils literal notranslate"><span class="pre">Word2VecAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug.__init__"><code class="docutils literal notranslate"><span class="pre">Word2VecAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug.modify_sent"><code class="docutils literal notranslate"><span class="pre">Word2VecAug.modify_sent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug.augment"><code class="docutils literal notranslate"><span class="pre">Word2VecAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.Thai2fitAug"><code class="docutils literal notranslate"><span class="pre">Thai2fitAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Thai2fitAug.__init__"><code class="docutils literal notranslate"><span class="pre">Thai2fitAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Thai2fitAug.tokenizer"><code class="docutils literal notranslate"><span class="pre">Thai2fitAug.tokenizer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Thai2fitAug.load_w2v"><code class="docutils literal notranslate"><span class="pre">Thai2fitAug.load_w2v()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Thai2fitAug.augment"><code class="docutils literal notranslate"><span class="pre">Thai2fitAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug"><code class="docutils literal notranslate"><span class="pre">LTW2VAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug.__init__"><code class="docutils literal notranslate"><span class="pre">LTW2VAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug.tokenizer"><code class="docutils literal notranslate"><span class="pre">LTW2VAug.tokenizer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug.load_w2v"><code class="docutils literal notranslate"><span class="pre">LTW2VAug.load_w2v()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug.augment"><code class="docutils literal notranslate"><span class="pre">LTW2VAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug"><code class="docutils literal notranslate"><span class="pre">FastTextAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.__init__"><code class="docutils literal notranslate"><span class="pre">FastTextAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.tokenize"><code class="docutils literal notranslate"><span class="pre">FastTextAug.tokenize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.modify_sent"><code class="docutils literal notranslate"><span class="pre">FastTextAug.modify_sent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.augment"><code class="docutils literal notranslate"><span class="pre">FastTextAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.lm.Thai2transformersAug"><code class="docutils literal notranslate"><span class="pre">Thai2transformersAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.Thai2transformersAug.__init__"><code class="docutils literal notranslate"><span class="pre">Thai2transformersAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.Thai2transformersAug.generate"><code class="docutils literal notranslate"><span class="pre">Thai2transformersAug.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.Thai2transformersAug.augment"><code class="docutils literal notranslate"><span class="pre">Thai2transformersAug.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug"><code class="docutils literal notranslate"><span class="pre">BPEmbAug</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.__init__"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.tokenizer"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.tokenizer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.load_w2v"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.load_w2v()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.augment"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.augment()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>

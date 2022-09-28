@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -68,7 +69,58 @@
 <li class="toctree-l1"><a class="reference internal" href="transliterate.html">pythainlp.transliterate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ulmfit.html">pythainlp.ulmfit</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.util</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.arabic_digit_to_thai_digit"><code class="docutils literal notranslate"><span class="pre">arabic_digit_to_thai_digit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.bahttext"><code class="docutils literal notranslate"><span class="pre">bahttext()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.collate"><code class="docutils literal notranslate"><span class="pre">collate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.dict_trie"><code class="docutils literal notranslate"><span class="pre">dict_trie()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.digit_to_text"><code class="docutils literal notranslate"><span class="pre">digit_to_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.display_thai_char"><code class="docutils literal notranslate"><span class="pre">display_thai_char()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.emoji_to_thai"><code class="docutils literal notranslate"><span class="pre">emoji_to_thai()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.eng_to_thai"><code class="docutils literal notranslate"><span class="pre">eng_to_thai()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.find_keyword"><code class="docutils literal notranslate"><span class="pre">find_keyword()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.countthai"><code class="docutils literal notranslate"><span class="pre">countthai()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.is_native_thai"><code class="docutils literal notranslate"><span class="pre">is_native_thai()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.isthai"><code class="docutils literal notranslate"><span class="pre">isthai()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.isthaichar"><code class="docutils literal notranslate"><span class="pre">isthaichar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.normalize"><code class="docutils literal notranslate"><span class="pre">normalize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.now_reign_year"><code class="docutils literal notranslate"><span class="pre">now_reign_year()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.num_to_thaiword"><code class="docutils literal notranslate"><span class="pre">num_to_thaiword()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.maiyamok"><code class="docutils literal notranslate"><span class="pre">maiyamok()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.rank"><code class="docutils literal notranslate"><span class="pre">rank()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.reign_year_to_ad"><code class="docutils literal notranslate"><span class="pre">reign_year_to_ad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.remove_dangling"><code class="docutils literal notranslate"><span class="pre">remove_dangling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.remove_dup_spaces"><code class="docutils literal notranslate"><span class="pre">remove_dup_spaces()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.remove_repeat_vowels"><code class="docutils literal notranslate"><span class="pre">remove_repeat_vowels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.remove_tonemark"><code class="docutils literal notranslate"><span class="pre">remove_tonemark()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.remove_zw"><code class="docutils literal notranslate"><span class="pre">remove_zw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.reorder_vowels"><code class="docutils literal notranslate"><span class="pre">reorder_vowels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.sound_syllable"><code class="docutils literal notranslate"><span class="pre">sound_syllable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.syllable_length"><code class="docutils literal notranslate"><span class="pre">syllable_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.syllable_open_close_detector"><code class="docutils literal notranslate"><span class="pre">syllable_open_close_detector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.text_to_arabic_digit"><code class="docutils literal notranslate"><span class="pre">text_to_arabic_digit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.text_to_num"><code class="docutils literal notranslate"><span class="pre">text_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.text_to_thai_digit"><code class="docutils literal notranslate"><span class="pre">text_to_thai_digit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_strftime"><code class="docutils literal notranslate"><span class="pre">thai_strftime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_to_eng"><code class="docutils literal notranslate"><span class="pre">thai_to_eng()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_word_tone_detector"><code class="docutils literal notranslate"><span class="pre">thai_word_tone_detector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_digit_to_arabic_digit"><code class="docutils literal notranslate"><span class="pre">thai_digit_to_arabic_digit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thaiword_to_date"><code class="docutils literal notranslate"><span class="pre">thaiword_to_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thaiword_to_num"><code class="docutils literal notranslate"><span class="pre">thaiword_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thaiword_to_time"><code class="docutils literal notranslate"><span class="pre">thaiword_to_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.time_to_thaiword"><code class="docutils literal notranslate"><span class="pre">time_to_thaiword()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.tone_detector"><code class="docutils literal notranslate"><span class="pre">tone_detector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.words_to_num"><code class="docutils literal notranslate"><span class="pre">words_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.Trie"><code class="docutils literal notranslate"><span class="pre">Trie</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.Node"><code class="docutils literal notranslate"><span class="pre">Trie.Node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.__init__"><code class="docutils literal notranslate"><span class="pre">Trie.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.add"><code class="docutils literal notranslate"><span class="pre">Trie.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.remove"><code class="docutils literal notranslate"><span class="pre">Trie.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.prefixes"><code class="docutils literal notranslate"><span class="pre">Trie.prefixes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>

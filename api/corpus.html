@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -57,13 +58,66 @@
 <li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.corpus</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conceptnet">ConceptNet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tnc">TNC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ttc">TTC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#oscar">OSCAR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#util">Util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.countries"><code class="docutils literal notranslate"><span class="pre">countries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.get_corpus"><code class="docutils literal notranslate"><span class="pre">get_corpus()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.get_corpus_db"><code class="docutils literal notranslate"><span class="pre">get_corpus_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.get_corpus_db_detail"><code class="docutils literal notranslate"><span class="pre">get_corpus_db_detail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.get_corpus_default_db"><code class="docutils literal notranslate"><span class="pre">get_corpus_default_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.get_corpus_path"><code class="docutils literal notranslate"><span class="pre">get_corpus_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.download"><code class="docutils literal notranslate"><span class="pre">download()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.remove"><code class="docutils literal notranslate"><span class="pre">remove()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.provinces"><code class="docutils literal notranslate"><span class="pre">provinces()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_stopwords"><code class="docutils literal notranslate"><span class="pre">thai_stopwords()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_words"><code class="docutils literal notranslate"><span class="pre">thai_words()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_syllables"><code class="docutils literal notranslate"><span class="pre">thai_syllables()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_negations"><code class="docutils literal notranslate"><span class="pre">thai_negations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_family_names"><code class="docutils literal notranslate"><span class="pre">thai_family_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_female_names"><code class="docutils literal notranslate"><span class="pre">thai_female_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.thai_male_names"><code class="docutils literal notranslate"><span class="pre">thai_male_names()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conceptnet">ConceptNet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.conceptnet.edges"><code class="docutils literal notranslate"><span class="pre">edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tnc">TNC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.tnc.word_freqs"><code class="docutils literal notranslate"><span class="pre">word_freqs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.tnc.unigram_word_freqs"><code class="docutils literal notranslate"><span class="pre">unigram_word_freqs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.tnc.bigram_word_freqs"><code class="docutils literal notranslate"><span class="pre">bigram_word_freqs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.tnc.trigram_word_freqs"><code class="docutils literal notranslate"><span class="pre">trigram_word_freqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ttc">TTC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.ttc.word_freqs"><code class="docutils literal notranslate"><span class="pre">word_freqs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.ttc.unigram_word_freqs"><code class="docutils literal notranslate"><span class="pre">unigram_word_freqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#oscar">OSCAR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.oscar.word_freqs"><code class="docutils literal notranslate"><span class="pre">word_freqs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.oscar.unigram_word_freqs"><code class="docutils literal notranslate"><span class="pre">unigram_word_freqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#util">Util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.util.find_badwords"><code class="docutils literal notranslate"><span class="pre">find_badwords()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.util.revise_wordset"><code class="docutils literal notranslate"><span class="pre">revise_wordset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.util.revise_newmm_default_wordset"><code class="docutils literal notranslate"><span class="pre">revise_newmm_default_wordset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#wordnet">WordNet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.synsets"><code class="docutils literal notranslate"><span class="pre">synsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.synset"><code class="docutils literal notranslate"><span class="pre">synset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.all_lemma_names"><code class="docutils literal notranslate"><span class="pre">all_lemma_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.all_synsets"><code class="docutils literal notranslate"><span class="pre">all_synsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.langs"><code class="docutils literal notranslate"><span class="pre">langs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.lemmas"><code class="docutils literal notranslate"><span class="pre">lemmas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.lemma"><code class="docutils literal notranslate"><span class="pre">lemma()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.lemma_from_key"><code class="docutils literal notranslate"><span class="pre">lemma_from_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.path_similarity"><code class="docutils literal notranslate"><span class="pre">path_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.lch_similarity"><code class="docutils literal notranslate"><span class="pre">lch_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.wup_similarity"><code class="docutils literal notranslate"><span class="pre">wup_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.morphy"><code class="docutils literal notranslate"><span class="pre">morphy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.corpus.wordnet.custom_lemmas"><code class="docutils literal notranslate"><span class="pre">custom_lemmas()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#definition">Definition</a></li>
 </ul>
 </li>

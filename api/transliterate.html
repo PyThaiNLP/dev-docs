@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -66,18 +67,52 @@
 <li class="toctree-l1"><a class="reference internal" href="tools.html">pythainlp.tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="translate.html">pythainlp.translate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.transliterate</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.romanize"><code class="docutils literal notranslate"><span class="pre">romanize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.transliterate"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.pronunciate"><code class="docutils literal notranslate"><span class="pre">pronunciate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.puan"><code class="docutils literal notranslate"><span class="pre">puan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.wunsen.WunsenTransliterate"><code class="docutils literal notranslate"><span class="pre">WunsenTransliterate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.wunsen.WunsenTransliterate.__init__"><code class="docutils literal notranslate"><span class="pre">WunsenTransliterate.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.wunsen.WunsenTransliterate.transliterate"><code class="docutils literal notranslate"><span class="pre">WunsenTransliterate.transliterate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#romanize-engines">Romanize Engines</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.thai2rom.romanize">thai2rom</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.royin.romanize">royin</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#transliterate-engines">Transliterate Engines</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.pyicu">icu</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.ipa">ipa</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.thaig2p.transliterate">thaig2p</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">tltk</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.iso_11940">iso_11940</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.pyicu">icu</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.pyicu.transliterate"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.ipa">ipa</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.ipa.transliterate"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.ipa.trans_list"><code class="docutils literal notranslate"><span class="pre">trans_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.ipa.xsampa_list"><code class="docutils literal notranslate"><span class="pre">xsampa_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">trans_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">xsampa_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.thaig2p.transliterate">thaig2p</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.thaig2p.transliterate"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">tltk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.tltk.romanize"><code class="docutils literal notranslate"><span class="pre">romanize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.tltk.tltk_g2p"><code class="docutils literal notranslate"><span class="pre">tltk_g2p()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.tltk.tltk_ipa"><code class="docutils literal notranslate"><span class="pre">tltk_ipa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.transliterate.iso_11940">iso_11940</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.transliterate.iso_11940.transliterate"><code class="docutils literal notranslate"><span class="pre">transliterate()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>

@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -63,27 +64,116 @@
 <li class="toctree-l1"><a class="reference internal" href="summarize.html">pythainlp.summarize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tag.html">pythainlp.tag</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.tokenize</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.clause_tokenize"><code class="docutils literal notranslate"><span class="pre">clause_tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.sent_tokenize"><code class="docutils literal notranslate"><span class="pre">sent_tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.subword_tokenize"><code class="docutils literal notranslate"><span class="pre">subword_tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.word_tokenize"><code class="docutils literal notranslate"><span class="pre">word_tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.word_detokenize"><code class="docutils literal notranslate"><span class="pre">word_detokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer"><code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer.__init__"><code class="docutils literal notranslate"><span class="pre">Tokenizer.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer.word_tokenize"><code class="docutils literal notranslate"><span class="pre">Tokenizer.word_tokenize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer.set_tokenize_engine"><code class="docutils literal notranslate"><span class="pre">Tokenizer.set_tokenize_engine()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#tokenization-engines">Tokenization Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sentence-level">Sentence level</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pythainlp.tokenize.crfcut">crfcut</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pythainlp.tokenize.thaisumcut">thaisumcut</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythainlp.tokenize.crfcut">crfcut</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.crfcut.extract_features"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.crfcut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythainlp.tokenize.thaisumcut">thaisumcut</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.list_to_string"><code class="docutils literal notranslate"><span class="pre">list_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.middle_cut"><code class="docutils literal notranslate"><span class="pre">middle_cut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.ThaiSentenceSegmentor"><code class="docutils literal notranslate"><span class="pre">ThaiSentenceSegmentor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.ThaiSentenceSegmentor.split_into_sentences"><code class="docutils literal notranslate"><span class="pre">ThaiSentenceSegmentor.split_into_sentences()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">list_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">middle_cut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">ThaiSentenceSegmentor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">ThaiSentenceSegmentor.split_into_sentences()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#word-level">Word level</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">attacut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">deepcut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.multi_cut">multi_cut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nlpo3">nlpo3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.longest">longest</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.pyicu">pyicu</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nercut">nercut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.sefr_cut">sefr_cut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">oskut</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#newmm">newmm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">attacut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.attacut.AttacutTokenizer"><code class="docutils literal notranslate"><span class="pre">AttacutTokenizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.attacut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">AttacutTokenizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">deepcut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.deepcut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.multi_cut">multi_cut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.multi_cut.LatticeString"><code class="docutils literal notranslate"><span class="pre">LatticeString</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.multi_cut.mmcut"><code class="docutils literal notranslate"><span class="pre">mmcut()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.multi_cut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.multi_cut.find_all_segment"><code class="docutils literal notranslate"><span class="pre">find_all_segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">find_all_segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nlpo3">nlpo3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.nlpo3.load_dict"><code class="docutils literal notranslate"><span class="pre">load_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.nlpo3.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">load_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.longest">longest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.longest.LongestMatchTokenizer"><code class="docutils literal notranslate"><span class="pre">LongestMatchTokenizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.longest.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.pyicu">pyicu</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.pyicu.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.nercut">nercut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.nercut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.sefr_cut">sefr_cut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.sefr_cut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">oskut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.oskut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#newmm">newmm</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.newmm.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#subword-level">Subword level</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.tcc">tcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.etcc">etcc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.tcc">tcc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc.tcc"><code class="docutils literal notranslate"><span class="pre">tcc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc.tcc_pos"><code class="docutils literal notranslate"><span class="pre">tcc_pos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27"><code class="docutils literal notranslate"><span class="pre">tcc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28"><code class="docutils literal notranslate"><span class="pre">tcc_pos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.etcc">etcc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.etcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
