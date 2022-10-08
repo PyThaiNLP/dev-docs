@@ -101,7 +101,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DEFAULT_SENT_TOKENIZE_ENGINE</span><span class="p">,</span>
@@ -111,7 +110,6 @@
     <span class="n">DEFAULT_WORD_DICT_TRIE</span><span class="p">,</span>
     <span class="n">DEFAULT_WORD_TOKENIZE_ENGINE</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_characters</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util.trie</span> <span class="kn">import</span> <span class="n">Trie</span><span class="p">,</span> <span class="n">dict_trie</span>
 
 
@@ -160,6 +158,7 @@
     <span class="n">_list_all</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segments</span><span class="p">]</span>
+    <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_characters</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
         <span class="n">_list_sents</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">_add_index</span> <span class="o">=</span> <span class="p">[]</span>
