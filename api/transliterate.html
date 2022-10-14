@@ -155,7 +155,7 @@
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.transliterate.romanize">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.transliterate.</span></span><span class="sig-name descname"><span class="pre">romanize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'royin'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/transliterate/core.html#romanize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.transliterate.romanize" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pythainlp.transliterate.</span></span><span class="sig-name descname"><span class="pre">romanize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'royin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback_engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'royin'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/transliterate/core.html#romanize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.transliterate.romanize" title="Permalink to this definition"></a></dt>
 <dd><p>This function renders Thai words in the Latin alphabet or “romanization”,
 using the Royal Thai General System of Transcription (RTGS)
 <a class="footnote-reference brackets" href="#rtgs-transcription" id="id1">1</a>. RTGS is the official system published
@@ -164,7 +164,9 @@ by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษา�
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Thai text to be romanized</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – ‘royin’ (default) or ‘thai2rom’</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – One of ‘royin’ (default), ‘thai2rom’, ‘tltk’, and ‘lookup’. See more in options for engine section.</p></li>
+<li><p><strong>fallback_engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – If engine equals ‘lookup’, use <cite>fallback_engine</cite> for words that are not in the transliteration dict.
+No effect on other engines. Default to ‘royin’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -180,6 +182,7 @@ Transcription issued by Royal Institute of Thailand.</p></li>
 <li><p><em>thai2rom</em> - a deep learning-based Thai romanization engine
 (require PyTorch).</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit</p></li>
+<li><p><em>lookup</em> - Look up on Thai-English Transliteration dictionary v1.4 compiled by Wannaphong.</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Example</dt>
@@ -201,6 +204,9 @@ Transcription issued by Royal Institute of Thailand.</p></li>
 
 <span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ภาพยนตร์&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;thai2rom&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;phapphayon&#39;</span>
+
+<span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ก็อปปี้&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;lookup&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;copy&#39;</span>
 </pre></div>
 </div>
 </dd></dl>

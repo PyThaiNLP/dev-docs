@@ -102,7 +102,11 @@
 <span class="n">DEFAULT_PRONUNCIATE_ENGINE</span> <span class="o">=</span> <span class="s2">&quot;w2p&quot;</span>
 
 
-<div class="viewcode-block" id="romanize"><a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.romanize">[docs]</a><span class="k">def</span> <span class="nf">romanize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="romanize"><a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.romanize">[docs]</a><span class="k">def</span> <span class="nf">romanize</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">,</span>
+    <span class="n">fallback_engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function renders Thai words in the Latin alphabet or &quot;romanization&quot;,</span>
 <span class="sd">    using the Royal Thai General System of Transcription (RTGS)</span>
@@ -110,7 +114,9 @@
 <span class="sd">    by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษาไทยเป็นอักษรละติน)</span>
 
 <span class="sd">    :param str text: Thai text to be romanized</span>
-<span class="sd">    :param str engine: &#39;royin&#39; (default) or &#39;thai2rom&#39;</span>
+<span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;tltk&#39;, and &#39;lookup&#39;. See more in options for engine section.</span>
+<span class="sd">    :param str fallback_engine: If engine equals &#39;lookup&#39;, use `fallback_engine` for words that are not in the transliteration dict.</span>
+<span class="sd">                                No effect on other engines. Default to &#39;royin&#39;.</span>
 
 <span class="sd">    :return: A string of Thai words rendered in the Latin alphabet.</span>
 <span class="sd">    :rtype: str</span>
@@ -121,6 +127,7 @@
 <span class="sd">        * *thai2rom* - a deep learning-based Thai romanization engine</span>
 <span class="sd">          (require PyTorch).</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit</span>
+<span class="sd">        * *lookup* - Look up on Thai-English Transliteration dictionary v1.4 compiled by Wannaphong.</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -141,19 +148,32 @@
 
 <span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom&quot;)</span>
 <span class="sd">        # output: &#39;phapphayon&#39;</span>
+
+<span class="sd">        romanize(&quot;ก็อปปี้&quot;, engine=&quot;lookup&quot;)</span>
+<span class="sd">        # output: &#39;copy&#39;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom</span> <span class="kn">import</span> <span class="n">romanize</span>
+        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">romanize</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine &quot;royin&quot;</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.royin</span> <span class="kn">import</span> <span class="n">romanize</span>
+
+        <span class="k">return</span> <span class="n">romanize</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom</span> <span class="kn">import</span> <span class="n">romanize</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">romanize</span>
-    <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine &quot;royin&quot;</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.royin</span> <span class="kn">import</span> <span class="n">romanize</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;lookup&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.lookup</span> <span class="kn">import</span> <span class="n">romanize</span>
 
-    <span class="k">return</span> <span class="n">romanize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+        <span class="n">fallback</span> <span class="o">=</span> <span class="n">select_romanize_engine</span><span class="p">(</span><span class="n">fallback_engine</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">romanize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fallback_func</span><span class="o">=</span><span class="n">fallback</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">)(</span><span class="n">text</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="transliterate"><a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.transliterate">[docs]</a><span class="k">def</span> <span class="nf">transliterate</span><span class="p">(</span>
