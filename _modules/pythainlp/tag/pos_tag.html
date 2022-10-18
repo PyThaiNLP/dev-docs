@@ -111,19 +111,10 @@
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *perceptron* - perceptron tagger (default)</span>
 <span class="sd">        * *unigram* - unigram tagger</span>
-<span class="sd">        * *wangchanberta* - wangchanberta model (support lst20 corpus only \</span>
-<span class="sd">            and it supports a string only. if you input a list of word, \</span>
-<span class="sd">            it will convert list word to a string.</span>
+<span class="sd">        * *wangchanberta* - wangchanberta model.</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit (support TNC corpus only.\</span>
 <span class="sd">            if you choose other corpus, It&#39;s change to TNC corpus.)</span>
 <span class="sd">    :param str corpus: the corpus that used to create the language model for tagger</span>
-<span class="sd">        * *lst20* - `LST20 &lt;https://aiforthai.in.th/corpus.php&gt;`_ corpus \</span>
-<span class="sd">            by National Electronics and Computer Technology Center, Thailand \</span>
-<span class="sd">            It is free for **non-commercial uses and research only**. \</span>
-<span class="sd">            You can read at \</span>
-<span class="sd">            `Facebook &lt;https://www.facebook.com/dancearmy/posts/10157641945708284&gt;`_.</span>
-<span class="sd">        * *lst20_ud* - LST20 text, with tags mapped to Universal POS tag \</span>
-<span class="sd">            from `Universal Dependencies &lt;https://universaldependencies.org/&gt;`</span>
 <span class="sd">        * *orchid* - `ORCHID \</span>
 <span class="sd">            &lt;https://www.academia.edu/9127599/Thai_Treebank&gt;`_ corpus, \</span>
 <span class="sd">            text from Thai academic articles (default)</span>
@@ -193,13 +184,10 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">words</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="n">_support_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lst20&quot;</span><span class="p">,</span> <span class="s2">&quot;lst20_ud&quot;</span><span class="p">,</span> <span class="s2">&quot;orchid&quot;</span><span class="p">,</span> <span class="s2">&quot;orchid_ud&quot;</span><span class="p">,</span> <span class="s2">&quot;pud&quot;</span><span class="p">]</span>
+    <span class="n">_support_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;orchid&quot;</span><span class="p">,</span> <span class="s2">&quot;orchid_ud&quot;</span><span class="p">,</span> <span class="s2">&quot;pud&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;perceptron&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">_support_corpus</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tag.perceptron</span> <span class="kn">import</span> <span class="n">tag</span> <span class="k">as</span> <span class="n">tag_</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;lst20&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.wangchanberta.postag</span> <span class="kn">import</span> <span class="n">pos_tag</span> <span class="k">as</span> <span class="n">tag_</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tag.tltk</span> <span class="kn">import</span> <span class="n">pos_tag</span> <span class="k">as</span> <span class="n">tag_</span>
         <span class="n">corpus</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span>
@@ -230,14 +218,9 @@
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *perceptron* - perceptron tagger (default)</span>
 <span class="sd">        * *unigram* - unigram tagger</span>
-<span class="sd">        * *wangchanberta*  - wangchanberta model (support lst20 corpus only)</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit (support TNC corpus only.\</span>
 <span class="sd">            if you choose other corpus, It&#39;s change to TNC corpus.)</span>
 <span class="sd">    :param str corpus: the corpus that used to create the language model for tagger</span>
-<span class="sd">        * *lst20* - `LST20 &lt;https://aiforthai.in.th/corpus.php&gt;`_ corpus \</span>
-<span class="sd">            by National Electronics and Computer Technology Center, Thailand</span>
-<span class="sd">        * *lst20_ud* - LST20 text, with tags mapped to Universal POS tags \</span>
-<span class="sd">            from `Universal Dependencies &lt;https://universaldependencies.org/&gt;`</span>
 <span class="sd">        * *orchid* - `ORCHID \</span>
 <span class="sd">            &lt;https://www.academia.edu/9127599/Thai_Treebank&gt;`_ corpus, \</span>
 <span class="sd">            text from Thai academic articles (default)</span>

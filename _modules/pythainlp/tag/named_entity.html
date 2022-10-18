@@ -112,18 +112,10 @@
 
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *thainer* - Thai NER engine</span>
-<span class="sd">        * *wangchanberta* - wangchanberta model</span>
-<span class="sd">        * *lst20_onnx* - LST20 NER model by wangchanberta with ONNX runtime</span>
 <span class="sd">        * *tltk* - wrapper for `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.</span>
 
 <span class="sd">    **Options for corpus**</span>
 <span class="sd">        * *thaimer* - Thai NER corpus</span>
-<span class="sd">        * *lst20* - lst20 corpus (wangchanberta only). \</span>
-<span class="sd">            `LST20 &lt;https://aiforthai.in.th/corpus.php&gt;`_ corpus \</span>
-<span class="sd">            by National Electronics and Computer Technology Center, Thailand \</span>
-<span class="sd">            It is free for **non-commercial uses and research only**. \</span>
-<span class="sd">            You can read at \</span>
-<span class="sd">            `Facebook &lt;https://www.facebook.com/dancearmy/posts/10157641945708284&gt;`_.</span>
 
 <span class="sd">    **Note**: for tltk engine, It&#39;s support ner model from tltk only.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -136,18 +128,6 @@
         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.tag.thainer</span> <span class="kn">import</span> <span class="n">ThaiNameTagger</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;lst20_onnx&quot;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.tag.lst20_ner_onnx</span> <span class="kn">import</span> <span class="n">LST20_NER_ONNX</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">LST20_NER_ONNX</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.wangchanberta</span> <span class="kn">import</span> <span class="n">ThaiNameTagger</span>
-            <span class="k">if</span> <span class="n">corpus</span><span class="o">==</span><span class="s2">&quot;lst20&quot;</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                LST20 corpus are free for research and open source only.</span><span class="se">\n</span><span class="s2"></span>
-<span class="s2">                If you want to use in Commercial use, please contract NECTEC.</span><span class="se">\n</span><span class="s2"></span>
-<span class="s2">                https://www.facebook.com/dancearmy/posts/10157641945708284</span>
-<span class="s2">                &quot;&quot;&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.tag</span> <span class="kn">import</span> <span class="n">tltk</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
@@ -195,15 +175,7 @@
 <span class="sd">            &gt;&gt;&gt; ner.tag(&quot;ทดสอบนายวรรณพงษ์ ภัททิยไพบูลย์&quot;, tag=True)</span>
 <span class="sd">            &#39;ทดสอบ&lt;PERSON&gt;นายวรรณพงษ์ ภัททิยไพบูลย์&lt;/PERSON&gt;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">pos</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;wangchanberta is not support part-of-speech tag.</span>
-<span class="sd">                It have not part-of-speech tag in output.&quot;&quot;&quot;</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_engine</span> <span class="o">==</span> <span class="s2">&quot;lst20_onnx&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="NNER"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER">[docs]</a><span class="k">class</span> <span class="nc">NNER</span><span class="p">:</span>

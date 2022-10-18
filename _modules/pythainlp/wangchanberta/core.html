@@ -111,8 +111,8 @@
     <span class="n">_tokenizer</span><span class="o">.</span><span class="n">additional_special_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;s&gt;NOTUSED&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;/s&gt;NOTUSED&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;_&gt;&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="ThaiNameTagger"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger">[docs]</a><span class="k">class</span> <span class="nc">ThaiNameTagger</span><span class="p">:</span>
-<div class="viewcode-block" id="ThaiNameTagger.__init__"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="k">class</span> <span class="nc">ThaiNameTagger</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thainer&quot;</span><span class="p">,</span>
         <span class="n">grouped_entities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
@@ -125,7 +125,6 @@
 
 <span class="sd">        :param str dataset_name:</span>
 <span class="sd">            * *thainer* - ThaiNER dataset</span>
-<span class="sd">            * *lst20* - LST20 Corpus</span>
 <span class="sd">        :param bool grouped_entities: grouped entities</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span> <span class="o">=</span> <span class="n">dataset_name</span>
@@ -136,7 +135,7 @@
             <span class="n">model</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;airesearch/</span><span class="si">{</span><span class="n">_model_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="n">revision</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;finetuned@</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="si">}</span><span class="s1">-ner&#39;</span><span class="p">,</span>
             <span class="n">ignore_labels</span><span class="o">=</span><span class="p">[],</span>
-            <span class="n">grouped_entities</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span><span class="p">)</span></div>
+            <span class="n">grouped_entities</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_IOB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
@@ -146,7 +145,7 @@
     <span class="k">def</span> <span class="nf">_clear_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;B-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;I-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ThaiNameTagger.get_ner"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger.get_ner">[docs]</a>    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -178,13 +177,6 @@
                 <span class="p">(</span>
                     <span class="n">i</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;▁&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;entity&#39;</span><span class="p">]</span>
                 <span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_ner</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;▁&#39;</span>
-            <span class="p">]</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span> <span class="o">==</span> <span class="s2">&quot;lst20&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="p">(</span>
-                    <span class="n">i</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;▁&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
-                    <span class="n">i</span><span class="p">[</span><span class="s1">&#39;entity_group&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;E-&#39;</span><span class="p">,</span> <span class="s1">&#39;I-&#39;</span><span class="p">)</span>
-                <span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_ner</span>
             <span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span> <span class="o">=</span> <span class="p">[</span>
@@ -224,7 +216,7 @@
 
             <span class="k">return</span> <span class="n">sent</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span></div></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span>
 
 
 <div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>

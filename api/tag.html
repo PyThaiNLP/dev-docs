@@ -768,13 +768,11 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <ul>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
-<li><p><em>wangchanberta</em> - wangchanberta model (support lst20 corpus only             and it supports a string only. if you input a list of word,             it will convert list word to a string.</p></li>
+<li><p><em>wangchanberta</em> - wangchanberta model.</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpus only.            if you choose other corpus, It’s change to TNC corpus.)</p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the corpus that used to create the language model for tagger
-* <em>lst20</em> - <a class="reference external" href="https://aiforthai.in.th/corpus.php">LST20</a> corpus             by National Electronics and Computer Technology Center, Thailand             It is free for <strong>non-commercial uses and research only</strong>.             You can read at             <a class="reference external" href="https://www.facebook.com/dancearmy/posts/10157641945708284">Facebook</a>.
-* <em>lst20_ud</em> - LST20 text, with tags mapped to Universal POS tag             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
 * <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
 * <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
 * <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
@@ -856,13 +854,10 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <ul>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
-<li><p><em>wangchanberta</em>  - wangchanberta model (support lst20 corpus only)</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpus only.            if you choose other corpus, It’s change to TNC corpus.)</p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <p>the corpus that used to create the language model for tagger
-* <em>lst20</em> - <a class="reference external" href="https://aiforthai.in.th/corpus.php">LST20</a> corpus             by National Electronics and Computer Technology Center, Thailand
-* <em>lst20_ud</em> - LST20 text, with tags mapped to Universal POS tags             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
 * <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
 * <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
 * <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
@@ -967,14 +962,11 @@ part-of-speech (POS) tag and named entity (NE) tag.</p>
 <dl class="simple">
 <dt><strong>Options for engine</strong></dt><dd><ul class="simple">
 <li><p><em>thainer</em> - Thai NER engine</p></li>
-<li><p><em>wangchanberta</em> - wangchanberta model</p></li>
-<li><p><em>lst20_onnx</em> - LST20 NER model by wangchanberta with ONNX runtime</p></li>
 <li><p><em>tltk</em> - wrapper for <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a>.</p></li>
 </ul>
 </dd>
 <dt><strong>Options for corpus</strong></dt><dd><ul class="simple">
 <li><p><em>thaimer</em> - Thai NER corpus</p></li>
-<li><p><em>lst20</em> - lst20 corpus (wangchanberta only).             <a class="reference external" href="https://aiforthai.in.th/corpus.php">LST20</a> corpus             by National Electronics and Computer Technology Center, Thailand             It is free for <strong>non-commercial uses and research only</strong>.             You can read at             <a class="reference external" href="https://www.facebook.com/dancearmy/posts/10157641945708284">Facebook</a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1123,12 +1115,12 @@ word and NER tag</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.thainer.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.thainer.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.4'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger" title="Permalink to this definition"></a></dt>
 <dd><p>Thai named-entity recognizer.
 :param str version: Thai NER version.</p>
 <blockquote>
-<div><p>It’s support Thai NER 1.4 &amp; 1.5.
-The defualt value is <cite>1.5</cite></p>
+<div><p>It’s support Thai NER 1.4.
+The defualt value is <cite>1.4</cite></p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Example</dt>
@@ -1136,16 +1128,13 @@ The defualt value is <cite>1.5</cite></p>
 </dl>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.tag.named_entity</span> <span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 
-<span class="n">thainer15</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.5&quot;</span><span class="p">)</span>
-<span class="n">thainer15</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;</span><span class="p">)</span>
-
 <span class="n">thainer14</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.4&quot;</span><span class="p">)</span>
 <span class="n">thainer14</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.5'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.4'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Thai named-entity recognizer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

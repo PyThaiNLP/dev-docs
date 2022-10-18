@@ -118,40 +118,7 @@
 <span class="kn">from</span> <span class="nn">pythainlp.util.trie</span> <span class="kn">import</span> <span class="n">Trie</span><span class="p">,</span> <span class="n">dict_trie</span>
 
 
-<div class="viewcode-block" id="clause_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.clause_tokenize">[docs]</a><span class="k">def</span> <span class="nf">clause_tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Clause tokenizer. (or Clause segmentation)</span>
-
-<span class="sd">    Tokenizes running word list into list of clauses (list of strings).</span>
-<span class="sd">    split by CRF trained on LST20 Corpus.</span>
-
-<span class="sd">    It is free for **non-commercial uses and research only**. \</span>
-<span class="sd">    You can read at `Facebook &lt;https://www.facebook.com/dancearmy/posts/10157641945708284&gt;`_.</span>
-
-<span class="sd">    :param str doc: word list to be clause</span>
-<span class="sd">    :return: list of claues</span>
-<span class="sd">    :rtype: list[list[str]]</span>
-
-<span class="sd">    :Example:</span>
-
-<span class="sd">    Clause tokenizer::</span>
-
-<span class="sd">        from pythainlp.tokenize import clause_tokenize</span>
-
-<span class="sd">        clause_tokenize([&quot;ฉัน&quot;,&quot;นอน&quot;,&quot;และ&quot;,&quot;คุณ&quot;,&quot;เล่น&quot;,&quot;มือถือ&quot;,&quot;ส่วน&quot;,&quot;น้อง&quot;,&quot;เขียน&quot;,&quot;โปรแกรม&quot;])</span>
-<span class="sd">        # [[&#39;ฉัน&#39;, &#39;นอน&#39;],</span>
-<span class="sd">        # [&#39;และ&#39;, &#39;คุณ&#39;, &#39;เล่น&#39;, &#39;มือถือ&#39;],</span>
-<span class="sd">        # [&#39;ส่วน&#39;, &#39;น้อง&#39;, &#39;เขียน&#39;, &#39;โปรแกรม&#39;]]</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pythainlp.tokenize.crfcls</span> <span class="kn">import</span> <span class="n">segment</span>
-
-    <span class="k">return</span> <span class="n">segment</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="word_detokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_detokenize">[docs]</a><span class="k">def</span> <span class="nf">word_detokenize</span><span class="p">(</span>
-    <span class="n">segments</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;str&quot;</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<div class="viewcode-block" id="word_detokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_detokenize">[docs]</a><span class="k">def</span> <span class="nf">word_detokenize</span><span class="p">(</span><span class="n">segments</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;str&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Word detokenizer.</span>
 
