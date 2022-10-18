@@ -65,6 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tag.html">pythainlp.tag</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.tokenize</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.clause_tokenize"><code class="docutils literal notranslate"><span class="pre">clause_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.sent_tokenize"><code class="docutils literal notranslate"><span class="pre">sent_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.subword_tokenize"><code class="docutils literal notranslate"><span class="pre">subword_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.word_tokenize"><code class="docutils literal notranslate"><span class="pre">word_tokenize()</span></code></a></li>
@@ -215,6 +216,35 @@
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.tokenize</span></code> contains multiple functions for tokenizing a chunk of Thai text into desirable units.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.clause_tokenize">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">clause_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#clause_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.clause_tokenize" title="Permalink to this definition"></a></dt>
+<dd><p>Clause tokenizer. (or Clause segmentation)
+Tokenizes running word list into list of clauses (list of strings).
+split by CRF trained on Blackboard Treebank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>doc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – word list to be clause</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of claues</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>Clause tokenizer::</dt><dd><p>from pythainlp.tokenize import clause_tokenize
+clause_tokenize([“ฉัน”,”นอน”,”และ”,”คุณ”,”เล่น”,”มือถือ”,”ส่วน”,”น้อง”,”เขียน”,”โปรแกรม”])
+# [[‘ฉัน’, ‘นอน’],
+# [‘และ’, ‘คุณ’, ‘เล่น’, ‘มือถือ’],
+# [‘ส่วน’, ‘น้อง’, ‘เขียน’, ‘โปรแกรม’]]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tokenize.sent_tokenize">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">sent_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'crfcut'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_whitespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#sent_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.sent_tokenize" title="Permalink to this definition"></a></dt>
