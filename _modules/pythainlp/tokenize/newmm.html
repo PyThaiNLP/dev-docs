@@ -99,7 +99,7 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Dictionary-based maximal matching word segmentation, constrained with</span>
-<span class="sd">Thai Character Cluster (TCC) boundaries.</span>
+<span class="sd">Thai Character Cluster (TCC) boundaries with improve the rules.</span>
 
 <span class="sd">The code is based on the notebooks created by Korakot Chaovavanich,</span>
 <span class="sd">with heuristic graph size limit added to avoid exponential wait time.</span>
@@ -118,7 +118,7 @@
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">Trie</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc</span> <span class="kn">import</span> <span class="n">tcc_pos</span>
+<span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc_p</span> <span class="kn">import</span> <span class="n">tcc_pos</span>
 
 <span class="c1"># match non-Thai tokens</span>
 <span class="n">_PAT_NONTHAI</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>

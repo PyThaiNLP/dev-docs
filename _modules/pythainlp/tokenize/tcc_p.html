@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.tcc &mdash; PyThaiNLP 4.0.0 documentation</title>
+  <title>pythainlp.tokenize.tcc_p &mdash; PyThaiNLP 4.0.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
@@ -86,7 +86,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>pythainlp.tokenize.tcc</li>
+      <li>pythainlp.tokenize.tcc_p</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -95,12 +95,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.tokenize.tcc</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.tokenize.tcc_p</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">The implementation of tokenizer accorinding to Thai Character Clusters (TCCs)</span>
 <span class="sd">rules purposed by `Theeramunkong et al. 2000. \</span>
 <span class="sd">    &lt;http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548&gt;`_</span>
+<span class="sd">and improve the rule that used in newmm</span>
 
 <span class="sd">Credits:</span>
 <span class="sd">    * TCC: Jakkrit TeCho</span>
@@ -113,38 +114,37 @@
 
 <span class="n">_RE_TCC</span> <span class="o">=</span> <span class="p">(</span>
     <span class="sd">&quot;&quot;&quot;\</span>
-<span class="sd">c[ั]([่-๋]c)?</span>
-<span class="sd">c[ั]([่-๋]c)?k</span>
 <span class="sd">เc็ck</span>
 <span class="sd">เcctาะk</span>
 <span class="sd">เccีtยะk</span>
 <span class="sd">เccีtย(?=[เ-ไก-ฮ]|$)k</span>
-<span class="sd">เc[ิีุู]tย(?=[เ-ไก-ฮ]|$)k</span>
 <span class="sd">เcc็ck</span>
 <span class="sd">เcิc์ck</span>
 <span class="sd">เcิtck</span>
 <span class="sd">เcีtยะ?k</span>
-<span class="sd">เcืtอะk</span>
-<span class="sd">เcื</span>
+<span class="sd">เcืtอะ?k</span>
+<span class="sd">เc[ิีุู]tย(?=[เ-ไก-ฮ]|$)k</span>
 <span class="sd">เctา?ะ?k</span>
-<span class="sd">c[ึื]tck</span>
-<span class="sd">c[ะ-ู]tk</span>
+<span class="sd">cัtวะk</span>
+<span class="sd">c[ัื]tc[ุิะ]?k</span>
 <span class="sd">c[ิุู]์</span>
+<span class="sd">c[ะ-ู]tk</span>
 <span class="sd">cรรc์</span>
 <span class="sd">c็</span>
 <span class="sd">ct[ะาำ]?k</span>
-<span class="sd">แc็ck</span>
-<span class="sd">แcc์k</span>
-<span class="sd">แctะk</span>
-<span class="sd">แcc็ck</span>
-<span class="sd">แccc์k</span>
-<span class="sd">โctะk</span>
-<span class="sd">[เ-ไ]ctk</span>
+<span class="sd">ck</span>
+<span class="sd">แc็c</span>
+<span class="sd">แcc์</span>
+<span class="sd">แctะ</span>
+<span class="sd">แcc็c</span>
+<span class="sd">แccc์</span>
+<span class="sd">โctะ</span>
+<span class="sd">[เ-ไ]ct</span>
 <span class="sd">ก็</span>
 <span class="sd">อึ</span>
 <span class="sd">หึ</span>
 <span class="sd">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-        <span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="s2">&quot;(cc?[d|ิ]?[์])?&quot;</span>
+        <span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="s2">&quot;(cc?[dิ]?[์])?&quot;</span>
     <span class="p">)</span>
     <span class="o">.</span><span class="n">replace</span><span class="p">(</span>
         <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;[ก-ฮ]&quot;</span>
@@ -157,7 +157,7 @@
 <span class="n">_PAT_TCC</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_RE_TCC</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="tcc"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.tcc">[docs]</a><span class="k">def</span> <span class="nf">tcc</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="tcc"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc_p.tcc">[docs]</a><span class="k">def</span> <span class="nf">tcc</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TCC generator, generates Thai Character Clusters</span>
 
@@ -180,7 +180,7 @@
         <span class="n">p</span> <span class="o">+=</span> <span class="n">n</span></div>
 
 
-<div class="viewcode-block" id="tcc_pos"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.tcc_pos">[docs]</a><span class="k">def</span> <span class="nf">tcc_pos</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<div class="viewcode-block" id="tcc_pos"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc_p.tcc_pos">[docs]</a><span class="k">def</span> <span class="nf">tcc_pos</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TCC positions</span>
 
@@ -200,7 +200,7 @@
     <span class="k">return</span> <span class="n">p_set</span></div>
 
 
-<div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc_p.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Subword segmentation</span>
 

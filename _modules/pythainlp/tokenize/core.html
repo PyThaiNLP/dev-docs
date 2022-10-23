@@ -243,6 +243,7 @@
 <span class="sd">        * *newmm* (default) - &quot;new multi-cut&quot;,</span>
 <span class="sd">          dictionary-based, maximum matching,</span>
 <span class="sd">          constrained with Thai Character Cluster (TCC) boundaries</span>
+<span class="sd">          with improve the TCC rule that used in newmm.</span>
 <span class="sd">        * *newmm-safe* - newmm, with a mechanism to avoid long</span>
 <span class="sd">          processing time for text with continuous ambiguous breaking points</span>
 <span class="sd">        * *nlpo3* - wrapper for a word tokenizer in</span>
@@ -538,6 +539,7 @@
 <span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
 <span class="sd">        * *ssg* - CRF syllable segmenter for Thai</span>
 <span class="sd">        * *tcc* (default) - Thai Character Cluster (Theeramunkong et al. 2000)</span>
+<span class="sd">        * *tcc_p* - Thai Character Cluster + improve the rule that used in newmm</span>
 <span class="sd">        * *tltk* - syllable tokenizer from tltk</span>
 <span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model</span>
 <span class="sd">    :Example:</span>
@@ -587,6 +589,8 @@
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc</span> <span class="kn">import</span> <span class="n">segment</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tcc_p&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc_p</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;etcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.etcc</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
