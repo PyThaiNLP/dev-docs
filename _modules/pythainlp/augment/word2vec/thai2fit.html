@@ -110,8 +110,9 @@
 <span class="sd">    Thai2Fit:</span>
 <span class="sd">    `github.com/cstorm125/thai2fit &lt;https://github.com/cstorm125/thai2fit&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="Thai2fitAug.__init__"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">thai2fit_wv</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s1">&#39;thai2fit_wv&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thai2fit_wv</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai2fit_wv&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_w2v</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Thai2fitAug.tokenizer"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug.tokenizer">[docs]</a>    <span class="k">def</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -128,10 +129,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">aug</span> <span class="o">=</span> <span class="n">Word2VecAug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thai2fit_wv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Thai2fitAug.augment"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">n_sent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_sent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Text Augment using word2vec from Thai2Fit</span>

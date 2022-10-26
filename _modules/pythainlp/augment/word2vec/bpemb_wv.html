@@ -108,8 +108,10 @@
 <span class="sd">    BPEmb:</span>
 <span class="sd">    `github.com/bheinzerling/bpemb &lt;https://github.com/bheinzerling/bpemb&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="BPEmbAug.__init__"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="n">vs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">bpemb</span> <span class="kn">import</span> <span class="n">BPEmb</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">bpemb_temp</span> <span class="o">=</span> <span class="n">BPEmb</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">vs</span><span class="o">=</span><span class="n">vs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bpemb_temp</span><span class="o">.</span><span class="n">emb</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_w2v</span><span class="p">()</span></div>
@@ -156,7 +158,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">+=</span> <span class="n">j</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;▁&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">+=</span> <span class="n">j</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;▁&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">temp_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_new</span></div></div>
 </pre></div>

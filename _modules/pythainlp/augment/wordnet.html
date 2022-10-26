@@ -205,7 +205,7 @@
 <span class="sd">    **Options for corpus**</span>
 <span class="sd">        * *orchid* - Orchid Corpus</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">corpus</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;orchid&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">corpus</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;orchid&quot;</span><span class="p">]:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">orchid</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
 
@@ -214,14 +214,12 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text Augment using wordnet</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="WordNetAug.__init__"><a class="viewcode-back" href="../../../api/augment.html#pythainlp.augment.WordNetAug.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="WordNetAug.find_synonyms"><a class="viewcode-back" href="../../../api/augment.html#pythainlp.augment.WordNetAug.find_synonyms">[docs]</a>    <span class="k">def</span> <span class="nf">find_synonyms</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">postag_corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid&quot;</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">postag_corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find synonyms from wordnet</span>
@@ -237,13 +235,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">list_synsets</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">p2w_pos</span> <span class="o">=</span> <span class="n">postype2wordnet</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">postag_corpus</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2w_pos</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2w_pos</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">list_synsets</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p2w_pos</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">list_synsets</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="bp">self</span><span class="o">.</span><span class="n">synset</span> <span class="ow">in</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-            <span class="k">for</span> <span class="bp">self</span><span class="o">.</span><span class="n">syn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synset</span><span class="o">.</span><span class="n">lemma_names</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;tha&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="bp">self</span><span class="o">.</span><span class="n">syn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synset</span><span class="o">.</span><span class="n">lemma_names</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;tha&quot;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">syn</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">synonyms_without_duplicates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
@@ -257,7 +255,7 @@
         <span class="n">tokenize</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">,</span>
         <span class="n">max_syn_sent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
         <span class="n">postag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">postag_corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid&quot;</span>
+        <span class="n">postag_corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Text Augment using wordnet</span>

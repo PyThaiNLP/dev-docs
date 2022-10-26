@@ -103,7 +103,10 @@
 <span class="n">_tagger</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">_tagger_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-<div class="viewcode-block" id="dependency_parsing"><a class="viewcode-back" href="../../../api/parse.html#pythainlp.parse.dependency_parsing">[docs]</a><span class="k">def</span> <span class="nf">dependency_parsing</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;esupar&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="dependency_parsing"><a class="viewcode-back" href="../../../api/parse.html#pythainlp.parse.dependency_parsing">[docs]</a><span class="k">def</span> <span class="nf">dependency_parsing</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;esupar&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dependency Parsing</span>
 
@@ -180,17 +183,18 @@
     <span class="k">if</span> <span class="n">_tagger_name</span> <span class="o">!=</span> <span class="n">engine</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;esupar&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.parse.esupar_engine</span> <span class="kn">import</span> <span class="n">Parse</span>
+
             <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;transformers_ud&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.parse.transformers_ud</span> <span class="kn">import</span> <span class="n">Parse</span>
+
             <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;spacy_thai&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.parse.spacy_thai_engine</span> <span class="kn">import</span> <span class="n">Parse</span>
+
             <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;The engine doesn&#39;t support.&quot;</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The engine doesn&#39;t support.&quot;</span><span class="p">)</span>
     <span class="n">_tagger_name</span> <span class="o">=</span> <span class="n">engine</span>
     <span class="k">return</span> <span class="n">_tagger</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span></div>
 </pre></div>

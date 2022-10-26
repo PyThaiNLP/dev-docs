@@ -184,6 +184,7 @@
 <span class="sd">        thainer14 = ThaiNameTagger(version=&quot;1.4&quot;)</span>
 <span class="sd">        thainer14.get_ner(&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="ThaiNameTagger.__init__"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.thainer.ThaiNameTagger.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.4&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Thai named-entity recognizer.</span>
@@ -193,6 +194,7 @@
 <span class="sd">                            The defualt value is `1.5`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">pycrfsuite</span> <span class="kn">import</span> <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">crf</span> <span class="o">=</span> <span class="n">CRFTagger</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;1.4&quot;</span><span class="p">:</span>
@@ -256,9 +258,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">_TOKENIZER_ENGINE</span><span class="p">)</span>
         <span class="n">pos_tags</span> <span class="o">=</span> <span class="n">pos_tag</span><span class="p">(</span>
-            <span class="n">tokens</span><span class="p">,</span>
-            <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;perceptron&quot;</span><span class="p">,</span>
-            <span class="n">corpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos_tag_name</span>
+            <span class="n">tokens</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;perceptron&quot;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos_tag_name</span>
         <span class="p">)</span>
         <span class="n">x_test</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="o">.</span><span class="n">__extract_features</span><span class="p">(</span><span class="n">pos_tags</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
