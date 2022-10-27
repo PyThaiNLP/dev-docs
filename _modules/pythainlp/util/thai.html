@@ -103,7 +103,18 @@
 <span class="kn">import</span> <span class="nn">string</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_above_vowels</span><span class="p">,</span> <span class="n">thai_tonemarks</span>
+<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">thai_lead_vowels</span><span class="p">,</span>
+    <span class="n">thai_follow_vowels</span><span class="p">,</span>
+    <span class="n">thai_above_vowels</span><span class="p">,</span>
+    <span class="n">thai_below_vowels</span><span class="p">,</span>
+    <span class="n">thai_consonants</span><span class="p">,</span>
+    <span class="n">thai_vowels</span><span class="p">,</span>
+    <span class="n">thai_tonemarks</span><span class="p">,</span>
+    <span class="n">thai_signs</span><span class="p">,</span>
+    <span class="n">thai_digits</span><span class="p">,</span>
+    <span class="n">thai_punctuations</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">pythainlp.transliterate</span> <span class="kn">import</span> <span class="n">pronunciate</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util.syllable</span> <span class="kn">import</span> <span class="n">tone_detector</span>
 
@@ -280,6 +291,77 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_pronunciate</span> <span class="o">=</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">tone_detector</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;หฺ&quot;</span><span class="p">,</span> <span class="s2">&quot;ห&quot;</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_pronunciate</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="count_thai_chars"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.count_thai_chars">[docs]</a><span class="k">def</span> <span class="nf">count_thai_chars</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count Thai characters by type</span>
+
+<span class="sd">    This function will give you numbers of Thai characters by type\</span>
+<span class="sd">        (consonants, vowels, lead_vowels, follow_vowels, above_vowels,\</span>
+<span class="sd">        below_vowels, tonemarks, signs, thai_digits, punctuations, non_thai)</span>
+
+<span class="sd">    :param str text: Text</span>
+<span class="sd">    :return: Dict with numbers of Thai characters by type</span>
+<span class="sd">    :rtype: dict</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import count_thai_chars</span>
+
+<span class="sd">        count_thai_chars(&quot;ทดสอบภาษาไทย&quot;)</span>
+<span class="sd">        # output: {</span>
+<span class="sd">        # &#39;vowels&#39;: 3,</span>
+<span class="sd">        # &#39;lead_vowels&#39;: 1,</span>
+<span class="sd">        # &#39;follow_vowels&#39;: 2,</span>
+<span class="sd">        # &#39;above_vowels&#39;: 0,</span>
+<span class="sd">        # &#39;below_vowels&#39;: 0,</span>
+<span class="sd">        # &#39;consonants&#39;: 9,</span>
+<span class="sd">        # &#39;tonemarks&#39;: 0,</span>
+<span class="sd">        # &#39;signs&#39;: 0,</span>
+<span class="sd">        # &#39;thai_digits&#39;: 0,</span>
+<span class="sd">        # &#39;punctuations&#39;: 0,</span>
+<span class="sd">        # &#39;non_thai&#39;: 0</span>
+<span class="sd">        # }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;vowels&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;lead_vowels&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;follow_vowels&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;above_vowels&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;below_vowels&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;consonants&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;tonemarks&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;signs&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;thai_digits&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;punctuations&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;non_thai&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_vowels</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;vowels&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_lead_vowels</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;lead_vowels&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_follow_vowels</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;follow_vowels&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_above_vowels</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;above_vowels&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_below_vowels</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;below_vowels&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;consonants&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;tonemarks&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_signs</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;signs&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_digits</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;thai_digits&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_punctuations</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;punctuations&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_dict</span><span class="p">[</span><span class="s2">&quot;non_thai&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">_dict</span></div>
 </pre></div>
 
            </div>
