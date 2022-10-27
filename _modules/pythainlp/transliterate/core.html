@@ -115,7 +115,7 @@
 <span class="sd">    by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษาไทยเป็นอักษรละติน)</span>
 
 <span class="sd">    :param str text: Thai text to be romanized</span>
-<span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;tltk&#39;, and &#39;lookup&#39;. See more in options for engine section.</span>
+<span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;thai2rom_onnx, &#39;tltk&#39;, and &#39;lookup&#39;. See more in options for engine section.</span>
 <span class="sd">    :param str fallback_engine: If engine equals &#39;lookup&#39;, use `fallback_engine` for words that are not in the transliteration dict.</span>
 <span class="sd">                                No effect on other engines. Default to &#39;royin&#39;.</span>
 
@@ -127,6 +127,7 @@
 <span class="sd">          Transcription issued by Royal Institute of Thailand.</span>
 <span class="sd">        * *thai2rom* - a deep learning-based Thai romanization engine</span>
 <span class="sd">          (require PyTorch).</span>
+<span class="sd">        * *thai2rom_onnx* - a deep learning-based Thai romanization engine with ONNX runtime</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit</span>
 <span class="sd">        * *lookup* - Look up on Thai-English Transliteration dictionary v1.4 compiled by Wannaphong.</span>
 
@@ -150,6 +151,9 @@
 <span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom&quot;)</span>
 <span class="sd">        # output: &#39;phapphayon&#39;</span>
 
+<span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom_onnx&quot;)</span>
+<span class="sd">        # output: &#39;phapphayon&#39;</span>
+
 <span class="sd">        romanize(&quot;ก็อปปี้&quot;, engine=&quot;lookup&quot;)</span>
 <span class="sd">        # output: &#39;copy&#39;</span>
 
@@ -158,6 +162,8 @@
     <span class="k">def</span> <span class="nf">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom</span> <span class="kn">import</span> <span class="n">romanize</span>
+        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom_onnx&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom_onnx</span> <span class="kn">import</span> <span class="n">romanize</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">romanize</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine &quot;royin&quot;</span>

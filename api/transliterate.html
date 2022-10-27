@@ -165,7 +165,7 @@ by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษา�
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Thai text to be romanized</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – One of ‘royin’ (default), ‘thai2rom’, ‘tltk’, and ‘lookup’. See more in options for engine section.</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – One of ‘royin’ (default), ‘thai2rom’, ‘thai2rom_onnx, ‘tltk’, and ‘lookup’. See more in options for engine section.</p></li>
 <li><p><strong>fallback_engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – If engine equals ‘lookup’, use <cite>fallback_engine</cite> for words that are not in the transliteration dict.
 No effect on other engines. Default to ‘royin’.</p></li>
 </ul>
@@ -182,6 +182,7 @@ No effect on other engines. Default to ‘royin’.</p></li>
 Transcription issued by Royal Institute of Thailand.</p></li>
 <li><p><em>thai2rom</em> - a deep learning-based Thai romanization engine
 (require PyTorch).</p></li>
+<li><p><em>thai2rom_onnx</em> - a deep learning-based Thai romanization engine with ONNX runtime</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit</p></li>
 <li><p><em>lookup</em> - Look up on Thai-English Transliteration dictionary v1.4 compiled by Wannaphong.</p></li>
 </ul>
@@ -204,6 +205,9 @@ Transcription issued by Royal Institute of Thailand.</p></li>
 <span class="c1"># output: &#39;phapn&#39;</span>
 
 <span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ภาพยนตร์&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;thai2rom&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;phapphayon&#39;</span>
+
+<span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ภาพยนตร์&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;thai2rom_onnx&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;phapphayon&#39;</span>
 
 <span class="n">romanize</span><span class="p">(</span><span class="s2">&quot;ก็อปปี้&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;lookup&quot;</span><span class="p">)</span>
