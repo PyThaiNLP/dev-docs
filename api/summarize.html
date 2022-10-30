@@ -65,6 +65,15 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.summarize</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.summarize.summarize"><code class="docutils literal notranslate"><span class="pre">summarize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.summarize.extract_keywords"><code class="docutils literal notranslate"><span class="pre">extract_keywords()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#keyword-extraction-engines">Keyword Extraction Engines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.summarize.keybert">KeyBERT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.summarize.keybert.KeyBERT"><code class="docutils literal notranslate"><span class="pre">KeyBERT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">KeyBERT</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -194,6 +203,260 @@ By default, tokenizer is <em>newmm</em>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.summarize.extract_keywords">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.summarize.</span></span><span class="sig-name descname"><span class="pre">extract_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyphrase_ngram_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'keybert'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/core.html#extract_keywords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.extract_keywords" title="Permalink to this definition"></a></dt>
+<dd><p>This function returns most-relevant keywords (and/or keyphrases) from the input document.
+Each algorithm may produce completely different keywords from each other,
+so please be careful when choosing the algorithm.</p>
+<p><em>Note</em>: Calling :func: <cite>extract_keywords()</cite> is expensive. For repetitive use of KeyBERT (the default engine),
+creating KeyBERT object is highly recommended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be summarized</p></li>
+<li><p><strong>keyphrase_ngram_range</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Number of token units to be defined as keyword.
+The token unit varies w.r.t. <cite>tokenizer_engine</cite>.
+For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เสา”, “ไฟฟ้า”),
+(1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords
+(e.g. “เสา”, “ไฟฟ้า”, “เสาไฟฟ้า”)  (default: (1, 2))</p></li>
+<li><p><strong>max_keywords</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of maximum keywords to be returned. (default: 5)</p></li>
+<li><p><strong>min_df</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Minimum frequency required to be a keyword. (default: 1)</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of algorithm to use for keyword extraction. (default: ‘keybert’)</p></li>
+<li><p><strong>tokenizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of tokenizer engine to use.
+Refer to options in :func: <a href="#id1"><span class="problematic" id="id2">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
+<li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
+If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of keywords</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
+<li><p><em>keybert</em> (default) - KeyBERT keyword extraction algorithm</p></li>
+<li><p><em>frequency</em> - frequency of words</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.summarize</span> <span class="kn">import</span> <span class="n">extract_keywords</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="s1">    ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="s1">    จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="s1">    ทำให้ร่างกายเจริญเติบโต</span>
+<span class="s1">    ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="s1">    ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="s1">    อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">extract_keywords</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="c1"># &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="c1"># &#39;เจริญเติบโต&#39;,</span>
+<span class="c1"># &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="c1"># &#39;มีพิษ&#39;]</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">extract_keywords</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_keywords</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="c1"># &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="c1"># &#39;เจริญเติบโต&#39;,</span>
+<span class="c1"># &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="c1"># &#39;มีพิษ&#39;,</span>
+<span class="c1"># &#39;ทำให้ร่างกาย&#39;,</span>
+<span class="c1"># &#39;ร่างกายเจริญเติบโต&#39;,</span>
+<span class="c1"># &#39;จะทำให้เกิด&#39;,</span>
+<span class="c1"># &#39;มีพิษและ&#39;,</span>
+<span class="c1"># &#39;เกิดโทษ&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="keyword-extraction-engines">
+<h2>Keyword Extraction Engines<a class="headerlink" href="#keyword-extraction-engines" title="Permalink to this heading"></a></h2>
+<section id="module-pythainlp.summarize.keybert">
+<span id="keybert"></span><h3>KeyBERT<a class="headerlink" href="#module-pythainlp.summarize.keybert" title="Permalink to this heading"></a></h3>
+<p>Minimal re-implementation of KeyBERT.</p>
+<p>KeyBERT is a minimal and easy-to-use keyword extraction technique
+that leverages BERT embeddings to create keywords and keyphrases
+that are most similar to a document.</p>
+<p><a class="reference external" href="https://github.com/MaartenGr/KeyBERT">https://github.com/MaartenGr/KeyBERT</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.summarize.keybert.KeyBERT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.summarize.keybert.</span></span><span class="sig-name descname"><span class="pre">KeyBERT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'airesearch/wangchanberta-base-att-spm-uncased'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.keybert.KeyBERT" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.summarize.keybert.KeyBERT.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'airesearch/wangchanberta-base-att-spm-uncased'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.keybert.KeyBERT.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.summarize.keybert.KeyBERT.extract_keywords">
+<span class="sig-name descname"><span class="pre">extract_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyphrase_ngram_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_similarity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.extract_keywords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.keybert.KeyBERT.extract_keywords" title="Permalink to this definition"></a></dt>
+<dd><p>Extract Thai keywords and/or keyphrases with KeyBERT algorithm.
+See <a class="reference external" href="https://github.com/MaartenGr/KeyBERT">https://github.com/MaartenGr/KeyBERT</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be summarized</p></li>
+<li><p><strong>keyphrase_ngram_range</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Number of token units to be defined as keyword.
+The token unit varies w.r.t. <cite>tokenizer_engine</cite>.
+For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เสา”, “ไฟฟ้า”),
+(1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords
+(e.g. “เสา”, “ไฟฟ้า”, “เสาไฟฟ้า”)  (default: (1, 2))</p></li>
+<li><p><strong>max_keywords</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of maximum keywords to be returned. (default: 5)</p></li>
+<li><p><strong>min_df</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Minimum frequency required to be a keyword. (default: 1)</p></li>
+<li><p><strong>tokenizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of tokenizer engine to use.
+Refer to options in :func: <a href="#id3"><span class="problematic" id="id4">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
+<li><p><strong>return_similarity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If <cite>True</cite>, return keyword scores. (default: False)</p></li>
+<li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
+If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of keywords with score</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.summarize.keybert</span> <span class="kn">import</span> <span class="n">KeyBERT</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="s1">    ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="s1">    จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="s1">    ทำให้ร่างกายเจริญเติบโต</span>
+<span class="s1">    ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="s1">    ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="s1">    อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">kb</span> <span class="o">=</span> <span class="n">KeyBERT</span><span class="p">()</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">kb</span><span class="o">.</span><span class="n">extract_keyword</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="c1"># &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="c1"># &#39;เจริญเติบโต&#39;,</span>
+<span class="c1"># &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="c1"># &#39;มีพิษ&#39;]</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">kb</span><span class="o">.</span><span class="n">extract_keyword</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_keywords</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_similarity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># output: [(&#39;อวัยวะต่างๆ&#39;, 0.3228477063109462),</span>
+<span class="c1"># (&#39;ซ่อมแซมส่วน&#39;, 0.31320597838000375),</span>
+<span class="c1"># (&#39;เจริญเติบโต&#39;, 0.29115434699705506),</span>
+<span class="c1"># (&#39;ควบคุมการเปลี่ยนแปลง&#39;, 0.2678430841321016),</span>
+<span class="c1"># (&#39;มีพิษ&#39;, 0.24996827960821494),</span>
+<span class="c1"># (&#39;ทำให้ร่างกาย&#39;, 0.23876962942443258),</span>
+<span class="c1"># (&#39;ร่างกายเจริญเติบโต&#39;, 0.23191285218852364),</span>
+<span class="c1"># (&#39;จะทำให้เกิด&#39;, 0.22425422716846247),</span>
+<span class="c1"># (&#39;มีพิษและ&#39;, 0.22162962875299588),</span>
+<span class="c1"># (&#39;เกิดโทษ&#39;, 0.20773497763458507)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.summarize.keybert.KeyBERT.embed">
+<span class="sig-name descname"><span class="pre">embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.keybert.KeyBERT.embed" title="Permalink to this definition"></a></dt>
+<dd><p>Create an embedding of each input in <cite>docs</cite> by averaging vectors from last hidden layer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.summarize.keybert.</span></span><span class="sig-name descname"><span class="pre">KeyBERT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'airesearch/wangchanberta-base-att-spm-uncased'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'airesearch/wangchanberta-base-att-spm-uncased'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">extract_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyphrase_ngram_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_similarity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.extract_keywords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
+<dd><p>Extract Thai keywords and/or keyphrases with KeyBERT algorithm.
+See <a class="reference external" href="https://github.com/MaartenGr/KeyBERT">https://github.com/MaartenGr/KeyBERT</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be summarized</p></li>
+<li><p><strong>keyphrase_ngram_range</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Number of token units to be defined as keyword.
+The token unit varies w.r.t. <cite>tokenizer_engine</cite>.
+For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เสา”, “ไฟฟ้า”),
+(1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords
+(e.g. “เสา”, “ไฟฟ้า”, “เสาไฟฟ้า”)  (default: (1, 2))</p></li>
+<li><p><strong>max_keywords</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of maximum keywords to be returned. (default: 5)</p></li>
+<li><p><strong>min_df</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Minimum frequency required to be a keyword. (default: 1)</p></li>
+<li><p><strong>tokenizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of tokenizer engine to use.
+Refer to options in :func: <a href="#id7"><span class="problematic" id="id8">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
+<li><p><strong>return_similarity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If <cite>True</cite>, return keyword scores. (default: False)</p></li>
+<li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
+If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of keywords with score</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.summarize.keybert</span> <span class="kn">import</span> <span class="n">KeyBERT</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="s1">    ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="s1">    จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="s1">    ทำให้ร่างกายเจริญเติบโต</span>
+<span class="s1">    ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="s1">    ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="s1">    อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">kb</span> <span class="o">=</span> <span class="n">KeyBERT</span><span class="p">()</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">kb</span><span class="o">.</span><span class="n">extract_keyword</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="c1"># &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="c1"># &#39;เจริญเติบโต&#39;,</span>
+<span class="c1"># &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="c1"># &#39;มีพิษ&#39;]</span>
+
+<span class="n">keywords</span> <span class="o">=</span> <span class="n">kb</span><span class="o">.</span><span class="n">extract_keyword</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_keywords</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_similarity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># output: [(&#39;อวัยวะต่างๆ&#39;, 0.3228477063109462),</span>
+<span class="c1"># (&#39;ซ่อมแซมส่วน&#39;, 0.31320597838000375),</span>
+<span class="c1"># (&#39;เจริญเติบโต&#39;, 0.29115434699705506),</span>
+<span class="c1"># (&#39;ควบคุมการเปลี่ยนแปลง&#39;, 0.2678430841321016),</span>
+<span class="c1"># (&#39;มีพิษ&#39;, 0.24996827960821494),</span>
+<span class="c1"># (&#39;ทำให้ร่างกาย&#39;, 0.23876962942443258),</span>
+<span class="c1"># (&#39;ร่างกายเจริญเติบโต&#39;, 0.23191285218852364),</span>
+<span class="c1"># (&#39;จะทำให้เกิด&#39;, 0.22425422716846247),</span>
+<span class="c1"># (&#39;มีพิษและ&#39;, 0.22162962875299588),</span>
+<span class="c1"># (&#39;เกิดโทษ&#39;, 0.20773497763458507)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/keybert.html#KeyBERT.embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Permalink to this definition"></a></dt>
+<dd><p>Create an embedding of each input in <cite>docs</cite> by averaging vectors from last hidden layer.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 </section>
 

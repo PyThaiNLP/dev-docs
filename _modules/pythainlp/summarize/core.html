@@ -98,15 +98,15 @@
   <h1>Source code for pythainlp.summarize.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Text summarization</span>
+<span class="sd">Text summarization and Keyword extraction</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span> <span class="nn">pythainlp.summarize</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DEFAULT_SUMMARIZE_ENGINE</span><span class="p">,</span>
     <span class="n">CPE_KMUTT_THAI_SENTENCE_SUM</span><span class="p">,</span>
+    <span class="n">DEFAULT_KEYWORD_EXTRACTION_ENGINE</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">pythainlp.summarize.freq</span> <span class="kn">import</span> <span class="n">FrequencySummarizer</span>
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
@@ -210,6 +210,141 @@
         <span class="n">sents</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;whitespace+newline&quot;</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">sents</span></div>
+
+
+<div class="viewcode-block" id="extract_keywords"><a class="viewcode-back" href="../../../api/summarize.html#pythainlp.summarize.extract_keywords">[docs]</a><span class="k">def</span> <span class="nf">extract_keywords</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">keyphrase_ngram_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">max_keywords</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">min_df</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_KEYWORD_EXTRACTION_ENGINE</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
+    <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function returns most-relevant keywords (and/or keyphrases) from the input document.</span>
+<span class="sd">    Each algorithm may produce completely different keywords from each other,</span>
+<span class="sd">    so please be careful when choosing the algorithm.</span>
+
+<span class="sd">    *Note*: Calling :func: `extract_keywords()` is expensive. For repetitive use of KeyBERT (the default engine),</span>
+<span class="sd">    creating KeyBERT object is highly recommended.</span>
+
+<span class="sd">    :param str text: text to be summarized</span>
+<span class="sd">    :param Tuple[int, int] keyphrase_ngram_range: Number of token units to be defined as keyword.</span>
+<span class="sd">                            The token unit varies w.r.t. `tokenizer_engine`.</span>
+<span class="sd">                            For instance, (1, 1) means each token (unigram) can be a keyword (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;),</span>
+<span class="sd">                            (1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords</span>
+<span class="sd">                            (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;, &quot;เสาไฟฟ้า&quot;)  (default: (1, 2))</span>
+<span class="sd">    :param int max_keywords: Number of maximum keywords to be returned. (default: 5)</span>
+<span class="sd">    :param int min_df: Minimum frequency required to be a keyword. (default: 1)</span>
+<span class="sd">    :param str engine: Name of algorithm to use for keyword extraction. (default: &#39;keybert&#39;)</span>
+<span class="sd">    :param str tokenizer: Name of tokenizer engine to use.</span>
+<span class="sd">                            Refer to options in :func: `pythainlp.tokenize.word_tokenizer() (default: &#39;newmm&#39;)</span>
+<span class="sd">    :param Optional[Iterable[str]] stop_words: A list of stop words (a.k.a words to be ignored).</span>
+<span class="sd">                            If not specified, :func:`pythainlp.corpus.thai_stopwords` is used. (default: None)</span>
+
+<span class="sd">    :return: list of keywords</span>
+
+<span class="sd">    **Options for engine**</span>
+<span class="sd">        * *keybert* (default) - KeyBERT keyword extraction algorithm</span>
+<span class="sd">        * *frequency* - frequency of words</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.summarize import extract_keywords</span>
+
+<span class="sd">        text = &#39;&#39;&#39;</span>
+<span class="sd">            อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="sd">            ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="sd">            จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="sd">            ทำให้ร่างกายเจริญเติบโต</span>
+<span class="sd">            ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="sd">            ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="sd">            อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+<span class="sd">        keywords = extract_keywords(text)</span>
+
+<span class="sd">        # output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="sd">        # &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="sd">        # &#39;เจริญเติบโต&#39;,</span>
+<span class="sd">        # &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="sd">        # &#39;มีพิษ&#39;]</span>
+
+<span class="sd">        keywords = extract_keywords(text, max_keywords=10)</span>
+
+<span class="sd">        # output: [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="sd">        # &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="sd">        # &#39;เจริญเติบโต&#39;,</span>
+<span class="sd">        # &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="sd">        # &#39;มีพิษ&#39;,</span>
+<span class="sd">        # &#39;ทำให้ร่างกาย&#39;,</span>
+<span class="sd">        # &#39;ร่างกายเจริญเติบโต&#39;,</span>
+<span class="sd">        # &#39;จะทำให้เกิด&#39;,</span>
+<span class="sd">        # &#39;มีพิษและ&#39;,</span>
+<span class="sd">        # &#39;เกิดโทษ&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">rank_by_frequency</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">max_keywords</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">min_df</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
+        <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.util.keywords</span> <span class="kn">import</span> <span class="n">rank</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">use_custom_stop_words</span> <span class="o">=</span> <span class="n">stop_words</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">use_custom_stop_words</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+        <span class="n">word_rank</span> <span class="o">=</span> <span class="n">rank</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">exclude_stopwords</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_custom_stop_words</span><span class="p">)</span>
+
+        <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">kw</span>
+            <span class="k">for</span> <span class="n">kw</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">word_rank</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="n">max_keywords</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cnt</span> <span class="o">&gt;=</span> <span class="n">min_df</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">keywords</span>
+
+    <span class="n">engines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;keybert&quot;</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;keybert&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.keybert</span> <span class="kn">import</span> <span class="n">KeyBERT</span>
+
+        <span class="n">keywords</span> <span class="o">=</span> <span class="n">KeyBERT</span><span class="p">()</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">,</span>
+            <span class="n">keyphrase_ngram_range</span><span class="o">=</span><span class="n">keyphrase_ngram_range</span><span class="p">,</span>
+            <span class="n">max_keywords</span><span class="o">=</span><span class="n">max_keywords</span><span class="p">,</span>
+            <span class="n">min_df</span><span class="o">=</span><span class="n">min_df</span><span class="p">,</span>
+            <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">return_similarity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">stop_words</span><span class="o">=</span><span class="n">stop_words</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;frequency&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rank_by_frequency</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">,</span>
+            <span class="n">max_keywords</span><span class="o">=</span><span class="n">max_keywords</span><span class="p">,</span>
+            <span class="n">min_df</span><span class="o">=</span><span class="n">min_df</span><span class="p">,</span>
+            <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">stop_words</span><span class="o">=</span><span class="n">stop_words</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># currently not supported</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Keyword extractor </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="si">}</span><span class="s2"> is currently not supported. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Use one of </span><span class="si">{</span><span class="n">engines</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">keywords</span></div>
 </pre></div>
 
            </div>
