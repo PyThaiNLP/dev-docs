@@ -127,6 +127,8 @@
 <span class="sd">            `GitHub &lt;https://github.com/KoichiYasuoka/spacy-thai&gt;`_</span>
 <span class="sd">        * *transformers_ud* - TransformersUD \</span>
 <span class="sd">            `GitHub &lt;https://github.com/KoichiYasuoka/&gt;`_</span>
+<span class="sd">        * *ud_goeswith* - POS-tagging and dependency-parsing with \</span>
+<span class="sd">            using `goeswith` for subwords</span>
 
 <span class="sd">    **Options for model (esupar engine)**</span>
 <span class="sd">        * *th* (default) - KoichiYasuoka/roberta-base-thai-spm-upos model \</span>
@@ -161,6 +163,12 @@
 <span class="sd">            for dependency-parsing. `Huggingface \</span>
 <span class="sd">            &lt;https://huggingface.co/KoichiYasuoka/roberta-base-thai-spm-ud-head&gt;`_</span>
 
+<span class="sd">    **Options for model (ud_goeswith engine)**</span>
+<span class="sd">        * *KoichiYasuoka/deberta-base-thai-ud-goeswith* (default) - \</span>
+<span class="sd">            This is a DeBERTa(V2) model pre-trained on Thai Wikipedia \</span>
+<span class="sd">            texts for POS-tagging and dependency-parsing (using goeswith for subwords) \</span>
+<span class="sd">            `Huggingface &lt;https://huggingface.co/KoichiYasuoka/deberta-base-thai-ud-goeswith&gt;`_</span>
+
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
@@ -193,6 +201,10 @@
             <span class="kn">from</span> <span class="nn">pythainlp.parse.spacy_thai_engine</span> <span class="kn">import</span> <span class="n">Parse</span>
 
             <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ud_goeswith&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pythainlp.parse.ud_goeswith</span> <span class="kn">import</span> <span class="n">Parse</span>
+
+            <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The engine doesn&#39;t support.&quot;</span><span class="p">)</span>
     <span class="n">_tagger_name</span> <span class="o">=</span> <span class="n">engine</span>
