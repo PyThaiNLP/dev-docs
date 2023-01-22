@@ -122,6 +122,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.arabic_digit_to_thai_digit"><code class="docutils literal notranslate"><span class="pre">arabic_digit_to_thai_digit()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.bahttext"><code class="docutils literal notranslate"><span class="pre">bahttext()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.convert_years"><code class="docutils literal notranslate"><span class="pre">convert_years()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.collate"><code class="docutils literal notranslate"><span class="pre">collate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.dict_trie"><code class="docutils literal notranslate"><span class="pre">dict_trie()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.digit_to_text"><code class="docutils literal notranslate"><span class="pre">digit_to_text()</span></code></a></li>
@@ -153,6 +154,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.text_to_num"><code class="docutils literal notranslate"><span class="pre">text_to_num()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.text_to_thai_digit"><code class="docutils literal notranslate"><span class="pre">text_to_thai_digit()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_strftime"><code class="docutils literal notranslate"><span class="pre">thai_strftime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_strptime"><code class="docutils literal notranslate"><span class="pre">thai_strptime()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_to_eng"><code class="docutils literal notranslate"><span class="pre">thai_to_eng()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_word_tone_detector"><code class="docutils literal notranslate"><span class="pre">thai_word_tone_detector()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_digit_to_arabic_digit"><code class="docutils literal notranslate"><span class="pre">thai_digit_to_arabic_digit()</span></code></a></li>
@@ -311,6 +313,38 @@ of Thai currency</p>
 <span class="c1"># output: สองร้อยบาทถ้วน</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.convert_years">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">convert_years</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'be'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ad'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/date.html#convert_years"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.convert_years" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert years</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – year</p></li>
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The src year</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The target year</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The years that be convert</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>Options for year</strong></dt><dd><ul class="simple">
+<li><p><em>be</em> - Buddhist calendar</p></li>
+<li><p><em>ad</em> - Anno Domini</p></li>
+<li><p><em>re</em> - Rattanakosin era</p></li>
+<li><p><em>ah</em> - Anno Hejira</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Warning</strong>: This function works properly only after 1941     because Thailand has change the Thai calendar in 1941.
+If you are the time traveler or the historian,     you should care about the correct calendar.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1395,6 +1429,60 @@ due to change in Thai New Year’s Day).</p>
 
 <span class="n">thai_strftime</span><span class="p">(</span><span class="n">datetime_obj</span><span class="p">,</span> <span class="s2">&quot;%H:%M %#p&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;01:40 am&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.thai_strptime">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_strptime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'be'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tzinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">backports.zoneinfo.ZoneInfo(key='Asia/Bangkok')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/util/date.html#thai_strptime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.thai_strptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thai strptime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text</p></li>
+<li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string containing date and time directives</p></li>
+<li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – year of the text         (ad isAnno Domini and be is Buddhist calendar)</p></li>
+<li><p><strong>add_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – add year convert to ad</p></li>
+<li><p><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – tzinfo (default is Asia/Bangkok)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The years that be convert to datetime.datetime</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.11)">datetime.datetime</a></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>The fmt char that support:</dt><dd><ul class="simple">
+<li><p><em>%d</em> - Day (1 - 31)</p></li>
+<li><p><em>%B</em> - Thai month (03, 3, มี.ค., or มีนาคม)</p></li>
+<li><p><em>%Y</em> - Year (66, 2566, or 2023)</p></li>
+<li><p><em>%H</em> - Hour (0 - 23)</p></li>
+<li><p><em>%M</em> - Minute (0 - 59)</p></li>
+<li><p><em>%S</em> - Second (0 - 59)</p></li>
+<li><p><em>%f</em> - Microsecond</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">thai_strptime</span>
+
+<span class="n">thai_strptime</span><span class="p">(</span><span class="s2">&quot;15 ก.ค. 2565 09:00:01&quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> %B %Y %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="c1"># output:</span>
+<span class="c1"># datetime.datetime(</span>
+<span class="c1">#   2022,</span>
+<span class="c1">#   7,</span>
+<span class="c1">#   15,</span>
+<span class="c1">#   9,</span>
+<span class="c1">#   0,</span>
+<span class="c1">#   1,</span>
+<span class="c1">#   tzinfo=backports.zoneinfo.ZoneInfo(key=&#39;Asia/Bangkok&#39;)</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </dd></dl>
