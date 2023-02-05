@@ -164,6 +164,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.time_to_thaiword"><code class="docutils literal notranslate"><span class="pre">time_to_thaiword()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.tone_detector"><code class="docutils literal notranslate"><span class="pre">tone_detector()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.words_to_num"><code class="docutils literal notranslate"><span class="pre">words_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.nectec_to_ipa"><code class="docutils literal notranslate"><span class="pre">nectec_to_ipa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.ipa_to_rtgs"><code class="docutils literal notranslate"><span class="pre">ipa_to_rtgs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.Trie"><code class="docutils literal notranslate"><span class="pre">Trie</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.Node"><code class="docutils literal notranslate"><span class="pre">Trie.Node</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.util.Trie.__init__"><code class="docutils literal notranslate"><span class="pre">Trie.__init__()</span></code></a></li>
@@ -1759,6 +1761,61 @@ such as ‘1’, ‘2’, ‘3’</p>
 <span class="c1"># output: 50.95</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.nectec_to_ipa">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">nectec_to_ipa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pronunciation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/phoneme.html#nectec_to_ipa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.nectec_to_ipa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converter NECTEC system to IPA system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pronunciation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – NECTEC phoneme</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>IPA that be convert</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<dl>
+<dt>::</dt><dd><p>from pythainlp.util import nectec_to_ipa</p>
+<p>print(nectec_to_ipa(“kl-uua-j^-2”))
+# output : ‘kl uua j ˥˩’</p>
+</dd>
+</dl>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
+<p>Pornpimon Palingoon, Sumonmas Thatphithakkul. Chapter 4 Speech processing and Speech corpus. In: Handbook of Thai Electronic Corpus. 1st ed. p. 122–56.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.ipa_to_rtgs">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">ipa_to_rtgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/phoneme.html#ipa_to_rtgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.ipa_to_rtgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converter IPA system to The Royal Thai General System of Transcription (RTGS)</p>
+<p>Docs: <a class="reference external" href="https://en.wikipedia.org/wiki/Help:IPA/Thai">https://en.wikipedia.org/wiki/Help:IPA/Thai</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ipa</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – IPA phoneme</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The RTGS that be convert</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<dl>
+<dt>::</dt><dd><p>from pythainlp.util import ipa_to_rtgs</p>
+<p>print(ipa_to_rtgs(“kluaj”))
+# output : ‘kluai’</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
