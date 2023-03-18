@@ -478,7 +478,42 @@
                 <span class="k">return</span> <span class="s1">&#39;Something went wrong Make sure you enter it in correct form.&#39;</span>
             
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;Something went wrong Make sure you enter it in correct form.&#39;</span></div></div>
+            <span class="k">return</span> <span class="s1">&#39;Something went wrong Make sure you enter it in correct form.&#39;</span></div>
+
+<div class="viewcode-block" id="KhaveeVerifier.check_aek_too"><a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_aek_too">[docs]</a>    <span class="k">def</span> <span class="nf">check_aek_too</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Thai tonal word checker</span>
+
+<span class="sd">        :param str or list[str] text: Thai word or list of Thai words</span>
+<span class="sd">        :return: the check if the word is aek or too or False(not both) or list of the check if input is list</span>
+<span class="sd">        :rtype: Union[List[bool], List[str], bool, str]</span>
+
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+
+<span class="sd">            kv = KhaveeVerifier()</span>
+
+<span class="sd">            # การเช็คคำเอกโท</span>
+<span class="sd">            print(kv.check_aek_too(&#39;เอง&#39;), kv.check_aek_too(&#39;เอ่ง&#39;), kv.check_aek_too(&#39;เอ้ง&#39;))</span>
+<span class="sd">            ## -&gt; False, aek, too</span>
+<span class="sd">            print(kv.check_aek_too([&#39;เอง&#39;, &#39;เอ่ง&#39;, &#39;เอ้ง&#39;])) # ใช้ List ได้เหมือนกัน</span>
+<span class="sd">            ## -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;text must be str or iterable list[str]&#39;</span><span class="p">)</span>
+
+        <span class="n">word_characters</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">text</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;่&#39;</span> <span class="ow">in</span> <span class="n">word_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;้&#39;</span> <span class="ow">in</span> <span class="n">word_characters</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;aek&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;้&#39;</span> <span class="ow">in</span> <span class="n">word_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;่&#39;</span> <span class="ow">in</span> <span class="n">word_characters</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;too&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div></div>
 </pre></div>
 
            </div>
