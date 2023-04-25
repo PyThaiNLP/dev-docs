@@ -116,7 +116,6 @@
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">subword_tokenize</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">sound_syllable</span>
 
-
 <div class="viewcode-block" id="KhaveeVerifier"><a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier">[docs]</a><span class="k">class</span> <span class="nc">KhaveeVerifier</span><span class="p">:</span>
 <div class="viewcode-block" id="KhaveeVerifier.__init__"><a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -315,11 +314,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ร&#39;</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ต&#39;</span><span class="p">,</span><span class="s1">&#39;ท&#39;</span><span class="p">]</span> <span class="p">:</span>
             <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;์&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="s1">&#39;ิ&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;ุ&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
-                <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_karun_sound_silence</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;ำ&#39;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;ํ&#39;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="s1">&#39;า&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;ไ&#39;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">or</span> <span class="s1">&#39;ใ&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;กา&#39;</span>
         <span class="k">elif</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;า&#39;</span><span class="p">,</span><span class="s1">&#39;ะ&#39;</span><span class="p">,</span><span class="s1">&#39;ิ&#39;</span><span class="p">,</span><span class="s1">&#39;ี&#39;</span><span class="p">,</span><span class="s1">&#39;ุ&#39;</span><span class="p">,</span><span class="s1">&#39;ู&#39;</span><span class="p">,</span><span class="s1">&#39;อ&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;ี&#39;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="s1">&#39;ย&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;ื&#39;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="s1">&#39;อ&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
@@ -517,7 +512,6 @@
 <div class="viewcode-block" id="KhaveeVerifier.check_aek_too"><a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_aek_too">[docs]</a>    <span class="k">def</span> <span class="nf">check_aek_too</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">dead_syllable_as_aek</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Thai tonal word checker</span>
-
 <span class="sd">        :param Union[List[str], str] text: Thai word or list of Thai words</span>
 <span class="sd">        :param bool dead_syllable_as_aek: if True, dead syllable will be considered as aek</span>
 <span class="sd">        :return: the check if the word is aek or too or False(not both) or list of the check if input is list</span>
@@ -552,7 +546,26 @@
         <span class="k">if</span> <span class="n">dead_syllable_as_aek</span> <span class="ow">and</span> <span class="n">sound_syllable</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;dead&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;aek&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span></div></div>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="KhaveeVerifier.handle_karun_sound_silence"><a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.handle_karun_sound_silence">[docs]</a>    <span class="k">def</span> <span class="nf">handle_karun_sound_silence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle sound silence in Thai word using &#39;์&#39; character (Karun)</span>
+<span class="sd">        by stripping all the characters before the &#39;Karun&#39; character that should be silenced</span>
+
+<span class="sd">        :param str text: Thai word</span>
+<span class="sd">        :return: Thai word with silence word stripped</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sound_silenced</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;์&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sound_silenced</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">word</span>
+        <span class="n">thai_consonants</span> <span class="o">=</span> <span class="s2">&quot;กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ&quot;</span>
+        <span class="n">locate_silenced</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;์&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">can_silence_two</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="n">locate_silenced</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">thai_consonants</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">cut_off</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">can_silence_two</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="n">locate_silenced</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cut_off</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">word</span></div></div>
 </pre></div>
 
            </div>
