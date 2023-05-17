@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP 4.0.0 documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP 4.0.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
@@ -31,7 +31,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.0.0) <br /> Published date: <unknown date>
+                <unknown> (4.0.1) <br /> Published date: <unknown date>
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -284,10 +284,12 @@
             <span class="n">sara</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ออ&#39;</span><span class="p">)</span> 
         
         <span class="c1"># incase บ่ </span>
-        <span class="k">if</span> <span class="s1">&#39;บ่&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;บ่&#39;</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
             <span class="n">sara</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">sara</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ออ&#39;</span><span class="p">)</span>
-
+        <span class="k">if</span> <span class="s1">&#39;ํ&#39;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">sara</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">sara</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;อำ&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sara</span> <span class="o">==</span> <span class="p">[]:</span>  
             <span class="k">return</span> <span class="s1">&#39;Cant find Sara in this word&#39;</span>
         <span class="k">else</span><span class="p">:</span>
