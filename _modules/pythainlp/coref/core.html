@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tools.path &mdash; PyThaiNLP 4.0.2 documentation</title>
+  <title>pythainlp.coref.core &mdash; PyThaiNLP 4.0.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
@@ -91,7 +91,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">pythainlp.tools.path</li>
+      <li class="breadcrumb-item active">pythainlp.coref.core</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -100,7 +100,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.tools.path</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.coref.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Copyright (C) 2016-2023 PyThaiNLP Project</span>
 <span class="c1">#</span>
@@ -115,80 +115,47 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">PyThaiNLP data tools</span>
-
-<span class="sd">For text processing and text conversion, see pythainlp.util</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="vm">__file__</span> <span class="k">as</span> <span class="n">pythainlp_file</span>
-
-<span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span> <span class="o">=</span> <span class="s2">&quot;pythainlp-data&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="get_full_data_path"><a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_full_data_path">[docs]</a><span class="k">def</span> <span class="nf">get_full_data_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="coreference_resolution"><a class="viewcode-back" href="../../../api/coref.html#pythainlp.coref.coreference_resolution">[docs]</a><span class="k">def</span> <span class="nf">coreference_resolution</span><span class="p">(</span><span class="n">texts</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">model_name</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;han-coref-v1.0&quot;</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function joins path of :mod:`pythainlp` data directory and the</span>
-<span class="sd">    given path, and returns the full path.</span>
+<span class="sd">    Coreference Resolution</span>
 
-<span class="sd">    :return: full path given the name of dataset</span>
-<span class="sd">    :rtype: str</span>
+<span class="sd">    :param List[str] texts: list texts to do coreference resolution</span>
+<span class="sd">    :param str model_name: coreference resolution model</span>
+<span class="sd">    :param str device: device for running coreference resolution model (cpu, cuda, and other)</span>
+<span class="sd">    :return: List txets of coreference resolution</span>
+<span class="sd">    :rtype: List[dict]</span>
+
+<span class="sd">    :Options for model_name:</span>
+<span class="sd">        * *han-coref-v1.0* - (default) Han-Corf: Thai oreference resolution by PyThaiNLP v1.0</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.tools import get_full_data_path</span>
+<span class="sd">        from pythainlp.coref import coreference_resolution</span>
 
-<span class="sd">        get_full_data_path(&#39;ttc_freq.txt&#39;)</span>
-<span class="sd">        # output: &#39;/root/pythainlp-data/ttc_freq.txt&#39;</span>
+<span class="sd">        print(</span>
+<span class="sd">            coreference_resolution(</span>
+<span class="sd">                [&quot;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&quot;]</span>
+<span class="sd">            )</span>
+<span class="sd">        )</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # [</span>
+<span class="sd">        # {&#39;text&#39;: &#39;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&#39;, </span>
+<span class="sd">        # &#39;clusters_string&#39;: [[&#39;Bill Gates&#39;, &#39;ผม&#39;]], </span>
+<span class="sd">        # &#39;clusters&#39;: [[(0, 10), (50, 52)]]}</span>
+<span class="sd">        # ]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_pythainlp_data_path</span><span class="p">(),</span> <span class="n">path</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_pythainlp_data_path"><a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_pythainlp_data_path">[docs]</a><span class="k">def</span> <span class="nf">get_pythainlp_data_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the full path where PyThaiNLP keeps its (downloaded) data.</span>
-<span class="sd">    If the directory does not yet exist, it will be created.</span>
-<span class="sd">    The path can be specified through the environment variable</span>
-<span class="sd">    :envvar:`PYTHAINLP_DATA_DIR`. By default, `~/pythainlp-data`</span>
-<span class="sd">    will be used.</span>
-
-<span class="sd">    :return: full path of directory for :mod:`pythainlp` downloaded data</span>
-<span class="sd">    :rtype: str</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.tools import get_pythainlp_data_path</span>
-
-<span class="sd">        get_pythainlp_data_path()</span>
-<span class="sd">        # output: &#39;/root/pythainlp-data&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pythainlp_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
-        <span class="s2">&quot;PYTHAINLP_DATA_DIR&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">pythainlp_data_dir</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">path</span></div>
-
-
-<div class="viewcode-block" id="get_pythainlp_path"><a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_pythainlp_path">[docs]</a><span class="k">def</span> <span class="nf">get_pythainlp_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function returns full path of PyThaiNLP code</span>
-
-<span class="sd">    :return: full path of :mod:`pythainlp` code</span>
-<span class="sd">    :rtype: str</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.tools import get_pythainlp_path</span>
-
-<span class="sd">        get_pythainlp_path()</span>
-<span class="sd">        # output: &#39;/usr/local/lib/python3.6/dist-packages/pythainlp&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pythainlp_file</span><span class="p">)</span></div>
+    <span class="k">global</span> <span class="n">model</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">texts</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">model_name</span><span class="o">==</span><span class="s2">&quot;han-coref-v1.0&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.coref.han_coref</span> <span class="kn">import</span> <span class="n">HanCoref</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">HanCoref</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
