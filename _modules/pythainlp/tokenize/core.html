@@ -447,6 +447,12 @@
 <span class="sd">        * *thaisum* - The implementation of sentence segmentator from \</span>
 <span class="sd">            Nakhun Chumpolsathien, 2020</span>
 <span class="sd">        * *tltk* - split by `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
+<span class="sd">        * *wtp* - split by `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_., \</span>
+<span class="sd">            It support many size of models. You can use ``wtp`` to use mini model, \</span>
+<span class="sd">            ``wtp-tiny`` to use ``wtp-bert-tiny`` model (default), \</span>
+<span class="sd">            ``wtp-mini`` to use ``wtp-bert-mini`` model, \</span>
+<span class="sd">            ``wtp-base`` to use ``wtp-canine-s-1l`` model, \</span>
+<span class="sd">            and ``wtp-large`` to use ``wtp-canine-s-12l`` model.</span>
 <span class="sd">        * *whitespace+newline* - split by whitespaces and newline.</span>
 <span class="sd">        * *whitespace* - split by whitespaces. Specifiaclly, with \</span>
 <span class="sd">                         :class:`regex` pattern  ``r&quot; +&quot;``</span>
@@ -517,6 +523,13 @@
 
         <span class="n">segment</span> <span class="o">=</span> <span class="n">segmentor</span><span class="p">()</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">split_into_sentences</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wtp&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
+            <span class="n">_size</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span><span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -526,6 +539,61 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">strip_whitespace</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
 
+    <span class="k">return</span> <span class="n">segments</span></div>
+
+
+<div class="viewcode-block" id="paragraph_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.paragraph_tokenize">[docs]</a><span class="k">def</span> <span class="nf">paragraph_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Paragraph tokenizer.</span>
+
+<span class="sd">    Tokenizes text into paragraph.</span>
+
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :param str engine: the name paragraph tokenizer</span>
+<span class="sd">    :return: list of paragraph</span>
+<span class="sd">    :rtype: List[List[str]]</span>
+<span class="sd">    **Options for engine**</span>
+<span class="sd">        * *wtp* - split by `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_., \</span>
+<span class="sd">            It support many size of models. You can use ``wtp`` to use mini model, \</span>
+<span class="sd">            ``wtp-tiny`` to use ``wtp-bert-tiny`` model (default), \</span>
+<span class="sd">            ``wtp-mini`` to use ``wtp-bert-mini`` model, \</span>
+<span class="sd">            ``wtp-base`` to use ``wtp-canine-s-1l`` model, \</span>
+<span class="sd">            and ``wtp-large`` to use ``wtp-canine-s-12l`` model.</span>
+
+<span class="sd">    :Example:</span>
+
+<span class="sd">    Split the text based on *wtp*::</span>
+
+<span class="sd">        from pythainlp.tokenize import paragraph_tokenize</span>
+
+<span class="sd">        sent = (</span>
+<span class="sd">            &quot;(1) บทความนี้ผู้เขียนสังเคราะห์ขึ้นมาจากผลงานวิจัยที่เคยทำมาในอดีต&quot;</span>
+<span class="sd">            +&quot;  มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด&quot;</span>
+<span class="sd">            +&quot; จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ณ ที่นี้&quot;</span>
+<span class="sd">        )</span>
+
+<span class="sd">        paragraph_tokenize(sent)</span>
+<span class="sd">        # output: [</span>
+<span class="sd">        # [&#39;(1) &#39;], </span>
+<span class="sd">        # [</span>
+<span class="sd">        #   &#39;บทความนี้ผู้เขียนสังเคราะห์ขึ้นมาจากผลงานวิจัยที่เคยทำมาในอดีต  &#39;,</span>
+<span class="sd">        #   &#39;มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด &#39;,</span>
+<span class="sd">        #   &#39;จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา &#39;,</span>
+<span class="sd">        #   &#39;ณ ที่นี้&#39;</span>
+<span class="sd">        # ]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wtp&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
+            <span class="n">_size</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span><span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;paragraph&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
+<span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
+        <span class="p">)</span>
     <span class="k">return</span> <span class="n">segments</span></div>
 
 
