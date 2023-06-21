@@ -268,7 +268,8 @@
 <span class="sd">                                 If no filter is required, use None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_dict</span><span class="p">:</span>  <span class="c1"># default, use Thai National Corpus</span>
-            <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">tnc</span><span class="o">.</span><span class="n">word_freqs</span><span class="p">()</span>
+            <span class="c1"># TODO: #680 change the dict</span>
+            <span class="n">custom_dict</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">tnc</span><span class="o">.</span><span class="n">word_freqs</span><span class="p">()]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dict_filter</span><span class="p">:</span>
             <span class="n">dict_filter</span> <span class="o">=</span> <span class="n">_no_filter</span>
