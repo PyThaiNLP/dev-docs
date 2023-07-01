@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP 4.0.2 documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP 4.1.0dev0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.0.2) <br /> Published date: <unknown date>
+                <unknown> (4.1.0dev0) <br /> Published date: <unknown date>
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -161,6 +161,8 @@
 <span class="n">_THAI_MALE_NAMES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="n">_THAI_MALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_male_th.txt&quot;</span>
 
+<span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
 
 <div class="viewcode-block" id="countries"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.countries">[docs]</a><span class="k">def</span> <span class="nf">countries</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -254,6 +256,22 @@
         <span class="n">_THAI_WORDS</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="n">_THAI_WORDS_FILENAME</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_THAI_WORDS</span></div>
+
+
+<div class="viewcode-block" id="thai_orst_words"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_orst_words">[docs]</a><span class="k">def</span> <span class="nf">thai_orst_words</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a frozenset of Thai words from Royal Society of Thailand</span>
+<span class="sd">    \n(See: `dev/pythainlp/corpus/thai_orst_words.txt\</span>
+<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/thai_orst_words&gt;`_)</span>
+
+<span class="sd">    :return: :class:`frozenset` containing words in Thai language.</span>
+<span class="sd">    :rtype: :class:`frozenset`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_THAI_ORST_WORDS</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_ORST_WORDS</span><span class="p">:</span>
+        <span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;thai_orst_words.txt&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_THAI_ORST_WORDS</span></div>
 
 
 <div class="viewcode-block" id="thai_stopwords"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_stopwords">[docs]</a><span class="k">def</span> <span class="nf">thai_stopwords</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>

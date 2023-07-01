@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP 4.0.2 documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP 4.1.0dev0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.0.2) <br /> Published date: <unknown date>
+                <unknown> (4.1.0dev0) <br /> Published date: <unknown date>
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -118,6 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thaiword_to_num"><code class="docutils literal notranslate"><span class="pre">thaiword_to_num()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thaiword_to_time"><code class="docutils literal notranslate"><span class="pre">thaiword_to_time()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.time_to_thaiword"><code class="docutils literal notranslate"><span class="pre">time_to_thaiword()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.tis620_to_utf8"><code class="docutils literal notranslate"><span class="pre">tis620_to_utf8()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.tone_detector"><code class="docutils literal notranslate"><span class="pre">tone_detector()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.words_to_num"><code class="docutils literal notranslate"><span class="pre">words_to_num()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.nectec_to_ipa"><code class="docutils literal notranslate"><span class="pre">nectec_to_ipa()</span></code></a></li>
@@ -1624,6 +1625,28 @@ such as ‘1’, ‘2’, ‘3’</p>
 <span class="c1"># สิบสองนาฬิกาสามนาทีศูนย์วินาที</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.tis620_to_utf8">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">tis620_to_utf8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/encoding.html#tis620_to_utf8"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.tis620_to_utf8" title="Permalink to this definition"></a></dt>
+<dd><p>Convert TIS-620 to UTF-8</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Text that use TIS-620 encoding</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Text that use UTF-8 encoding</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p>from pythainlp.util import tis620_to_utf8
+tis620_to_utf8(”¡ÃÐ·ÃÇ§ÍØµÊÒË¡ÃÃÁ”)
+# output: ‘กระทรวงอุตสาหกรรม’</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

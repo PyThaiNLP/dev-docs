@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex &mdash; PyThaiNLP 4.0.2 documentation</title>
+  <title>pythainlp.soundex &mdash; PyThaiNLP 4.1.0dev0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.0.2) <br /> Published date: <unknown date>
+                <unknown> (4.1.0dev0) <br /> Published date: <unknown date>
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -72,6 +72,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.udom83"><code class="docutils literal notranslate"><span class="pre">udom83()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.metasound"><code class="docutils literal notranslate"><span class="pre">metasound()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.prayut_and_somchaip"><code class="docutils literal notranslate"><span class="pre">prayut_and_somchaip()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.sound.word_approximation"><code class="docutils literal notranslate"><span class="pre">word_approximation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.sound.audio_vector"><code class="docutils literal notranslate"><span class="pre">audio_vector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.soundex.sound.word2audio"><code class="docutils literal notranslate"><span class="pre">word2audio()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
@@ -332,6 +335,84 @@ phonetic code with the mactching technique called <strong>Soundex</strong> <a cl
 
 <span class="n">prayut_and_somchaip</span><span class="p">(</span><span class="s2">&quot;คิง&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="c1"># output: &#39;52&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.soundex.sound.word_approximation">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.sound.</span></span><span class="sig-name descname"><span class="pre">word_approximation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/soundex/sound.html#word_approximation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.sound.word_approximation" title="Permalink to this definition"></a></dt>
+<dd><p>Thai Word Approximation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai word</p></li>
+<li><p><strong>list_word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai word</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of approximation of word (The smaller the value, the closer)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.soundex.sound</span> <span class="kn">import</span> <span class="n">word_approximation</span>
+
+<span class="n">word_approximation</span><span class="p">(</span><span class="s2">&quot;รถ&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;รด&quot;</span><span class="p">,</span> <span class="s2">&quot;รส&quot;</span><span class="p">,</span> <span class="s2">&quot;รม&quot;</span><span class="p">,</span> <span class="s2">&quot;น้ำ&quot;</span><span class="p">])</span>
+<span class="c1"># output : [0.0, 0.0, 3.875, 8.375]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.soundex.sound.audio_vector">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.sound.</span></span><span class="sig-name descname"><span class="pre">audio_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/sound.html#audio_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.sound.audio_vector" title="Permalink to this definition"></a></dt>
+<dd><p>Convert audio to vector list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai word</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List feature from panphon</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[List[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>]]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.soundex.sound</span> <span class="kn">import</span> <span class="n">audio_vector</span>
+
+<span class="n">audio_vector</span><span class="p">(</span><span class="s2">&quot;น้ำ&quot;</span><span class="p">)</span>
+<span class="c1"># output : [[-1, 1, 1, -1, -1, -1, ...]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.soundex.sound.word2audio">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.sound.</span></span><span class="sig-name descname"><span class="pre">word2audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/sound.html#word2audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.sound.word2audio" title="Permalink to this definition"></a></dt>
+<dd><p>Convert word to IPA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai word</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>IPA that remove tone from the text</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.soundex.sound</span> <span class="kn">import</span> <span class="n">word2audio</span>
+
+<span class="n">word2audio</span><span class="p">(</span><span class="s2">&quot;น้ำ&quot;</span><span class="p">)</span>
+<span class="c1"># output : &#39;n aː m .&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
