@@ -74,6 +74,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/wsd.html">pythainlp.wsd</a></li>
 </ul>
 
         </div>
@@ -129,11 +130,13 @@
     <span class="s2">&quot;thai_stopwords&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_syllables&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_words&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_dict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_wsd_dict&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">FrozenSet</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus</span><span class="p">,</span> <span class="n">get_corpus_path</span>
 
 <span class="n">_THAI_COUNTRIES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="n">_THAI_COUNTRIES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;countries_th.txt&quot;</span>
@@ -162,6 +165,9 @@
 <span class="n">_THAI_MALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_male_th.txt&quot;</span>
 
 <span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <div class="viewcode-block" id="countries"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.countries">[docs]</a><span class="k">def</span> <span class="nf">countries</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -359,6 +365,54 @@
         <span class="n">_THAI_MALE_NAMES</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="n">_THAI_MALE_NAMES_FILENAME</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_THAI_MALE_NAMES</span></div>
+
+
+<div class="viewcode-block" id="thai_dict"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_dict">[docs]</a><span class="k">def</span> <span class="nf">thai_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return Thai dictionary with definition from wiktionary.</span>
+<span class="sd">    \n(See: `thai_dict\</span>
+<span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_)</span>
+
+<span class="sd">    :return: Thai word with part-of-speech type and definition</span>
+<span class="sd">    :rtype: :class:`frozenset`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_THAI_DICT</span>
+    <span class="k">if</span> <span class="n">_THAI_DICT</span> <span class="o">==</span> <span class="p">{}:</span>
+        <span class="kn">import</span> <span class="nn">csv</span>
+        <span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span> <span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_dict&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">_THAI_DICT</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
+                <span class="n">_THAI_DICT</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">_THAI_DICT</span></div>
+
+
+<div class="viewcode-block" id="thai_wsd_dict"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_wsd_dict">[docs]</a><span class="k">def</span> <span class="nf">thai_wsd_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return Thai Word Sense Disambiguation dictionary with definition from wiktionary.</span>
+<span class="sd">    \n(See: `thai_dict\</span>
+<span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_)</span>
+
+<span class="sd">    :return: Thai word with part-of-speech type and definition</span>
+<span class="sd">    :rtype: :class:`frozenset`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_THAI_WSD_DICT</span>
+    <span class="k">if</span> <span class="n">_THAI_WSD_DICT</span> <span class="o">==</span> <span class="p">{}:</span>
+        <span class="n">_thai_wsd</span> <span class="o">=</span> <span class="n">thai_dict</span><span class="p">()</span>
+        <span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
+            <span class="n">_all_value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">_use</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_all_value</span><span class="p">:</span>
+                <span class="n">_use</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">_use</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_use</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_use</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">_THAI_WSD_DICT</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">_THAI_WSD_DICT</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_use</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_THAI_WSD_DICT</span></div>
 </pre></div>
 
            </div>
