@@ -135,8 +135,8 @@
     <span class="n">_tokenizer</span><span class="o">.</span><span class="n">additional_special_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;s&gt;NOTUSED&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;/s&gt;NOTUSED&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="ThaiNameTagger"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger">[docs]</a><span class="k">class</span> <span class="nc">ThaiNameTagger</span><span class="p">:</span>
-<div class="viewcode-block" id="ThaiNameTagger.__init__"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="k">class</span> <span class="nc">ThaiNameTagger</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thainer&quot;</span><span class="p">,</span> <span class="n">grouped_entities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -158,7 +158,7 @@
             <span class="n">revision</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;finetuned@</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">-ner&quot;</span><span class="p">,</span>
             <span class="n">ignore_labels</span><span class="o">=</span><span class="p">[],</span>
             <span class="n">grouped_entities</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_IOB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
@@ -168,7 +168,7 @@
     <span class="k">def</span> <span class="nf">_clear_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;I-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ThaiNameTagger.get_ner"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger.get_ner">[docs]</a>    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">tag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -241,11 +241,11 @@
 
             <span class="k">return</span> <span class="n">sent</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span></div></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span>
 
 
-<div class="viewcode-block" id="NamedEntityRecognition"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition">[docs]</a><span class="k">class</span> <span class="nc">NamedEntityRecognition</span><span class="p">:</span>
-<div class="viewcode-block" id="NamedEntityRecognition.__init__"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">NamedEntityRecognition</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function tags named-entitiy from text in IOB format.</span>
 
@@ -256,7 +256,7 @@
         <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
         <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForTokenClassification</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_fix_span_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">ner</span><span class="p">):</span>
         <span class="n">_ner</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">_ner</span><span class="o">=</span><span class="n">ner</span>
@@ -271,7 +271,7 @@
                 <span class="n">i</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
             <span class="n">_new_tag</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">_new_tag</span>
-<div class="viewcode-block" id="NamedEntityRecognition.get_ner"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition.get_ner">[docs]</a>    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">get_ner</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">tag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -321,7 +321,7 @@
                     <span class="n">sent</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/&quot;</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span>
 
             <span class="k">return</span> <span class="n">sent</span>
-        <span class="k">return</span> <span class="n">ner_tag</span></div></div>
+        <span class="k">return</span> <span class="n">ner_tag</span>
 
 
 <div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
