@@ -160,6 +160,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.tcc_p">tcc+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc_p.tcc"><code class="docutils literal notranslate"><span class="pre">tcc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc_p.tcc_pos"><code class="docutils literal notranslate"><span class="pre">tcc_pos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.tcc_p.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.etcc">etcc</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.etcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
@@ -1259,9 +1265,71 @@ rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.e
 </dl>
 </dd></dl>
 
-<p>tcc+
-+++
-.. automodule:: pythainlp.tokenize.tcc_p</p>
+</section>
+<section id="module-pythainlp.tokenize.tcc_p">
+<span id="id14"></span><h3>tcc+<a class="headerlink" href="#module-pythainlp.tokenize.tcc_p" title="Permalink to this heading"></a></h3>
+<p>The implementation of tokenizer accorinding to Thai Character Clusters (TCCs)
+rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548">Theeramunkong et al. 2000.</a>
+and improve the rule that used in newmm</p>
+<dl class="simple">
+<dt>Credits:</dt><dd><ul class="simple">
+<li><p>TCC: Jakkrit TeCho</p></li>
+<li><p>Grammar: Wittawat Jitkrittum (<a class="reference external" href="https://github.com/wittawatj/jtcc/blob/master/TCC.g">link to the source file</a>)</p></li>
+<li><p>Python code: Korakot Chaovavanich</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.tcc_p.tcc">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.tcc_p.</span></span><span class="sig-name descname"><span class="pre">tcc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/tcc_p.html#tcc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.tcc_p.tcc" title="Permalink to this definition"></a></dt>
+<dd><p>TCC generator, generates Thai Character Clusters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be tokenized to character clusters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>subwords (character clusters)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterator[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.tcc_p.tcc_pos">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.tcc_p.</span></span><span class="sig-name descname"><span class="pre">tcc_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.11)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/tcc_p.html#tcc_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.tcc_p.tcc_pos" title="Permalink to this definition"></a></dt>
+<dd><p>TCC positions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be tokenized to character clusters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of the end position of subwords</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.tcc_p.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.tcc_p.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/tcc_p.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.tcc_p.segment" title="Permalink to this definition"></a></dt>
+<dd><p>Subword segmentation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be tokenized to character clusters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of subwords (character clusters), tokenized from the text</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-pythainlp.tokenize.etcc">
 <span id="etcc"></span><h3>etcc<a class="headerlink" href="#module-pythainlp.tokenize.etcc" title="Permalink to this heading"></a></h3>
