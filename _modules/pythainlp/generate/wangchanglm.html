@@ -260,6 +260,26 @@
 <span class="sd">        :param bool skip_special_tokens: skip special tokens</span>
 <span class="sd">        :return: the answer from Instruct.</span>
 <span class="sd">        :rtype: str</span>
+
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">                from pythainlp.generate.wangchanglm import WangChanGLM</span>
+<span class="sd">                import torch</span>
+
+<span class="sd">                model = WangChanGLM()</span>
+
+<span class="sd">                model.load_model(device=&quot;cpu&quot;,torch_dtype=torch.bfloat16)</span>
+
+<span class="sd">                print(model.instruct_generate(instruct=&quot;ขอวิธีลดน้ำหนัก&quot;))</span>
+<span class="sd">                # output: ลดน้ําหนักให้ได้ผล ต้องทําอย่างค่อยเป็นค่อยไป</span>
+<span class="sd">                # ปรับเปลี่ยนพฤติกรรมการกินอาหาร</span>
+<span class="sd">                # ออกกําลังกายอย่างสม่ําเสมอ</span>
+<span class="sd">                # และพักผ่อนให้เพียงพอ</span>
+<span class="sd">                # ที่สําคัญควรหลีกเลี่ยงอาหารที่มีแคลอรี่สูง</span>
+<span class="sd">                # เช่น อาหารทอด อาหารมัน อาหารที่มีน้ําตาลสูง</span>
+<span class="sd">                # และเครื่องดื่มแอลกอฮอล์</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">context</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">context</span><span class="o">==</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_no_input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span>

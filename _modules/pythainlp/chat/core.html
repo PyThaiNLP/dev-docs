@@ -175,6 +175,20 @@
 <span class="sd">        :param str text: text for asking chatbot.</span>
 <span class="sd">        :return: the answer from chatbot.</span>
 <span class="sd">        :rtype: str</span>
+<span class="sd">        :Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">                from pythainlp.chat.core import ChatBotModel</span>
+<span class="sd">                import torch</span>
+
+<span class="sd">                chatbot = ChatBotModel()</span>
+<span class="sd">                chatbot.load_model(device=&quot;cpu&quot;,torch_dtype=torch.bfloat16)</span>
+
+<span class="sd">                print(chatbot.chat(&quot;สวัสดี&quot;))</span>
+<span class="sd">                # output: ยินดีที่ได้รู้จัก</span>
+
+<span class="sd">                print(chatbot.history)</span>
+<span class="sd">                # output: [(&#39;สวัสดี&#39;, &#39;ยินดีที่ได้รู้จัก&#39;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_temp</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">!=</span><span class="p">[]:</span>

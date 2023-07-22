@@ -447,7 +447,26 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.generate.wangchanglm</span> <span class="kn">import</span> <span class="n">WangChanGLM</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">WangChanGLM</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span><span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">instruct_generate</span><span class="p">(</span><span class="n">instruct</span><span class="o">=</span><span class="s2">&quot;ขอวิธีลดน้ำหนัก&quot;</span><span class="p">))</span>
+<span class="c1"># output: ลดน้ําหนักให้ได้ผล ต้องทําอย่างค่อยเป็นค่อยไป</span>
+<span class="c1"># ปรับเปลี่ยนพฤติกรรมการกินอาหาร</span>
+<span class="c1"># ออกกําลังกายอย่างสม่ําเสมอ</span>
+<span class="c1"># และพักผ่อนให้เพียงพอ</span>
+<span class="c1"># ที่สําคัญควรหลีกเลี่ยงอาหารที่มีแคลอรี่สูง</span>
+<span class="c1"># เช่น อาหารทอด อาหารมัน อาหารที่มีน้ําตาลสูง</span>
+<span class="c1"># และเครื่องดื่มแอลกอฮอล์</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
