@@ -79,6 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ulmfit.html">pythainlp.ulmfit</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.util</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.abbreviation_to_full_text"><code class="docutils literal notranslate"><span class="pre">abbreviation_to_full_text()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.arabic_digit_to_thai_digit"><code class="docutils literal notranslate"><span class="pre">arabic_digit_to_thai_digit()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.bahttext"><code class="docutils literal notranslate"><span class="pre">bahttext()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.convert_years"><code class="docutils literal notranslate"><span class="pre">convert_years()</span></code></a></li>
@@ -175,6 +176,41 @@
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.util</span></code> contains utility functions, like text conversion and formatting</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.abbreviation_to_full_text">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">abbreviation_to_full_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/abbreviation.html#abbreviation_to_full_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.abbreviation_to_full_text" title="Permalink to this definition"></a></dt>
+<dd><p>This function convert Thai text (with abbreviation) to full text.</p>
+<p>This function use KhamYo for handles abbreviations.
+See more <a class="reference external" href="https://github.com/wannaphong/KhamYo">KhamYo</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai text</p></li>
+<li><p><strong>top_k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Top K</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Thai full text that handles abbreviations as full text and cos scores (original text -  modified text).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Union[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a>, None]]]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">abbreviation_to_full_text</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;รร.ของเราน่าอยู่&quot;</span>
+
+<span class="n">abbreviation_to_full_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># output: [</span>
+<span class="c1"># (&#39;โรงเรียนของเราน่าอยู่&#39;, tensor(0.3734)), </span>
+<span class="c1"># (&#39;โรงแรมของเราน่าอยู่&#39;, tensor(0.2438))</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.arabic_digit_to_thai_digit">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">arabic_digit_to_thai_digit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/digitconv.html#arabic_digit_to_thai_digit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.arabic_digit_to_thai_digit" title="Permalink to this definition"></a></dt>
