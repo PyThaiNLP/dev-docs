@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta2) <br /> Published date: 27/07/2023
+                <unknown> (4.1.0beta2) <br /> Published date: 01/08/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -637,10 +637,15 @@
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
 <span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
-<span class="sd">        * *ssg* - CRF syllable segmenter for Thai</span>
+<span class="sd">        * *han_solo* - CRF syllable segmenter for Thai that can work in the \</span>
+<span class="sd">            Thai social media domain. See `PyThaiNLP/Han-solo \</span>
+<span class="sd">        &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_.</span>
+<span class="sd">        * *ssg* - CRF syllable segmenter for Thai. See `ponrawee/ssg \</span>
+<span class="sd">        &lt;https://github.com/ponrawee/ssg&gt;`_.</span>
 <span class="sd">        * *tcc* (default) - Thai Character Cluster (Theeramunkong et al. 2000)</span>
 <span class="sd">        * *tcc_p* - Thai Character Cluster + improve the rule that used in newmm</span>
-<span class="sd">        * *tltk* - syllable tokenizer from tltk</span>
+<span class="sd">        * *tltk* - syllable tokenizer from tltk. See `tltk \</span>
+<span class="sd">        &lt;https://pypi.org/project/tltk/&gt;`_.</span>
 <span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model</span>
 <span class="sd">    :Example:</span>
 
@@ -707,6 +712,8 @@
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.ssg</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tltk</span> <span class="kn">import</span> <span class="n">syllable_tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;han_solo&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.han_solo</span> <span class="kn">import</span> <span class="n">segment</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
