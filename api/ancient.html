@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.coref &mdash; PyThaiNLP 4.1.0beta3 documentation</title>
+  <title>pythainlp.ancient &mdash; PyThaiNLP 4.1.0beta3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pythainlp.corpus" href="corpus.html" />
-    <link rel="prev" title="pythainlp.cls" href="cls.html" /> 
+    <link rel="next" title="pythainlp.augment" href="augment.html" />
+    <link rel="prev" title="License" href="../notes/license.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,18 +58,18 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.ancient</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.ancient.aksonhan_to_current"><code class="docutils literal notranslate"><span class="pre">aksonhan_to_current()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.coref</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pythainlp.coref.coreference_resolution"><code class="docutils literal notranslate"><span class="pre">coreference_resolution()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">pythainlp.generate</a></li>
@@ -104,9 +104,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">pythainlp.coref</li>
+      <li class="breadcrumb-item active">pythainlp.ancient</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/coref.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ancient.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -114,50 +114,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pythainlp-coref">
-<h1>pythainlp.coref<a class="headerlink" href="#pythainlp-coref" title="Permalink to this heading"></a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.coref</span></code> is Coreference Resolution for Thai.</p>
+  <section id="pythainlp-ancient">
+<h1>pythainlp.ancient<a class="headerlink" href="#pythainlp-ancient" title="Permalink to this heading"></a></h1>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="pythainlp.coref.coreference_resolution">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.coref.</span></span><span class="sig-name descname"><span class="pre">coreference_resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'han-coref-v1.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/coref/core.html#coreference_resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.coref.coreference_resolution" title="Permalink to this definition"></a></dt>
-<dd><p>Coreference Resolution</p>
+<dt class="sig sig-object py" id="pythainlp.ancient.aksonhan_to_current">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.ancient.</span></span><span class="sig-name descname"><span class="pre">aksonhan_to_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ancient/aksonhan.html#aksonhan_to_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ancient.aksonhan_to_current" title="Permalink to this definition"></a></dt>
+<dd><p>AksonHan words convert to current Thai words</p>
+<p>AksonHan (อักษรหัน) is writing down two consonants as the     spelling of the /a/ vowels. (สระ อะ).</p>
+<p>Today, รร is an aksonHan words that still used in Thai.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>texts</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – list texts to do coreference resolution</p></li>
-<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – coreference resolution model</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – device for running coreference resolution model (cpu, cuda, and other)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Thai word</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List txets of coreference resolution</p>
+<dd class="field-even"><p>Thai AksonHan convert to current Thai words</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
-<dt class="field-even">Options for model_name<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><em>han-coref-v1.0</em> - (default) Han-Corf: Thai oreference resolution by PyThaiNLP v1.0</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.coref</span> <span class="kn">import</span> <span class="n">coreference_resolution</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.ancient</span> <span class="kn">import</span> <span class="n">aksonhan_to_current</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="n">coreference_resolution</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">&quot;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&quot;</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [</span>
-<span class="c1"># {&#39;text&#39;: &#39;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&#39;, </span>
-<span class="c1"># &#39;clusters_string&#39;: [[&#39;Bill Gates&#39;, &#39;ผม&#39;]], </span>
-<span class="c1"># &#39;clusters&#39;: [[(0, 10), (50, 52)]]}</span>
-<span class="c1"># ]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aksonhan_to_current</span><span class="p">(</span><span class="s2">&quot;จกก&quot;</span><span class="p">))</span>
+<span class="c1"># output: จัก</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">aksonhan_to_current</span><span class="p">(</span><span class="s2">&quot;บงงคบบ&quot;</span><span class="p">))</span>
+<span class="c1"># output: บังคับ</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">aksonhan_to_current</span><span class="p">(</span><span class="s2">&quot;สรรเพชญ&quot;</span><span class="p">))</span> <span class="c1"># รร is still used.</span>
+<span class="c1"># output: สรรเพชญ</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -169,8 +158,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cls.html" class="btn btn-neutral float-left" title="pythainlp.cls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="corpus.html" class="btn btn-neutral float-right" title="pythainlp.corpus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../notes/license.html" class="btn btn-neutral float-left" title="License" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="augment.html" class="btn btn-neutral float-right" title="pythainlp.augment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
