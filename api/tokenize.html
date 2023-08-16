@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta3) <br /> Published date: 14/08/2023
+                <unknown> (4.1.0beta3) <br /> Published date: 16/08/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.sent_tokenize"><code class="docutils literal notranslate"><span class="pre">sent_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.paragraph_tokenize"><code class="docutils literal notranslate"><span class="pre">paragraph_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.subword_tokenize"><code class="docutils literal notranslate"><span class="pre">subword_tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.syllable_tokenize"><code class="docutils literal notranslate"><span class="pre">syllable_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.word_tokenize"><code class="docutils literal notranslate"><span class="pre">word_tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.word_detokenize"><code class="docutils literal notranslate"><span class="pre">word_detokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer"><code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code></a><ul>
@@ -106,12 +107,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#word-level">Word level</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">attacut</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">attacut</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.attacut.AttacutTokenizer"><code class="docutils literal notranslate"><span class="pre">AttacutTokenizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.attacut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">deepcut</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">deepcut</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.deepcut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
@@ -122,7 +123,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.multi_cut.find_all_segment"><code class="docutils literal notranslate"><span class="pre">find_all_segment()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">nlpo3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">nlpo3</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.nlpo3.load_dict"><code class="docutils literal notranslate"><span class="pre">load_dict()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.nlpo3.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
@@ -132,7 +133,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.longest.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">pyicu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">pyicu</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.pyicu.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
@@ -144,7 +145,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.sefr_cut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">oskut</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">oskut</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.oskut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
@@ -169,6 +170,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.etcc">etcc</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.etcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pythainlp.tokenize.han_solo">han_solo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer"><code class="docutils literal notranslate"><span class="pre">Featurizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -388,13 +394,14 @@ into ‘ข’, ‘น’, ‘ม’, and ‘ชั้น’.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be tokenized</p></li>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the name subword tokenizer</p></li>
+<li><p><strong>keep_whitespace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – keep whitespace</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of subwords</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -452,6 +459,38 @@ into ‘ข’, ‘น’, ‘ม’, and ‘ชั้น’.</p>
 <span class="c1"># output: [&#39;▁ความ&#39;, &#39;แปลก&#39;, &#39;แยก&#39;, &#39;และ&#39;, &#39;พัฒนาการ&#39;]</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.syllable_tokenize">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">syllable_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'han_solo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_whitespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#syllable_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.syllable_tokenize" title="Permalink to this definition"></a></dt>
+<dd><p>Syllable tokenizer</p>
+<p>Tokenizes text into inseparable units of
+Thai syllable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – text to be tokenized</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the name syllable tokenizer</p></li>
+<li><p><strong>keep_whitespace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – keep whitespace</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of subwords</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
+<li><p><em>dict</em> - newmm word tokenizer with a syllable dictionary</p></li>
+<li><p><em>han_solo</em> - CRF syllable segmenter for Thai that can work in the             Thai social media domain. See <a class="reference external" href="https://github.com/PyThaiNLP/Han-solo">PyThaiNLP/Han-solo</a>.</p></li>
+<li><p><em>ssg</em> - CRF syllable segmenter for Thai. See <a class="reference external" href="https://github.com/ponrawee/ssg">ponrawee/ssg</a>.</p></li>
+<li><p><em>tltk</em> - syllable tokenizer from tltk. See <a class="reference external" href="https://pypi.org/project/tltk/">tltk</a>.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -841,8 +880,8 @@ limitations under the License.</p>
 </section>
 <section id="word-level">
 <h2>Word level<a class="headerlink" href="#word-level" title="Permalink to this heading"></a></h2>
-<section id="id4">
-<h3>attacut<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<section id="id7">
+<h3>attacut<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
 <span class="target" id="module-pythainlp.tokenize.attacut"></span><p>Wrapper for AttaCut - Fast and Reasonably Accurate Word Tokenizer for Thai</p>
 <dl class="field-list simple">
 <dt class="field-odd">See Also<span class="colon">:</span></dt>
@@ -884,8 +923,8 @@ limitations under the License.</p>
 </dd></dl>
 
 </section>
-<section id="id5">
-<h3>deepcut<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<section id="id8">
+<h3>deepcut<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
 <span class="target" id="module-pythainlp.tokenize.deepcut"></span><p>Wrapper for deepcut Thai word segmentation. deepcut is a
 Thai word segmentation library using 1D Convolution Neural Network.</p>
 <p>User need to install deepcut (and its dependency: tensorflow) by themselves.</p>
@@ -971,8 +1010,8 @@ Original code from Korakot Chaovavanich.</p>
 </dd></dl>
 
 </section>
-<section id="id7">
-<h3>nlpo3<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<section id="id10">
+<h3>nlpo3<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
 <span class="target" id="module-pythainlp.tokenize.nlpo3"></span><dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tokenize.nlpo3.load_dict">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.nlpo3.</span></span><span class="sig-name descname"><span class="pre">load_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/nlpo3.html#load_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.nlpo3.load_dict" title="Permalink to this definition"></a></dt>
@@ -1070,8 +1109,8 @@ on the code from Patorn Utenpattanun.</p>
 </dd></dl>
 
 </section>
-<section id="id9">
-<h3>pyicu<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<section id="id12">
+<h3>pyicu<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
 <span class="target" id="module-pythainlp.tokenize.pyicu"></span><p>Wrapper for PyICU word segmentation. This wrapper module uses
 <code class="xref py py-class docutils literal notranslate"><span class="pre">icu.BreakIterator</span></code> with Thai as <code class="xref py py-class docutils literal notranslate"><span class="pre">icu.Local</span></code>
 to locate boundaries between words from the text.</p>
@@ -1127,7 +1166,7 @@ parts of the same named-entity.</p>
 
 </section>
 <section id="module-pythainlp.tokenize.sefr_cut">
-<span id="id11"></span><h3>sefr_cut<a class="headerlink" href="#module-pythainlp.tokenize.sefr_cut" title="Permalink to this heading"></a></h3>
+<span id="id14"></span><h3>sefr_cut<a class="headerlink" href="#module-pythainlp.tokenize.sefr_cut" title="Permalink to this heading"></a></h3>
 <p>Wrapper for SEFR CUT Thai word segmentation. SEFR CUT is a
 Thai Word Segmentation Models using Stacked Ensemble.</p>
 <dl class="field-list simple">
@@ -1143,8 +1182,8 @@ Thai Word Segmentation Models using Stacked Ensemble.</p>
 <dd></dd></dl>
 
 </section>
-<section id="id13">
-<h3>oskut<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<section id="id16">
+<h3>oskut<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
 <span class="target" id="module-pythainlp.tokenize.oskut"></span><p>Wrapper OSKut (Out-of-domain StacKed cut for Word Segmentation).
 Handling Cross- and Out-of-Domain Samples in Thai Word Segmentation
 Stacked Ensemble Framework and DeepCut as Baseline model (ACL 2021 Findings)</p>
@@ -1269,7 +1308,7 @@ rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.e
 
 </section>
 <section id="module-pythainlp.tokenize.tcc_p">
-<span id="id15"></span><h3>tcc+<a class="headerlink" href="#module-pythainlp.tokenize.tcc_p" title="Permalink to this heading"></a></h3>
+<span id="id18"></span><h3>tcc+<a class="headerlink" href="#module-pythainlp.tokenize.tcc_p" title="Permalink to this heading"></a></h3>
 <p>The implementation of tokenizer accorinding to Thai Character Clusters (TCCs)
 rules purposed by <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548">Theeramunkong et al. 2000.</a>
 and improve the rule that used in newmm</p>
@@ -1371,6 +1410,36 @@ and Information Technology (ISCIT), pp. 37-40. 2001.</p>
 </dd>
 </dl>
 </dd></dl>
+
+</section>
+<section id="module-pythainlp.tokenize.han_solo">
+<span id="han-solo"></span><h3>han_solo<a class="headerlink" href="#module-pythainlp.tokenize.han_solo" title="Permalink to this heading"></a></h3>
+<p>🪿 Han-solo: Thai syllable segmenter</p>
+<p>GitHub: <a class="reference external" href="https://github.com/PyThaiNLP/Han-solo">https://github.com/PyThaiNLP/Han-solo</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.han_solo.</span></span><span class="sig-name descname"><span class="pre">Featurizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.pad">
+<span class="sig-name descname"><span class="pre">pad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.pad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.pad" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.featurize">
+<span class="sig-name descname"><span class="pre">featurize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indiv_char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'list'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.featurize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.featurize" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.han_solo.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.segment" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 </section>

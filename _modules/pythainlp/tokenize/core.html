@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta3) <br /> Published date: 14/08/2023
+                <unknown> (4.1.0beta3) <br /> Published date: 16/08/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -633,8 +633,9 @@
 
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :param str engine: the name subword tokenizer</span>
+<span class="sd">    :param bool keep_whitespace: keep whitespace</span>
 <span class="sd">    :return: list of subwords</span>
-<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    :rtype: List[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
 <span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
@@ -728,6 +729,44 @@
         <span class="n">segments</span> <span class="o">=</span> <span class="n">strip_whitespace</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">segments</span></div>
+
+
+<div class="viewcode-block" id="syllable_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.syllable_tokenize">[docs]</a><span class="k">def</span> <span class="nf">syllable_tokenize</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="n">DEFAULT_SYLLABLE_TOKENIZE_ENGINE</span><span class="p">,</span>
+    <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Syllable tokenizer</span>
+
+<span class="sd">    Tokenizes text into inseparable units of</span>
+<span class="sd">    Thai syllable.</span>
+
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :param str engine: the name syllable tokenizer</span>
+<span class="sd">    :param bool keep_whitespace: keep whitespace</span>
+<span class="sd">    :return: list of subwords</span>
+<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    **Options for engine**</span>
+<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
+<span class="sd">        * *han_solo* - CRF syllable segmenter for Thai that can work in the \</span>
+<span class="sd">            Thai social media domain. See `PyThaiNLP/Han-solo \</span>
+<span class="sd">        &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_.</span>
+<span class="sd">        * *ssg* - CRF syllable segmenter for Thai. See `ponrawee/ssg \</span>
+<span class="sd">        &lt;https://github.com/ponrawee/ssg&gt;`_.</span>
+<span class="sd">        * *tltk* - syllable tokenizer from tltk. See `tltk \</span>
+<span class="sd">        &lt;https://pypi.org/project/tltk/&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;dict&quot;</span><span class="p">,</span> <span class="s2">&quot;han_solo&quot;</span><span class="p">,</span> <span class="s2">&quot;ssg&quot;</span><span class="p">,</span> <span class="s2">&quot;tltk&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
+<span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">subword_tokenize</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span>
+        <span class="n">keep_whitespace</span><span class="o">=</span><span class="n">keep_whitespace</span>
+    <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Tokenizer"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer">[docs]</a><span class="k">class</span> <span class="nc">Tokenizer</span><span class="p">:</span>
