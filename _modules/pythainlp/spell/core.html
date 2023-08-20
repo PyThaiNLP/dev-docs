@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta3) <br /> Published date: 16/08/2023
+                <unknown> (4.1.0beta3) <br /> Published date: 20/08/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -205,6 +205,7 @@
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
 <span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
+<span class="sd">        * *wanchanberta_thai_grammarly* - WanchanBERTa Thai Grammarly</span>
 <span class="sd">    :return: the corrected word</span>
 <span class="sd">    :rtype: str</span>
 
@@ -236,6 +237,11 @@
         <span class="kn">from</span> <span class="nn">pythainlp.spell.symspellpy</span> <span class="kn">import</span> <span class="n">correct</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
 
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wanchanberta_thai_grammarly&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pythainlp.spell.wanchanberta_thai_grammarly</span> <span class="kn">import</span> <span class="n">correct</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
+
+        <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    
     <span class="k">else</span><span class="p">:</span>
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">DEFAULT_SPELL_CHECKER</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
@@ -289,6 +295,7 @@
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
 <span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
+<span class="sd">        * *wanchanberta_thai_grammarly* - WanchanBERTa Thai Grammarly</span>
 <span class="sd">    :return: the corrected list sentences of word</span>
 <span class="sd">    :rtype: List[str]</span>
 
