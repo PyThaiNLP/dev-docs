@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 24/09/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -554,7 +554,12 @@
     <span class="k">return</span> <span class="n">segments</span></div>
 
 
-<div class="viewcode-block" id="paragraph_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.paragraph_tokenize">[docs]</a><span class="k">def</span> <span class="nf">paragraph_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">,</span> <span class="n">paragraph_threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<div class="viewcode-block" id="paragraph_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.paragraph_tokenize">[docs]</a><span class="k">def</span> <span class="nf">paragraph_tokenize</span><span class="p">(</span>
+      <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+      <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">,</span> 
+      <span class="n">paragraph_threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+      <span class="n">style</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;newline&#39;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Paragraph tokenizer.</span>
 
@@ -600,7 +605,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span><span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;paragraph&quot;</span><span class="p">,</span><span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">)</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span>
+                      <span class="n">text</span><span class="p">,</span>
+                      <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span>
+                      <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;paragraph&quot;</span><span class="p">,</span>
+                      <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
+                      <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                    <span class="p">)</span>
         
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
