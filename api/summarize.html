@@ -59,7 +59,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
@@ -96,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -133,9 +134,9 @@
 <span class="sig-prename descclassname"><span class="pre">pythainlp.summarize.</span></span><span class="sig-name descname"><span class="pre">summarize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'frequency'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/core.html#summarize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.summarize" title="Permalink to this definition"></a></dt>
 <dd><p>This function summarizes text based on frequency of words.</p>
 <p>Under the hood, this function first tokenizes sentences from the given
-text with <a class="reference internal" href="tokenize.html#pythainlp.tokenize.sent_tokenize" title="pythainlp.tokenize.sent_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.sent_tokenize()</span></code></a>.
+text with <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.sent_tokenize()</span></code>.
 Then, it computes frequencies of tokenized words
-(with <a class="reference internal" href="tokenize.html#pythainlp.tokenize.word_tokenize" title="pythainlp.tokenize.word_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code></a>) in all sentences
+(with <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code>) in all sentences
 and normalizes them with maximum word frequency. The words with normalized
 frequencies that are less than 0.1 or greater than 0.9 will be
 filtered out from frequency dictionary. Finally, it picks <em>n</em> sentences
@@ -149,7 +150,7 @@ in the sentence and also appear in the frequency dictionary.</p>
 By default, n is <em>1</em> (effective for frequency engine only)</p></li>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – text summarization engine (By default: <em>frequency</em>).</p></li>
 <li><p><strong>tokenizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – word tokenizer engine name (refer to
-<a class="reference internal" href="tokenize.html#pythainlp.tokenize.word_tokenize" title="pythainlp.tokenize.word_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code></a>).
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code>).
 By default, tokenizer is <em>newmm</em>
 (effective for frequency engine only)</p></li>
 </ul>
@@ -236,7 +237,7 @@ For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เส
 <li><p><strong>tokenizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of tokenizer engine to use.
 Refer to options in :func: <a href="#id1"><span class="problematic" id="id2">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
 <li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
-If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+If not specified, <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code> is used. (default: None)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -328,7 +329,7 @@ For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เส
 Refer to options in :func: <a href="#id3"><span class="problematic" id="id4">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
 <li><p><strong>return_similarity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If <cite>True</cite>, return keyword scores. (default: False)</p></li>
 <li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
-If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+If not specified, <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code> is used. (default: None)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -411,7 +412,7 @@ For instance, (1, 1) means each token (unigram) can be a keyword (e.g. “เส
 Refer to options in :func: <a href="#id7"><span class="problematic" id="id8">`</span></a>pythainlp.tokenize.word_tokenizer() (default: ‘newmm’)</p></li>
 <li><p><strong>return_similarity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If <cite>True</cite>, return keyword scores. (default: False)</p></li>
 <li><p><strong>stop_words</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – A list of stop words (a.k.a words to be ignored).
-If not specified, <a class="reference internal" href="corpus.html#pythainlp.corpus.thai_stopwords" title="pythainlp.corpus.thai_stopwords"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code></a> is used. (default: None)</p></li>
+If not specified, <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.thai_stopwords()</span></code> is used. (default: None)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

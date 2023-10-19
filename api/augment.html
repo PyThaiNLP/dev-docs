@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.augment &mdash; PyThaiNLP 4.1.0beta5 documentation</title>
+  <title>pythainlp.augment Module &mdash; PyThaiNLP 4.1.0beta5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -59,14 +59,19 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.augment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.augment Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#textaugment-class">TextAugment Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wordnetaug-class">WordNetAug Class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.WordNetAug"><code class="docutils literal notranslate"><span class="pre">WordNetAug</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.__init__"><code class="docutils literal notranslate"><span class="pre">WordNetAug.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.find_synonyms"><code class="docutils literal notranslate"><span class="pre">WordNetAug.find_synonyms()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.WordNetAug.augment"><code class="docutils literal notranslate"><span class="pre">WordNetAug.augment()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#word2vecaug-thai2fitaug-ltw2vaug-classes">Word2VecAug, Thai2fitAug, LTW2VAug Classes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug"><code class="docutils literal notranslate"><span class="pre">Word2VecAug</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug.__init__"><code class="docutils literal notranslate"><span class="pre">Word2VecAug.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.Word2VecAug.modify_sent"><code class="docutils literal notranslate"><span class="pre">Word2VecAug.modify_sent()</span></code></a></li>
@@ -87,6 +92,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.LTW2VAug.augment"><code class="docutils literal notranslate"><span class="pre">LTW2VAug.augment()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fasttextaug-and-thai2transformersaug-classes">FastTextAug and Thai2transformersAug Classes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug"><code class="docutils literal notranslate"><span class="pre">FastTextAug</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.__init__"><code class="docutils literal notranslate"><span class="pre">FastTextAug.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.FastTextAug.tokenize"><code class="docutils literal notranslate"><span class="pre">FastTextAug.tokenize()</span></code></a></li>
@@ -100,6 +108,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.lm.Thai2transformersAug.augment"><code class="docutils literal notranslate"><span class="pre">Thai2transformersAug.augment()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bpembaug-class">BPEmbAug Class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug"><code class="docutils literal notranslate"><span class="pre">BPEmbAug</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.__init__"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug.tokenizer"><code class="docutils literal notranslate"><span class="pre">BPEmbAug.tokenizer()</span></code></a></li>
@@ -109,6 +120,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-functions">Additional Functions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
@@ -132,6 +144,7 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -149,7 +162,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">pythainlp.augment</li>
+      <li class="breadcrumb-item active">pythainlp.augment Module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/augment.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -159,11 +172,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pythainlp-augment">
-<h1>pythainlp.augment<a class="headerlink" href="#pythainlp-augment" title="Permalink to this heading"></a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">textaugment</span></code> is Thai text augment. This function for text augment task.</p>
-<section id="modules">
-<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+  <section id="pythainlp-augment-module">
+<h1>pythainlp.augment Module<a class="headerlink" href="#pythainlp-augment-module" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The <cite>pythainlp.augment</cite> module is a powerful toolset for text augmentation in the Thai language. Text augmentation is a process that enriches and diversifies textual data by generating alternative versions of the original text. This module is a valuable resource for improving the quality and variety of Thai language data for NLP tasks.</p>
+</section>
+<section id="textaugment-class">
+<h2>TextAugment Class<a class="headerlink" href="#textaugment-class" title="Permalink to this heading"></a></h2>
+<p>The central component of the <cite>pythainlp.augment</cite> module is the <cite>TextAugment</cite> class. This class provides various text augmentation techniques and functions to enhance the diversity of your text data. It offers the following methods:</p>
+</section>
+<section id="wordnetaug-class">
+<h2>WordNetAug Class<a class="headerlink" href="#wordnetaug-class" title="Permalink to this heading"></a></h2>
+<p>The <cite>WordNetAug</cite> class is designed to perform text augmentation using WordNet, a lexical database for English. This class enables you to augment Thai text using English synonyms, offering a unique approach to text diversification. The following methods are available within this class:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.augment.WordNetAug">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.augment.</span></span><span class="sig-name descname"><span class="pre">WordNetAug</span></span><a class="reference internal" href="../_modules/pythainlp/augment/wordnet.html#WordNetAug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.WordNetAug" title="Permalink to this definition"></a></dt>
@@ -233,6 +254,10 @@
 
 </dd></dl>
 
+</section>
+<section id="word2vecaug-thai2fitaug-ltw2vaug-classes">
+<h2>Word2VecAug, Thai2fitAug, LTW2VAug Classes<a class="headerlink" href="#word2vecaug-thai2fitaug-ltw2vaug-classes" title="Permalink to this heading"></a></h2>
+<p>The <cite>pythainlp.augment.word2vec</cite> package contains multiple classes for text augmentation using Word2Vec models. These classes include <cite>Word2VecAug</cite>, <cite>Thai2fitAug</cite>, and <cite>LTW2VAug</cite>. Each of these classes allows you to use Word2Vec embeddings to generate text variations. Explore the methods provided by these classes to understand their capabilities.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.augment.word2vec.Word2VecAug">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.augment.word2vec.</span></span><span class="sig-name descname"><span class="pre">Word2VecAug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><span class="pre">object</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'file'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/augment/word2vec/core.html#Word2VecAug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.word2vec.Word2VecAug" title="Permalink to this definition"></a></dt>
@@ -412,6 +437,10 @@
 
 </dd></dl>
 
+</section>
+<section id="fasttextaug-and-thai2transformersaug-classes">
+<h2>FastTextAug and Thai2transformersAug Classes<a class="headerlink" href="#fasttextaug-and-thai2transformersaug-classes" title="Permalink to this heading"></a></h2>
+<p>The <cite>pythainlp.augment.lm</cite> package offers classes for text augmentation using language models. These classes include <cite>FastTextAug</cite> and <cite>Thai2transformersAug</cite>. These classes allow you to use language model-based techniques to diversify text data. Explore their methods to understand their capabilities.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.augment.lm.FastTextAug">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.augment.lm.</span></span><span class="sig-name descname"><span class="pre">FastTextAug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/augment/lm/fasttext.html#FastTextAug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.lm.FastTextAug" title="Permalink to this definition"></a></dt>
@@ -538,6 +567,10 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 
 </dd></dl>
 
+</section>
+<section id="bpembaug-class">
+<h2>BPEmbAug Class<a class="headerlink" href="#bpembaug-class" title="Permalink to this heading"></a></h2>
+<p>The <cite>pythainlp.augment.word2vec.bpemb_wv</cite> package contains the <cite>BPEmbAug</cite> class, which is designed for text augmentation using subword embeddings. This class is particularly useful when working with subword representations for Thai text augmentation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.augment.word2vec.bpemb_wv.BPEmbAug">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.augment.word2vec.bpemb_wv.</span></span><span class="sig-name descname"><span class="pre">BPEmbAug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'th'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/augment/word2vec/bpemb_wv.html#BPEmbAug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.word2vec.bpemb_wv.BPEmbAug" title="Permalink to this definition"></a></dt>
@@ -600,6 +633,15 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 
 </dd></dl>
 
+</section>
+<section id="additional-functions">
+<h2>Additional Functions<a class="headerlink" href="#additional-functions" title="Permalink to this heading"></a></h2>
+<p>To further enhance your text augmentation tasks, the <cite>pythainlp.augment</cite> module offers the following functions:</p>
+<ul class="simple">
+<li><p><cite>postype2wordnet</cite>: This function maps part-of-speech tags to WordNet-compatible POS tags, facilitating the integration of WordNet augmentation with Thai text.</p></li>
+</ul>
+<p>These functions and classes provide diverse techniques for text augmentation in the Thai language, making this module a valuable asset for NLP researchers, developers, and practitioners.</p>
+<p>For detailed usage examples and guidelines, please refer to the official PyThaiNLP documentation. The <cite>pythainlp.augment</cite> module opens up new possibilities for enriching and diversifying Thai text data, leading to improved NLP models and applications.</p>
 </section>
 </section>
 

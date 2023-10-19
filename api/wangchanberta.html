@@ -59,7 +59,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
@@ -91,13 +91,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.get_ner"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.get_ner()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#pythainlp.wangchanberta.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -127,9 +127,9 @@
              
   <section id="pythainlp-wangchanberta">
 <h1>pythainlp.wangchanberta<a class="headerlink" href="#pythainlp-wangchanberta" title="Permalink to this heading"></a></h1>
-<p>WangchanBERTa base model: wangchanberta-base-att-spm-uncased <a class="footnote-reference brackets" href="#lowphansirikul-2021" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-<p>We used WangchanBERTa for Thai name tagger task, part-of-speech and subword tokenizer.</p>
-<p>If you want to finetune model, You can read <a class="reference external" href="https://github.com/vistec-AI/thai2transformers">https://github.com/vistec-AI/thai2transformers</a></p>
+<p>The <cite>pythainlp.wangchanberta</cite> module is built upon the WangchanBERTa base model, specifically the <cite>wangchanberta-base-att-spm-uncased</cite> model, as detailed in the paper by Lowphansirikul et al. [^Lowphansirikul_2021].</p>
+<p>This base model is utilized for various natural language processing tasks in the Thai language, including named entity recognition, part-of-speech tagging, and subword tokenization.</p>
+<p>If you intend to fine-tune the model or explore its capabilities further, please refer to the [thai2transformers repository](<a class="reference external" href="https://github.com/vistec-AI/thai2transformers">https://github.com/vistec-AI/thai2transformers</a>).</p>
 <p><strong>Speed Benchmark</strong></p>
 <table class="docutils align-default">
 <thead>
@@ -153,7 +153,7 @@
 </tr>
 </tbody>
 </table>
-<p>Notebook:</p>
+<p>For a comprehensive performance benchmark, the following notebooks are available:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://colab.research.google.com/drive/1ymTVB1UESXAyZlSpjknCb72xpdcZ86Db?usp=sharing">PyThaiNLP basic function and pythainlp.wangchanberta CPU at Google
 Colab</a></p></li>
@@ -164,7 +164,8 @@ Colab</a></p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.NamedEntityRecognition">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.wangchanberta.</span></span><span class="sig-name descname"><span class="pre">NamedEntityRecognition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pythainlp/thainer-corpus-v2-base-model'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#NamedEntityRecognition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.NamedEntityRecognition" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<dd><p>The <cite>NamedEntityRecognition</cite> class is a fundamental component for identifying named entities in Thai text. It allows you to extract entities such as names, locations, and organizations from text data.</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.NamedEntityRecognition.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pythainlp/thainer-corpus-v2-base-model'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#NamedEntityRecognition.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.NamedEntityRecognition.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>This function tags named entities in text in IOB format.</p>
@@ -198,7 +199,8 @@ Powered by wangchanberta from VISTEC-depa             AI Research Institute of T
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.wangchanberta.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouped_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<dd><p>The <cite>ThaiNameTagger</cite> class is designed for tagging Thai names within text. This is essential for tasks such as entity recognition, information extraction, and text classification.</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouped_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>This function tags named entities in text in IOB format.</p>
@@ -240,8 +242,8 @@ Powered by wangchanberta from VISTEC-depa             AI Research Institute of T
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pythainlp.wangchanberta.segment">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.wangchanberta.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.segment" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.wangchanberta.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Subword tokenize. SentencePiece from wangchanberta model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -254,20 +256,13 @@ Powered by wangchanberta from VISTEC-depa             AI Research Institute of T
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
 </dd>
 </dl>
+<p>The <cite>segment</cite> function is a subword tokenization tool that breaks down text into subword units, offering a foundation for further text processing and analysis.</p>
 </dd></dl>
 
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="lowphansirikul-2021" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Lowphansirikul L, Polpanumas C, Jantrakulchai N, Nutanong S.
-WangchanBERTa: Pretraining transformer-based Thai Language Models.
-arXiv:210109635 [cs] [Internet]. 2021 Jan 23 [cited 2021 Feb 27];
-Available from: http://arxiv.org/abs/2101.09635</p>
-</aside>
-</aside>
+<p>[^Lowphansirikul_2021] Lowphansirikul L, Polpanumas C, Jantrakulchai N, Nutanong S. WangchanBERTa: Pretraining transformer-based Thai Language Models. [ArXiv:2101.09635](http://arxiv.org/abs/2101.09635) [Internet]. 2021 Jan 23 [cited 2021 Feb 27].</p>
 </section>
 </section>
 

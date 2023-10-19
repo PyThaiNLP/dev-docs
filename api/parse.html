@@ -59,7 +59,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
@@ -70,7 +70,12 @@
 <li class="toctree-l1"><a class="reference internal" href="khavee.html">pythainlp.khavee</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.parse</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pythainlp.parse.dependency_parsing"><code class="docutils literal notranslate"><span class="pre">dependency_parsing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependency-parsing">dependency_parsing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.parse.dependency_parsing"><code class="docutils literal notranslate"><span class="pre">dependency_parsing()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
@@ -87,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -116,9 +122,11 @@
              
   <section id="pythainlp-parse">
 <h1>pythainlp.parse<a class="headerlink" href="#pythainlp-parse" title="Permalink to this heading"></a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.parse</span></code> is dependency parsing for Thai.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.parse</span></code> module provides dependency parsing for the Thai language. Dependency parsing is a fundamental task in natural language processing that involves identifying the grammatical relationships between words in a sentence, which helps to analyze sentence structure and meaning.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+<section id="dependency-parsing">
+<h3>dependency_parsing<a class="headerlink" href="#dependency-parsing" title="Permalink to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.parse.dependency_parsing">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.parse.</span></span><span class="sig-name descname"><span class="pre">dependency_parsing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'str'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'esupar'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/parse/core.html#dependency_parsing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.parse.dependency_parsing" title="Permalink to this definition"></a></dt>
@@ -189,6 +197,29 @@
 </div>
 </dd></dl>
 
+<p>The <cite>dependency_parsing</cite> function is the core component of the <cite>pythainlp.parse</cite> module. It offers dependency parsing capabilities for the Thai language. Given a Thai sentence as input, this function parses the sentence to identify the grammatical relationships between words, creating a dependency tree that represents the sentence’s structure.</p>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>To use the <cite>dependency_parsing</cite> function for Thai dependency parsing, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Import the <cite>pythainlp.parse</cite> module.</p></li>
+<li><p>Use the <cite>dependency_parsing</cite> function with a Thai sentence as input.</p></li>
+<li><p>The function will return the dependency parsing results, which include information about the grammatical relationships between words.</p></li>
+</ol>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>Here’s a basic example of how to use the <cite>dependency_parsing</cite> function:</p>
+<p><a href="#id10"><span class="problematic" id="id11">``</span></a><a href="#id12"><span class="problematic" id="id13">`</span></a>python
+from pythainlp.parse import dependency_parsing</p>
+<p># Input Thai sentence
+sentence = “พี่น้องชาวบ้านกำลังเลี้ยงสตางค์ในสวน”</p>
+<p># Perform dependency parsing
+parsing_result = dependency_parsing(sentence)</p>
+<p># Print the parsing result
+print(parsing_result)</p>
+</section>
 </section>
 </section>
 

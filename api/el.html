@@ -59,7 +59,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
@@ -69,6 +69,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#pythainlp.el.EntityLinker"><code class="docutils literal notranslate"><span class="pre">EntityLinker</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.el.EntityLinker.__init__"><code class="docutils literal notranslate"><span class="pre">EntityLinker.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.el.EntityLinker.get_el"><code class="docutils literal notranslate"><span class="pre">EntityLinker.get_el()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#entitylinker">EntityLinker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes-and-methods">Attributes and Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -117,7 +124,7 @@
              
   <section id="pythainlp-el">
 <h1>pythainlp.el<a class="headerlink" href="#pythainlp-el" title="Permalink to this heading"></a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.el</span></code> is Thai Entity Linking with PyThaiNLP.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.el</span></code> module is an essential component of Thai Entity Linking within the PyThaiNLP library. Entity Linking is a key natural language processing task that associates mentions in text with corresponding entities in a knowledge base.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.el.EntityLinker">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.el.</span></span><span class="sig-name descname"><span class="pre">EntityLinker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bela'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wikidata'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/el/core.html#EntityLinker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.el.EntityLinker" title="Permalink to this definition"></a></dt>
@@ -169,6 +176,43 @@
 
 </dd></dl>
 
+<section id="entitylinker">
+<h2>EntityLinker<a class="headerlink" href="#entitylinker" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="#pythainlp.el.EntityLinker" title="pythainlp.el.EntityLinker"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityLinker</span></code></a> class is the core component of the <cite>pythainlp.el</cite> module, responsible for Thai Entity Linking. Entity Linking, also known as Named Entity Linking (NEL), plays a critical role in various applications, including question answering, information retrieval, and knowledge graph construction.</p>
+<section id="attributes-and-methods">
+<h3>Attributes and Methods<a class="headerlink" href="#attributes-and-methods" title="Permalink to this heading"></a></h3>
+<p>The <cite>EntityLinker</cite> class offers the following attributes and methods:</p>
+<ul class="simple">
+<li><p><cite>__init__(text, engine=”default”)</cite>
+- The constructor for the <cite>EntityLinker</cite> class. It takes the input <cite>text</cite> and an optional <cite>engine</cite> parameter to specify the entity linking engine. The default engine is used if no specific engine is provided.</p></li>
+<li><p><cite>link()</cite>
+- The <cite>link</cite> method performs entity linking on the input text using the specified engine. It returns a list of entities linked in the text, along with their relevant information.</p></li>
+<li><p><cite>set_engine(engine)</cite>
+- The <cite>set_engine</cite> method allows you to change the entity linking engine during runtime. This provides flexibility in selecting different engines for entity linking based on your specific requirements.</p></li>
+<li><p><cite>get_linked_entities()</cite>
+- The <cite>get_linked_entities</cite> method retrieves a list of linked entities from the last entity linking operation. This is useful for extracting the entities found in the text.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>To use the <cite>EntityLinker</cite> class for entity linking, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Initialize an <cite>EntityLinker</cite> object with the input text and, optionally, specify the engine.</p></li>
+<li><p>Call the <cite>link</cite> method to perform entity linking on the text.</p></li>
+<li><p>Utilize the <cite>get_linked_entities</cite> method to access the linked entities found in the text.</p></li>
+</ol>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>Here’s a simple example of how to use the <cite>EntityLinker</cite> class:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+from pythainlp.el import EntityLinker</p>
+<p>text = “Bangkok is the capital of Thailand.”
+el = EntityLinker(text)
+linked_entities = el.link()
+print(linked_entities)</p>
+</section>
+</section>
 </section>
 
 

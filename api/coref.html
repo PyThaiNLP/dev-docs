@@ -59,15 +59,17 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ancient.html">pythainlp.ancient</a></li>
-<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.coref</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coreference-resolution-function">Coreference Resolution Function</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.coref.coreference_resolution"><code class="docutils literal notranslate"><span class="pre">coreference_resolution()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
@@ -87,6 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_vector.html#dependencies">Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
 
@@ -116,9 +119,14 @@
              
   <section id="pythainlp-coref">
 <h1>pythainlp.coref<a class="headerlink" href="#pythainlp-coref" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The <cite>pythainlp.coref</cite> module is dedicated to Coreference Resolution for the Thai language. Coreference resolution is a crucial task in natural language processing (NLP) that deals with identifying and linking expressions (such as pronouns) in a text to the entities or concepts they refer to. This module provides tools to tackle coreference resolution challenges in the context of the Thai language.</p>
+</section>
+<section id="coreference-resolution-function">
+<h2>Coreference Resolution Function<a class="headerlink" href="#coreference-resolution-function" title="Permalink to this heading"></a></h2>
+<p>The primary component of the <cite>pythainlp.coref</cite> module is the <cite>coreference_resolution</cite> function. This function is designed to analyze text and identify instances of coreference, helping NLP systems understand when different expressions in the text refer to the same entity. Here’s how you can use it:</p>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.coref</span></code> is Coreference Resolution for Thai.</p>
-<section id="modules">
-<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.coref.coreference_resolution">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.coref.</span></span><span class="sig-name descname"><span class="pre">coreference_resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'han-coref-v1.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/coref/core.html#coreference_resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.coref.coreference_resolution" title="Permalink to this definition"></a></dt>
@@ -162,6 +170,21 @@
 </div>
 </dd></dl>
 
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>To use the <cite>coreference_resolution</cite> function effectively, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Import the <cite>coreference_resolution</cite> function from the <cite>pythainlp.coref</cite> module.</p></li>
+<li><p>Pass the Thai text you want to analyze for coreferences as input to the function.</p></li>
+<li><p>The function will process the text and return information about coreference relationships within the text.</p></li>
+</ol>
+<p>Example:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+from pythainlp.coref import coreference_resolution</p>
+<p>text = “นาย A มาจาก กรุงเทพ และเขา มีความรักต่อ บางกิจ ของเขา”
+coreferences = coreference_resolution(text)</p>
+<p>print(coreferences)</p>
 </section>
 </section>
 
