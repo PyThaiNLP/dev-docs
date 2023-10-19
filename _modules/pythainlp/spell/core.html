@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -132,16 +132,16 @@
 
 <div class="viewcode-block" id="spell"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.spell">[docs]</a><span class="k">def</span> <span class="nf">spell</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Provides a list of possible correct spelling of the given word.</span>
+<span class="sd">    Provides a list of possible correct spellings of the given word.</span>
 <span class="sd">    The list of words are from the words in the dictionary</span>
 <span class="sd">    that incurs an edit distance value of 1 or 2.</span>
 <span class="sd">    The result is a list of words sorted by their occurrences</span>
 <span class="sd">    in the spelling dictionary in descending order.</span>
 
-<span class="sd">    :param str word: Word to spell check</span>
+<span class="sd">    :param str word: Word to check spell of</span>
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
-<span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
+<span class="sd">        * *phunspell* - A spell checker utilizing spylls, a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
 <span class="sd">        * *tltk* - wrapper for `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.</span>
 
@@ -200,10 +200,10 @@
 <span class="sd">    Corrects the spelling of the given word by returning</span>
 <span class="sd">    the correctly spelled word.</span>
 
-<span class="sd">    :param str word: word to correct spelling</span>
+<span class="sd">    :param str word: word to correct spelling of</span>
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
-<span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
+<span class="sd">        * *phunspell* - A spell checker utilizing spylls, a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
 <span class="sd">        * *wanchanberta_thai_grammarly* - WanchanBERTa Thai Grammarly</span>
 <span class="sd">    :return: the corrected word</span>
@@ -241,7 +241,7 @@
         <span class="kn">from</span> <span class="nn">pythainlp.spell.wanchanberta_thai_grammarly</span> <span class="kn">import</span> <span class="n">correct</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
 
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">SPELL_CHECKER</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    
+
     <span class="k">else</span><span class="p">:</span>
         <span class="n">text_correct</span> <span class="o">=</span> <span class="n">DEFAULT_SPELL_CHECKER</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
@@ -250,14 +250,14 @@
 
 <div class="viewcode-block" id="spell_sent"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.spell_sent">[docs]</a><span class="k">def</span> <span class="nf">spell_sent</span><span class="p">(</span><span class="n">list_words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Provides a list of possible correct spelling of sentence</span>
+<span class="sd">    Provides a list of possible correct spellings of sentence</span>
 
-<span class="sd">    :param List[str] list_words: list word of sentence</span>
+<span class="sd">    :param List[str] list_words: list of words in sentence</span>
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
-<span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
+<span class="sd">        * *phunspell* - A spell checker utilizing spylls, a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
-<span class="sd">    :return: list of possible correct words</span>
+<span class="sd">    :return: list of possibly correct words</span>
 <span class="sd">    :rtype: List[List[str]]</span>
 
 <span class="sd">    :Example:</span>
@@ -288,15 +288,15 @@
 
 <div class="viewcode-block" id="correct_sent"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.correct_sent">[docs]</a><span class="k">def</span> <span class="nf">correct_sent</span><span class="p">(</span><span class="n">list_words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pn&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Corrects the spelling of the given sentence by returning</span>
+<span class="sd">    Corrects and returns the spelling of the given sentence</span>
 
-<span class="sd">    :param List[str] list_words: list word of sentence</span>
+<span class="sd">    :param List[str] list_words: list of words in sentence</span>
 <span class="sd">    :param str engine:</span>
 <span class="sd">        * *pn* - Peter Norvig&#39;s algorithm [#norvig_spellchecker]_ (default)</span>
-<span class="sd">        * *phunspell* - A spell checker utilizing spylls a port of Hunspell.</span>
+<span class="sd">        * *phunspell* - A spell checker utilizing spylls, a port of Hunspell.</span>
 <span class="sd">        * *symspellpy* - symspellpy is a Python port of SymSpell v6.5.</span>
 <span class="sd">        * *wanchanberta_thai_grammarly* - WanchanBERTa Thai Grammarly</span>
-<span class="sd">    :return: the corrected list sentences of word</span>
+<span class="sd">    :return: the corrected list of words in sentence</span>
 <span class="sd">    :rtype: List[str]</span>
 
 <span class="sd">    :Example:</span>

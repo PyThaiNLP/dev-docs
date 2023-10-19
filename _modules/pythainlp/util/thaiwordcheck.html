@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -173,7 +173,7 @@
     <span class="s2">&quot;ผลิ&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="c1"># Diphthong prefixes (can starts native Thai word)</span>
+<span class="c1"># Diphthong prefixes (can start native Thai word)</span>
 <span class="n">_TH_PREFIX_DIPHTHONG</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;กะ&quot;</span><span class="p">,</span> <span class="s2">&quot;กระ&quot;</span><span class="p">,</span> <span class="s2">&quot;ปะ&quot;</span><span class="p">,</span> <span class="s2">&quot;ประ&quot;</span><span class="p">}</span>
 
 <span class="c1"># Thai consonant filter</span>
@@ -184,7 +184,7 @@
 <div class="viewcode-block" id="is_native_thai"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.is_native_thai">[docs]</a><span class="k">def</span> <span class="nf">is_native_thai</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if a word is an &quot;native Thai word&quot; (Thai: &quot;คำไทยแท้&quot;)</span>
-<span class="sd">    This function based on a simple heuristic algorithm</span>
+<span class="sd">    This function is based on a simple heuristic algorithm</span>
 <span class="sd">    and cannot be entirely reliable.</span>
 
 <span class="sd">    :param str word: word</span>
@@ -223,11 +223,11 @@
     <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_TH_NATIVE_WORDS</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="c1"># If a word contains non-Thai char, it is not a native Thai</span>
+    <span class="c1"># If a word contains non-Thai chars, it is not a native Thai</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">_TH_NON_NATIVE_CHARS</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="c1"># If does not contain any Thai consonants -&gt; cannot be Thai</span>
+    <span class="c1"># If it does not contain any Thai consonants -&gt; it cannot be Thai</span>
     <span class="n">chs</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">_TH_CONSONANTS_PATTERN</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">chs</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -241,7 +241,7 @@
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="c1"># Note: This will not work, as it check the whole word, not the prefix.</span>
-    <span class="c1"># Prefix-sentitive tokenization is required in order to able to check this.</span>
+    <span class="c1"># Prefix-sensitive tokenization is required in order to be able to check this.</span>
     <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_TH_PREFIX_DIPHTHONG</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
 

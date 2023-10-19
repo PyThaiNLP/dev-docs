@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -142,14 +142,14 @@
 <span class="c1"># silenced</span>
 <span class="n">_RE_KARANT</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;จน์|มณ์|ณฑ์|ทร์|ตร์|[ก-ฮ]์|[ก-ฮ][ะ-ู]์&quot;</span><span class="p">)</span>
 
-<span class="c1"># signs, symbols, vowel that has no explicit sound</span>
+<span class="c1"># signs, symbols, vowel that has no explicit sounds</span>
 <span class="c1"># Paiyannoi, Phinthu, Maiyamok, Maitaikhu, Nikhahit</span>
 <span class="n">_RE_SIGN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\u0e2f\u0e3a\u0e46\u0e47\u0e4d]&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="lk82"><a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.lk82">[docs]</a><span class="k">def</span> <span class="nf">lk82</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function converts Thai text into phonetic code with the a</span>
+<span class="sd">    This function converts Thai text into phonetic code with the</span>
 <span class="sd">    Thai soundex algorithm named **LK82** [#lk82]_.</span>
 
 <span class="sd">    :param str text: Thai word</span>
@@ -232,13 +232,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_TRANS2</span><span class="p">))</span>  <span class="c1"># 12.</span>
 
-    <span class="c1"># 13. remove repetitives</span>
+    <span class="c1"># 13. remove repetitions</span>
     <span class="n">res2</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
             <span class="n">res2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
-    <span class="c1"># 14. fill zeros</span>
+    <span class="c1"># 14. fill with zeros</span>
     <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;0000&quot;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span></div>
 </pre></div>
 

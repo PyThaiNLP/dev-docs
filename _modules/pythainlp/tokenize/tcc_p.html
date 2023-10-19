@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,10 +121,10 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">The implementation of tokenizer accorinding to Thai Character Clusters (TCCs)</span>
-<span class="sd">rules purposed by `Theeramunkong et al. 2000. \</span>
+<span class="sd">The implementation of tokenizer according to Thai Character Clusters (TCCs)</span>
+<span class="sd">rules proposed by `Theeramunkong et al. 2000. \</span>
 <span class="sd">    &lt;http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548&gt;`_</span>
-<span class="sd">and improve the rule that used in newmm</span>
+<span class="sd">and improved rules that are used in newmm</span>
 
 <span class="sd">Credits:</span>
 <span class="sd">    * TCC: Jakkrit TeCho</span>
@@ -180,9 +180,9 @@
 
 <div class="viewcode-block" id="tcc"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc_p.tcc">[docs]</a><span class="k">def</span> <span class="nf">tcc</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    TCC generator, generates Thai Character Clusters</span>
+<span class="sd">    TCC generator which generates Thai Character Clusters</span>
 
-<span class="sd">    :param str text: text to be tokenized to character clusters</span>
+<span class="sd">    :param str text: text to be tokenized into character clusters</span>
 <span class="sd">    :return: subwords (character clusters)</span>
 <span class="sd">    :rtype: Iterator[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -205,8 +205,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TCC positions</span>
 
-<span class="sd">    :param str text: text to be tokenized to character clusters</span>
-<span class="sd">    :return: list of the end position of subwords</span>
+<span class="sd">    :param str text: text to be tokenized into character clusters</span>
+<span class="sd">    :return: list of the ending position of subwords</span>
 <span class="sd">    :rtype: set[int]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -225,7 +225,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Subword segmentation</span>
 
-<span class="sd">    :param str text: text to be tokenized to character clusters</span>
+<span class="sd">    :param str text: text to be tokenized into character clusters</span>
 <span class="sd">    :return: list of subwords (character clusters), tokenized from the text</span>
 <span class="sd">    :rtype: list[str]</span>
 

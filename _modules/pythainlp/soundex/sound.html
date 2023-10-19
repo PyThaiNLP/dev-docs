@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,21 +121,20 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">pythainlp.transliterate</span> <span class="kn">import</span> <span class="n">pronunciate</span><span class="p">,</span> <span class="n">transliterate</span>
-<span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
-
 <span class="kn">import</span> <span class="nn">panphon</span>
 <span class="kn">import</span> <span class="nn">panphon.distance</span>
+<span class="kn">from</span> <span class="nn">pythainlp.transliterate</span> <span class="kn">import</span> <span class="n">pronunciate</span><span class="p">,</span> <span class="n">transliterate</span>
+<span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 
 <span class="n">_ft</span> <span class="o">=</span> <span class="n">panphon</span><span class="o">.</span><span class="n">FeatureTable</span><span class="p">()</span>
 <span class="n">_dst</span> <span class="o">=</span> <span class="n">panphon</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">Distance</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">_clean_ipa</span><span class="p">(</span><span class="n">ipa</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Clean IPA by remove tone and remove space between phone</span>
+<span class="sd">    Clean IPA by removing tones and space between phonetic codes</span>
 
 <span class="sd">    :param str ipa: IPA text</span>
-<span class="sd">    :return: IPA that remove tone from the text</span>
+<span class="sd">    :return: IPA with tones removed from the text</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">ipa</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˩˩˦&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˥˩&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˨˩&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˦˥&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˧&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;˧&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; .&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;. &quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -145,7 +144,7 @@
 <span class="sd">    Convert word to IPA</span>
 
 <span class="sd">    :param str word: Thai word</span>
-<span class="sd">    :return: IPA that remove tone from the text</span>
+<span class="sd">    :return: IPA with tones removed from the text</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -166,7 +165,7 @@
 <span class="sd">    Convert audio to vector list</span>
 
 <span class="sd">    :param str word: Thai word</span>
-<span class="sd">    :return: List feature from panphon</span>
+<span class="sd">    :return: List of features from panphon</span>
 <span class="sd">    :rtype: List[List[int]]</span>
 
 <span class="sd">    :Example:</span>
@@ -185,7 +184,7 @@
 
 <span class="sd">    :param str word: Thai word</span>
 <span class="sd">    :param str list_word: Thai word</span>
-<span class="sd">    :return: List of approximation of word (The smaller the value, the closer)</span>
+<span class="sd">    :return: List of approximation of words (The smaller the value, the closer)</span>
 <span class="sd">    :rtype: List[str]</span>
 
 <span class="sd">    :Example:</span>

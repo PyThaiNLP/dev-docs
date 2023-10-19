@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -154,10 +154,10 @@
 
 
 <span class="c1"># Pretrained model paths</span>
-<span class="n">THWIKI_LSTM</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">wgts_fname</span><span class="o">=</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_MODEL_NAME_LSTM</span><span class="p">),</span>
-    <span class="n">itos_fname</span><span class="o">=</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_ITOS_NAME_LSTM</span><span class="p">),</span>
-<span class="p">)</span>
+<span class="n">THWIKI_LSTM</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;wgts_fname&quot;</span><span class="p">:</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_MODEL_NAME_LSTM</span><span class="p">),</span>
+    <span class="s2">&quot;itos_fname&quot;</span><span class="p">:</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_ITOS_NAME_LSTM</span><span class="p">),</span>
+<span class="p">}</span>
 
 <span class="c1"># Preprocessing rules for Thai text</span>
 <span class="c1"># dense features</span>
@@ -224,7 +224,7 @@
 <span class="sd">        [บ้าน&#39;, &#39;xxrep&#39;, &#39;   &#39;, &#39;อยู่&#39;, &#39;xxwrep&#39;, &#39;นาน&#39;, &#39;😂&#39;, &#39;🤣&#39;,</span>
 <span class="sd">        &#39;😃&#39;, &#39;😄&#39;, &#39;😅&#39;, &#39;pythainlp&#39;, &#39;&amp;&#39;]</span>
 
-<span class="sd">        2. Modify pre_rules and post_rules arugments with</span>
+<span class="sd">        2. Modify pre_rules and post_rules arguments with</span>
 <span class="sd">           rules provided in :mod:`pythainlp.ulmfit`:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.ulmfit import (</span>
@@ -260,7 +260,7 @@
 
 <div class="viewcode-block" id="document_vector"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.document_vector">[docs]</a><span class="k">def</span> <span class="nf">document_vector</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">learn</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">agg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function vectorize Thai input text into a 400 dimension vector using</span>
+<span class="sd">    This function vectorizes Thai input text into a 400 dimension vector using</span>
 <span class="sd">    :class:`fastai` language model and data bunch.</span>
 
 <span class="sd">    :meth: `document_vector` get document vector using fastai language model</span>
@@ -269,7 +269,7 @@
 <span class="sd">    :param learn: :class:`fastai` language model learner</span>
 <span class="sd">    :param data: :class:`fastai` data bunch</span>
 <span class="sd">    :param str agg: name of aggregation methods for word embeddings</span>
-<span class="sd">                    The avialable methods are &quot;mean&quot; and &quot;sum&quot;</span>
+<span class="sd">                    The available methods are &quot;mean&quot; and &quot;sum&quot;</span>
 
 <span class="sd">    :return: :class:`numpy.array` of document vector sized 400 based on</span>
 <span class="sd">             the encoder of the model</span>

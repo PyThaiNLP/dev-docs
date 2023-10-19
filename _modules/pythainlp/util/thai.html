@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -151,7 +151,7 @@
 
 <span class="sd">    :param ch: input character</span>
 <span class="sd">    :type ch: str</span>
-<span class="sd">    :return: True if ch is a Thai characttr, otherwise False.</span>
+<span class="sd">    :return: True if ch is a Thai character, otherwise False.</span>
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
@@ -166,19 +166,19 @@
 <span class="sd">        # output: True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ch_val</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">ch_val</span> <span class="o">&gt;=</span> <span class="n">_TH_FIRST_CHAR_ASCII</span> <span class="ow">and</span> <span class="n">ch_val</span> <span class="o">&lt;=</span> <span class="n">_TH_LAST_CHAR_ASCII</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_TH_FIRST_CHAR_ASCII</span> <span class="o">&lt;=</span> <span class="n">ch_val</span> <span class="o">&lt;=</span> <span class="n">_TH_LAST_CHAR_ASCII</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="kc">False</span></div>
 
 
 <div class="viewcode-block" id="isthai"><a class="viewcode-back" href="../../../api/util.html#pythainlp.util.isthai">[docs]</a><span class="k">def</span> <span class="nf">isthai</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if every characters in a string are Thai character.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if every character in a string is a Thai character.</span>
 
 <span class="sd">    :param text: input text</span>
 <span class="sd">    :type text: str</span>
 <span class="sd">    :param ignore_chars: characters to be ignored, defaults to &quot;.&quot;</span>
 <span class="sd">    :type ignore_chars: str, optional</span>
-<span class="sd">    :return: True if every characters in the input string are Thai,</span>
+<span class="sd">    :return: True if every character in the input string is Thai,</span>
 <span class="sd">             otherwise False.</span>
 <span class="sd">    :rtype: bool</span>
 
@@ -214,10 +214,10 @@
 
 <span class="sd">    :param text: input text</span>
 <span class="sd">    :type text: str</span>
-<span class="sd">    :param ignore_chars: characters to be ignored, defaults to whitespaces,\\</span>
-<span class="sd">        digits, and puntuations.</span>
+<span class="sd">    :param ignore_chars: characters to be ignored, defaults to whitespace,\\</span>
+<span class="sd">        digits, and punctuation marks.</span>
 <span class="sd">    :type ignore_chars: str, optional</span>
-<span class="sd">    :return: proportion of Thai characters in the text (percent)</span>
+<span class="sd">    :return: proportion of Thai characters in the text (percentage)</span>
 <span class="sd">    :rtype: float</span>
 
 <span class="sd">    :Example:</span>
@@ -293,12 +293,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Thai tone detector for word.</span>
 
-<span class="sd">    It use pythainlp.transliterate.pronunciate for convert word to\</span>
+<span class="sd">    It uses pythainlp.transliterate.pronunciate for converting word to\</span>
 <span class="sd">        pronunciation.</span>
 
 <span class="sd">    :param str word: Thai word.</span>
-<span class="sd">    :return: Thai pronunciation with tone each syllables.\</span>
-<span class="sd">        (l, m, h, r, f or empty if it cannot detector)</span>
+<span class="sd">    :return: Thai pronunciation with tones in each syllable.\</span>
+<span class="sd">        (l, m, h, r, f or empty if it cannot be detected)</span>
 <span class="sd">    :rtype: Tuple[str, str]</span>
 
 <span class="sd">    :Example:</span>

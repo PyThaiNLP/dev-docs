@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -120,12 +120,11 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">CamembertTokenizer</span><span class="p">,</span>
     <span class="n">pipeline</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;airesearch/wangchanberta-base-att-spm-uncased&quot;</span>
 
@@ -160,9 +159,6 @@
             <span class="n">num_replace_tokens</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
         <span class="n">masked_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_text</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_replace_tokens</span><span class="p">):</span>
-            <span class="n">replace_token</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">sent</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">)))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">masked_text</span> <span class="o">=</span> <span class="n">masked_text</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">MASK_TOKEN</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sent2</span> <span class="o">+=</span> <span class="p">[</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;s&gt; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>

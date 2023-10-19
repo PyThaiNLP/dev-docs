@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Thai-English Transliteratation Dictionary v1.4</span>
+<span class="sd">Thai-English Transliteration Dictionary v1.4</span>
 
 <span class="sd">Wannaphong Phatthiyaphaibun. (2022).</span>
 <span class="sd">wannaphong/thai-english-transliteration-dictionary: v1.4 (v1.4).</span>
@@ -145,9 +145,9 @@
 
 <div class="viewcode-block" id="get_transliteration_dict"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.th_en_translit.get_transliteration_dict">[docs]</a><span class="k">def</span> <span class="nf">get_transliteration_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">defaultdict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get transliteration dictionary for Thai to English.</span>
+<span class="sd">    Get Thai to English transliteration dictionary.</span>
 
-<span class="sd">    The returned dict is defaultdict[str, defaultdict[List[str], List[Optional[bool]]]] format.</span>
+<span class="sd">    The returned dict is in defaultdict[str, defaultdict[List[str], List[Optional[bool]]]] format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="n">_FILE_NAME</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
@@ -156,18 +156,18 @@
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_FILE_NAME</span><span class="si">}</span><span class="s2"> is not found under pythainlp/corpus.&quot;</span>
         <span class="p">)</span>
 
-    <span class="c1"># use list, one word can have multiple transliterations.</span>
+    <span class="c1"># use list, as one word can have multiple transliterations.</span>
     <span class="n">trans_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span>
         <span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="n">TRANSLITERATE_EN</span><span class="p">:</span> <span class="p">[],</span> <span class="n">TRANSLITERATE_FOLLOW_RTSG</span><span class="p">:</span> <span class="p">[]}</span>
     <span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="c1"># assume first row contains column names, skipped.</span>
+            <span class="c1"># assume that the first row contains column names, so skip it.</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]:</span>
                 <span class="n">stripped</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">stripped</span><span class="p">:</span>
                     <span class="n">th</span><span class="p">,</span> <span class="o">*</span><span class="n">en_checked</span> <span class="o">=</span> <span class="n">stripped</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-                    <span class="c1"># replace in-between whitespaces to prevent mismatch results from different tokenizers.</span>
+                    <span class="c1"># replace in-between whitespace to prevent mismatched results from different tokenizers.</span>
                     <span class="c1"># e.g. &quot;บอยแบนด์&quot;</span>
                     <span class="c1"># route 1: &quot;บอยแบนด์&quot; -&gt; [&quot;บอย&quot;, &quot;แบนด์&quot;] -&gt; [&quot;boy&quot;, &quot;band&quot;] -&gt; &quot;boyband&quot;</span>
                     <span class="c1"># route 2: &quot;บอยแบนด์&quot; -&gt; [&quot;&quot;บอยแบนด์&quot;&quot;] -&gt; [&quot;boy band&quot;] -&gt; &quot;boy band&quot;</span>

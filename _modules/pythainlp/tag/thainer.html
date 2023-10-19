@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -133,7 +133,7 @@
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">isthai</span>
 
-<span class="n">_TOKENIZER_ENGINE</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span>  <span class="c1"># should be the same as one used in training data</span>
+<span class="n">_TOKENIZER_ENGINE</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span>  <span class="c1"># should be same as that used in training data</span>
 
 
 <span class="k">def</span> <span class="nf">_is_stopword</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># เช็คว่าเป็นคำฟุ่มเฟือย</span>
@@ -194,10 +194,10 @@
 <div class="viewcode-block" id="ThaiNameTagger"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.thainer.ThaiNameTagger">[docs]</a><span class="k">class</span> <span class="nc">ThaiNameTagger</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Thai named-entity recognizer or Thai NER.</span>
-<span class="sd">    This function support Thai NER 1.4 and 1.5 only.</span>
+<span class="sd">    This function supports Thai NER 1.4 and 1.5 only.</span>
 <span class="sd">    :param str version: Thai NER version.</span>
-<span class="sd">        It&#39;s support Thai NER 1.4 &amp; 1.5.</span>
-<span class="sd">        The defualt value is `1.4</span>
+<span class="sd">        It supports Thai NER 1.4 &amp; 1.5.</span>
+<span class="sd">        The default value is `1.4</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -214,7 +214,7 @@
 
 <span class="sd">        :param str version: Thai NER version.</span>
 <span class="sd">                            It&#39;s support Thai NER 1.4 &amp; 1.5.</span>
-<span class="sd">                            The defualt value is `1.4`</span>
+<span class="sd">                            The default value is `1.4`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">pycrfsuite</span> <span class="kn">import</span> <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span>
 
@@ -231,24 +231,24 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function tags named-entitiy from text in IOB format.</span>
+<span class="sd">        This function tags named-entities in text in IOB format.</span>
 
 <span class="sd">        :param str text: text in Thai to be tagged</span>
 <span class="sd">        :param bool pos: To include POS tags in the results (`True`) or</span>
-<span class="sd">                            exclude (`False`). The defualt value is `True`</span>
-<span class="sd">        :param bool tag: output like html tag.</span>
-<span class="sd">        :return: a list of tuple associated with tokenized word, NER tag,</span>
-<span class="sd">                 POS tag (if the parameter `pos` is specified as `True`),</span>
-<span class="sd">                 and output like html tag (if the parameter `tag` is</span>
+<span class="sd">                            exclude (`False`). The default value is `True`</span>
+<span class="sd">        :param bool tag: output HTML-like tags.</span>
+<span class="sd">        :return: a list of tuples associated with tokenized words, NER tags,</span>
+<span class="sd">                 POS tags (if the parameter `pos` is specified as `True`),</span>
+<span class="sd">                 and output HTML-like tags (if the parameter `tag` is</span>
 <span class="sd">                 specified as `True`).</span>
-<span class="sd">                 Otherwise, return a list of tuple associated with tokenized</span>
-<span class="sd">                 word and NER tag</span>
+<span class="sd">                 Otherwise, return a list of tuples associated with tokenized</span>
+<span class="sd">                 words and NER tags</span>
 <span class="sd">        :rtype: Union[list[tuple[str, str]], list[tuple[str, str, str]]], str</span>
 
 <span class="sd">        :Note:</span>
 <span class="sd">            * For the POS tags to be included in the results, this function</span>
-<span class="sd">              uses :func:`pythainlp.tag.pos_tag` with engine as `perceptron`</span>
-<span class="sd">              and corpus as orchid_ud`.</span>
+<span class="sd">              uses :func:`pythainlp.tag.pos_tag` with engine `perceptron`</span>
+<span class="sd">              and corpus `orchid_ud`.</span>
 
 <span class="sd">        :Example:</span>
 

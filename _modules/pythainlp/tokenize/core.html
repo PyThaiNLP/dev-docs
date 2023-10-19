@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Tokenizer generic functions</span>
+<span class="sd">Generic functions of tokenizers</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
@@ -146,10 +146,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Clause tokenizer. (or Clause segmentation)</span>
 <span class="sd">    Tokenizes running word list into list of clauses (list of strings).</span>
-<span class="sd">    split by CRF trained on Blackboard Treebank.</span>
+<span class="sd">    Split by CRF trained on Blackboard Treebank.</span>
 
-<span class="sd">    :param str doc: word list to be clause</span>
-<span class="sd">    :return: list of claues</span>
+<span class="sd">    :param str doc: word list to be clause tokenized</span>
+<span class="sd">    :return: list of clauses</span>
 <span class="sd">    :rtype: list[list[str]]</span>
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -171,11 +171,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Word detokenizer.</span>
 
-<span class="sd">    This function will detokenize the list word in each sentence to text.</span>
+<span class="sd">    This function will detokenize the list of words in each sentence into text.</span>
 
-<span class="sd">    :param str segments: List sentences with list words.</span>
+<span class="sd">    :param str segments: List of sentences, each with a list of words.</span>
 <span class="sd">    :param str output: the output type (str or list)</span>
-<span class="sd">    :return: the thai text</span>
+<span class="sd">    :return: the Thai text</span>
 <span class="sd">    :rtype: Union[str,List[str]]</span>
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -198,7 +198,7 @@
             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="c1"># previous word</span>
                 <span class="n">p_w</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="c1"># if w is number or other language and not be space</span>
+                <span class="c1"># if w is number or other language and is not space</span>
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span>
                     <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
@@ -206,7 +206,7 @@
                 <span class="p">):</span>
                     <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
                     <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="c1"># if previous word is number or other language and not be space</span>
+                <span class="c1"># if previous word is number or other language and is not space</span>
                 <span class="k">elif</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
                     <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
                     <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
@@ -226,10 +226,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">_text</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_list_all</span><span class="p">:</span>
-            <span class="n">_temp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
-                <span class="n">_temp</span> <span class="o">+=</span> <span class="n">j</span>
-            <span class="n">_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
+            <span class="n">_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
         <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_text</span><span class="p">)</span></div>
 
 
@@ -248,9 +245,9 @@
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :param str engine: name of the tokenizer to be used</span>
 <span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie</span>
-<span class="sd">    :param bool keep_whitespace: True to keep whitespaces, a common mark</span>
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace, a common mark</span>
 <span class="sd">                                 for end of phrase in Thai.</span>
-<span class="sd">                                 Otherwise, whitespaces are omitted.</span>
+<span class="sd">                                 Otherwise, whitespace is omitted.</span>
 <span class="sd">    :param bool join_broken_num: True to rejoin formatted numeric that could be wrongly separated.</span>
 <span class="sd">                                 Otherwise, formatted numeric could be wrongly separated.</span>
 
@@ -270,17 +267,17 @@
 <span class="sd">        * *longest* - dictionary-based, longest matching</span>
 <span class="sd">        * *mm* - &quot;multi-cut&quot;, dictionary-based, maximum matching</span>
 <span class="sd">        * *nercut* - dictionary-based, maximal matching,</span>
-<span class="sd">          constrained with Thai Character Cluster (TCC) boundaries,</span>
+<span class="sd">          constrained by Thai Character Cluster (TCC) boundaries,</span>
 <span class="sd">          combining tokens that are parts of the same named-entity</span>
 <span class="sd">        * *newmm* (default) - &quot;new multi-cut&quot;,</span>
 <span class="sd">          dictionary-based, maximum matching,</span>
-<span class="sd">          constrained with Thai Character Cluster (TCC) boundaries</span>
-<span class="sd">          with improve the TCC rule that used in newmm.</span>
+<span class="sd">          constrained by Thai Character Cluster (TCC) boundaries</span>
+<span class="sd">          with improved TCC rules that are used in newmm.</span>
 <span class="sd">        * *newmm-safe* - newmm, with a mechanism to avoid long</span>
-<span class="sd">          processing time for text with continuous ambiguous breaking points</span>
+<span class="sd">          processing time for text with continuously ambiguous breaking points</span>
 <span class="sd">        * *nlpo3* - wrapper for a word tokenizer in</span>
 <span class="sd">          `nlpO3 &lt;https://github.com/PyThaiNLP/nlpo3&gt;`_.,</span>
-<span class="sd">          newmm adaptation in Rust (2.5x faster)</span>
+<span class="sd">          adaptation of newmm in Rust (2.5x faster)</span>
 <span class="sd">        * *oskut* - wrapper for</span>
 <span class="sd">          `OSKut &lt;https://github.com/mrpeerat/OSKut&gt;`_.,</span>
 <span class="sd">          Out-of-domain StacKed cut for Word Segmentation</span>
@@ -295,7 +292,7 @@
 <span class="sd">          *deepcut*, *longest*, *newmm*, and *newmm-safe* engines.</span>
 <span class="sd">    :Example:</span>
 
-<span class="sd">    Tokenize text with different tokenizer::</span>
+<span class="sd">    Tokenize text with different tokenizers::</span>
 
 <span class="sd">        from pythainlp.tokenize import word_tokenize</span>
 
@@ -307,7 +304,7 @@
 <span class="sd">        word_tokenize(text, engine=&#39;attacut&#39;)</span>
 <span class="sd">        # output: [&#39;โอเค&#39;, &#39;บ่&#39;, &#39;พวกเรา&#39;, &#39;รัก&#39;, &#39;ภาษา&#39;, &#39;บ้านเกิด&#39;]</span>
 
-<span class="sd">    Tokenize text by omiting whitespaces::</span>
+<span class="sd">    Tokenize text with whitespace omitted::</span>
 
 <span class="sd">        text = &quot;วรรณกรรม ภาพวาด และการแสดงงิ้ว &quot;</span>
 
@@ -318,7 +315,7 @@
 <span class="sd">        word_tokenize(text, engine=&quot;newmm&quot;, keep_whitespace=False)</span>
 <span class="sd">        # output: [&#39;วรรณกรรม&#39;, &#39;ภาพวาด&#39;, &#39;และ&#39;, &#39;การแสดง&#39;, &#39;งิ้ว&#39;]</span>
 <span class="sd">        </span>
-<span class="sd">    Join broken formatted numeric (e.g. time, decimals, IP address)::</span>
+<span class="sd">    Join broken formatted numeric (e.g. time, decimals, IP addresses)::</span>
 
 <span class="sd">        text = &quot;เงิน1,234บาท19:32น 127.0.0.1&quot;</span>
 
@@ -331,7 +328,7 @@
 <span class="sd">        # output:</span>
 <span class="sd">        # [&#39;เงิน&#39;, &#39;1,234&#39;, &#39;บาท&#39;, &#39;19:32น&#39;, &#39; &#39;, &#39;127.0.0.1&#39;]</span>
 
-<span class="sd">    Tokenize with default and custom dictionary::</span>
+<span class="sd">    Tokenize with default and custom dictionaries::</span>
 
 <span class="sd">        from pythainlp.corpus.common import thai_words</span>
 <span class="sd">        from pythainlp.tokenize import dict_trie</span>
@@ -359,7 +356,7 @@
 
     <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;newmm&quot;</span> <span class="ow">or</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;onecut&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="s2">&quot;onecut&quot;</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.newmm</span> <span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
@@ -375,7 +372,7 @@
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.longest</span> <span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;mm&quot;</span> <span class="ow">or</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;multi_cut&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;mm&quot;</span><span class="p">,</span> <span class="s2">&quot;multi_cut&quot;</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.multi_cut</span> <span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
@@ -452,21 +449,21 @@
 <span class="sd">    :param str text: the text to be tokenized</span>
 <span class="sd">    :param str engine: choose among *&#39;crfcut&#39;*, *&#39;whitespace&#39;*, \</span>
 <span class="sd">    *&#39;whitespace+newline&#39;*</span>
-<span class="sd">    :return: list of splited sentences</span>
+<span class="sd">    :return: list of split sentences</span>
 <span class="sd">    :rtype: list[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *crfcut* - (default) split by CRF trained on TED dataset</span>
-<span class="sd">        * *thaisum* - The implementation of sentence segmentator from \</span>
+<span class="sd">        * *thaisum* - The implementation of sentence segmenter from \</span>
 <span class="sd">            Nakhun Chumpolsathien, 2020</span>
 <span class="sd">        * *tltk* - split by `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
 <span class="sd">        * *wtp* - split by `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_., \</span>
-<span class="sd">            It support many size of models. You can use ``wtp`` to use mini model, \</span>
+<span class="sd">            It supports many sizes of models. You can use ``wtp`` to use mini model, \</span>
 <span class="sd">            ``wtp-tiny`` to use ``wtp-bert-tiny`` model (default), \</span>
 <span class="sd">            ``wtp-mini`` to use ``wtp-bert-mini`` model, \</span>
 <span class="sd">            ``wtp-base`` to use ``wtp-canine-s-1l`` model, \</span>
 <span class="sd">            and ``wtp-large`` to use ``wtp-canine-s-12l`` model.</span>
-<span class="sd">        * *whitespace+newline* - split by whitespaces and newline.</span>
-<span class="sd">        * *whitespace* - split by whitespaces. Specifiaclly, with \</span>
+<span class="sd">        * *whitespace+newline* - split by whitespace and newline.</span>
+<span class="sd">        * *whitespace* - split by whitespace, specifically with \</span>
 <span class="sd">                         :class:`regex` pattern  ``r&quot; +&quot;``</span>
 <span class="sd">    :Example:</span>
 
@@ -555,23 +552,23 @@
 
 
 <div class="viewcode-block" id="paragraph_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.paragraph_tokenize">[docs]</a><span class="k">def</span> <span class="nf">paragraph_tokenize</span><span class="p">(</span>
-      <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-      <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">,</span> 
-      <span class="n">paragraph_threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-      <span class="n">style</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;newline&#39;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">,</span>
+    <span class="n">paragraph_threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;newline&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Paragraph tokenizer.</span>
 
-<span class="sd">    Tokenizes text into paragraph.</span>
+<span class="sd">    Tokenizes text into paragraphs.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name paragraph tokenizer</span>
-<span class="sd">    :return: list of paragraph</span>
+<span class="sd">    :param str engine: the name of paragraph tokenizer</span>
+<span class="sd">    :return: list of paragraphs</span>
 <span class="sd">    :rtype: List[List[str]]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *wtp* - split by `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_., \</span>
-<span class="sd">            It support many size of models. You can use ``wtp`` to use mini model, \</span>
+<span class="sd">            It supports many sizes of models. You can use ``wtp`` to use mini model, \</span>
 <span class="sd">            ``wtp-tiny`` to use ``wtp-bert-tiny`` model (default), \</span>
 <span class="sd">            ``wtp-mini`` to use ``wtp-bert-mini`` model, \</span>
 <span class="sd">            ``wtp-base`` to use ``wtp-canine-s-1l`` model, \</span>
@@ -612,7 +609,7 @@
                       <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
                       <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
                     <span class="p">)</span>
-        
+
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -627,23 +624,23 @@
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Subword tokenizer. Can be smaller than syllable.</span>
+<span class="sd">    Subword tokenizer for tokenizing text into units smaller than syllables.</span>
 
 <span class="sd">    Tokenizes text into inseparable units of</span>
-<span class="sd">    Thai contiguous characters namely</span>
+<span class="sd">    Thai contiguous characters, namely</span>
 <span class="sd">    `Thai Character Clusters (TCCs) \</span>
 <span class="sd">    &lt;https://www.researchgate.net/publication/2853284_Character_Cluster_Based_Thai_Information_Retrieval&gt;`_</span>
-<span class="sd">    TCCs are the units based on Thai spelling feature that could not be</span>
-<span class="sd">    separated any character further such as   &#39;ก็&#39;, &#39;จะ&#39;, &#39;ไม่&#39;, and &#39;ฝา&#39;.</span>
+<span class="sd">    TCCs are units based on Thai spelling features that could not be</span>
+<span class="sd">    separated any character further such as &#39;ก็&#39;, &#39;จะ&#39;, &#39;ไม่&#39;, and &#39;ฝา&#39;.</span>
 <span class="sd">    If the following units are separated, they could not be spelled out.</span>
-<span class="sd">    This function apply the TCC rules to tokenizes the text into</span>
+<span class="sd">    This function applies TCC rules to tokenize the text into</span>
 <span class="sd">    the smallest units.</span>
 
 <span class="sd">    For example, the word &#39;ขนมชั้น&#39; would be tokenized</span>
 <span class="sd">    into &#39;ข&#39;, &#39;น&#39;, &#39;ม&#39;, and &#39;ชั้น&#39;.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name subword tokenizer</span>
+<span class="sd">    :param str engine: the name of subword tokenizer</span>
 <span class="sd">    :param bool keep_whitespace: keep whitespace</span>
 <span class="sd">    :return: list of subwords</span>
 <span class="sd">    :rtype: List[str]</span>
@@ -656,13 +653,13 @@
 <span class="sd">        * *ssg* - CRF syllable segmenter for Thai. See `ponrawee/ssg \</span>
 <span class="sd">        &lt;https://github.com/ponrawee/ssg&gt;`_.</span>
 <span class="sd">        * *tcc* (default) - Thai Character Cluster (Theeramunkong et al. 2000)</span>
-<span class="sd">        * *tcc_p* - Thai Character Cluster + improve the rule that used in newmm</span>
+<span class="sd">        * *tcc_p* - Thai Character Cluster + improved rules that are used in newmm</span>
 <span class="sd">        * *tltk* - syllable tokenizer from tltk. See `tltk \</span>
 <span class="sd">        &lt;https://pypi.org/project/tltk/&gt;`_.</span>
 <span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model</span>
 <span class="sd">    :Example:</span>
 
-<span class="sd">    Tokenize text into subword based on *tcc*::</span>
+<span class="sd">    Tokenize text into subwords based on *tcc*::</span>
 
 <span class="sd">        from pythainlp.tokenize import subword_tokenize</span>
 
@@ -678,7 +675,7 @@
 <span class="sd">        # output: [&#39;ค&#39;, &#39;วา&#39;, &#39;ม&#39;, &#39;แป&#39;, &#39;ล&#39;, &#39;ก&#39;, &#39;แย&#39;, &#39;ก&#39;,</span>
 <span class="sd">        &#39;และ&#39;, &#39;พัฒ&#39;,&#39;นา&#39;, &#39;กา&#39;, &#39;ร&#39;]</span>
 
-<span class="sd">    Tokenize text into subword based on *etcc*::</span>
+<span class="sd">    Tokenize text into subwords based on *etcc*::</span>
 
 <span class="sd">        text_1 = &quot;ยุคเริ่มแรกของ ราชวงศ์หมิง&quot;</span>
 <span class="sd">        text_2 = &quot;ความแปลกแยกและพัฒนาการ&quot;</span>
@@ -689,7 +686,7 @@
 <span class="sd">        subword_tokenize(text_2, engine=&#39;etcc&#39;)</span>
 <span class="sd">        # output: [&#39;ความแปลกแยกและ&#39;, &#39;พัฒ&#39;, &#39;นาการ&#39;]</span>
 
-<span class="sd">    Tokenize text into subword based on *wangchanberta*::</span>
+<span class="sd">    Tokenize text into subwords based on *wangchanberta*::</span>
 
 <span class="sd">        text_1 = &quot;ยุคเริ่มแรกของ ราชวงศ์หมิง&quot;</span>
 <span class="sd">        text_2 = &quot;ความแปลกแยกและพัฒนาการ&quot;</span>
@@ -733,7 +730,7 @@
 <span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">segments</span> <span class="o">==</span> <span class="p">[]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">segments</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
@@ -751,10 +748,10 @@
 <span class="sd">    Syllable tokenizer</span>
 
 <span class="sd">    Tokenizes text into inseparable units of</span>
-<span class="sd">    Thai syllable.</span>
+<span class="sd">    Thai syllables.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name syllable tokenizer</span>
+<span class="sd">    :param str engine: the name of syllable tokenizer</span>
 <span class="sd">    :param bool keep_whitespace: keep whitespace</span>
 <span class="sd">    :return: list of subwords</span>
 <span class="sd">    :rtype: List[str]</span>
@@ -782,11 +779,11 @@
 
 <div class="viewcode-block" id="Tokenizer"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer">[docs]</a><span class="k">class</span> <span class="nc">Tokenizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Tokenizer class, for a custom tokenizer.</span>
+<span class="sd">    Tokenizer class for a custom tokenizer.</span>
 
 <span class="sd">    This class allows users to pre-define custom dictionary along with</span>
 <span class="sd">    tokenizer and encapsulate them into one single object.</span>
-<span class="sd">    It is an wrapper for both two functions including</span>
+<span class="sd">    It is an wrapper for both functions, that are</span>
 <span class="sd">    :func:`pythainlp.tokenize.word_tokenize`,</span>
 <span class="sd">    and :func:`pythainlp.util.dict_trie`</span>
 
@@ -818,8 +815,8 @@
 <span class="sd">        # [&#39;อะ&#39;, &#39;เฟเซีย&#39;, &#39; &#39;, &#39;(&#39;, &#39;Aphasia&#39;, &#39;)&#39;, &#39; &#39;, &#39;เป็น&#39;, &#39;อาการ&#39;,</span>
 <span class="sd">        #   &#39;ผิดปกติ&#39;, &#39;ของ&#39;, &#39;การ&#39;, &#39;พูด&#39;]</span>
 
-<span class="sd">    Tokenizer object instantiated with a file path containing list of</span>
-<span class="sd">    word separated with *newline* and explicitly set a new tokenizer</span>
+<span class="sd">    Tokenizer object instantiated with a file path containing a list of</span>
+<span class="sd">    words separated with *newline* and explicitly setting a new tokenizer</span>
 <span class="sd">    after initiation::</span>
 
 <span class="sd">        PATH_TO_CUSTOM_DICTIONARY = &#39;./custom_dictionary.txtt&#39;</span>
@@ -830,7 +827,7 @@
 
 <span class="sd">        text = &quot;อะเฟเซีย (Aphasia) เป็นอาการผิดปกติของการพูด&quot;</span>
 
-<span class="sd">        # initate an object from file with `attacut` as tokenizer</span>
+<span class="sd">        # initiate an object from file with `attacut` as tokenizer</span>
 <span class="sd">        _tokenizer = Tokenizer(custom_dict=PATH_TO_CUSTOM_DICTIONARY, \\</span>
 <span class="sd">            engine=&#39;attacut&#39;)</span>
 
@@ -860,9 +857,9 @@
 <span class="sd">        :param str custom_dict: a file path, a list of vocaburaies* to be</span>
 <span class="sd">                    used to create a trie, or an instantiated</span>
 <span class="sd">                    :class:`pythainlp.util.Trie` object.</span>
-<span class="sd">        :param str engine: choose between different options of engine to token</span>
+<span class="sd">        :param str engine: choose between different options of tokenizer engines</span>
 <span class="sd">                           (i.e.  *newmm*, *mm*, *longest*, *deepcut*)</span>
-<span class="sd">        :param bool keep_whitespace: True to keep whitespaces, a common mark</span>
+<span class="sd">        :param bool keep_whitespace: True to keep whitespace, a common mark</span>
 <span class="sd">                                    for end of phrase in Thai</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="kc">None</span>
@@ -901,7 +898,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the tokenizer&#39;s engine.</span>
 
-<span class="sd">        :param str engine: choose between different options of engine to token</span>
+<span class="sd">        :param str engine: choose between different options of tokenizer engines</span>
 <span class="sd">                           (i.e. *newmm*, *mm*, *longest*, *deepcut*)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">engine</span></div></div>

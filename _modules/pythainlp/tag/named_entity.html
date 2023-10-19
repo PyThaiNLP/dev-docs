@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -123,15 +123,14 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Named-entity recognizer</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="NER"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NER">[docs]</a><span class="k">class</span> <span class="nc">NER</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Named-entity recognizer class</span>
+<span class="sd">    Class of named-entity recognizer</span>
 
-<span class="sd">    :param str engine: Named-entity recognizer engine</span>
+<span class="sd">    :param str engine: engine of named-entity recognizer</span>
 <span class="sd">    :param str corpus: corpus</span>
 
 <span class="sd">    **Options for engine**</span>
@@ -142,7 +141,7 @@
 <span class="sd">    **Options for corpus**</span>
 <span class="sd">        * *thainer* - Thai NER corpus (default)</span>
 
-<span class="sd">    **Note**: for tltk engine, It&#39;s support ner model from tltk only.</span>
+<span class="sd">    **Note**: The tltk engine supports NER models from tltk only.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="NER.__init__"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NER.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thainer&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -177,18 +176,18 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function tags named-entitiy from text in IOB format.</span>
+<span class="sd">        This function tags named entities in text in IOB format.</span>
 
 <span class="sd">        :param str text: text in Thai to be tagged</span>
-<span class="sd">        :param bool pos: output with part-of-speech tag.\</span>
-<span class="sd">            (wangchanberta is not support)</span>
-<span class="sd">        :param bool tag: output like html tag.</span>
-<span class="sd">        :return: a list of tuple associated with tokenized word, NER tag,</span>
-<span class="sd">                 POS tag (if the parameter `pos` is specified as `True`),</span>
-<span class="sd">                 and output like html tag (if the parameter `tag` is</span>
+<span class="sd">        :param bool pos: output with part-of-speech tags.\</span>
+<span class="sd">            (wangchanberta is not supported)</span>
+<span class="sd">        :param bool tag: output HTML-like tags.</span>
+<span class="sd">        :return: a list of tuples associated with tokenized words, NER tags,</span>
+<span class="sd">                 POS tags (if the parameter `pos` is specified as `True`),</span>
+<span class="sd">                 and output HTML-like tags (if the parameter `tag` is</span>
 <span class="sd">                 specified as `True`).</span>
-<span class="sd">                 Otherwise, return a list of tuple associated with tokenized</span>
-<span class="sd">                 word and NER tag</span>
+<span class="sd">                 Otherwise, return a list of tuples associated with tokenized</span>
+<span class="sd">                 words and NER tags</span>
 <span class="sd">        :rtype: Union[List[Tuple[str, str]], List[Tuple[str, str, str]], str]</span>
 <span class="sd">        :Example:</span>
 
@@ -213,7 +212,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Nested Named Entity Recognition</span>
 
-<span class="sd">    :param str engine: Nested Named entity recognizer engine</span>
+<span class="sd">    :param str engine: engine of nested named entity recognizer</span>
 <span class="sd">    :param str corpus: corpus</span>
 
 <span class="sd">    **Options for engine**</span>
@@ -230,11 +229,11 @@
 
 <div class="viewcode-block" id="NNER.tag"><a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER.tag">[docs]</a>    <span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function tags nested named-entitiy.</span>
+<span class="sd">        This function tags nested named entities.</span>
 
 <span class="sd">        :param str text: text in Thai to be tagged</span>
 
-<span class="sd">        :return: a list of tuple associated with tokenized word, NNER tag.</span>
+<span class="sd">        :return: a list of tuples associated with tokenized words and NNER tags.</span>
 <span class="sd">        :rtype: Tuple[List[str], List[dict]]</span>
 
 <span class="sd">        :Example:</span>

@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Text summarization and Keyword extraction</span>
+<span class="sd">Text summarization and keyword extraction</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
@@ -144,14 +144,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function summarizes text based on frequency of words.</span>
 
-<span class="sd">    Under the hood, this function first tokenize sentence from the given</span>
+<span class="sd">    Under the hood, this function first tokenizes sentences from the given</span>
 <span class="sd">    text with :func:`pythainlp.tokenize.sent_tokenize`.</span>
-<span class="sd">    Then, computes frequencies of tokenized words</span>
+<span class="sd">    Then, it computes frequencies of tokenized words</span>
 <span class="sd">    (with :func:`pythainlp.tokenize.word_tokenize`) in all sentences</span>
-<span class="sd">    and normalized with maximum word frequency. The words with normalized</span>
-<span class="sd">    frequncy that are less than 0.1 or greater than 0.9 will be</span>
+<span class="sd">    and normalizes them with maximum word frequency. The words with normalized</span>
+<span class="sd">    frequencies that are less than 0.1 or greater than 0.9 will be</span>
 <span class="sd">    filtered out from frequency dictionary. Finally, it picks *n* sentences</span>
-<span class="sd">    with highest sum of normalized frequency from all words</span>
+<span class="sd">    with highest sum of normalized frequency from all words which are</span>
 <span class="sd">    in the sentence and also appear in the frequency dictionary.</span>
 
 <span class="sd">    :param str text: text to be summarized</span>

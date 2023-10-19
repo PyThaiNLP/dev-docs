@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Thai unigram word frequency from OSCAR Corpus (icu word tokenize)</span>
+<span class="sd">Thai unigram word frequency from OSCAR Corpus (words tokenized using ICU)</span>
 
 <span class="sd">Credit: Korakot Chaovavanich</span>
 <span class="sd">https://web.facebook.com/groups/colab.thailand/permalink/1524070061101680/</span>
@@ -139,12 +139,12 @@
 
 <div class="viewcode-block" id="word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.oscar.word_freqs">[docs]</a><span class="k">def</span> <span class="nf">word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get word frequency from OSCAR Corpus (icu word tokenize)</span>
+<span class="sd">    Get word frequency from OSCAR Corpus (words tokenized using ICU)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">word_freqs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
         <span class="k">del</span> <span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">_data</span><span class="p">:</span>
             <span class="n">_temp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
@@ -159,12 +159,12 @@
 
 <div class="viewcode-block" id="unigram_word_freqs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.oscar.unigram_word_freqs">[docs]</a><span class="k">def</span> <span class="nf">unigram_word_freqs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">defaultdict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get unigram word frequency from OSCAR Corpus (icu word tokenize)</span>
+<span class="sd">    Get unigram word frequency from OSCAR Corpus (words tokenized using ICU)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_FILENAME</span><span class="p">)</span>
     <span class="n">_word_freqs</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-        <span class="n">_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
         <span class="k">del</span> <span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_data</span><span class="p">:</span>
             <span class="n">_temp</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>

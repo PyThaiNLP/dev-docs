@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -154,8 +154,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load model</span>
 <span class="sd">        </span>
-<span class="sd">        :param str model_path: Model path</span>
-<span class="sd">        :param bool return_dict: return_dict</span>
+<span class="sd">        :param str model_path: model path</span>
+<span class="sd">        :param bool return_dict: return dict</span>
 <span class="sd">        :param bool load_in_8bit: load model in 8bit</span>
 <span class="sd">        :param str device: device (cpu, cuda or other)</span>
 <span class="sd">        :param torch_dtype torch_dtype: torch_dtype</span>
@@ -179,7 +179,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;idx&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_exclude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_exclude</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">is_exclude</span><span class="o">==</span><span class="kc">True</span><span class="p">]</span><span class="o">.</span><span class="n">idx</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">is_exclude</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">]</span><span class="o">.</span><span class="n">idx</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
 <div class="viewcode-block" id="WangChanGLM.gen_instruct"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.wangchanglm.WangChanGLM.gen_instruct">[docs]</a>    <span class="k">def</span> <span class="nf">gen_instruct</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
@@ -196,15 +196,15 @@
 <span class="sd">        Generate Instruct</span>
 <span class="sd">        </span>
 <span class="sd">        :param str text: text</span>
-<span class="sd">        :param int max_new_tokens: max new tokens</span>
-<span class="sd">        :param float top_p: Top p</span>
+<span class="sd">        :param int max_new_tokens: maximum number of new tokens</span>
+<span class="sd">        :param float top_p: top p</span>
 <span class="sd">        :param float temperature: temperature</span>
-<span class="sd">        :param int top_k: Top k</span>
-<span class="sd">        :param int no_repeat_ngram_size: no repeat ngram size</span>
+<span class="sd">        :param int top_k: top k</span>
+<span class="sd">        :param int no_repeat_ngram_size: do not repeat ngram size</span>
 <span class="sd">        :param float typical_p: typical p</span>
 <span class="sd">        :param bool thai_only: Thai only</span>
 <span class="sd">        :param bool skip_special_tokens: skip special tokens</span>
-<span class="sd">        :return: the answer from Instruct.</span>
+<span class="sd">        :return: the answer from Instruct</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
@@ -251,15 +251,15 @@
 <span class="sd">        </span>
 <span class="sd">        :param str instruct: Instruct</span>
 <span class="sd">        :param str context: context</span>
-<span class="sd">        :param int max_new_tokens: max new tokens</span>
-<span class="sd">        :param float top_p: Top p</span>
+<span class="sd">        :param int max_new_tokens: maximum number of new tokens</span>
+<span class="sd">        :param float top_p: top p</span>
 <span class="sd">        :param float temperature: temperature</span>
-<span class="sd">        :param int top_k: Top k</span>
-<span class="sd">        :param int no_repeat_ngram_size: no repeat ngram size</span>
+<span class="sd">        :param int top_k: top k</span>
+<span class="sd">        :param int no_repeat_ngram_size: do not repeat ngram size</span>
 <span class="sd">        :param float typical_p: typical p</span>
 <span class="sd">        :param bool thai_only: Thai only</span>
 <span class="sd">        :param bool skip_special_tokens: skip special tokens</span>
-<span class="sd">        :return: the answer from Instruct.</span>
+<span class="sd">        :return: the answer from Instruct</span>
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
@@ -282,7 +282,7 @@
 <span class="sd">                # และเครื่องดื่มแอลกอฮอล์</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">context</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">context</span><span class="o">==</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">context</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
             <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_no_input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span>
                 <span class="p">{</span><span class="s1">&#39;instruction&#39;</span><span class="p">:</span> <span class="n">instruct</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
             <span class="p">)</span>

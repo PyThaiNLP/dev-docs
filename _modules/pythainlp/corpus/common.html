@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Common list of words.</span>
+<span class="sd">Common lists of words.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
@@ -147,7 +147,7 @@
 <span class="n">_THAI_COUNTRIES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;countries_th.txt&quot;</span>
 
 <span class="n">_THAI_THAILAND_PROVINCES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;thailand_provinces_th.csv&quot;</span>
 
 <span class="n">_THAI_SYLLABLES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -183,7 +183,7 @@
 <span class="sd">    \n(See: `dev/pythainlp/corpus/countries_th.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/countries_th.txt&gt;`_)</span>
 
-<span class="sd">    :return: :class:`frozenset` containing countries names in Thai</span>
+<span class="sd">    :return: :class:`frozenset` containing country names in Thai</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_COUNTRIES</span>
@@ -213,12 +213,12 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_THAILAND_PROVINCES</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span><span class="p">:</span>
         <span class="n">provs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="n">prov_details</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">prov_details</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">get_corpus</span><span class="p">(</span><span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span><span class="p">,</span> <span class="n">as_is</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
-            <span class="n">prov</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">prov</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">prov</span><span class="p">[</span><span class="s2">&quot;name_th&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">prov</span><span class="p">[</span><span class="s2">&quot;abbr_th&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">prov</span><span class="p">[</span><span class="s2">&quot;name_en&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -242,9 +242,9 @@
 <span class="sd">    &quot;โมน&quot;, &quot;โม่ง&quot;, &quot;กา&quot;, &quot;ก่า&quot;, and, &quot;ก้า&quot;.</span>
 <span class="sd">    \n(See: `dev/pythainlp/corpus/syllables_th.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/syllables_th.txt&gt;`_)</span>
-<span class="sd">    We using thai syllables list from `KUCut &lt;https://github.com/Thanabhat/KUCut&gt;`_.</span>
+<span class="sd">    We use the Thai syllable list from `KUCut &lt;https://github.com/Thanabhat/KUCut&gt;`_.</span>
 
-<span class="sd">    :return: :class:`frozenset` containing syllables in Thai language.</span>
+<span class="sd">    :return: :class:`frozenset` containing syllables in the Thai language.</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_SYLLABLES</span>
@@ -260,7 +260,7 @@
 <span class="sd">    and &quot;พิษภัย&quot;. \n(See: `dev/pythainlp/corpus/words_th.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/words_th.txt&gt;`_)</span>
 
-<span class="sd">    :return: :class:`frozenset` containing words in Thai language.</span>
+<span class="sd">    :return: :class:`frozenset` containing words in the Thai language.</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_WORDS</span>
@@ -276,7 +276,7 @@
 <span class="sd">    \n(See: `dev/pythainlp/corpus/thai_orst_words.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/thai_orst_words&gt;`_)</span>
 
-<span class="sd">    :return: :class:`frozenset` containing words in Thai language.</span>
+<span class="sd">    :return: :class:`frozenset` containing words in the Thai language.</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_ORST_WORDS</span>
@@ -291,7 +291,7 @@
 <span class="sd">    Return a frozenset of Thai stopwords such as &quot;มี&quot;, &quot;ไป&quot;, &quot;ไง&quot;, &quot;ขณะ&quot;,</span>
 <span class="sd">    &quot;การ&quot;, and &quot;ประการหนึ่ง&quot;. \n(See: `dev/pythainlp/corpus/stopwords_th.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/stopwords_th.txt&gt;`_)</span>
-<span class="sd">    We using stopword lists by thesis&#39;s เพ็ญศิริ ลี้ตระกูล.</span>
+<span class="sd">    We use stopword lists by thesis&#39;s เพ็ญศิริ ลี้ตระกูล.</span>
 
 <span class="sd">    :See Also:</span>
 
@@ -315,7 +315,7 @@
 <span class="sd">    \n(See: `dev/pythainlp/corpus/negations_th.txt\</span>
 <span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/negations_th.txt&gt;`_)</span>
 
-<span class="sd">    :return: :class:`frozenset` containing negations in Thai language.</span>
+<span class="sd">    :return: :class:`frozenset` containing negations in the Thai language.</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_NEGATIONS</span>
@@ -379,11 +379,11 @@
 <span class="sd">    \n(See: `thai_dict\</span>
 <span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_)</span>
 
-<span class="sd">    :return: Thai word with part-of-speech type and definition</span>
+<span class="sd">    :return: Thai words with part-of-speech type and definition</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_DICT</span>
-    <span class="k">if</span> <span class="n">_THAI_DICT</span> <span class="o">==</span> <span class="p">{}:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_DICT</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">csv</span>
         <span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span> <span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_dict&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
@@ -401,11 +401,11 @@
 <span class="sd">    \n(See: `thai_dict\</span>
 <span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_)</span>
 
-<span class="sd">    :return: Thai word with part-of-speech type and definition</span>
+<span class="sd">    :return: Thai words with part-of-speech type and definition</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_WSD_DICT</span>
-    <span class="k">if</span> <span class="n">_THAI_WSD_DICT</span> <span class="o">==</span> <span class="p">{}:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_WSD_DICT</span><span class="p">:</span>
         <span class="n">_thai_wsd</span> <span class="o">=</span> <span class="n">thai_dict</span><span class="p">()</span>
         <span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
@@ -427,11 +427,11 @@
 <span class="sd">    \n(See: `thai_synonym\</span>
 <span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_synonym.html&gt;`_)</span>
 
-<span class="sd">    :return: Thai word with part-of-speech type and synonym</span>
+<span class="sd">    :return: Thai words with part-of-speech type and synonym</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_SYNONYM</span>
-    <span class="k">if</span> <span class="n">_THAI_SYNONYM</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_THAI_SYNONYM</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">csv</span>
         <span class="n">_THAI_SYNONYM</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span> <span class="s2">&quot;pos&quot;</span><span class="p">:[],</span> <span class="s2">&quot;synonym&quot;</span><span class="p">:[]}</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_synonym&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>

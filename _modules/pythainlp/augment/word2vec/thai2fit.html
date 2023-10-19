@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -120,10 +120,10 @@
 <span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">pythainlp.augment.word2vec.core</span> <span class="kn">import</span> <span class="n">Word2VecAug</span>
 <span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus_path</span>
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">THAI2FIT_TOKENIZER</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
 
 <div class="viewcode-block" id="Thai2fitAug"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug">[docs]</a><span class="k">class</span> <span class="nc">Thai2fitAug</span><span class="p">:</span>
@@ -140,14 +140,14 @@
 
 <div class="viewcode-block" id="Thai2fitAug.tokenizer"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug.tokenizer">[docs]</a>    <span class="k">def</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param str text: thai text</span>
+<span class="sd">        :param str text: Thai text</span>
 <span class="sd">        :rtype: List[str]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">THAI2FIT_TOKENIZER</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Thai2fitAug.load_w2v"><a class="viewcode-back" href="../../../../api/augment.html#pythainlp.augment.word2vec.Thai2fitAug.load_w2v">[docs]</a>    <span class="k">def</span> <span class="nf">load_w2v</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Load thai2fit word2vec model</span>
+<span class="sd">        Load Thai2Fit&#39;s word2vec model</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">aug</span> <span class="o">=</span> <span class="n">Word2VecAug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thai2fit_wv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span></div>
 
@@ -157,11 +157,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Text Augment using word2vec from Thai2Fit</span>
 
-<span class="sd">        :param str sentence: thai sentence</span>
-<span class="sd">        :param int n_sent: number sentence</span>
-<span class="sd">        :param float p: Probability of word</span>
+<span class="sd">        :param str sentence: Thai sentence</span>
+<span class="sd">        :param int n_sent: number of sentence</span>
+<span class="sd">        :param float p: probability of word</span>
 
-<span class="sd">        :return: list of text augment</span>
+<span class="sd">        :return: list of text augmented</span>
 <span class="sd">        :rtype: List[Tuple[str]]</span>
 
 <span class="sd">        :Example:</span>

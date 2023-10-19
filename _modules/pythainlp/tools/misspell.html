@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -191,7 +191,7 @@
     <span class="n">valid_neighbours</span> <span class="o">=</span> <span class="n">find_neighbour_locations</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
 
     <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">printing_locations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;▐&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;​▐&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+    <span class="n">printing_locations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;▐&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;▐&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
 
     <span class="k">for</span> <span class="n">language_ix</span><span class="p">,</span> <span class="n">is_shift</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">valid_neighbours</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -212,7 +212,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">printing_locations</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">char</span>
-        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something wrong with: &quot;</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
@@ -223,13 +223,13 @@
 
 <div class="viewcode-block" id="misspell"><a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.misspell.misspell">[docs]</a><span class="k">def</span> <span class="nf">misspell</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Simulate some mispellings for the input sentence.</span>
-<span class="sd">    The number of mispelled locations is governed by ratio.</span>
+<span class="sd">    Simulate some misspellings of the input sentence.</span>
+<span class="sd">    The number of misspelled locations is governed by ratio.</span>
 
-<span class="sd">    :params str sentence: sentence to be mispelled</span>
+<span class="sd">    :params str sentence: sentence to be misspelled</span>
 <span class="sd">    :params float ratio: number of misspells per 100 chars. Defaults to 0.5.</span>
 
-<span class="sd">    :return: sentence containing some misspelled</span>
+<span class="sd">    :return: sentence containing some misspelled words</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>

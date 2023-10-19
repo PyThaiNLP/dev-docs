@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -151,16 +151,15 @@
 <span class="c1">#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#    See the License for the specific language governing permissions and</span>
 <span class="c1">#    limitations under the License.</span>
-<span class="c1">#     { </span>
+<span class="c1">#     {</span>
 <span class="c1">#      &quot;0 (current anchor)|+1 (the character on the right from anchor)|A (character)&quot; : 1</span>
 <span class="c1">#     }</span>
-        
+
 <div class="viewcode-block" id="Featurizer.__init__"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sequence_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span> <span class="o">=</span> <span class="n">delimiter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">sequence_size</span>
-        <span class="k">pass</span></div>
-    
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">sequence_size</span></div>
+
 <div class="viewcode-block" id="Featurizer.pad"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.pad">[docs]</a>    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">padder</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">padder</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">+</span> <span class="n">sentence</span> <span class="o">+</span> <span class="n">padder</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span></div>
 
@@ -204,7 +203,7 @@
                         <span class="n">features</span><span class="p">[</span><span class="n">left_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">left_key</span><span class="p">)</span>
-                
+
                 <span class="n">abs_index_right</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># สมมุติคือตำแหน่งที่ 0 จะได้ 0, 1, 2, 3, 4 (radius = 5)</span>
                 <span class="n">char_right</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">abs_index_right</span><span class="p">]</span>
                 <span class="k">while</span> <span class="n">char_right</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="p">:</span>
@@ -218,9 +217,9 @@
                         <span class="n">features</span><span class="p">[</span><span class="n">right_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">right_key</span><span class="p">)</span>
-                
+
                 <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-                
+
             <span class="n">chars</span> <span class="o">=</span> <span class="n">chars_left</span> <span class="o">+</span> <span class="n">chars_right</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">ngram</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">]</span>
@@ -230,10 +229,10 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ngram_key</span><span class="p">)</span>
             <span class="n">all_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span><span class="p">):</span>
-              <span class="n">cut</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cut</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span>
+                <span class="n">cut</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cut</span><span class="p">)</span>
             <span class="n">all_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cut</span><span class="p">)</span>
-            
+
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">all_features</span><span class="p">,</span>
             <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="n">all_labels</span>

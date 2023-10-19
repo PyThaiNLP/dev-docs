@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -128,13 +128,13 @@
     <span class="s2">&quot;postype2wordnet&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
-<span class="kn">from</span> <span class="nn">pythainlp.tag</span> <span class="kn">import</span> <span class="n">pos_tag</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
+<span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">pythainlp.tag</span> <span class="kn">import</span> <span class="n">pos_tag</span>
 
 
 <span class="n">orchid</span> <span class="o">=</span> <span class="p">{</span>
@@ -220,9 +220,9 @@
 
 <span class="k">def</span> <span class="nf">postype2wordnet</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    convert part-of-speech type to wordnet type</span>
+<span class="sd">    Convert part-of-speech type to wordnet type</span>
 
-<span class="sd">    :param str pos: pos type</span>
+<span class="sd">    :param str pos: POS type</span>
 <span class="sd">    :param str corpus: part-of-speech corpus</span>
 
 <span class="sd">    **Options for corpus**</span>
@@ -245,11 +245,11 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">postag_corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find synonyms from wordnet</span>
+<span class="sd">        Find synonyms using wordnet</span>
 
 <span class="sd">        :param str word: word</span>
 <span class="sd">        :param str pos: part-of-speech type</span>
-<span class="sd">        :param str postag_corpus: postag corpus name</span>
+<span class="sd">        :param str postag_corpus: name of POS tag corpus</span>
 <span class="sd">        :return: list of synonyms</span>
 <span class="sd">        :rtype: List[str]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -283,11 +283,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Text Augment using wordnet</span>
 
-<span class="sd">        :param str sentence: thai sentence</span>
-<span class="sd">        :param object tokenize: function for tokenize word</span>
-<span class="sd">        :param int max_syn_sent: max number for synonyms sentence</span>
-<span class="sd">        :param bool postag: on part-of-speech</span>
-<span class="sd">        :param str postag_corpus: postag corpus name</span>
+<span class="sd">        :param str sentence: Thai sentence</span>
+<span class="sd">        :param object tokenize: function for tokenizing words</span>
+<span class="sd">        :param int max_syn_sent: maximum number of synonymous sentences</span>
+<span class="sd">        :param bool postag: use part-of-speech</span>
+<span class="sd">        :param str postag_corpus: name of POS tag corpus</span>
 
 <span class="sd">        :return: list of synonyms</span>
 <span class="sd">        :rtype: List[Tuple[str]]</span>
@@ -314,7 +314,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">list_pos</span> <span class="o">=</span> <span class="n">pos_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">postag_corpus</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_pos</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_synonyms</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">postag_corpus</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">list_synonym</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">word</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">list_synonym</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">)</span>
@@ -322,7 +322,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_words</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_synonyms</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">list_synonym</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">word</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">list_synonym</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">)</span>

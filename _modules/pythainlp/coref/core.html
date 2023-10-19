@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -128,10 +128,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Coreference Resolution</span>
 
-<span class="sd">    :param List[str] texts: list texts to do coreference resolution</span>
+<span class="sd">    :param List[str] texts: list of texts to apply coreference resolution to</span>
 <span class="sd">    :param str model_name: coreference resolution model</span>
-<span class="sd">    :param str device: device for running coreference resolution model (cpu, cuda, and other)</span>
-<span class="sd">    :return: List txets of coreference resolution</span>
+<span class="sd">    :param str device: device for running coreference resolution model on (cpu, cuda, and others)</span>
+<span class="sd">    :return: List of texts with coreference resolution</span>
 <span class="sd">    :rtype: List[dict]</span>
 
 <span class="sd">    :Options for model_name:</span>
@@ -157,7 +157,7 @@
     <span class="k">global</span> <span class="n">model</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">texts</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">model_name</span><span class="o">==</span><span class="s2">&quot;han-coref-v1.0&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">model_name</span><span class="o">==</span><span class="s2">&quot;han-coref-v1.0&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.coref.han_coref</span> <span class="kn">import</span> <span class="n">HanCoref</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">HanCoref</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span></div>

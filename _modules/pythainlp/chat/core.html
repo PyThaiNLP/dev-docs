@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -126,12 +126,12 @@
 <div class="viewcode-block" id="ChatBotModel"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel">[docs]</a><span class="k">class</span> <span class="nc">ChatBotModel</span><span class="p">:</span>
 <div class="viewcode-block" id="ChatBotModel.__init__"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Chat with AI generation</span>
+<span class="sd">        Chat using AI generation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span></div>
 <div class="viewcode-block" id="ChatBotModel.reset_chat"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.reset_chat">[docs]</a>    <span class="k">def</span> <span class="nf">reset_chat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reset chat by clean history</span>
+<span class="sd">        Reset chat by cleaning history</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span></div>
 <div class="viewcode-block" id="ChatBotModel.load_model"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.load_model">[docs]</a>    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span>
@@ -173,8 +173,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Chatbot</span>
 <span class="sd">        </span>
-<span class="sd">        :param str text: text for asking chatbot.</span>
-<span class="sd">        :return: the answer from chatbot.</span>
+<span class="sd">        :param str text: text for asking chatbot with.</span>
+<span class="sd">        :return: answer from chatbot.</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        :Example:</span>
 <span class="sd">        ::</span>
@@ -192,7 +192,7 @@
 <span class="sd">                # output: [(&#39;สวัสดี&#39;, &#39;ยินดีที่ได้รู้จัก&#39;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_temp</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">!=</span><span class="p">[]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">h</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
                 <span class="n">_temp</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_chatbot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;human&quot;</span><span class="p">:</span><span class="n">h</span><span class="p">,</span><span class="s2">&quot;bot&quot;</span><span class="p">:</span><span class="n">b</span><span class="p">})</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">stop_token</span>
         <span class="n">_temp</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_chatbot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;human&quot;</span><span class="p">:</span><span class="n">text</span><span class="p">,</span><span class="s2">&quot;bot&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">})</span>

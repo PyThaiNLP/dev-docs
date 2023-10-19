@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,7 +121,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Spell out time to Thai words.</span>
+<span class="sd">Spell out time as Thai words.</span>
 
 <span class="sd">Convert time string or time object to Thai words.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -246,11 +246,11 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time format not supported: </span><span class="si">{</span><span class="n">fmt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">&quot;m&quot;</span> <span class="ow">or</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span>
             <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span>
             <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;6h&quot;</span> <span class="ow">or</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;m6h&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;6h&quot;</span><span class="p">,</span> <span class="s2">&quot;m6h&quot;</span><span class="p">))</span>
         <span class="p">):</span>
             <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;ครึ่ง&quot;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -259,7 +259,7 @@
                 <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;วินาที&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;6h&quot;</span> <span class="ow">or</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;m6h&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;6h&quot;</span><span class="p">,</span> <span class="s2">&quot;m6h&quot;</span><span class="p">)):</span>
                 <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;ครึ่ง&quot;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;นาที&quot;</span>
@@ -275,7 +275,7 @@
     <span class="n">precision</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Spell out time to Thai words.</span>
+<span class="sd">    Spell out time as Thai words.</span>
 
 <span class="sd">    :param str time_data: time input, can be a datetime.time object \</span>
 <span class="sd">        or a datetime.datetime object \</span>
@@ -284,11 +284,11 @@
 <span class="sd">        * *24h* - 24-hour clock (default)</span>
 <span class="sd">        * *6h* - 6-hour clock</span>
 <span class="sd">        * *m6h* - Modified 6-hour clock</span>
-<span class="sd">    :param str precision: precision of the spell out</span>
-<span class="sd">        * *m* - always spell out to minute level</span>
-<span class="sd">        * *s* - always spell out to second level</span>
+<span class="sd">    :param str precision: precision of the spell out time</span>
+<span class="sd">        * *m* - always spell out at minute level</span>
+<span class="sd">        * *s* - always spell out at second level</span>
 <span class="sd">        * None - spell out only non-zero parts</span>
-<span class="sd">    :return: Time spell out in Thai words</span>
+<span class="sd">    :return: Time spelled out as Thai words</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -320,12 +320,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_time</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)):</span>
         <span class="n">_time</span> <span class="o">=</span> <span class="n">time_data</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Time data must be a datetime.time object, &quot;</span>
+                <span class="s2">&quot;Time input must be a datetime.time object, &quot;</span>
                 <span class="s2">&quot;a datetime.datetime object, or a string.&quot;</span>
             <span class="p">)</span>
 
@@ -355,7 +355,7 @@
 <span class="sd">    Convert Thai time in words into time (H:M).</span>
 
 <span class="sd">    :param str text: Thai time in words</span>
-<span class="sd">    :param bool padding: Zero padding the hour if True</span>
+<span class="sd">    :param bool padding: Zero pad the hour if True</span>
 
 <span class="sd">    :return: time string</span>
 <span class="sd">    :rtype: str</span>

@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -153,10 +153,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.ThaiTokenizer.tokenizer">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/tokenizer.html#ThaiTokenizer.tokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.ThaiTokenizer.tokenizer" title="Permalink to this definition"></a></dt>
-<dd><p>This function tokenizes text with <em>newmm</em> engine and the dictionary
+<dd><p>This function tokenizes text using <em>newmm</em> engine and the dictionary
 specifically for <cite>ulmfit</cite> related functions
-(see: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/words_th_thai2fit_201810.txt">Dictonary file (.txt)</a>).
-:meth: tokenize text with a frozen newmm engine
+(see: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/words_th_thai2fit_201810.txt">Dictionary file (.txt)</a>).
+:meth: tokenize text using a frozen newmm engine
 :param str text: text to tokenize
 :return: tokenized text
 :rtype: list[str]</p>
@@ -164,7 +164,7 @@ specifically for <cite>ulmfit</cite> related functions
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Using <a class="reference internal" href="#pythainlp.ulmfit.ThaiTokenizer.tokenizer" title="pythainlp.ulmfit.ThaiTokenizer.tokenizer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.ulmfit.ThaiTokenizer.tokenizer()</span></code></a> is
 similar to <a class="reference internal" href="tokenize.html#pythainlp.tokenize.word_tokenize" title="pythainlp.tokenize.word_tokenize"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code></a>
-with <em>ulmfit</em> engine.</p>
+using <em>ulmfit</em> engine.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.ulmfit</span> <span class="kn">import</span> <span class="n">ThaiTokenizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="gp">&gt;&gt;&gt;</span>
@@ -192,7 +192,7 @@ with <em>ulmfit</em> engine.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.document_vector">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">document_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/ulmfit/core.html#document_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.document_vector" title="Permalink to this definition"></a></dt>
-<dd><p>This function vectorize Thai input text into a 400 dimension vector using
+<dd><p>This function vectorizes Thai input text into a 400 dimension vector using
 <code class="xref py py-class docutils literal notranslate"><span class="pre">fastai</span></code> language model and data bunch.</p>
 <dl class="field-list">
 <dt class="field-odd">Meth<span class="colon">:</span></dt>
@@ -205,7 +205,7 @@ and data bunch</p>
 <li><p><strong>learn</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">fastai</span></code> language model learner</p></li>
 <li><p><strong>data</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">fastai</span></code> data bunch</p></li>
 <li><p><strong>agg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of aggregation methods for word embeddings
-The avialable methods are “mean” and “sum”</p></li>
+The available methods are “mean” and “sum”</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -246,13 +246,13 @@ usage, <a class="reference external" href="https://github.com/cstorm125/thai2fit
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.fix_html">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">fix_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/preprocess.html#fix_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.fix_html" title="Permalink to this definition"></a></dt>
-<dd><p>List of replacements from html strings in <cite>test</cite>. (code from <cite>fastai</cite>)</p>
+<dd><p>Replace HTML strings in <cite>test</cite>. (codes from <cite>fastai</cite>)</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – text to replace html string</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – text to replace HTML strings in</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>text where html strings are replaced</p>
+<dd class="field-even"><p>text with HTML strings replaced</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -367,7 +367,7 @@ and <a class="reference internal" href="#pythainlp.ulmfit.remove_space" title="p
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Modify pre_rules and post_rules arugments with
+<li><p>Modify pre_rules and post_rules arguments with
 rules provided in <code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp.ulmfit</span></code>:</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythainlp.ulmfit</span> <span class="kn">import</span> <span class="p">(</span>
@@ -408,7 +408,7 @@ rules provided in <code class="xref py py-mod docutils literal notranslate"><spa
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.rm_useless_spaces">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">rm_useless_spaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/preprocess.html#rm_useless_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.rm_useless_spaces" title="Permalink to this definition"></a></dt>
-<dd><p>Remove multiple spaces in <cite>text</cite>. (code from <cite>fastai</cite>)</p>
+<dd><p>Remove multiple spaces in <cite>text</cite>. (codes from <cite>fastai</cite>)</p>
 </dd></dl>
 
 <dl class="py function">
@@ -431,16 +431,16 @@ rules provided in <code class="xref py py-mod docutils literal notranslate"><spa
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.replace_rep_after">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">replace_rep_after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/preprocess.html#replace_rep_after"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.replace_rep_after" title="Permalink to this definition"></a></dt>
-<dd><p>Replace repetitions at the character level in <cite>text</cite> after the repetition.
-This is done to prevent such case as ‘น้อยยยยยยยย’ becoming ‘น้อ xxrep 8 ย’
-;instead it will retain the word as ‘น้อย xxrep 8’</p>
+<dd><p>Replace repetitions at the character level in <cite>text</cite> after the repeated character.
+This is to prevent cases such as ‘น้อยยยยยยยย’ becomes ‘น้อ xxrep 8 ย’
+; instead it will retain the word as ‘น้อย xxrep 8’</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input text to replace character repetition</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input text to replace character repetitions in</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>text with repetitive token <strong>xxrep</strong> and the counter
-after character repetition</p>
+after the repeated character</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -489,7 +489,7 @@ character repetition</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ulmfit.replace_wrep_post">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">replace_wrep_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Collection" title="(in Python v3.12)"><span class="pre">Collection</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/preprocess.html#replace_wrep_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.replace_wrep_post" title="Permalink to this definition"></a></dt>
-<dd><p>Replace reptitive words post tokenization;
+<dd><p>Replace repetitive words after tokenization;
 fastai <cite>replace_wrep</cite> does not work well with Thai.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -497,7 +497,7 @@ fastai <cite>replace_wrep</cite> does not work well with Thai.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of tokens where <strong>xxwrep</strong> token and the counter
-is added in front of repetitive words.</p>
+is added before repetitive words.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -546,7 +546,7 @@ repetitive words.</p>
 <dt class="sig sig-object py" id="pythainlp.ulmfit.spec_add_spaces">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ulmfit.</span></span><span class="sig-name descname"><span class="pre">spec_add_spaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ulmfit/preprocess.html#spec_add_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ulmfit.spec_add_spaces" title="Permalink to this definition"></a></dt>
 <dd><p>Add spaces around / and # in <cite>text</cite>. 
-(code from <cite>fastai</cite>)</p>
+(codes from <cite>fastai</cite>)</p>
 </dd></dl>
 
 <dl class="py function">

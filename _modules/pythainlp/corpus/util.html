@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,8 +121,8 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Tool for create word list</span>
-<span class="sd">code is from Korakot Chaovavanich.</span>
+<span class="sd">Tool for creating word lists</span>
+<span class="sd">codes are from Korakot Chaovavanich.</span>
 
 <span class="sd">:See also:</span>
 <span class="sd">    * `Facebook post \</span>
@@ -141,7 +141,7 @@
 
 <span class="k">def</span> <span class="nf">index_pairs</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return begining and ending index pairs of words</span>
+<span class="sd">    Return beginning and ending indexes of word pairs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
@@ -160,7 +160,7 @@
 <span class="sd">    :param Callable[[str], List[str]] tokenize: a tokenize function</span>
 <span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
 <span class="sd">        as a training set</span>
-<span class="sd">    :return: words that considered making `tokenize` perform unwell</span>
+<span class="sd">    :return: words that are considered to make `tokenize` perform badly</span>
 <span class="sd">    :rtype: Set[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">right</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
@@ -176,7 +176,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">wrong</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1"># if wrong more than right, then it&#39;s a bad word</span>
+    <span class="c1"># if wrong is more than right, then it&#39;s a bad word</span>
     <span class="n">bad_words</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">wrong</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">[</span><span class="n">w</span><span class="p">]:</span>
@@ -191,10 +191,10 @@
     <span class="n">training_data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Revise a set of word that could improve tokenization performance of</span>
+<span class="sd">    Revise a set of words that could improve tokenization performance of</span>
 <span class="sd">    a dictionary-based `tokenize` function.</span>
 
-<span class="sd">    `orign_words` will be used as a base set for the dictionary.</span>
+<span class="sd">    `orig_words` will be used as a base set for the dictionary.</span>
 <span class="sd">    Words that do not performed well with `training_data` will be removed.</span>
 <span class="sd">    The remaining words will be returned.</span>
 
@@ -204,7 +204,7 @@
 <span class="sd">        will be used as a base for revision</span>
 <span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
 <span class="sd">        as a training set</span>
-<span class="sd">    :return: words that considered making `tokenize` perform unwell</span>
+<span class="sd">    :return: words that are considered to make `tokenize` perform badly</span>
 <span class="sd">    :rtype: Set[str]</span>
 
 <span class="sd">    :Example::</span>
@@ -249,7 +249,7 @@
 
 <span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
 <span class="sd">        as a training set</span>
-<span class="sd">    :return: words that considered making `tokenize` perform unwell</span>
+<span class="sd">    :return: words that are considered to make `tokenize` perform badly</span>
 <span class="sd">    :rtype: Set[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">orig_words</span> <span class="o">=</span> <span class="n">thai_words</span><span class="p">()</span>

@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -138,11 +138,11 @@
 
 <span class="k">def</span> <span class="nf">replace_url</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Replace url in `text` with TK_URL</span>
+<span class="sd">    Replace URL in `text` with TK_URL</span>
 
-<span class="sd">    :param str text: text to replace url</span>
+<span class="sd">    :param str text: text to replace URL in</span>
 
-<span class="sd">    :return: text where urls  are replaced</span>
+<span class="sd">    :return: text with URLs replaced</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -157,11 +157,11 @@
 
 <div class="viewcode-block" id="fix_html"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.fix_html">[docs]</a><span class="k">def</span> <span class="nf">fix_html</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    List of replacements from html strings in `test`. (code from `fastai`)</span>
+<span class="sd">    Replace HTML strings in `test`. (codes from `fastai`)</span>
 
-<span class="sd">    :param str text: text to replace html string</span>
+<span class="sd">    :param str text: text to replace HTML strings in</span>
 
-<span class="sd">    :return: text where html strings are replaced</span>
+<span class="sd">    :return: text with HTML strings replaced</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -191,25 +191,25 @@
 
 
 <div class="viewcode-block" id="rm_useless_spaces"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.rm_useless_spaces">[docs]</a><span class="k">def</span> <span class="nf">rm_useless_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove multiple spaces in `text`. (code from `fastai`)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove multiple spaces in `text`. (codes from `fastai`)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; {2,}&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="spec_add_spaces"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.spec_add_spaces">[docs]</a><span class="k">def</span> <span class="nf">spec_add_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add spaces around / and # in `text`. \n (code from `fastai`)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add spaces around / and # in `text`. \n (codes from `fastai`)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([/#\n])&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot; \1 &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="replace_rep_after"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.replace_rep_after">[docs]</a><span class="k">def</span> <span class="nf">replace_rep_after</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Replace repetitions at the character level in `text` after the repetition.</span>
-<span class="sd">    This is done to prevent such case as &#39;น้อยยยยยยยย&#39; becoming &#39;น้อ xxrep 8 ย&#39;</span>
-<span class="sd">    ;instead it will retain the word as &#39;น้อย xxrep 8&#39;</span>
+<span class="sd">    Replace repetitions at the character level in `text` after the repeated character.</span>
+<span class="sd">    This is to prevent cases such as &#39;น้อยยยยยยยย&#39; becomes &#39;น้อ xxrep 8 ย&#39;</span>
+<span class="sd">    ; instead it will retain the word as &#39;น้อย xxrep 8&#39;</span>
 
-<span class="sd">    :param str text: input text to replace character repetition</span>
+<span class="sd">    :param str text: input text to replace character repetitions in</span>
 
 <span class="sd">    :return: text with repetitive token **xxrep** and the counter</span>
-<span class="sd">             after character repetition</span>
+<span class="sd">             after the repeated character</span>
 
 <span class="sd">    :rtype: str</span>
 <span class="sd">    :Example:</span>
@@ -232,13 +232,13 @@
 
 <div class="viewcode-block" id="replace_wrep_post"><a class="viewcode-back" href="../../../api/ulmfit.html#pythainlp.ulmfit.replace_wrep_post">[docs]</a><span class="k">def</span> <span class="nf">replace_wrep_post</span><span class="p">(</span><span class="n">toks</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Replace reptitive words post tokenization;</span>
+<span class="sd">    Replace repetitive words after tokenization;</span>
 <span class="sd">    fastai `replace_wrep` does not work well with Thai.</span>
 
 <span class="sd">    :param list[str] toks: list of tokens</span>
 
 <span class="sd">    :return: list of tokens where **xxwrep** token and the counter</span>
-<span class="sd">             is added in front of repetitive words.</span>
+<span class="sd">             is added before repetitive words.</span>
 <span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
@@ -277,11 +277,11 @@
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{\}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
-    <span class="c1"># brakets with only punctuations</span>
+    <span class="c1"># brackets with only punctuation marks</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\([^a-zA-Z0-9ก-๙]+\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{[^a-zA-Z0-9ก-๙]+\}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[[^a-zA-Z0-9ก-๙]+\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
-    <span class="c1"># artifiacts after (</span>
+    <span class="c1"># artifacts after (</span>
     <span class="n">new_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
         <span class="sa">r</span><span class="s2">&quot;(?&lt;=\()[^a-zA-Z0-9ก-๙]+(?=[a-zA-Z0-9ก-๙])&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">new_line</span>
     <span class="p">)</span>

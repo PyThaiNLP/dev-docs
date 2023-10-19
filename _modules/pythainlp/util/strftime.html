@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -176,7 +176,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Conversion support for thai_strftime().</span>
 
-<span class="sd">    The fmt_char should be in _NEED_L10N when call this function.</span>
+<span class="sd">    The fmt_char should be in _NEED_L10N when calling this function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">str_</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="n">fmt_char</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">:</span>
@@ -195,7 +195,7 @@
         <span class="c1"># Thai Buddhist century (AD+543)/100 + 1 as decimal number;</span>
         <span class="n">str_</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">dt_obj</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="n">_BE_AD_DIFFERENCE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">fmt_char</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
-        <span class="c1"># Locale’s appropriate date and time representation</span>
+        <span class="c1"># Locale&#39;s appropriate date and time representation</span>
         <span class="c1"># Wed  6 Oct 01:40:00 1976</span>
         <span class="c1"># พ   6 ต.ค. 01:40:00 2519  &lt;-- left-aligned weekday, right-aligned day</span>
         <span class="n">str_</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:&lt;2}</span><span class="s2"> </span><span class="si">{:&gt;2}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -301,13 +301,13 @@
 <span class="sd">        * The Thai Buddhist Era (BE) year is simply converted from AD</span>
 <span class="sd">          by adding 543. This is certainly not accurate for years</span>
 <span class="sd">          before 1941 AD, due to the change in Thai New Year&#39;s Day.</span>
-<span class="sd">        * This meant to be an interrim solution, since</span>
+<span class="sd">        * This meant to be an interim solution, since</span>
 <span class="sd">          Python standard&#39;s locale module (which relied on C&#39;s strftime())</span>
 <span class="sd">          does not support &quot;th&quot; or &quot;th_TH&quot; locale yet. If supported,</span>
 <span class="sd">          we can just locale.setlocale(locale.LC_TIME, &quot;th_TH&quot;)</span>
 <span class="sd">          and then use native datetime.strftime().</span>
 
-<span class="sd">    We trying to make this platform-independent and support extentions</span>
+<span class="sd">    We are trying to make this platform-independent and support extensions</span>
 <span class="sd">    as many as possible. See these links for strftime() extensions</span>
 <span class="sd">    in POSIX, BSD, and GNU libc:</span>
 

@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -124,7 +124,7 @@
 <span class="sd">NLTK WordNet wrapper</span>
 
 <span class="sd">API here is exactly the same as NLTK WordNet API,</span>
-<span class="sd">except that lang (language) argument will be &quot;tha&quot; (Thai) by default.</span>
+<span class="sd">except that the lang (language) argument is &quot;tha&quot; (Thai) by default.</span>
 
 <span class="sd">For more on usage, see NLTK Howto:</span>
 <span class="sd">https://www.nltk.org/howto/wordnet.html</span>
@@ -146,17 +146,17 @@
 
 <div class="viewcode-block" id="synsets"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.synsets">[docs]</a><span class="k">def</span> <span class="nf">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tha&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function return the synonym sets for all lemmas given the word</span>
+<span class="sd">    This function returns the synonym set for all lemmas of the given word</span>
 <span class="sd">    with an optional argument to constrain the part of speech of the word.</span>
 
-<span class="sd">    :param str word: word to find its synsets</span>
-<span class="sd">    :param str pos: the part of speech constraint (i.e. *n* for Noun, *v*</span>
+<span class="sd">    :param str word: word to find synsets of</span>
+<span class="sd">    :param str pos: constraint of the part of speech (i.e. *n* for Noun, *v*</span>
 <span class="sd">                    for Verb, *a* for Adjective, *s* for Adjective</span>
 <span class="sd">                    satellites, and *r* for Adverb)</span>
 <span class="sd">    :param str lang: abbreviation of language (i.e. *eng*, *tha*).</span>
 <span class="sd">                     By default, it is *tha*</span>
 
-<span class="sd">    :return: :class:`Synset` for all lemmas for the word constrained with</span>
+<span class="sd">    :return: :class:`Synset` all lemmas of the word constrained with</span>
 <span class="sd">             the argument *pos*.</span>
 <span class="sd">    :rtype: list[:class:`Synset`]</span>
 
@@ -174,11 +174,11 @@
 <span class="sd">         Synset(&#39;base.n.14&#39;), Synset(&#39;home.n.01&#39;),</span>
 <span class="sd">         Synset(&#39;houseful.n.01&#39;), Synset(&#39;home.n.07&#39;)]</span>
 
-<span class="sd">        When specifying the part of speech constrain. For example,</span>
-<span class="sd">        the word &quot;แรง&quot; cound be interpreted as force (n.) or hard (adj.).</span>
+<span class="sd">        When specifying the constraint of the part of speech. For example,</span>
+<span class="sd">        the word &quot;แรง&quot; could be interpreted as force (n.) or hard (adj.).</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.corpus.wordnet import synsets</span>
-<span class="sd">        &gt;&gt;&gt; # By default, accept all part of speech</span>
+<span class="sd">        &gt;&gt;&gt; # By default, allow all parts of speech</span>
 <span class="sd">        &gt;&gt;&gt; synsets(&quot;แรง&quot;, lang=&quot;tha&quot;)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # only Noun</span>
@@ -194,10 +194,10 @@
 
 <div class="viewcode-block" id="synset"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.synset">[docs]</a><span class="k">def</span> <span class="nf">synset</span><span class="p">(</span><span class="n">name_synsets</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function return the synonym set (synset) given the name of synset</span>
+<span class="sd">    This function returns the synonym set (synset) given the name of the synset</span>
 <span class="sd">    (i.e. &#39;dog.n.01&#39;, &#39;chase.v.01&#39;).</span>
 
-<span class="sd">    :param str name_synsets: name of the sysset</span>
+<span class="sd">    :param str name_synsets: name of the synset</span>
 
 <span class="sd">    :return: :class:`Synset` of the given name</span>
 <span class="sd">    :rtype: :class:`Synset`</span>
@@ -219,18 +219,18 @@
 
 <div class="viewcode-block" id="all_lemma_names"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.all_lemma_names">[docs]</a><span class="k">def</span> <span class="nf">all_lemma_names</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tha&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function returns all lemma names for all synsets for the given</span>
+<span class="sd">    This function returns all lemma names for all synsets of the given</span>
 <span class="sd">    part of speech tag and language. If part of speech tag is not</span>
-<span class="sd">    specified, all synsets for all part of speech will be used.</span>
+<span class="sd">    specified, all synsets of all parts of speech will be used.</span>
 
-<span class="sd">    :param str pos: the part of speech constraint (i.e. *n* for Noun,</span>
+<span class="sd">    :param str pos: constraint of the part of speech (i.e. *n* for Noun,</span>
 <span class="sd">                    *v* for Verb, *a* for Adjective, *s* for</span>
 <span class="sd">                    Adjective satellites, and *r* for Adverb).</span>
 <span class="sd">                    By default, *pos* is **None**.</span>
 <span class="sd">    :param str lang: abbreviation of language (i.e. *eng*, *tha*).</span>
 <span class="sd">                     By default, it is *tha*.</span>
 
-<span class="sd">    :return: :class:`Synset` of lemmas names given the pos and language</span>
+<span class="sd">    :return: :class:`Synset` of lemmas names given the POS and language</span>
 <span class="sd">    :rtype: list[:class:`Synset`]</span>
 
 <span class="sd">    :Example:</span>
@@ -262,12 +262,12 @@
 
 <div class="viewcode-block" id="all_synsets"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.all_synsets">[docs]</a><span class="k">def</span> <span class="nf">all_synsets</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function iterates over all synsets constrained by given</span>
+<span class="sd">    This function iterates over all synsets constrained by the given</span>
 <span class="sd">    part of speech tag.</span>
 
 <span class="sd">    :param str pos: part of speech tag</span>
 
-<span class="sd">    :return: list of synsets constrained by given part of speech tag.</span>
+<span class="sd">    :return: list of synsets constrained by the given part of speech tag.</span>
 <span class="sd">    :rtype: Iterable[:class:`Synset`]</span>
 
 <span class="sd">    :Example:</span>
@@ -293,7 +293,7 @@
 
 <div class="viewcode-block" id="langs"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.langs">[docs]</a><span class="k">def</span> <span class="nf">langs</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function return a set of ISO-639 language codes.</span>
+<span class="sd">    This function returns a set of ISO-639 language codes.</span>
 
 <span class="sd">    :return: ISO-639 language codes</span>
 <span class="sd">    :rtype: list[str]</span>
@@ -315,15 +315,15 @@
 <span class="sd">    This function returns all lemmas given the word with an optional</span>
 <span class="sd">    argument to constrain the part of speech of the word.</span>
 
-<span class="sd">    :param str word: word to find its lammas</span>
-<span class="sd">    :param str pos: the part of speech constraint (i.e. *n* for Noun,</span>
+<span class="sd">    :param str word: word to find lemmas of</span>
+<span class="sd">    :param str pos: constraint of the part of speech (i.e. *n* for Noun,</span>
 <span class="sd">                    *v* for Verb, *a* for Adjective, *s* for</span>
 <span class="sd">                    Adjective satellites, and *r* for Adverb)</span>
 <span class="sd">    :param str lang: abbreviation of language (i.e. *eng*, *tha*).</span>
 <span class="sd">                     By default, it is *tha*.</span>
 
-<span class="sd">    :return: :class:`Synset` for all lemmas for the word constraine</span>
-<span class="sd">              with the argument *pos*.</span>
+<span class="sd">    :return: :class:`Synset` of all lemmas of the word constrained</span>
+<span class="sd">              by the argument *pos*.</span>
 <span class="sd">    :rtype: list[:class:`Lemma`]</span>
 
 <span class="sd">    :Example:</span>
@@ -337,7 +337,7 @@
 <span class="sd">        [Lemma(&#39;god.n.01.พระเจ้า&#39;), Lemma(&#39;godhead.n.01.พระเจ้า&#39;),</span>
 <span class="sd">         Lemma(&#39;father.n.06.พระเจ้า&#39;), Lemma(&#39;god.n.03.พระเจ้า&#39;)]</span>
 
-<span class="sd">        When specify the part of speech tag.</span>
+<span class="sd">        When the part of speech tag is specified:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.corpus.wordnet import lemmas</span>
 <span class="sd">        &gt;&gt;&gt;</span>
@@ -347,7 +347,7 @@
 <span class="sd">         Lemma(&#39;roll_up.v.01.ม้วน&#39;), Lemma(&#39;wind.v.03.ม้วน&#39;),</span>
 <span class="sd">         Lemma(&#39;roll.n.11.ม้วน&#39;)]</span>
 <span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; # only lammas with Noun as the part of speech</span>
+<span class="sd">        &gt;&gt;&gt; # only lemmas with Noun as the part of speech</span>
 <span class="sd">        &gt;&gt;&gt; lemmas(&quot;ม้วน&quot;, pos=&quot;n&quot;)</span>
 <span class="sd">        [Lemma(&#39;roll.n.11.ม้วน&#39;)]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -356,7 +356,7 @@
 
 <div class="viewcode-block" id="lemma"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.lemma">[docs]</a><span class="k">def</span> <span class="nf">lemma</span><span class="p">(</span><span class="n">name_synsets</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function return lemma object given the name.</span>
+<span class="sd">    This function returns lemma object given the name.</span>
 
 <span class="sd">    .. note::</span>
 <span class="sd">        Support only English language (*eng*).</span>
@@ -385,8 +385,8 @@
 <div class="viewcode-block" id="lemma_from_key"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.lemma_from_key">[docs]</a><span class="k">def</span> <span class="nf">lemma_from_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function returns lemma object given the lemma key.</span>
-<span class="sd">    This is similar to :func:`lemma` but it needs to supply the key</span>
-<span class="sd">    of lemma instead of the name.</span>
+<span class="sd">    This is similar to :func:`lemma` but it needs to be given the key</span>
+<span class="sd">    of lemma instead of the name of lemma.</span>
 
 <span class="sd">    .. note::</span>
 <span class="sd">        Support only English language (*eng*).</span>
@@ -412,7 +412,7 @@
 <div class="viewcode-block" id="path_similarity"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.wordnet.path_similarity">[docs]</a><span class="k">def</span> <span class="nf">path_similarity</span><span class="p">(</span><span class="n">synsets1</span><span class="p">,</span> <span class="n">synsets2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function returns similarity between two synsets based on the</span>
-<span class="sd">    shortest path distance from the equation as follows.</span>
+<span class="sd">    shortest path distance calculated using the equation below.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -420,13 +420,13 @@
 <span class="sd">                             synsets2) + 1}</span>
 
 <span class="sd">    The shortest path distance is calculated by the connection through</span>
-<span class="sd">    the is-a (hypernym/hyponym) taxonomy. The score is in the ranage</span>
+<span class="sd">    the is-a (hypernym/hyponym) taxonomy. The score is in the range of</span>
 <span class="sd">    0 to 1. Path similarity of 1 indicates identicality.</span>
 
 <span class="sd">    :param `Synset` synsets1: first synset supplied to measures</span>
-<span class="sd">                              the path similarity</span>
+<span class="sd">                              the path similarity with</span>
 <span class="sd">    :param `Synset` synsets2: second synset supplied to measures</span>
-<span class="sd">                              the path similarity</span>
+<span class="sd">                              the path similarity with</span>
 
 <span class="sd">    :return: path similarity between two synsets</span>
 <span class="sd">    :rtype: float</span>
@@ -494,9 +494,9 @@
 <span class="sd">    Least Common Subsumer (most specific ancestor node).</span>
 
 <span class="sd">    :param `Synset` synsets1: first synset supplied to measures</span>
-<span class="sd">                              the WUP similarity</span>
+<span class="sd">                              the WUP similarity with</span>
 <span class="sd">    :param `Synset` synsets2: second synset supplied to measures</span>
-<span class="sd">                              the WUP similarity</span>
+<span class="sd">                              the WUP similarity with</span>
 
 <span class="sd">    :return: WUP similarity between two synsets</span>
 <span class="sd">    :rtype: float</span>
@@ -524,7 +524,7 @@
 <span class="sd">    This function finds a possible base form for the given form,</span>
 <span class="sd">    with the given part of speech.</span>
 
-<span class="sd">    :param str form: the form to finds the base form</span>
+<span class="sd">    :param str form: the form to finds the base form of</span>
 <span class="sd">    :param str pos: part of speech tag of words to be searched</span>
 
 <span class="sd">    :return: base form of the given form</span>

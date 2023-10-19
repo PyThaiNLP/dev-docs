@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -115,7 +115,7 @@
              
   <section id="pythainlp-wsd">
 <h1>pythainlp.wsd<a class="headerlink" href="#pythainlp-wsd" title="Permalink to this heading"></a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.wsd</span></code> contains get word sense function for Thai Word Sense Disambiguation (WSD).</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.wsd</span></code> contains functions used to get word senses for Thai Word Sense Disambiguation (WSD).</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
 <dl class="py function">
@@ -128,22 +128,22 @@ This function will get definition and distance from context in sentence.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai sentence</p></li>
 <li><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai word</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – device for running model.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – device for running model on.</p></li>
 <li><p><strong>custom_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Thai dictionary {“word”:[“definition”,..]}</p></li>
-<li><p><strong>custom_tokenizer</strong> (<a class="reference internal" href="tokenize.html#pythainlp.tokenize.Tokenizer" title="pythainlp.tokenize.Tokenizer"><em>Tokenizer</em></a>) – Tokenizer for tokenize words from sentence.</p></li>
+<li><p><strong>custom_tokenizer</strong> (<a class="reference internal" href="tokenize.html#pythainlp.tokenize.Tokenizer" title="pythainlp.tokenize.Tokenizer"><em>Tokenizer</em></a>) – Tokenizer used to tokenize words in sentence.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of definition and distance (1 - cos_sim) or None (If word is not in the dictionary)</p>
+<dd class="field-even"><p>list of definitions and distances (1 - cos_sim) or None (If word is not in the dictionary)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Union[List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>]], None]</p>
 </dd>
 </dl>
 <p>We get the ideas from <a class="reference external" href="https://arxiv.org/abs/2305.03520">Context-Aware Semantic Similarity Measurement for Unsupervised     Word Sense Disambiguation</a> to build get_sense function.</p>
-<p>For Thai dictionary, We use Thai dictionary from wiktionary.
+<p>For Thai dictionary, we use Thai dictionary from wiktionary.
 See more <a class="reference external" href="https://pythainlp.github.io/pythainlp-corpus/thai_dict.html">thai_dict</a>.</p>
-<p>For the model, We use Sentence Transformers model from     <a class="reference external" href="https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2">sentence-transformers/paraphrase-multilingual-mpnet-base-v2</a> for     Unsupervised Word Sense Disambiguation.</p>
+<p>For the model, we use sentence transformers model from     <a class="reference external" href="https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2">sentence-transformers/paraphrase-multilingual-mpnet-base-v2</a> for     unsupervised word sense disambiguation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>

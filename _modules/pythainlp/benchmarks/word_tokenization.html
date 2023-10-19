@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -130,7 +130,7 @@
 
 <span class="n">SEPARATOR</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span>
 
-<span class="c1"># regex for removing to a space surrounded by separators, i.e. | |</span>
+<span class="c1"># regex for removing one space surrounded by separators, i.e. | |</span>
 <span class="n">SURROUNDING_SEPS_RX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
     <span class="s2">&quot;</span><span class="si">{sep}</span><span class="s2">? ?</span><span class="si">{sep}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">SEPARATOR</span><span class="p">))</span>
 <span class="p">)</span>
@@ -141,7 +141,7 @@
 <span class="c1"># regex for removing tags, i.e. &lt;NE&gt;, &lt;/NE&gt;</span>
 <span class="n">TAG_RX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;\/?[A-Z]+&gt;&quot;</span><span class="p">)</span>
 
-<span class="c1"># regex for tailing separator, i.e.  a|dog| -&gt; a|dog</span>
+<span class="c1"># regex for removing trailing separators, i.e.  a|dog| -&gt; a|dog</span>
 <span class="n">TAILING_SEP_RX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sep}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">SEPARATOR</span><span class="p">)))</span>
 
 
@@ -162,19 +162,19 @@
 
 <span class="k">def</span> <span class="nf">_flatten_result</span><span class="p">(</span><span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Flatten two-level dictionary.</span>
+<span class="sd">    Flatten two-dimension dictionary.</span>
 
-<span class="sd">    Use keys in the first level as a prefix for keys in the two levels.</span>
+<span class="sd">    Use keys in the first dimension as a prefix for keys in the second dimension.</span>
 <span class="sd">    For example,</span>
 <span class="sd">    my_dict = { &quot;a&quot;: { &quot;b&quot;: 7 } }</span>
 <span class="sd">    flatten(my_dict)</span>
 <span class="sd">    { &quot;a:b&quot;: 7 }</span>
 
 
-<span class="sd">    :param dict my_dict: contains stats dictionary</span>
+<span class="sd">    :param dict my_dict: dictionary containing stats</span>
 <span class="sd">    :param str sep: separator between the two keys (default: &quot;:&quot;)</span>
 
-<span class="sd">    :return: a one-level dictionary with key combined</span>
+<span class="sd">    :return: a one-dimension dictionary with keys combined</span>
 <span class="sd">    :rtype: dict[str, float | str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
@@ -188,12 +188,12 @@
 
 <div class="viewcode-block" id="benchmark"><a class="viewcode-back" href="../../../api/benchmarks.html#pythainlp.benchmarks.word_tokenization.benchmark">[docs]</a><span class="k">def</span> <span class="nf">benchmark</span><span class="p">(</span><span class="n">ref_samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Performace benchmark of samples.</span>
+<span class="sd">    Performance benchmarking for samples.</span>
 
 <span class="sd">    Please see :meth:`pythainlp.benchmarks.word_tokenization.compute_stats` for</span>
-<span class="sd">    metrics being computed.</span>
+<span class="sd">    the computed metrics.</span>
 
-<span class="sd">    :param list[str] ref_samples: ground truth samples</span>
+<span class="sd">    :param list[str] ref_samples: ground truth for samples</span>
 <span class="sd">    :param list[str] samples: samples that we want to evaluate</span>
 
 <span class="sd">    :return: dataframe with row x col = len(samples) x len(metrics)</span>
@@ -235,7 +235,7 @@
 <span class="sd">    Clean up text before performing evaluation.</span>
 
 <span class="sd">    :param str text: text to be preprocessed</span>
-<span class="sd">    :param bool remove_space: whether remove white space</span>
+<span class="sd">    :param bool remove_space: whether to remove white space</span>
 
 <span class="sd">    :return: preprocessed text</span>
 <span class="sd">    :rtype: str</span>
@@ -258,26 +258,26 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute statistics for tokenization quality</span>
 
-<span class="sd">    These statistics includes:</span>
+<span class="sd">    These statistics include:</span>
 
 <span class="sd">    **Character-Level**:</span>
 <span class="sd">      True Positive, False Positive, True Negative, False Negative, Precision, Recall, and f1</span>
 <span class="sd">    **Word-Level**:</span>
 <span class="sd">      Precision, Recall, and f1</span>
 <span class="sd">    **Other**:</span>
-<span class="sd">      - Correct tokenization indicator: {0, 1} sequence indicating the correspoding</span>
+<span class="sd">      - Correct tokenization indicator: {0, 1} sequence indicating that the corresponding</span>
 <span class="sd">        word is tokenized correctly.</span>
 
-<span class="sd">    :param str ref_sample: ground truth samples</span>
+<span class="sd">    :param str ref_sample: ground truth for samples</span>
 <span class="sd">    :param str samples: samples that we want to evaluate</span>
 
-<span class="sd">    :return: metrics in character and word-level and correctly tokenized word indicators</span>
+<span class="sd">    :return: metrics at character- and word-level and indicators of correctly tokenized words</span>
 <span class="sd">    :rtype: dict[str, float | str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ref_sample</span> <span class="o">=</span> <span class="n">_binary_representation</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">)</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="n">_binary_representation</span><span class="p">(</span><span class="n">raw_sample</span><span class="p">)</span>
 
-    <span class="c1"># Compute charater-level statistics</span>
+    <span class="c1"># Compute character-level statistics</span>
     <span class="n">c_pos_pred</span><span class="p">,</span> <span class="n">c_neg_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">sample</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">sample</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="n">c_pos_pred</span> <span class="o">=</span> <span class="n">c_pos_pred</span><span class="p">[</span><span class="n">c_pos_pred</span> <span class="o">&lt;</span> <span class="n">ref_sample</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -289,17 +289,13 @@
     <span class="n">c_tn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">c_fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">c_precision</span> <span class="o">=</span> <span class="n">c_tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">c_tp</span> <span class="o">+</span> <span class="n">c_fp</span><span class="p">)</span>
-    <span class="n">c_recall</span> <span class="o">=</span> <span class="n">c_tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">c_tp</span> <span class="o">+</span> <span class="n">c_fn</span><span class="p">)</span>
-    <span class="n">c_f1</span> <span class="o">=</span> <span class="n">_f1</span><span class="p">(</span><span class="n">c_precision</span><span class="p">,</span> <span class="n">c_recall</span><span class="p">)</span>
-
     <span class="c1"># Compute word-level statistics</span>
 
     <span class="c1"># Find correctly tokenized words in the reference sample</span>
-    <span class="n">word_boundaries</span> <span class="o">=</span> <span class="n">_find_word_boudaries</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">)</span>
+    <span class="n">word_boundaries</span> <span class="o">=</span> <span class="n">_find_word_boundaries</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">)</span>
 
     <span class="c1"># Find correctly tokenized words in the sample</span>
-    <span class="n">ss_boundaries</span> <span class="o">=</span> <span class="n">_find_word_boudaries</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">ss_boundaries</span> <span class="o">=</span> <span class="n">_find_word_boundaries</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">tokenization_indicators</span> <span class="o">=</span> <span class="n">_find_words_correctly_tokenised</span><span class="p">(</span>
         <span class="n">word_boundaries</span><span class="p">,</span> <span class="n">ss_boundaries</span>
     <span class="p">)</span>
@@ -307,7 +303,7 @@
     <span class="n">correctly_tokenised_words</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tokenization_indicators</span><span class="p">)</span>
 
     <span class="n">tokenization_indicators</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-        <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">tokenization_indicators</span><span class="p">)</span>
+        <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tokenization_indicators</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
@@ -330,7 +326,7 @@
 
 <span class="k">def</span> <span class="nf">_binary_representation</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Transform text to {0, 1} sequence.</span>
+<span class="sd">    Transform text into {0, 1} sequence.</span>
 
 <span class="sd">    where (1) indicates that the corresponding character is the beginning of</span>
 <span class="sd">    a word. For example, ผม|ไม่|ชอบ|กิน|ผัก -&gt; 10100...</span>
@@ -361,9 +357,9 @@
     <span class="k">return</span> <span class="n">bin_rept</span>
 
 
-<span class="k">def</span> <span class="nf">_find_word_boudaries</span><span class="p">(</span><span class="n">bin_reps</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_find_word_boundaries</span><span class="p">(</span><span class="n">bin_reps</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Find start and end location of each word.</span>
+<span class="sd">    Find the starting and ending location of each word.</span>
 
 <span class="sd">    :param str bin_reps: binary representation of a text</span>
 

@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -180,8 +180,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.abbreviation_to_full_text">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">abbreviation_to_full_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/abbreviation.html#abbreviation_to_full_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.abbreviation_to_full_text" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert Thai text (with abbreviation) to full text.</p>
-<p>This function use KhamYo for handles abbreviations.
+<dd><p>This function converts Thai text (with abbreviation) to full text.</p>
+<p>This function uses KhamYo for handles abbreviations.
 See more <a class="reference external" href="https://github.com/wannaphong/KhamYo">KhamYo</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -191,7 +191,7 @@ See more <a class="reference external" href="https://github.com/wannaphong/KhamY
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Thai full text that handles abbreviations as full text and cos scores (original text -  modified text).</p>
+<dd class="field-even"><p>Thai full text with abbreviations converted to full text and cos scores (original text - modified text).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, Union[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>, None]]]</p>
@@ -215,14 +215,14 @@ See more <a class="reference external" href="https://github.com/wannaphong/KhamY
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.arabic_digit_to_thai_digit">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">arabic_digit_to_thai_digit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/digitconv.html#arabic_digit_to_thai_digit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.arabic_digit_to_thai_digit" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert Arabic digits (i.e. 1, 3, 10) to Thai digits
+<dd><p>This function converts Arabic digits (i.e. 1, 3, 10) to Thai digits
 (i.e. ๑, ๓, ๑๐).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text with Arabic digits such as ‘1’, ‘2’, ‘3’</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Text with Arabic digits being converted to Thai digits
+<dd class="field-even"><p>Text with Arabic digits converted to Thai digits
 such as ‘๑’, ‘๒’, ‘๓’</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -284,13 +284,13 @@ of Thai currency</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – year</p></li>
-<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The src year</p></li>
+<li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Year</p></li>
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The source year</p></li>
 <li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The target year</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The years that be convert</p>
+<dd class="field-even"><p>The converted year</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -391,11 +391,11 @@ Thai dictionary</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input text</p></li>
-<li><p><strong>ignore_chars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – characters to be ignored, defaults to whitespaces,digits, and puntuations.</p></li>
+<li><p><strong>ignore_chars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – characters to be ignored, defaults to whitespace,digits, and punctuation marks.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>proportion of Thai characters in the text (percent)</p>
+<dd class="field-even"><p>proportion of Thai characters in the text (percentage)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
@@ -446,7 +446,7 @@ dictionary file or a list of words or a pythainlp.util.Trie object</p>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text with digits such as ‘1’, ‘2’, ‘๓’, ‘๔’</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Text with digits being spelled out in Thai</p>
+<dd class="field-even"><p>Text with digits spelled out in Thai</p>
 </dd>
 </dl>
 </dd></dl>
@@ -480,13 +480,13 @@ to ease readability.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.emoji_to_thai">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">emoji_to_thai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(':',</span> <span class="pre">':')</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/emojiconv.html#emoji_to_thai"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.emoji_to_thai" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert emoji to thai meaning</p>
+<dd><p>This function converts emojis to their Thai meanings</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text with Emoji</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text with emojis</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Text with Emoji being converted to thai meaning</p>
+<dd class="field-even"><p>Text with emojis converted to their Thai meanings</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -517,11 +517,11 @@ Qwerty keyboard layout to the originally intended keyboard layout
 that is the Thai Kedmanee keyboard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – incorrect text input (type Thai with English keyboard)</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – incorrect text input (Thai typed using English keyboard)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Thai text where incorrect typing with
-a keyboard layout is corrected</p>
+<dd class="field-even"><p>Thai text with typing using
+incorrect keyboard layout is corrected</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -541,17 +541,17 @@ a keyboard layout is corrected</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.find_keyword">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">find_keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/keywords.html#find_keyword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.find_keyword" title="Permalink to this definition"></a></dt>
-<dd><p>This function count the frequency of words in the list
-where stopword is excluded and returns as a frequency dictionary.</p>
+<dd><p>This function counts the frequencies of words in the list
+where stopword is excluded and returns a frequency dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>word_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – a list of words</p></li>
-<li><p><strong>min_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the mininum frequency for words to obtain</p></li>
+<li><p><strong>min_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the minimum frequency for words to be retained</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a dictionary object with key-value pair as word and its raw count</p>
+<dd class="field-even"><p>a dictionary object with key-value pair being words and their raw counts</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
@@ -578,14 +578,14 @@ where stopword is excluded and returns as a frequency dictionary.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.ipa_to_rtgs">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">ipa_to_rtgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/phoneme.html#ipa_to_rtgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.ipa_to_rtgs" title="Permalink to this definition"></a></dt>
-<dd><p>Converter IPA system to The Royal Thai General System of Transcription (RTGS)</p>
+<dd><p>Convert IPA system to The Royal Thai General System of Transcription (RTGS)</p>
 <p>Docs: <a class="reference external" href="https://en.wikipedia.org/wiki/Help:IPA/Thai">https://en.wikipedia.org/wiki/Help:IPA/Thai</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ipa</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – IPA phoneme</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The RTGS that be convert</p>
+<dd class="field-even"><p>The RTGS that is converted</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -605,7 +605,7 @@ where stopword is excluded and returns as a frequency dictionary.</p>
 <dt class="sig sig-object py" id="pythainlp.util.is_native_thai">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">is_native_thai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thaiwordcheck.html#is_native_thai"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.is_native_thai" title="Permalink to this definition"></a></dt>
 <dd><p>Check if a word is an “native Thai word” (Thai: “คำไทยแท้”)
-This function based on a simple heuristic algorithm
+This function is based on a simple heuristic algorithm
 and cannot be entirely reliable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -646,7 +646,7 @@ and cannot be entirely reliable.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.isthai">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">isthai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_chars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai.html#isthai"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.isthai" title="Permalink to this definition"></a></dt>
-<dd><p>Check if every characters in a string are Thai character.</p>
+<dd><p>Check if every character in a string is a Thai character.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -655,7 +655,7 @@ and cannot be entirely reliable.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if every characters in the input string are Thai,
+<dd class="field-even"><p>True if every character in the input string is Thai,
 otherwise False.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -690,7 +690,7 @@ otherwise False.</p>
 <dd class="field-odd"><p><strong>ch</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input character</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if ch is a Thai characttr, otherwise False.</p>
+<dd class="field-even"><p>True if ch is a Thai character, otherwise False.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
@@ -720,7 +720,7 @@ This function is preprocessing MaiYaMok in Thai sentence.</p>
 <dd class="field-odd"><p><strong>sent</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – input sentence (list or str)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of words</p>
+<dd class="field-even"><p>list of words</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -742,13 +742,13 @@ This function is preprocessing MaiYaMok in Thai sentence.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.nectec_to_ipa">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">nectec_to_ipa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pronunciation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/phoneme.html#nectec_to_ipa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.nectec_to_ipa" title="Permalink to this definition"></a></dt>
-<dd><p>Converter NECTEC system to IPA system</p>
+<dd><p>Convert NECTEC system to IPA system</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>pronunciation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – NECTEC phoneme</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>IPA that be convert</p>
+<dd class="field-even"><p>IPA that is converted</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -792,7 +792,7 @@ to be applied, they can choose to call those functions by themselves.</p>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input text</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>normalized text according to the fules</p>
+<dd class="field-even"><p>normalized text according to the rules</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -839,7 +839,7 @@ to be applied, they can choose to call those functions by themselves.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.num_to_thaiword">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">num_to_thaiword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/numtoword.html#num_to_thaiword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.num_to_thaiword" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert number to Thai text</p>
+<dd><p>This function converts number to Thai text</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – an integer number to be converted to Thai text</p>
@@ -867,21 +867,21 @@ to be applied, they can choose to call those functions by themselves.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.rank">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_stopwords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.Counter" title="(in Python v3.12)"><span class="pre">Counter</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/keywords.html#rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.rank" title="Permalink to this definition"></a></dt>
-<dd><p>Count word frequecy given a list of Thai words with an option
+<dd><p>Count word frequencies given a list of Thai words with an option
 to exclude stopwords.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – a list of words</p></li>
-<li><p><strong>exclude_stopwords</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If this parameter is set to <strong>True</strong>
-to exclude stopwords from counting.
+<li><p><strong>exclude_stopwords</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If this parameter is set to <strong>True</strong>,
+exclude stopwords from counting.
 Otherwise, the stopwords will be counted.
 By default, <a href="#id1"><span class="problematic" id="id2">`</span></a>exclude_stopwords`is
 set to <strong>False</strong></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Counter object representing word frequency from the text</p>
+<dd class="field-even"><p>a Counter object representing word frequencies in the text</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.Counter" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.Counter</span></code></a></p>
@@ -889,7 +889,7 @@ set to <strong>False</strong></p></li>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<p>Include stopwords in counting word frequency:</p>
+<p>Include stopwords when counting word frequencies:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">rank</span>
 
 <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;บันทึก&quot;</span><span class="p">,</span> <span class="s2">&quot;เหตุการณ์&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;มี&quot;</span><span class="p">,</span> <span class="s2">&quot;การ&quot;</span><span class="p">,</span> <span class="s2">&quot;บันทึก&quot;</span><span class="p">,</span> \
@@ -909,7 +909,7 @@ set to <strong>False</strong></p></li>
 <span class="c1">#     })</span>
 </pre></div>
 </div>
-<p>Exclude stopword in counting word frequency:</p>
+<p>Exclude stopwords when counting word frequencies:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.util</span> <span class="kn">import</span> <span class="n">rank</span>
 
 <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;บันทึก&quot;</span><span class="p">,</span> <span class="s2">&quot;เหตุการณ์&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;มี&quot;</span><span class="p">,</span> <span class="s2">&quot;การ&quot;</span><span class="p">,</span> <span class="s2">&quot;บันทึก&quot;</span><span class="p">,</span> \
@@ -931,7 +931,7 @@ set to <strong>False</strong></p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.reign_year_to_ad">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">reign_year_to_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reign_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reign</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/date.html#reign_year_to_ad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.reign_year_to_ad" title="Permalink to this definition"></a></dt>
-<dd><p>Convert reigh year to AD.</p>
+<dd><p>Convert reign year to AD.</p>
 <p>Return AD year according to the reign year for
 the 7th to 10th King of Chakri dynasty, Thailand.
 For instance, the AD year of the 4th reign year of the 10th King is 2019.</p>
@@ -1048,13 +1048,13 @@ double Sara E will be converted to Sara Ae and not be removed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.remove_tone_ipa">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">remove_tone_ipa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/phoneme.html#remove_tone_ipa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.remove_tone_ipa" title="Permalink to this definition"></a></dt>
-<dd><p>Remove Thai Tone from IPA system</p>
+<dd><p>Remove Thai Tones from IPA system</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ipa</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – IPA phoneme</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>IPA phoneme that deleted tone</p>
+<dd class="field-even"><p>IPA phoneme with tones removed</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -1079,13 +1079,13 @@ double Sara E will be converted to Sara Ae and not be removed.</p>
 <div><ul class="simple">
 <li><p>Down tone (Thai: ไม้เอก  _่ )</p></li>
 <li><p>Falling tone  (Thai: ไม้โท  _้ )</p></li>
-<li><p>High tone (Thai: ไม้ตรี  ​_๊ )</p></li>
+<li><p>High tone (Thai: ไม้ตรี  _๊ )</p></li>
 <li><p>Rising tone (Thai: ไม้จัตวา _๋ )</p></li>
 </ul>
 </div></blockquote>
 <p>Putting wrong tone mark is a common mistake in Thai writing.
 By removing tone marks from the string, it could be used to
-for a approximate string matching</p>
+for a approximate string matching.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – input text</p>
@@ -1165,7 +1165,7 @@ according to these rules:</p>
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">sound_syllable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syllable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/syllable.html#sound_syllable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.sound_syllable" title="Permalink to this definition"></a></dt>
 <dd><p>Sound syllable classification</p>
 <p>This function is sound syllable classification.
-It is live syllable or dead syllable.</p>
+The syllable is a live syllable or dead syllable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>syllable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllable</p>
@@ -1194,7 +1194,7 @@ It is live syllable or dead syllable.</p>
 <dt class="sig sig-object py" id="pythainlp.util.syllable_length">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">syllable_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syllable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/syllable.html#syllable_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.syllable_length" title="Permalink to this definition"></a></dt>
 <dd><p>Thai syllable length</p>
-<p>This function is use for find syllable’s length. (long or short)</p>
+<p>This function is used for finding syllable’s length. (long or short)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>syllable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllable</p>
@@ -1222,8 +1222,8 @@ It is live syllable or dead syllable.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.syllable_open_close_detector">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">syllable_open_close_detector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syllable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/syllable.html#syllable_open_close_detector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.syllable_open_close_detector" title="Permalink to this definition"></a></dt>
-<dd><p>Thai syllable open/close detector</p>
-<p>This function is use for find Thai syllable that open or closed sound.</p>
+<dd><p>Open/close Thai syllables detector</p>
+<p>This function is used for finding Thai syllables that are open or closed sound.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>syllable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllable</p>
@@ -1251,14 +1251,14 @@ It is live syllable or dead syllable.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.text_to_arabic_digit">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">text_to_arabic_digit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/digitconv.html#text_to_arabic_digit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.text_to_arabic_digit" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert Thai spelled out digits to Arabic digits.</p>
+<dd><p>This function converts spelled out digits in Thai to Arabic digits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> – A digit spelled out in Thai</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>An Arabic digit such as ‘1’, ‘2’, ‘3’ if the text is
-Thai digit spelled out (ศูนย์, หนึ่ง, สอง, …, เก้า).
+digit spelled out in Thai (ศูนย์, หนึ่ง, สอง, …, เก้า).
 Otherwise, it returns an empty string.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1278,7 +1278,7 @@ Otherwise, it returns an empty string.</p>
 <span class="n">text_to_arabic_digit</span><span class="p">(</span><span class="s2">&quot;เก้า&quot;</span><span class="p">)</span>
 <span class="c1"># output: 9</span>
 
-<span class="c1"># For text that is not Thai digit spelled out</span>
+<span class="c1"># For text that is not digit spelled out in Thai</span>
 <span class="n">text_to_arabic_digit</span><span class="p">(</span><span class="s2">&quot;สิบ&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
 <span class="c1"># output: True</span>
 <span class="n">text_to_arabic_digit</span><span class="p">(</span><span class="s2">&quot;เก้าร้อย&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
@@ -1290,13 +1290,13 @@ Otherwise, it returns an empty string.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.text_to_num">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">text_to_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/wordtonum.html#text_to_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.text_to_num" title="Permalink to this definition"></a></dt>
-<dd><p>Thai text to list thai word with floating point number</p>
+<dd><p>Thai text to list of Thai words with floating point numbers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai text with the spelled-out numerals</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of thai words with float value of the input</p>
+<dd class="field-even"><p>list of Thai words with float values of the input</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -1318,14 +1318,14 @@ Otherwise, it returns an empty string.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.text_to_thai_digit">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">text_to_thai_digit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/digitconv.html#text_to_thai_digit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.text_to_thai_digit" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert Thai spelled out digits to Thai digits.</p>
+<dd><p>This function converts spelled out digits in Thai to Thai digits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> – A digit spelled out in Thai</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A Thai digit such as ‘๑’, ‘๒’, ‘๓’  if the text is Thai digit
-spelled out (ศูนย์, หนึ่ง, สอง, …, เก้า).
+<dd class="field-even"><p>A Thai digit such as ‘๑’, ‘๒’, ‘๓’ if the text is digit
+spelled out in Thai (ศูนย์, หนึ่ง, สอง, …, เก้า).
 Otherwise, it returns an empty string.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1357,14 +1357,14 @@ Otherwise, it returns an empty string.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.thai_digit_to_arabic_digit">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_digit_to_arabic_digit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/digitconv.html#thai_digit_to_arabic_digit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.thai_digit_to_arabic_digit" title="Permalink to this definition"></a></dt>
-<dd><p>This function convert Thai digits (i.e. ๑, ๓, ๑๐) to Arabic digits
+<dd><p>This function converts Thai digits (i.e. ๑, ๓, ๑๐) to Arabic digits
 (i.e. 1, 3, 10).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text with Thai digits such as ‘๑’, ‘๒’, ‘๓’</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Text with Thai digits being converted to Arabic digits
+<dd class="field-even"><p>Text with Thai digits converted to Arabic digits
 such as ‘1’, ‘2’, ‘3’</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1414,7 +1414,7 @@ such as ‘1’, ‘2’, ‘3’</p>
 <li><p>The Thai Buddhist Era (BE) year is simply converted from AD
 by adding 543. This is certainly not accurate for years
 before 1941 AD, due to the change in Thai New Year’s Day.</p></li>
-<li><p>This meant to be an interrim solution, since
+<li><p>This meant to be an interim solution, since
 Python standard’s locale module (which relied on C’s strftime())
 does not support “th” or “th_TH” locale yet. If supported,
 we can just locale.setlocale(locale.LC_TIME, “th_TH”)
@@ -1422,7 +1422,7 @@ and then use native datetime.strftime().</p></li>
 </ul>
 </dd>
 </dl>
-<p>We trying to make this platform-independent and support extentions
+<p>We are trying to make this platform-independent and support extensions
 as many as possible. See these links for strftime() extensions
 in POSIX, BSD, and GNU libc:</p>
 <blockquote>
@@ -1514,19 +1514,19 @@ due to change in Thai New Year’s Day).</p>
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – text</p></li>
 <li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – string containing date and time directives</p></li>
 <li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – year of the text         (ad isAnno Domini and be is Buddhist calendar)</p></li>
-<li><p><strong>add_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – add year convert to ad</p></li>
+<li><p><strong>add_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – add to year when converting to ad</p></li>
 <li><p><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a>) – tzinfo (default is Asia/Bangkok)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The years that be convert to datetime.datetime</p>
+<dd class="field-even"><p>The year that is converted to datetime.datetime</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)">datetime.datetime</a></p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>The fmt char that support:</dt><dd><ul class="simple">
+<dt>The fmt chars that are supported:</dt><dd><ul class="simple">
 <li><p><em>%d</em> - Day (1 - 31)</p></li>
 <li><p><em>%B</em> - Thai month (03, 3, มี.ค., or มีนาคม)</p></li>
 <li><p><em>%Y</em> - Year (66, 2566, or 2023)</p></li>
@@ -1566,11 +1566,11 @@ keyboard layout to the originally intended keyboard layout
 that is the English-US Qwerty keyboard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – incorrect text input (type English with Thai keyboard)</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – incorrect text input (English typed using Thai keyboard)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>English text where incorrect typing with
-a keyboard layout is corrected</p>
+<dd class="field-even"><p>English text with typing with
+incorrect keyboard layout is corrected</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -1591,13 +1591,13 @@ a keyboard layout is corrected</p>
 <dt class="sig sig-object py" id="pythainlp.util.thai_word_tone_detector">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_word_tone_detector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai.html#thai_word_tone_detector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.thai_word_tone_detector" title="Permalink to this definition"></a></dt>
 <dd><p>Thai tone detector for word.</p>
-<p>It use pythainlp.transliterate.pronunciate for convert word to        pronunciation.</p>
+<p>It uses pythainlp.transliterate.pronunciate for converting word to        pronunciation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai word.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Thai pronunciation with tone each syllables.        (l, m, h, r, f or empty if it cannot detector)</p>
+<dd class="field-even"><p>Thai pronunciation with tones in each syllable.        (l, m, h, r, f or empty if it cannot be detected)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -1623,7 +1623,7 @@ a keyboard layout is corrected</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai text contains relative date</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai text containing relative date</p></li>
 <li><p><strong>date</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><em>datetime.datetime</em></a>) – date (default is datetime.datetime.now())</p></li>
 </ul>
 </dd>
@@ -1677,7 +1677,7 @@ a keyboard layout is corrected</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai time in words</p></li>
-<li><p><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Zero padding the hour if True</p></li>
+<li><p><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Zero pad the hour if True</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1699,7 +1699,7 @@ a keyboard layout is corrected</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.time_to_thaiword">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">time_to_thaiword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.12)"><span class="pre">time</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'24h'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/time.html#time_to_thaiword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.time_to_thaiword" title="Permalink to this definition"></a></dt>
-<dd><p>Spell out time to Thai words.</p>
+<dd><p>Spell out time as Thai words.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1708,14 +1708,14 @@ a keyboard layout is corrected</p>
 * <em>24h</em> - 24-hour clock (default)
 * <em>6h</em> - 6-hour clock
 * <em>m6h</em> - Modified 6-hour clock</p></li>
-<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – precision of the spell out
-* <em>m</em> - always spell out to minute level
-* <em>s</em> - always spell out to second level
+<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – precision of the spell out time
+* <em>m</em> - always spell out at minute level
+* <em>s</em> - always spell out at second level
 * None - spell out only non-zero parts</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Time spell out in Thai words</p>
+<dd class="field-even"><p>Time spelled out as Thai words</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -1756,10 +1756,10 @@ a keyboard layout is corrected</p>
 <dd><p>Convert TIS-620 to UTF-8</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text that use TIS-620 encoding</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Text that uses TIS-620 encoding</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Text that use UTF-8 encoding</p>
+<dd class="field-even"><p>Text that uses UTF-8 encoding</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -1784,7 +1784,7 @@ a keyboard layout is corrected</p>
 <dd class="field-odd"><p><strong>syllable</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllable</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>syllable’s tone (l, m, h, r, f or empty if it cannot detector)</p>
+<dd class="field-even"><p>syllable’s tone (l, m, h, r, f or empty if it cannot be detected)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
@@ -1831,13 +1831,13 @@ a keyboard layout is corrected</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.spell_words.spell_syllable">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.spell_words.</span></span><span class="sig-name descname"><span class="pre">spell_syllable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/spell_words.html#spell_syllable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.spell_words.spell_syllable" title="Permalink to this definition"></a></dt>
-<dd><p>Spell syllable by Thai word distribution form.</p>
+<dd><p>Spell out syllables in Thai word distribution form.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllable only</p>
+<dd class="field-odd"><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai syllables only</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of spell syllable</p>
+<dd class="field-even"><p>List of spelled out syllables</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -1856,13 +1856,13 @@ a keyboard layout is corrected</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.util.spell_words.spell_word">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.spell_words.</span></span><span class="sig-name descname"><span class="pre">spell_word</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/spell_words.html#spell_word"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.spell_words.spell_word" title="Permalink to this definition"></a></dt>
-<dd><p>Spell word by Thai word distribution form.</p>
+<dd><p>Spell out words in Thai word distribution form.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>w</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai word only</p>
+<dd class="field-odd"><p><strong>w</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai words only</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of spell word</p>
+<dd class="field-even"><p>List of spelled out words</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>

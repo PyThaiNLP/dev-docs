@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -121,11 +121,11 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Dictionary-based maximal matching word segmentation, constrained with</span>
-<span class="sd">Thai Character Cluster (TCC) boundaries with improve the rules.</span>
+<span class="sd">Dictionary-based maximal matching word segmentation, constrained by</span>
+<span class="sd">Thai Character Cluster (TCC) boundaries with improved rules.</span>
 
-<span class="sd">The code is based on the notebooks created by Korakot Chaovavanich,</span>
-<span class="sd">with heuristic graph size limit added to avoid exponential wait time.</span>
+<span class="sd">The codes are based on the notebooks created by Korakot Chaovavanich,</span>
+<span class="sd">with heuristic graph size limit added to avoid exponential waiting time.</span>
 
 <span class="sd">:See Also:</span>
 <span class="sd">    * \</span>
@@ -147,9 +147,9 @@
 <span class="n">_PAT_NONTHAI</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;(?x)</span>
 <span class="sd">[-a-zA-Z]+|        # Latin characters</span>
-<span class="sd">\d+([,\.]\d+)*|    # number</span>
-<span class="sd">[ \t]+|            # space</span>
-<span class="sd">\r?\n              # newline</span>
+<span class="sd">\d+([,\.]\d+)*|    # numbers</span>
+<span class="sd">[ \t]+|            # spaces</span>
+<span class="sd">\r?\n              # newlines</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="p">)</span>
 
@@ -186,12 +186,12 @@
 
 <span class="k">def</span> <span class="nf">_onecut</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="c1"># main data structure:</span>
-    <span class="c1"># - key is begin position (int)</span>
-    <span class="c1"># - value is possible end positions (List[int])</span>
+    <span class="c1"># - key is beginning position (int)</span>
+    <span class="c1"># - value is possible ending positions (List[int])</span>
     <span class="c1"># if key is not found, value is empty list</span>
     <span class="n">graph</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
-    <span class="n">graph_size</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># keep track of graph size, if too big will force cutoff</span>
+    <span class="n">graph_size</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># keep track of graph size, if too big, force cutoff</span>
 
     <span class="n">valid_poss</span> <span class="o">=</span> <span class="n">tcc_pos</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># breaking positions that are TCC-valid</span>
 
@@ -259,10 +259,10 @@
     <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_DICT_TRIE</span><span class="p">,</span>
     <span class="n">safe_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Maximal-matching word segmentation, Thai Character Cluster constrained.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Maximal-matching word segmentation constrained by Thai Character Cluster.</span>
 
 <span class="sd">    A dictionary-based word segmentation using maximal matching algorithm,</span>
-<span class="sd">    constrained to Thai Character Cluster boundaries.</span>
+<span class="sd">    constrained by Thai Character Cluster boundaries.</span>
 
 <span class="sd">    A custom dictionary can be supplied.</span>
 
@@ -271,7 +271,7 @@
 <span class="sd">    :param custom_dict: tokenization dictionary,\</span>
 <span class="sd">        defaults to DEFAULT_WORD_DICT_TRIE</span>
 <span class="sd">    :type custom_dict: Trie, optional</span>
-<span class="sd">    :param safe_mode: reduce chance for long processing time in long text\</span>
+<span class="sd">    :param safe_mode: reduce chance for long processing time for long text\</span>
 <span class="sd">        with many ambiguous breaking points, defaults to False</span>
 <span class="sd">    :type safe_mode: bool, optional</span>
 <span class="sd">    :return: list of tokens</span>
@@ -287,12 +287,12 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">_onecut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">))</span>
 
     <span class="c1"># if the text is longer than the limit,</span>
-    <span class="c1"># breaks them into smaller chunks then tokenizes each chunk</span>
+    <span class="c1"># break them into smaller chunks, then tokenize each chunk</span>
     <span class="n">text_parts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">_TEXT_SCAN_END</span><span class="p">:</span>
         <span class="n">sample</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">_TEXT_SCAN_BEGIN</span><span class="p">:</span><span class="n">_TEXT_SCAN_END</span><span class="p">]</span>
 
-        <span class="c1"># find possible break positions</span>
+        <span class="c1"># find possible breaking positions</span>
         <span class="n">cut_pos</span> <span class="o">=</span> <span class="n">_TEXT_SCAN_END</span>
 
         <span class="c1"># try to break by space first</span>
@@ -320,7 +320,7 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
         <span class="n">text_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-    <span class="c1"># tokenizes each text parts</span>
+    <span class="c1"># tokenizes each text part</span>
     <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">text_part</span> <span class="ow">in</span> <span class="n">text_parts</span><span class="p">:</span>
         <span class="n">tokens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_onecut</span><span class="p">(</span><span class="n">text_part</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)))</span>

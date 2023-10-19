@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -123,15 +123,15 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Thai2fit: Thai Wikipeida Language Model for Text Generation</span>
 
-<span class="sd">Code from</span>
+<span class="sd">Codes are from</span>
 <span class="sd">https://github.com/PyThaiNLP/tutorials/blob/master/source/notebooks/text_generation.ipynb</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gen_sentence&quot;</span><span class="p">]</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># fastai</span>
 <span class="kn">import</span> <span class="nn">fastai</span>
@@ -171,21 +171,21 @@
 
 <span class="n">data_lm</span><span class="o">.</span><span class="n">sanity_check</span><span class="p">()</span>
 
-<span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">emb_sz</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
-    <span class="n">n_hid</span><span class="o">=</span><span class="mi">1550</span><span class="p">,</span>
-    <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">pad_token</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">qrnn</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">tie_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">out_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">output_p</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-    <span class="n">hidden_p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">input_p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-    <span class="n">embed_p</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-    <span class="n">weight_p</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">trn_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">drop_mult</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;emb_sz&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="s2">&quot;n_hid&quot;</span><span class="p">:</span> <span class="mi">1550</span><span class="p">,</span>
+    <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;pad_token&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;qrnn&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;tie_weights&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;out_bias&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;output_p&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="s2">&quot;hidden_p&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">&quot;input_p&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">&quot;embed_p&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+    <span class="s2">&quot;weight_p&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">trn_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;drop_mult&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s2">&quot;clip&quot;</span><span class="p">:</span> <span class="mf">0.12</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
 
 <span class="n">learn</span> <span class="o">=</span> <span class="n">language_model_learner</span><span class="p">(</span>
     <span class="n">data_lm</span><span class="p">,</span> <span class="n">AWD_LSTM</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">trn_args</span>
@@ -204,10 +204,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text generator using Thai2fit</span>
 
-<span class="sd">    :param str start_seq: word for begin word.</span>
-<span class="sd">    :param int N: number of word.</span>
-<span class="sd">    :param bool output_str: output is str</span>
-<span class="sd">    :param bool duplicate: duplicate word in sent</span>
+<span class="sd">    :param str start_seq: word to begin sentence with</span>
+<span class="sd">    :param int N: number of words</span>
+<span class="sd">    :param bool output_str: output as string</span>
+<span class="sd">    :param bool duplicate: allow duplicate words in sentence</span>
 
 <span class="sd">    :return: list words or str words</span>
 <span class="sd">    :rtype: List[str], str</span>

@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -129,7 +129,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 <span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus_path</span>
 
@@ -144,7 +144,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># get the model, will download if it&#39;s not available locally</span>
+        <span class="c1"># get the model, download it if it&#39;s not available locally</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__model_filename</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">_MODEL_NAME</span><span class="p">)</span>
 
         <span class="n">loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model_filename</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
@@ -226,7 +226,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">vocabulary_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">character_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
             <span class="n">vocabulary_size</span><span class="p">,</span> <span class="n">embedding_size</span>
@@ -290,7 +290,7 @@
 
 <span class="k">class</span> <span class="nc">Attn</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Attn</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
@@ -341,7 +341,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">vocabulary_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">AttentionDecoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary_size</span> <span class="o">=</span> <span class="n">vocabulary_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">character_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
@@ -458,7 +458,7 @@
                 <span class="n">decoder_input</span><span class="p">,</span> <span class="n">decoder_hidden</span><span class="p">,</span> <span class="n">encoder_outputs</span><span class="p">,</span> <span class="n">mask</span>
             <span class="p">)</span>
 
-            <span class="n">topv</span><span class="p">,</span> <span class="n">topi</span> <span class="o">=</span> <span class="n">decoder_output</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">topi</span> <span class="o">=</span> <span class="n">decoder_output</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">outputs</span><span class="p">[</span><span class="n">di</span><span class="p">]</span> <span class="o">=</span> <span class="n">decoder_output</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
             <span class="n">teacher_force</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">teacher_forcing_ratio</span>
@@ -479,7 +479,6 @@
 
 
 <div class="viewcode-block" id="transliterate"><a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.thaig2p.transliterate">[docs]</a><span class="k">def</span> <span class="nf">transliterate</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">global</span> <span class="n">_THAI_G2P</span>
     <span class="k">return</span> <span class="n">_THAI_G2P</span><span class="o">.</span><span class="n">g2p</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 </pre></div>
 

@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -198,10 +198,10 @@
 <span class="sd">        from :mod:`gensim`.</span>
 
 <span class="sd">        :param list words: a list of words</span>
-<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative`</span>
+<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
 <span class="sd">                          not in the vocabulary of the model.</span>
-<span class="sd">        :return: the word that mostly unrelated</span>
-<span class="sd">        :rtype: strt</span>
+<span class="sd">        :return: the word is that mostly unrelated</span>
+<span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Note:</span>
 <span class="sd">            * If a word in `words` is not in the vocabulary, :class:`KeyError`</span>
@@ -233,8 +233,8 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">positive</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">negative</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function find the top-10 words that are most similar with respect</span>
-<span class="sd">        to from two lists of words labeled as positive and negative.</span>
+<span class="sd">        This function finds the top-10 words that are most similar with respect</span>
+<span class="sd">        to two lists of words labeled as positive and negative.</span>
 <span class="sd">        The top-10 most similar words are obtained using multiplication</span>
 <span class="sd">        combination objective from Omer Levy and Yoav Goldberg</span>
 <span class="sd">        [OmerLevy_YoavGoldberg_2014]_.</span>
@@ -243,12 +243,12 @@
 <span class="sd">        :mod:`gensim`.</span>
 
 <span class="sd">        :param list positive: a list of words to add</span>
-<span class="sd">        :param list negative: a list of words to substract</span>
+<span class="sd">        :param list negative: a list of words to subtract</span>
 
-<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative`</span>
+<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
 <span class="sd">                          not in the vocabulary of the model.</span>
 <span class="sd">        :return: list of top-10 most similar words and its similarity score</span>
-<span class="sd">        :rtype:  list[tuple[str,float]]</span>
+<span class="sd">        :rtype:  list[tuple[str, float]]</span>
 
 <span class="sd">        :Note:</span>
 <span class="sd">            *  With a single word in the positive list, it will find the</span>
@@ -318,7 +318,7 @@
 <span class="sd">        (&#39;ลาว&#39;, 0.2995176911354065), (&#39;คนไทย&#39;, 0.2885020673274994),</span>
 <span class="sd">        (&#39;เวียดนาม&#39;, 0.2878379821777344), (&#39;ชาวไทย&#39;, 0.28480708599090576)]</span>
 
-<span class="sd">        The function return :class:`KeyError` when the term &quot;เมนูอาหารไทย&quot;</span>
+<span class="sd">        The function returns :class:`KeyError` when the term &quot;เมนูอาหารไทย&quot;</span>
 <span class="sd">        is not in the vocabulary.</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
@@ -335,10 +335,10 @@
 
 <div class="viewcode-block" id="WordVector.similarity"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.similarity">[docs]</a>    <span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function computae cosine similarity between two words.</span>
+<span class="sd">        This function computes cosine similarity between two words.</span>
 
-<span class="sd">        :param str word1: first word to be compared</span>
-<span class="sd">        :param str word2: second word to be compared</span>
+<span class="sd">        :param str word1: first word to be compared with</span>
+<span class="sd">        :param str word2: second word to be compared with</span>
 
 <span class="sd">        :raises KeyError: if either `word1` or `word2` is not in the</span>
 <span class="sd">                          vocabulary of the model.</span>
@@ -374,11 +374,11 @@
 
 <div class="viewcode-block" id="WordVector.sentence_vectorizer"><a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.sentence_vectorizer">[docs]</a>    <span class="k">def</span> <span class="nf">sentence_vectorizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_mean</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function convert a Thai sentence into vector.</span>
-<span class="sd">        Specifically, it first tokenize that text and map each tokenized words</span>
+<span class="sd">        This function converts a Thai sentence into vector.</span>
+<span class="sd">        Specifically, it first tokenizes that text and map each tokenized word</span>
 <span class="sd">        with the word vectors from the model.</span>
-<span class="sd">        Then, word vectors are aggregatesd into one vector of 300 dimension</span>
-<span class="sd">        by calulating either mean, or summation of all word vectors.</span>
+<span class="sd">        Then, word vectors are aggregated into one vector of 300 dimension</span>
+<span class="sd">        by calculating either mean or summation of all word vectors.</span>
 
 <span class="sd">        :param str text: text input</span>
 <span class="sd">        :param bool use_mean: if `True` aggregate word vectors with mean of all</span>
@@ -393,8 +393,8 @@
 <span class="sd">        :Example:</span>
 
 <span class="sd">        Vectorize the sentence, &quot;อ้วนเสี้ยวเข้ายึดแคว้นกิจิ๋ว ในปี พ.ศ. 735&quot;,</span>
-<span class="sd">        into one sentence vector with two aggregation meanthods: mean</span>
-<span class="sd">         and summation.</span>
+<span class="sd">        into one sentence vector with two aggregation methods: mean</span>
+<span class="sd">        and summation.</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
 <span class="sd">        &gt;&gt;&gt;</span>

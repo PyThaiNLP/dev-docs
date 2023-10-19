@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 06/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 19/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -158,8 +158,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get details about a corpus, using information from local catalog.</span>
 
-<span class="sd">    :param str name: name corpus</span>
-<span class="sd">    :return: details about a corpus</span>
+<span class="sd">    :param str name: name of corpus</span>
+<span class="sd">    :return: details about corpus</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -174,7 +174,7 @@
             <span class="k">if</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">version</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">corpus</span>
 
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="p">{}</span></div>
 
 
 <span class="k">def</span> <span class="nf">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -195,7 +195,7 @@
 
 <span class="sd">    Each line in the file will be a member of the set or the list.</span>
 
-<span class="sd">    By default, a frozenset will be return, with whitespaces stripped, and</span>
+<span class="sd">    By default, a frozenset will be return, with whitespace stripped and</span>
 <span class="sd">    empty values and duplicates removed.</span>
 
 <span class="sd">    If as_is is True, a list will be return, with no modifications</span>
@@ -204,7 +204,7 @@
 
 <span class="sd">    :param str filename: filename of the corpus to be read</span>
 
-<span class="sd">    :return: :class:`frozenset` or :class:`list` consists of lines in the file</span>
+<span class="sd">    :return: :class:`frozenset` or :class:`list` consisting of lines in the file</span>
 <span class="sd">    :rtype: :class:`frozenset` or :class:`list`</span>
 
 <span class="sd">    :Example:</span>
@@ -240,12 +240,12 @@
 <span class="sd">    Get model path from default_db.json</span>
 
 <span class="sd">    :param str name: corpus name</span>
-<span class="sd">    :return: path to the corpus or **None** of the corpus doesn&#39;t \</span>
-<span class="sd">             exist in the device</span>
+<span class="sd">    :return: path to the corpus or **None** if the corpus doesn&#39;t \</span>
+<span class="sd">             exist on the device</span>
 <span class="sd">    :rtype: str</span>
 
-<span class="sd">    If you want edit default_db.json, \</span>
-<span class="sd">        you can edit in pythainlp/corpus/default_db.json</span>
+<span class="sd">    If you want to edit default_db.json, \</span>
+<span class="sd">        you can edit pythainlp/corpus/default_db.json</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">default_db_path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="s2">&quot;default_db.json&quot;</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">default_db_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
@@ -271,14 +271,14 @@
 
 <span class="sd">    :param str name: corpus name</span>
 <span class="sd">    :param str version: version</span>
-<span class="sd">    :param bool force: force download</span>
-<span class="sd">    :return: path to the corpus or **None** of the corpus doesn&#39;t \</span>
-<span class="sd">             exist in the device</span>
+<span class="sd">    :param bool force: force downloading</span>
+<span class="sd">    :return: path to the corpus or **None** if the corpus doesn&#39;t \</span>
+<span class="sd">             exist on the device</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">    (Please see the filename from</span>
+<span class="sd">    (Please see the filename in</span>
 <span class="sd">    `this file</span>
 <span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/db.json&gt;`_</span>
 
@@ -306,18 +306,18 @@
 <span class="sd">        print(get_corpus_path(&#39;wiki_lm_lstm&#39;))</span>
 <span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Customize your the corpus path then close the line after lines 164 through 190.</span>
+    <span class="c1"># Customize your corpus path then close the line from lines 164 through 190.</span>
     <span class="n">_CUSTOMIZE</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1"># &quot;the corpus name&quot;:&quot;path&quot;</span>
     <span class="p">}</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_CUSTOMIZE</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_CUSTOMIZE</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_CUSTOMIZE</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
     <span class="n">default_path</span> <span class="o">=</span> <span class="n">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">default_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">default_path</span>
 
-    <span class="c1"># check if the corpus is in local catalog, download if not</span>
+    <span class="c1"># check if the corpus is in local catalog, download it if not</span>
     <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">):</span>
@@ -330,7 +330,7 @@
             <span class="n">path</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;foldername&quot;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">))</span>
-        <span class="c1"># check if the corpus file actually exists, download if not</span>
+        <span class="c1"># check if the corpus file actually exists, download it if not</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -343,8 +343,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download helper.</span>
 
-<span class="sd">    @param: url to download file</span>
-<span class="sd">    @param: dst place to put the file</span>
+<span class="sd">    @param: URL for downloading file</span>
+<span class="sd">    @param: dst place to put the file into</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 64 KiB</span>
 
@@ -378,8 +378,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check hash helper.</span>
 
-<span class="sd">    @param: dst place to put the file</span>
-<span class="sd">    @param: md5 place to hash the file (MD5)</span>
+<span class="sd">    @param: dst place to put the file into</span>
+<span class="sd">    @param: md5 place to file hash (MD5)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">md5</span> <span class="ow">and</span> <span class="n">md5</span> <span class="o">!=</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">hashlib</span>
@@ -420,9 +420,9 @@
     <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">__version</span> <span class="o">=</span> <span class="n">__version__</span>
     <span class="k">if</span> <span class="s2">&quot;dev&quot;</span> <span class="ow">in</span> <span class="n">__version</span><span class="p">:</span>
-        <span class="n">__version</span> <span class="o">=</span> <span class="n">__version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dev&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">__version</span> <span class="o">=</span> <span class="n">__version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">elif</span> <span class="s2">&quot;beta&quot;</span> <span class="ow">in</span> <span class="n">__version</span><span class="p">:</span>
-        <span class="n">__version</span> <span class="o">=</span> <span class="n">__version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">__version</span> <span class="o">=</span> <span class="n">__version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">__version</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">cause</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
@@ -438,13 +438,13 @@
         <span class="n">check</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">cause</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;&lt;=&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cause</span> <span class="ow">and</span> <span class="s2">&quot;&lt;&quot;</span> <span class="ow">in</span> <span class="n">cause</span><span class="p">:</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">cause</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">)</span>
-        <span class="n">check</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">cause</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;&lt;=&quot;</span> <span class="ow">in</span> <span class="n">cause</span><span class="p">:</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">cause</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">)</span>
-        <span class="n">check</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">cause</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;&lt;&quot;</span> <span class="ow">in</span> <span class="n">cause</span><span class="p">:</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">cause</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">)</span>
-        <span class="n">check</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">cause</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">):</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">cause</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">check</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">_version2int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -465,10 +465,10 @@
 <span class="sd">    https://pythainlp.github.io/pythainlp-corpus/db.json</span>
 
 <span class="sd">    :param str name: corpus name</span>
-<span class="sd">    :param bool force: force download</span>
+<span class="sd">    :param bool force: force downloading</span>
 <span class="sd">    :param str url: URL of the corpus catalog</span>
-<span class="sd">    :param str version: Version of the corpus</span>
-<span class="sd">    :return: **True** if the corpus is found and succesfully downloaded.</span>
+<span class="sd">    :param str version: version of the corpus</span>
+<span class="sd">    :return: **True** if the corpus is found and successfully downloaded.</span>
 <span class="sd">             Otherwise, it returns **False**.</span>
 <span class="sd">    :rtype: bool</span>
 
@@ -483,7 +483,7 @@
 <span class="sd">        # - Downloading: wiki_lm_lstm 0.1</span>
 <span class="sd">        # thwiki_lm.pth:  26%|██▌       | 114k/434k [00:00&lt;00:00, 690kB/s]</span>
 
-<span class="sd">    By default, downloaded corpus and model will be saved in</span>
+<span class="sd">    By default, downloaded corpora and models will be saved in</span>
 <span class="sd">    ``$HOME/pythainlp-data/``</span>
 <span class="sd">    (e.g. ``/Users/bact/pythainlp-data/wiki_lm_lstm.pth``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -532,7 +532,7 @@
                 <span class="n">found</span> <span class="o">=</span> <span class="n">i</span>
                 <span class="k">break</span>
 
-        <span class="c1"># If not found in local, download</span>
+        <span class="c1"># If not found in local, download it</span>
         <span class="k">if</span> <span class="n">force</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Downloading: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">_download</span><span class="p">(</span>
@@ -592,16 +592,16 @@
 
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">local_db</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="c1"># Check if versions match if the corpus is found in local database</span>
+        <span class="c1"># Check if versions match or if the corpus is found in local database</span>
         <span class="c1"># but a re-download is not forced</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">current_ver</span> <span class="o">=</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="n">found</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">current_ver</span> <span class="o">==</span> <span class="n">version</span><span class="p">:</span>
-                <span class="c1"># Already has the same version</span>
+                <span class="c1"># Corpus of the same version already exists</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Already up to date.&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># Has the corpus but different version</span>
+                <span class="c1"># Corpus exists but is of different version</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Existing version: </span><span class="si">{</span><span class="n">current_ver</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- New version available: </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Use download(data_name, force=True) to update&quot;</span><span class="p">)</span>
@@ -617,7 +617,7 @@
 <span class="sd">    Remove corpus</span>
 
 <span class="sd">    :param str name: corpus name</span>
-<span class="sd">    :return: **True** if the corpus is found and succesfully removed.</span>
+<span class="sd">    :return: **True** if the corpus is found and successfully removed.</span>
 <span class="sd">             Otherwise, it returns **False**.</span>
 <span class="sd">    :rtype: bool</span>
 
