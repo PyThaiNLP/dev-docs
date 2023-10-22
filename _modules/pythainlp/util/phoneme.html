@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 21/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 22/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -233,7 +233,13 @@
     <span class="s2">&quot;d&quot;</span><span class="p">:</span><span class="s2">&quot;d&quot;</span><span class="p">,</span>
     <span class="s2">&quot;f&quot;</span><span class="p">:</span><span class="s2">&quot;f&quot;</span><span class="p">,</span>
     <span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="s2">&quot;h&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;j&quot;</span><span class="p">:</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+    <span class="c1"># The conversion of j depends on its position in the syllable.</span>
+    <span class="c1"># But, unfortunately, the current implementation cannot handle both cases.</span>
+    <span class="c1"># To remove confusions without changing the behavior and breaking existing codes,</span>
+    <span class="c1"># it is suggested that the first key-value mapping of j be simply commented out,</span>
+    <span class="c1"># as it would be overridden by the second one and thus never take effect from the beginning.</span>
+    <span class="c1"># See #846 for a more detailed discussion: https://github.com/PyThaiNLP/pythainlp/issues/846</span>
+    <span class="c1"># &quot;j&quot;:&quot;y&quot;,</span>
     <span class="s2">&quot;k&quot;</span><span class="p">:</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
     <span class="s2">&quot;kʰ&quot;</span><span class="p">:</span><span class="s2">&quot;kh&quot;</span><span class="p">,</span>
     <span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="s2">&quot;l&quot;</span><span class="p">,</span>
@@ -306,7 +312,7 @@
 <span class="sd">    Docs: https://en.wikipedia.org/wiki/Help:IPA/Thai</span>
 
 <span class="sd">    :param str ipa: IPA phoneme</span>
-<span class="sd">    :return: The RTGS that is converted</span>
+<span class="sd">    :return: The RTGS that is converted, according to rules listed in the Wikipedia page</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
