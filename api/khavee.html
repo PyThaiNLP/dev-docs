@@ -36,7 +36,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 22/10/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 23/10/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -212,10 +212,10 @@
 
 <span class="n">kv</span> <span class="o">=</span> <span class="n">KhaveeVerifier</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span><span class="s1">&#39;อัน&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span> <span class="s1">&#39;อัน&#39;</span><span class="p">))</span>
 <span class="c1"># output: True</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span><span class="s1">&#39;แมว&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span> <span class="s1">&#39;แมว&#39;</span><span class="p">))</span>
 <span class="c1"># output: False</span>
 </pre></div>
 </div>
@@ -250,11 +250,20 @@
 
 <span class="n">kv</span> <span class="o">=</span> <span class="n">KhaveeVerifier</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_klon</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง เอ๋งเอ๋งคะนอง มีคนจับจอง เขาชื่อน้องเธียร&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">k_type</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_klon</span><span class="p">(</span>
+    <span class="s1">&#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง เอ๋งเอ๋งคะนอง                 มีคนจับจอง เขาชื่อน้องเธียร&#39;</span><span class="p">,</span>
+    <span class="n">k_type</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">))</span>
 <span class="c1"># output: The poem is correct according to the principle.</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_klon</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง เอ๋งเอ๋งเสียงหมา มีคนจับจอง เขาชื่อน้องเธียร&#39;&#39;&#39;</span><span class="p">,</span><span class="n">k_type</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-<span class="c1"># # -&gt; [&quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;จอง&#39;)in paragraph 2&quot;, &quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;ทอง&#39;)in paragraph 2&quot;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_klon</span><span class="p">(</span>
+    <span class="s1">&#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง                 เอ๋งเอ๋งเสียงหมา มีคนจับจอง เขาชื่อน้องเธียร&#39;</span><span class="p">,</span>
+    <span class="n">k_type</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">))</span>
+<span class="c1"># output: [</span>
+    <span class="s2">&quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;จอง&#39;) in paragraph 2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;ทอง&#39;) in paragraph 2&quot;</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -285,9 +294,9 @@
 
 <span class="c1"># การเช็คคำเอกโท</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอง&#39;</span><span class="p">),</span> <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอ่ง&#39;</span><span class="p">),</span> <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอ้ง&#39;</span><span class="p">))</span>
-<span class="c1">## -&gt; False, aek, too</span>
+<span class="c1"># -&gt; False, aek, too</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">([</span><span class="s1">&#39;เอง&#39;</span><span class="p">,</span> <span class="s1">&#39;เอ่ง&#39;</span><span class="p">,</span> <span class="s1">&#39;เอ้ง&#39;</span><span class="p">]))</span> <span class="c1"># ใช้ List ได้เหมือนกัน</span>
-<span class="c1">## -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
+<span class="c1"># -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
