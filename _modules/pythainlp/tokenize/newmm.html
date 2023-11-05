@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (4.1.0beta5) <br /> Published date: 01/11/2023
+                <unknown> (4.1.0beta5) <br /> Published date: 05/11/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -144,12 +144,15 @@
 <span class="kn">from</span> <span class="nn">pythainlp.tokenize.tcc_p</span> <span class="kn">import</span> <span class="n">tcc_pos</span>
 
 <span class="c1"># match non-Thai tokens</span>
+<span class="c1"># `|` is used as like &quot;early return&quot;,</span>
+<span class="c1"># which divides &quot;abc123&quot; to &quot;abc&quot;, &quot;123&quot; for example.</span>
 <span class="n">_PAT_NONTHAI</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;(?x)</span>
+<span class="sa">r</span><span class="sd">&quot;&quot;&quot;(?x)</span>
 <span class="sd">[-a-zA-Z]+|        # Latin characters</span>
 <span class="sd">\d+([,\.]\d+)*|    # numbers</span>
 <span class="sd">[ \t]+|            # spaces</span>
-<span class="sd">\r?\n              # newlines</span>
+<span class="sd">\r?\n|             # newlines</span>
+<span class="sd">[^\u0E00-\u0E7F \t\r\n]+  # other non-Thai characters, and stops matching until space/newline</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="p">)</span>
 
