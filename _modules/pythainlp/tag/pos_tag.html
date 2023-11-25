@@ -33,7 +33,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (5.0.0dev0) <br /> Published date: 13/11/2023
+                <unknown> (5.0.0dev0) <br /> Published date: 25/11/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -288,13 +288,36 @@
 
 
 <span class="k">def</span> <span class="nf">pos_tag_transformers</span><span class="p">(</span>
-    <span class="n">words</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bert-base-th-cased-blackboard&quot;</span>
-<span class="p">):</span>
+    <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bert&quot;</span><span class="p">,</span>
+    <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blackboard&quot;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">-&gt;</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &quot;wangchanberta-ud-thai-pud-upos&quot;,</span>
-<span class="sd">    &quot;mdeberta-v3-ud-thai-pud-upos&quot;,</span>
-<span class="sd">    &quot;bert-base-th-cased-blackboard&quot;,</span>
+<span class="sd">    Marks sentences with part-of-speech (POS) tags.</span>
 
+<span class="sd">    :param str sentence: a list of lists of tokenized words</span>
+<span class="sd">    :param str engine:</span>
+<span class="sd">        * *bert* -  BERT: Bidirectional Encoder Representations from Transformers (default)</span>
+<span class="sd">        * *wangchanberta* - fine-tuned version of airesearch/wangchanberta-base-att-spm-uncased on pud corpus (support PUD cotpus only)</span>
+<span class="sd">        * *mdeberta* - mDeBERTa: Multilingual Decoding-enhanced BERT with disentangled attention (support PUD corpus only)</span>
+<span class="sd">    :param str corpus: the corpus that is used to create the language model for tagger</span>
+<span class="sd">        * *blackboard* - `blackboard treebank (support bert engine only) &lt;https://bitbucket.org/kaamanita/blackboard-treebank/src/master/&gt;`_</span>
+<span class="sd">        * *pud* - `Parallel Universal Dependencies (PUD)\</span>
+<span class="sd">            &lt;https://github.com/UniversalDependencies/UD_Thai-PUD&gt;`_ \</span>
+<span class="sd">            treebanks, natively use Universal POS tags (support wangchanberta and mdeberta engine)</span>
+<span class="sd">    :return: a list of lists of tuples (word, POS tag)</span>
+<span class="sd">    :rtype: list[list[tuple[str, str]]]</span>
+
+<span class="sd">    :Example:</span>
+
+<span class="sd">    Labels POS for given sentence::</span>
+
+<span class="sd">        from pythainlp.tag import pos_tag_transformers</span>
+
+<span class="sd">        sentences = &quot;แมวทำอะไรตอนห้าโมงเช้า&quot;</span>
+<span class="sd">        pos_tag_transformers(sentences, engine=&quot;bert&quot;, corpus=&#39;blackboard&#39;)</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # [[(&#39;แมว&#39;, &#39;NOUN&#39;), (&#39;ทําอะไร&#39;, &#39;VERB&#39;), (&#39;ตอนห้าโมงเช้า&#39;, &#39;NOUN&#39;)]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -304,31 +327,38 @@
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
             <span class="s2">&quot;Not found transformers! Please install transformers by pip install transformers&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sentence</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta-ud-thai-pud-upos&quot;</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="s2">&quot;Pavarissy/wangchanberta-ud-thai-pud-upos&quot;</span><span class="p">)</span>
-        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Pavarissy/wangchanberta-ud-thai-pud-upos&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;mdeberta-v3-ud-thai-pud-upos&quot;</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="s2">&quot;Pavarissy/mdeberta-v3-ud-thai-pud-upos&quot;</span><span class="p">)</span>
-        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Pavarissy/mdeberta-v3-ud-thai-pud-upos&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;bert-base-th-cased-blackboard&quot;</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lunarlist/pos_thai&quot;</span><span class="p">)</span>
-        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lunarlist/pos_thai&quot;</span><span class="p">)</span>
+    <span class="n">_blackboard_support_engine</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;bert&quot;</span> <span class="p">:</span> <span class="s2">&quot;lunarlist/pos_thai&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">_pud_support_engine</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;wangchanberta&quot;</span> <span class="p">:</span> <span class="s2">&quot;Pavarissy/wangchanberta-ud-thai-pud-upos&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mdeberta&quot;</span> <span class="p">:</span> <span class="s2">&quot;Pavarissy/mdeberta-v3-ud-thai-pud-upos&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s1">&#39;blackboard&#39;</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_blackboard_support_engine</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">base_model</span> <span class="o">=</span> <span class="n">_blackboard_support_engine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>
+        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s1">&#39;pud&#39;</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_pud_support_engine</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">base_model</span> <span class="o">=</span> <span class="n">_pud_support_engine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>
+        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;pos_tag_transformers not support </span><span class="si">{0}</span><span class="s2"> engine.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">engine</span>
+            <span class="s2">&quot;pos_tag_transformers not support </span><span class="si">{0}</span><span class="s2"> engine or </span><span class="si">{1}</span><span class="s2"> corpus.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">engine</span><span class="p">,</span> <span class="n">corpus</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">TokenClassificationPipeline</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">grouped_entities</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">TokenClassificationPipeline</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">aggregation_strategy</span><span class="o">=</span><span class="s2">&quot;simple&quot;</span><span class="p">)</span>
 
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">outputs</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="n">word_tags</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">tag</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">],</span> <span class="n">tag</span><span class="p">[</span><span class="s1">&#39;entity_group&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">word_tags</span>
 </pre></div>
 
            </div>
