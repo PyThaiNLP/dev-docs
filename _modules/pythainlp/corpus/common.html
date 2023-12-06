@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP 297aadc documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP 9bd951b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d3a52a00"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=1b2af14a"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (297aadc) <br /> Published date: 06/12/2023
+                dev (9bd951b) <br /> Published date: 06/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -122,49 +122,51 @@
     <span class="s2">&quot;thai_female_names&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_male_names&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_negations&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_dict&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_stopwords&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_syllables&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;thai_words&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;thai_dict&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;thai_wsd_dict&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_synonym&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_synonyms&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_words&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thai_wsd_dict&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">FrozenSet</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus</span><span class="p">,</span> <span class="n">get_corpus_path</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">get_corpus</span><span class="p">,</span> <span class="n">get_corpus_as_is</span><span class="p">,</span> <span class="n">get_corpus_path</span>
 
-<span class="n">_THAI_COUNTRIES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_COUNTRIES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_COUNTRIES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;countries_th.txt&quot;</span>
 
-<span class="n">_THAI_THAILAND_PROVINCES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">_THAI_THAILAND_PROVINCES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
+<span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;thailand_provinces_th.csv&quot;</span>
 
-<span class="n">_THAI_SYLLABLES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_SYLLABLES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_SYLLABLES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;syllables_th.txt&quot;</span>
 
-<span class="n">_THAI_WORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_WORDS</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_WORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;words_th.txt&quot;</span>
 
-<span class="n">_THAI_STOPWORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_STOPWORDS</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_STOPWORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;stopwords_th.txt&quot;</span>
 
-<span class="n">_THAI_NEGATIONS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_NEGATIONS</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_NEGATIONS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;negations_th.txt&quot;</span>
 
-<span class="n">_THAI_FAMLIY_NAMES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_FAMLIY_NAMES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_FAMLIY_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;family_names_th.txt&quot;</span>
-<span class="n">_THAI_FEMALE_NAMES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_FEMALE_NAMES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_FEMALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_female_th.txt&quot;</span>
-<span class="n">_THAI_MALE_NAMES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_MALE_NAMES</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_MALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_male_th.txt&quot;</span>
 
-<span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">_THAI_ORST_WORDS</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 
 <span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">_THAI_SYNONYM</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_THAI_SYNONYMS</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <div class="viewcode-block" id="countries"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.countries">[docs]</a><span class="k">def</span> <span class="nf">countries</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -184,7 +186,7 @@
     <span class="k">return</span> <span class="n">_THAI_COUNTRIES</span></div>
 
 
-<div class="viewcode-block" id="provinces"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.provinces">[docs]</a><span class="k">def</span> <span class="nf">provinces</span><span class="p">(</span><span class="n">details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<div class="viewcode-block" id="provinces"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.provinces">[docs]</a><span class="k">def</span> <span class="nf">provinces</span><span class="p">(</span><span class="n">details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a frozenset of Thailand province names in Thai such as &quot;กระบี่&quot;,</span>
 <span class="sd">    &quot;กรุงเทพมหานคร&quot;, &quot;กาญจนบุรี&quot;, and &quot;อุบลราชธานี&quot;.</span>
@@ -206,7 +208,7 @@
         <span class="n">provs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="n">prov_details</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">get_corpus</span><span class="p">(</span><span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span><span class="p">,</span> <span class="n">as_is</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">get_corpus_as_is</span><span class="p">(</span><span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span><span class="p">):</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
             <span class="n">prov</span> <span class="o">=</span> <span class="p">{}</span>
@@ -265,14 +267,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a frozenset of Thai words from Royal Society of Thailand</span>
 <span class="sd">    \n(See: `dev/pythainlp/corpus/thai_orst_words.txt\</span>
-<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/thai_orst_words&gt;`_)</span>
+<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/orst_words_th.txt&gt;`_)</span>
 
 <span class="sd">    :return: :class:`frozenset` containing words in the Thai language.</span>
 <span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_THAI_ORST_WORDS</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_ORST_WORDS</span><span class="p">:</span>
-        <span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;thai_orst_words.txt&quot;</span><span class="p">)</span>
+        <span class="n">_THAI_ORST_WORDS</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;orst_words_th.txt&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_THAI_ORST_WORDS</span></div>
 
@@ -376,8 +378,11 @@
     <span class="k">global</span> <span class="n">_THAI_DICT</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_DICT</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">csv</span>
-        <span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span> <span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_dict&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+
+        <span class="n">_THAI_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;meaning&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_dict&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
                 <span class="n">_THAI_DICT</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
@@ -398,41 +403,49 @@
     <span class="k">global</span> <span class="n">_THAI_WSD_DICT</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_WSD_DICT</span><span class="p">:</span>
         <span class="n">_thai_wsd</span> <span class="o">=</span> <span class="n">thai_dict</span><span class="p">()</span>
-        <span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;meaning&quot;</span><span class="p">:[]}</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
+        <span class="n">_THAI_WSD_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;meaning&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span> <span class="n">_thai_wsd</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
             <span class="n">_all_value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
             <span class="n">_use</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_all_value</span><span class="p">:</span>
                 <span class="n">_use</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">_use</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_use</span><span class="p">))</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_use</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">_use</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_use</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_use</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">_THAI_WSD_DICT</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="n">_THAI_WSD_DICT</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_use</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_THAI_WSD_DICT</span></div>
 
 
-<div class="viewcode-block" id="thai_synonym"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_synonym">[docs]</a><span class="k">def</span> <span class="nf">thai_synonym</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="thai_synonyms"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_synonyms">[docs]</a><span class="k">def</span> <span class="nf">thai_synonyms</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return Thai synonym.</span>
+<span class="sd">    Return Thai synonyms.</span>
 <span class="sd">    \n(See: `thai_synonym\</span>
 <span class="sd">    &lt;https://pythainlp.github.io/pythainlp-corpus/thai_synonym.html&gt;`_)</span>
 
 <span class="sd">    :return: Thai words with part-of-speech type and synonym</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">_THAI_SYNONYM</span>
-    <span class="k">if</span> <span class="n">_THAI_SYNONYM</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">_THAI_SYNONYMS</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_SYNONYMS</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">csv</span>
-        <span class="n">_THAI_SYNONYM</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span> <span class="s2">&quot;pos&quot;</span><span class="p">:[],</span> <span class="s2">&quot;synonym&quot;</span><span class="p">:[]}</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_synonym&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+
+        <span class="n">_THAI_SYNONYMS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;pos&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;synonym&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thai_synonym&quot;</span><span class="p">),</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-                <span class="n">_THAI_SYNONYM</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
-                <span class="n">_THAI_SYNONYM</span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">])</span>
-                <span class="n">_THAI_SYNONYM</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">))</span>
+                <span class="n">_THAI_SYNONYMS</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
+                <span class="n">_THAI_SYNONYMS</span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">])</span>
+                <span class="n">_THAI_SYNONYMS</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">_THAI_SYNONYM</span></div>
+    <span class="k">return</span> <span class="n">_THAI_SYNONYMS</span></div>
+
+
+<span class="k">def</span> <span class="nf">thai_synonym</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated: Use thai_synonyms() instead.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">thai_synonyms</span><span class="p">()</span>
 </pre></div>
 
            </div>
