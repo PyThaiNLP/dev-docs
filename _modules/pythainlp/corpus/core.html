@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 5.0.0dev0 documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 297aadc documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=1a11a02f"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d3a52a00"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                <unknown> (5.0.0dev0) <br /> Published date: 04/12/2023
+                dev (297aadc) <br /> Published date: 06/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -180,7 +180,10 @@
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">(),</span> <span class="n">filename</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_corpus"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus">[docs]</a><span class="k">def</span> <span class="nf">get_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">as_is</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<div class="viewcode-block" id="get_corpus"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus">[docs]</a><span class="k">def</span> <span class="nf">get_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">as_is</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="n">comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read corpus data from file and return a frozenset or a list.</span>
 
@@ -192,8 +195,12 @@
 <span class="sd">    If as_is is True, a list will be return, with no modifications</span>
 <span class="sd">    in member values and their orders.</span>
 
+<span class="sd">    If comments is False, any text at any position after the character</span>
+<span class="sd">    &#39;#&#39; in each line will be discarded.</span>
 
 <span class="sd">    :param str filename: filename of the corpus to be read</span>
+<span class="sd">    :param bool as_is: no modification to the text, and return a list</span>
+<span class="sd">    :param bool comments: keep comments</span>
 
 <span class="sd">    :return: :class:`frozenset` or :class:`list` consisting of lines in the file</span>
 <span class="sd">    :rtype: :class:`frozenset` or :class:`list`</span>
@@ -203,26 +210,61 @@
 
 <span class="sd">        from pythainlp.corpus import get_corpus</span>
 
-<span class="sd">        get_corpus(&#39;negations_th.txt&#39;)</span>
+<span class="sd">        # input file (negations_th.txt):</span>
+<span class="sd">        # แต่</span>
+<span class="sd">        # ไม่</span>
+
+<span class="sd">        get_corpus(&quot;negations_th.txt&quot;)</span>
 <span class="sd">        # output:</span>
 <span class="sd">        # frozenset({&#39;แต่&#39;, &#39;ไม่&#39;})</span>
 
-<span class="sd">        get_corpus(&#39;ttc_freq.txt&#39;)</span>
+<span class="sd">        get_corpus(&quot;negations_th.txt&quot;, as_is=True)</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # [&#39;แต่&#39;, &#39;ไม่&#39;]</span>
+
+<span class="sd">        # input file (ttc_freq.txt):</span>
+<span class="sd">        # ตัวบท&lt;tab&gt;10</span>
+<span class="sd">        # โดยนัยนี้&lt;tab&gt;1</span>
+
+<span class="sd">        get_corpus(&quot;ttc_freq.txt&quot;)</span>
 <span class="sd">        # output:</span>
 <span class="sd">        # frozenset({&#39;โดยนัยนี้\\t1&#39;,</span>
 <span class="sd">        #    &#39;ตัวบท\\t10&#39;,</span>
-<span class="sd">        #    &#39;หยิบยื่น\\t3&#39;,</span>
 <span class="sd">        #     ...})</span>
+
+<span class="sd">        # input file (icubrk_th.txt):</span>
+<span class="sd">        # # Thai Dictionary for ICU BreakIterator</span>
+<span class="sd">        # กก</span>
+<span class="sd">        # กกขนาก</span>
+
+<span class="sd">        get_corpus(&quot;icubrk_th.txt&quot;)</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # frozenset({&#39;กกขนาก&#39;,</span>
+<span class="sd">        #     &#39;# Thai Dictionary for ICU BreakIterator&#39;,</span>
+<span class="sd">        #     &#39;กก&#39;,</span>
+<span class="sd">        #     ...})</span>
+
+<span class="sd">        get_corpus(&quot;icubrk_th.txt&quot;, comments=False)</span>
+<span class="sd">        # output:</span>
+<span class="sd">        # frozenset({&#39;กกขนาก&#39;,</span>
+<span class="sd">        #     &#39;กก&#39;,</span>
+<span class="sd">        #     ...})</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">comments</span><span class="p">:</span>
+        <span class="c1"># take only text before character &#39;#&#39;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
     <span class="k">if</span> <span class="n">as_is</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">lines</span>
 
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
     <span class="k">return</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lines</span><span class="p">))</span></div>
 
 
