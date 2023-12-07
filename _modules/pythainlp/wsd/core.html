@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wsd.core &mdash; PyThaiNLP bf61884 documentation</title>
+  <title>pythainlp.wsd.core &mdash; PyThaiNLP 2015804 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=6b995755"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=5f78aaaa"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (bf61884) <br /> Published date: 07/12/2023
+                dev (2015804) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -119,39 +119,50 @@
 
 <span class="n">_wsd_dict</span> <span class="o">=</span> <span class="n">thai_wsd_dict</span><span class="p">()</span>
 <span class="n">_mean_all</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span> <span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
-    <span class="n">_mean_all</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">],</span> <span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">]):</span>
+    <span class="n">_mean_all</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+
 <span class="n">_all_word</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_mean_all</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 <span class="n">_TRIE</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_all_word</span><span class="p">))</span>
 <span class="n">_word_cut</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">_TRIE</span><span class="p">)</span>
 
+<span class="n">_MODEL</span> <span class="o">=</span> <span class="kc">None</span>
+
 
 <span class="k">class</span> <span class="nc">_SentenceTransformersModel</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;sentence-transformers/paraphrase-multilingual-mpnet-base-v2&quot;</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sentence-transformers/paraphrase-multilingual-mpnet-base-v2&quot;</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">change_device</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentences1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="n">sentences2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">util</span>
-        <span class="n">embedding_1</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentences1</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">embedding_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentences2</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="o">-</span><span class="n">util</span><span class="o">.</span><span class="n">pytorch_cos_sim</span><span class="p">(</span><span class="n">embedding_1</span><span class="p">,</span> <span class="n">embedding_2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
-<span class="n">_MODEL</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentences1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sentences2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">util</span>
+
+        <span class="n">embedding_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentences1</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">embedding_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentences2</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">util</span><span class="o">.</span><span class="n">pytorch_cos_sim</span><span class="p">(</span><span class="n">embedding_1</span><span class="p">,</span> <span class="n">embedding_2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="get_sense"><a class="viewcode-back" href="../../../api/wsd.html#pythainlp.wsd.get_sense">[docs]</a><span class="k">def</span> <span class="nf">get_sense</span><span class="p">(</span>
     <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
-    <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">custom_tokenizer</span><span class="p">:</span> <span class="n">Tokenizer</span><span class="o">=</span><span class="n">_word_cut</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">custom_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(),</span>
+    <span class="n">custom_tokenizer</span><span class="p">:</span> <span class="n">Tokenizer</span> <span class="o">=</span> <span class="n">_word_cut</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get word sense from the sentence.</span>
 <span class="sd">    This function will get definition and distance from context in sentence.</span>
@@ -160,19 +171,23 @@
 <span class="sd">    :param str word: Thai word</span>
 <span class="sd">    :param str device: device for running model on.</span>
 <span class="sd">    :param dict custom_dict: Thai dictionary {&quot;word&quot;:[&quot;definition&quot;,..]}</span>
-<span class="sd">    :param Tokenizer custom_tokenizer: Tokenizer used to tokenize words in sentence.</span>
-<span class="sd">    :return: list of definitions and distances (1 - cos_sim) or None (If word is not in the dictionary)</span>
-<span class="sd">    :rtype: Union[List[Tuple[str, float]], None]</span>
+<span class="sd">    :param Tokenizer custom_tokenizer: Tokenizer used to tokenize words in \</span>
+<span class="sd">        sentence.</span>
+<span class="sd">    :return: a list of definitions and distances (1 - cos_sim) or \</span>
+<span class="sd">        an empty list (if word is not in the dictionary)</span>
+<span class="sd">    :rtype: List[Tuple[str, float]]</span>
 <span class="sd">    </span>
-<span class="sd">    We get the ideas from `Context-Aware Semantic Similarity Measurement for Unsupervised \</span>
-<span class="sd">    Word Sense Disambiguation &lt;https://arxiv.org/abs/2305.03520&gt;`_ to build get_sense function.</span>
+<span class="sd">    We get the ideas from `Context-Aware Semantic Similarity Measurement for \</span>
+<span class="sd">        Unsupervised Word Sense Disambiguation \</span>
+<span class="sd">        &lt;https://arxiv.org/abs/2305.03520&gt;`_ to build get_sense function.</span>
 
-<span class="sd">    For Thai dictionary, we use Thai dictionary from wiktionary.</span>
-<span class="sd">    See more `thai_dict &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_.</span>
+<span class="sd">    Use Thai dictionary from wiktionary.</span>
+<span class="sd">    See `thai_dict &lt;https://pythainlp.github.io/pythainlp-corpus/thai_dict.html&gt;`_.</span>
 <span class="sd">    </span>
-<span class="sd">    For the model, we use sentence transformers model from \</span>
-<span class="sd">    `sentence-transformers/paraphrase-multilingual-mpnet-base-v2 &lt;https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2&gt;`_ for \</span>
-<span class="sd">    unsupervised word sense disambiguation.</span>
+<span class="sd">    Use sentence transformers model from \</span>
+<span class="sd">        `sentence-transformers/paraphrase-multilingual-mpnet-base-v2 \</span>
+<span class="sd">        &lt;https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2&gt;`_ \</span>
+<span class="sd">        for unsupervised word sense disambiguation.</span>
 <span class="sd">    </span>
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -193,25 +208,34 @@
 <span class="sd">        #   0.12473666667938232)]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_MODEL</span>
-    <span class="k">if</span> <span class="n">custom_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_dict</span><span class="p">:</span>
         <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">_mean_all</span>
-    <span class="n">_w</span> <span class="o">=</span> <span class="n">custom_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+    <span class="n">w</span> <span class="o">=</span> <span class="n">custom_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">or</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">_MODEL</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_MODEL</span><span class="p">:</span>
         <span class="n">_MODEL</span> <span class="o">=</span> <span class="n">_SentenceTransformersModel</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">device</span><span class="o">!=</span><span class="n">device</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">device</span> <span class="o">!=</span> <span class="n">device</span><span class="p">:</span>
         <span class="n">_MODEL</span><span class="o">.</span><span class="n">change_device</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-    <span class="n">_temp_mean</span> <span class="o">=</span> <span class="n">custom_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
-    <span class="n">_temp</span> <span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_temp_mean</span><span class="p">:</span>
+
+    <span class="n">temp_mean</span> <span class="o">=</span> <span class="n">custom_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">temp_mean</span><span class="p">:</span>
         <span class="n">_temp_2</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_w</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="n">word</span><span class="o">+</span><span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> ความหมาย &#39;&quot;</span><span class="o">+</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;&#39;) &quot;</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">word</span>
+                    <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> ความหมาย &#39;&quot;</span>
+                    <span class="o">+</span> <span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="s2">&quot;&#39;) &quot;</span>
+                <span class="p">)</span>
             <span class="n">_temp_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-        <span class="n">_temp</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">_MODEL</span><span class="o">.</span><span class="n">get_score</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_temp_2</span><span class="p">))))</span>
-    <span class="k">return</span> <span class="n">_temp</span></div>
+        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">_MODEL</span><span class="o">.</span><span class="n">get_score</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_temp_2</span><span class="p">))))</span>
+
+    <span class="k">return</span> <span class="n">temp</span></div>
 </pre></div>
 
            </div>

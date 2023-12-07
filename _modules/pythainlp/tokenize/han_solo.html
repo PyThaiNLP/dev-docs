@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.han_solo &mdash; PyThaiNLP bf61884 documentation</title>
+  <title>pythainlp.tokenize.han_solo &mdash; PyThaiNLP 2015804 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=6b995755"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=5f78aaaa"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (bf61884) <br /> Published date: 07/12/2023
+                dev (2015804) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -110,6 +110,7 @@
   <h1>Source code for pythainlp.tokenize.han_solo</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># SPDX-FileCopyrightText: Copyright 2016-2023 PyThaiNLP Project</span>
+<span class="c1"># SPDX-FileCopyrightText: Copyright 2019 Ponrawee Prasertsom</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">🪿 Han-solo: Thai syllable segmenter</span>
@@ -118,54 +119,45 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">path_pythainlp_corpus</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pycrfsuite</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;ImportError; Install pycrfsuite by pip install python-crfsuite&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="s2">&quot;ImportError; Install pycrfsuite by pip install python-crfsuite&quot;</span>
+    <span class="p">)</span>
 
 <span class="n">tagger</span> <span class="o">=</span> <span class="n">pycrfsuite</span><span class="o">.</span><span class="n">Tagger</span><span class="p">()</span>
-<span class="n">tagger</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="s1">&#39;han_solo.crfsuite&#39;</span><span class="p">))</span>
+<span class="n">tagger</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="s2">&quot;han_solo.crfsuite&quot;</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="Featurizer"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer">[docs]</a><span class="k">class</span> <span class="nc">Featurizer</span><span class="p">:</span>
-<span class="c1">#  This class from ssg at https://github.com/ponrawee/ssg.</span>
-<span class="c1">#    Copyright 2019 Ponrawee Prasertsom</span>
-
-<span class="c1">#    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1">#    you may not use this file except in compliance with the License.</span>
-<span class="c1">#    You may obtain a copy of the License at</span>
-
-<span class="c1">#        http://www.apache.org/licenses/LICENSE-2.0</span>
-
-<span class="c1">#    Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1">#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1">#    See the License for the specific language governing permissions and</span>
-<span class="c1">#    limitations under the License.</span>
-<span class="c1">#     {</span>
-<span class="c1">#      &quot;0 (current anchor)|+1 (the character on the right from anchor)|A (character)&quot; : 1</span>
-<span class="c1">#     }</span>
+    <span class="c1">#  This class from ssg at https://github.com/ponrawee/ssg.</span>
 
 <div class="viewcode-block" id="Featurizer.__init__"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sequence_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span> <span class="o">=</span> <span class="n">delimiter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">sequence_size</span></div>
 
-<div class="viewcode-block" id="Featurizer.pad"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.pad">[docs]</a>    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">padder</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Featurizer.pad"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.pad">[docs]</a>    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">padder</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">padder</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">+</span> <span class="n">sentence</span> <span class="o">+</span> <span class="n">padder</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Featurizer.featurize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.featurize">[docs]</a>    <span class="k">def</span> <span class="nf">featurize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indiv_char</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Featurizer.featurize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.Featurizer.featurize">[docs]</a>    <span class="k">def</span> <span class="nf">featurize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indiv_char</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s2">&quot;list&quot;</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="n">padding</span><span class="p">:</span>
             <span class="n">sentence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
         <span class="n">all_features</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">all_labels</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">skip_next</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">current_position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">current_position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">):</span>
             <span class="k">if</span> <span class="n">skip_next</span><span class="p">:</span>
                 <span class="n">skip_next</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">continue</span>
             <span class="n">features</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
                 <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">cut</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">char</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">current_position</span><span class="p">]</span>
@@ -173,13 +165,15 @@
                 <span class="n">cut</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">skip_next</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">chars_left</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="n">chars_right</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="n">chars</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="n">abs_index_left</span> <span class="o">=</span> <span class="n">current_position</span> <span class="c1"># left start at -1</span>
-            <span class="n">abs_index_right</span> <span class="o">=</span> <span class="n">current_position</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1"># right start at 0</span>
+            <span class="n">chars_left</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">chars_right</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">chars</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">abs_index_left</span> <span class="o">=</span> <span class="n">current_position</span>  <span class="c1"># left start at -1</span>
+            <span class="n">abs_index_right</span> <span class="o">=</span> <span class="n">current_position</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># right start at 0</span>
             <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">:</span>
-                <span class="n">abs_index_left</span> <span class="o">-=</span> <span class="mi">1</span> <span class="c1"># สมมุติตำแหน่งที่ 0 จะได้ -1, -2, -3, -4, -5 (radius = 5)</span>
+                <span class="n">abs_index_left</span> <span class="o">-=</span> <span class="p">(</span>
+                    <span class="mi">1</span>  <span class="c1"># สมมุติตำแหน่งที่ 0 จะได้ -1, -2, -3, -4, -5 (radius = 5)</span>
+                <span class="p">)</span>
                 <span class="n">char_left</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">abs_index_left</span><span class="p">]</span>
                 <span class="k">while</span> <span class="n">char_left</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="p">:</span>
                     <span class="n">abs_index_left</span> <span class="o">-=</span> <span class="mi">1</span>
@@ -189,13 +183,15 @@
                 <span class="n">chars_left</span> <span class="o">=</span> <span class="n">char_left</span> <span class="o">+</span> <span class="n">chars_left</span>
                 <span class="c1"># ใส่ลง feature</span>
                 <span class="k">if</span> <span class="n">indiv_char</span><span class="p">:</span>
-                    <span class="n">left_key</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_index_left</span><span class="p">),</span> <span class="n">char_left</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+                    <span class="n">left_key</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_index_left</span><span class="p">),</span> <span class="n">char_left</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>
                         <span class="n">features</span><span class="p">[</span><span class="n">left_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">left_key</span><span class="p">)</span>
 
-                <span class="n">abs_index_right</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># สมมุติคือตำแหน่งที่ 0 จะได้ 0, 1, 2, 3, 4 (radius = 5)</span>
+                <span class="n">abs_index_right</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="mi">1</span>  <span class="c1"># สมมุติคือตำแหน่งที่ 0 จะได้ 0, 1, 2, 3, 4 (radius = 5)</span>
+                <span class="p">)</span>
                 <span class="n">char_right</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">abs_index_right</span><span class="p">]</span>
                 <span class="k">while</span> <span class="n">char_right</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="p">:</span>
                     <span class="n">abs_index_right</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -203,8 +199,10 @@
                 <span class="n">relative_index_right</span> <span class="o">=</span> <span class="n">counter</span>
                 <span class="n">chars_right</span> <span class="o">+=</span> <span class="n">char_right</span>
                 <span class="k">if</span> <span class="n">indiv_char</span><span class="p">:</span>
-                    <span class="n">right_key</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_index_right</span><span class="p">),</span> <span class="n">char_right</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+                    <span class="n">right_key</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_index_right</span><span class="p">),</span> <span class="n">char_right</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>
                         <span class="n">features</span><span class="p">[</span><span class="n">right_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">right_key</span><span class="p">)</span>
@@ -213,33 +211,32 @@
 
             <span class="n">chars</span> <span class="o">=</span> <span class="n">chars_left</span> <span class="o">+</span> <span class="n">chars_right</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">ngram</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">]</span>
-                <span class="n">ngram_key</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">),</span> <span class="n">ngram</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+                <span class="n">ngram</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">]</span>
+                <span class="n">ngram_key</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">),</span> <span class="n">ngram</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>
                     <span class="n">features</span><span class="p">[</span><span class="n">ngram_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ngram_key</span><span class="p">)</span>
             <span class="n">all_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">return_type</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
                 <span class="n">cut</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cut</span><span class="p">)</span>
             <span class="n">all_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cut</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">all_features</span><span class="p">,</span>
-            <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="n">all_labels</span>
-        <span class="p">}</span></div></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">all_features</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">all_labels</span><span class="p">}</span></div></div>
+
+
 <span class="n">_to_feature</span> <span class="o">=</span> <span class="n">Featurizer</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="segment"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.han_solo.segment">[docs]</a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">_to_feature</span><span class="o">.</span><span class="n">featurize</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;X&quot;</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">_to_feature</span><span class="o">.</span><span class="n">featurize</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;X&quot;</span><span class="p">]</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">tagger</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">list_cut</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">),</span><span class="n">y_pred</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="s2">&quot;1&quot;</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
             <span class="n">list_cut</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">list_cut</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+=</span><span class="n">j</span>
+            <span class="n">list_cut</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span>
     <span class="k">return</span> <span class="n">list_cut</span></div>
 </pre></div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP bf61884 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 2015804 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=6b995755"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=5f78aaaa"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (bf61884) <br /> Published date: 07/12/2023
+                dev (2015804) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -158,7 +158,7 @@
 
 <div class="viewcode-block" id="word_detokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_detokenize">[docs]</a><span class="k">def</span> <span class="nf">word_detokenize</span><span class="p">(</span>
     <span class="n">segments</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;str&quot;</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Word detokenizer.</span>
 
@@ -175,16 +175,18 @@
 <span class="sd">        print(word_detokenize([&quot;เรา&quot;, &quot;เล่น&quot;]))</span>
 <span class="sd">        # output: เราเล่น</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_list_all</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_all</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segments</span><span class="p">]</span>
+
     <span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">thai_characters</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
-        <span class="n">_list_sents</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">_add_index</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">_space_index</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">_mark_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">list_sents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">add_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">space_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mark_index</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="c1"># previous word</span>
@@ -195,35 +197,36 @@
                     <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
                     <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
                 <span class="p">):</span>
-                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-                    <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
                 <span class="c1"># if previous word is number or other language and is not space</span>
                 <span class="k">elif</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
-                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-                    <span class="n">_add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
                 <span class="c1"># if word is Thai iteration mark</span>
                 <span class="k">elif</span> <span class="n">w</span> <span class="o">==</span> <span class="s2">&quot;ๆ&quot;</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
-                        <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-                    <span class="n">_mark_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_space_index</span><span class="p">:</span>
-                    <span class="n">_space_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">_mark_index</span><span class="p">:</span>
-                    <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-            <span class="n">_list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-        <span class="n">_list_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_list_sents</span><span class="p">)</span>
+                        <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                    <span class="n">mark_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">space_index</span><span class="p">:</span>
+                    <span class="n">space_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">mark_index</span><span class="p">:</span>
+                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">list_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_sents</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_list_all</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_text</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_list_all</span><span class="p">:</span>
-            <span class="n">_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_text</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">list_all</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_all</span><span class="p">:</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="word_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.word_tokenize">[docs]</a><span class="k">def</span> <span class="nf">word_tokenize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([]),</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_WORD_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -400,7 +403,7 @@
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">custom_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">custom_dict</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">:</span>
 <span class="s2">                custom_dict must be a str.</span>
@@ -525,11 +528,12 @@
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">split_into_sentences</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wtp&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
-            <span class="n">_size</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span>
+            <span class="n">_size</span> <span class="o">=</span> <span class="s2">&quot;mini&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span><span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">)</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -545,8 +549,8 @@
 <div class="viewcode-block" id="paragraph_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.paragraph_tokenize">[docs]</a><span class="k">def</span> <span class="nf">paragraph_tokenize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wtp-mini&quot;</span><span class="p">,</span>
-    <span class="n">paragraph_threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">style</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;newline&#39;</span><span class="p">,</span>
+    <span class="n">paragraph_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newline&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Paragraph tokenizer.</span>
@@ -589,23 +593,25 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wtp&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
-            <span class="n">_size</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="s2">&quot;mini&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span>
-                      <span class="n">text</span><span class="p">,</span>
-                      <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span>
-                      <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;paragraph&quot;</span><span class="p">,</span>
-                      <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
-                      <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-                    <span class="p">)</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
+        <span class="kn">from</span> <span class="nn">pythainlp.tokenize.wtsplit</span> <span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+            <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;paragraph&quot;</span><span class="p">,</span>
+            <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
 <span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
         <span class="p">)</span>
+
     <span class="k">return</span> <span class="n">segments</span></div>
 
 
@@ -732,7 +738,7 @@
 
 <div class="viewcode-block" id="syllable_tokenize"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.syllable_tokenize">[docs]</a><span class="k">def</span> <span class="nf">syllable_tokenize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="n">DEFAULT_SYLLABLE_TOKENIZE_ENGINE</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SYLLABLE_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -762,9 +768,7 @@
 <span class="s2">            It might be a typo; if not, please consult our document.&quot;&quot;&quot;</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">subword_tokenize</span><span class="p">(</span>
-        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
-        <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span>
-        <span class="n">keep_whitespace</span><span class="o">=</span><span class="n">keep_whitespace</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="n">keep_whitespace</span>
     <span class="p">)</span></div>
 
 
@@ -837,7 +841,7 @@
 
 <div class="viewcode-block" id="Tokenizer.__init__"><a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Trie</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Trie</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
         <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
         <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -853,7 +857,7 @@
 <span class="sd">        :param bool keep_whitespace: True to keep whitespace, a common mark</span>
 <span class="sd">                                    for end of phrase in Thai</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
         <span class="k">if</span> <span class="n">custom_dict</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">dict_trie</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
