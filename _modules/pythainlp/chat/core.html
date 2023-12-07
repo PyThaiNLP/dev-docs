@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.chat.core &mdash; PyThaiNLP 9bd951b documentation</title>
+  <title>pythainlp.chat.core &mdash; PyThaiNLP bf61884 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=1b2af14a"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=6b995755"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (9bd951b) <br /> Published date: 06/12/2023
+                dev (bf61884) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -61,7 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chat.html">pythainlp.chat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/cls.html">pythainlp.cls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -120,24 +120,26 @@
 <span class="sd">        Chat using AI generation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="ChatBotModel.reset_chat"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.reset_chat">[docs]</a>    <span class="k">def</span> <span class="nf">reset_chat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reset chat by cleaning history</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="ChatBotModel.load_model"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.load_model">[docs]</a>    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">model_name</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;wangchanglm&quot;</span><span class="p">,</span>
-        <span class="n">return_dict</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">load_in_8bit</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wangchanglm&quot;</span><span class="p">,</span>
+        <span class="n">return_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">load_in_8bit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
         <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span>
-        <span class="n">offload_folder</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span>
-        <span class="n">low_cpu_mem_usage</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">offload_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span>
+        <span class="n">low_cpu_mem_usage</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load model</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param str model_name: Model name (Now, we support wangchanglm only)</span>
 <span class="sd">        :param bool return_dict: return_dict</span>
 <span class="sd">        :param bool load_in_8bit: load model in 8bit</span>
@@ -148,6 +150,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;wangchanglm&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pythainlp.generate.wangchanglm</span> <span class="kn">import</span> <span class="n">WangChanGLM</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">WangChanGLM</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
                 <span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;pythainlp/wangchanglm-7.5B-sft-en-sharded&quot;</span><span class="p">,</span>
@@ -156,14 +159,15 @@
                 <span class="n">offload_folder</span><span class="o">=</span><span class="n">offload_folder</span><span class="p">,</span>
                 <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
                 <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch_dtype</span><span class="p">,</span>
-                <span class="n">low_cpu_mem_usage</span><span class="o">=</span><span class="n">low_cpu_mem_usage</span>
+                <span class="n">low_cpu_mem_usage</span><span class="o">=</span><span class="n">low_cpu_mem_usage</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We doesn&#39;t support </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
-<div class="viewcode-block" id="ChatBotModel.chat"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.chat">[docs]</a>    <span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ChatBotModel.chat"><a class="viewcode-back" href="../../../api/chat.html#pythainlp.chat.ChatBotModel.chat">[docs]</a>    <span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Chatbot</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param str text: text for asking chatbot with.</span>
 <span class="sd">        :return: answer from chatbot.</span>
 <span class="sd">        :rtype: str</span>
@@ -182,13 +186,20 @@
 <span class="sd">                print(chatbot.history)</span>
 <span class="sd">                # output: [(&#39;สวัสดี&#39;, &#39;ยินดีที่ได้รู้จัก&#39;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_temp</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+        <span class="n">_temp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">h</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
-                <span class="n">_temp</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_chatbot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;human&quot;</span><span class="p">:</span><span class="n">h</span><span class="p">,</span><span class="s2">&quot;bot&quot;</span><span class="p">:</span><span class="n">b</span><span class="p">})</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">stop_token</span>
-        <span class="n">_temp</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s1">&#39;prompt_chatbot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;human&quot;</span><span class="p">:</span><span class="n">text</span><span class="p">,</span><span class="s2">&quot;bot&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">})</span>
+            <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
+                <span class="n">_temp</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s2">&quot;prompt_chatbot&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span>
+                        <span class="p">{</span><span class="s2">&quot;human&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;bot&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+                    <span class="p">)</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">stop_token</span>
+                <span class="p">)</span>
+        <span class="n">_temp</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">PROMPT_DICT</span><span class="p">[</span><span class="s2">&quot;prompt_chatbot&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;human&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="s2">&quot;bot&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
+        <span class="p">)</span>
         <span class="n">_bot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">gen_instruct</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">text</span><span class="p">,</span><span class="n">_bot</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">text</span><span class="p">,</span> <span class="n">_bot</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">_bot</span></div></div>
 </pre></div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.cls.param_free &mdash; PyThaiNLP 9bd951b documentation</title>
+  <title>pythainlp.classify.param_free &mdash; PyThaiNLP bf61884 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=1b2af14a"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=6b995755"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (9bd951b) <br /> Published date: 06/12/2023
+                dev (bf61884) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -61,7 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chat.html">pythainlp.chat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/cls.html">pythainlp.cls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -98,7 +98,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">pythainlp.cls.param_free</li>
+      <li class="breadcrumb-item active">pythainlp.classify.param_free</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -107,7 +107,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.cls.param_free</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.classify.param_free</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># SPDX-FileCopyrightText: Copyright 2016-2023 PyThaiNLP Project</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
@@ -117,18 +117,20 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="GzipModel"><a class="viewcode-back" href="../../../api/cls.html#pythainlp.cls.GzipModel">[docs]</a><span class="k">class</span> <span class="nc">GzipModel</span><span class="p">:</span>
+<div class="viewcode-block" id="GzipModel"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel">[docs]</a><span class="k">class</span> <span class="nc">GzipModel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class is a re-implementation of “Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors (Jiang et al., Findings 2023)</span>
+<span class="sd">    This class is a re-implementation of</span>
+<span class="sd">    “Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors</span>
+<span class="sd">    (Jiang et al., Findings 2023)</span>
 
 <span class="sd">    :param list training_data: list [(text_sample,label)]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="GzipModel.__init__"><a class="viewcode-back" href="../../../api/cls.html#pythainlp.cls.GzipModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<div class="viewcode-block" id="GzipModel.__init__"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Cx2_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="GzipModel.train"><a class="viewcode-back" href="../../../api/cls.html#pythainlp.cls.GzipModel.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="GzipModel.train"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Cx2_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="p">)):</span>
             <span class="n">Cx2_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -136,7 +138,7 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">Cx2_list</span></div>
 
-<div class="viewcode-block" id="GzipModel.predict"><a class="viewcode-back" href="../../../api/cls.html#pythainlp.cls.GzipModel.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="GzipModel.predict"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param str x1: the text that we want to predict label for.</span>
 <span class="sd">        :param str k: k</span>
@@ -146,7 +148,7 @@
 <span class="sd">        :Example:</span>
 <span class="sd">        ::</span>
 
-<span class="sd">                from pythainlp.cls import GzipModel</span>
+<span class="sd">                from pythainlp.classify import GzipModel</span>
 
 <span class="sd">                training_data =  [</span>
 <span class="sd">                    (&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;, &quot;Neutral&quot;),</span>
@@ -173,10 +175,12 @@
             <span class="c1"># normalized compression distance</span>
             <span class="n">ncd</span> <span class="o">=</span> <span class="p">(</span><span class="n">Cx1x2</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">Cx1</span><span class="p">,</span> <span class="n">Cx2</span><span class="p">))</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">Cx1</span><span class="p">,</span> <span class="n">Cx2</span><span class="p">)</span>
             <span class="n">disance_from_x1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ncd</span><span class="p">)</span>
+
         <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">disance_from_x1</span><span class="p">))</span>
         <span class="n">top_k_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">top_k_class</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">predict_class</span> <span class="o">=</span> <span class="n">top_k_class</span><span class="p">[</span><span class="n">counts</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
+
         <span class="k">return</span> <span class="n">predict_class</span></div></div>
 </pre></div>
 

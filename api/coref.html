@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.coref &mdash; PyThaiNLP 9bd951b documentation</title>
+  <title>pythainlp.coref &mdash; PyThaiNLP bf61884 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -16,14 +16,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1b2af14a"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=6b995755"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pythainlp.corpus" href="corpus.html" />
-    <link rel="prev" title="pythainlp.cls" href="cls.html" /> 
+    <link rel="prev" title="pythainlp.classify" href="classify.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,7 +38,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (9bd951b) <br /> Published date: 06/12/2023
+                dev (bf61884) <br /> Published date: 07/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -64,7 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cls.html">pythainlp.cls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.coref</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coreference-resolution-function">Coreference Resolution Function</a><ul>
@@ -137,7 +137,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>texts</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – list of texts to apply coreference resolution to</p></li>
 <li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – coreference resolution model</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – device for running coreference resolution model on (cpu, cuda, and others)</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – device for running coreference resolution model on        (“cpu”, “cuda”, and others)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -148,7 +148,7 @@
 </dd>
 <dt class="field-even">Options for model_name<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><em>han-coref-v1.0</em> - (default) Han-Corf: Thai oreference resolution by PyThaiNLP v1.0</p></li>
+<li><p><em>han-coref-v1.0</em> - (default) Han-Coref: Thai coreference resolution            by PyThaiNLP v1.0</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
@@ -163,8 +163,8 @@
 <span class="p">)</span>
 <span class="c1"># output:</span>
 <span class="c1"># [</span>
-<span class="c1"># {&#39;text&#39;: &#39;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&#39;, </span>
-<span class="c1"># &#39;clusters_string&#39;: [[&#39;Bill Gates&#39;, &#39;ผม&#39;]], </span>
+<span class="c1"># {&#39;text&#39;: &#39;Bill Gates ได้รับวัคซีน COVID-19 เข็มแรกแล้ว ระบุ ผมรู้สึกสบายมาก&#39;,</span>
+<span class="c1"># &#39;clusters_string&#39;: [[&#39;Bill Gates&#39;, &#39;ผม&#39;]],</span>
 <span class="c1"># &#39;clusters&#39;: [[(0, 10), (50, 52)]]}</span>
 <span class="c1"># ]</span>
 </pre></div>
@@ -195,7 +195,7 @@ coreferences = coreference_resolution(text)</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cls.html" class="btn btn-neutral float-left" title="pythainlp.cls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classify.html" class="btn btn-neutral float-left" title="pythainlp.classify" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="corpus.html" class="btn btn-neutral float-right" title="pythainlp.corpus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
