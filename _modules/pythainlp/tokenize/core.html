@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 4b80066 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 9610b54 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=43615ec6"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=dfed8b4c"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (4b80066) <br /> Published date: 11/12/2023
+                dev (9610b54) <br /> Published date: 11/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -238,7 +238,7 @@
 
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :param str engine: name of the tokenizer to be used</span>
-<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie</span>
+<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie (some engine may not support)</span>
 <span class="sd">    :param bool keep_whitespace: True to keep whitespace, a common mark</span>
 <span class="sd">                                 for end of phrase in Thai.</span>
 <span class="sd">                                 Otherwise, whitespace is omitted.</span>
@@ -400,18 +400,20 @@
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;nlpo3&quot;</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pythainlp.tokenize.nlpo3</span> <span class="kn">import</span> <span class="n">segment</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">custom_dict</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">:</span>
-<span class="s2">                custom_dict must be a str.</span>
-<span class="s2">                It is a dictionary name as assigned with load_dict().</span>
-<span class="s2">                See pythainlp.tokenize.nlpo3.load_dict()&quot;&quot;&quot;</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="c1"># Currently cannot handle custom_dict from inside word_tokenize(),</span>
+        <span class="c1"># due to difference in type.</span>
+        <span class="c1">#if isinstance(custom_dict, str):</span>
+        <span class="c1">#    segments = segment(text, custom_dict=custom_dict)</span>
+        <span class="c1">#elif not isinstance(custom_dict, str) and not custom_dict:</span>
+        <span class="c1">#    raise ValueError(</span>
+        <span class="c1">#        f&quot;&quot;&quot;Tokenizer \&quot;{engine}\&quot;:</span>
+        <span class="c1">#        custom_dict must be a str.</span>
+        <span class="c1">#        It is a dictionary name as assigned with load_dict().</span>
+        <span class="c1">#        See pythainlp.tokenize.nlpo3.load_dict()&quot;&quot;&quot;</span>
+        <span class="c1">#    )</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    segments = segment(text)</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
