@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP 3b6daf0 documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP fcef21c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d2e2d7db"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=c25b6f8d"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (3b6daf0) <br /> Published date: 12/12/2023
+                dev (fcef21c) <br /> Published date: 12/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -111,12 +111,14 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># SPDX-FileCopyrightText: Copyright 2016-2023 PyThaiNLP Project</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Common lists of words.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;countries&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;find_synonyms&quot;</span><span class="p">,</span>
     <span class="s2">&quot;provinces&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_family_names&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_female_names&quot;</span><span class="p">,</span>
@@ -446,6 +448,41 @@
 <span class="k">def</span> <span class="nf">thai_synonym</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated: Use thai_synonyms() instead.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">thai_synonyms</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">find_synonyms</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find synonyms</span>
+
+<span class="sd">    :param str word: Thai word</span>
+<span class="sd">    :return: List of synonyms of the input word or an empty list if it isn&#39;t exist.</span>
+<span class="sd">    :rtype: List[str]</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.corpus import find_synonyms</span>
+
+<span class="sd">        print(find_synonyms(&quot;หมู&quot;))</span>
+<span class="sd">        # output: [&#39;จรุก&#39;, &#39;วราหะ&#39;, &#39;วราห์&#39;, &#39;ศูกร&#39;, &#39;สุกร&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">synonyms</span> <span class="o">=</span> <span class="n">thai_synonyms</span><span class="p">()</span>  <span class="c1"># get a dictionary of {word, synonym}</span>
+    <span class="n">list_synonym</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]:</span>  <span class="c1"># find by word</span>
+        <span class="n">list_synonym</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">][</span><span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">word</span><span class="p">)])</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">words</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">]):</span>  <span class="c1"># find by synonym</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">list_synonym</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;synonym&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">list_synonym</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">synonyms</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">])</span>
+
+    <span class="n">list_synonym</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">list_synonym</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">list_synonym</span><span class="p">:</span>  <span class="c1"># remove same word</span>
+        <span class="n">list_synonym</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">list_synonym</span>
 </pre></div>
 
            </div>
