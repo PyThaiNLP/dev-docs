@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.augment &mdash; PyThaiNLP ff74b39 documentation</title>
+  <title>pythainlp.augment &mdash; PyThaiNLP 3b6daf0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7a3496fb"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d2e2d7db"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -38,7 +38,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (ff74b39) <br /> Published date: 11/12/2023
+                dev (3b6daf0) <br /> Published date: 12/12/2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -535,11 +535,11 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.augment.lm.Thai2transformersAug.augment">
 <span class="sig-name descname"><span class="pre">augment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_replace_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/augment/lm/wangchanberta.html#Thai2transformersAug.augment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.augment.lm.Thai2transformersAug.augment" title="Permalink to this definition"></a></dt>
-<dd><p>Text Augment from wangchanberta</p>
+<dd><p>Text augmentation from WangchanBERTa</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – thai sentence</p></li>
+<li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Thai sentence</p></li>
 <li><p><strong>num_replace_tokens</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number replace tokens</p></li>
 </ul>
 </dd>
@@ -554,7 +554,7 @@ from <a class="reference external" href="https://fasttext.cc/docs/en/crawl-vecto
 </dl>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pythainlp.augment.lm</span> <span class="kn">import</span> <span class="n">Thai2transformersAug</span>
 
-<span class="n">aug</span><span class="o">=</span><span class="n">Thai2transformersAug</span><span class="p">()</span>
+<span class="n">aug</span> <span class="o">=</span> <span class="n">Thai2transformersAug</span><span class="p">()</span>
 
 <span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">&quot;ช้างมีทั้งหมด 50 ตัว บน&quot;</span><span class="p">)</span>
 <span class="c1"># output: [&#39;ช้างมีทั้งหมด 50 ตัว บนโลกใบนี้&#39;,</span>
