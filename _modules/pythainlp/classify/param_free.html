@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify.param_free &mdash; PyThaiNLP 7c773d9 documentation</title>
+  <title>pythainlp.classify.param_free &mdash; PyThaiNLP fedcd90 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=9f48c45f"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=221fe49a"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             PyThaiNLP
           </a>
               <div class="version">
-                dev (7c773d9) <br /> Published date: 19/07/2024
+                dev (fedcd90) <br /> Published date: 21/07/2024
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -117,6 +117,7 @@
 <span class="kn">import</span> <span class="nn">gzip</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
 
 <div class="viewcode-block" id="GzipModel"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel">[docs]</a><span class="k">class</span> <span class="nc">GzipModel</span><span class="p">:</span>
@@ -126,11 +127,15 @@
 <span class="sd">    (Jiang et al., Findings 2023)</span>
 
 <span class="sd">    :param list training_data: list [(text_sample,label)]</span>
+<span class="sd">    :param str model_path: Path for loading model (if you saved the model)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="GzipModel.__init__"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Cx2_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">()</span></div>
+<div class="viewcode-block" id="GzipModel.__init__"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Cx2_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="GzipModel.train"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Cx2_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -183,7 +188,23 @@
         <span class="n">_</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">top_k_class</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">predict_class</span> <span class="o">=</span> <span class="n">top_k_class</span><span class="p">[</span><span class="n">counts</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
 
-        <span class="k">return</span> <span class="n">predict_class</span></div></div>
+        <span class="k">return</span> <span class="n">predict_class</span></div>
+
+<div class="viewcode-block" id="GzipModel.save"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param str path: path for save model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span>
+                <span class="s2">&quot;training_data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                <span class="s2">&quot;Cx2_list&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cx2_list</span>
+            <span class="p">},</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GzipModel.load"><a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Cx2_list</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Cx2_list&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;training_data&quot;</span><span class="p">])</span></div></div>
 </pre></div>
 
            </div>
