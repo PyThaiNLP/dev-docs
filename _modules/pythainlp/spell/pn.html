@@ -1,11 +1,11 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.pn &mdash; PyThaiNLP 287ad56 documentation</title>
+  <title>pythainlp.spell.pn &mdash; PyThaiNLP f49e8fb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,9 +13,9 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=389416a8"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../_static/documentation_options.js?v=9c356a62"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -227,8 +227,12 @@
     <span class="k">return</span> <span class="n">custom_dict</span>
 
 
-<div class="viewcode-block" id="NorvigSpellChecker"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker">[docs]</a><span class="k">class</span> <span class="nc">NorvigSpellChecker</span><span class="p">:</span>
-<div class="viewcode-block" id="NorvigSpellChecker.__init__"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="NorvigSpellChecker">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker">[docs]</a>
+<span class="k">class</span> <span class="nc">NorvigSpellChecker</span><span class="p">:</span>
+<div class="viewcode-block" id="NorvigSpellChecker.__init__">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
@@ -286,7 +290,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span> <span class="o">+=</span> <span class="n">Counter</span><span class="p">()</span>  <span class="c1"># remove zero and negative counts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS_TOTAL</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.dictionary"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ItemsView</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.dictionary">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.dictionary">[docs]</a>
+    <span class="k">def</span> <span class="nf">dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ItemsView</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the spelling dictionary currently used by this spell checker</span>
 
@@ -306,7 +313,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.known"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.known">[docs]</a>    <span class="k">def</span> <span class="nf">known</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.known">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.known">[docs]</a>
+    <span class="k">def</span> <span class="nf">known</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of given words found in the spelling dictionary</span>
 
@@ -335,7 +345,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.prob"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.prob">[docs]</a>    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.prob">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.prob">[docs]</a>
+    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the probability of an input word,</span>
 <span class="sd">        according to the spelling dictionary</span>
@@ -363,7 +376,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS_TOTAL</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.freq"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.freq">[docs]</a>    <span class="k">def</span> <span class="nf">freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.freq">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.freq">[docs]</a>
+    <span class="k">def</span> <span class="nf">freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the frequency of an input word,</span>
 <span class="sd">        according to the spelling dictionary</span>
@@ -387,7 +403,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">[</span><span class="n">word</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.spell"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.spell">[docs]</a>    <span class="k">def</span> <span class="nf">spell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.spell">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.spell">[docs]</a>
+    <span class="k">def</span> <span class="nf">spell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of all correctly-spelled words whose spelling</span>
 <span class="sd">        is similar to the given word by edit distance metrics.</span>
@@ -437,7 +456,10 @@
 
         <span class="k">return</span> <span class="n">candidates</span></div>
 
-<div class="viewcode-block" id="NorvigSpellChecker.correct"><a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.correct">[docs]</a>    <span class="k">def</span> <span class="nf">correct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<div class="viewcode-block" id="NorvigSpellChecker.correct">
+<a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.NorvigSpellChecker.correct">[docs]</a>
+    <span class="k">def</span> <span class="nf">correct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the most possible word, using the probability from</span>
 <span class="sd">        the spelling dictionary</span>
@@ -476,7 +498,9 @@
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">pass</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="n">word</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="n">word</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
 </pre></div>
 
            </div>

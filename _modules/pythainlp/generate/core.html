@@ -1,11 +1,11 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.generate.core &mdash; PyThaiNLP 287ad56 documentation</title>
+  <title>pythainlp.generate.core &mdash; PyThaiNLP f49e8fb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,9 +13,9 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=389416a8"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../_static/documentation_options.js?v=9c356a62"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -116,16 +116,19 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_unigram</span>
-<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">bigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_bigram</span>
-<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">trigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_trigram</span>
-<span class="kn">from</span> <span class="nn">pythainlp.corpus.ttc</span> <span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">ttc_word_freqs_unigram</span>
+
 <span class="kn">from</span> <span class="nn">pythainlp.corpus.oscar</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">oscar_word_freqs_unigram</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">bigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_bigram</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">trigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_trigram</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus.tnc</span> <span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_unigram</span>
+<span class="kn">from</span> <span class="nn">pythainlp.corpus.ttc</span> <span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">ttc_word_freqs_unigram</span>
 
 
-<div class="viewcode-block" id="Unigram"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram">[docs]</a><span class="k">class</span> <span class="nc">Unigram</span><span class="p">:</span>
+<div class="viewcode-block" id="Unigram">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram">[docs]</a>
+<span class="k">class</span> <span class="nc">Unigram</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text generator using Unigram</span>
 
@@ -135,7 +138,9 @@
 <span class="sd">        * *oscar* - OSCAR Corpus</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Unigram.__init__"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Unigram.__init__">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;tnc&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">counts</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ttc&quot;</span><span class="p">:</span>
@@ -149,7 +154,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">prob</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_word_prob</span> <span class="o">=</span> <span class="p">{}</span></div>
 
-<div class="viewcode-block" id="Unigram.gen_sentence"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram.gen_sentence">[docs]</a>    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Unigram.gen_sentence">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram.gen_sentence">[docs]</a>
+    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">start_seq</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
@@ -188,6 +196,7 @@
             <span class="n">rand_text</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">output_str</span><span class="p">,</span> <span class="n">prob</span><span class="o">=</span><span class="n">prob</span><span class="p">,</span> <span class="n">duplicate</span><span class="o">=</span><span class="n">duplicate</span>
         <span class="p">)</span></div>
 
+
     <span class="k">def</span> <span class="nf">_next_word</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -213,7 +222,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span></div>
 
 
-<div class="viewcode-block" id="Bigram"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram">[docs]</a><span class="k">class</span> <span class="nc">Bigram</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Bigram">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram">[docs]</a>
+<span class="k">class</span> <span class="nc">Bigram</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text generator using Bigram</span>
 
@@ -221,7 +233,9 @@
 <span class="sd">        * *tnc* - Thai National Corpus (default)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Bigram.__init__"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Bigram.__init__">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;tnc&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">uni</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bi</span> <span class="o">=</span> <span class="n">tnc_word_freqs_bigram</span><span class="p">()</span>
@@ -229,7 +243,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bi_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bi_keys</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Bigram.prob"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.prob">[docs]</a>    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Bigram.prob">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.prob">[docs]</a>
+    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        probability of word</span>
 
@@ -245,7 +262,10 @@
             <span class="n">v</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
-<div class="viewcode-block" id="Bigram.gen_sentence"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.gen_sentence">[docs]</a>    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Bigram.gen_sentence">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.gen_sentence">[docs]</a>
+    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">start_seq</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -301,10 +321,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">late_word</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">output_str</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_word</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span></div>
+</div>
 
 
-<div class="viewcode-block" id="Trigram"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram">[docs]</a><span class="k">class</span> <span class="nc">Trigram</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Trigram">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram">[docs]</a>
+<span class="k">class</span> <span class="nc">Trigram</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text generator using Trigram</span>
 
@@ -312,7 +336,9 @@
 <span class="sd">        * *tnc* - Thai National Corpus (default)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Trigram.__init__"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Trigram.__init__">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tnc&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;tnc&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">uni</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bi</span> <span class="o">=</span> <span class="n">tnc_word_freqs_bigram</span><span class="p">()</span>
@@ -322,7 +348,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ti_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ti</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bi_keys</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Trigram.prob"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.prob">[docs]</a>    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t3</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Trigram.prob">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.prob">[docs]</a>
+    <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t3</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        probability of word</span>
 
@@ -340,7 +369,10 @@
 
         <span class="k">return</span> <span class="n">v</span></div>
 
-<div class="viewcode-block" id="Trigram.gen_sentence"><a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.gen_sentence">[docs]</a>    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Trigram.gen_sentence">
+<a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.gen_sentence">[docs]</a>
+    <span class="k">def</span> <span class="nf">gen_sentence</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">start_seq</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -400,7 +432,9 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">listdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">output_str</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listdata</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">listdata</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">listdata</span></div>
+</div>
+
 </pre></div>
 
            </div>

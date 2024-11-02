@@ -1,11 +1,11 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 287ad56 documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP f49e8fb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,9 +13,9 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=389416a8"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../_static/documentation_options.js?v=9c356a62"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -111,19 +111,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Corpus related functions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
-<span class="kn">import</span> <span class="nn">json</span>
 
+<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">pythainlp.corpus</span> <span class="kn">import</span> <span class="n">corpus_db_path</span><span class="p">,</span> <span class="n">corpus_db_url</span><span class="p">,</span> <span class="n">corpus_path</span>
 <span class="kn">from</span> <span class="nn">pythainlp.tools</span> <span class="kn">import</span> <span class="n">get_full_data_path</span>
-<span class="kn">from</span> <span class="nn">pythainlp</span> <span class="kn">import</span> <span class="n">__version__</span>
-
 
 <span class="n">_CHECK_MODE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PYTHAINLP_READ_MODE&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_corpus_db"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db">[docs]</a><span class="k">def</span> <span class="nf">get_corpus_db</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="get_corpus_db">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus_db</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get corpus catalog from server.</span>
 
@@ -142,7 +143,10 @@
     <span class="k">return</span> <span class="n">corpus_db</span></div>
 
 
-<div class="viewcode-block" id="get_corpus_db_detail"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db_detail">[docs]</a><span class="k">def</span> <span class="nf">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+
+<div class="viewcode-block" id="get_corpus_db_detail">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db_detail">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get details about a corpus, using information from local catalog.</span>
 
@@ -165,6 +169,7 @@
     <span class="k">return</span> <span class="p">{}</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get path pythainlp.corpus data</span>
@@ -177,7 +182,9 @@
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">(),</span> <span class="n">filename</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_corpus"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus">[docs]</a><span class="k">def</span> <span class="nf">get_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">frozenset</span><span class="p">:</span>
+<div class="viewcode-block" id="get_corpus">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">frozenset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read corpus data from file and return a frozenset.</span>
 
@@ -248,7 +255,10 @@
     <span class="k">return</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lines</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="get_corpus_as_is"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_as_is">[docs]</a><span class="k">def</span> <span class="nf">get_corpus_as_is</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+
+<div class="viewcode-block" id="get_corpus_as_is">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_as_is">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus_as_is</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read corpus data from file, as it is, and return a list.</span>
 
@@ -284,7 +294,10 @@
     <span class="k">return</span> <span class="n">lines</span></div>
 
 
-<div class="viewcode-block" id="get_corpus_default_db"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_default_db">[docs]</a><span class="k">def</span> <span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="get_corpus_default_db">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_default_db">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get model path from default_db.json</span>
 
@@ -314,7 +327,10 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="get_corpus_path"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a><span class="k">def</span> <span class="nf">get_corpus_path</span><span class="p">(</span>
+
+<div class="viewcode-block" id="get_corpus_path">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a>
+<span class="k">def</span> <span class="nf">get_corpus_path</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -391,6 +407,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">_download</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download helper.</span>
@@ -400,8 +417,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 64 KiB</span>
 
-    <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+    <span class="kn">import</span> <span class="nn">requests</span>
 
     <span class="n">file_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -507,7 +525,9 @@
     <span class="k">return</span> <span class="n">check</span>
 
 
-<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
+<div class="viewcode-block" id="download">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.download">[docs]</a>
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -657,7 +677,10 @@
     <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="remove"><a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.remove">[docs]</a><span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+<div class="viewcode-block" id="remove">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.remove">[docs]</a>
+<span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Remove corpus</span>
 
@@ -706,6 +729,7 @@
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">return</span> <span class="kc">False</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">get_path_folder_corpus</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">):</span>
