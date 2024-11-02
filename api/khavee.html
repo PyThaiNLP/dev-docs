@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee &mdash; PyThaiNLP 78f1795 documentation</title>
+  <title>pythainlp.khavee &mdash; PyThaiNLP 0c970fd documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=741baf91"></script>
+      <script src="../_static/documentation_options.js?v=fdc1bf35"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -181,7 +181,7 @@
 
 <span class="n">kv</span> <span class="o">=</span> <span class="n">KhaveeVerifier</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_marttra</span><span class="p">(</span><span class="s1">&#39;สาว&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_marttra</span><span class="p">(</span><span class="s2">&quot;สาว&quot;</span><span class="p">))</span>
 <span class="c1"># output: &#39;เกอว&#39;</span>
 </pre></div>
 </div>
@@ -211,10 +211,10 @@
 
 <span class="n">kv</span> <span class="o">=</span> <span class="n">KhaveeVerifier</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span> <span class="s1">&#39;อัน&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s2">&quot;สรร&quot;</span><span class="p">,</span> <span class="s2">&quot;อัน&quot;</span><span class="p">))</span>
 <span class="c1"># output: True</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s1">&#39;สรร&#39;</span><span class="p">,</span> <span class="s1">&#39;แมว&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">is_sumpus</span><span class="p">(</span><span class="s2">&quot;สรร&quot;</span><span class="p">,</span> <span class="s2">&quot;แมว&quot;</span><span class="p">))</span>
 <span class="c1"># output: False</span>
 </pre></div>
 </div>
@@ -292,9 +292,13 @@
 <span class="n">kv</span> <span class="o">=</span> <span class="n">KhaveeVerifier</span><span class="p">()</span>
 
 <span class="c1"># การเช็คคำเอกโท</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอง&#39;</span><span class="p">),</span> <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอ่ง&#39;</span><span class="p">),</span> <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s1">&#39;เอ้ง&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s2">&quot;เอง&quot;</span><span class="p">),</span>
+    <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s2">&quot;เอ่ง&quot;</span><span class="p">),</span>
+    <span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="s2">&quot;เอ้ง&quot;</span><span class="p">),</span>
+<span class="p">)</span>
 <span class="c1"># -&gt; False, aek, too</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">([</span><span class="s1">&#39;เอง&#39;</span><span class="p">,</span> <span class="s1">&#39;เอ่ง&#39;</span><span class="p">,</span> <span class="s1">&#39;เอ้ง&#39;</span><span class="p">]))</span> <span class="c1"># ใช้ List ได้เหมือนกัน</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kv</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">([</span><span class="s2">&quot;เอง&quot;</span><span class="p">,</span> <span class="s2">&quot;เอ่ง&quot;</span><span class="p">,</span> <span class="s2">&quot;เอ้ง&quot;</span><span class="p">]))</span>  <span class="c1"># ใช้ List ได้เหมือนกัน</span>
 <span class="c1"># -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
 </pre></div>
 </div>

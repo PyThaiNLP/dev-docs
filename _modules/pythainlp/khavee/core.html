@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP 78f1795 documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP 0c970fd documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=741baf91"></script>
+      <script src="../../../_static/documentation_options.js?v=fdc1bf35"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -336,7 +336,7 @@
 
 <span class="sd">            kv = KhaveeVerifier()</span>
 
-<span class="sd">            print(kv.check_marttra(&#39;สาว&#39;))</span>
+<span class="sd">            print(kv.check_marttra(&quot;สาว&quot;))</span>
 <span class="sd">            # output: &#39;เกอว&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ร&quot;</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ต&quot;</span><span class="p">,</span> <span class="s2">&quot;ท&quot;</span><span class="p">]:</span>
@@ -417,10 +417,10 @@
 
 <span class="sd">            kv = KhaveeVerifier()</span>
 
-<span class="sd">            print(kv.is_sumpus(&#39;สรร&#39;, &#39;อัน&#39;))</span>
+<span class="sd">            print(kv.is_sumpus(&quot;สรร&quot;, &quot;อัน&quot;))</span>
 <span class="sd">            # output: True</span>
 
-<span class="sd">            print(kv.is_sumpus(&#39;สรร&#39;, &#39;แมว&#39;))</span>
+<span class="sd">            print(kv.is_sumpus(&quot;สรร&quot;, &quot;แมว&quot;))</span>
 <span class="sd">            # output: False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">marttra1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_marttra</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
@@ -738,9 +738,13 @@
 <span class="sd">            kv = KhaveeVerifier()</span>
 
 <span class="sd">            # การเช็คคำเอกโท</span>
-<span class="sd">            print(kv.check_aek_too(&#39;เอง&#39;), kv.check_aek_too(&#39;เอ่ง&#39;), kv.check_aek_too(&#39;เอ้ง&#39;))</span>
+<span class="sd">            print(</span>
+<span class="sd">                kv.check_aek_too(&quot;เอง&quot;),</span>
+<span class="sd">                kv.check_aek_too(&quot;เอ่ง&quot;),</span>
+<span class="sd">                kv.check_aek_too(&quot;เอ้ง&quot;),</span>
+<span class="sd">            )</span>
 <span class="sd">            # -&gt; False, aek, too</span>
-<span class="sd">            print(kv.check_aek_too([&#39;เอง&#39;, &#39;เอ่ง&#39;, &#39;เอ้ง&#39;])) # ใช้ List ได้เหมือนกัน</span>
+<span class="sd">            print(kv.check_aek_too([&quot;เอง&quot;, &quot;เอ่ง&quot;, &quot;เอ้ง&quot;]))  # ใช้ List ได้เหมือนกัน</span>
 <span class="sd">            # -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
 
 
