@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 0e8ee98 documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 95a759e documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c69d65a4"></script>
+      <script src="../../../_static/documentation_options.js?v=ab76d4fa"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -111,6 +111,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Corpus related functions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
@@ -134,10 +135,10 @@
 
     <span class="n">corpus_db</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">corpus_db</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">corpus_db</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">http_err</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HTTP error occurred: </span><span class="si">{</span><span class="n">http_err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Non-HTTP error occurred: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">corpus_db</span></div>
@@ -146,7 +147,7 @@
 
 <div class="viewcode-block" id="get_corpus_db_detail">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db_detail">[docs]</a>
-<span class="k">def</span> <span class="nf">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get details about a corpus, using information from local catalog.</span>
 
@@ -297,7 +298,7 @@
 
 <div class="viewcode-block" id="get_corpus_default_db">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_default_db">[docs]</a>
-<span class="k">def</span> <span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get model path from default_db.json</span>
 
@@ -331,7 +332,7 @@
 <div class="viewcode-block" id="get_corpus_path">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a>
 <span class="k">def</span> <span class="nf">get_corpus_path</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get corpus path.</span>
@@ -375,11 +376,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
-    <span class="n">_CUSTOMIZE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">CUSTOMIZE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1"># &quot;the corpus name&quot;:&quot;path&quot;</span>
     <span class="p">}</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_CUSTOMIZE</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_CUSTOMIZE</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">CUSTOMIZE</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CUSTOMIZE</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
     <span class="n">default_path</span> <span class="o">=</span> <span class="n">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">default_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -415,14 +416,14 @@
 <span class="sd">    @param: URL for downloading file</span>
 <span class="sd">    @param: dst place to put the file into</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 64 KiB</span>
+    <span class="n">CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 64 KiB</span>
 
     <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 
     <span class="kn">import</span> <span class="nn">requests</span>
 
     <span class="n">file_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">dst</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
@@ -432,7 +433,7 @@
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="n">pbar</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="n">_CHUNK_SIZE</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="n">CHUNK_SIZE</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">pbar</span><span class="p">:</span>
@@ -459,7 +460,7 @@
             <span class="n">file_md5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">md5</span> <span class="o">!=</span> <span class="n">file_md5</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Hash does not match expected.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Hash does not match expected.&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_version2int</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -528,7 +529,7 @@
 <div class="viewcode-block" id="download">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.download">[docs]</a>
 <span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download corpus.</span>
@@ -549,7 +550,7 @@
 
 <span class="sd">        from pythainlp.corpus import download</span>
 
-<span class="sd">        download(&#39;wiki_lm_lstm&#39;, force=True)</span>
+<span class="sd">        download(&quot;wiki_lm_lstm&quot;, force=True)</span>
 <span class="sd">        # output:</span>
 <span class="sd">        # Corpus: wiki_lm_lstm</span>
 <span class="sd">        # - Downloading: wiki_lm_lstm 0.1</span>
@@ -586,10 +587,13 @@
 
         <span class="c1"># version may still be None here</span>
         <span class="k">if</span> <span class="n">version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not found corpus&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corpus not found.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">elif</span> <span class="n">_check_version</span><span class="p">(</span><span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;pythainlp_version&quot;</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Versions Corpus not support&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="n">_check_version</span><span class="p">(</span><span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;pythainlp_version&quot;</span><span class="p">])</span>
+            <span class="ow">is</span> <span class="kc">False</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corpus version not supported.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="n">corpus_versions</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">]</span>
         <span class="n">file_name</span> <span class="o">=</span> <span class="n">corpus_versions</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
@@ -632,8 +636,10 @@
                 <span class="n">foldername</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">)):</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">))</span>
-                <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">zip</span><span class="p">:</span>
-                    <span class="nb">zip</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">))</span>
+                <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span>
+                    <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span>
+                <span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
+                    <span class="n">zip_file</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">))</span>
 
             <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
                 <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="n">found</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">version</span>
@@ -644,7 +650,9 @@
                 <span class="c1"># This awkward behavior is for backward-compatibility with</span>
                 <span class="c1"># database files generated previously using TinyDB</span>
                 <span class="k">if</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]:</span>
-                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="nb">max</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">corpus_no</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">corpus_no</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span>
@@ -694,13 +702,13 @@
 
 <span class="sd">        from pythainlp.corpus import remove, get_corpus_path, get_corpus</span>
 
-<span class="sd">        print(remove(&#39;ttc&#39;))</span>
+<span class="sd">        print(remove(&quot;ttc&quot;))</span>
 <span class="sd">        # output: True</span>
 
-<span class="sd">        print(get_corpus_path(&#39;ttc&#39;))</span>
+<span class="sd">        print(get_corpus_path(&quot;ttc&quot;))</span>
 <span class="sd">        # output: None</span>
 
-<span class="sd">        get_corpus(&#39;ttc&#39;)</span>
+<span class="sd">        get_corpus(&quot;ttc&quot;)</span>
 <span class="sd">        # output:</span>
 <span class="sd">        # FileNotFoundError: [Errno 2] No such file or directory:</span>
 <span class="sd">        # &#39;/usr/local/lib/python3.6/dist-packages/pythainlp/corpus/ttc&#39;</span>
@@ -710,7 +718,9 @@
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">corpus</span> <span class="k">for</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">corpus</span> <span class="k">for</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
+    <span class="p">]</span>
 
     <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
