@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.th_en_translit &mdash; PyThaiNLP cf3e625 documentation</title>
+  <title>pythainlp.corpus.th_en_translit &mdash; PyThaiNLP ed83a18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=7e805ab0"></script>
+      <script src="../../../_static/documentation_options.js?v=62537b53"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -137,7 +137,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get Thai to English transliteration dictionary.</span>
 
-<span class="sd">    The returned dict is in defaultdict[str, defaultdict[List[str], List[Optional[bool]]]] format.</span>
+<span class="sd">    The returned dict is in dict[str, dict[List[str], List[Optional[bool]]]] format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="n">_FILE_NAME</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
@@ -147,7 +147,7 @@
         <span class="p">)</span>
 
     <span class="c1"># use list, as one word can have multiple transliterations.</span>
-    <span class="n">trans_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span>
+    <span class="n">trans_dict</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span>
         <span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="n">TRANSLITERATE_EN</span><span class="p">:</span> <span class="p">[],</span> <span class="n">TRANSLITERATE_FOLLOW_RTSG</span><span class="p">:</span> <span class="p">[]}</span>
     <span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
@@ -170,11 +170,11 @@
                         <span class="n">en_follow_rtgs</span>
                     <span class="p">)</span>
 
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Unable to parse </span><span class="si">{</span><span class="n">_FILE_NAME</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Unable to parse </span><span class="si">{</span><span class="n">_FILE_NAME</span><span class="si">}</span><span class="s2">. &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;Make sure it is a 3-column tab-separated file with header.&quot;</span>
-        <span class="p">)</span>
+        <span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">trans_dict</span></div>
 
