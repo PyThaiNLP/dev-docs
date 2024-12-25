@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.syllable &mdash; PyThaiNLP 188904f documentation</title>
+  <title>pythainlp.util.syllable &mdash; PyThaiNLP 985231a documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=dcc1e1bd"></script>
+      <script src="../../../_static/documentation_options.js?v=b2f377e8"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -299,7 +299,7 @@
 <span class="sd">        # output: short</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">thai_consonants</span><span class="p">)]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;short&quot;</span>
     <span class="k">elif</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">)):</span>
         <span class="k">return</span> <span class="s2">&quot;short&quot;</span>
@@ -377,14 +377,14 @@
             <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span>
         <span class="p">):</span>
             <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
-        <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">&quot;อ&quot;</span> <span class="ow">and</span> <span class="n">consonant_ending</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;dead&quot;</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
         <span class="k">elif</span> <span class="p">(</span>
             <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">&quot;ห&quot;</span>
             <span class="ow">and</span> <span class="n">consonant_ending</span>
             <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span>
             <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span>
         <span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
+        <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">&quot;อ&quot;</span> <span class="ow">and</span> <span class="n">consonant_ending</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;dead&quot;</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
         <span class="k">elif</span> <span class="p">(</span>
             <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">&quot;ห&quot;</span>
@@ -397,6 +397,22 @@
             <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
         <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">&quot;ห&quot;</span> <span class="ow">and</span> <span class="n">consonant_ending</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
+    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
     <span class="k">elif</span> <span class="p">(</span>
         <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span>
         <span class="ow">and</span> <span class="n">syllable_check_length</span> <span class="o">==</span> <span class="s2">&quot;short&quot;</span>
@@ -417,22 +433,6 @@
         <span class="ow">and</span> <span class="n">syllable_check</span> <span class="o">==</span> <span class="s2">&quot;open&quot;</span>
     <span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;live&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
-    <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span>
     <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;mid&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;dead&quot;</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span>
     <span class="k">elif</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;dead&quot;</span><span class="p">:</span>
