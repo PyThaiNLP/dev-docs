@@ -5,15 +5,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 37f6ba8 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 7332984 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=489edf84"></script>
+      <script src="../../../_static/documentation_options.js?v=9f055255"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -118,7 +118,7 @@
 
 <div class="viewcode-block" id="romanize">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.romanize">[docs]</a>
-<span class="k">def</span> <span class="nf">romanize</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">romanize</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">,</span>
     <span class="n">fallback_engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">,</span>
@@ -174,15 +174,15 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom&quot;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom</span> <span class="kn">import</span> <span class="n">romanize</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.thai2rom</span><span class="w"> </span><span class="kn">import</span> <span class="n">romanize</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai2rom_onnx&quot;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thai2rom_onnx</span> <span class="kn">import</span> <span class="n">romanize</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.thai2rom_onnx</span><span class="w"> </span><span class="kn">import</span> <span class="n">romanize</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">romanize</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">romanize</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine &quot;royin&quot;</span>
-            <span class="kn">from</span> <span class="nn">pythainlp.transliterate.royin</span> <span class="kn">import</span> <span class="n">romanize</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.royin</span><span class="w"> </span><span class="kn">import</span> <span class="n">romanize</span>
 
         <span class="k">return</span> <span class="n">romanize</span>
 
@@ -190,7 +190,7 @@
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;lookup&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.lookup</span> <span class="kn">import</span> <span class="n">romanize</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.lookup</span><span class="w"> </span><span class="kn">import</span> <span class="n">romanize</span>
 
         <span class="n">fallback</span> <span class="o">=</span> <span class="n">select_romanize_engine</span><span class="p">(</span><span class="n">fallback_engine</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">romanize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fallback_func</span><span class="o">=</span><span class="n">fallback</span><span class="p">)</span>
@@ -206,7 +206,7 @@
 
 <div class="viewcode-block" id="transliterate">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.transliterate">[docs]</a>
-<span class="k">def</span> <span class="nf">transliterate</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transliterate</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_TRANSLITERATE_ENGINE</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -271,19 +271,19 @@
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;icu&quot;</span><span class="p">,</span> <span class="s2">&quot;pyicu&quot;</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.pyicu</span> <span class="kn">import</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.pyicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ipa&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.ipa</span> <span class="kn">import</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.ipa</span><span class="w"> </span><span class="kn">import</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk_g2p&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">tltk_g2p</span> <span class="k">as</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk_g2p</span> <span class="k">as</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk_ipa&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.tltk</span> <span class="kn">import</span> <span class="n">tltk_ipa</span> <span class="k">as</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk_ipa</span> <span class="k">as</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;iso_11940&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.iso_11940</span> <span class="kn">import</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.iso_11940</span><span class="w"> </span><span class="kn">import</span> <span class="n">transliterate</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thaig2p_v2&quot;</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thaig2p_v2</span> <span class="kn">import</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.thaig2p_v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">transliterate</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># use default engine: &quot;thaig2p&quot;</span>
-        <span class="kn">from</span> <span class="nn">pythainlp.transliterate.thaig2p</span> <span class="kn">import</span> <span class="n">transliterate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.thaig2p</span><span class="w"> </span><span class="kn">import</span> <span class="n">transliterate</span>
 
     <span class="k">return</span> <span class="n">transliterate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
@@ -291,7 +291,7 @@
 
 <div class="viewcode-block" id="pronunciate">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.pronunciate">[docs]</a>
-<span class="k">def</span> <span class="nf">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_PRONUNCIATE_ENGINE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_PRONUNCIATE_ENGINE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function pronunciates Thai word.</span>
 
@@ -320,7 +320,7 @@
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="c1"># if engine == &quot;w2p&quot;:  # has only one engine</span>
-    <span class="kn">from</span> <span class="nn">pythainlp.transliterate.w2p</span> <span class="kn">import</span> <span class="n">pronunciate</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.transliterate.w2p</span><span class="w"> </span><span class="kn">import</span> <span class="n">pronunciate</span>
 
     <span class="k">return</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">)</span></div>
 
