@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP ae4c5fa documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP ef0e01d documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d6efae27"></script>
+      <script src="../../../_static/documentation_options.js?v=b59738fa"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -856,6 +856,49 @@
     <span class="k">return</span> <span class="n">subword_tokenize</span><span class="p">(</span>
         <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="n">keep_whitespace</span>
     <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="display_cell_tokenize">
+<a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.display_cell_tokenize">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">display_cell_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display cell tokenizer.</span>
+
+<span class="sd">    Tokenizes Thai text into display cells without splitting tone marks.</span>
+
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :return: list of display cells</span>
+<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :Example:</span>
+
+<span class="sd">    Tokenize Thai text into display cells::</span>
+
+<span class="sd">        from pythainlp.tokenize import display_cell_tokenize</span>
+
+<span class="sd">        text = &quot;แม่น้ำอยู่ที่ไหน&quot;</span>
+<span class="sd">        display_cell_tokenize(text)</span>
+<span class="sd">        # output: [&#39;แ&#39;, &#39;ม่&#39;, &#39;น้ํ&#39;, &#39;า&#39;, &#39;อ&#39;, &#39;ยู่&#39;, &#39;ที่&#39;, &#39;ไ&#39;, &#39;ห&#39;, &#39;น&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">display_cells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_cell</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ำ&quot;</span><span class="p">,</span> <span class="s2">&quot;ํา&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]&quot;</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
+            <span class="n">current_cell</span> <span class="o">+=</span> <span class="n">char</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_cell</span><span class="p">:</span>
+                <span class="n">display_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_cell</span><span class="p">)</span>
+            <span class="n">current_cell</span> <span class="o">=</span> <span class="n">char</span>
+
+    <span class="k">if</span> <span class="n">current_cell</span><span class="p">:</span>
+        <span class="n">display_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_cell</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display_cells</span></div>
 
 
 

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize &mdash; PyThaiNLP ae4c5fa documentation</title>
+  <title>pythainlp.tokenize &mdash; PyThaiNLP ef0e01d documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=d6efae27"></script>
+      <script src="../_static/documentation_options.js?v=b59738fa"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -81,6 +81,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.Tokenizer.set_tokenize_engine"><code class="docutils literal notranslate"><span class="pre">Tokenizer.set_tokenize_engine()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.display_cell_tokenize"><code class="docutils literal notranslate"><span class="pre">display_cell_tokenize</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tokenization-engines">Tokenization Engines</a></li>
@@ -693,6 +694,34 @@ for end of phrase in Thai</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tokenize.display_cell_tokenize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.</span></span><span class="sig-name descname"><span class="pre">display_cell_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/core.html#display_cell_tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.display_cell_tokenize" title="Link to this definition"></a></dt>
+<dd><p>Display cell tokenizer.</p>
+<p>Tokenizes Thai text into display cells without splitting tone marks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – text to be tokenized</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of display cells</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>Tokenize Thai text into display cells:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_cell_tokenize</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;แม่น้ำอยู่ที่ไหน&quot;</span>
+<span class="n">display_cell_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># output: [&#39;แ&#39;, &#39;ม่&#39;, &#39;น้ํ&#39;, &#39;า&#39;, &#39;อ&#39;, &#39;ยู่&#39;, &#39;ที่&#39;, &#39;ไ&#39;, &#39;ห&#39;, &#39;น&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
