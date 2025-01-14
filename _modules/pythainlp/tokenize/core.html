@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 0850aa8 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 1271452 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=2db519f7"></script>
+      <script src="../../../_static/documentation_options.js?v=93e4d78a"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -224,10 +224,10 @@
 <span class="sd">    :param str engine: name of the tokenizer to be used</span>
 <span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie (some engine may not support)</span>
 <span class="sd">    :param bool keep_whitespace: True to keep whitespace, a common mark</span>
-<span class="sd">                                 for end of phrase in Thai.</span>
-<span class="sd">                                 Otherwise, whitespace is omitted.</span>
+<span class="sd">                                  for end of phrase in Thai.</span>
+<span class="sd">                                  Otherwise, whitespace is omitted.</span>
 <span class="sd">    :param bool join_broken_num: True to rejoin formatted numeric that could be wrongly separated.</span>
-<span class="sd">                                 Otherwise, formatted numeric could be wrongly separated.</span>
+<span class="sd">                                  Otherwise, formatted numeric could be wrongly separated.</span>
 
 <span class="sd">    :return: list of words</span>
 <span class="sd">    :rtype: List[str]</span>
@@ -333,6 +333,18 @@
         <span class="k">return</span> <span class="p">[]</span>
 
     <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">custom_dict</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="s2">&quot;attacut&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;icu&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nercut&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sefr_cut&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tltk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oskut&quot;</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine does not support custom dictionaries.&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="s2">&quot;onecut&quot;</span><span class="p">):</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.newmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
@@ -482,7 +494,7 @@
 <span class="sd">            and ``wtp-large`` to use ``wtp-canine-s-12l`` model.</span>
 <span class="sd">        * *whitespace+newline* - split by whitespace and newline.</span>
 <span class="sd">        * *whitespace* - split by whitespace, specifically with \</span>
-<span class="sd">                         :class:`regex` pattern  ``r&quot; +&quot;``</span>
+<span class="sd">                          :class:`regex` pattern  ``r&quot; +&quot;``</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Split the text based on *whitespace*::</span>
@@ -987,9 +999,9 @@
 <span class="sd">                    used to create a trie, or an instantiated</span>
 <span class="sd">                    :class:`pythainlp.util.Trie` object.</span>
 <span class="sd">        :param str engine: choose between different options of tokenizer engines</span>
-<span class="sd">                           (i.e.  *newmm*, *mm*, *longest*, *deepcut*)</span>
+<span class="sd">                            (i.e.  *newmm*, *mm*, *longest*, *deepcut*)</span>
 <span class="sd">        :param bool keep_whitespace: True to keep whitespace, a common mark</span>
-<span class="sd">                                    for end of phrase in Thai</span>
+<span class="sd">                                     for end of phrase in Thai</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
         <span class="k">if</span> <span class="n">custom_dict</span><span class="p">:</span>
