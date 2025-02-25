@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate &mdash; PyThaiNLP d274093 documentation</title>
+  <title>pythainlp.transliterate &mdash; PyThaiNLP d88d971 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=eeaf0e66"></script>
+      <script src="../_static/documentation_options.js?v=6504629c"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -78,7 +78,10 @@
 <li class="toctree-l1"><a class="reference internal" href="translate.html">pythainlp.translate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.transliterate</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#transliteration-engines">Transliteration Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transliteration-engines">Transliteration Engines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.transliterate.royin.romanize"><code class="docutils literal notranslate"><span class="pre">romanize()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -327,24 +330,26 @@ how the input text should be pronounced.</p>
 <h2>Transliteration Engines<a class="headerlink" href="#transliteration-engines" title="Link to this heading"></a></h2>
 <p><strong>thai2rom</strong></p>
 <p><strong>royin</strong></p>
-<p id="module-pythainlp.transliterate.royin.romanize">Render Thai words in Latin alphabet, using RTGS</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.transliterate.royin.romanize">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.transliterate.royin.</span></span><span class="sig-name descname"><span class="pre">romanize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/transliterate/royin.html#romanize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.transliterate.royin.romanize" title="Link to this definition"></a></dt>
+<dd><p>Render Thai words in Latin alphabet, using RTGS</p>
 <p>Royal Thai General System of Transcription (RTGS),
 is the official system by the Royal Institute of Thailand.</p>
 <dl class="field-list simple">
-<dt class="field-odd">param text<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Thai text to be romanized</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Thai text to be romanized</p>
 </dd>
-<dt class="field-even">type text<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string of Thai words rendered in the Latin alphabet</p>
 </dd>
-<dt class="field-odd">return<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A string of Thai words rendered in the Latin alphabet</p>
-</dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 <p>The <cite>royin</cite> engine focuses on transliterating Thai text into English characters. It provides an alternative approach to transliteration, ensuring accurate representation of Thai words.</p>
+</dd></dl>
+
 <p><strong>Transliterate Engines</strong></p>
 <p>This section includes multiple transliteration engines designed to suit various use cases. They offer unique methods for transliterating Thai text into romanized form:</p>
 <ul class="simple">
