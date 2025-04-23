@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus &mdash; PyThaiNLP 921dd33 documentation</title>
+  <title>pythainlp.corpus &mdash; PyThaiNLP 2ac1374 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fb11ab7d"></script>
+      <script src="../_static/documentation_options.js?v=1cf8b36d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -86,10 +86,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#thai-female-names">thai_female_names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thai-male-names">thai_male_names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp-corpus-th-en-translit-get-transliteration-dict">pythainlp.corpus.th_en_translit.get_transliteration_dict</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#conceptnet">ConceptNet</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pythainlp-corpus-conceptnet-edges">pythainlp.corpus.conceptnet.edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp-corpus-tnc-word-freqs">pythainlp.corpus.tnc.word_freqs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp-corpus-tnc-unigram-word-freqs">pythainlp.corpus.tnc.unigram_word_freqs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp-corpus-tnc-bigram-word-freqs">pythainlp.corpus.tnc.bigram_word_freqs</a></li>
@@ -783,123 +779,6 @@ and “พิษภัย”.</p>
 <span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.th_en_translit.</span></span><span class="sig-name descname"><span class="pre">get_transliteration_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.defaultdict" title="(in Python v3.13)"><span class="pre">defaultdict</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/th_en_translit.html#get_transliteration_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Get Thai to English transliteration dictionary.</p>
 <p>The returned dict is in dict[str, dict[List[str], List[Optional[bool]]]] format.</p>
-</dd></dl>
-
-</section>
-</section>
-<section id="conceptnet">
-<h2>ConceptNet<a class="headerlink" href="#conceptnet" title="Link to this heading"></a></h2>
-<p>ConceptNet is an open, multilingual knowledge graph used for various natural language understanding tasks. For more information, refer to the <a class="reference external" href="https://github.com/commonsense/conceptnet5/wiki/API">ConceptNet documentation</a>.</p>
-<section id="pythainlp-corpus-conceptnet-edges">
-<h3>pythainlp.corpus.conceptnet.edges<a class="headerlink" href="#pythainlp-corpus-conceptnet-edges" title="Link to this heading"></a></h3>
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.conceptnet.</span></span><span class="sig-name descname"><span class="pre">edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'th'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/corpus/conceptnet.html#edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Get edges from <a class="reference external" href="http://api.conceptnet.io/">ConceptNet</a> API.
-ConceptNet is a public semantic network, designed to help computers
-understand the meanings of words that people use.</p>
-<p>For example, the term “ConceptNet” is a “knowledge graph”, and
-“knowledge graph” has “common sense knowledge” which is a part of
-“artificial intelligence”. Also, “ConcepNet” is used for
-“natural language understanding” which is a part of
-“artificial intelligence”.</p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">“ConceptNet” –is a–&gt; “knowledge graph” –has–&gt; “common sense”          –a part of–&gt; “artificial intelligence”</div>
-<div class="line">“ConceptNet” –used for–&gt; “natural language understanding”          –a part of–&gt; “artificial intelligence”</div>
-</div>
-</div></blockquote>
-<p>With this illustration, it shows relationships (represented as <em>Edge</em>)
-between the terms (represented as <em>Node</em>).</p>
-<p>This function requires an internet connection to access the ConceptNet API.
-Please use it considerately. It will timeout after 10 seconds.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – word to be sent to ConceptNet API</p></li>
-<li><p><strong>lang</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – abbreviation of language (i.e. <em>th</em> for Thai, <em>en</em> for
-English, or <em>ja</em> for Japan). By default, it is <em>th</em>
-(Thai).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>return edges of the given word according to the
-ConceptNet network.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.conceptnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">edges</span>
-
-<span class="n">edges</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [{</span>
-<span class="c1">#   &#39;@id&#39;: &#39;/a/[/r/IsA/,/c/en/hello/,/c/en/greeting/]&#39;,</span>
-<span class="c1">#   &#39;@type&#39;: &#39;Edge&#39;,</span>
-<span class="c1">#   &#39;dataset&#39;: &#39;/d/conceptnet/4/en&#39;,</span>
-<span class="c1">#   &#39;end&#39;: {&#39;@id&#39;: &#39;/c/en/greeting&#39;,</span>
-<span class="c1">#   &#39;@type&#39;: &#39;Node&#39;,</span>
-<span class="c1">#   &#39;label&#39;: &#39;greeting&#39;,</span>
-<span class="c1">#   &#39;language&#39;: &#39;en&#39;,</span>
-<span class="c1">#   &#39;term&#39;: &#39;/c/en/greeting&#39;},</span>
-<span class="c1">#   &#39;license&#39;: &#39;cc:by/4.0&#39;,</span>
-<span class="c1">#   &#39;rel&#39;: {&#39;@id&#39;: &#39;/r/IsA&#39;, &#39;@type&#39;: &#39;Relation&#39;, &#39;label&#39;: &#39;IsA&#39;},</span>
-<span class="c1">#   &#39;sources&#39;: [</span>
-<span class="c1">#   {</span>
-<span class="c1">#   &#39;@id&#39;: &#39;/and/[/s/activity/omcs/vote/,/s/contributor/omcs/bmsacr/]&#39;,</span>
-<span class="c1">#   &#39;@type&#39;: &#39;Source&#39;,</span>
-<span class="c1">#   &#39;activity&#39;: &#39;/s/activity/omcs/vote&#39;,</span>
-<span class="c1">#   &#39;contributor&#39;: &#39;/s/contributor/omcs/bmsacr&#39;</span>
-<span class="c1">#   },</span>
-<span class="c1">#   {</span>
-<span class="c1">#     &#39;@id&#39;: &#39;/and/[/s/activity/omcs/vote/,/s/contributor/omcs/test/]&#39;,</span>
-<span class="c1">#     &#39;@type&#39;: &#39;Source&#39;,</span>
-<span class="c1">#     &#39;activity&#39;: &#39;/s/activity/omcs/vote&#39;,</span>
-<span class="c1">#     &#39;contributor&#39;: &#39;/s/contributor/omcs/test&#39;}</span>
-<span class="c1">#   ],</span>
-<span class="c1">#   &#39;start&#39;: {&#39;@id&#39;: &#39;/c/en/hello&#39;,</span>
-<span class="c1">#   &#39;@type&#39;: &#39;Node&#39;,</span>
-<span class="c1">#   &#39;label&#39;: &#39;Hello&#39;,</span>
-<span class="c1">#   &#39;language&#39;: &#39;en&#39;,</span>
-<span class="c1">#   &#39;term&#39;: &#39;/c/en/hello&#39;},</span>
-<span class="c1">#   &#39;surfaceText&#39;: &#39;[[Hello]] is a kind of [[greeting]]&#39;,</span>
-<span class="c1">#   &#39;weight&#39;: 3.4641016151377544</span>
-<span class="c1"># }, ...]</span>
-
-<span class="n">edges</span><span class="p">(</span><span class="s1">&#39;สวัสดี&#39;</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;th&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [{</span>
-<span class="c1">#  &#39;@id&#39;: &#39;/a/[/r/RelatedTo/,/c/th/สวัสดี/n/,/c/en/prosperity/]&#39;,</span>
-<span class="c1">#  &#39;@type&#39;: &#39;Edge&#39;,</span>
-<span class="c1">#  &#39;dataset&#39;: &#39;/d/wiktionary/en&#39;,</span>
-<span class="c1">#  &#39;end&#39;: {&#39;@id&#39;: &#39;/c/en/prosperity&#39;,</span>
-<span class="c1">#  &#39;@type&#39;: &#39;Node&#39;,</span>
-<span class="c1">#  &#39;label&#39;: &#39;prosperity&#39;,</span>
-<span class="c1">#  &#39;language&#39;: &#39;en&#39;,</span>
-<span class="c1">#  &#39;term&#39;: &#39;/c/en/prosperity&#39;},</span>
-<span class="c1">#  &#39;license&#39;: &#39;cc:by-sa/4.0&#39;,</span>
-<span class="c1">#  &#39;rel&#39;: {</span>
-<span class="c1">#      &#39;@id&#39;: &#39;/r/RelatedTo&#39;, &#39;@type&#39;: &#39;Relation&#39;,</span>
-<span class="c1">#      &#39;label&#39;: &#39;RelatedTo&#39;},</span>
-<span class="c1">#  &#39;sources&#39;: [{</span>
-<span class="c1">#  &#39;@id&#39;: &#39;/and/[/s/process/wikiparsec/2/,/s/resource/wiktionary/en/]&#39;,</span>
-<span class="c1">#  &#39;@type&#39;: &#39;Source&#39;,</span>
-<span class="c1">#  &#39;contributor&#39;: &#39;/s/resource/wiktionary/en&#39;,</span>
-<span class="c1">#  &#39;process&#39;: &#39;/s/process/wikiparsec/2&#39;}],</span>
-<span class="c1">#  &#39;start&#39;: {&#39;@id&#39;: &#39;/c/th/สวัสดี/n&#39;,</span>
-<span class="c1">#  &#39;@type&#39;: &#39;Node&#39;,</span>
-<span class="c1">#  &#39;label&#39;: &#39;สวัสดี&#39;,</span>
-<span class="c1">#  &#39;language&#39;: &#39;th&#39;,</span>
-<span class="c1">#  &#39;sense_label&#39;: &#39;n&#39;,</span>
-<span class="c1">#  &#39;term&#39;: &#39;/c/th/สวัสดี&#39;},</span>
-<span class="c1">#  &#39;surfaceText&#39;: None,</span>
-<span class="c1">#  &#39;weight&#39;: 1.0</span>
-<span class="c1"># }, ...]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <p>TNC (Thai National Corpus)
