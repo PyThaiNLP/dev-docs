@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.core &mdash; PyThaiNLP aad134d documentation</title>
+  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 372ced4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8b206862"></script>
+      <script src="../../../_static/documentation_options.js?v=8c12b5f7"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -124,17 +124,19 @@
     <span class="n">fallback_engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_ROMANIZE_ENGINE</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function renders Thai words in the Latin alphabet or &quot;romanization&quot;,</span>
+<span class="sd">    This function renders Thai word in the Latin alphabet or &quot;romanization&quot;,</span>
 <span class="sd">    using the Royal Thai General System of Transcription (RTGS)</span>
 <span class="sd">    [#rtgs_transcription]_. RTGS is the official system published</span>
 <span class="sd">    by the Royal Institute of Thailand. (Thai: ถอดเสียงภาษาไทยเป็นอักษรละติน)</span>
 
-<span class="sd">    :param str text: Thai text to be romanized</span>
+<span class="sd">    :param str text: A Thai word to be romanized. \</span>
+<span class="sd">        The input should not include whitespace because \</span>
+<span class="sd">        the function is support subwords by spliting whitespace.</span>
 <span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;thai2rom_onnx, &#39;tltk&#39;, and &#39;lookup&#39;. See more in options for engine section.</span>
 <span class="sd">    :param str fallback_engine: If engine equals &#39;lookup&#39;, use `fallback_engine` for words that are not in the transliteration dict.</span>
 <span class="sd">                                No effect on other engines. Default to &#39;royin&#39;.</span>
 
-<span class="sd">    :return: A string of Thai words rendered in the Latin alphabet.</span>
+<span class="sd">    :return: A string of a Thai word rendered in the Latin alphabet.</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Options for engines:</span>
@@ -162,6 +164,9 @@
 
 <span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;royin&quot;)</span>
 <span class="sd">        # output: &#39;phapn&#39;</span>
+
+<span class="sd">        romanize(&quot;รส ดี&quot;, engine=&quot;royin&quot;) # subwords</span>
+<span class="sd">        # output: &#39;rot di&#39;</span>
 
 <span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom&quot;)</span>
 <span class="sd">        # output: &#39;phapphayon&#39;</span>
@@ -197,9 +202,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rom_engine</span> <span class="o">=</span> <span class="n">select_romanize_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
         <span class="n">trans_word</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
-            <span class="n">trans_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rom_engine</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
-        <span class="n">new_word</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">trans_word</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">subword</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
+            <span class="n">trans_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rom_engine</span><span class="p">(</span><span class="n">subword</span><span class="p">))</span>
+        <span class="n">new_word</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">trans_word</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">new_word</span></div>
 
 
