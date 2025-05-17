@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient &mdash; PyThaiNLP 372ced4 documentation</title>
+  <title>pythainlp.ancient &mdash; PyThaiNLP 9a1ca86 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8c12b5f7"></script>
+      <script src="../_static/documentation_options.js?v=65404f25"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -58,6 +58,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.ancient</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.ancient.aksonhan_to_current"><code class="docutils literal notranslate"><span class="pre">aksonhan_to_current()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.ancient.convert_currency"><code class="docutils literal notranslate"><span class="pre">convert_currency()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -147,6 +148,58 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="n">aksonhan_to_current</span><span class="p">(</span><span class="s2">&quot;สรรเพชญ&quot;</span><span class="p">))</span> <span class="c1"># รร is still used.</span>
 <span class="c1"># output: สรรเพชญ</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.ancient.convert_currency">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.ancient.</span></span><span class="sig-name descname"><span class="pre">convert_currency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ancient/currency.html#convert_currency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ancient.convert_currency" title="Link to this definition"></a></dt>
+<dd><p>Convert ancient Thai currency to other units</p>
+<ul class="simple">
+<li><p>เบี้ย (Bia)</p></li>
+<li><p>อัฐ (At)</p></li>
+<li><p>ไพ (Pi)</p></li>
+<li><p>เฟื้อง (Feuang)</p></li>
+<li><p>สลึง (Saleung)</p></li>
+<li><p>บาท (Bath)</p></li>
+<li><p>ตำลึง (Tamleung)</p></li>
+<li><p>ชั่ง (Chang)</p></li>
+</ul>
+<dl class="simple">
+<dt>See more:</dt><dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/History_of_Thai_money">Thai money</a>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – value</p></li>
+<li><p><strong>from_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – currency unit         (‘เบี้ย’, ‘อัฐ’, ‘ไพ’, ‘เฟื้อง’, ‘สลึง’, ‘บาท’, ‘ตำลึง’, ‘ชั่ง’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Thai currency</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.ancient</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_currency</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">convert_currency</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;บาท&quot;</span><span class="p">))</span>
+<span class="c1"># output:</span>
+<span class="c1"># {</span>
+<span class="c1">#  &#39;เบี้ย&#39;: 51200.0,</span>
+<span class="c1">#  &#39;อัฐ&#39;: 512.0,</span>
+<span class="c1">#  &#39;ไพ&#39;: 256.0,</span>
+<span class="c1">#  &#39;เฟื้อง&#39;: 64.0,</span>
+<span class="c1">#  &#39;สลึง&#39;: 32.0,</span>
+<span class="c1">#  &#39;บาท&#39;: 8.0,</span>
+<span class="c1">#  &#39;ตำลึง&#39;: 2.0,</span>
+<span class="c1">#  &#39;ชั่ง&#39;: 0.1</span>
+<span class="c1"># }</span>
 </pre></div>
 </div>
 </dd></dl>
