@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tools.path &mdash; PyThaiNLP 9e1cace documentation</title>
+  <title>pythainlp.tools.core &mdash; PyThaiNLP 9e1cace documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -96,7 +96,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">pythainlp.tools.path</li>
+      <li class="breadcrumb-item active">pythainlp.tools.core</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -105,93 +105,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.tools.path</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.tools.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># SPDX-FileCopyrightText: 2016-2025 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">PyThaiNLP data tools</span>
-
-<span class="sd">For text processing and text conversion, see pythainlp.util</span>
+<span class="sd">Generic support functions for PyThaiNLP.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="vm">__file__</span> <span class="k">as</span> <span class="n">pythainlp_file</span>
-
-<span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span> <span class="o">=</span> <span class="s2">&quot;pythainlp-data&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 
-<div class="viewcode-block" id="get_full_data_path">
-<a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_full_data_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_full_data_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function joins path of :mod:`pythainlp` data directory and the</span>
-<span class="sd">    given path, and returns the full path.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warn_deprecation</span><span class="p">(</span>
+    <span class="n">deprecated_func</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">replacing_func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">deprecated_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">removal_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Warn about the deprecation of a function.</span>
 
-<span class="sd">    :return: full path given the name of dataset</span>
-<span class="sd">    :rtype: str</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.tools import get_full_data_path</span>
-
-<span class="sd">        get_full_data_path(&#39;ttc_freq.txt&#39;)</span>
-<span class="sd">        # output: &#39;/root/pythainlp-data/ttc_freq.txt&#39;</span>
+<span class="sd">    :param str deprecated_func: Name of the deprecated function.</span>
+<span class="sd">    :param str replacing_func: Name of the function to use instead (optional).</span>
+<span class="sd">    :param str deprecated_version: Version in which the function will be deprecated (optional).</span>
+<span class="sd">    :param str removal_version: Version in which the function will be removed (optional).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_pythainlp_data_path</span><span class="p">(),</span> <span class="n">path</span><span class="p">)</span></div>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The &#39;</span><span class="si">{</span><span class="n">deprecated_func</span><span class="si">}</span><span class="s2">&#39; function is deprecated&quot;</span>
+    <span class="k">if</span> <span class="n">deprecated_version</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; since </span><span class="si">{</span><span class="n">deprecated_version</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">removal_version</span><span class="p">:</span>
+        <span class="n">removal_version</span> <span class="o">=</span> <span class="s2">&quot;a future release&quot;</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; and will be removed in </span><span class="si">{</span><span class="n">removal_version</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="k">if</span> <span class="n">replacing_func</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; Please use &#39;</span><span class="si">{</span><span class="n">replacing_func</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
+<div class="viewcode-block" id="safe_print">
+<a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.safe_print">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_print</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print text to console, handling UnicodeEncodeError.</span>
 
-
-<div class="viewcode-block" id="get_pythainlp_data_path">
-<a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_pythainlp_data_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_pythainlp_data_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the full path where PyThaiNLP keeps its (downloaded) data.</span>
-<span class="sd">    If the directory does not yet exist, it will be created.</span>
-<span class="sd">    The path can be specified through the environment variable</span>
-<span class="sd">    :envvar:`PYTHAINLP_DATA_DIR`. By default, `~/pythainlp-data`</span>
-<span class="sd">    will be used.</span>
-
-<span class="sd">    :return: full path of directory for :mod:`pythainlp` downloaded data</span>
-<span class="sd">    :rtype: str</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.tools import get_pythainlp_data_path</span>
-
-<span class="sd">        get_pythainlp_data_path()</span>
-<span class="sd">        # output: &#39;/root/pythainlp-data&#39;</span>
+<span class="sd">    :param text: Text to print.</span>
+<span class="sd">    :type text: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pythainlp_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
-        <span class="s2">&quot;PYTHAINLP_DATA_DIR&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">pythainlp_data_dir</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">path</span></div>
-
-
-
-<div class="viewcode-block" id="get_pythainlp_path">
-<a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.get_pythainlp_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_pythainlp_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function returns full path of PyThaiNLP codes</span>
-
-<span class="sd">    :return: full path of :mod:`pythainlp` codes</span>
-<span class="sd">    :rtype: str</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.tools import get_pythainlp_path</span>
-
-<span class="sd">        get_pythainlp_path()</span>
-<span class="sd">        # output: &#39;/usr/local/lib/python3.6/dist-packages/pythainlp&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pythainlp_file</span><span class="p">)</span></div>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
 
 </pre></div>
 
