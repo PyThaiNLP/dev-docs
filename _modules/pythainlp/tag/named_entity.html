@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 3158296 documentation</title>
+  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 48d803b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b793d13d"></script>
+      <script src="../../../_static/documentation_options.js?v=7dadf5ca"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -200,16 +200,17 @@
 <span class="sd">            &gt;&gt;&gt; from pythainlp.tag import NER</span>
 <span class="sd">            &gt;&gt;&gt;</span>
 <span class="sd">            &gt;&gt;&gt; ner = NER(&quot;thainer&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; ner.tag(&quot;ทดสอบนายวรรณพงษ์ ภัททิยไพบูลย์&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; ner.tag(&quot;ทดสอบ นายวรรณพงษ์ ภัททิยไพบูลย์&quot;)</span>
 <span class="sd">            [(&#39;ทดสอบ&#39;, &#39;O&#39;),</span>
+<span class="sd">            [(&#39; &#39;, &#39;O&#39;),</span>
 <span class="sd">            (&#39;นาย&#39;, &#39;B-PERSON&#39;),</span>
 <span class="sd">            (&#39;วรรณ&#39;, &#39;I-PERSON&#39;),</span>
 <span class="sd">            (&#39;พงษ์&#39;, &#39;I-PERSON&#39;),</span>
 <span class="sd">            (&#39; &#39;, &#39;I-PERSON&#39;),</span>
 <span class="sd">            (&#39;ภัททิย&#39;, &#39;I-PERSON&#39;),</span>
 <span class="sd">            (&#39;ไพบูลย์&#39;, &#39;I-PERSON&#39;)]</span>
-<span class="sd">            &gt;&gt;&gt; ner.tag(&quot;ทดสอบนายวรรณพงษ์ ภัททิยไพบูลย์&quot;, tag=True)</span>
-<span class="sd">            &#39;ทดสอบ&lt;PERSON&gt;นายวรรณพงษ์ ภัททิยไพบูลย์&lt;/PERSON&gt;&#39;</span>
+<span class="sd">            &gt;&gt;&gt; ner.tag(&quot;ทดสอบ นายวรรณพงษ์ ภัททิยไพบูลย์&quot;, tag=True)</span>
+<span class="sd">            &#39;ทดสอบ &lt;PERSON&gt;นายวรรณพงษ์ ภัททิยไพบูลย์&lt;/PERSON&gt;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span></div>
 </div>
