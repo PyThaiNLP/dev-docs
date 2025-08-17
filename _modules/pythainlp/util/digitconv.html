@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.digitconv &mdash; PyThaiNLP 48d803b documentation</title>
+  <title>pythainlp.util.digitconv &mdash; PyThaiNLP 00f55ff documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=7dadf5ca"></script>
+      <script src="../../../_static/documentation_options.js?v=eb7e6096"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -194,7 +194,7 @@
 <span class="sd">        # output: เป็นจำนวน 123,400.25 บาท</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_thai_arabic_translate_table</span><span class="p">)</span></div>
 
@@ -223,7 +223,7 @@
 <span class="sd">        # output: เป็นจำนวน ๑๒๓,๔๐๐.๒๕ บาท</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Convert Arabic to Thai numerals</span>
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_arabic_thai_translate_table</span><span class="p">)</span></div>
@@ -238,7 +238,7 @@
 <span class="sd">    :return: Text with digits spelled out in Thai</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Convert Thai numerals to Arabic ones</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_thai_arabic_translate_table</span><span class="p">)</span>
@@ -280,7 +280,9 @@
 <span class="sd">        text_to_arabic_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;</span>
 <span class="sd">        # output: True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="n">text</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_spell_digit</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="n">text</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_spell_digit</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">_spell_digit</span><span class="p">[</span><span class="n">text</span><span class="p">]</span></div>
@@ -319,6 +321,11 @@
 <span class="sd">        text_to_thai_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;</span>
 <span class="sd">        # output: True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">arabic_digit_to_thai_digit</span><span class="p">(</span><span class="n">text_to_arabic_digit</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></div>
 
 </pre></div>
