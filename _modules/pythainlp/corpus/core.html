@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 3ce57f7 documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP f7df55d documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=2a7bd371"></script>
+      <script src="../../../_static/documentation_options.js?v=e5bf50f9"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -116,6 +116,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
@@ -715,9 +716,6 @@
 <span class="sd">        # FileNotFoundError: [Errno 2] No such file or directory:</span>
 <span class="sd">        # &#39;/usr/local/lib/python3.6/dist-packages/pythainlp/corpus/ttc&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">_CHECK_MODE</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP is read-only mode. It can&#39;t remove corpus.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
@@ -746,6 +744,63 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_path_folder_corpus</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">),</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_safe_directory_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make safe directory name</span>
+
+<span class="sd">    :param str name: directory name</span>
+<span class="sd">    :return: safe directory name</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Replace invalid characters with an underscore</span>
+    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[&lt;&gt;:&quot;/</span><span class="se">\\</span><span class="s1">|?*]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="c1"># Remove leading/trailing spaces or periods (especially important for Windows)</span>
+    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">safe_name</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; .&#39;</span><span class="p">)</span>
+    <span class="c1"># Prevent names that are reserved on Windows</span>
+    <span class="n">reserved_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CON&#39;</span><span class="p">,</span> <span class="s1">&#39;PRN&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;NUL&#39;</span><span class="p">,</span> <span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="s1">&#39;COM2&#39;</span><span class="p">,</span> <span class="s1">&#39;COM3&#39;</span><span class="p">,</span> <span class="s1">&#39;COM4&#39;</span><span class="p">,</span> <span class="s1">&#39;COM5&#39;</span><span class="p">,</span> <span class="s1">&#39;COM6&#39;</span><span class="p">,</span> <span class="s1">&#39;COM7&#39;</span><span class="p">,</span> <span class="s1">&#39;COM8&#39;</span><span class="p">,</span> <span class="s1">&#39;COM9&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT1&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT2&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT3&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT4&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT5&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT6&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT7&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT8&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT9&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">safe_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">reserved_names</span><span class="p">:</span>
+        <span class="n">safe_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">safe_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># Prepend underscore to avoid conflict</span>
+    <span class="k">return</span> <span class="n">safe_name</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_hf_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    HuggingFace Hub in :mod:`pythainlp` data directory.</span>
+
+<span class="sd">    :param str repo_id: repo_id</span>
+<span class="sd">    :param str filename: filename</span>
+<span class="sd">    :return: path</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_CHECK_MODE</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP is read-only mode. It can&#39;t download.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">hf_hub_download</span><span class="p">,</span> <span class="n">snapshot_download</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        huggingface-hub isn&#39;t found!</span>
+<span class="s2">        Please installing the package via &#39;pip install huggingface-hub&#39;.</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">hf_root</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="s2">&quot;hf_models&quot;</span><span class="p">)</span>
+    <span class="n">name_dir</span> <span class="o">=</span> <span class="n">make_safe_directory_name</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+    <span class="n">root_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hf_root</span><span class="p">,</span> <span class="n">name_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">filename</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+            <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="n">snapshot_download</span><span class="p">(</span>
+            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+            <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">output_path</span>
 </pre></div>
 
            </div>
