@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify &mdash; PyThaiNLP 999e2a6 documentation</title>
+  <title>pythainlp.classify &mdash; PyThaiNLP a14b4b5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=9627c85d"></script>
+      <script src="../_static/documentation_options.js?v=0115cb43"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -59,7 +59,17 @@
 <li class="toctree-l1"><a class="reference internal" href="augment.html">pythainlp.augment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">pythainlp.benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chat.html">pythainlp.chat</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.classify</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.classify</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pythainlp.classify.GzipModel"><code class="docutils literal notranslate"><span class="pre">GzipModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.classify.GzipModel.__init__"><code class="docutils literal notranslate"><span class="pre">GzipModel.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.classify.GzipModel.train"><code class="docutils literal notranslate"><span class="pre">GzipModel.train()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.classify.GzipModel.predict"><code class="docutils literal notranslate"><span class="pre">GzipModel.predict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.classify.GzipModel.save"><code class="docutils literal notranslate"><span class="pre">GzipModel.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.classify.GzipModel.load"><code class="docutils literal notranslate"><span class="pre">GzipModel.load()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -110,6 +120,86 @@
              
   <section id="pythainlp-classify">
 <h1>pythainlp.classify<a class="headerlink" href="#pythainlp-classify" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythainlp.classify.</span></span><span class="sig-name descname"><span class="pre">GzipModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">training_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel" title="Link to this definition"></a></dt>
+<dd><p>This class is a re-implementation of
+“Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors
+(Jiang et al., Findings 2023)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>training_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – list [(text_sample,label)]</p></li>
+<li><p><strong>model_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path for loading model (if you saved the model)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">training_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.train" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.predict" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the text that we want to predict label for.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – k</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.classify</span><span class="w"> </span><span class="kn">import</span> <span class="n">GzipModel</span>
+
+<span class="n">training_data</span> <span class="o">=</span>  <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;กลัวพวกมึงหาย อดกินบาบิก้อน&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;บริการแย่มากก เป็นหมอได้ไง😤&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;ขับรถแย่มาก&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;ดีนะครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;ลองแล้วรสนี้อร่อย... ชอบๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;ฉันรู้สึกโกรธ เวลามือถือแบตหมด&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;เธอภูมิใจที่ได้ทำสิ่งดี ๆ และดีใจกับเด็ก ๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;นี่เป็นบทความหนึ่ง&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GzipModel</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;ฉันดีใจ&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># output: Positive</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.save" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – path for save model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.classify.GzipModel.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.load" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
