@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 6022bf7 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP bbc1c2c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=482dbe94"></script>
+      <script src="../../../_static/documentation_options.js?v=7d61135f"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -265,6 +265,8 @@
 <span class="sd">        * *tltk* - wrapper for</span>
 <span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
 <span class="sd">           maximum collocation approach</span>
+<span class="sd">        * *budoux* - wrapper for</span>
+<span class="sd">          `budoux &lt;https://github.com/google/budoux&gt;`_.</span>
 <span class="sd">    :Note:</span>
 <span class="sd">        - The **custom_dict** parameter only works for \</span>
 <span class="sd">          *deepcut*, *longest*, *newmm*, and *newmm-safe* engines.</span>
@@ -340,7 +342,8 @@
         <span class="s2">&quot;nercut&quot;</span><span class="p">,</span>
         <span class="s2">&quot;sefr_cut&quot;</span><span class="p">,</span>
         <span class="s2">&quot;tltk&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;oskut&quot;</span>
+        <span class="s2">&quot;oskut&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;budoux&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine does not support custom dictionaries.&quot;</span>
@@ -376,6 +379,10 @@
             <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;icu&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.pyicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;budoux&quot;</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.budoux</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;nercut&quot;</span><span class="p">:</span>
