@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.lm.text_util &mdash; PyThaiNLP 6439d0d documentation</title>
+  <title>pythainlp.lm.text_util &mdash; PyThaiNLP da8c3b6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=685c2817"></script>
+      <script src="../../../_static/documentation_options.js?v=aec7abf8"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -106,21 +106,18 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pythainlp.lm.text_util</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="c1"># ruff: noqa: C901</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 
 <div class="viewcode-block" id="calculate_ngram_counts">
 <a class="viewcode-back" href="../../../api/lm.html#pythainlp.lm.calculate_ngram_counts">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_ngram_counts</span><span class="p">(</span>
-        <span class="n">list_words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-        <span class="n">n_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">n_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="n">list_words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the counts of n-grams in the list words for the specified range.</span>
 
@@ -136,7 +133,7 @@
 
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_min</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_words</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">ngram</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_words</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">])</span>
+            <span class="n">ngram</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_words</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">])</span>
             <span class="n">ngram_counts</span><span class="p">[</span><span class="n">ngram</span><span class="p">]</span> <span class="o">=</span> <span class="n">ngram_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ngram</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">ngram_counts</span></div>
@@ -145,7 +142,7 @@
 
 <div class="viewcode-block" id="remove_repeated_ngrams">
 <a class="viewcode-back" href="../../../api/lm.html#pythainlp.lm.remove_repeated_ngrams">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">remove_repeated_ngrams</span><span class="p">(</span><span class="n">string_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_repeated_ngrams</span><span class="p">(</span><span class="n">string_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Remove repeated n-grams</span>
 
@@ -159,7 +156,7 @@
 
 <span class="sd">        from pythainlp.lm import remove_repeated_ngrams</span>
 
-<span class="sd">        remove_repeated_ngrams([&#39;เอา&#39;, &#39;เอา&#39;, &#39;แบบ&#39;, &#39;ไหน&#39;], n=1)</span>
+<span class="sd">        remove_repeated_ngrams([&quot;เอา&quot;, &quot;เอา&quot;, &quot;แบบ&quot;, &quot;ไหน&quot;], n=1)</span>
 <span class="sd">        # output: [&#39;เอา&#39;, &#39;แบบ&#39;, &#39;ไหน&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">string_list</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -171,12 +168,14 @@
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string_list</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">string_list</span><span class="p">):</span>
-            <span class="n">ngram</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">string_list</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">])</span>
+            <span class="n">ngram</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">string_list</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">])</span>
 
             <span class="k">if</span> <span class="n">ngram</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_ngrams</span><span class="p">:</span>
                 <span class="n">unique_ngrams</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ngram</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">output_list</span> <span class="ow">or</span> <span class="n">output_list</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):]</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ngram</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">output_list</span> <span class="ow">or</span> <span class="n">output_list</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:]</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">(</span>
+                    <span class="n">ngram</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="p">):</span>
                     <span class="n">output_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">ngram</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ngram</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>

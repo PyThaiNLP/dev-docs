@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.el.core &mdash; PyThaiNLP 6439d0d documentation</title>
+  <title>pythainlp.el.core &mdash; PyThaiNLP da8c3b6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=685c2817"></script>
+      <script src="../../../_static/documentation_options.js?v=aec7abf8"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -106,11 +106,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pythainlp.el.core</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 
 <div class="viewcode-block" id="EntityLinker">
@@ -118,7 +117,12 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">EntityLinker</span><span class="p">:</span>
 <div class="viewcode-block" id="EntityLinker.__init__">
 <a class="viewcode-back" href="../../../api/el.html#pythainlp.el.EntityLinker.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;bela&quot;</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;wikidata&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bela&quot;</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+        <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wikidata&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        EntityLinker</span>
 
@@ -133,27 +137,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;bela&quot;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EntityLinker doesn&#39;t support </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> model.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;EntityLinker doesn&#39;t support </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> model.&quot;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;wikidata&quot;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EntityLinker doesn&#39;t support </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2"> tag.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;EntityLinker doesn&#39;t support </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2"> tag.&quot;</span>
+            <span class="p">)</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.el._multiel</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiEL</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MultiEL</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="EntityLinker.get_el">
 <a class="viewcode-back" href="../../../api/el.html#pythainlp.el.EntityLinker.get_el">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_el</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_text</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span><span class="o">-&gt;</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_el</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_text</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get Entity Linking from Thai Text</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param str Union[List[str], str]: list of Thai text or text</span>
 <span class="sd">        :return: list of entity linking</span>
 <span class="sd">        :rtype: Union[List[dict], str]</span>
-<span class="sd">        </span>
+
 <span class="sd">        :Example:</span>
 <span class="sd">        ::</span>
 
 <span class="sd">                from pythainlp.el import EntityLinker</span>
-<span class="sd">                </span>
+
 <span class="sd">                el = EntityLinker(device=&quot;cuda&quot;)</span>
 <span class="sd">                print(el.get_el(&quot;จ๊อบเคยเป็นซีอีโอบริษัทแอปเปิล&quot;))</span>
 <span class="sd">                # output: [{&#39;offsets&#39;: [11, 23],</span>

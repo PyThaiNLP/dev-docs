@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 6439d0d documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP da8c3b6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=685c2817"></script>
+      <script src="../../../_static/documentation_options.js?v=aec7abf8"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -106,18 +106,18 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pythainlp.corpus.core</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Corpus related functions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">corpus_db_path</span><span class="p">,</span> <span class="n">corpus_db_url</span><span class="p">,</span> <span class="n">corpus_path</span>
@@ -158,7 +158,7 @@
 <span class="sd">    :return: details about corpus</span>
 <span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">local_db</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">version</span><span class="p">:</span>
@@ -249,7 +249,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">comments</span><span class="p">:</span>
@@ -292,7 +292,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">lines</span></div>
@@ -301,7 +301,7 @@
 
 <div class="viewcode-block" id="get_corpus_default_db">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_default_db">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get model path from default_db.json</span>
 
@@ -336,7 +336,7 @@
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_path</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get corpus path.</span>
 
@@ -377,9 +377,8 @@
 <span class="sd">        print(get_corpus_path(&#39;wiki_lm_lstm&#39;))</span>
 <span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-    <span class="n">CUSTOMIZE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">CUSTOMIZE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1"># &quot;the corpus name&quot;:&quot;path&quot;</span>
     <span class="p">}</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">CUSTOMIZE</span><span class="p">):</span>
@@ -578,7 +577,7 @@
 
     <span class="c1"># check if corpus is available</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">corpus_db</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">local_db</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="n">corpus</span> <span class="o">=</span> <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
@@ -653,9 +652,7 @@
                 <span class="c1"># This awkward behavior is for backward-compatibility with</span>
                 <span class="c1"># database files generated previously using TinyDB</span>
                 <span class="k">if</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]:</span>
-                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="nb">max</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="p">)</span>
+                    <span class="n">corpus_no</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="k">for</span> <span class="n">no</span> <span class="ow">in</span> <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">corpus_no</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">local_db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">corpus_no</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span>
@@ -719,7 +716,7 @@
     <span class="k">if</span> <span class="n">_CHECK_MODE</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP is read-only mode. It can&#39;t download.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">corpus_db_path</span><span class="p">(),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">corpus</span> <span class="k">for</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;_default&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
@@ -749,7 +746,7 @@
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">),</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">make_safe_directory_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_safe_directory_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Make safe directory name</span>
 
@@ -758,17 +755,40 @@
 <span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Replace invalid characters with an underscore</span>
-    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[&lt;&gt;:&quot;/</span><span class="se">\\</span><span class="s1">|?*]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[&lt;&gt;:&quot;/</span><span class="se">\\</span><span class="s1">|?*]&#39;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="c1"># Remove leading/trailing spaces or periods (especially important for Windows)</span>
-    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">safe_name</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; .&#39;</span><span class="p">)</span>
+    <span class="n">safe_name</span> <span class="o">=</span> <span class="n">safe_name</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; .&quot;</span><span class="p">)</span>
     <span class="c1"># Prevent names that are reserved on Windows</span>
-    <span class="n">reserved_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CON&#39;</span><span class="p">,</span> <span class="s1">&#39;PRN&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;NUL&#39;</span><span class="p">,</span> <span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="s1">&#39;COM2&#39;</span><span class="p">,</span> <span class="s1">&#39;COM3&#39;</span><span class="p">,</span> <span class="s1">&#39;COM4&#39;</span><span class="p">,</span> <span class="s1">&#39;COM5&#39;</span><span class="p">,</span> <span class="s1">&#39;COM6&#39;</span><span class="p">,</span> <span class="s1">&#39;COM7&#39;</span><span class="p">,</span> <span class="s1">&#39;COM8&#39;</span><span class="p">,</span> <span class="s1">&#39;COM9&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT1&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT2&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT3&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT4&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT5&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT6&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT7&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT8&#39;</span><span class="p">,</span> <span class="s1">&#39;LPT9&#39;</span><span class="p">]</span>
+    <span class="n">reserved_names</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;CON&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PRN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;AUX&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NUL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM8&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COM9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT8&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LPT9&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
     <span class="k">if</span> <span class="n">safe_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">reserved_names</span><span class="p">:</span>
-        <span class="n">safe_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">safe_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># Prepend underscore to avoid conflict</span>
+        <span class="n">safe_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">safe_name</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># Prepend underscore to avoid conflict</span>
     <span class="k">return</span> <span class="n">safe_name</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_hf_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_hf_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    HuggingFace Hub in :mod:`pythainlp` data directory.</span>
 
@@ -785,20 +805,17 @@
 <span class="s2">        Please installing the package via &#39;pip install huggingface-hub&#39;.</span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="n">hf_root</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="s2">&quot;hf_models&quot;</span><span class="p">)</span>
     <span class="n">name_dir</span> <span class="o">=</span> <span class="n">make_safe_directory_name</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
     <span class="n">root_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hf_root</span><span class="p">,</span> <span class="n">name_dir</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">filename</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">output_path</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
-            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-            <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
+            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">output_path</span> <span class="o">=</span> <span class="n">snapshot_download</span><span class="p">(</span>
-            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
-            <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
+            <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span> <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">output_path</span>
 </pre></div>
