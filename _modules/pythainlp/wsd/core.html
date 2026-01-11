@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wsd.core &mdash; PyThaiNLP 0beadd8 documentation</title>
+  <title>pythainlp.wsd.core &mdash; PyThaiNLP a7efd01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=890cbf12"></script>
+      <script src="../../../_static/documentation_options.js?v=85243685"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -163,10 +163,9 @@
     <span class="n">custom_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(),</span>
     <span class="n">custom_tokenizer</span><span class="p">:</span> <span class="n">Tokenizer</span> <span class="o">=</span> <span class="n">_word_cut</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get word sense from the sentence.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get word sense from the sentence.</span>
 <span class="sd">    This function will get definition and distance from context in sentence.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param str sentence: Thai sentence</span>
 <span class="sd">    :param str word: Thai word</span>
 <span class="sd">    :param str device: device for running model on.</span>
@@ -176,19 +175,19 @@
 <span class="sd">    :return: a list of definitions and distances (1 - cos_sim) or \</span>
 <span class="sd">        an empty list (if word is not in the dictionary)</span>
 <span class="sd">    :rtype: List[Tuple[str, float]]</span>
-<span class="sd">    </span>
+
 <span class="sd">    We get the ideas from `Context-Aware Semantic Similarity Measurement for \</span>
 <span class="sd">        Unsupervised Word Sense Disambiguation \</span>
 <span class="sd">        &lt;https://arxiv.org/abs/2305.03520&gt;`_ to build get_sense function.</span>
 
 <span class="sd">    Use Thai dictionary from wiktionary.</span>
 <span class="sd">    See `thai_dict &lt;https://pythainlp.org/pythainlp-corpus/thai_dict.html&gt;`_.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Use sentence transformers model from \</span>
 <span class="sd">        `sentence-transformers/paraphrase-multilingual-mpnet-base-v2 \</span>
 <span class="sd">        &lt;https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2&gt;`_ \</span>
 <span class="sd">        for unsupervised word sense disambiguation.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 

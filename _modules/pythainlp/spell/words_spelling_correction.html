@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP 0beadd8 documentation</title>
+  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP a7efd01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=890cbf12"></script>
+      <script src="../../../_static/documentation_options.js?v=85243685"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -117,8 +117,7 @@
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">FastTextEncoder</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class to load pre-trained FastText-like word embeddings,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to load pre-trained FastText-like word embeddings,</span>
 <span class="sd">    compute word and sentence vectors, and interact with an ONNX</span>
 <span class="sd">    model for nearest neighbor suggestions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -135,8 +134,7 @@
         <span class="n">minn</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
         <span class="n">maxn</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes the FastTextEncoder, loading embeddings, vocabulary,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the FastTextEncoder, loading embeddings, vocabulary,</span>
 <span class="sd">        nearest neighbor model, and suggestion words list.</span>
 
 <span class="sd">        Args:</span>
@@ -147,10 +145,10 @@
 <span class="sd">            nb_words (int): The number of words in the vocabulary (used as an offset for subword indices).</span>
 <span class="sd">            minn (int): Minimum character length for subwords.</span>
 <span class="sd">            maxn (int): Maximum character length for subwords.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># reduce load</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">onnxruntime</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">np</span> <span class="o">=</span> <span class="n">np</span>
         <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
@@ -294,8 +292,7 @@
     <span class="c1"># --- Nearest Neighbor Method ---</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_word_suggestion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_word</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Queries the ONNX model to find the nearest neighbor word(s)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Queries the ONNX model to find the nearest neighbor word(s)</span>
 <span class="sd">        for the given word or list of words.</span>
 
 <span class="sd">        Args:</span>
@@ -305,6 +302,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            str or list of str: The nearest neighbor word(s) from the</span>
 <span class="sd">                                pre-loaded suggestion list.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">input_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_word</span><span class="p">]</span>
@@ -357,8 +355,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">get_words_spell_suggestion</span><span class="p">(</span>
     <span class="n">list_words</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get words spell suggestion</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get words spell suggestion</span>
 
 <span class="sd">    The function is designed to retrieve spelling suggestions \</span>
 <span class="sd">        for one or more input Thai words.</span>
