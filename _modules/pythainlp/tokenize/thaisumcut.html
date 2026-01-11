@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.thaisumcut &mdash; PyThaiNLP f59b908 documentation</title>
+  <title>pythainlp.tokenize.thaisumcut &mdash; PyThaiNLP 37726f3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1a7659f6"></script>
+      <script src="../../../_static/documentation_options.js?v=44f735fd"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -142,18 +142,24 @@
 <div class="viewcode-block" id="middle_cut">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.thaisumcut.middle_cut">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">middle_cut</span><span class="p">(</span><span class="n">sentences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">result_parts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
         <span class="n">sentence_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+        <span class="n">sentence_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sentence_len</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">sentence_len</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
                 <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
-            <span class="k">if</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+                <span class="n">sentence_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>  <span class="c1"># Update length after modification</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">sentence_len</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
                     <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">:]</span>
+                    <span class="n">sentence_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>  <span class="c1"># Update length after modification</span>
 
         <span class="n">fixed_text_lenth</span> <span class="o">=</span> <span class="mi">20</span>
 
@@ -165,34 +171,25 @@
                 <span class="n">white_space_index</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">white_space_diff</span> <span class="o">=</span> <span class="p">{}</span>
 
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
                         <span class="n">white_space_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
 
                 <span class="k">for</span> <span class="n">white_space</span> <span class="ow">in</span> <span class="n">white_space_index</span><span class="p">:</span>
-                    <span class="n">white_space_diff</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-                        <span class="p">{</span><span class="n">white_space</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">white_space</span> <span class="o">-</span> <span class="n">middle_space</span><span class="p">)}</span>
-                    <span class="p">)</span>
+                    <span class="n">white_space_diff</span><span class="p">[</span><span class="n">white_space</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">white_space</span> <span class="o">-</span> <span class="n">middle_space</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">white_space_diff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">min_diff</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
-                        <span class="n">white_space_diff</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-                    <span class="p">)</span>
+                <span class="k">if</span> <span class="n">white_space_diff</span><span class="p">:</span>
+                    <span class="n">min_diff</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">white_space_diff</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
                     <span class="n">tokens</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">min_diff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                     <span class="n">tokens</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">min_diff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;&lt;stop&gt;&quot;</span><span class="p">)</span>
-            <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span> <span class="o">+</span> <span class="n">list_to_string</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;stop&gt;&quot;</span>
+            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_to_string</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span> <span class="o">+</span> <span class="n">sentence</span> <span class="o">+</span> <span class="s2">&quot;&lt;stop&gt;&quot;</span>
+            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
 
-    <span class="n">sentences</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;stop&gt;&quot;</span><span class="p">)</span>
-    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-    <span class="k">if</span> <span class="s2">&quot;&quot;</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-        <span class="n">sentences</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;nan&quot;</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-        <span class="n">sentences</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
+    <span class="c1"># Split all result parts by &lt;stop&gt; and filter</span>
+    <span class="n">all_sentences</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">result_parts</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;stop&gt;&quot;</span><span class="p">))</span>
 
-    <span class="n">sentences</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">sentences</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">sentences</span></div>
+    <span class="k">return</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">all_sentences</span> <span class="k">if</span> <span class="n">s</span><span class="p">]</span></div>
 
 
 
@@ -201,13 +198,13 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">ThaiSentenceSegmentor</span><span class="p">:</span>
 <div class="viewcode-block" id="ThaiSentenceSegmentor.split_into_sentences">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.thaisumcut.ThaiSentenceSegmentor.split_into_sentences">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">split_into_sentences</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">isMiddleCut</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">split_into_sentences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">isMiddleCut</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="c1"># Declare Variables</span>
         <span class="n">th_alphabets</span> <span class="o">=</span> <span class="s2">&quot;([ก-๙])&quot;</span>
         <span class="n">th_conjunction</span> <span class="o">=</span> <span class="s2">&quot;(ทำให้|โดย|เพราะ|นอกจากนี้|แต่|กรณีที่|หลังจากนี้|ต่อมา|ภายหลัง|นับตั้งแต่|หลังจาก|ซึ่งเหตุการณ์|ผู้สื่อข่าวรายงานอีก|ส่วนที่|ส่วนสาเหตุ|ฉะนั้น|เพราะฉะนั้น|เพื่อ|เนื่องจาก|จากการสอบสวนทราบว่า|จากกรณี|จากนี้|อย่างไรก็ดี)&quot;</span>
-        <span class="n">th_cite</span> <span class="o">=</span> <span class="s2">&quot;(กล่าวว่า|เปิดเผยว่า|รายงานว่า|ให้การว่า|เผยว่า|บนทวิตเตอร์ว่า|แจ้งว่า|พลเมืองดีว่า|อ้างว่า)&quot;</span>
+        <span class="n">th_cite</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;(กล่าวว่า|เปิดเผยว่า|รายงานว่า|ให้การว่า|เผยว่า|บนทวิตเตอร์ว่า|แจ้งว่า|พลเมืองดีว่า|อ้างว่า)&quot;</span>
+        <span class="p">)</span>
         <span class="n">th_ka_krub</span> <span class="o">=</span> <span class="s2">&quot;(ครับ|ค่ะ)&quot;</span>
         <span class="n">th_stop_after</span> <span class="o">=</span> <span class="s2">&quot;(หรือไม่|โดยเร็ว|แล้ว|อีกด้วย)&quot;</span>
         <span class="n">th_stop_before</span> <span class="o">=</span> <span class="s2">&quot;(ล่าสุด|เบื้องต้น|ซึ่ง|ทั้งนี้|แม้ว่า|เมื่อ|แถมยัง|ตอนนั้น|จนเป็นเหตุให้|จากนั้น|อย่างไรก็ตาม|และก็|อย่างใดก็ตาม|เวลานี้|เช่น|กระทั่ง)&quot;</span>
@@ -273,9 +270,7 @@
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ทั้งนี้เพื่อ&quot;</span><span class="p">,</span> <span class="s2">&quot;ทั้งนี้&lt;rth_for&gt;&quot;</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;เวลาต่อมา&quot;</span><span class="p">,</span> <span class="s2">&quot;เวลา&lt;rth_toma&gt;&quot;</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อย่างไรก็ตาม&quot;</span><span class="p">,</span> <span class="s2">&quot;อย่างไรก็ตาม&quot;</span><span class="p">)</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-            <span class="s2">&quot;อย่างไรก็ตามหลังจาก&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;อย่างไรก็ตาม&lt;rth_langjak&gt;&quot;</span>
-        <span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อย่างไรก็ตามหลังจาก&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;อย่างไรก็ตาม&lt;rth_langjak&gt;&quot;</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ซึ่งทำให้&quot;</span><span class="p">,</span> <span class="s2">&quot;ซึ่ง&lt;rth_tamhai&gt;&quot;</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;โดยประมาท&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;doi&gt;ประมาท&quot;</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;โดยธรรม&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;doi&gt;ธรรม&quot;</span><span class="p">)</span>
@@ -288,14 +283,14 @@
             <span class="n">last_position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
             <span class="n">pop_split_position</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">split_position</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;และ&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;และ&quot;</span><span class="p">:</span>
                     <span class="n">and_position</span> <span class="o">=</span> <span class="n">i</span>
 
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="n">and_position</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
                     <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">and_position</span>
-                    <span class="ow">and</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
+                    <span class="ow">and</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
                     <span class="ow">and</span> <span class="n">nearest_space_position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
                 <span class="p">):</span>
                     <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">and_position</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
@@ -327,13 +322,13 @@
             <span class="n">last_position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
             <span class="n">pop_split_position</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">split_position</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;หรือ&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;หรือ&quot;</span><span class="p">:</span>
                     <span class="n">or_position</span> <span class="o">=</span> <span class="n">i</span>
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="n">or_position</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
                     <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">or_position</span>
-                    <span class="ow">and</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
+                    <span class="ow">and</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
                     <span class="ow">and</span> <span class="n">nearest_space_position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
                 <span class="p">):</span>
                     <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">or_position</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
@@ -365,13 +360,13 @@
             <span class="n">pop_split_position</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">last_position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
             <span class="n">split_position</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;จึง&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;จึง&quot;</span><span class="p">:</span>
                     <span class="n">cung_position</span> <span class="o">=</span> <span class="n">i</span>
 
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="n">cung_position</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
-                    <span class="ow">and</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
+                    <span class="ow">and</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span>
                     <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">cung_position</span>
                     <span class="ow">and</span> <span class="n">nearest_space_position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
                 <span class="p">):</span>
@@ -404,9 +399,7 @@
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">th_conjunction</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">th_cite</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1&lt;stop&gt;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">degit</span> <span class="o">+</span> <span class="s2">&quot;[.]&quot;</span> <span class="o">+</span> <span class="n">th_title</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;</span><span class="se">\\</span><span class="s2">1.</span><span class="se">\\</span><span class="s2">2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-            <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">degit</span> <span class="o">+</span> <span class="n">degit</span> <span class="o">+</span> <span class="s2">&quot;[.]&quot;</span> <span class="o">+</span> <span class="n">th_title</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;</span><span class="se">\\</span><span class="s2">1</span><span class="se">\\</span><span class="s2">2.</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">,</span> <span class="n">text</span>
-        <span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">degit</span> <span class="o">+</span> <span class="n">degit</span> <span class="o">+</span> <span class="s2">&quot;[.]&quot;</span> <span class="o">+</span> <span class="n">th_title</span><span class="p">,</span> <span class="s2">&quot;&lt;stop&gt;</span><span class="se">\\</span><span class="s2">1</span><span class="se">\\</span><span class="s2">2.</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">th_alphabets</span> <span class="o">+</span> <span class="n">th_stop_after</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1</span><span class="se">\\</span><span class="s2">2&lt;stop&gt;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
         <span class="k">if</span> <span class="s2">&quot;”&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.”&quot;</span><span class="p">,</span> <span class="s2">&quot;”.&quot;</span><span class="p">)</span>
