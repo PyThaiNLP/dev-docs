@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.trie &mdash; PyThaiNLP 52b0ddc documentation</title>
+  <title>pythainlp.util.trie &mdash; PyThaiNLP fc91b16 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ccc79517"></script>
+      <script src="../../../_static/documentation_options.js?v=3e526f07"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -122,6 +122,38 @@
 <div class="viewcode-block" id="Trie">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Trie</span><span class="p">(</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trie data structure for efficient prefix-based word search.</span>
+
+<span class="sd">    A Trie (prefix tree) is a tree-like data structure used to store</span>
+<span class="sd">    a collection of strings. It enables fast retrieval of words with</span>
+<span class="sd">    common prefixes, making it ideal for dictionary-based tokenization</span>
+<span class="sd">    and autocomplete features.</span>
+
+<span class="sd">    :param Iterable[str] words: An iterable collection of words to initialize the Trie</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import Trie</span>
+
+<span class="sd">        # Create a trie with Thai words</span>
+<span class="sd">        trie = Trie([&#39;สวัสดี&#39;, &#39;สวัส&#39;, &#39;ดี&#39;, &#39;ครับ&#39;])</span>
+
+<span class="sd">        # Check if word exists</span>
+<span class="sd">        &#39;สวัสดี&#39; in trie</span>
+<span class="sd">        # output: True</span>
+
+<span class="sd">        # Find all prefixes of a word</span>
+<span class="sd">        trie.prefixes(&#39;สวัสดีครับ&#39;)</span>
+<span class="sd">        # output: [&#39;สวัส&#39;, &#39;สวัสดี&#39;]</span>
+
+<span class="sd">        # Add a new word</span>
+<span class="sd">        trie.add(&#39;สวัสดีตอนเช้า&#39;)</span>
+
+<span class="sd">        # Get number of words in trie</span>
+<span class="sd">        len(trie)</span>
+<span class="sd">        # output: 5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="Trie.Node">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.Node">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">:</span>

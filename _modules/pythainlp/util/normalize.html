@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.normalize &mdash; PyThaiNLP 52b0ddc documentation</title>
+  <title>pythainlp.util.normalize &mdash; PyThaiNLP fc91b16 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ccc79517"></script>
+      <script src="../../../_static/documentation_options.js?v=3e526f07"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -272,6 +272,17 @@
 <span class="sd">    :param str text: input text</span>
 <span class="sd">    :return: text without zero-width characters</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import remove_zw</span>
+
+<span class="sd">        remove_zw(&quot;สวัสดี\u200bครับ&quot;)</span>
+<span class="sd">        # output: &#39;สวัสดีครับ&#39;</span>
+
+<span class="sd">        remove_zw(&quot;ภาษา\u200cไทย&quot;)</span>
+<span class="sd">        # output: &#39;ภาษาไทย&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">_ZERO_WIDTH_CHARS</span><span class="p">:</span>
         <span class="k">while</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
@@ -297,6 +308,19 @@
 <span class="sd">    :param str text: input text</span>
 <span class="sd">    :return: text with vowels and tone marks in the standard logical order</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import reorder_vowels</span>
+
+<span class="sd">        # Two Sara E become Sara Ae</span>
+<span class="sd">        reorder_vowels(&quot;เเปลก&quot;)</span>
+<span class="sd">        # output: &#39;แปลก&#39;</span>
+
+<span class="sd">        # Reorder tone marks and vowels</span>
+<span class="sd">        reorder_vowels(&quot;ก้ำ&quot;)</span>
+<span class="sd">        # output: &#39;กำ้&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">_REORDER_PAIRS</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">text</span><span class="p">)</span>
@@ -316,6 +340,17 @@
 <span class="sd">    :param str text: input text</span>
 <span class="sd">    :return: text without repeating Thai vowels, tone marks, and signs</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import remove_repeat_vowels</span>
+
+<span class="sd">        remove_repeat_vowels(&quot;นานาาา&quot;)</span>
+<span class="sd">        # output: &#39;นานา&#39;</span>
+
+<span class="sd">        remove_repeat_vowels(&quot;ดีีีี&quot;)</span>
+<span class="sd">        # output: &#39;ดี&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">reorder_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">_NOREPEAT_PAIRS</span><span class="p">:</span>

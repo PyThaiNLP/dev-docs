@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP 52b0ddc documentation</title>
+  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP fc91b16 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ccc79517"></script>
+      <script src="../../../_static/documentation_options.js?v=3e526f07"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -425,6 +425,23 @@
 
 <span class="sd">    :return: The Zodiac name or number corresponding to the input year.</span>
 <span class="sd">    :rtype: Union[str, int]</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import th_zodiac</span>
+
+<span class="sd">        # Get Thai zodiac name</span>
+<span class="sd">        th_zodiac(2024, output_type=1)</span>
+<span class="sd">        # output: &#39;มะโรง&#39;</span>
+
+<span class="sd">        # Get English zodiac name</span>
+<span class="sd">        th_zodiac(2024, output_type=2)</span>
+<span class="sd">        # output: &#39;DRAGON&#39;</span>
+
+<span class="sd">        # Get zodiac number</span>
+<span class="sd">        th_zodiac(2024, output_type=3)</span>
+<span class="sd">        # output: 5</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate zodiac index</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">12</span>
@@ -446,6 +463,18 @@
 <span class="sd">    :param date input_date: date of the day.</span>
 <span class="sd">    :return: Thai text lunar date</span>
 <span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import to_lunar_date</span>
+<span class="sd">        from datetime import date</span>
+
+<span class="sd">        to_lunar_date(date(2024, 1, 1))</span>
+<span class="sd">        # output: &#39;แรม 5 ค่ำ เดือน 1&#39;</span>
+
+<span class="sd">        to_lunar_date(date(2024, 12, 31))</span>
+<span class="sd">        # output: &#39;แรม 9 ค่ำ เดือน 2&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check if date is within supported range</span>
     <span class="k">if</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;</span> <span class="mi">1903</span> <span class="ow">or</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2460</span><span class="p">:</span>
