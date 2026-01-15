@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP 4553c44 documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP 28fe327 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=4041921a"></script>
+      <script src="../_static/documentation_options.js?v=41818fd0"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -266,6 +266,118 @@ of Thai currency</p>
 
 <dl class="py function">
 <dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">censor_profanity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/profanity.html#censor_profanity"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Replace profanity words in the text with a replacement character.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to censor</p></li>
+<li><p><strong>replacement</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – character to replace profanity with (default: “*”)</p></li>
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><em>set</em></a>) – additional profanity words to censor (default: None)</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine (default: “newmm”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Text with profanity words censored</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">censor_profanity</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">censor_profanity</span><span class="p">(</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">))</span>
+<span class="c1"># output: สวัสดีครับ</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">censor_profanity</span><span class="p">(</span><span class="s2">&quot;text with profanity word&quot;</span><span class="p">))</span>
+<span class="c1"># output: text with *** word</span>
+
+<span class="c1"># Add custom profanity words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">censor_profanity</span><span class="p">(</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">,</span> <span class="n">custom_words</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">}))</span>
+<span class="c1"># output: ******</span>
+</pre></div>
+</div>
+<p>The <cite>censor_profanity</cite> function replaces profanity words in Thai text with a replacement character (default: “*”). Users can provide custom profanity words in addition to the built-in list for content moderation and filtering.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">collate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.14)"><span class="pre">Iterable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/collate.html#collate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function sorts strings (almost) according to Thai dictionary.</p>
+<p>Important notes: this implementation ignores tone marks and symbols</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Iterable</em>) – a list of words to be sorted</p></li>
+<li><p><strong>reverse</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>reverse</cite> is set to <strong>True</strong> the result will be
+sorted in descending order. Otherwise, the result
+will be sorted in ascending order, defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of strings, sorted alphabetically, (almost) according to
+Thai dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">collate</span>
+
+<span class="n">collate</span><span class="p">([</span><span class="s1">&#39;ไก่&#39;</span><span class="p">,</span> <span class="s1">&#39;เกิด&#39;</span><span class="p">,</span> <span class="s1">&#39;กาล&#39;</span><span class="p">,</span> <span class="s1">&#39;เป็ด&#39;</span><span class="p">,</span> <span class="s1">&#39;หมู&#39;</span><span class="p">,</span> <span class="s1">&#39;วัว&#39;</span><span class="p">,</span> <span class="s1">&#39;วันที่&#39;</span><span class="p">])</span>
+<span class="c1"># output: [&#39;กาล&#39;, &#39;เกิด&#39;, &#39;ไก่&#39;, &#39;เป็ด&#39;, &#39;วันที่&#39;, &#39;วัว&#39;, &#39;หมู&#39;]</span>
+
+<span class="n">collate</span><span class="p">([</span><span class="s1">&#39;ไก่&#39;</span><span class="p">,</span> <span class="s1">&#39;เกิด&#39;</span><span class="p">,</span> <span class="s1">&#39;กาล&#39;</span><span class="p">,</span> <span class="s1">&#39;เป็ด&#39;</span><span class="p">,</span> <span class="s1">&#39;หมู&#39;</span><span class="p">,</span> <span class="s1">&#39;วัว&#39;</span><span class="p">,</span> <span class="s1">&#39;วันที่&#39;</span><span class="p">],</span> \
+    <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># output: [&#39;หมู&#39;, &#39;วัว&#39;, &#39;วันที่&#39;, &#39;เป็ด&#39;, &#39;ไก่&#39;, &#39;เกิด&#39;, &#39;กาล&#39;]</span>
+</pre></div>
+</div>
+<p>The <cite>collate</cite> function is a versatile tool for sorting Thai text in a locale-specific manner. It ensures that text data is sorted correctly, taking into account the Thai language’s unique characteristics.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">contains_profanity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/profanity.html#contains_profanity"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Check if the given text contains profanity words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to check</p></li>
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><em>set</em></a>) – additional profanity words to check (default: None)</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine (default: “newmm”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if text contains profanity, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">contains_profanity</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">contains_profanity</span><span class="p">(</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">))</span>
+<span class="c1"># output: False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">contains_profanity</span><span class="p">(</span><span class="s2">&quot;คำหยาบคาย&quot;</span><span class="p">))</span>
+<span class="c1"># output: True if the word is in the profanity list</span>
+
+<span class="c1"># Add custom profanity words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">contains_profanity</span><span class="p">(</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">,</span> <span class="n">custom_words</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">}))</span>
+<span class="c1"># output: True</span>
+</pre></div>
+</div>
+<p>The <cite>contains_profanity</cite> function checks if Thai text contains profanity words. It returns True if profanity is detected and False otherwise. Users can provide custom profanity words for enhanced content moderation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">convert_years</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'be'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ad'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/date.html#convert_years"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Convert years</p>
 <dl class="field-list simple">
@@ -314,43 +426,6 @@ If you are the time traveler or the historian,     you should care about the cor
 </pre></div>
 </div>
 <p>The <cite>convert_years</cite> function is designed to facilitate the conversion of Western calendar years into Thai Buddhist Era (BE) years. This is significant for presenting dates and years in a Thai context.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">collate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.14)"><span class="pre">Iterable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/collate.html#collate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>This function sorts strings (almost) according to Thai dictionary.</p>
-<p>Important notes: this implementation ignores tone marks and symbols</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>Iterable</em>) – a list of words to be sorted</p></li>
-<li><p><strong>reverse</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>reverse</cite> is set to <strong>True</strong> the result will be
-sorted in descending order. Otherwise, the result
-will be sorted in ascending order, defaults to False</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of strings, sorted alphabetically, (almost) according to
-Thai dictionary</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">collate</span>
-
-<span class="n">collate</span><span class="p">([</span><span class="s1">&#39;ไก่&#39;</span><span class="p">,</span> <span class="s1">&#39;เกิด&#39;</span><span class="p">,</span> <span class="s1">&#39;กาล&#39;</span><span class="p">,</span> <span class="s1">&#39;เป็ด&#39;</span><span class="p">,</span> <span class="s1">&#39;หมู&#39;</span><span class="p">,</span> <span class="s1">&#39;วัว&#39;</span><span class="p">,</span> <span class="s1">&#39;วันที่&#39;</span><span class="p">])</span>
-<span class="c1"># output: [&#39;กาล&#39;, &#39;เกิด&#39;, &#39;ไก่&#39;, &#39;เป็ด&#39;, &#39;วันที่&#39;, &#39;วัว&#39;, &#39;หมู&#39;]</span>
-
-<span class="n">collate</span><span class="p">([</span><span class="s1">&#39;ไก่&#39;</span><span class="p">,</span> <span class="s1">&#39;เกิด&#39;</span><span class="p">,</span> <span class="s1">&#39;กาล&#39;</span><span class="p">,</span> <span class="s1">&#39;เป็ด&#39;</span><span class="p">,</span> <span class="s1">&#39;หมู&#39;</span><span class="p">,</span> <span class="s1">&#39;วัว&#39;</span><span class="p">,</span> <span class="s1">&#39;วันที่&#39;</span><span class="p">],</span> \
-    <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># output: [&#39;หมู&#39;, &#39;วัว&#39;, &#39;วันที่&#39;, &#39;เป็ด&#39;, &#39;ไก่&#39;, &#39;เกิด&#39;, &#39;กาล&#39;]</span>
-</pre></div>
-</div>
-<p>The <cite>collate</cite> function is a versatile tool for sorting Thai text in a locale-specific manner. It ensures that text data is sorted correctly, taking into account the Thai language’s unique characteristics.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -603,6 +678,43 @@ where stopword is excluded and returns a frequency dictionary.</p>
 </pre></div>
 </div>
 <p>The <cite>find_keyword</cite> function is a powerful utility for identifying keywords and key phrases in text data. It is a fundamental component for text analysis and information extraction tasks.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">find_profanity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/util/profanity.html#find_profanity"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Find all profanity words in the given text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to check</p></li>
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><em>set</em></a>) – additional profanity words to check (default: None)</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine (default: “newmm”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of profanity words found in the text</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_profanity</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">find_profanity</span><span class="p">(</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">))</span>
+<span class="c1"># output: []</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">find_profanity</span><span class="p">(</span><span class="s2">&quot;text with profanity words&quot;</span><span class="p">))</span>
+<span class="c1"># output: [&#39;profanity_word1&#39;, &#39;profanity_word2&#39;]</span>
+
+<span class="c1"># Add custom profanity words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">find_profanity</span><span class="p">(</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">,</span> <span class="n">custom_words</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">}))</span>
+<span class="c1"># output: [&#39;คำใหม่&#39;]</span>
+</pre></div>
+</div>
+<p>The <cite>find_profanity</cite> function identifies and returns a list of all profanity words found in Thai text. Users can provide custom profanity words to enhance detection capabilities for content moderation.</p>
 </dd></dl>
 
 <dl class="py function">

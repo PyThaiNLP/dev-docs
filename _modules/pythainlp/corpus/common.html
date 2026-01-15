@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP 4553c44 documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP 28fe327 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=4041921a"></script>
+      <script src="../../../_static/documentation_options.js?v=41818fd0"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -156,6 +156,9 @@
 
 <span class="n">_THAI_NEGATIONS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_NEGATIONS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;negations_th.txt&quot;</span>
+
+<span class="n">_THAI_PROFANITY_WORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
+<span class="n">_THAI_PROFANITY_WORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;profanity_th.txt&quot;</span>
 
 <span class="n">_THAI_FAMLIY_NAMES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_FAMLIY_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;family_names_th.txt&quot;</span>
@@ -332,6 +335,21 @@
 
     <span class="k">return</span> <span class="n">_THAI_NEGATIONS</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_profanity_words</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a frozenset of Thai profanity words for content filtering.</span>
+<span class="sd">    \n(See: `dev/pythainlp/corpus/profanity_th.txt\</span>
+<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/profanity_th.txt&gt;`_)</span>
+
+<span class="sd">    :return: :class:`frozenset` containing profanity words in the Thai language.</span>
+<span class="sd">    :rtype: :class:`frozenset`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_THAI_PROFANITY_WORDS</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_THAI_PROFANITY_WORDS</span><span class="p">:</span>
+        <span class="n">_THAI_PROFANITY_WORDS</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span><span class="n">_THAI_PROFANITY_WORDS_FILENAME</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_THAI_PROFANITY_WORDS</span>
 
 
 <div class="viewcode-block" id="thai_family_names">
