@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 11c8a9e documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 7ff7488 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=87b301da"></script>
+      <script src="../../../_static/documentation_options.js?v=d37bac06"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -272,6 +272,15 @@
 <span class="sd">    :Note:</span>
 <span class="sd">        - The **custom_dict** parameter only works for \</span>
 <span class="sd">          *deepcut*, *longest*, *newmm*, and *newmm-safe* engines.</span>
+<span class="sd">        - Built-in tokenizers (*longest*, *mm*, *newmm*, and *newmm-safe*) \</span>
+<span class="sd">          are thread-safe.</span>
+<span class="sd">        - Wrappers of external tokenizer are designed to be thread-safe \</span>
+<span class="sd">          but depend on the external tokenizer.</span>
+<span class="sd">        - **WARNING**: When using custom_dict in multi-threaded environments, \</span>
+<span class="sd">          do NOT modify the Trie object (via add/remove methods) while \</span>
+<span class="sd">          tokenization is in progress. The Trie data structure is not \</span>
+<span class="sd">          thread-safe for concurrent modifications. Create your dictionary \</span>
+<span class="sd">          before starting threads and only read from it during tokenization.</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Tokenize text with different tokenizers::</span>
