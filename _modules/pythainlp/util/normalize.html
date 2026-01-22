@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.normalize &mdash; PyThaiNLP 3bd5fc5 documentation</title>
+  <title>pythainlp.util.normalize &mdash; PyThaiNLP c441c66 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ef3ee317"></script>
+      <script src="../../../_static/documentation_options.js?v=3971e9c4"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -118,6 +118,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_above_vowels</span> <span class="k">as</span> <span class="n">above_v</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_below_vowels</span> <span class="k">as</span> <span class="n">below_v</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_consonants</span><span class="p">,</span> <span class="n">thai_vowels</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_follow_vowels</span> <span class="k">as</span> <span class="n">follow_v</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_lead_vowels</span> <span class="k">as</span> <span class="n">lead_v</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_tonemarks</span> <span class="k">as</span> <span class="n">tonemarks</span>
@@ -126,6 +127,7 @@
 
 <span class="n">_DANGLING_CHARS</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">above_v</span><span class="si">}{</span><span class="n">below_v</span><span class="si">}{</span><span class="n">tonemarks</span><span class="si">}</span><span class="se">\u0e3a\u0e4c\u0e4d\u0e4e</span><span class="s2">&quot;</span>
 <span class="n">_RE_REMOVE_DANGLINGS</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;^[</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">]+&quot;</span><span class="p">)</span>
+<span class="n">_RE_REMOVE_DANGLINGS_AFTER_SPACE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; +[</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">]+&quot;</span><span class="p">)</span>
 
 <span class="n">_ZERO_WIDTH_CHARS</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\u200b\u200c</span><span class="s2">&quot;</span>  <span class="c1"># ZWSP, ZWNJ</span>
 
@@ -158,6 +160,13 @@
 
 <span class="n">_RE_REMOVE_NEWLINES</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[ </span><span class="se">\n</span><span class="s2">]*</span><span class="se">\n</span><span class="s2">[ </span><span class="se">\n</span><span class="s2">]*&quot;</span><span class="p">)</span>
 
+<span class="c1"># Remove single space before non-base characters, but only after a consonant</span>
+<span class="c1"># that&#39;s not preceded by a vowel (to avoid breaking up complete words)</span>
+<span class="c1"># This conservative approach fixes &quot;พ ุ่ม&quot; but preserves &quot;ภาพ ุ่&quot;</span>
+<span class="n">_RE_REMOVE_SPACES_BEFORE_NONBASE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">])(?&lt;![</span><span class="si">{</span><span class="n">thai_vowels</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]) ([</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">])&quot;</span>
+<span class="p">)</span>
+
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_last_char</span><span class="p">(</span><span class="n">matchobj</span><span class="p">):</span>  <span class="c1"># to be used with _RE_NOREPEAT_TONEMARKS</span>
     <span class="k">return</span> <span class="n">matchobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -166,7 +175,7 @@
 <div class="viewcode-block" id="remove_dangling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_dangling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_dangling</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove Thai non-base characters at the beginning of text.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove Thai non-base characters at the beginning of text and after spaces.</span>
 
 <span class="sd">    This is a common &quot;typo&quot;, especially for input field in a form,</span>
 <span class="sd">    as these non-base characters can be visually hidden from user</span>
@@ -175,10 +184,10 @@
 <span class="sd">    A character to be removed should be both:</span>
 
 <span class="sd">        * tone mark, above vowel, below vowel, or non-base sign AND</span>
-<span class="sd">        * located at the beginning of the text</span>
+<span class="sd">        * located at the beginning of the text or after spaces</span>
 
 <span class="sd">    :param str text: input text</span>
-<span class="sd">    :return: text without dangling Thai characters at the beginning</span>
+<span class="sd">    :return: text without dangling Thai characters at the beginning and after spaces</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -188,8 +197,13 @@
 
 <span class="sd">        remove_dangling(&quot;๊ก&quot;)</span>
 <span class="sd">        # output: &#39;ก&#39;</span>
+
+<span class="sd">        remove_dangling(&quot;คำ ่ที่สอง&quot;)</span>
+<span class="sd">        # output: &#39;คำ ที่สอง&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_RE_REMOVE_DANGLINGS</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_REMOVE_DANGLINGS</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_REMOVE_DANGLINGS_AFTER_SPACE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span></div>
 
 
 
@@ -292,6 +306,28 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_spaces_before_marks</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove spaces before Thai tone marks and non-base characters.</span>
+
+<span class="sd">    Spaces before tone marks, above vowels, below vowels, and other</span>
+<span class="sd">    non-base characters are often unintentional typos. This function</span>
+<span class="sd">    removes such spaces to normalize the text.</span>
+
+<span class="sd">    :param str text: input text</span>
+<span class="sd">    :return: text without spaces before Thai tone marks and non-base characters</span>
+<span class="sd">    :rtype: str</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        from pythainlp.util import remove_spaces_before_marks</span>
+
+<span class="sd">        remove_spaces_before_marks(&quot;พ ุ่มดอกไม้&quot;)</span>
+<span class="sd">        # output: &#39;พุ่มดอกไม้&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_RE_REMOVE_SPACES_BEFORE_NONBASE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\1\2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="reorder_vowels">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.reorder_vowels">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">reorder_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -370,13 +406,15 @@
 
 <span class="sd">        * Remove zero-width spaces</span>
 <span class="sd">        * Remove duplicate spaces</span>
+<span class="sd">        * Remove spaces before tone marks and non-base characters</span>
 <span class="sd">        * Reorder tone marks and vowels to standard order/spelling</span>
 <span class="sd">        * Remove duplicate vowels and signs</span>
 <span class="sd">        * Remove duplicate tone marks</span>
 <span class="sd">        * Remove dangling non-base characters at the beginning of text</span>
 
 <span class="sd">    normalize() simply call remove_zw(), remove_dup_spaces(),</span>
-<span class="sd">    remove_repeat_vowels(), and remove_dangling(), in that order.</span>
+<span class="sd">    remove_spaces_before_marks(), remove_repeat_vowels(), and</span>
+<span class="sd">    remove_dangling(), in that order.</span>
 
 <span class="sd">    If a user wants to customize the selection or the order of rules</span>
 <span class="sd">    to be applied, they can choose to call those functions by themselves.</span>
@@ -400,6 +438,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_zw</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_dup_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">remove_spaces_before_marks</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_repeat_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_dangling</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 

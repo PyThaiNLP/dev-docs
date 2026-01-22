@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP 3bd5fc5 documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP c441c66 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=ef3ee317"></script>
+      <script src="../_static/documentation_options.js?v=3971e9c4"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -880,6 +880,7 @@ Maiyamok with a word being repeated.</p>
 <div><ul class="simple">
 <li><p>Remove zero-width spaces</p></li>
 <li><p>Remove duplicate spaces</p></li>
+<li><p>Remove spaces before tone marks and non-base characters</p></li>
 <li><p>Reorder tone marks and vowels to standard order/spelling</p></li>
 <li><p>Remove duplicate vowels and signs</p></li>
 <li><p>Remove duplicate tone marks</p></li>
@@ -887,7 +888,8 @@ Maiyamok with a word being repeated.</p>
 </ul>
 </div></blockquote>
 <p>normalize() simply call remove_zw(), remove_dup_spaces(),
-remove_repeat_vowels(), and remove_dangling(), in that order.</p>
+remove_spaces_before_marks(), remove_repeat_vowels(), and
+remove_dangling(), in that order.</p>
 <p>If a user wants to customize the selection or the order of rules
 to be applied, they can choose to call those functions by themselves.</p>
 <p>Note: for Unicode normalization, see unicodedata.normalize().</p>
@@ -1076,7 +1078,7 @@ For instance, the AD year of the 4th reign year of the 10th King is 2019.</p>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">remove_dangling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/normalize.html#remove_dangling"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Remove Thai non-base characters at the beginning of text.</p>
+<dd><p>Remove Thai non-base characters at the beginning of text and after spaces.</p>
 <p>This is a common “typo”, especially for input field in a form,
 as these non-base characters can be visually hidden from user
 who may accidentally typed them in.</p>
@@ -1084,7 +1086,7 @@ who may accidentally typed them in.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>tone mark, above vowel, below vowel, or non-base sign AND</p></li>
-<li><p>located at the beginning of the text</p></li>
+<li><p>located at the beginning of the text or after spaces</p></li>
 </ul>
 </div></blockquote>
 <dl class="field-list simple">
@@ -1092,7 +1094,7 @@ who may accidentally typed them in.</p>
 <dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>text without dangling Thai characters at the beginning</p>
+<dd class="field-even"><p>text without dangling Thai characters at the beginning and after spaces</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -1104,6 +1106,9 @@ who may accidentally typed them in.</p>
 
 <span class="n">remove_dangling</span><span class="p">(</span><span class="s2">&quot;๊ก&quot;</span><span class="p">)</span>
 <span class="c1"># output: &#39;ก&#39;</span>
+
+<span class="n">remove_dangling</span><span class="p">(</span><span class="s2">&quot;คำ ่ที่สอง&quot;</span><span class="p">)</span>
+<span class="c1"># output: &#39;คำ ที่สอง&#39;</span>
 </pre></div>
 </div>
 <p>The <cite>remove_dangling</cite> function is a text processing tool for removing dangling characters or diacritics from text. It is useful for text cleaning and normalization.</p>
