@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 9e6520b documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP e4c6f6b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0eca0768"></script>
+      <script src="../../../_static/documentation_options.js?v=94c332c4"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -139,6 +139,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CompleteSoundex</span><span class="p">:</span>
@@ -282,7 +283,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove silent characters (karan/thanthakhat) from text.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฮ][ะ-ู]?์&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">heuristic_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heuristic_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Apply heuristic rules to split syllables.</span>
 
@@ -512,7 +513,7 @@
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_apply_implicit_vowel</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply implicit vowel defaults.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
@@ -529,7 +530,7 @@
         <span class="n">init_char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">init_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">implicit_rule</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Special adjustments for ส (so sua) mapping.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">init_char</span> <span class="o">==</span> <span class="s2">&quot;ส&quot;</span> <span class="ow">and</span> <span class="n">init_code</span> <span class="o">==</span> <span class="s2">&quot;ซศ&quot;</span><span class="p">:</span>
@@ -569,7 +570,7 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">process_syllable</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process a single syllable and return its soundex code.</span>

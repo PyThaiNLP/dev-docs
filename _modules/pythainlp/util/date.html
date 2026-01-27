@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.date &mdash; PyThaiNLP 9e6520b documentation</title>
+  <title>pythainlp.util.date &mdash; PyThaiNLP e4c6f6b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0eca0768"></script>
+      <script src="../../../_static/documentation_options.js?v=94c332c4"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -119,6 +119,8 @@
 <span class="c1"># AH ปีฮิจเราะห์ศักราชเป็นปีพุทธศักราช จะต้องบวกด้วย 1122</span>
 <span class="c1"># ไม่ได้รองรับปี พ.ศ. ก่อนการเปลี่ยนวันขึ้นปีใหม่ของประเทศไทย</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;convert_years&quot;</span><span class="p">,</span>
@@ -329,7 +331,7 @@
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">year</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;be&quot;</span><span class="p">,</span>
-    <span class="n">add_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">add_year</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tzinfo</span><span class="o">=</span><span class="n">ZoneInfo</span><span class="p">(</span><span class="s2">&quot;Asia/Bangkok&quot;</span><span class="p">),</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai strptime</span>
@@ -338,7 +340,7 @@
 <span class="sd">    :param str fmt: string containing date and time directives</span>
 <span class="sd">    :param str year: year of the text \</span>
 <span class="sd">        (ad is Anno Domini and be is Buddhist Era)</span>
-<span class="sd">    :param int | None add_year: add to year when converting to ad. Default is None.</span>
+<span class="sd">    :param Optional[int] add_year: add to year when converting to ad. Default is None.</span>
 <span class="sd">    :param object tzinfo: tzinfo (default is Asia/Bangkok)</span>
 <span class="sd">    :return: The year that is converted to datetime.datetime</span>
 <span class="sd">    :rtype: datetime.datetime</span>
@@ -506,7 +508,7 @@
 
 <div class="viewcode-block" id="thaiword_to_date">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thaiword_to_date">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_date</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_date</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Thai relative date to :class:`datetime.datetime`.</span>
 
 <span class="sd">    :param str text: Thai text containing relative date</span>
