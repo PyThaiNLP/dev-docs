@@ -6,17 +6,20 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize &mdash; PyThaiNLP 9ad4ca6 documentation</title>
+  <title>pythainlp.summarize &mdash; PyThaiNLP 610c219 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b67b9c90"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=1cd6996e"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,9 +49,9 @@
               <p class="caption" role="heading"><span class="caption-text">Notes</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../notes/FAQ.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/command_line.html">Command Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/getting_started.html#tutorial-notebooks">Tutorial Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/command_line.html">Command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/getting_started.html#tutorial-notebooks">Tutorial notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/installation.html#faq">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/license.html">License</a></li>
@@ -72,15 +75,13 @@
 <li class="toctree-l1"><a class="reference internal" href="soundex.html">pythainlp.soundex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spell.html">pythainlp.spell</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.summarize</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.summarize.summarize"><code class="docutils literal notranslate"><span class="pre">summarize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.summarize.extract_keywords"><code class="docutils literal notranslate"><span class="pre">extract_keywords()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#keyword-extraction-engines">Keyword Extraction Engines</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#keybert">KeyBERT</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#keyword-extraction-engines">Keyword extraction engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keybert">KeyBERT</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tag.html">pythainlp.tag</a></li>
@@ -121,9 +122,9 @@
              
   <section id="pythainlp-summarize">
 <h1>pythainlp.summarize<a class="headerlink" href="#pythainlp-summarize" title="Link to this heading"></a></h1>
-<p>The <a class="reference internal" href="#pythainlp.summarize.summarize" title="pythainlp.summarize.summarize"><code class="xref py py-class docutils literal notranslate"><span class="pre">summarize</span></code></a> is Thai text summarizer.</p>
-<section id="modules">
-<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp.summarize</span></code> module provides functions for Thai text summarization and keyword extraction.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.summarize.summarize">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.summarize.</span></span><span class="sig-name descname"><span class="pre">summarize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'frequency'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/summarize/core.html#summarize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.summarize.summarize" title="Link to this definition"></a></dt>
@@ -288,10 +289,10 @@ If not specified, <code class="xref py py-func docutils literal notranslate"><sp
 
 </section>
 <section id="keyword-extraction-engines">
-<h2>Keyword Extraction Engines<a class="headerlink" href="#keyword-extraction-engines" title="Link to this heading"></a></h2>
-<section id="keybert">
-<h3>KeyBERT<a class="headerlink" href="#keybert" title="Link to this heading"></a></h3>
+<h2>Keyword extraction engines<a class="headerlink" href="#keyword-extraction-engines" title="Link to this heading"></a></h2>
 </section>
+<section id="keybert">
+<h2>KeyBERT<a class="headerlink" href="#keybert" title="Link to this heading"></a></h2>
 </section>
 </section>
 

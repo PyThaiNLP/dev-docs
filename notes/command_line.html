@@ -6,21 +6,24 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Command Line &mdash; PyThaiNLP 9ad4ca6 documentation</title>
+  <title>Command line &mdash; PyThaiNLP 610c219 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=eea1f72d" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b67b9c90"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=1cd6996e"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="Getting started" href="getting_started.html" />
     <link rel="prev" title="FAQ" href="FAQ.html" /> 
 </head>
 
@@ -46,9 +49,9 @@
               <p class="caption" role="heading"><span class="caption-text">Notes</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html#tutorial-notebooks">Tutorial Notebooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html#tutorial-notebooks">Tutorial notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html#faq">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -98,7 +101,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Command Line</li>
+      <li class="breadcrumb-item active">Command line</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/notes/command_line.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -109,8 +112,8 @@
            <div itemprop="articleBody">
              
   <section id="command-line">
-<h1>Command Line<a class="headerlink" href="#command-line" title="Link to this heading"></a></h1>
-<p>You can use some thainlp functions directly from command line.</p>
+<h1>Command line<a class="headerlink" href="#command-line" title="Link to this heading"></a></h1>
+<p>You can use some <cite>thainlp</cite> functions directly from the command line.</p>
 <p><strong>Tokenization</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thainlp</span> <span class="n">tokenize</span> <span class="o">&lt;</span><span class="n">word</span><span class="o">|</span><span class="n">syllable</span><span class="o">|</span><span class="n">subword</span><span class="o">|</span><span class="n">sent</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">nw</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">newmm</span><span class="o">|</span><span class="n">attacut</span><span class="o">|</span><span class="n">longest</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">SEPARATOR</span><span class="p">]</span> <span class="n">TEXT</span>
 </pre></div>
@@ -132,7 +135,7 @@ $ thainlp tokenize sent &quot;หลายปีที่ผ่านมา ช�
 หลายปีที่ผ่านมา @@ชาวชุมชนโคกยาวหลายคนได้พากันย้ายออก @@บ้างก็เสียชีวิต @@บางคนถูกจำคุกในข้อบุกรุกป่าหรือแม้กระทั่งสูญหาย@@
 </pre></div>
 </div>
-<p><strong>Part-Of-Speech tagging</strong>:</p>
+<p><strong>Part-of-speech tagging</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pythainlp</span> <span class="n">tagg</span> <span class="n">pos</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">SEPARATOR</span><span class="p">]</span> <span class="n">TEXT</span>
 </pre></div>
 </div>
@@ -219,7 +222,7 @@ word_level:correctly_tokenised_words 15637.0000
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="FAQ.html" class="btn btn-neutral float-left" title="FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
