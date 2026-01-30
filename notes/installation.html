@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; PyThaiNLP 610c219 documentation</title>
+  <title>Installation &mdash; PyThaiNLP 7029234 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=1cd6996e"></script>
+      <script src="../_static/documentation_options.js?v=2e430ccd"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -54,6 +54,12 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html#tutorial-notebooks">Tutorial notebooks</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#notes-for-windows-installation">Notes for Windows installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pythainlp-in-distributed-environments">Using PyThaiNLP in distributed environments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-considerations">Key considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-usage-with-apache-spark">Example usage with Apache Spark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-safety-considerations">Thread safety considerations</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#runtime-configurations">Runtime configurations</a></li>
 </ul>
 </li>
@@ -194,6 +200,62 @@
 </ul>
 </div></blockquote>
 </section>
+<section id="using-pythainlp-in-distributed-environments">
+<h2>Using PyThaiNLP in distributed environments<a class="headerlink" href="#using-pythainlp-in-distributed-environments" title="Link to this heading"></a></h2>
+<p>PyThaiNLP can be used in distributed computing environments such as Apache Spark. When using PyThaiNLP in these environments, you need to configure the data directory for each worker node.</p>
+<section id="key-considerations">
+<h3>Key considerations<a class="headerlink" href="#key-considerations" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Set environment variables inside distributed functions</strong>: Environment variables must be set inside the function that will be distributed to executor nodes, not in the driver program.</p></li>
+<li><p><strong>Use a writable local directory</strong>: The default data directory (<code class="docutils literal notranslate"><span class="pre">~/pythainlp-data</span></code>) may not be writable on executor nodes. Use a local directory like <code class="docutils literal notranslate"><span class="pre">./pythainlp-data</span></code> instead.</p></li>
+<li><p><strong>Set ``PYTHAINLP_DATA_DIR`` before data access</strong>: Always set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> environment variable before the first call that reads or writes PyThaiNLP data on each worker.</p></li>
+</ol>
+</section>
+<section id="example-usage-with-apache-spark">
+<h3>Example usage with Apache Spark<a class="headerlink" href="#example-usage-with-apache-spark" title="Link to this heading"></a></h3>
+<p>Basic example using PySpark RDD:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkContext</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="s2">&quot;local[*]&quot;</span><span class="p">,</span> <span class="s2">&quot;PyThaiNLP Example&quot;</span><span class="p">)</span>
+<span class="n">thai_texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;ภาษาไทย&quot;</span><span class="p">]</span>
+<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">thai_texts</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tokenize_thai</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">tokenized_rdd</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">tokenize_thai</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">tokenized_rdd</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example using PySpark DataFrame API:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">StringType</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">])</span>
+
+<span class="nd">@udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tokenize_udf</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;tokens&quot;</span><span class="p">,</span> <span class="n">tokenize_udf</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>For more comprehensive examples including error handling, production best practices, and advanced features, see the file <code class="docutils literal notranslate"><span class="pre">examples/distributed_pyspark.py</span></code> in the PyThaiNLP repository.</p>
+</section>
+<section id="thread-safety-considerations">
+<h3>Thread safety considerations<a class="headerlink" href="#thread-safety-considerations" title="Link to this heading"></a></h3>
+<p>PyThaiNLP’s core tokenization engines are thread-safe, which is important for distributed computing environments where multiple threads may process data concurrently. For detailed information about thread safety guarantees and best practices, see <span class="xref std std-doc">threadsafe</span>.</p>
+<p>Note that while the code itself is thread-safe, you still need to configure the data directory appropriately for distributed environments as described above.</p>
+</section>
+</section>
 <section id="runtime-configurations">
 <h2>Runtime configurations<a class="headerlink" href="#runtime-configurations" title="Link to this heading"></a></h2>
 <dl class="std envvar">
@@ -215,9 +277,21 @@
 <section id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Link to this heading"></a></h1>
 <p>Q: How do I set environment variables on each executor node in a distributed environment?</p>
-<p>A: See the discussion in <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/issues/475">PermissionError: [Errno 13] Permission denied: /home/pythainlp-data</a>.</p>
+<p>A: When using PyThaiNLP in distributed computing environments like Apache Spark, you need to set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> environment variable inside the function that will be distributed to executor nodes. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tokenize_thai</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">tokenize_thai</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This ensures that each executor node uses a local data directory instead of the default home directory, which may not be writable on executor nodes.</p>
+<p>For detailed examples including PySpark DataFrame API and production best practices, see <code class="docutils literal notranslate"><span class="pre">examples/distributed_pyspark.py</span></code>.</p>
+<p>For more discussion, see <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/issues/475">PermissionError: [Errno 13] Permission denied: /home/pythainlp-data</a>.</p>
 <p>Q: How do I enable read-only mode for PyThaiNLP?</p>
-<p>A: Set the environment variable <cite>PYTHAINLP_READ_MODE</cite> to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>A: Set the environment variable <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 </section>
 
 
