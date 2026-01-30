@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.keywords &mdash; PyThaiNLP 12d7768 documentation</title>
+  <title>pythainlp.util.keywords &mdash; PyThaiNLP 7cc69e9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=905e4709"></script>
+      <script src="../../../_static/documentation_options.js?v=18624ffa"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -112,6 +112,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_stopwords</span>
 
@@ -120,7 +121,7 @@
 
 <div class="viewcode-block" id="rank">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.rank">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">rank</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">exclude_stopwords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rank</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">exclude_stopwords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Counter</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Count word frequencies given a list of Thai words with an option</span>
 <span class="sd">    to exclude stopwords.</span>
 
@@ -210,9 +211,12 @@
 <span class="sd">        # output: {&#39; &#39;: 2, &#39;บันทึก&#39;: 4, &#39;ลายลักษณ์อักษรและ&#39;: 1,</span>
 <span class="sd">         &#39;เสียง&#39;: 1, &#39;เหตุการณ์&#39;: 3}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">word_list</span> <span class="o">=</span> <span class="n">rank</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">exclude_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">word_counter</span> <span class="o">=</span> <span class="n">rank</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">exclude_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">word_list</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="n">min_len</span><span class="p">}</span></div>
+    <span class="k">if</span> <span class="n">word_counter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">word_counter</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="n">min_len</span><span class="p">}</span></div>
 
 </pre></div>
 

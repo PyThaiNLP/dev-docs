@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.date &mdash; PyThaiNLP 12d7768 documentation</title>
+  <title>pythainlp.util.date &mdash; PyThaiNLP 7cc69e9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=905e4709"></script>
+      <script src="../../../_static/documentation_options.js?v=18624ffa"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -120,7 +120,7 @@
 <span class="c1"># ไม่ได้รองรับปี พ.ศ. ก่อนการเปลี่ยนวันขึ้นปีใหม่ของประเทศไทย</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;convert_years&quot;</span><span class="p">,</span>
@@ -134,12 +134,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">backports.zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
 
 <span class="n">thai_abbr_weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;จ&quot;</span><span class="p">,</span> <span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;พ&quot;</span><span class="p">,</span> <span class="s2">&quot;พฤ&quot;</span><span class="p">,</span> <span class="s2">&quot;ศ&quot;</span><span class="p">,</span> <span class="s2">&quot;ส&quot;</span><span class="p">,</span> <span class="s2">&quot;อา&quot;</span><span class="p">]</span>
 <span class="n">thai_full_weekdays</span> <span class="o">=</span> <span class="p">[</span>
@@ -400,22 +395,22 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_old</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
     <span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">y_matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">y_matches</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
+    <span class="n">hour</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">minute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">second</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">_find_month</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">])</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">&quot;H&quot;</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">]</span>
+        <span class="n">hour</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">&quot;M&quot;</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">]</span>
+        <span class="n">minute</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">&quot;S&quot;</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
-        <span class="n">S</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">]</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">&quot;f&quot;</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">==</span> <span class="s2">&quot;be&quot;</span><span class="p">:</span>
@@ -434,9 +429,9 @@
         <span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
         <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">),</span>
         <span class="n">day</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">),</span>
-        <span class="n">hour</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">H</span><span class="p">),</span>
-        <span class="n">minute</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">M</span><span class="p">),</span>
-        <span class="n">second</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">S</span><span class="p">),</span>
+        <span class="n">hour</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">hour</span><span class="p">),</span>
+        <span class="n">minute</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">minute</span><span class="p">),</span>
+        <span class="n">second</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">second</span><span class="p">),</span>
         <span class="n">microsecond</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
         <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzinfo</span><span class="p">,</span>
     <span class="p">)</span></div>
@@ -495,6 +490,7 @@
 <span class="sd">            reign_year_to_ad(1, 9))</span>
 <span class="sd">        # output: The 4th reign year of the King Rama X is in 1946</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ad</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">reign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
         <span class="n">ad</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">reign_year</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2015</span>
     <span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">reign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
@@ -509,7 +505,7 @@
 
 <div class="viewcode-block" id="thaiword_to_date">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thaiword_to_date">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_date</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_date</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Thai relative date to :class:`datetime.datetime`.</span>
 
 <span class="sd">    :param str text: Thai text containing relative date</span>
@@ -527,7 +523,7 @@
     <span class="k">if</span> <span class="n">text</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_DAY</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="n">day_num</span> <span class="o">=</span> <span class="n">_DAY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">day_num</span> <span class="o">=</span> <span class="n">_DAY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">date</span><span class="p">:</span>
         <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.util &mdash; PyThaiNLP 12d7768 documentation</title>
+  <title>pythainlp.corpus.util &mdash; PyThaiNLP 7cc69e9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=905e4709"></script>
+      <script src="../../../_static/documentation_options.js?v=18624ffa"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -153,12 +153,13 @@
 <span class="sd">    :return: words that are considered to make `tokenize` perform badly</span>
 <span class="sd">    :rtype: Set[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
-    <span class="n">wrong</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="n">right</span><span class="p">:</span> <span class="n">Counter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="n">wrong</span><span class="p">:</span> <span class="n">Counter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">train_words</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">:</span>
-        <span class="n">train_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">index_pairs</span><span class="p">(</span><span class="n">train_words</span><span class="p">))</span>
-        <span class="n">test_words</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_words</span><span class="p">))</span>
+        <span class="n">train_words_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">train_words</span><span class="p">)</span>
+        <span class="n">train_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">index_pairs</span><span class="p">(</span><span class="n">train_words_list</span><span class="p">))</span>
+        <span class="n">test_words</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_words_list</span><span class="p">))</span>
         <span class="n">test_pairs</span> <span class="o">=</span> <span class="n">index_pairs</span><span class="p">(</span><span class="n">test_words</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">test_words</span><span class="p">,</span> <span class="n">test_pairs</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
