@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 55168fe documentation</title>
+  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 5c3899f documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c1cff83d"></script>
+      <script src="../../../_static/documentation_options.js?v=eb327360"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -129,12 +129,15 @@
 <span class="sd">    :param str corpus: corpus</span>
 
 <span class="sd">    **Options for engine**</span>
-<span class="sd">        * *thainer-v2* - Thai NER engine v2.0 for Thai NER 2.0 (default)</span>
+<span class="sd">        * *phayathaibert* - PhayaThaiBERT-based Thai NER engine</span>
 <span class="sd">        * *thainer* - Thai NER engine</span>
+<span class="sd">        * *thainer-v2* - Thai NER engine v2.0 for Thai NER 2.0 (default)</span>
 <span class="sd">        * *tltk* - wrapper for `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.</span>
+<span class="sd">        * *wangchanberta* - WangchanBERTa-based Thai NER engine</span>
 
 <span class="sd">    **Options for corpus**</span>
 <span class="sd">        * *thainer* - Thai NER corpus (default)</span>
+<span class="sd">        * *thainer-v2* - Thai NER v2 corpus</span>
 
 <span class="sd">    **Note**: The tltk engine supports NER models from tltk only.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -152,29 +155,33 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">load_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name_engine</span> <span class="o">=</span> <span class="n">engine</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
+        <span class="k">if</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityRecognition</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityRecognition</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityRecognition</span><span class="p">(</span>
-                <span class="n">model</span><span class="o">=</span><span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span>
-            <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityRecognition</span><span class="p">(</span>
+                    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span> <span class="k">as</span> <span class="n">WangchanbertaThaiNameTagger</span>  <span class="c1"># type: ignore[assignment]  # noqa: I001,E501</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>  <span class="c1"># type: ignore[assignment]  # noqa: I001</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">WangchanbertaThaiNameTagger</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+        <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phayathaibert&quot;</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityTagger</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
-        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phayathaibert&quot;</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityTagger</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># No corpus matched</span>
+            <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;NER class not support </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine or </span><span class="si">{</span><span class="n">corpus</span><span class="si">}</span><span class="s2"> corpus.&quot;</span>
             <span class="p">)</span></div>
