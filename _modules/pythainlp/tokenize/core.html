@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP a248ba9 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP e9b8f3b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b13a96d9"></script>
+      <script src="../../../_static/documentation_options.js?v=137e8f7c"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -152,7 +152,7 @@
 <span class="sd">    :param str segments: List of sentences, each with a list of words.</span>
 <span class="sd">    :param str output: the output type (str or list)</span>
 <span class="sd">    :return: the Thai text</span>
-<span class="sd">    :rtype: Union[str,List[str]]</span>
+<span class="sd">    :rtype: Union[list[list[str]], str]</span>
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
@@ -234,7 +234,7 @@
 <span class="sd">                                  Otherwise, formatted numeric could be wrongly separated.</span>
 
 <span class="sd">    :return: list of words</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *attacut* - wrapper for</span>
 <span class="sd">          `AttaCut &lt;https://github.com/PyThaiNLP/attacut&gt;`_.,</span>
@@ -542,7 +542,7 @@
 <span class="sd">    :param str engine: choose among *&#39;crfcut&#39;*, *&#39;whitespace&#39;*, \</span>
 <span class="sd">    *&#39;whitespace+newline&#39;*</span>
 <span class="sd">    :return: list of split sentences</span>
-<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    :rtype: Union[list[str], list[list[str]]]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *crfcut* - (default) split by CRF trained on TED dataset</span>
 <span class="sd">        * *thaisum* - The implementation of sentence segmenter from \</span>
@@ -705,7 +705,7 @@
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :param str engine: the name of paragraph tokenizer</span>
 <span class="sd">    :return: list of paragraphs</span>
-<span class="sd">    :rtype: List[List[str]]</span>
+<span class="sd">    :rtype: list[List[str]]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *wtp* - split by `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_., \</span>
 <span class="sd">            It supports many sizes of models. You can use ``wtp`` to use mini model, \</span>
@@ -787,7 +787,7 @@
 <span class="sd">    :param str engine: the name of subword tokenizer</span>
 <span class="sd">    :param bool keep_whitespace: keep whitespace</span>
 <span class="sd">    :return: list of subwords</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
 <span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
@@ -913,7 +913,7 @@
 <span class="sd">    :param str engine: the name of syllable tokenizer</span>
 <span class="sd">    :param bool keep_whitespace: keep whitespace</span>
 <span class="sd">    :return: list of subwords</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
 <span class="sd">        * *han_solo* - CRF syllable segmenter for Thai that can work in the \</span>
@@ -955,7 +955,7 @@
 
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :return: list of display cells</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Tokenize Thai text into display cells::</span>

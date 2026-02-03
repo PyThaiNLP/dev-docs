@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.word_vector.core &mdash; PyThaiNLP a248ba9 documentation</title>
+  <title>pythainlp.word_vector.core &mdash; PyThaiNLP e9b8f3b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b13a96d9"></script>
+      <script src="../../../_static/documentation_options.js?v=137e8f7c"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -202,7 +202,7 @@
 <span class="sd">        in the list. We use the function :func:`doesnt_match`</span>
 <span class="sd">        from :mod:`gensim`.</span>
 
-<span class="sd">        :param list words: a list of words</span>
+<span class="sd">        :param list[str] words: a list of words</span>
 <span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
 <span class="sd">                          not in the vocabulary of the model.</span>
 <span class="sd">        :return: the word that is mostly unrelated</span>
@@ -249,8 +249,8 @@
 <span class="sd">        We use the function :func:`gensim.most_similar_cosmul` directly from</span>
 <span class="sd">        :mod:`gensim`.</span>
 
-<span class="sd">        :param list positive: a list of words to add</span>
-<span class="sd">        :param list negative: a list of words to subtract</span>
+<span class="sd">        :param list[str] positive: a list of words to add</span>
+<span class="sd">        :param list[str] negative: a list of words to subtract</span>
 
 <span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
 <span class="sd">                          not in the vocabulary of the model.</span>
@@ -398,7 +398,7 @@
 
 <span class="sd">        :return: 300-dimension vector representing the given sentence</span>
 <span class="sd">                 in form of :mod:`numpy` array</span>
-<span class="sd">        :rtype: :class:`numpy.ndarray((1,300))`</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
 
 
 <span class="sd">        :Example:</span>
