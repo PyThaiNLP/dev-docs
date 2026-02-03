@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP bbb5854 documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP adefafc documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a6c44b22"></script>
+      <script src="../../../_static/documentation_options.js?v=35f76c55"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -139,6 +139,7 @@
 <span class="sd">        complete_soundex(&quot;ปุญญา&quot;)  # &#39;ปป4G0น-ยย1B0--*&#39;</span>
 <span class="sd">        complete_soundex(&quot;สวรรค์&quot;)  # &#39;ซศ1A-0-วว1Aน0-&#39;</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -798,11 +799,14 @@
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.soundex import complete_soundex, complete_soundex_similarity</span>
+<span class="sd">        from pythainlp.soundex import (</span>
+<span class="sd">            complete_soundex,</span>
+<span class="sd">            complete_soundex_similarity,</span>
+<span class="sd">        )</span>
 
 <span class="sd">        # Encode two words</span>
 <span class="sd">        code1 = complete_soundex(&quot;ข้มขืน&quot;)  # Bitter/Forced (with tone)</span>
-<span class="sd">        code2 = complete_soundex(&quot;ขมขืน&quot;)   # Bitter (no tone)</span>
+<span class="sd">        code2 = complete_soundex(&quot;ขมขืน&quot;)  # Bitter (no tone)</span>
 
 <span class="sd">        # Calculate similarity</span>
 <span class="sd">        similarity = complete_soundex_similarity(code1, code2)</span>

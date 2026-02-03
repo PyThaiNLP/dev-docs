@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex &mdash; PyThaiNLP bbb5854 documentation</title>
+  <title>pythainlp.soundex &mdash; PyThaiNLP adefafc documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=a6c44b22"></script>
+      <script src="../_static/documentation_options.js?v=35f76c55"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -479,11 +479,14 @@ which compares codes position-by-position rather than by syllable blocks.</p>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.soundex</span><span class="w"> </span><span class="kn">import</span> <span class="n">complete_soundex</span><span class="p">,</span> <span class="n">complete_soundex_similarity</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.soundex</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">complete_soundex</span><span class="p">,</span>
+    <span class="n">complete_soundex_similarity</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="c1"># Encode two words</span>
 <span class="n">code1</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span><span class="s2">&quot;ข้มขืน&quot;</span><span class="p">)</span>  <span class="c1"># Bitter/Forced (with tone)</span>
-<span class="n">code2</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span><span class="s2">&quot;ขมขืน&quot;</span><span class="p">)</span>   <span class="c1"># Bitter (no tone)</span>
+<span class="n">code2</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span><span class="s2">&quot;ขมขืน&quot;</span><span class="p">)</span>  <span class="c1"># Bitter (no tone)</span>
 
 <span class="c1"># Calculate similarity</span>
 <span class="n">similarity</span> <span class="o">=</span> <span class="n">complete_soundex_similarity</span><span class="p">(</span><span class="n">code1</span><span class="p">,</span> <span class="n">code2</span><span class="p">)</span>

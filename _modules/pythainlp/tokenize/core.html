@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP bbb5854 documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP adefafc documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a6c44b22"></script>
+      <script src="../../../_static/documentation_options.js?v=35f76c55"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -112,8 +112,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Generic functions of tokenizers</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Generic functions of tokenizers&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -469,10 +468,10 @@
 
 <span class="sd">        from pythainlp.tokenize import indices_words</span>
 
-<span class="sd">        indices_words([&#39;สวัสดี&#39;, &#39;ครับ&#39;])</span>
+<span class="sd">        indices_words([&quot;สวัสดี&quot;, &quot;ครับ&quot;])</span>
 <span class="sd">        # output: [(0, 5), (6, 9)]</span>
 
-<span class="sd">        indices_words([&#39;hello&#39;, &#39;world&#39;])</span>
+<span class="sd">        indices_words([&quot;hello&quot;, &quot;world&quot;])</span>
 <span class="sd">        # output: [(0, 4), (5, 9)]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
@@ -485,7 +484,9 @@
     <span class="k">return</span> <span class="n">indices</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">map_indices_to_words</span><span class="p">(</span><span class="n">index_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">sentences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_indices_to_words</span><span class="p">(</span>
+    <span class="n">index_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">sentences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Map character index pairs to actual words from sentences.</span>
 
 <span class="sd">    This function takes a list of character index pairs and a list of</span>
@@ -502,7 +503,7 @@
 <span class="sd">        from pythainlp.tokenize import map_indices_to_words</span>
 
 <span class="sd">        indices = [(0, 5), (6, 9)]</span>
-<span class="sd">        sentences = [&#39;สวัสดีครับ&#39;]</span>
+<span class="sd">        sentences = [&quot;สวัสดีครับ&quot;]</span>
 <span class="sd">        map_indices_to_words(indices, sentences)</span>
 <span class="sd">        # output: [[&#39;สวัสดี&#39;, &#39;ครับ&#39;]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -668,7 +669,9 @@
             <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.wtsplit</span><span class="w"> </span><span class="kn">import</span> <span class="n">tokenize</span>
 
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">original_text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">)</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">original_text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Tokenizer </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not found.</span>
@@ -845,15 +848,19 @@
 
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tcc</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">tcc_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">tcc_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tcc_p&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tcc_p</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">tcc_p_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">tcc_p_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;etcc&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.etcc</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">etcc_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">etcc_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">wangchanberta_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">wangchanberta_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>  <span class="c1"># use syllable dictionary</span>
         <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -863,15 +870,19 @@
             <span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;ssg&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.ssg</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">ssg_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">ssg_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">syllable_tokenize</span> <span class="k">as</span> <span class="n">tltk_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">tltk_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;han_solo&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.han_solo</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">han_solo_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">han_solo_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phayathai&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">phayathai_segment</span>
+
         <span class="n">segments</span> <span class="o">=</span> <span class="n">phayathai_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
