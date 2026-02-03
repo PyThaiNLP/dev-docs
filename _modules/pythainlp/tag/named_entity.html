@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 9e2ea22 documentation</title>
+  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 71275c2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=62deecd4"></script>
+      <script src="../../../_static/documentation_options.js?v=0d846e52"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -130,6 +130,7 @@
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *phayathaibert* - PhayaThaiBERT-based Thai NER engine</span>
 <span class="sd">        * *thainer* - Thai NER engine</span>
+<span class="sd">        * *thai-nner* - Thai Nested NER engine</span>
 <span class="sd">        * *thainer-v2* - Thai NER engine v2.0 for Thai NER 2.0 (default)</span>
 <span class="sd">        * *tltk* - wrapper for `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.</span>
 <span class="sd">        * *wangchanberta* - WangchanBERTa-based Thai NER engine</span>
@@ -139,6 +140,7 @@
 <span class="sd">        * *thainer-v2* - Thai NER v2 corpus</span>
 
 <span class="sd">    **Note**: The tltk engine supports NER models from tltk only.</span>
+<span class="sd">              The thai-nner engine supports nested NER and ignores corpus parameter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="NER.__init__">
@@ -154,7 +156,18 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">load_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name_engine</span> <span class="o">=</span> <span class="n">engine</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
+
+        <span class="c1"># Engines that ignore corpus parameter</span>
+        <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai-nner&quot;</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thai_nner</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNNER</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNNER</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
+        <span class="c1"># Corpus-specific engines</span>
+        <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 
@@ -176,11 +189,6 @@
                 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityTagger</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># No corpus matched</span>
-            <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -249,20 +257,29 @@
 <div class="viewcode-block" id="NNER.load_engine">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER.load_engine">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thai_nner&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thai_nner</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thai_NNER</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thai_nner</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNNER</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">Thai_NNER</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNNER</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="NNER.tag">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.NNER.tag">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_level_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This function tags nested named entities.</span>
 
 <span class="sd">        :param str text: text in Thai to be tagged</span>
+<span class="sd">        :param bool top_level_only: If True, return only top-level (outermost)</span>
+<span class="sd">                                     entities. If False, return all nested</span>
+<span class="sd">                                     entities. Default is False.</span>
 
-<span class="sd">        :return: a list of tuples associated with tokenized words and NNER tags.</span>
+<span class="sd">        :return: a tuple of (tokens, entities) where tokens is a list of</span>
+<span class="sd">                 tokenized strings and entities is a list of dictionaries</span>
+<span class="sd">                 containing &#39;text&#39;, &#39;span&#39;, and &#39;entity_type&#39; keys.</span>
 <span class="sd">        :rtype: tuple[list[str], list[dict[str, Any]]]</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            The tokenized output may include empty strings as part of the</span>
+<span class="sd">            tokenization process from the underlying Thai-NNER model.</span>
 
 <span class="sd">        :Example:</span>
 
@@ -302,8 +319,11 @@
 <span class="sd">                    &#39;entity_type&#39;: &#39;unit&#39;</span>
 <span class="sd">                }</span>
 <span class="sd">            ])</span>
+<span class="sd">            &gt;&gt;&gt; # Get only top-level entities (outermost entities)</span>
+<span class="sd">            &gt;&gt;&gt; nner.tag(&quot;แมวทำอะไรตอนห้าโมงเช้า&quot;, top_level_only=True)</span>
+<span class="sd">            ([...], [{&#39;text&#39;: [&#39;&#39;, &#39;ห้า&#39;, &#39;&#39;, &#39;โมง&#39;], &#39;span&#39;: [7, 11], &#39;entity_type&#39;: &#39;time&#39;}])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_level_only</span><span class="o">=</span><span class="n">top_level_only</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

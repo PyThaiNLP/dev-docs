@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP 9e2ea22 documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP 71275c2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=62deecd4"></script>
+      <script src="../_static/documentation_options.js?v=0d846e52"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -770,6 +770,7 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dt><strong>Options for engine</strong></dt><dd><ul class="simple">
 <li><p><em>phayathaibert</em> - PhayaThaiBERT-based Thai NER engine</p></li>
 <li><p><em>thainer</em> - Thai NER engine</p></li>
+<li><p><em>thai-nner</em> - Thai Nested NER engine</p></li>
 <li><p><em>thainer-v2</em> - Thai NER engine v2.0 for Thai NER 2.0 (default)</p></li>
 <li><p><em>tltk</em> - wrapper for <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a>.</p></li>
 <li><p><em>wangchanberta</em> - WangchanBERTa-based Thai NER engine</p></li>
@@ -780,8 +781,9 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <li><p><em>thainer-v2</em> - Thai NER v2 corpus</p></li>
 </ul>
 </dd>
+<dt><strong>Note</strong>: The tltk engine supports NER models from tltk only.</dt><dd><p>The thai-nner engine supports nested NER and ignores corpus parameter.</p>
+</dd>
 </dl>
-<p><strong>Note</strong>: The tltk engine supports NER models from tltk only.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer-v2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.__init__" title="Link to this definition"></a></dt>
@@ -868,20 +870,34 @@ words and NER tags</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER.tag">
-<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.tag" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_level_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.tag" title="Link to this definition"></a></dt>
 <dd><p>This function tags nested named entities.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text in Thai to be tagged</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text in Thai to be tagged</p></li>
+<li><p><strong>top_level_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, return only top-level (outermost)
+entities. If False, return all nested
+entities. Default is False.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of tuples associated with tokenized words and NNER tags.</p>
+<dd class="field-even"><p>a tuple of (tokens, entities) where tokens is a list of
+tokenized strings and entities is a list of dictionaries
+containing ‘text’, ‘span’, and ‘entity_type’ keys.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, Any]]]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.named_entity</span><span class="w"> </span><span class="kn">import</span> <span class="n">NNER</span>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The tokenized output may include empty strings as part of the
+tokenization process from the underlying Thai-NNER model.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.named_entity</span><span class="w"> </span><span class="kn">import</span> <span class="n">NNER</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nner</span> <span class="o">=</span> <span class="n">NNER</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nner</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">&quot;แมวทำอะไรตอนห้าโมงเช้า&quot;</span><span class="p">)</span>
 <span class="go">([</span>
@@ -917,6 +933,9 @@ words and NER tags</p>
 <span class="go">        &#39;entity_type&#39;: &#39;unit&#39;</span>
 <span class="go">    }</span>
 <span class="go">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get only top-level entities (outermost entities)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nner</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">&quot;แมวทำอะไรตอนห้าโมงเช้า&quot;</span><span class="p">,</span> <span class="n">top_level_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">([...], [{&#39;text&#39;: [&#39;&#39;, &#39;ห้า&#39;, &#39;&#39;, &#39;โมง&#39;], &#39;span&#39;: [7, 11], &#39;entity_type&#39;: &#39;time&#39;}])</span>
 </pre></div>
 </div>
 </dd>
