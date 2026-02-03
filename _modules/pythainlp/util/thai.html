@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.thai &mdash; PyThaiNLP 0c21974 documentation</title>
+  <title>pythainlp.util.thai &mdash; PyThaiNLP a22ff19 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c1e7d435"></script>
+      <script src="../../../_static/documentation_options.js?v=0f39f753"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -112,13 +112,13 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Check if it is Thai text</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Check if it is Thai text&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">thai_above_vowels</span><span class="p">,</span>
@@ -340,16 +340,17 @@
 
 <div class="viewcode-block" id="thai_word_tone_detector">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thai_word_tone_detector">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">thai_word_tone_detector</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_word_tone_detector</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai tone detector for word.</span>
 
 <span class="sd">    It uses pythainlp.transliterate.pronunciate for converting word to\</span>
 <span class="sd">        pronunciation.</span>
 
-<span class="sd">    :param str word: Thai word.</span>
-<span class="sd">    :return: Thai pronunciation with tones in each syllable.\</span>
-<span class="sd">        (l, m, h, r, f or empty if it cannot be detected)</span>
-<span class="sd">    :rtype: Tuple[str, str]</span>
+<span class="sd">    :param Optional[str] word: Thai word, or None</span>
+<span class="sd">    :return: List of tuples containing Thai pronunciation with tones in each syllable.\</span>
+<span class="sd">        Tone values: l (low), m (mid), h (high), r (rising), f (falling), or empty if it cannot be detected.\</span>
+<span class="sd">        Returns [] if word is None or empty.</span>
+<span class="sd">    :rtype: list[tuple[str, str]]</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -361,7 +362,13 @@
 
 <span class="sd">        print(thai_word_tone_detector(&quot;มือถือ&quot;))</span>
 <span class="sd">        # output: [(&#39;มือ&#39;, &#39;m&#39;), (&#39;ถือ&#39;, &#39;r&#39;)]</span>
+
+<span class="sd">        print(thai_word_tone_detector(None))</span>
+<span class="sd">        # output: []</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
     <span class="kn">from</span><span class="w"> </span><span class="nn">..transliterate</span><span class="w"> </span><span class="kn">import</span> <span class="n">pronunciate</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">..util.syllable</span><span class="w"> </span><span class="kn">import</span> <span class="n">tone_detector</span>
 
