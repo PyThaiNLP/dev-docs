@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.word_vector.core &mdash; PyThaiNLP a22ff19 documentation</title>
+  <title>pythainlp.word_vector.core &mdash; PyThaiNLP bbb5854 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0f39f753"></script>
+      <script src="../../../_static/documentation_options.js?v=a6c44b22"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -232,7 +232,7 @@
 <span class="sd">        &gt;&gt;&gt; wv.doesnt_match(words)</span>
 <span class="sd">        &#39;เรือ&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 
 
 <div class="viewcode-block" id="WordVector.most_similar_cosmul">
@@ -336,7 +336,7 @@
 <span class="sd">        &gt;&gt;&gt; wv.most_similar_cosmul(list_positive, list_negative)</span>
 <span class="sd">        KeyError: &quot;word &#39;เมนูอาหารไทย&#39; not in vocabulary&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">most_similar_cosmul</span><span class="p">(</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">most_similar_cosmul</span><span class="p">(</span>  <span class="c1"># type: ignore[no-any-return]</span>
             <span class="n">positive</span><span class="o">=</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="n">negative</span>
         <span class="p">)</span></div>
 
@@ -379,7 +379,7 @@
 <span class="sd">        0.04300258</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 
 
 <div class="viewcode-block" id="WordVector.sentence_vectorizer">
@@ -435,7 +435,7 @@
         <span class="n">len_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">len_words</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">vec</span>
+            <span class="k">return</span> <span class="n">vec</span>  <span class="c1"># type: ignore[no-any-return]</span>
 
         <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;thai2fit_wv&quot;</span><span class="p">:</span>
@@ -449,7 +449,7 @@
         <span class="k">if</span> <span class="n">use_mean</span><span class="p">:</span>
             <span class="n">vec</span> <span class="o">/=</span> <span class="n">len_words</span>
 
-        <span class="k">return</span> <span class="n">vec</span></div>
+        <span class="k">return</span> <span class="n">vec</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 </div>
 
 </pre></div>
