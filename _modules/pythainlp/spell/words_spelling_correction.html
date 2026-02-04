@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP 8a188f2 documentation</title>
+  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP f22c110 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=214d532b"></script>
+      <script src="../../../_static/documentation_options.js?v=472f9f16"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -178,24 +178,18 @@
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">model_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nn_model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">nn_model_path</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">bucket</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nb_words</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">nb_words</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">minn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">minn</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">maxn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">maxn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">model_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_model_path</span> <span class="o">=</span> <span class="n">nn_model_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span> <span class="o">=</span> <span class="n">bucket</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nb_words</span> <span class="o">=</span> <span class="n">nb_words</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minn</span> <span class="o">=</span> <span class="n">minn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxn</span> <span class="o">=</span> <span class="n">maxn</span>
 
         <span class="c1"># Load data and models</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">:</span> <span class="s2">&quot;NDArray[np.float32]&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_embeddings</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">words_for_suggestion</span><span class="p">:</span> <span class="s2">&quot;NDArray[np.str_]&quot;</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_load_suggestion_words</span><span class="p">(</span><span class="n">words_list</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nn_session</span><span class="p">:</span> <span class="s2">&quot;InferenceSession&quot;</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_onnx_session</span><span class="p">(</span>
-            <span class="n">nn_model_path</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">words_for_suggestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_suggestion_words</span><span class="p">(</span><span class="n">words_list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_onnx_session</span><span class="p">(</span><span class="n">nn_model_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_load_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads embeddings matrix and vocabulary list.&quot;&quot;&quot;</span>
@@ -383,9 +377,9 @@
     <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pythainlp/word-spelling-correction-char2vec&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_onnx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;pythainlp/word-spelling-correction-char2vec&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_path</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_onnx</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;nearest_neighbors.onnx&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
@@ -393,7 +387,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;list_word-spelling-correction-char2vec.txt&quot;</span>
             <span class="p">)</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()))</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_onnx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_word</span><span class="p">)</span>
 
 

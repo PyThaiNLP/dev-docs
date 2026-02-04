@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP 8a188f2 documentation</title>
+  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP f22c110 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=214d532b"></script>
+      <script src="../../../_static/documentation_options.js?v=472f9f16"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -116,7 +116,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -153,7 +153,7 @@
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span><span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span><span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten two-dimension dictionary.</span>
 
 <span class="sd">    Use keys in the first dimension as a prefix for keys in the second dimension.</span>
@@ -167,7 +167,7 @@
 <span class="sd">    :param str sep: separator between the two keys (default: &quot;:&quot;)</span>
 
 <span class="sd">    :return: a one-dimension dictionary with keys combined</span>
-<span class="sd">    :rtype: dict[str, Any]</span>
+<span class="sd">    :rtype: dict[str, Union[int, str]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k1</span><span class="si">}{</span><span class="n">sep</span><span class="si">}{</span><span class="n">k2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">v</span>
@@ -252,7 +252,7 @@
 
 <div class="viewcode-block" id="compute_stats">
 <a class="viewcode-back" href="../../../api/benchmarks.html#pythainlp.benchmarks.word_tokenization.compute_stats">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_stats</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">raw_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_stats</span><span class="p">(</span><span class="n">ref_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">raw_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute statistics for tokenization quality</span>
 
 <span class="sd">    These statistics include:</span>
@@ -269,7 +269,7 @@
 <span class="sd">    :param str samples: samples that we want to evaluate</span>
 
 <span class="sd">    :return: metrics at character- and word-level and indicators of correctly tokenized words</span>
-<span class="sd">    :rtype: dict[str, Any]</span>
+<span class="sd">    :rtype: dict[str, dict[str, Union[int, str]]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -285,11 +285,11 @@
     <span class="n">c_pos_pred</span> <span class="o">=</span> <span class="n">c_pos_pred</span><span class="p">[</span><span class="n">c_pos_pred</span> <span class="o">&lt;</span> <span class="n">ref_sample_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="n">c_neg_pred</span> <span class="o">=</span> <span class="n">c_neg_pred</span><span class="p">[</span><span class="n">c_neg_pred</span> <span class="o">&lt;</span> <span class="n">ref_sample_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-    <span class="n">c_tp</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">intp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_pos_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">c_fp</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">intp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_pos_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">c_tp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_pos_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">c_fp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_pos_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
 
-    <span class="n">c_tn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">intp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">c_fn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">intp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c_tn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">c_fn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">[</span><span class="n">c_neg_pred</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># Compute word-level statistics</span>
 
@@ -302,7 +302,7 @@
         <span class="n">word_boundaries</span><span class="p">,</span> <span class="n">ss_boundaries</span>
     <span class="p">)</span>
 
-    <span class="n">correctly_tokenised_words</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">intp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tokenization_indicators</span><span class="p">)</span>
+    <span class="n">correctly_tokenised_words</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tokenization_indicators</span><span class="p">))</span>
 
     <span class="n">tokenization_indicators_str</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tokenization_indicators</span><span class="p">))</span>
 
@@ -315,8 +315,8 @@
         <span class="p">},</span>
         <span class="s2">&quot;word_level&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;correctly_tokenised_words&quot;</span><span class="p">:</span> <span class="n">correctly_tokenised_words</span><span class="p">,</span>
-            <span class="s2">&quot;total_words_in_sample&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_arr</span><span class="p">),</span>
-            <span class="s2">&quot;total_words_in_ref_sample&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">),</span>
+            <span class="s2">&quot;total_words_in_sample&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_arr</span><span class="p">)),</span>
+            <span class="s2">&quot;total_words_in_ref_sample&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">)),</span>
         <span class="p">},</span>
         <span class="s2">&quot;global&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;tokenisation_indicators&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokenization_indicators_str</span><span class="p">)</span>
