@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.normalize &mdash; PyThaiNLP 2e0acf8 documentation</title>
+  <title>pythainlp.util.normalize &mdash; PyThaiNLP 59541d6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=04cc7e5f"></script>
+      <script src="../../../_static/documentation_options.js?v=a1fe5eb8"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -130,7 +130,9 @@
 
 <span class="n">_DANGLING_CHARS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">above_v</span><span class="si">}{</span><span class="n">below_v</span><span class="si">}{</span><span class="n">tonemarks</span><span class="si">}</span><span class="se">\u0e3a\u0e4c\u0e4d\u0e4e</span><span class="s2">&quot;</span>
 <span class="n">_RE_REMOVE_DANGLINGS</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;^[</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">]+&quot;</span><span class="p">)</span>
-<span class="n">_RE_REMOVE_DANGLINGS_AFTER_SPACE</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; +[</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">]+&quot;</span><span class="p">)</span>
+<span class="n">_RE_REMOVE_DANGLINGS_AFTER_SPACE</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot; +[</span><span class="si">{</span><span class="n">_DANGLING_CHARS</span><span class="si">}</span><span class="s2">]+&quot;</span>
+<span class="p">)</span>
 
 <span class="n">_ZERO_WIDTH_CHARS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\u200b\u200c</span><span class="s2">&quot;</span>  <span class="c1"># ZWSP, ZWNJ</span>
 
@@ -171,7 +173,9 @@
 <span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_last_char</span><span class="p">(</span><span class="n">matchobj</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># to be used with _RE_NOREPEAT_TONEMARKS</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_last_char</span><span class="p">(</span>
+    <span class="n">matchobj</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># to be used with _RE_NOREPEAT_TONEMARKS</span>
     <span class="k">return</span> <span class="n">matchobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 
