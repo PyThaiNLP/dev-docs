@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP f22c110 documentation</title>
+  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP af709c9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=472f9f16"></script>
+      <script src="../../../_static/documentation_options.js?v=71f9efd8"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -198,10 +198,10 @@
             <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">preprocessing</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">s</span><span class="p">:</span>
                 <span class="n">stats</span> <span class="o">=</span> <span class="n">compute_stats</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-                <span class="n">stats</span> <span class="o">=</span> <span class="n">_flatten_result</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
-                <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;expected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
-                <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;actual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+                <span class="n">flat_stats</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">_flatten_result</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+                <span class="n">flat_stats</span><span class="p">[</span><span class="s2">&quot;expected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+                <span class="n">flat_stats</span><span class="p">[</span><span class="s2">&quot;actual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flat_stats</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">reason</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">[Error]</span>

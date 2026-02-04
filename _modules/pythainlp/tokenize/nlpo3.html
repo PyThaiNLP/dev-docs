@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP f22c110 documentation</title>
+  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP af709c9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=472f9f16"></script>
+      <script src="../../../_static/documentation_options.js?v=71f9efd8"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -199,7 +199,11 @@
             <span class="s2">&quot;nlpo3 is not installed. Install it with: pip install nlpo3&quot;</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">ex</span>
 
-    <span class="n">msg</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="n">nlpo3_load_dict</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span> <span class="n">dict_name</span><span class="o">=</span><span class="n">dict_name</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">msg</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="n">nlpo3_load_dict</span><span class="p">(</span>
+        <span class="n">file_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span> <span class="n">dict_name</span><span class="o">=</span><span class="n">dict_name</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">stderr</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">success</span></div>
@@ -243,12 +247,13 @@
     <span class="k">if</span> <span class="n">custom_dict</span> <span class="o">==</span> <span class="n">_NLPO3_DEFAULT_DICT_NAME</span><span class="p">:</span>
         <span class="n">_ensure_default_dict_loaded</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">nlpo3_segment</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">nlpo3_segment</span><span class="p">(</span>
         <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
         <span class="n">dict_name</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">,</span>
         <span class="n">safe</span><span class="o">=</span><span class="n">safe_mode</span><span class="p">,</span>
         <span class="n">parallel</span><span class="o">=</span><span class="n">parallel_mode</span><span class="p">,</span>
-    <span class="p">)</span></div>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
 
 </pre></div>
 
