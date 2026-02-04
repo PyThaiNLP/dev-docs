@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 82e1d9f documentation</title>
+  <title>pythainlp.tag.named_entity &mdash; PyThaiNLP 2e0acf8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d324fe00"></script>
+      <script src="../../../_static/documentation_options.js?v=04cc7e5f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -166,21 +166,21 @@
         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thai-nner&quot;</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thai_nner</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNNER</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNNER</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">ThaiNNER</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;tltk&quot;</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tltk</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">tltk</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">tltk</span>
         <span class="c1"># Corpus-specific engines</span>
         <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">()</span>
             <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">:</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityRecognition</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityRecognition</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">NamedEntityRecognition</span><span class="p">(</span>
                     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span>
                 <span class="p">)</span>
             <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta&quot;</span><span class="p">:</span>
@@ -188,12 +188,12 @@
                     <span class="n">ThaiNameTagger</span> <span class="k">as</span> <span class="n">WangchanbertaThaiNameTagger</span><span class="p">,</span>
                 <span class="p">)</span>  <span class="c1"># noqa: I001,E501</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">WangchanbertaThaiNameTagger</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">WangchanbertaThaiNameTagger</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">&quot;thainer-v2&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phayathaibert&quot;</span><span class="p">:</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityTagger</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -331,7 +331,7 @@
 <span class="sd">            &gt;&gt;&gt; nner.tag(&quot;แมวทำอะไรตอนห้าโมงเช้า&quot;, top_level_only=True)</span>
 <span class="sd">            ([...], [{&#39;text&#39;: [&#39;&#39;, &#39;ห้า&#39;, &#39;&#39;, &#39;โมง&#39;], &#39;span&#39;: [7, 11], &#39;entity_type&#39;: &#39;time&#39;}])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_level_only</span><span class="o">=</span><span class="n">top_level_only</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_level_only</span><span class="o">=</span><span class="n">top_level_only</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 </div>
 
 </pre></div>

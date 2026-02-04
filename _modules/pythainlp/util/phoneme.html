@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.phoneme &mdash; PyThaiNLP 82e1d9f documentation</title>
+  <title>pythainlp.util.phoneme &mdash; PyThaiNLP 2e0acf8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d324fe00"></script>
+      <script src="../../../_static/documentation_options.js?v=04cc7e5f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -122,7 +122,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util.trie</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trie</span>
 
-<span class="n">consonants_ipa_nectec</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">consonants_ipa_nectec</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;k^&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;kʰ&quot;</span><span class="p">,</span> <span class="s2">&quot;kh&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;ŋ&quot;</span><span class="p">,</span> <span class="s2">&quot;ng&quot;</span><span class="p">,</span> <span class="s2">&quot;ng^&quot;</span><span class="p">),</span>
@@ -147,7 +147,7 @@
 <span class="p">]</span>
 <span class="c1"># ipa, initial, final</span>
 
-<span class="n">monophthong_ipa_nectec</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">monophthong_ipa_nectec</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;ɛ&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">),</span>
@@ -170,7 +170,7 @@
     <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;@@&quot;</span><span class="p">),</span>  <span class="c1"># -อ long</span>
 <span class="p">]</span>
 
-<span class="n">diphthong_ipa_nectec</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">diphthong_ipa_nectec</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;ia&quot;</span><span class="p">,</span> <span class="s2">&quot;ia&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;ɯa&quot;</span><span class="p">,</span> <span class="s2">&quot;va&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;ua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua&quot;</span><span class="p">),</span>
@@ -179,7 +179,7 @@
     <span class="p">(</span><span class="s2">&quot;uua&quot;</span><span class="p">,</span> <span class="s2">&quot;uua&quot;</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="n">tones_ipa_nectec</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">tones_ipa_nectec</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;˧&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;˨˩&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;˥˩&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">),</span>
@@ -187,7 +187,7 @@
     <span class="p">(</span><span class="s2">&quot;˩˩˦&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="n">dict_nectec_to_ipa</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">dict_nectec_to_ipa</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">consonants_ipa_nectec</span>
     <span class="o">+</span> <span class="n">monophthong_ipa_nectec</span>
@@ -235,7 +235,7 @@
 
 
 
-<span class="n">dict_ipa_rtgs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">dict_ipa_rtgs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span>
     <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
     <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span>
@@ -305,7 +305,7 @@
     <span class="s2">&quot;.&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">dict_ipa_rtgs_final</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
+<span class="n">dict_ipa_rtgs_final</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
 
 
 <span class="nd">@lru_cache</span>

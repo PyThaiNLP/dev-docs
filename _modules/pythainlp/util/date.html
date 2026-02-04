@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.date &mdash; PyThaiNLP 82e1d9f documentation</title>
+  <title>pythainlp.util.date &mdash; PyThaiNLP 2e0acf8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d324fe00"></script>
+      <script src="../../../_static/documentation_options.js?v=04cc7e5f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -125,7 +125,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;convert_years&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_abbr_months&quot;</span><span class="p">,</span>
     <span class="s2">&quot;thai_abbr_weekdays&quot;</span><span class="p">,</span>
@@ -139,8 +139,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
 
-<span class="n">thai_abbr_weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;จ&quot;</span><span class="p">,</span> <span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;พ&quot;</span><span class="p">,</span> <span class="s2">&quot;พฤ&quot;</span><span class="p">,</span> <span class="s2">&quot;ศ&quot;</span><span class="p">,</span> <span class="s2">&quot;ส&quot;</span><span class="p">,</span> <span class="s2">&quot;อา&quot;</span><span class="p">]</span>
-<span class="n">thai_full_weekdays</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">thai_abbr_weekdays</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;จ&quot;</span><span class="p">,</span> <span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;พ&quot;</span><span class="p">,</span> <span class="s2">&quot;พฤ&quot;</span><span class="p">,</span> <span class="s2">&quot;ศ&quot;</span><span class="p">,</span> <span class="s2">&quot;ส&quot;</span><span class="p">,</span> <span class="s2">&quot;อา&quot;</span><span class="p">]</span>
+<span class="n">thai_full_weekdays</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;วันจันทร์&quot;</span><span class="p">,</span>
     <span class="s2">&quot;วันอังคาร&quot;</span><span class="p">,</span>
     <span class="s2">&quot;วันพุธ&quot;</span><span class="p">,</span>
@@ -150,7 +150,7 @@
     <span class="s2">&quot;วันอาทิตย์&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">thai_abbr_months</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">thai_abbr_months</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;ม.ค.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ก.พ.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;มี.ค.&quot;</span><span class="p">,</span>
@@ -164,7 +164,7 @@
     <span class="s2">&quot;พ.ย.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ธ.ค.&quot;</span><span class="p">,</span>
 <span class="p">]</span>
-<span class="n">thai_full_months</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">thai_full_months</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;มกราคม&quot;</span><span class="p">,</span>
     <span class="s2">&quot;กุมภาพันธ์&quot;</span><span class="p">,</span>
     <span class="s2">&quot;มีนาคม&quot;</span><span class="p">,</span>
@@ -178,7 +178,7 @@
     <span class="s2">&quot;พฤศจิกายน&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ธันวาคม&quot;</span><span class="p">,</span>
 <span class="p">]</span>
-<span class="n">thai_full_month_lists</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">thai_full_month_lists</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="s2">&quot;มกราคม&quot;</span><span class="p">,</span> <span class="s2">&quot;มกรา&quot;</span><span class="p">,</span> <span class="s2">&quot;ม.ค.&quot;</span><span class="p">,</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;กุมภาพันธ์&quot;</span><span class="p">,</span> <span class="s2">&quot;กุมภา&quot;</span><span class="p">,</span> <span class="s2">&quot;ก.พ.&quot;</span><span class="p">,</span> <span class="s2">&quot;02&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;มีนาคม&quot;</span><span class="p">,</span> <span class="s2">&quot;มีนา&quot;</span><span class="p">,</span> <span class="s2">&quot;มี.ค.&quot;</span><span class="p">,</span> <span class="s2">&quot;03&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">],</span>
@@ -192,11 +192,11 @@
     <span class="p">[</span><span class="s2">&quot;พฤศจิกายน&quot;</span><span class="p">,</span> <span class="s2">&quot;พฤศจิกา&quot;</span><span class="p">,</span> <span class="s2">&quot;พ.ย.&quot;</span><span class="p">,</span> <span class="s2">&quot;11&quot;</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;ธันวาคม&quot;</span><span class="p">,</span> <span class="s2">&quot;ธันวา&quot;</span><span class="p">,</span> <span class="s2">&quot;ธ.ค.&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">],</span>
 <span class="p">]</span>
-<span class="n">thai_full_month_lists_regex</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">thai_full_month_lists_regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_full_month_lists</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
 <span class="p">)</span>
-<span class="n">year_all_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d\d\d\d|\d\d)&quot;</span>
-<span class="n">dates_list</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">year_all_regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d\d\d\d|\d\d)&quot;</span>
+<span class="n">dates_list</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;(&quot;</span>
     <span class="o">+</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
         <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
@@ -204,7 +204,7 @@
     <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
 <span class="p">)</span>
 
-<span class="n">_DAY</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_DAY</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;วันนี้&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;คืนนี้&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;พรุ่งนี้&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
