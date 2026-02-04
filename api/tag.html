@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -83,18 +83,23 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.chunk_parse"><code class="docutils literal notranslate"><span class="pre">chunk_parse()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.NER"><code class="docutils literal notranslate"><span class="pre">NER</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.__init__"><code class="docutils literal notranslate"><span class="pre">NER.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.name_engine"><code class="docutils literal notranslate"><span class="pre">NER.name_engine</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.engine"><code class="docutils literal notranslate"><span class="pre">NER.engine</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.load_engine"><code class="docutils literal notranslate"><span class="pre">NER.load_engine()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.tag"><code class="docutils literal notranslate"><span class="pre">NER.tag()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.NNER"><code class="docutils literal notranslate"><span class="pre">NNER</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NNER.__init__"><code class="docutils literal notranslate"><span class="pre">NNER.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NNER.engine"><code class="docutils literal notranslate"><span class="pre">NNER.engine</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NNER.load_engine"><code class="docutils literal notranslate"><span class="pre">NNER.load_engine()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NNER.tag"><code class="docutils literal notranslate"><span class="pre">NNER.tag()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.thainer.ThaiNameTagger"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.thainer.ThaiNameTagger.__init__"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.thainer.ThaiNameTagger.crf"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.crf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.thainer.ThaiNameTagger.pos_tag_name"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.pos_tag_name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.thainer.ThaiNameTagger.get_ner"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.get_ner()</span></code></a></li>
 </ul>
 </li>
@@ -789,6 +794,16 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer-v2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.NER.name_engine">
+<span class="sig-name descname"><span class="pre">name_engine</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#pythainlp.tag.NER.name_engine" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.NER.engine">
+<span class="sig-name descname"><span class="pre">engine</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span><a class="headerlink" href="#pythainlp.tag.NER.engine" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.load_engine">
 <span class="sig-name descname"><span class="pre">load_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.load_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.load_engine" title="Link to this definition"></a></dt>
@@ -861,6 +876,11 @@ words and NER tags</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai_nner'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.NNER.engine">
+<span class="sig-name descname"><span class="pre">engine</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span><a class="headerlink" href="#pythainlp.tag.NNER.engine" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -976,6 +996,16 @@ The default value is <cite>1.4</cite></p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.crf">
+<span class="sig-name descname"><span class="pre">crf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CRFTagger</span></span><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.crf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.pos_tag_name">
+<span class="sig-name descname"><span class="pre">pos_tag_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.pos_tag_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.get_ner">

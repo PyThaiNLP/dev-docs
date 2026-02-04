@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.util &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.corpus.util &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -252,7 +252,7 @@
     <span class="n">orig_words</span> <span class="o">=</span> <span class="n">thai_words</span><span class="p">()</span>
     <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">orig_words</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="n">newmm</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">trie</span><span class="p">)</span>
 
     <span class="n">revised_words</span> <span class="o">=</span> <span class="n">revise_wordset</span><span class="p">(</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">orig_words</span><span class="p">,</span> <span class="n">training_data</span><span class="p">)</span>

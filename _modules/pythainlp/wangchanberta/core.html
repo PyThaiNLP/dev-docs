@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wangchanberta.core &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.wangchanberta.core &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -116,7 +116,11 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">CamembertTokenizer</span><span class="p">,</span> <span class="n">PreTrainedModel</span><span class="p">,</span> <span class="n">PreTrainedTokenizerBase</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.pipelines</span><span class="w"> </span><span class="kn">import</span> <span class="n">TokenClassificationPipeline</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 
@@ -124,7 +128,7 @@
 <span class="n">_tokenizer</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_get_tokenizer</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_tokenizer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">CamembertTokenizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tokenizer, initializing it if necessary.&quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_tokenizer</span>
     <span class="k">if</span> <span class="n">_tokenizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -145,11 +149,18 @@
 <div class="viewcode-block" id="ThaiNameTagger">
 <a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThaiNameTagger</span><span class="p">:</span>
+    <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">grouped_entities</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">classify_tokens</span><span class="p">:</span> <span class="n">TokenClassificationPipeline</span>
+    <span class="n">json_ner</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+    <span class="n">output</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">sent_ner</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+
 <div class="viewcode-block" id="ThaiNameTagger.__init__">
 <a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.ThaiNameTagger.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thainer&quot;</span><span class="p">,</span> <span class="n">grouped_entities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This function tags named entities in text in IOB format.</span>
 
 <span class="sd">        Powered by wangchanberta from VISTEC-depa\</span>
@@ -161,9 +172,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span> <span class="o">=</span> <span class="n">dataset_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span> <span class="o">=</span> <span class="n">grouped_entities</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">classify_tokens</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">dataset_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">grouped_entities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classify_tokens</span><span class="p">:</span> <span class="n">TokenClassificationPipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
             <span class="n">task</span><span class="o">=</span><span class="s2">&quot;ner&quot;</span><span class="p">,</span>
             <span class="n">tokenizer</span><span class="o">=</span><span class="n">_get_tokenizer</span><span class="p">(),</span>
             <span class="n">model</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;airesearch/</span><span class="si">{</span><span class="n">_model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -173,12 +184,12 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_IOB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_IOB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;B-&quot;</span> <span class="o">+</span> <span class="n">tag</span>
         <span class="k">return</span> <span class="s2">&quot;O&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_clear_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_clear_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;I-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ThaiNameTagger.get_ner">
@@ -205,10 +216,10 @@
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">json_ner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">json_ner</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grouped_entities</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span> <span class="o">==</span> <span class="s2">&quot;thainer&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sent_ner</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">(</span>
                     <span class="n">i</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;▁&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_IOB</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;entity_group&quot;</span><span class="p">]),</span>
@@ -266,6 +277,9 @@
 <div class="viewcode-block" id="NamedEntityRecognition">
 <a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NamedEntityRecognition</span><span class="p">:</span>
+    <span class="n">tokenizer</span><span class="p">:</span> <span class="n">PreTrainedTokenizerBase</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">PreTrainedModel</span>
+
 <div class="viewcode-block" id="NamedEntityRecognition.__init__">
 <a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -279,23 +293,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForTokenClassification</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">:</span> <span class="n">PreTrainedTokenizerBase</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="n">PreTrainedModel</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_fix_span_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">ner</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fix_span_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">ner</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
         <span class="n">_ner</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">_ner</span> <span class="o">=</span> <span class="n">ner</span>
         <span class="n">_new_tag</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">_ner</span><span class="p">):</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">):</span>
+            <span class="n">i_decoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i_decoded</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">):</span>
                 <span class="n">j</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;s&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i_decoded</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;s&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">):</span>
                 <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">:</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-            <span class="n">_new_tag</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">i_decoded</span> <span class="o">==</span> <span class="s2">&quot;&lt;_&gt;&quot;</span><span class="p">:</span>
+                <span class="n">i_decoded</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+            <span class="n">_new_tag</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i_decoded</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">_new_tag</span>
 
 <div class="viewcode-block" id="NamedEntityRecognition.get_ner">
@@ -359,7 +373,7 @@
                     <span class="n">sent</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/&quot;</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span>
 
             <span class="k">return</span> <span class="n">sent</span>
-        <span class="k">return</span> <span class="n">ner_tag</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
+        <span class="k">return</span> <span class="n">ner_tag</span></div>
 </div>
 
 

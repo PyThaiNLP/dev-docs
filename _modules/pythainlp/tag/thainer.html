@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.thainer &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.tag.thainer &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -119,12 +119,15 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ThaiNameTagger&quot;</span><span class="p">]</span>
 
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span><span class="p">,</span> <span class="n">thai_stopwords</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.pos_tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">isthai</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pycrfsuite</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span>
 
 <span class="n">_TOKENIZER_ENGINE</span> <span class="o">=</span> <span class="s2">&quot;mm&quot;</span>
 
@@ -133,7 +136,7 @@
     <span class="k">return</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">thai_stopwords</span><span class="p">()</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_doc2features</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_doc2features</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">word</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">postag</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
@@ -202,6 +205,9 @@
 <span class="sd">        thainer14.get_ner(&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">crf</span><span class="p">:</span> <span class="n">CRFTagger</span>
+    <span class="n">pos_tag_name</span><span class="p">:</span> <span class="nb">str</span>
+
 <div class="viewcode-block" id="ThaiNameTagger.__init__">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.thainer.ThaiNameTagger.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.4&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -213,7 +219,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pycrfsuite</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">crf</span> <span class="o">=</span> <span class="n">CRFTagger</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="p">:</span> <span class="s2">&quot;CRFTagger&quot;</span> <span class="o">=</span> <span class="n">CRFTagger</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;1.4&quot;</span><span class="p">:</span>
             <span class="n">model_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thainer-1.4&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.4&quot;</span><span class="p">)</span>
@@ -224,7 +230,7 @@
                     <span class="s2">&quot;  pythainlp.corpus.download(&#39;thainer-1.4&#39;)&quot;</span>
                 <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pos_tag_name</span> <span class="o">=</span> <span class="s2">&quot;orchid_ud&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pos_tag_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchid_ud&quot;</span>
         <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;1.5&quot;</span><span class="p">:</span>
             <span class="n">model_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;thainer&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.5&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

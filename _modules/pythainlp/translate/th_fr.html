@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -125,6 +125,12 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
 
 <div class="viewcode-block" id="ThFrTranslator">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator">[docs]</a>
@@ -142,6 +148,10 @@
 <span class="sd">    :param bool use_gpu : load model using GPU (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">tokenizer_thfr</span><span class="p">:</span> <span class="n">AutoTokenizer</span>
+    <span class="n">model_thfr</span><span class="p">:</span> <span class="n">AutoModelForSeq2SeqLM</span>
+    <span class="n">translated</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+
 <div class="viewcode-block" id="ThFrTranslator.__init__">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -151,10 +161,10 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thfr</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ThFrTranslator.translate">
@@ -178,11 +188,11 @@
 <span class="sd">            # output: &quot;Test du système.&quot;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thzh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">translated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thfr</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">decoded_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thzh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thfr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">translated</span>
         <span class="p">]</span>
         <span class="k">return</span> <span class="n">decoded_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>

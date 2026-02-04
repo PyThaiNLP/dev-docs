@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -154,12 +154,12 @@
 <span class="sd">    by Chalermpol  Tapsai, Phayung  Meesad, and Choochart  Haruechaiyasak (2020).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Thai consonants for pattern matching</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">thai_consonants</span> <span class="o">=</span> <span class="s2">&quot;กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬฮอ&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thai_consonants</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬฮอ&quot;</span>
 
         <span class="c1"># 1. Maps (Tables 5.1 - 5.4)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initial_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ก&quot;</span><span class="p">:</span> <span class="s2">&quot;กก&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ข&quot;</span><span class="p">:</span> <span class="s2">&quot;คข&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ฃ&quot;</span><span class="p">:</span> <span class="s2">&quot;คข&quot;</span><span class="p">,</span>
@@ -207,7 +207,7 @@
             <span class="s2">&quot;อ&quot;</span><span class="p">:</span> <span class="s2">&quot;ออ&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">vowel_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vowel_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ะ&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ั&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
             <span class="s2">&quot;รร&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
@@ -243,7 +243,7 @@
             <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ก&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ข&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ค&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
@@ -281,7 +281,7 @@
             <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;ว&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;่&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;่&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">clean_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove silent characters (karan/thanthakhat) from text.&quot;&quot;&quot;</span>

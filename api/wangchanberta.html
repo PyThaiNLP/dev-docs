@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wangchanberta &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.wangchanberta &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -86,11 +86,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.wangchanberta.NamedEntityRecognition"><code class="docutils literal notranslate"><span class="pre">NamedEntityRecognition</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.NamedEntityRecognition.__init__"><code class="docutils literal notranslate"><span class="pre">NamedEntityRecognition.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.NamedEntityRecognition.tokenizer"><code class="docutils literal notranslate"><span class="pre">NamedEntityRecognition.tokenizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.NamedEntityRecognition.model"><code class="docutils literal notranslate"><span class="pre">NamedEntityRecognition.model</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.NamedEntityRecognition.get_ner"><code class="docutils literal notranslate"><span class="pre">NamedEntityRecognition.get_ner()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.json_ner"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.json_ner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.output"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.sent_ner"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.sent_ner</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.__init__"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.dataset_name"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.dataset_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.grouped_entities"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.grouped_entities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.classify_tokens"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.classify_tokens</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.wangchanberta.ThaiNameTagger.get_ner"><code class="docutils literal notranslate"><span class="pre">ThaiNameTagger.get_ner()</span></code></a></li>
 </ul>
 </li>
@@ -175,6 +183,16 @@ Colab`_</span></a></p></li>
 :param str model: The model that use wangchanberta pretrained.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.NamedEntityRecognition.tokenizer">
+<span class="sig-name descname"><span class="pre">tokenizer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PreTrainedTokenizerBase</span></span><a class="headerlink" href="#pythainlp.wangchanberta.NamedEntityRecognition.tokenizer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.NamedEntityRecognition.model">
+<span class="sig-name descname"><span class="pre">model</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PreTrainedModel</span></span><a class="headerlink" href="#pythainlp.wangchanberta.NamedEntityRecognition.model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.NamedEntityRecognition.get_ner">
 <span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#NamedEntityRecognition.get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.NamedEntityRecognition.get_ner" title="Link to this definition"></a></dt>
@@ -202,9 +220,24 @@ Powered by wangchanberta from VISTEC-depa             AI Research Institute of T
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.wangchanberta.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouped_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger" title="Link to this definition"></a></dt>
 <dd><p>The <cite>ThaiNameTagger</cite> class is designed for tagging Thai names within text. This is essential for tasks such as entity recognition, information extraction, and text classification.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.json_ner">
+<span class="sig-name descname"><span class="pre">json_ner</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.json_ner" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.output" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.sent_ner">
+<span class="sig-name descname"><span class="pre">sent_ner</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.sent_ner" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouped_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouped_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/wangchanberta/core.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.__init__" title="Link to this definition"></a></dt>
 <dd><p>This function tags named entities in text in IOB format.</p>
 <p>Powered by wangchanberta from VISTEC-depa             AI Research Institute of Thailand</p>
 <dl class="field-list simple">
@@ -219,6 +252,21 @@ Powered by wangchanberta from VISTEC-depa             AI Research Institute of T
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.dataset_name">
+<span class="sig-name descname"><span class="pre">dataset_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.dataset_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.grouped_entities">
+<span class="sig-name descname"><span class="pre">grouped_entities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.grouped_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.classify_tokens">
+<span class="sig-name descname"><span class="pre">classify_tokens</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TokenClassificationPipeline</span></span><a class="headerlink" href="#pythainlp.wangchanberta.ThaiNameTagger.classify_tokens" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.wangchanberta.ThaiNameTagger.get_ner">

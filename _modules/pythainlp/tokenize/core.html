@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -1064,7 +1064,7 @@
         <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
         <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize tokenizer object.</span>
 
 <span class="sd">        :param str custom_dict: a file path, a list of vocaburaies* to be</span>
@@ -1075,19 +1075,19 @@
 <span class="sd">        :param bool keep_whitespace: True to keep whitespace, a common mark</span>
 <span class="sd">                                     for end of phrase in Thai</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
         <span class="k">if</span> <span class="n">custom_dict</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">dict_trie</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span> <span class="o">=</span> <span class="n">word_dict_trie</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">engine</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="s2">&quot;mm&quot;</span><span class="p">,</span> <span class="s2">&quot;longest&quot;</span><span class="p">,</span> <span class="s2">&quot;deepcut&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
                 <span class="s2">&quot;The Tokenizer class does not support &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="si">}</span><span class="s2"> for custom tokenizer.&quot;</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__keep_whitespace</span> <span class="o">=</span> <span class="n">keep_whitespace</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__join_broken_num</span> <span class="o">=</span> <span class="n">join_broken_num</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">keep_whitespace</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">join_broken_num</span></div>
 
 
 <div class="viewcode-block" id="Tokenizer.word_tokenize">

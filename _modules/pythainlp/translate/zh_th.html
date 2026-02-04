@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.zh_th &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.translate.zh_th &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -122,6 +122,12 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
 
 <div class="viewcode-block" id="ThZhTranslator">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ThZhTranslator">[docs]</a>
@@ -135,6 +141,10 @@
 
 <span class="sd">    :param bool use_gpu : load model using GPU (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tokenizer_thzh</span><span class="p">:</span> <span class="n">AutoTokenizer</span>
+    <span class="n">model_thzh</span><span class="p">:</span> <span class="n">AutoModelForSeq2SeqLM</span>
+    <span class="n">translated</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
 
 <div class="viewcode-block" id="ThZhTranslator.__init__">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ThZhTranslator.__init__">[docs]</a>
@@ -196,6 +206,10 @@
 
 <span class="sd">    :param bool use_gpu : load model using GPU (Default is False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tokenizer_zhth</span><span class="p">:</span> <span class="n">AutoTokenizer</span>
+    <span class="n">model_zhth</span><span class="p">:</span> <span class="n">AutoModelForSeq2SeqLM</span>
+    <span class="n">translated</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
 
 <div class="viewcode-block" id="ZhThTranslator.__init__">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.zh_th.ZhThTranslator.__init__">[docs]</a>

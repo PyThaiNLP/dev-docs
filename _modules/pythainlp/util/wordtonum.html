@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.wordtonum &mdash; PyThaiNLP 0eaff7f documentation</title>
+  <title>pythainlp.util.wordtonum &mdash; PyThaiNLP 460bd74 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb8f599b"></script>
+      <script src="../../../_static/documentation_options.js?v=28d38ed6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -122,20 +122,20 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_words</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
 
-<span class="n">_ptn_digits</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(|หนึ่ง|เอ็ด|สอง|ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)&quot;</span>
-<span class="n">_ptn_six_figures</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">_ptn_digits</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(|หนึ่ง|เอ็ด|สอง|ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)&quot;</span>
+<span class="n">_ptn_six_figures</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
     <span class="sa">rf</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">แสน)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">หมื่น)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">พัน)?&quot;</span>
     <span class="sa">rf</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">ร้อย)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">สิบ)?</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">?&quot;</span>
 <span class="p">)</span>
-<span class="n">_ptn_thai_numerals</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;(ลบ)?(</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">ล้าน)*</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">_re_thai_numerals</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">_ptn_thai_numerals</span><span class="p">)</span>
+<span class="n">_ptn_thai_numerals</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;(ลบ)?(</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">ล้าน)*</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">_re_thai_numerals</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">_ptn_thai_numerals</span><span class="p">)</span>
 
-<span class="n">_digits</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_digits</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># &quot;ศูนย์&quot; was excluded as a special case</span>
     <span class="s2">&quot;หนึ่ง&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">&quot;เอ็ด&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -149,7 +149,7 @@
     <span class="s2">&quot;แปด&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
     <span class="s2">&quot;เก้า&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="n">_powers_of_10</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_powers_of_10</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;สิบ&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="s2">&quot;ร้อย&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="s2">&quot;พัน&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
@@ -157,7 +157,7 @@
     <span class="s2">&quot;แสน&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
     <span class="c1"># &quot;ล้าน&quot; was excluded as a special case</span>
 <span class="p">}</span>
-<span class="n">_valid_tokens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_digits</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">_powers_of_10</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;ล้าน&quot;</span><span class="p">,</span> <span class="s2">&quot;ลบ&quot;</span><span class="p">}</span>
+<span class="n">_valid_tokens</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_digits</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">_powers_of_10</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;ล้าน&quot;</span><span class="p">,</span> <span class="s2">&quot;ลบ&quot;</span><span class="p">}</span>
 
 
 <span class="nd">@lru_cache</span>
