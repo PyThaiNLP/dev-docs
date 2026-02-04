@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP c766a7f documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP 82e1d9f documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=19af2271"></script>
+      <script src="../../../_static/documentation_options.js?v=d324fe00"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -123,7 +123,7 @@
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;countries&quot;</span><span class="p">,</span>
     <span class="s2">&quot;find_synonyms&quot;</span><span class="p">,</span>
     <span class="s2">&quot;provinces&quot;</span><span class="p">,</span>
@@ -145,33 +145,33 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn_deprecation</span>
 
 <span class="n">_THAI_COUNTRIES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_COUNTRIES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;countries_th.txt&quot;</span>
+<span class="n">_THAI_COUNTRIES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;countries_th.txt&quot;</span>
 
 <span class="n">_THAI_THAILAND_PROVINCES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 <span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;thailand_provinces_th.csv&quot;</span>
+<span class="n">_THAI_THAILAND_PROVINCES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;thailand_provinces_th.csv&quot;</span>
 
 <span class="n">_THAI_SYLLABLES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_SYLLABLES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;syllables_th.txt&quot;</span>
+<span class="n">_THAI_SYLLABLES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;syllables_th.txt&quot;</span>
 
 <span class="n">_THAI_WORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_WORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;words_th.txt&quot;</span>
+<span class="n">_THAI_WORDS_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;words_th.txt&quot;</span>
 
 <span class="n">_THAI_STOPWORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_STOPWORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;stopwords_th.txt&quot;</span>
+<span class="n">_THAI_STOPWORDS_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;stopwords_th.txt&quot;</span>
 
 <span class="n">_THAI_NEGATIONS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_NEGATIONS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;negations_th.txt&quot;</span>
+<span class="n">_THAI_NEGATIONS_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;negations_th.txt&quot;</span>
 
 <span class="n">_THAI_PROFANITY_WORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_PROFANITY_WORDS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;profanity_th.txt&quot;</span>
+<span class="n">_THAI_PROFANITY_WORDS_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;profanity_th.txt&quot;</span>
 
 <span class="n">_THAI_FAMLIY_NAMES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_FAMLIY_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;family_names_th.txt&quot;</span>
+<span class="n">_THAI_FAMLIY_NAMES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;family_names_th.txt&quot;</span>
 <span class="n">_THAI_FEMALE_NAMES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_FEMALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_female_th.txt&quot;</span>
+<span class="n">_THAI_FEMALE_NAMES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;person_names_female_th.txt&quot;</span>
 <span class="n">_THAI_MALE_NAMES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-<span class="n">_THAI_MALE_NAMES_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;person_names_male_th.txt&quot;</span>
+<span class="n">_THAI_MALE_NAMES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;person_names_male_th.txt&quot;</span>
 
 <span class="n">_THAI_ORST_WORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 
