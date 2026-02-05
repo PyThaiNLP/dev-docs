@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate &mdash; PyThaiNLP 5eda0af documentation</title>
+  <title>pythainlp.translate &mdash; PyThaiNLP 31a7010 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=daa897af"></script>
+      <script src="../_static/documentation_options.js?v=3ce6b6fa"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -89,18 +89,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.translate.word_translate"><code class="docutils literal notranslate"><span class="pre">word_translate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator.translated"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator.translated</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator.__init__"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator.tokenizer_thzh"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator.tokenizer_thzh</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator.model_thzh"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator.model_thzh</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ThZhTranslator.translate"><code class="docutils literal notranslate"><span class="pre">ThZhTranslator.translate()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator.translated"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator.translated</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator.__init__"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator.tokenizer_zhth"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator.tokenizer_zhth</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator.model_zhth"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator.model_zhth</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.translate.zh_th.ZhThTranslator.translate"><code class="docutils literal notranslate"><span class="pre">ZhThTranslator.translate()</span></code></a></li>
 </ul>
 </li>
@@ -201,6 +195,11 @@
 <span class="c1"># output: I love cat.</span>
 </pre></div>
 </div>
+<p>Translate text with excluded words:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">th2en</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ฉันรักแมว&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;แมว&quot;</span><span class="p">])</span>
+<span class="c1"># output: I love แมว.</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -210,11 +209,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.Translate.translate">
-<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/core.html#Translate.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.Translate.translate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/core.html#Translate.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.Translate.translate" title="Link to this definition"></a></dt>
 <dd><p>Translate text</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p></li>
+<li><p><strong>exclude_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words to exclude from translation
+(optional)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>translated text in target language</p>
@@ -276,33 +279,22 @@
 </ul>
 <p>:param bool use_gpu : load model using GPU (Default is False)</p>
 <p>The <cite>ThZhTranslator</cite> class specializes in translating text from Thai to Chinese (Simplified). This class is valuable for bridging language gaps between these two languages, promoting cross-cultural communication.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ThZhTranslator.translated">
-<span class="sig-name descname"><span class="pre">translated</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.translated" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.zh_th.ThZhTranslator.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Lalita/marianmt-th-zh_cn'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ThZhTranslator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ThZhTranslator.tokenizer_thzh">
-<span class="sig-name descname"><span class="pre">tokenizer_thzh</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AutoTokenizer</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.tokenizer_thzh" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ThZhTranslator.model_thzh">
-<span class="sig-name descname"><span class="pre">model_thzh</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AutoModelForSeq2SeqLM</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.model_thzh" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.zh_th.ThZhTranslator.translate">
-<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ThZhTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.translate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ThZhTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ThZhTranslator.translate" title="Link to this definition"></a></dt>
 <dd><p>Translate text from Thai to Chinese</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p></li>
+<li><p><strong>exclude_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words to exclude from translation
+(optional)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>translated text in target language</p>
@@ -322,6 +314,11 @@
 <span class="c1"># output: 我爱你</span>
 </pre></div>
 </div>
+<p>Translate text from Thai to Chinese with excluded words:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thzh</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ผมรักคุณ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ผม&quot;</span><span class="p">])</span>
+<span class="c1"># output: ผม爱你</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -337,33 +334,22 @@
 </ul>
 <p>:param bool use_gpu : load model using GPU (Default is False)</p>
 <p>The <cite>ZhThTranslator</cite> class is designed for translating text from Chinese (Simplified) to Thai. It assists in making content accessible to Thai-speaking audiences by converting Chinese text into Thai.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ZhThTranslator.translated">
-<span class="sig-name descname"><span class="pre">translated</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.translated" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.zh_th.ZhThTranslator.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Lalita/marianmt-zh_cn-th'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ZhThTranslator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ZhThTranslator.tokenizer_zhth">
-<span class="sig-name descname"><span class="pre">tokenizer_zhth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AutoTokenizer</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.tokenizer_zhth" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pythainlp.translate.zh_th.ZhThTranslator.model_zhth">
-<span class="sig-name descname"><span class="pre">model_zhth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AutoModelForSeq2SeqLM</span></span><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.model_zhth" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.zh_th.ZhThTranslator.translate">
-<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ZhThTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.translate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/zh_th.html#ZhThTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.zh_th.ZhThTranslator.translate" title="Link to this definition"></a></dt>
 <dd><p>Translate text from Chinese to Thai</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p></li>
+<li><p><strong>exclude_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words to exclude from translation
+(optional)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>translated text in target language</p>
@@ -381,6 +367,11 @@
 
 <span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">)</span>
 <span class="c1"># output: ผมรักคุณนะ</span>
+</pre></div>
+</div>
+<p>Translate text from Chinese to Thai with excluded words:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;我&quot;</span><span class="p">])</span>
+<span class="c1"># output: 我รักคุณนะ</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -421,11 +412,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.translate.th_fr.ThFrTranslator.translate">
-<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/th_fr.html#ThFrTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.th_fr.ThFrTranslator.translate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/translate/th_fr.html#ThFrTranslator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.translate.th_fr.ThFrTranslator.translate" title="Link to this definition"></a></dt>
 <dd><p>Translate text from Thai to French</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input text in source language</p></li>
+<li><p><strong>exclude_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words to exclude from translation
+(optional)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>translated text in target language</p>
@@ -443,6 +438,11 @@
 
 <span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">)</span>
 <span class="c1"># output: &quot;Test du système.&quot;</span>
+</pre></div>
+</div>
+<p>Translate text from Thai to French with excluded words:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ระบบ&quot;</span><span class="p">])</span>
+<span class="c1"># output: &quot;Test du ระบบ.&quot;</span>
 </pre></div>
 </div>
 </dd></dl>
