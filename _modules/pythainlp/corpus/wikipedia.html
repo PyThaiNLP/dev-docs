@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.collate &mdash; PyThaiNLP fc39d3a documentation</title>
+  <title>pythainlp.corpus.wikipedia &mdash; PyThaiNLP fc39d3a documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -99,7 +99,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">pythainlp.util.collate</li>
+      <li class="breadcrumb-item active">pythainlp.corpus.wikipedia</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -108,64 +108,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.util.collate</h1><div class="highlight"><pre>
+  <h1>Source code for pythainlp.corpus.wikipedia</h1><div class="highlight"><pre>
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Thai collation (sorted according to Thai dictionary order)</span>
-<span class="sd">Simple implementation using regular expressions</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Provides an optional word list from Thai Wikipedia titles.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pattern</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="n">_RE_TONE</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[็-์]&quot;</span><span class="p">)</span>
-<span class="n">_RE_LV_C</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([เ-ไ])([ก-ฮ])&quot;</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus</span>
 
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_thkey</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">cv</span> <span class="o">=</span> <span class="n">_RE_TONE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>  <span class="c1"># remove tone</span>
-    <span class="n">cv</span> <span class="o">=</span> <span class="n">_RE_LV_C</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="p">)</span>  <span class="c1"># switch lead vowel</span>
-
-    <span class="n">tone_match</span> <span class="o">=</span> <span class="n">_RE_TONE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    <span class="n">tone</span> <span class="o">=</span> <span class="n">tone_match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="k">if</span> <span class="n">tone_match</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">cv</span> <span class="o">+</span> <span class="n">tone</span>
+<span class="n">_WIKIPEDIA_TITLES</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_WIKIPEDIA_TITLES_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wikipedia_titles_th.txt&quot;</span>
 
 
-<div class="viewcode-block" id="collate">
-<a class="viewcode-back" href="../../../api/util.html#pythainlp.util.collate">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">collate</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sorts strings (almost) according to Thai dictionary.</span>
+<div class="viewcode-block" id="thai_wikipedia_titles">
+<a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_wikipedia_titles">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_wikipedia_titles</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a frozenset of words from Thai Wikipedia titles corpus.</span>
+<span class="sd">    They are mostly nouns and noun phrases,</span>
+<span class="sd">    including event, organization, people, place, and product names.</span>
+<span class="sd">    Commonly misspelled words are included intentionally.</span>
 
-<span class="sd">    Important notes: this implementation ignores tone marks and symbols</span>
+<span class="sd">    See: `dev/pythainlp/corpus/wikipedia_titles_th.txt\</span>
+<span class="sd">    &lt;https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/wikipedia_titles_th.txt&gt;`_</span>
 
-<span class="sd">    :param data: a list of words to be sorted</span>
-<span class="sd">    :type data: Iterable</span>
-<span class="sd">    :param reverse: If `reverse` is set to **True** the result will be</span>
-<span class="sd">                         sorted in descending order. Otherwise, the result</span>
-<span class="sd">                         will be sorted in ascending order, defaults to False</span>
-<span class="sd">    :type reverse: bool, optional</span>
+<span class="sd">    More info:</span>
+<span class="sd">    https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/corpus_license.md</span>
 
-<span class="sd">    :return: a list of strings, sorted alphabetically, (almost) according to</span>
-<span class="sd">             Thai dictionary</span>
-<span class="sd">    :rtype: List[str]</span>
-
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-
-<span class="sd">        from pythainlp.util import collate</span>
-
-<span class="sd">        collate([&#39;ไก่&#39;, &#39;เกิด&#39;, &#39;กาล&#39;, &#39;เป็ด&#39;, &#39;หมู&#39;, &#39;วัว&#39;, &#39;วันที่&#39;])</span>
-<span class="sd">        # output: [&#39;กาล&#39;, &#39;เกิด&#39;, &#39;ไก่&#39;, &#39;เป็ด&#39;, &#39;วันที่&#39;, &#39;วัว&#39;, &#39;หมู&#39;]</span>
-
-<span class="sd">        collate([&#39;ไก่&#39;, &#39;เกิด&#39;, &#39;กาล&#39;, &#39;เป็ด&#39;, &#39;หมู&#39;, &#39;วัว&#39;, &#39;วันที่&#39;], \\</span>
-<span class="sd">            reverse=True)</span>
-<span class="sd">        # output: [&#39;หมู&#39;, &#39;วัว&#39;, &#39;วันที่&#39;, &#39;เป็ด&#39;, &#39;ไก่&#39;, &#39;เกิด&#39;, &#39;กาล&#39;]</span>
+<span class="sd">    :return: :class:`frozenset` containing Thai words.</span>
+<span class="sd">    :rtype: :class:`frozenset`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">_thkey</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span></div>
+    <span class="k">global</span> <span class="n">_WIKIPEDIA_TITLES</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_WIKIPEDIA_TITLES</span><span class="p">:</span>
+        <span class="n">_WIKIPEDIA_TITLES</span> <span class="o">=</span> <span class="n">get_corpus</span><span class="p">(</span>
+            <span class="n">_WIKIPEDIA_TITLES_FILENAME</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_WIKIPEDIA_TITLES</span></div>
 
 </pre></div>
 
