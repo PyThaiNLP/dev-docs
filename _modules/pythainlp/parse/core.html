@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.parse.core &mdash; PyThaiNLP b008610 documentation</title>
+  <title>pythainlp.parse.core &mdash; PyThaiNLP fa4db9a documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=70c5aa41"></script>
+      <script src="../../../_static/documentation_options.js?v=fc0f9347"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -150,6 +150,8 @@
 <span class="sd">            `GitHub &lt;https://github.com/KoichiYasuoka/&gt;`_</span>
 <span class="sd">        * *ud_goeswith* - POS tagging and dependency parsing \</span>
 <span class="sd">            using `goeswith` for subwords</span>
+<span class="sd">        * *attaparse* - Thai dependency parser using Stanza and PhayaThaiBERT. \</span>
+<span class="sd">            `GitHub &lt;https://github.com/nlp-chula/attaparse&gt;`_</span>
 
 <span class="sd">    **Options for model (esupar engine)**</span>
 <span class="sd">        * *th* (default) - KoichiYasuoka/roberta-base-thai-spm-upos model \</span>
@@ -235,6 +237,10 @@
                 <span class="k">if</span> <span class="n">model</span>
                 <span class="k">else</span> <span class="s2">&quot;KoichiYasuoka/deberta-base-thai-ud-goeswith&quot;</span>
             <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;attaparse&quot;</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.parse.attaparse_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parse</span>  <span class="c1"># type: ignore[assignment]  # noqa: I001</span>
+
+            <span class="n">_tagger</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The engine doesn&#39;t support.&quot;</span><span class="p">)</span>
 
