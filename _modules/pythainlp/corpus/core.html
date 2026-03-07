@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP fa4db9a documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 571a823 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fc0f9347"></script>
+      <script src="../../../_static/documentation_options.js?v=c72967d8"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -130,6 +130,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">corpus_db_path</span><span class="p">,</span> <span class="n">corpus_db_url</span><span class="p">,</span> <span class="n">corpus_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_full_data_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_offline_mode</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
@@ -372,48 +373,76 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_resolve_corpus_file_path</span><span class="p">(</span>
+    <span class="n">corpus_db_detail</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve the local filesystem path for a corpus catalog entry.</span>
+
+<span class="sd">    :param dict corpus_db_detail: a corpus catalog entry from the local DB</span>
+<span class="sd">    :return: full local path to the corpus file or folder,</span>
+<span class="sd">             or ``None`` if required path information is missing</span>
+<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_folder&quot;</span><span class="p">):</span>
+        <span class="n">foldername</span> <span class="o">=</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;foldername&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">)</span> <span class="k">if</span> <span class="n">foldername</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">if</span> <span class="n">filename</span> <span class="k">else</span> <span class="kc">None</span>
+
+
 <div class="viewcode-block" id="get_corpus_path">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_path</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get corpus path.</span>
 
+<span class="sd">    The function checks the following locations in order:</span>
+
+<span class="sd">    1. A user-defined path override (``CUSTOMIZE`` mapping).</span>
+<span class="sd">    2. Bundled (default) corpora shipped with PyThaiNLP.</span>
+<span class="sd">    3. The local download catalog (``~/pythainlp-data/``).</span>
+
+<span class="sd">    When the corpus file is not present locally, the behavior depends on the</span>
+<span class="sd">    ``PYTHAINLP_OFFLINE`` environment variable:</span>
+
+<span class="sd">    - If ``PYTHAINLP_OFFLINE`` is set to a truthy value (e.g., ``&quot;1&quot;``),</span>
+<span class="sd">      a :exc:`FileNotFoundError` is raised immediately.</span>
+<span class="sd">    - Otherwise, the corpus is downloaded automatically.</span>
+
 <span class="sd">    :param str name: corpus name</span>
-<span class="sd">    :param str version: version</span>
-<span class="sd">    :param bool force: force downloading</span>
-<span class="sd">    :return: path to the corpus or **None** if the corpus doesn&#39;t \</span>
-<span class="sd">             exist on the device</span>
-<span class="sd">    :rtype: str</span>
+<span class="sd">    :param str version: corpus version (empty string means latest)</span>
+<span class="sd">    :return: full local path when the corpus exists,</span>
+<span class="sd">             or ``None`` when the corpus cannot be found or downloaded.</span>
+<span class="sd">    :rtype: Optional[str]</span>
+
+<span class="sd">    :raises FileNotFoundError: when the corpus is missing locally and</span>
+<span class="sd">        ``PYTHAINLP_OFFLINE`` is set to a truthy value.</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">    (Please see the filename in</span>
-<span class="sd">    `this file</span>
-<span class="sd">    &lt;https://pythainlp.org/pythainlp-corpus/db.json&gt;`_</span>
+<span class="sd">    `this file &lt;https://pythainlp.org/pythainlp-corpus/db.json&gt;`_)</span>
 
 <span class="sd">    If the corpus already exists::</span>
 
 <span class="sd">        from pythainlp.corpus import get_corpus_path</span>
 
-<span class="sd">        print(get_corpus_path(&#39;ttc&#39;))</span>
+<span class="sd">        print(get_corpus_path(&quot;ttc&quot;))</span>
 <span class="sd">        # output: /root/pythainlp-data/ttc_freq.txt</span>
 
-<span class="sd">    If the corpus has not been downloaded yet::</span>
+<span class="sd">    If the corpus has not been downloaded yet (online mode)::</span>
+
+<span class="sd">        from pythainlp.corpus import get_corpus_path</span>
+
+<span class="sd">        print(get_corpus_path(&quot;wiki_lm_lstm&quot;))</span>
+<span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
+<span class="sd">        # (downloads automatically on first call)</span>
+
+<span class="sd">    To download manually::</span>
 
 <span class="sd">        from pythainlp.corpus import download, get_corpus_path</span>
 
-<span class="sd">        print(get_corpus_path(&#39;wiki_lm_lstm&#39;))</span>
-<span class="sd">        # output: None</span>
-
-<span class="sd">        download(&#39;wiki_lm_lstm&#39;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # Download: wiki_lm_lstm</span>
-<span class="sd">        # wiki_lm_lstm 0.32</span>
-<span class="sd">        # thwiki_lm.pth?dl=1: 1.05GB [00:25, 41.5MB/s]</span>
-<span class="sd">        # /root/pythainlp-data/thwiki_model_lstm.pth</span>
-
-<span class="sd">        print(get_corpus_path(&#39;wiki_lm_lstm&#39;))</span>
+<span class="sd">        download(&quot;wiki_lm_lstm&quot;)</span>
+<span class="sd">        print(get_corpus_path(&quot;wiki_lm_lstm&quot;))</span>
 <span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">CUSTOMIZE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -422,38 +451,50 @@
     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">CUSTOMIZE</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">CUSTOMIZE</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 
+    <span class="c1"># Check bundled (default) corpora first</span>
     <span class="n">default_path</span> <span class="o">=</span> <span class="n">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">default_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">default_path</span>
 
-    <span class="c1"># check if the corpus is in local catalog, download it if not</span>
+    <span class="c1"># Check the local download catalog</span>
     <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">):</span>
-        <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span><span class="p">:</span>
+        <span class="c1"># Corpus not in local catalog; download it unless in offline mode</span>
+        <span class="k">if</span> <span class="n">is_offline_mode</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;corpus-not-found name=</span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  Corpus &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; not found locally.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  PYTHAINLP_OFFLINE is set; automatic downloading is disabled.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  To download, unset PYTHAINLP_OFFLINE, then run:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;    Python: pythainlp.corpus.download(&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;    CLI:    thainlp data get </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
         <span class="n">corpus_db_detail</span> <span class="o">=</span> <span class="n">get_corpus_db_detail</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_db_detail</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="n">corpus_db_detail</span> <span class="ow">and</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">):</span>
-        <span class="c1"># corpus is in the local catalog, get full path to the file</span>
-        <span class="k">if</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_folder&quot;</span><span class="p">):</span>
-            <span class="n">foldername</span> <span class="o">=</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;foldername&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">foldername</span><span class="p">:</span>
-                <span class="n">path</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">foldername</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
-                <span class="n">path</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">None</span>
-        <span class="c1"># check if the corpus file actually exists, download it if not</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">path</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">_resolve_corpus_file_path</span><span class="p">(</span><span class="n">corpus_db_detail</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="c1"># File is registered in catalog but missing from disk</span>
+    <span class="k">if</span> <span class="n">is_offline_mode</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;corpus-not-found name=</span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> expected-path=</span><span class="si">{</span><span class="n">path</span><span class="si">!r}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;  Corpus &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; expected at &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39; but file not found.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;  PYTHAINLP_OFFLINE is set; automatic re-downloading is disabled.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;  To re-download, unset PYTHAINLP_OFFLINE, then run:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    Python: pythainlp.corpus.download(&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, force=True)</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    CLI:    thainlp data get </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">download</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">path</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span></div>
 
 
 
@@ -720,6 +761,12 @@
 <span class="sd">    The available corpus names can be seen in this file:</span>
 <span class="sd">    https://pythainlp.org/pythainlp-corpus/db.json</span>
 
+<span class="sd">    This function always performs the download regardless of the</span>
+<span class="sd">    ``PYTHAINLP_OFFLINE`` environment variable, because an explicit call</span>
+<span class="sd">    to ``download()`` is a deliberate user action.</span>
+<span class="sd">    ``PYTHAINLP_OFFLINE`` only blocks the *automatic* download triggered</span>
+<span class="sd">    by :func:`pythainlp.corpus.get_corpus_path`.</span>
+
 <span class="sd">    :param str name: corpus name</span>
 <span class="sd">    :param bool force: force downloading</span>
 <span class="sd">    :param str url: URL of the corpus catalog</span>
@@ -746,6 +793,7 @@
     <span class="k">if</span> <span class="n">_CHECK_MODE</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP is read-only mode. It can&#39;t download.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">corpus_db_url</span><span class="p">()</span>
 
@@ -924,8 +972,13 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_path_folder_corpus</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">corpus_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">corpus_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corpus path not found for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_path</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;corpus-not-found name=</span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> version=</span><span class="si">{</span><span class="n">version</span><span class="si">!r}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;  Corpus &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; (version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">) not found.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    Python: pythainlp.corpus.download(&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    CLI:    thainlp data get </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span>
 
 

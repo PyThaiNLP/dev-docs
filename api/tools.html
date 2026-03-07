@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tools &mdash; PyThaiNLP fa4db9a documentation</title>
+  <title>pythainlp.tools &mdash; PyThaiNLP 571a823 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fc0f9347"></script>
+      <script src="../_static/documentation_options.js?v=c72967d8"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -147,11 +147,23 @@ given path, and returns the full path.</p>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tools.</span></span><span class="sig-name descname"><span class="pre">get_pythainlp_data_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tools/path.html#get_pythainlp_data_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Returns the full path where PyThaiNLP keeps its (downloaded) data.
-If the directory does not yet exist, it will be created.
-The path can be specified through the environment variable
-<span class="target" id="index-0"></span><a class="reference internal" href="../notes/installation.html#envvar-PYTHAINLP_DATA_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code></a>. By default, <cite>~/pythainlp-data</cite>
-will be used.</p>
+<dd><p>Return the full path where PyThaiNLP keeps its (downloaded) data.</p>
+<p>The directory is created if it does not yet exist.</p>
+<p>The path is resolved in the following order:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> environment variable (preferred).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> environment variable
+(deprecated; shows a warning).</p></li>
+<li><p>If <strong>both</strong> variables are set, the function raises
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> because the conflict must be resolved
+explicitly.</p></li>
+<li><p>If neither is set, <code class="docutils literal notranslate"><span class="pre">~/pythainlp-data</span></code> is used.</p></li>
+</ol>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version ``PYTHAINLP_DATA_DIR``: </span>is deprecated.
+Use <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> instead (follows the same pattern as
+<code class="docutils literal notranslate"><span class="pre">NLTK_DATA</span></code>).</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>full path of directory for <code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp</span></code> downloaded data</p>

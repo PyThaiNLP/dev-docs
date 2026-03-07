@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus &mdash; PyThaiNLP fa4db9a documentation</title>
+  <title>pythainlp.corpus &mdash; PyThaiNLP 571a823 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fc0f9347"></script>
+      <script src="../_static/documentation_options.js?v=c72967d8"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -374,48 +374,64 @@ in Python’s urllib. Only download corpus from trusted URLs.</p>
 <h3>get_corpus_path<a class="headerlink" href="#get-corpus-path" title="Link to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.</span></span><span class="sig-name descname"><span class="pre">get_corpus_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/core.html#get_corpus_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.</span></span><span class="sig-name descname"><span class="pre">get_corpus_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/core.html#get_corpus_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Get corpus path.</p>
+<p>The function checks the following locations in order:</p>
+<ol class="arabic simple">
+<li><p>A user-defined path override (<code class="docutils literal notranslate"><span class="pre">CUSTOMIZE</span></code> mapping).</p></li>
+<li><p>Bundled (default) corpora shipped with PyThaiNLP.</p></li>
+<li><p>The local download catalog (<code class="docutils literal notranslate"><span class="pre">~/pythainlp-data/</span></code>).</p></li>
+</ol>
+<p>When the corpus file is not present locally, the behavior depends on the
+<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> environment variable:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> is set to a truthy value (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code>),
+a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> is raised immediately.</p></li>
+<li><p>Otherwise, the corpus is downloaded automatically.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus name</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – version</p></li>
-<li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – force downloading</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus version (empty string means latest)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>path to the corpus or <strong>None</strong> if the corpus doesn’t              exist on the device</p>
+<dd class="field-even"><p>full local path when the corpus exists,
+or <code class="docutils literal notranslate"><span class="pre">None</span></code> when the corpus cannot be found or downloaded.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-odd"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – when the corpus is missing locally and
+<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> is set to a truthy value.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
 <p>(Please see the filename in
-<a class="reference external" href="https://pythainlp.org/pythainlp-corpus/db.json">this file</a></p>
+<a class="reference external" href="https://pythainlp.org/pythainlp-corpus/db.json">this file</a>)</p>
 <p>If the corpus already exists:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s1">&#39;ttc&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">))</span>
 <span class="c1"># output: /root/pythainlp-data/ttc_freq.txt</span>
 </pre></div>
 </div>
-<p>If the corpus has not been downloaded yet:</p>
+<p>If the corpus has not been downloaded yet (online mode):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">))</span>
+<span class="c1"># output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
+<span class="c1"># (downloads automatically on first call)</span>
+</pre></div>
+</div>
+<p>To download manually:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span><span class="p">,</span> <span class="n">get_corpus_path</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s1">&#39;wiki_lm_lstm&#39;</span><span class="p">))</span>
-<span class="c1"># output: None</span>
-
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;wiki_lm_lstm&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># Download: wiki_lm_lstm</span>
-<span class="c1"># wiki_lm_lstm 0.32</span>
-<span class="c1"># thwiki_lm.pth?dl=1: 1.05GB [00:25, 41.5MB/s]</span>
-<span class="c1"># /root/pythainlp-data/thwiki_model_lstm.pth</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s1">&#39;wiki_lm_lstm&#39;</span><span class="p">))</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">))</span>
 <span class="c1"># output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
 </pre></div>
 </div>
@@ -430,6 +446,11 @@ in Python’s urllib. Only download corpus from trusted URLs.</p>
 <dd><p>Download corpus.</p>
 <p>The available corpus names can be seen in this file:
 <a class="reference external" href="https://pythainlp.org/pythainlp-corpus/db.json">https://pythainlp.org/pythainlp-corpus/db.json</a></p>
+<p>This function always performs the download regardless of the
+<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> environment variable, because an explicit call
+to <code class="docutils literal notranslate"><span class="pre">download()</span></code> is a deliberate user action.
+<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> only blocks the <em>automatic</em> download triggered
+by <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

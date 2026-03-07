@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; PyThaiNLP fa4db9a documentation</title>
+  <title>Installation &mdash; PyThaiNLP 571a823 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fc0f9347"></script>
+      <script src="../_static/documentation_options.js?v=c72967d8"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -218,7 +218,8 @@
 <ol class="arabic simple">
 <li><p><strong>Set environment variables inside distributed functions</strong>: Environment variables must be set inside the function that will be distributed to executor nodes, not in the driver program.</p></li>
 <li><p><strong>Use a writable local directory</strong>: The default data directory (<code class="docutils literal notranslate"><span class="pre">~/pythainlp-data</span></code>) may not be writable on executor nodes. Use a local directory like <code class="docutils literal notranslate"><span class="pre">./pythainlp-data</span></code> instead.</p></li>
-<li><p><strong>Set ``PYTHAINLP_DATA_DIR`` before data access</strong>: Always set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> environment variable before the first call that reads or writes PyThaiNLP data on each worker.</p></li>
+<li><p><strong>Set ``PYTHAINLP_DATA`` before data access</strong>: Always set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> environment variable before the first call that reads or writes PyThaiNLP data on each worker.
+(<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> is also accepted for backward compatibility but is deprecated.)</p></li>
 </ol>
 </section>
 <section id="example-usage-with-apache-spark">
@@ -232,7 +233,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">tokenize_thai</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
     <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
@@ -251,7 +252,7 @@
 <span class="nd">@udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">tokenize_udf</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
     <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
@@ -269,11 +270,31 @@
 <section id="runtime-configurations">
 <h2>Runtime configurations<a class="headerlink" href="#runtime-configurations" title="Link to this heading"></a></h2>
 <dl class="std envvar">
-<dt class="sig sig-object std" id="envvar-PYTHAINLP_DATA_DIR">
-<span class="sig-name descname"><span class="pre">PYTHAINLP_DATA_DIR</span></span><a class="headerlink" href="#envvar-PYTHAINLP_DATA_DIR" title="Link to this definition"></a></dt>
+<dt class="sig sig-object std" id="envvar-PYTHAINLP_DATA">
+<span class="sig-name descname"><span class="pre">PYTHAINLP_DATA</span></span><a class="headerlink" href="#envvar-PYTHAINLP_DATA" title="Link to this definition"></a></dt>
 <dd><p>Specifies the location where downloaded data and the corpus database are stored. If the directory does not exist, PyThaiNLP will create it.</p>
 <p>By default this is a directory named <code class="docutils literal notranslate"><span class="pre">pythainlp-data</span></code> in the user’s home directory.</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">thainlp</span> <span class="pre">data</span> <span class="pre">path</span></code> at the command line to display the current <cite>PYTHAINLP_DATA_DIR</cite>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">thainlp</span> <span class="pre">data</span> <span class="pre">path</span></code> at the command line to display the current data directory.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-PYTHAINLP_DATA_DIR">
+<span class="sig-name descname"><span class="pre">PYTHAINLP_DATA_DIR</span></span><a class="headerlink" href="#envvar-PYTHAINLP_DATA_DIR" title="Link to this definition"></a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version Use: </span><span class="target" id="index-0"></span><a class="reference internal" href="#envvar-PYTHAINLP_DATA"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code></a> instead. Setting <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> triggers a
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> at runtime. If both <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code>
+are set simultaneously, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-PYTHAINLP_OFFLINE">
+<span class="sig-name descname"><span class="pre">PYTHAINLP_OFFLINE</span></span><a class="headerlink" href="#envvar-PYTHAINLP_OFFLINE" title="Link to this definition"></a></dt>
+<dd><p>When set to a truthy value (<code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">yes</span></code>, <code class="docutils literal notranslate"><span class="pre">on</span></code>), PyThaiNLP operates in
+<em>offline mode</em>: corpus downloads are disabled, and <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code>
+raises <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> for any corpus that is not already cached locally.</p>
+<p>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.is_offline_mode()</span></code> to check the current state programmatically.</p>
+<p>This follows the same convention as <code class="docutils literal notranslate"><span class="pre">HF_HUB_OFFLINE</span></code> in <cite>huggingface_hub</cite>.</p>
 </dd></dl>
 
 <dl class="std envvar">
@@ -286,10 +307,10 @@
 <section id="installation-faq">
 <h2>Installation FAQ<a class="headerlink" href="#installation-faq" title="Link to this heading"></a></h2>
 <p>Q: How do I set environment variables on each executor node in a distributed environment?</p>
-<p>A: When using PyThaiNLP in distributed computing environments like Apache Spark, you need to set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> environment variable inside the function that will be distributed to executor nodes. For example:</p>
+<p>A: When using PyThaiNLP in distributed computing environments like Apache Spark, you need to set the <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> environment variable inside the function that will be distributed to executor nodes. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tokenize_thai</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA_DIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHAINLP_DATA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./pythainlp-data&#39;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
     <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
