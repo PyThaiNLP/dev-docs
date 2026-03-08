@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.encoding &mdash; PyThaiNLP c6d19d6 documentation</title>
+  <title>pythainlp.util.khuap_klam &mdash; PyThaiNLP c6d19d6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -100,7 +100,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">pythainlp.util.encoding</li>
+      <li class="breadcrumb-item active">pythainlp.util.khuap_klam</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -109,53 +109,87 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for pythainlp.util.encoding</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding_utf-8 -*-</span>
-<span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+  <h1>Source code for pythainlp.util.khuap_klam</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">&quot;&quot;&quot;Thai consonant cluster (Kham Khuap Klam) checker.&quot;&quot;&quot;</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<div class="viewcode-block" id="tis620_to_utf8">
-<a class="viewcode-back" href="../../../api/util.html#pythainlp.util.tis620_to_utf8">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">tis620_to_utf8</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert TIS-620 to UTF-8</span>
+<span class="c1"># Regex for true consonant clusters (คำควบกล้ำแท้):</span>
+<span class="c1"># initial consonants ก ข ค ต ป ผ พ ฟ บ followed by ร ล ว</span>
+<span class="n">_TRUE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[กขคตปผพฟบ][รลว]&quot;</span><span class="p">)</span>
 
-<span class="sd">    :param str text: TIS-620 encoded text</span>
-<span class="sd">    :return: UTF-8 encoded text</span>
-<span class="sd">    :rtype: str</span>
+<span class="c1"># Regex for false consonant clusters (คำควบกล้ำไม่แท้):</span>
+<span class="c1"># written forms that look like clusters but are not pronounced as such</span>
+<span class="n">_FALSE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(ทร|จร|ศร|สร|ซร)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Leading vowels that appear before the initial consonant in written Thai</span>
+<span class="n">_LEAD_VOWEL_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[เแโใไ]+&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_strip_lead_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove leading vowels (เ แ โ ใ ไ) from the start of *text*.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_LEAD_VOWEL_RE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="check_khuap_klam">
+<a class="viewcode-back" href="../../../api/util.html#pythainlp.util.check_khuap_klam">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_khuap_klam</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a Thai word is a consonant cluster (Kham Khuap Klam).</span>
+
+<span class="sd">    :param str word: Thai word to check.</span>
+<span class="sd">    :return: ``True`` if the word is a *true* consonant cluster</span>
+<span class="sd">        (คำควบกล้ำแท้), ``False`` if it is a *false* consonant cluster</span>
+<span class="sd">        (คำควบกล้ำไม่แท้), or ``None`` if it is not a consonant cluster.</span>
+<span class="sd">    :rtype: Optional[bool]</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import tis620_to_utf8</span>
+<span class="sd">        from pythainlp.util import check_khuap_klam</span>
 
-<span class="sd">        tis620_to_utf8(&quot;¡ÃÐ·ÃÇ§ÍØµÊÒË¡ÃÃÁ&quot;)</span>
-<span class="sd">        # output: &#39;กระทรวงอุตสาหกรรม&#39;</span>
+<span class="sd">        # True consonant clusters (คำควบกล้ำแท้)</span>
+<span class="sd">        print(check_khuap_klam(&quot;กราบ&quot;))   # True</span>
+<span class="sd">        print(check_khuap_klam(&quot;ปลา&quot;))    # True</span>
+<span class="sd">        print(check_khuap_klam(&quot;เพราะ&quot;))  # True</span>
+<span class="sd">        print(check_khuap_klam(&quot;ตรง&quot;))    # True</span>
+
+<span class="sd">        # False consonant clusters (คำควบกล้ำไม่แท้)</span>
+<span class="sd">        print(check_khuap_klam(&quot;จริง&quot;))   # False</span>
+<span class="sd">        print(check_khuap_klam(&quot;ทราย&quot;))   # False</span>
+<span class="sd">        print(check_khuap_klam(&quot;เศร้า&quot;))  # False</span>
+
+<span class="sd">        # Not a consonant cluster</span>
+<span class="sd">        print(check_khuap_klam(&quot;แม่&quot;))    # None</span>
+<span class="sd">        print(check_khuap_klam(&quot;ตา&quot;))     # None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;cp1252&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;tis-620&quot;</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
+    <span class="kn">from</span><span class="w"> </span><span class="nn">..transliterate</span><span class="w"> </span><span class="kn">import</span> <span class="n">pronunciate</span>
 
+    <span class="c1"># Convert to pronunciation; remove sub-consonant marker (พินทุ ฺ)</span>
+    <span class="n">reading</span> <span class="o">=</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;w2p&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u0e3a</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="to_idna">
-<a class="viewcode-back" href="../../../api/util.html#pythainlp.util.to_idna">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">to_idna</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode text with IDNA, as used in Internationalized Domain Name (IDN).</span>
+    <span class="c1"># Use only the first syllable of the reading</span>
+    <span class="n">first_syll_reading</span> <span class="o">=</span> <span class="n">reading</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="sd">    :param str text: Thai text</span>
-<span class="sd">    :return: IDNA-encoded text</span>
-<span class="sd">    :rtype: str</span>
+    <span class="n">written_core</span> <span class="o">=</span> <span class="n">_strip_lead_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">reading_core</span> <span class="o">=</span> <span class="n">_strip_lead_vowels</span><span class="p">(</span><span class="n">first_syll_reading</span><span class="p">)</span>
 
-<span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
+    <span class="n">is_true_sound</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">_TRUE_CLUSTER_RE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">reading_core</span><span class="p">))</span>
+    <span class="n">is_false_form</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">_FALSE_CLUSTER_RE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">written_core</span><span class="p">))</span>
 
-<span class="sd">        from pythainlp.util import to_idna</span>
-
-<span class="sd">        to_idna(&quot;คนละครึ่ง.com&quot;)</span>
-<span class="sd">        # output: &#39;xn--42caj4e6bk1f5b1j.com&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;idna&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="n">is_true_sound</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">is_false_form</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
 
 </pre></div>
 
