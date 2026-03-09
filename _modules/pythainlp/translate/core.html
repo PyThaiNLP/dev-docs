@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.core &mdash; PyThaiNLP 7e01186 documentation</title>
+  <title>pythainlp.translate.core &mdash; PyThaiNLP 1b4a014 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ba8a984a"></script>
+      <script src="../../../_static/documentation_options.js?v=79a4d61b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -178,12 +178,12 @@
         <span class="c1"># - a delimiter character such as whitespace or common punctuation.</span>
         <span class="c1"># This allows matching words like &quot;cat&quot; in &quot;I love cat.&quot;.</span>
         <span class="n">delimiter_chars</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s&quot;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span>
-            <span class="s2">&quot;.,!?;:&#39;</span><span class="se">\&quot;</span><span class="s2">()[]</span><span class="si">{}</span><span class="s2">&lt;&gt;/</span><span class="se">\\</span><span class="s2">|`~@#$%^&amp;*-+=&quot;&quot;&#39;&#39;、，。！？；：（）【】《》&quot;</span>
+            <span class="s2">&quot;.,!?;:&#39;</span><span class="se">\&quot;</span><span class="s2">()[]</span><span class="si">{}</span><span class="s2">&lt;&gt;/</span><span class="se">\\</span><span class="s2">|`~@#$%^&amp;*-+=&#39;&#39;、，。！？；：（）【】《》&quot;</span>
         <span class="p">)</span>
         <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">fr</span><span class="s2">&quot;(?:(?&lt;=^)|(?&lt;=[</span><span class="si">{</span><span class="n">delimiter_chars</span><span class="si">}</span><span class="s2">]))&quot;</span>
+            <span class="sa">rf</span><span class="s2">&quot;(?:(?&lt;=^)|(?&lt;=[</span><span class="si">{</span><span class="n">delimiter_chars</span><span class="si">}</span><span class="s2">]))&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">escaped_word</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">fr</span><span class="s2">&quot;(?:(?=$)|(?=[</span><span class="si">{</span><span class="n">delimiter_chars</span><span class="si">}</span><span class="s2">]))&quot;</span>
+            <span class="sa">rf</span><span class="s2">&quot;(?:(?=$)|(?=[</span><span class="si">{</span><span class="n">delimiter_chars</span><span class="si">}</span><span class="s2">]))&quot;</span>
         <span class="p">)</span>
 
         <span class="c1"># Check if there&#39;s a match with token boundaries</span>

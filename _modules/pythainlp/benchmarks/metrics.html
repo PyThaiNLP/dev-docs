@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP 7e01186 documentation</title>
+  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP 1b4a014 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=ba8a984a"></script>
+      <script src="../../../_static/documentation_options.js?v=79a4d61b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -119,11 +119,12 @@
 <span class="sd">This module provides pure Python implementations of common evaluation</span>
 <span class="sd">metrics (BLEU, ROUGE) that handle Thai text tokenization automatically.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_ngrams</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
@@ -196,7 +197,7 @@
     <span class="n">lowercase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">max_ngram</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
     <span class="n">smooth</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate BLEU score for Thai text with automatic tokenization.</span>
 
@@ -204,7 +205,7 @@
 <span class="sd">    Understudy) metric that automatically tokenizes Thai text using</span>
 <span class="sd">    PyThaiNLP before calculating the score.</span>
 
-<span class="sd">    :param list[str] | list[list[str]] references: reference translations.</span>
+<span class="sd">    :param Union[list[str], list[list[str]]] references: reference translations.</span>
 <span class="sd">        Can be:</span>
 <span class="sd">        - A list of strings (one reference per hypothesis)</span>
 <span class="sd">        - A list of lists of strings (multiple references per hypothesis)</span>
@@ -217,9 +218,11 @@
 <span class="sd">    :param bool smooth: whether to use smoothing for zero counts</span>
 <span class="sd">        (default: True)</span>
 
-<span class="sd">    :return: dictionary with &#39;bleu&#39;, &#39;precisions&#39;, &#39;bp&#39;, &#39;length_ratio&#39;,</span>
-<span class="sd">        &#39;hyp_length&#39;, and &#39;ref_length&#39;</span>
-<span class="sd">    :rtype: dict[str, float]</span>
+<span class="sd">    :return: dictionary with ``&#39;bleu&#39;``, ``&#39;precisions&#39;``, ``&#39;bp&#39;``,</span>
+<span class="sd">        ``&#39;length_ratio&#39;``, ``&#39;hyp_length&#39;``, and ``&#39;ref_length&#39;``.</span>
+<span class="sd">        The ``&#39;precisions&#39;`` value is a ``list[float]``; all other values</span>
+<span class="sd">        are ``float``.</span>
+<span class="sd">    :rtype: dict[str, Union[float, list[float]]]</span>
 
 <span class="sd">    :Example:</span>
 <span class="sd">    ::</span>
@@ -245,7 +248,9 @@
 
     <span class="c1"># Normalize references format</span>
     <span class="k">if</span> <span class="n">references</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">references</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">refs_normalized</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ref</span><span class="p">]</span> <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">references</span><span class="p">]</span>
+        <span class="n">refs_normalized</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">ref</span><span class="p">]</span> <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;list[str]&quot;</span><span class="p">,</span> <span class="n">references</span><span class="p">)</span>
+        <span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">refs_normalized</span> <span class="o">=</span> <span class="n">references</span>  <span class="c1"># type: ignore[assignment]</span>
 
@@ -348,7 +353,7 @@
     <span class="n">reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">tokenize</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
-    <span class="n">rouge_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rouge_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate ROUGE scores for Thai text with automatic tokenization.</span>
@@ -366,7 +371,7 @@
 <span class="sd">    :param str hypothesis: hypothesis text to evaluate</span>
 <span class="sd">    :param str tokenize: tokenization engine to use (default: &quot;newmm&quot;).</span>
 <span class="sd">        See :func:`pythainlp.tokenize.word_tokenize` for available engines.</span>
-<span class="sd">    :param list[str] | None rouge_types: list of ROUGE types to calculate.</span>
+<span class="sd">    :param Optional[list[str]] rouge_types: list of ROUGE types to calculate.</span>
 <span class="sd">        Default is [&quot;rouge1&quot;, &quot;rouge2&quot;, &quot;rougeL&quot;]</span>
 
 <span class="sd">    :return: dictionary mapping ROUGE type to (precision, recall, fmeasure)</span>
@@ -390,8 +395,12 @@
         <span class="n">rouge_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rouge1&quot;</span><span class="p">,</span> <span class="s2">&quot;rouge2&quot;</span><span class="p">,</span> <span class="s2">&quot;rougeL&quot;</span><span class="p">]</span>
 
     <span class="c1"># Tokenize texts</span>
-    <span class="n">ref_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">hyp_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ref_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">hyp_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span>
+        <span class="n">hypothesis</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -484,8 +493,12 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 
     <span class="c1"># Tokenize texts</span>
-    <span class="n">ref_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">hyp_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ref_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">hyp_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span>
+        <span class="n">hypothesis</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
 
     <span class="c1"># Calculate edit distance using dynamic programming</span>
     <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref_tokens</span><span class="p">)</span>
@@ -513,7 +526,7 @@
 
     <span class="c1"># Calculate WER</span>
     <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">/</span> <span class="n">r</span></div>
 
@@ -588,7 +601,7 @@
 
     <span class="c1"># Calculate CER</span>
     <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">/</span> <span class="n">r</span></div>
 
