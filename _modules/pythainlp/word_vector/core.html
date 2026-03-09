@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.word_vector.core &mdash; PyThaiNLP 1b4a014 documentation</title>
+  <title>pythainlp.word_vector.core &mdash; PyThaiNLP 6363c61 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=79a4d61b"></script>
+      <script src="../../../_static/documentation_options.js?v=d8d1ede5"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -115,6 +115,7 @@
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
@@ -131,6 +132,13 @@
 
 <span class="n">_TK_SP</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;xxspace&quot;</span>
 <span class="n">_TK_EOL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;xxeol&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_DuplicateWordFilter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Filter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Suppress gensim&#39;s &#39;duplicate word&#39; warnings for word2vec files.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">LogRecord</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;duplicate word&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="WordVector">
@@ -185,11 +193,17 @@
                 <span class="sa">f</span><span class="s2">&quot;    Python: pythainlp.corpus.download(&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;    CLI:    thainlp data get </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">KeyedVectors</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span>
-            <span class="n">corpus_file</span><span class="p">,</span>
-            <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">unicode_errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">_filter</span> <span class="o">=</span> <span class="n">_DuplicateWordFilter</span><span class="p">()</span>
+        <span class="n">_gensim_kv_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;gensim.models.keyedvectors&quot;</span><span class="p">)</span>
+        <span class="n">_gensim_kv_logger</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">_filter</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">KeyedVectors</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span>
+                <span class="n">corpus_file</span><span class="p">,</span>
+                <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">unicode_errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">_gensim_kv_logger</span><span class="o">.</span><span class="n">removeFilter</span><span class="p">(</span><span class="n">_filter</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">WV_DIM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;thai2fit_wv&quot;</span><span class="p">:</span>
