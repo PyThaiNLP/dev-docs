@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tools.path &mdash; PyThaiNLP 6363c61 documentation</title>
+  <title>pythainlp.tools.path &mdash; PyThaiNLP 5ce7793 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d8d1ede5"></script>
+      <script src="../../../_static/documentation_options.js?v=4210e1ea"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -135,6 +135,85 @@
 <span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pythainlp-data&quot;</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">is_read_only_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return whether PyThaiNLP is operating in read-only mode.</span>
+
+<span class="sd">    Read-only mode prevents **implicit background writes** to PyThaiNLP&#39;s</span>
+<span class="sd">    internal data directory — writes that happen as side effects the user</span>
+<span class="sd">    may not be aware of. It is activated by setting the</span>
+<span class="sd">    ``PYTHAINLP_READ_ONLY`` environment variable to a truthy value</span>
+<span class="sd">    (e.g. ``&quot;1&quot;``).</span>
+
+<span class="sd">    .. deprecated::</span>
+<span class="sd">        ``PYTHAINLP_READ_MODE`` is deprecated.</span>
+<span class="sd">        Use ``PYTHAINLP_READ_ONLY`` instead.</span>
+<span class="sd">        Setting both variables at the same time raises :exc:`ValueError`.</span>
+
+<span class="sd">    When read-only mode is active, the following implicit writes are blocked:</span>
+
+<span class="sd">    - Creating the PyThaiNLP data directory</span>
+<span class="sd">      (``~/pythainlp-data`` or as set by ``PYTHAINLP_DATA``).</span>
+<span class="sd">    - :func:`pythainlp.corpus.download` — corpus downloads and catalog</span>
+<span class="sd">      updates.</span>
+<span class="sd">    - :func:`pythainlp.corpus.remove` — corpus file and catalog deletions.</span>
+
+<span class="sd">    The following **explicit** user-initiated writes are **not** blocked,</span>
+<span class="sd">    because the user deliberately provided the destination path:</span>
+
+<span class="sd">    - Saving a trained model to a user-specified path</span>
+<span class="sd">      (e.g. ``model.save(&quot;my_model.json&quot;)``).</span>
+<span class="sd">    - Training a tagger with an explicit ``save_loc`` argument.</span>
+<span class="sd">    - Saving a tokenizer vocabulary to a user-specified directory.</span>
+<span class="sd">    - CLI output files written to a path the user specified or invoked.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Use :func:`~pythainlp.tools.path.is_offline_mode` (``PYTHAINLP_OFFLINE``)</span>
+<span class="sd">        to disable only *automatic* background downloads while still allowing</span>
+<span class="sd">        explicit :func:`~pythainlp.corpus.download` calls.</span>
+
+<span class="sd">    :return: ``True`` if PyThaiNLP is in read-only mode, ``False`` otherwise.</span>
+<span class="sd">    :rtype: bool</span>
+
+<span class="sd">    :raises ValueError: if both ``PYTHAINLP_READ_ONLY`` and</span>
+<span class="sd">        ``PYTHAINLP_READ_MODE`` are set at the same time.</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        import os</span>
+<span class="sd">        from pythainlp import is_read_only_mode</span>
+
+<span class="sd">        os.environ[&quot;PYTHAINLP_READ_ONLY&quot;] = &quot;1&quot;</span>
+<span class="sd">        print(is_read_only_mode())  # True</span>
+
+<span class="sd">        os.environ[&quot;PYTHAINLP_READ_ONLY&quot;] = &quot;0&quot;</span>
+<span class="sd">        print(is_read_only_mode())  # False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+    <span class="n">read_only</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PYTHAINLP_READ_ONLY&quot;</span><span class="p">)</span>
+    <span class="n">read_mode_legacy</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PYTHAINLP_READ_MODE&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">read_only</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">read_mode_legacy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Both PYTHAINLP_READ_ONLY and PYTHAINLP_READ_MODE are set. &quot;</span>
+            <span class="s2">&quot;Please use PYTHAINLP_READ_ONLY only and unset PYTHAINLP_READ_MODE.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">read_mode_legacy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">read_only</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;PYTHAINLP_READ_MODE is deprecated; use PYTHAINLP_READ_ONLY instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">read_mode_legacy</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+
+    <span class="k">if</span> <span class="n">read_only</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">read_only</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">is_offline_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return whether PyThaiNLP is operating in offline mode.</span>
 
@@ -251,7 +330,8 @@
 
     <span class="n">resolved</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="n">PYTHAINLP_DEFAULT_DATA_DIR</span><span class="p">)</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_read_only_mode</span><span class="p">():</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">path</span></div>
 
 
