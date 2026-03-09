@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; PyThaiNLP 5ce7793 documentation</title>
+  <title>Installation &mdash; PyThaiNLP f0d2f71 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=4210e1ea"></script>
+      <script src="../_static/documentation_options.js?v=b3b7c74d"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -56,7 +56,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#thread-safety-considerations">Thread safety considerations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#runtime-configurations">Runtime configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime-configurations">Runtime configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interaction-between-environment-variables">Interaction between environment variables</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-faq">Installation FAQ</a></li>
 </ul>
 </li>
@@ -345,6 +348,67 @@ same time, PyThaiNLP raises <a class="reference external" href="https://docs.pyt
 </div>
 </dd></dl>
 
+<section id="interaction-between-environment-variables">
+<h3>Interaction between environment variables<a class="headerlink" href="#interaction-between-environment-variables" title="Link to this heading"></a></h3>
+<p>The table below shows how <span class="target" id="index-6"></span><a class="reference internal" href="#envvar-PYTHAINLP_OFFLINE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code></a> and <span class="target" id="index-7"></span><a class="reference internal" href="#envvar-PYTHAINLP_READ_ONLY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code></a>
+affect the two main corpus operations:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 32.0%" />
+<col style="width: 33.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE=1</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY=1</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code> — corpus already cached locally</p></td>
+<td><p>Succeeds (returns path)</p></td>
+<td><p>Succeeds (no write needed)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code> — corpus <strong>not</strong> cached locally</p></td>
+<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
+<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.download()</span></code> — corpus already in local catalog</p></td>
+<td><p>Succeeds (download is an explicit user action)</p></td>
+<td><p>Fails (returns <code class="docutils literal notranslate"><span class="pre">False</span></code>; all writes are blocked)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.download()</span></code> — corpus <strong>not</strong> in local catalog</p></td>
+<td><p>Succeeds (downloads the corpus)</p></td>
+<td><p>Fails (returns <code class="docutils literal notranslate"><span class="pre">False</span></code>; all writes are blocked)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><span class="target" id="index-8"></span><a class="reference internal" href="#envvar-PYTHAINLP_OFFLINE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code></a> blocks only <strong>automatic</strong> downloads.
+Explicit calls to <code class="xref py py-func docutils literal notranslate"><span class="pre">download()</span></code> (or the
+<code class="docutils literal notranslate"><span class="pre">thainlp</span> <span class="pre">data</span> <span class="pre">get</span></code> CLI command) still work, because those are
+deliberate user actions.</p></li>
+<li><p><span class="target" id="index-9"></span><a class="reference internal" href="#envvar-PYTHAINLP_READ_ONLY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code></a> is <strong>more restrictive</strong>: it blocks
+<em>all</em> writes to the data directory, including explicit
+<code class="xref py py-func docutils literal notranslate"><span class="pre">download()</span></code> calls.
+Use this when the data directory is on a read-only file system
+(e.g., a read-only Docker volume or a shared cluster mount).</p></li>
+<li><p><span class="target" id="index-10"></span><a class="reference internal" href="#envvar-PYTHAINLP_DATA"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code></a> sets the path of the data directory used by
+both modes.  In read-only mode the directory is not created if it
+does not already exist.</p></li>
+</ul>
+<p>Typical use cases:</p>
+<ul class="simple">
+<li><p><strong>Offline laptop / air-gapped system</strong>: set <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE=1</span></code>
+after downloading all required corpora.  You can still call
+<code class="docutils literal notranslate"><span class="pre">download()</span></code> manually if you have network access.</p></li>
+<li><p><strong>Read-only container image with pre-bundled corpora</strong>:
+set <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY=1</span></code> so that no writes occur at all.
+Any attempt to download a corpus that is missing from the image
+will return <code class="docutils literal notranslate"><span class="pre">False</span></code> instead of raising a permission error.</p></li>
+</ul>
+</section>
 </section>
 <section id="installation-faq">
 <h2>Installation FAQ<a class="headerlink" href="#installation-faq" title="Link to this heading"></a></h2>
