@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.newmm &mdash; PyThaiNLP f0d2f71 documentation</title>
+  <title>pythainlp.tokenize.newmm &mdash; PyThaiNLP 95fa200 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b3b7c74d"></script>
+      <script src="../../../_static/documentation_options.js?v=6555f7e1"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -175,13 +175,17 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_bfs_paths_graph</span><span class="p">(</span>
     <span class="n">graph</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">goal</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="c1"># visited set prevents re-exploring nodes already reached via a shorter</span>
+    <span class="c1"># path, converting worst-case BFS from exponential to O(V + E).</span>
+    <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">}</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="p">[(</span><span class="n">start</span><span class="p">,</span> <span class="p">[</span><span class="n">start</span><span class="p">])]</span>
     <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
         <span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="n">goal</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">pos</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">pos</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
                 <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">pos</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">pos</span><span class="p">]))</span>
 
 
@@ -201,7 +205,7 @@
     <span class="n">end_pos</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">pos_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">len_text</span><span class="p">:</span>
         <span class="n">begin_pos</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">pos_list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">custom_dict</span><span class="o">.</span><span class="n">prefixes</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">:]):</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">custom_dict</span><span class="o">.</span><span class="n">prefixes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">):</span>
             <span class="n">end_pos_candidate</span> <span class="o">=</span> <span class="n">begin_pos</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">end_pos_candidate</span> <span class="ow">in</span> <span class="n">valid_poss</span><span class="p">:</span>
                 <span class="n">graph</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end_pos_candidate</span><span class="p">)</span>
@@ -219,20 +223,20 @@
                 <span class="n">_bfs_paths_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">,</span> <span class="n">pos_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="p">)</span>
             <span class="n">graph_size</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">end_pos_candidates</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
                 <span class="k">yield</span> <span class="n">text</span><span class="p">[</span><span class="n">end_pos</span><span class="p">:</span><span class="n">pos</span><span class="p">]</span>
                 <span class="n">end_pos</span> <span class="o">=</span> <span class="n">pos</span>
         <span class="k">elif</span> <span class="n">len_pos_list</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># no candidate, deal with non-dictionary word</span>
-            <span class="n">m</span> <span class="o">=</span> <span class="n">_PAT_NONTHAI</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">:])</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">_PAT_NONTHAI</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">m</span><span class="p">:</span>  <span class="c1"># non-Thai token, skip to the end</span>
-                <span class="n">end_pos</span> <span class="o">=</span> <span class="n">begin_pos</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+                <span class="n">end_pos</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>  <span class="c1"># Thai token, find minimum skip</span>
                 <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">begin_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">len_text</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">valid_poss</span><span class="p">:</span>
-                        <span class="n">prefix</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">pos</span><span class="p">:]</span>
                         <span class="n">words</span> <span class="o">=</span> <span class="p">[</span>
                             <span class="n">word</span>
-                            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">custom_dict</span><span class="o">.</span><span class="n">prefixes</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">custom_dict</span><span class="o">.</span><span class="n">prefixes</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
                             <span class="k">if</span> <span class="p">(</span>
                                 <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="ow">in</span> <span class="n">valid_poss</span><span class="p">)</span>
                                 <span class="ow">and</span> <span class="ow">not</span> <span class="n">_PAT_THAI_TWOCHARS</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
@@ -243,14 +247,14 @@
                             <span class="k">break</span>
 
                         <span class="c1"># is a non-Thai token</span>
-                        <span class="k">if</span> <span class="n">_PAT_NONTHAI</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">_PAT_NONTHAI</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
                             <span class="n">end_pos</span> <span class="o">=</span> <span class="n">pos</span>
                             <span class="k">break</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">end_pos</span> <span class="o">=</span> <span class="n">len_text</span>
 
-            <span class="n">graph</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end_pos</span><span class="p">)</span>
-            <span class="n">graph_size</span> <span class="o">=</span> <span class="n">graph_size</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">graph_size</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
             <span class="k">yield</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">:</span><span class="n">end_pos</span><span class="p">]</span>
             <span class="n">heappush</span><span class="p">(</span><span class="n">pos_list</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span>
 
@@ -269,13 +273,17 @@
 
 <span class="sd">    A custom dictionary can be supplied.</span>
 
+<span class="sd">    For very long texts (hundreds of kilobytes or more), consider using</span>
+<span class="sd">    ``safe_mode=True`` to enable chunk-based processing and reduce memory use.</span>
+
 <span class="sd">    :param text: text to be tokenized</span>
 <span class="sd">    :type text: str</span>
 <span class="sd">    :param custom_dict: tokenization dictionary,\</span>
 <span class="sd">        defaults to word_dict_trie()</span>
 <span class="sd">    :type custom_dict: Trie, optional</span>
-<span class="sd">    :param safe_mode: reduce chance for long processing time for long text\</span>
-<span class="sd">        with many ambiguous breaking points, defaults to False</span>
+<span class="sd">    :param safe_mode: use chunk-based processing to reduce memory use and</span>
+<span class="sd">        processing time for long text with many ambiguous breaking points,</span>
+<span class="sd">        defaults to False</span>
 <span class="sd">    :type safe_mode: bool, optional</span>
 <span class="sd">    :return: list of tokens</span>
 <span class="sd">    :rtype: list[str]</span>
