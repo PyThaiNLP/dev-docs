@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.trie &mdash; PyThaiNLP 621f8f7 documentation</title>
+  <title>pythainlp.util.trie &mdash; PyThaiNLP ef81afc documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=15da7098"></script>
+      <script src="../../../_static/documentation_options.js?v=761a215e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -121,7 +121,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="Trie">
@@ -160,8 +160,8 @@
 <span class="sd">        # output: 5</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">words</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">root</span><span class="p">:</span> <span class="n">Node</span>
+    <span class="n">_word_count</span><span class="p">:</span> <span class="nb">int</span>
 
 <div class="viewcode-block" id="Trie.Node">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.Node">[docs]</a>
@@ -172,16 +172,16 @@
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.Node.__init__">[docs]</a>
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
+            <span class="c1"># Children dict is created on demand to reduce memory for leaf nodes.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></div>
 </div>
 
 
 <div class="viewcode-block" id="Trie.__init__">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_word_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span> <span class="o">=</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">()</span>
-
         <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span></div>
 
@@ -192,18 +192,21 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a word to the trie.</span>
 <span class="sd">        Spaces in front of and following the word will be removed.</span>
 
-<span class="sd">        :param str text: a word</span>
+<span class="sd">        :param str word: a word</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
         <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">child</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">child</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">child</span> <span class="o">=</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">()</span>
                 <span class="n">cur</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">child</span>
-        <span class="n">cur</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="kc">True</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cur</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_word_count</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
 
 <div class="viewcode-block" id="Trie.remove">
@@ -212,26 +215,33 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove a word from the trie.</span>
 <span class="sd">        If the word is not found, do nothing.</span>
 
-<span class="sd">        :param str text: a word</span>
+<span class="sd">        :param str word: a word</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># remove from set first</span>
-        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-        <span class="c1"># then remove from nodes</span>
-        <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># track path to leaf</span>
+        <span class="c1"># Navigate to the word&#39;s end node, recording the path.</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
-            <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">ch</span><span class="p">))</span>
-            <span class="n">parent</span> <span class="o">=</span> <span class="n">child</span>
-        <span class="c1"># remove the last one</span>
-        <span class="n">child</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="c1"># prune up the tree</span>
-        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>  <span class="c1"># word not in trie</span>
+            <span class="n">child</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>  <span class="c1"># word not in trie</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">ch</span><span class="p">))</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">child</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># path exists but not a complete word</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_word_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="c1"># Prune nodes that are now unused (not an end and no children).</span>
+        <span class="c1"># parent.children is always non-None here because the path was</span>
+        <span class="c1"># built by traversing through existing children dicts.</span>
+        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">end</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="k">del</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span>  <span class="c1"># remove from parent dict</span></div>
+            <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># always true; narrows type</span>
+                <span class="k">del</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                    <span class="n">parent</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># free empty dict</span></div>
 
 
 <div class="viewcode-block" id="Trie.prefixes">
@@ -249,8 +259,10 @@
         <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
                 <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
@@ -260,13 +272,33 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">end</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span>
+        <span class="c1"># DFS through the trie to yield all stored words.</span>
+        <span class="c1"># A shared mutable prefix list is appended/popped to avoid</span>
+        <span class="c1"># O(k²) list copies that a stack-based approach would incur.</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_dfs</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">ch</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+                    <span class="k">yield from</span> <span class="n">_dfs</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+                    <span class="n">prefix</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="k">yield from</span> <span class="n">_dfs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="p">[])</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_word_count</span></div>
 
 
 
