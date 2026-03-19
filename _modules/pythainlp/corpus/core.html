@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 5.3.1 documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 2bae5be documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f8739c50"></script>
+      <script src="../../../_static/documentation_options.js?v=c34f7fef"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -130,7 +130,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">corpus_db_path</span><span class="p">,</span> <span class="n">corpus_db_url</span><span class="p">,</span> <span class="n">corpus_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_full_data_path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_offline_mode</span><span class="p">,</span> <span class="n">is_read_only_mode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools.path</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">is_offline_mode</span><span class="p">,</span>
+    <span class="n">is_read_only_mode</span><span class="p">,</span>
+    <span class="n">safe_path_join</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">http.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPMessage</span><span class="p">,</span> <span class="n">HTTPResponse</span>
@@ -220,16 +224,6 @@
     <span class="k">return</span> <span class="p">{}</span></div>
 
 
-
-<span class="k">def</span><span class="w"> </span><span class="nf">path_pythainlp_corpus</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get path pythainlp.corpus data</span>
-
-<span class="sd">    :param str filename: filename of the corpus to be read</span>
-
-<span class="sd">    :return: : path of corpus</span>
-<span class="sd">    :rtype: str</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">(),</span> <span class="n">filename</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_corpus">
@@ -371,13 +365,15 @@
 
     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">corpus_db</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;versions&quot;</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span>
-                <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">safe_path_join</span><span class="p">(</span>
+                <span class="n">corpus_path</span><span class="p">(),</span>
+                <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;filename&quot;</span><span class="p">],</span>
             <span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">version</span><span class="p">:</span>  <span class="c1"># load latest version</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;latest_version&quot;</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">path_pythainlp_corpus</span><span class="p">(</span>
-                <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">safe_path_join</span><span class="p">(</span>
+                <span class="n">corpus_path</span><span class="p">(),</span>
+                <span class="n">corpus_db</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="n">version</span><span class="p">][</span><span class="s2">&quot;filename&quot;</span><span class="p">],</span>
             <span class="p">)</span>
 
     <span class="k">return</span> <span class="kc">None</span></div>
@@ -987,17 +983,6 @@
     <span class="k">return</span> <span class="kc">False</span></div>
 
 
-
-<span class="k">def</span><span class="w"> </span><span class="nf">get_path_folder_corpus</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">corpus_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">corpus_path</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;corpus-not-found name=</span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> version=</span><span class="si">{</span><span class="n">version</span><span class="si">!r}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  Corpus &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; (version </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">) not found.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;    Python: pythainlp.corpus.download(&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;    CLI:    thainlp data get </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">,</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_safe_directory_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
