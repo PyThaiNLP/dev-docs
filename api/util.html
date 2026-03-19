@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP 2bae5be documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP f462b9f documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=c34f7fef"></script>
+      <script src="../_static/documentation_options.js?v=fa620590"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -515,7 +515,10 @@ If you are the time traveler or the historian,     you should care about the cor
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">countthai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_chars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span> <span class="pre">\t\n\r\x0b\x0c0123456789!&quot;#$%&amp;\'()*+,-./:;&lt;=&gt;?&#64;[\\]^_`{|}~'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai.html#countthai"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Find proportion of Thai characters in a given text</p>
+<dd><p>Find proportion of Thai characters in a given text.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 5.3.2: </span>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">count_thai()</span></code> instead.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -529,24 +532,7 @@ If you are the time traveler or the historian,     you should care about the cor
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">countthai</span>
-
-<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ไทยเอ็นแอลพี 3.0&quot;</span><span class="p">)</span>
-<span class="c1"># output: 100.0</span>
-
-<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP 3.0&quot;</span><span class="p">)</span>
-<span class="c1"># output: 0.0</span>
-
-<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ใช้งาน PyThaiNLP 3.0&quot;</span><span class="p">)</span>
-<span class="c1"># output: 40.0</span>
-
-<span class="n">countthai</span><span class="p">(</span><span class="s2">&quot;ใช้งาน PyThaiNLP 3.0&quot;</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="c1"># output: 30.0</span>
-</pre></div>
-</div>
 <p>The <cite>countthai</cite> function is a text processing utility for counting the occurrences of Thai characters in text data. This is useful for understanding the prevalence of Thai language content.</p>
 </dd></dl>
 
@@ -793,6 +779,9 @@ where stopwords are excluded and returns a frequency dictionary.</p>
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">isthai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_chars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai.html#isthai"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Check if every character in a string is a Thai character.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 5.3.2: </span>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">is_thai()</span></code> instead.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -807,24 +796,7 @@ otherwise False.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">isthai</span>
-
-<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาลเวลา&quot;</span><span class="p">)</span>
-<span class="c1"># output: True</span>
-
-<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาลเวลา.&quot;</span><span class="p">)</span>
-<span class="c1"># output: True</span>
-
-<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาล-เวลา&quot;</span><span class="p">)</span>
-<span class="c1"># output: False</span>
-
-<span class="n">isthai</span><span class="p">(</span><span class="s2">&quot;กาล-เวลา +66&quot;</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="o">=</span><span class="s2">&quot;01234567890+-.,&quot;</span><span class="p">)</span>
-<span class="c1"># output: True</span>
-</pre></div>
-</div>
 <p>The <cite>isthai</cite> function is a straightforward language detection utility that determines if text contains Thai language content. This function is essential for language-specific text processing.</p>
 </dd></dl>
 
@@ -832,6 +804,9 @@ otherwise False.</p>
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">isthaichar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai.html#isthaichar"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Check if a character is a Thai character.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 5.3.2: </span>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">is_thai_char()</span></code> instead.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ch</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – input character</p>
@@ -842,18 +817,7 @@ otherwise False.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">isthaichar</span>
-
-<span class="n">isthaichar</span><span class="p">(</span><span class="s2">&quot;ก&quot;</span><span class="p">)</span>  <span class="c1"># THAI CHARACTER KO KAI</span>
-<span class="c1"># output: True</span>
-
-<span class="n">isthaichar</span><span class="p">(</span><span class="s2">&quot;๕&quot;</span><span class="p">)</span>  <span class="c1"># THAI DIGIT FIVE</span>
-<span class="c1"># output: True</span>
-</pre></div>
-</div>
 <p>The <cite>isthaichar</cite> function is designed to check if a character belongs to the Thai script. It helps in character-level language identification and text processing.</p>
 </dd></dl>
 

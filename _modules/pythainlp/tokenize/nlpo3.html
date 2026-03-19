@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP 2bae5be documentation</title>
+  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP f462b9f documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c34f7fef"></script>
+      <script src="../../../_static/documentation_options.js?v=fa620590"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -126,11 +126,10 @@
     <span class="p">)</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">nlpo3</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">nlpo3_segment</span>  <span class="c1"># noqa: F401</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">_THAI_WORDS_FILENAME</span>
-
 <span class="n">_NLPO3_DEFAULT_DICT_NAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;_73bcj049dzbu9t49b4va170k&quot;</span>  <span class="c1"># supposed to be unique</span>
 <span class="p">)</span>
+<span class="n">_NLPO3_WORDS_FILENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;words_th.txt&quot;</span>
 <span class="n">_NLPO3_DEFAULT_DICT</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Will be lazily loaded</span>
 <span class="n">_dict_file_ctx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="kc">None</span>  <span class="c1"># File context manager kept alive for program lifetime</span>
@@ -161,7 +160,7 @@
             <span class="c1"># Double-check pattern to avoid race conditions</span>
             <span class="k">if</span> <span class="n">_NLPO3_DEFAULT_DICT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">corpus_files</span> <span class="o">=</span> <span class="n">files</span><span class="p">(</span><span class="s2">&quot;pythainlp.corpus&quot;</span><span class="p">)</span>
-                <span class="n">dict_file</span> <span class="o">=</span> <span class="n">corpus_files</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">_THAI_WORDS_FILENAME</span><span class="p">)</span>
+                <span class="n">dict_file</span> <span class="o">=</span> <span class="n">corpus_files</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">_NLPO3_WORDS_FILENAME</span><span class="p">)</span>
                 <span class="n">_dict_file_ctx</span> <span class="o">=</span> <span class="n">as_file</span><span class="p">(</span><span class="n">dict_file</span><span class="p">)</span>
                 <span class="n">dict_path</span> <span class="o">=</span> <span class="n">_dict_file_ctx</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
                 <span class="n">msg</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="n">nlpo3_load_dict</span><span class="p">(</span>
