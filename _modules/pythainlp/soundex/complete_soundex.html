@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 1b55f4f documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 8a557df documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb955f81"></script>
+      <script src="../../../_static/documentation_options.js?v=aeb3639f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -321,7 +321,9 @@
 
         <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_process_leading_vowel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_process_leading_vowel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract and process leading vowel.&quot;&quot;&quot;</span>
         <span class="n">leading_vowel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;เ&quot;</span><span class="p">,</span> <span class="s2">&quot;แ&quot;</span><span class="p">,</span> <span class="s2">&quot;โ&quot;</span><span class="p">,</span> <span class="s2">&quot;ไ&quot;</span><span class="p">,</span> <span class="s2">&quot;ใ&quot;</span><span class="p">]:</span>
@@ -330,8 +332,8 @@
         <span class="k">return</span> <span class="n">leading_vowel</span><span class="p">,</span> <span class="n">idx</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_initial_consonant</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Process initial consonant and cluster.&quot;&quot;&quot;</span>
         <span class="n">init_char</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="n">init_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -361,7 +363,7 @@
         <span class="k">return</span> <span class="n">init_char</span><span class="p">,</span> <span class="n">init_code</span><span class="p">,</span> <span class="n">cluster_char</span><span class="p">,</span> <span class="n">idx</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_detect_cluster</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Detect if ร/ล/ว is a cluster.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
@@ -382,7 +384,7 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_map_leading_vowel_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_map_leading_vowel_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Map leading vowel to initial vowel and final code.&quot;&quot;&quot;</span>
         <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
@@ -405,12 +407,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_scan_vowels_tones_finals</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">final_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Scan remaining characters for vowels, tones, and finals.&quot;&quot;&quot;</span>
         <span class="n">remaining</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
         <span class="n">final_candidates</span> <span class="o">=</span> <span class="p">[]</span>
@@ -430,7 +432,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_vowel_char</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">final_code</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Process a single vowel character.&quot;&quot;&quot;</span>
         <span class="c1"># Complex Vowel Checks</span>
         <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;เ&quot;</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;ื&quot;</span><span class="p">:</span>
@@ -467,8 +469,8 @@
         <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">final_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Process final consonant and detect dropped ร.&quot;&quot;&quot;</span>
         <span class="n">dropped_r</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -501,7 +503,10 @@
         <span class="k">return</span> <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span><span class="p">,</span> <span class="n">dropped_r</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_special_format</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">init_char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">init_char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if special format (tone before final) should be used.&quot;&quot;&quot;</span>
         <span class="c1"># Special format (tone before final) is used when:</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP 1b55f4f documentation</title>
+  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP 8a557df documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=fb955f81"></script>
+      <script src="../../../_static/documentation_options.js?v=aeb3639f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -123,6 +123,7 @@
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 <span class="n">SEPARATOR</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span>
 
@@ -156,7 +157,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span>
-    <span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span>
+    <span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten two-dimension dictionary.</span>
 
@@ -167,7 +168,8 @@
 <span class="sd">    { &quot;a:b&quot;: 7 }</span>
 
 
-<span class="sd">    :param dict my_dict: dictionary containing stats</span>
+<span class="sd">    :param dict[str, dict[str, Union[int, str]]] my_dict: dictionary</span>
+<span class="sd">        containing stats</span>
 <span class="sd">    :param str sep: separator between the two keys (default: &quot;:&quot;)</span>
 
 <span class="sd">    :return: a one-dimension dictionary with keys combined</span>
@@ -206,7 +208,7 @@
                 <span class="n">flat_stats</span><span class="p">[</span><span class="s2">&quot;expected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
                 <span class="n">flat_stats</span><span class="p">[</span><span class="s2">&quot;actual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flat_stats</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">reason</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">[Error]</span>
 <span class="s2">Reason: </span><span class="si">%s</span>
@@ -222,7 +224,7 @@
                 <span class="n">r</span><span class="p">,</span>
                 <span class="n">s</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 
@@ -331,7 +333,9 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_binary_representation</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_binary_representation</span><span class="p">(</span>
+    <span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;NDArray[np.int8]&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform text into {0, 1} sequence.</span>
 
 <span class="sd">    where (1) indicates that the corresponding character is the beginning of</span>
@@ -341,7 +345,7 @@
 <span class="sd">    :param bool verbose: for debugging purposes</span>
 
 <span class="sd">    :return: {0, 1} sequence</span>
-<span class="sd">    :rtype: np.ndarray</span>
+<span class="sd">    :rtype: numpy.typing.NDArray[numpy.int8]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -350,7 +354,7 @@
     <span class="n">boundary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">chars</span> <span class="o">==</span> <span class="n">SEPARATOR</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">boundary</span> <span class="o">=</span> <span class="n">boundary</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">boundary</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-    <span class="n">bin_rept</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">-</span> <span class="n">boundary</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">bin_rept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">-</span> <span class="n">boundary</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
     <span class="n">bin_rept</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">boundary</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="n">sample_wo_seps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">SEPARATOR</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
@@ -369,10 +373,13 @@
     <span class="k">return</span> <span class="n">bin_rept</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_find_word_boundaries</span><span class="p">(</span><span class="n">bin_reps</span><span class="p">:</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_find_word_boundaries</span><span class="p">(</span>
+    <span class="n">bin_reps</span><span class="p">:</span> <span class="s2">&quot;NDArray[np.int8]&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the starting and ending location of each word.</span>
 
-<span class="sd">    :param numpy.ndarray bin_reps: binary representation of a text</span>
+<span class="sd">    :param numpy.typing.NDArray[numpy.int8] bin_reps: binary representation</span>
+<span class="sd">        of a text</span>
 
 <span class="sd">    :return: list of tuples (start, end)</span>
 <span class="sd">    :rtype: list[tuple[int, int]]</span>
