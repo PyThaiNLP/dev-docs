@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 8a557df documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 570aea1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=aeb3639f"></script>
+      <script src="../../../_static/documentation_options.js?v=9d192e01"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -615,7 +615,7 @@
             <span class="n">tarfile</span><span class="o">.</span><span class="n">LinkOutsideDestinationError</span><span class="p">,</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="c1"># Re-raise as ValueError for consistency with older Python versions</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Manual validation for older Python versions</span>
         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getmembers</span><span class="p">():</span>
@@ -1037,13 +1037,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">hf_hub_download</span><span class="p">,</span> <span class="n">snapshot_download</span>
-    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        huggingface-hub isn&#39;t found!</span>
-<span class="sd">        Please installing the package via &#39;pip install huggingface-hub&#39;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="p">)</span>
+            <span class="s2">&quot;huggingface-hub is not installed.&quot;</span>
+            <span class="s2">&quot; Install it with: pip install huggingface-hub&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="n">hf_root</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="s2">&quot;hf_models&quot;</span><span class="p">)</span>
