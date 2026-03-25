@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP adc9230 documentation</title>
+  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP a4296cb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=e57d6dd6"></script>
+      <script src="../../../_static/documentation_options.js?v=1c9fd220"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -118,7 +118,8 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">overload</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -142,6 +143,37 @@
 <span class="n">TAILING_SEP_RX</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">SEPARATOR</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
 
 
+<span class="k">class</span><span class="w"> </span><span class="nc">CharLevelStat</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Character-level confusion matrix statistics for tokenization.&quot;&quot;&quot;</span>
+
+    <span class="n">tp</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">fp</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">tn</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">WordLevelStat</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Word-level tokenization statistics.&quot;&quot;&quot;</span>
+
+    <span class="n">correctly_tokenized_words</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">total_words_in_sample</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">total_words_in_ref_sample</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GlobalStat</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Global tokenization indicator as a binary indicator string.&quot;&quot;&quot;</span>
+
+    <span class="n">tokenization_indicators</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TokenizationStat</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tokenization quality statistics at character, word, and global level.&quot;&quot;&quot;</span>
+
+    <span class="n">char_level</span><span class="p">:</span> <span class="n">CharLevelStat</span>
+    <span class="n">word_level</span><span class="p">:</span> <span class="n">WordLevelStat</span>
+    <span class="n">global_</span><span class="p">:</span> <span class="n">GlobalStat</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_f1</span><span class="p">(</span><span class="n">precision</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">recall</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute f1.</span>
 
@@ -156,8 +188,21 @@
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span>
 
 
+<span class="nd">@overload</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span>
-    <span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span>
+    <span class="n">my_dict</span><span class="p">:</span> <span class="n">TokenizationStat</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span> <span class="o">...</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span>
+    <span class="n">my_dict</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span> <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_flatten_result</span><span class="p">(</span>
+    <span class="n">my_dict</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten two-dimension dictionary.</span>
 
@@ -168,8 +213,9 @@
 <span class="sd">    { &quot;a:b&quot;: 7 }</span>
 
 
-<span class="sd">    :param dict[str, dict[str, Union[int, str]]] my_dict: dictionary</span>
-<span class="sd">        containing stats</span>
+<span class="sd">    :param my_dict: dictionary containing stats</span>
+<span class="sd">    :type my_dict: TokenizationStat or</span>
+<span class="sd">        collections.abc.Mapping[str, collections.abc.Mapping[str, Union[int, str]]]</span>
 <span class="sd">    :param str sep: separator between the two keys (default: &quot;:&quot;)</span>
 
 <span class="sd">    :return: a one-dimension dictionary with keys combined</span>
@@ -260,7 +306,7 @@
 <a class="viewcode-back" href="../../../api/benchmarks.html#pythainlp.benchmarks.word_tokenization.compute_stats">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats</span><span class="p">(</span>
     <span class="n">ref_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">raw_sample</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenizationStat</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute statistics for tokenization quality</span>
 
 <span class="sd">    These statistics include:</span>
@@ -277,7 +323,7 @@
 <span class="sd">    :param str samples: samples that we want to evaluate</span>
 
 <span class="sd">    :return: metrics at character- and word-level and indicators of correctly tokenized words</span>
-<span class="sd">    :rtype: dict[str, dict[str, Union[int, str]]]</span>
+<span class="sd">    :rtype: TokenizationStat</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -306,29 +352,29 @@
 
     <span class="c1"># Find correctly tokenized words in the sample</span>
     <span class="n">ss_boundaries</span> <span class="o">=</span> <span class="n">_find_word_boundaries</span><span class="p">(</span><span class="n">sample_arr</span><span class="p">)</span>
-    <span class="n">tokenization_indicators</span> <span class="o">=</span> <span class="n">_find_words_correctly_tokenised</span><span class="p">(</span>
+    <span class="n">tokenization_indicators</span> <span class="o">=</span> <span class="n">_find_words_correctly_tokenized</span><span class="p">(</span>
         <span class="n">word_boundaries</span><span class="p">,</span> <span class="n">ss_boundaries</span>
     <span class="p">)</span>
 
-    <span class="n">correctly_tokenised_words</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tokenization_indicators</span><span class="p">))</span>
+    <span class="n">correctly_tokenized_words</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tokenization_indicators</span><span class="p">))</span>
 
     <span class="n">tokenization_indicators_str</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tokenization_indicators</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;char_level&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;tp&quot;</span><span class="p">:</span> <span class="n">c_tp</span><span class="p">,</span>
-            <span class="s2">&quot;fp&quot;</span><span class="p">:</span> <span class="n">c_fp</span><span class="p">,</span>
-            <span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="n">c_tn</span><span class="p">,</span>
-            <span class="s2">&quot;fn&quot;</span><span class="p">:</span> <span class="n">c_fn</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;word_level&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;correctly_tokenised_words&quot;</span><span class="p">:</span> <span class="n">correctly_tokenised_words</span><span class="p">,</span>
-            <span class="s2">&quot;total_words_in_sample&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_arr</span><span class="p">)),</span>
-            <span class="s2">&quot;total_words_in_ref_sample&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">)),</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;global&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;tokenisation_indicators&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokenization_indicators_str</span><span class="p">)</span>
-        <span class="p">},</span>
+        <span class="s2">&quot;char_level&quot;</span><span class="p">:</span> <span class="n">CharLevelStat</span><span class="p">(</span>
+            <span class="n">tp</span><span class="o">=</span><span class="n">c_tp</span><span class="p">,</span>
+            <span class="n">fp</span><span class="o">=</span><span class="n">c_fp</span><span class="p">,</span>
+            <span class="n">tn</span><span class="o">=</span><span class="n">c_tn</span><span class="p">,</span>
+            <span class="n">fn</span><span class="o">=</span><span class="n">c_fn</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;word_level&quot;</span><span class="p">:</span> <span class="n">WordLevelStat</span><span class="p">(</span>
+            <span class="n">correctly_tokenized_words</span><span class="o">=</span><span class="n">correctly_tokenized_words</span><span class="p">,</span>
+            <span class="n">total_words_in_sample</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_arr</span><span class="p">)),</span>
+            <span class="n">total_words_in_ref_sample</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ref_sample_arr</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;global_&quot;</span><span class="p">:</span> <span class="n">GlobalStat</span><span class="p">(</span>
+            <span class="n">tokenization_indicators</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokenization_indicators_str</span><span class="p">),</span>
+        <span class="p">),</span>
     <span class="p">}</span></div>
 
 
@@ -393,7 +439,7 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">start_idx</span><span class="p">,</span> <span class="n">end_idx</span><span class="p">))</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_find_words_correctly_tokenised</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_find_words_correctly_tokenized</span><span class="p">(</span>
     <span class="n">ref_boundaries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
     <span class="n">predicted_boundaries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
