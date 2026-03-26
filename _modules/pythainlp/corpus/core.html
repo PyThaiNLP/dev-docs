@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP a4296cb documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 7f55388 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1c9fd220"></script>
+      <script src="../../../_static/documentation_options.js?v=9abeae78"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -620,8 +620,9 @@
         <span class="c1"># Manual validation for older Python versions</span>
         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getmembers</span><span class="p">():</span>
             <span class="c1"># Check the member&#39;s target path</span>
-            <span class="n">member_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_within_directory</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member_path</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">safe_path_join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Attempted path traversal in tar file: </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
@@ -631,21 +632,26 @@
                 <span class="c1"># Get the link target (can be absolute or relative)</span>
                 <span class="n">link_target</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">linkname</span>
 
-                <span class="c1"># If it&#39;s a relative symlink, resolve it relative to the member&#39;s directory</span>
+                <span class="c1"># If it&#39;s a relative symlink, resolve it relative to the member&#39;s directory.</span>
+                <span class="c1"># Pass the archive-relative dirname and link target as separate parts to</span>
+                <span class="c1"># safe_path_join, which canonicalises and validates containment in one step.</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">link_target</span><span class="p">):</span>
-                    <span class="n">member_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">member_path</span><span class="p">)</span>
-                    <span class="n">link_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">member_dir</span><span class="p">,</span> <span class="n">link_target</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">safe_path_join</span><span class="p">(</span>
+                            <span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">link_target</span>
+                        <span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">linkname</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># Absolute symlinks are dangerous - make them relative to extraction path</span>
-                    <span class="n">link_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                        <span class="n">path</span><span class="p">,</span> <span class="n">link_target</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
-                    <span class="p">)</span>
-
-                <span class="c1"># Check if the resolved symlink target is within the directory</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_within_directory</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">link_target</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">linkname</span><span class="si">}</span><span class="s2">&quot;</span>
-                    <span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">safe_path_join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">link_target</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">linkname</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
 
         <span class="n">tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
 
@@ -664,8 +670,9 @@
 <span class="sd">    created by Unix-based archiving tools and may not be portable.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
-        <span class="n">member_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_within_directory</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member_path</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">safe_path_join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">member</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempted path traversal in zip file: </span><span class="si">{</span><span class="n">member</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Check for potential symlinks in ZIP files</span>
@@ -679,21 +686,26 @@
             <span class="c1"># Read the symlink target from the file content</span>
             <span class="n">link_target</span> <span class="o">=</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">member</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
-            <span class="c1"># Resolve the link target relative to the member&#39;s directory</span>
+            <span class="c1"># Resolve the link target relative to the member&#39;s directory.</span>
+            <span class="c1"># Pass the archive-relative dirname and link target as separate parts to</span>
+            <span class="c1"># safe_path_join, which canonicalises and validates containment in one step.</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">link_target</span><span class="p">):</span>
-                <span class="n">member_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">member_path</span><span class="p">)</span>
-                <span class="n">resolved_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">member_dir</span><span class="p">,</span> <span class="n">link_target</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">safe_path_join</span><span class="p">(</span>
+                        <span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">member</span><span class="p">),</span> <span class="n">link_target</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">link_target</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Absolute symlinks - make them relative to extraction path</span>
-                <span class="n">resolved_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                    <span class="n">path</span><span class="p">,</span> <span class="n">link_target</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
-                <span class="p">)</span>
-
-            <span class="c1"># Check if the symlink target is within the directory</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_within_directory</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">resolved_target</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">link_target</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">safe_path_join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">link_target</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Symlink </span><span class="si">{</span><span class="n">member</span><span class="si">}</span><span class="s2"> points outside extraction directory: </span><span class="si">{</span><span class="n">link_target</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
 
     <span class="n">zip_file</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
 
@@ -1046,7 +1058,7 @@
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="n">hf_root</span> <span class="o">=</span> <span class="n">get_full_data_path</span><span class="p">(</span><span class="s2">&quot;hf_models&quot;</span><span class="p">)</span>
     <span class="n">name_dir</span> <span class="o">=</span> <span class="n">make_safe_directory_name</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
-    <span class="n">root_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hf_root</span><span class="p">,</span> <span class="n">name_dir</span><span class="p">)</span>
+    <span class="n">root_project</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">hf_root</span><span class="p">,</span> <span class="n">name_dir</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
         <span class="n">output_path</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
             <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">local_dir</span><span class="o">=</span><span class="n">root_project</span>
