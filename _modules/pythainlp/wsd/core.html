@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wsd.core &mdash; PyThaiNLP b113e0b documentation</title>
+  <title>pythainlp.wsd.core &mdash; PyThaiNLP ae3f849 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=3fd1151d"></script>
+      <script src="../../../_static/documentation_options.js?v=8a03ff41"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -125,16 +125,16 @@
 <span class="n">_wsd_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="n">thai_wsd_dict</span><span class="p">()</span>
 <span class="n">_mean_all</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="n">_all_word</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;set[str]&quot;</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">_mean_all</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-<span class="n">_TRIE</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">_all_word</span><span class="p">)</span>
-<span class="n">_word_cut</span><span class="p">:</span> <span class="n">Tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">_TRIE</span><span class="p">)</span>
-
 <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;list[str]&quot;</span><span class="p">,</span> <span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
 <span class="n">meanings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;list[list[str]]&quot;</span><span class="p">,</span> <span class="n">_wsd_dict</span><span class="p">[</span><span class="s2">&quot;meaning&quot;</span><span class="p">])</span>
 <span class="n">i_word</span><span class="p">:</span> <span class="nb">str</span>
 <span class="n">i_meanings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i_word</span><span class="p">,</span> <span class="n">i_meanings</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">meanings</span><span class="p">):</span>
     <span class="n">_mean_all</span><span class="p">[</span><span class="n">i_word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i_meanings</span>
+
+<span class="n">_all_word</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;set[str]&quot;</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">_mean_all</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">_TRIE</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">_all_word</span><span class="p">)</span>
+<span class="n">_word_cut</span><span class="p">:</span> <span class="n">Tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">_TRIE</span><span class="p">)</span>
 
 <span class="n">_MODEL_CACHE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_SentenceTransformersModel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
