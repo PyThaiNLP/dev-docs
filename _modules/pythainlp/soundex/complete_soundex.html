@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -138,7 +138,7 @@
 <span class="sd">        complete_soundex(&quot;ก้าน&quot;)  # &#39;กก1Bน2-&#39;</span>
 
 <span class="sd">        # Multi-syllable (automatically handled)</span>
-<span class="sd">        complete_soundex(&quot;ปุญญา&quot;)  # &#39;ปป4G0น-ยย1B0--*&#39;</span>
+<span class="sd">        complete_soundex(&quot;ปุญญา&quot;)  # &#39;ปป1B0น-*&#39;</span>
 <span class="sd">        complete_soundex(&quot;สวรรค์&quot;)  # &#39;ซศ1A-0-วว1Aน0-&#39;</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -663,11 +663,12 @@
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
+
 <span class="sd">            &gt;&gt;&gt; from pythainlp.soundex import complete_soundex</span>
 <span class="sd">            &gt;&gt;&gt; complete_soundex(&quot;ก้าน&quot;)</span>
 <span class="sd">            &#39;กก1Bน2-&#39;</span>
-<span class="sd">            &gt;&gt;&gt; complete_soundex(&quot;ปุญญา&quot;)</span>
-<span class="sd">            &#39;ปป4G0น-ยย1B0--*&#39;</span>
+<span class="sd">            &gt;&gt;&gt; complete_soundex(&quot;ปุญญา&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;ปป1B0น-*&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
@@ -751,26 +752,25 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.soundex import complete_soundex</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.soundex import complete_soundex  # doctest: +SKIP</span>
 
-<span class="sd">        # Single syllable encoding</span>
-<span class="sd">        complete_soundex(&quot;ก้าน&quot;)</span>
-<span class="sd">        # output: &#39;กก1Bน2-&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # Single syllable encoding</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;กก1Bน2-&#39;</span>
 
-<span class="sd">        complete_soundex(&quot;กลับ&quot;)</span>
-<span class="sd">        # output: &#39;กก1Aบ0ล&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;กลับ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;กก1Aบ0ล&#39;</span>
 
-<span class="sd">        # Multi-syllable words (automatically tokenized)</span>
-<span class="sd">        complete_soundex(&quot;ปุญญา&quot;)</span>
-<span class="sd">        # output: &#39;ปป4G0น-ยย1B0--*&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # Multi-syllable words (automatically tokenized)</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ปุญญา&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;ปป1B0น-*&#39;</span>
 
-<span class="sd">        complete_soundex(&quot;สวรรค์&quot;)</span>
-<span class="sd">        # output: &#39;ซศ1A-0-วว1Aน0-&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;สวรรค์&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;ซศ1A-0-วว1Aน0-&#39;</span>
 
-<span class="sd">        complete_soundex(&quot;ปันนา&quot;)</span>
-<span class="sd">        # output: &#39;ปป1A0น-นน1B0--&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ปันนา&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;ปป1Bน0-&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_complete_soundex_instance</span>
 
@@ -806,32 +806,31 @@
 <span class="sd">    :rtype: float</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.soundex import (</span>
-<span class="sd">            complete_soundex,</span>
-<span class="sd">            complete_soundex_similarity,</span>
-<span class="sd">        )</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.soundex import (  # doctest: +SKIP</span>
+<span class="sd">        ...     complete_soundex,</span>
+<span class="sd">        ...     complete_soundex_similarity,</span>
+<span class="sd">        ... )</span>
 
-<span class="sd">        # Encode two words</span>
-<span class="sd">        code1 = complete_soundex(&quot;ข้มขืน&quot;)  # Bitter/Forced (with tone)</span>
-<span class="sd">        code2 = complete_soundex(&quot;ขมขืน&quot;)  # Bitter (no tone)</span>
+<span class="sd">        &gt;&gt;&gt; # Encode two words</span>
+<span class="sd">        &gt;&gt;&gt; code1 = complete_soundex(&quot;ข้มขืน&quot;)  # Bitter/Forced (with tone)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code2 = complete_soundex(&quot;ขมขืน&quot;)  # Bitter (no tone)  # doctest: +SKIP</span>
 
-<span class="sd">        # Calculate similarity</span>
-<span class="sd">        similarity = complete_soundex_similarity(code1, code2)</span>
-<span class="sd">        # output: ~0.93 (13 matches out of 14 characters)</span>
+<span class="sd">        &gt;&gt;&gt; # Calculate similarity</span>
+<span class="sd">        &gt;&gt;&gt; similarity = complete_soundex_similarity(code1, code2)  # doctest: +SKIP</span>
+<span class="sd">        ~0.93 (13 matches out of 14 characters)</span>
 
-<span class="sd">        # Perfect match</span>
-<span class="sd">        code_a = complete_soundex(&quot;ก้าน&quot;)</span>
-<span class="sd">        code_b = complete_soundex(&quot;ก้าน&quot;)</span>
-<span class="sd">        complete_soundex_similarity(code_a, code_b)</span>
-<span class="sd">        # output: 1.0</span>
+<span class="sd">        &gt;&gt;&gt; # Perfect match</span>
+<span class="sd">        &gt;&gt;&gt; code_a = complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_b = complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex_similarity(code_a, code_b)  # doctest: +SKIP</span>
+<span class="sd">        1.0</span>
 
-<span class="sd">        # No match</span>
-<span class="sd">        code_x = complete_soundex(&quot;ทราย&quot;)</span>
-<span class="sd">        code_y = complete_soundex(&quot;น้ำ&quot;)</span>
-<span class="sd">        complete_soundex_similarity(code_x, code_y)</span>
-<span class="sd">        # output: 0.0 (completely different)</span>
+<span class="sd">        &gt;&gt;&gt; # No match</span>
+<span class="sd">        &gt;&gt;&gt; code_x = complete_soundex(&quot;ทราย&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_y = complete_soundex(&quot;น้ำ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex_similarity(code_x, code_y)  # doctest: +SKIP</span>
+<span class="sd">        0.0 (completely different)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">code1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">code2</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">1.0</span>

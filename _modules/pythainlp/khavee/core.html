@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -162,14 +162,13 @@
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.khavee import KhaveeVerifier  # doctest: +SKIP</span>
 
-<span class="sd">            kv = KhaveeVerifier()</span>
+<span class="sd">            &gt;&gt;&gt; kv = KhaveeVerifier()  # doctest: +SKIP</span>
 
-<span class="sd">            print(kv.check_sara(&quot;เริง&quot;))</span>
-<span class="sd">            # output: &#39;เออ&#39;</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.check_sara(&quot;เริง&quot;))  # doctest: +SKIP</span>
+<span class="sd">            &#39;เออ&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sara</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">countoa</span> <span class="o">=</span> <span class="mi">0</span>
@@ -347,21 +346,20 @@
 <a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_marttra">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_marttra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Check the Thai spelling Section in the Thai word.</span>
+<span class="sd">        Check the Thai spelling section of the Thai word.</span>
 
 <span class="sd">        :param str word: Thai word</span>
-<span class="sd">        :return: name of spelling Section of the word.</span>
+<span class="sd">        :return: name of the spelling section of the word</span>
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.khavee import KhaveeVerifier  # doctest: +SKIP</span>
 
-<span class="sd">            kv = KhaveeVerifier()</span>
+<span class="sd">            &gt;&gt;&gt; kv = KhaveeVerifier()  # doctest: +SKIP</span>
 
-<span class="sd">            print(kv.check_marttra(&quot;สาว&quot;))</span>
-<span class="sd">            # output: &#39;เกอว&#39;</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.check_marttra(&quot;สาว&quot;))  # doctest: +SKIP</span>
+<span class="sd">            &#39;เกอว&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Handle consonant clusters ending with ร</span>
         <span class="c1"># ตร, ทร → remove ร (treat as final ต/ท sound)</span>
@@ -452,17 +450,16 @@
 <span class="sd">        :rtype: bool</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.khavee import KhaveeVerifier  # doctest: +SKIP</span>
 
-<span class="sd">            kv = KhaveeVerifier()</span>
+<span class="sd">            &gt;&gt;&gt; kv = KhaveeVerifier()  # doctest: +SKIP</span>
 
-<span class="sd">            print(kv.is_sumpus(&quot;สรร&quot;, &quot;อัน&quot;))</span>
-<span class="sd">            # output: True</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.is_sumpus(&quot;สรร&quot;, &quot;อัน&quot;))  # doctest: +SKIP</span>
+<span class="sd">            True</span>
 
-<span class="sd">            print(kv.is_sumpus(&quot;สรร&quot;, &quot;แมว&quot;))</span>
-<span class="sd">            # output: False</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.is_sumpus(&quot;สรร&quot;, &quot;แมว&quot;))  # doctest: +SKIP</span>
+<span class="sd">            False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">marttra1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_marttra</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
         <span class="n">marttra2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_marttra</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
@@ -526,25 +523,24 @@
 <span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.khavee import KhaveeVerifier  # doctest: +SKIP</span>
 
-<span class="sd">            kv = KhaveeVerifier()</span>
+<span class="sd">            &gt;&gt;&gt; kv = KhaveeVerifier()  # doctest: +SKIP</span>
 
-<span class="sd">            print(kv.check_klon(</span>
-<span class="sd">                &#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง เอ๋งเอ๋งคะนอง \</span>
-<span class="sd">                มีคนจับจอง เขาชื่อน้องเธียร&#39;,</span>
-<span class="sd">                k_type=4</span>
-<span class="sd">            ))</span>
-<span class="sd">            # output: The poem is correct according to the principle.</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.check_klon(  # doctest: +SKIP</span>
+<span class="sd">            ...     &#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง เอ๋งเอ๋งคะนอง \</span>
+<span class="sd">            ...     มีคนจับจอง เขาชื่อน้องเธียร&#39;,</span>
+<span class="sd">            ...     k_type=4</span>
+<span class="sd">            ... ))</span>
+<span class="sd">            The poem is correct according to the principle.</span>
 
-<span class="sd">            print(kv.check_klon(</span>
-<span class="sd">                &#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง \</span>
-<span class="sd">                เอ๋งเอ๋งเสียงหมา มีคนจับจอง เขาชื่อน้องเธียร&#39;,</span>
-<span class="sd">                k_type=4</span>
-<span class="sd">            ))</span>
-<span class="sd">            # output: [</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.check_klon(  # doctest: +SKIP</span>
+<span class="sd">            ...     &#39;ฉันชื่อหมูกรอบ ฉันชอบกินไก่ แล้วก็วิ่งไล่ หมาชื่อนํ้าทอง ลคคนเก่ง \</span>
+<span class="sd">            ...     เอ๋งเอ๋งเสียงหมา มีคนจับจอง เขาชื่อน้องเธียร&#39;,</span>
+<span class="sd">            ...     k_type=4</span>
+<span class="sd">            ... ))</span>
+<span class="sd">            [</span>
 <span class="sd">                &quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;จอง&#39;) in paragraph 2&quot;,</span>
 <span class="sd">                &quot;Can&#39;t find rhyme between paragraphs (&#39;หมา&#39;, &#39;ทอง&#39;) in paragraph 2&quot;</span>
 <span class="sd">            ]</span>
@@ -775,21 +771,20 @@
 <span class="sd">        :rtype: Union[list[bool], List[str], bool, str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.khavee import KhaveeVerifier</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.khavee import KhaveeVerifier  # doctest: +SKIP</span>
 
-<span class="sd">            kv = KhaveeVerifier()</span>
+<span class="sd">            &gt;&gt;&gt; kv = KhaveeVerifier()  # doctest: +SKIP</span>
 
-<span class="sd">            # การเช็คคำเอกโท</span>
-<span class="sd">            print(</span>
-<span class="sd">                kv.check_aek_too(&quot;เอง&quot;),</span>
-<span class="sd">                kv.check_aek_too(&quot;เอ่ง&quot;),</span>
-<span class="sd">                kv.check_aek_too(&quot;เอ้ง&quot;),</span>
-<span class="sd">            )</span>
-<span class="sd">            # -&gt; False, aek, too</span>
-<span class="sd">            print(kv.check_aek_too([&quot;เอง&quot;, &quot;เอ่ง&quot;, &quot;เอ้ง&quot;]))  # ใช้ List ได้เหมือนกัน</span>
-<span class="sd">            # -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; # การเช็คคำเอกโท</span>
+<span class="sd">            &gt;&gt;&gt; print(  # doctest: +SKIP</span>
+<span class="sd">            ...     kv.check_aek_too(&quot;เอง&quot;),</span>
+<span class="sd">            ...     kv.check_aek_too(&quot;เอ่ง&quot;),</span>
+<span class="sd">            ...     kv.check_aek_too(&quot;เอ้ง&quot;),</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; # -&gt; False, aek, too</span>
+<span class="sd">            &gt;&gt;&gt; print(kv.check_aek_too([&quot;เอง&quot;, &quot;เอ่ง&quot;, &quot;เอ้ง&quot;]))  # ใช้ List ได้เหมือนกัน  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; # -&gt; [False, &#39;aek&#39;, &#39;too&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">check_aek_too</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dead_syllable_as_aek</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>  <span class="c1"># type: ignore[misc]</span>
@@ -816,8 +811,8 @@
 <span class="sd">        by stripping all characters before the &#39;Karun&#39; character</span>
 <span class="sd">        that should be silenced</span>
 
-<span class="sd">        :param str text: Thai word</span>
-<span class="sd">        :return: Thai word with silent words stripped</span>
+<span class="sd">        :param str word: Thai word</span>
+<span class="sd">        :return: Thai word with silent consonant stripped</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sound_silenced</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;์&quot;</span><span class="p">)</span>

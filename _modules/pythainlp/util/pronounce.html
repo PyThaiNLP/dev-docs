@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.pronounce &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.pronounce &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -145,12 +145,10 @@
 <span class="sd">    :rtype: List[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import rhyme</span>
-
-<span class="sd">        print(rhyme(&quot;จีบ&quot;))</span>
-<span class="sd">        # output: [&#39;กลีบ&#39;, &#39;กีบ&#39;, &#39;ครีบ&#39;, ...]</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import rhyme  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; rhyme(&quot;จีบ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;กลีบ&#39;, &#39;กีบ&#39;, &#39;ครีบ&#39;, &#39;คีบ&#39;, &#39;งีบ&#39;, ... ]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
         <span class="n">i</span>
@@ -211,12 +209,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import thai_consonant_to_spelling</span>
-
-<span class="sd">        print(tone_to_spelling(&quot;ก&quot;))</span>
-<span class="sd">        # output: กอ</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_consonant_to_spelling</span>
+<span class="sd">        &gt;&gt;&gt; print(thai_consonant_to_spelling(&quot;ก&quot;))</span>
+<span class="sd">        กอ</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="s2">&quot;อ&quot;</span>
@@ -234,12 +230,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import tone_to_spelling</span>
-
-<span class="sd">        print(tone_to_spelling(&quot;่&quot;))  # ไม้เอก</span>
-<span class="sd">        # output: ไม้เอก</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import tone_to_spelling</span>
+<span class="sd">        &gt;&gt;&gt; print(tone_to_spelling(&quot;่&quot;))  # ไม้เอก</span>
+<span class="sd">        ไม้เอก</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;ไม้เอก&quot;</span>
@@ -301,15 +295,12 @@
 <span class="sd">    :rtype: List[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import spelling</span>
-
-<span class="sd">        print(spelling(&quot;เรียน&quot;))</span>
-<span class="sd">        # output: [&#39;รอ&#39;, &#39;เอีย&#39;, &#39;นอ&#39;, &#39;เรียน&#39;]</span>
-
-<span class="sd">        print(spelling(&quot;เฝ้า&quot;))</span>
-<span class="sd">        # output: [&#39;ฝอ&#39;, &#39;เอา&#39;, &#39;เฝา&#39;, &#39;ไม้โท&#39;, &#39;เฝ้า&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import spelling</span>
+<span class="sd">        &gt;&gt;&gt; spelling(&quot;เรียน&quot;)</span>
+<span class="sd">        [&#39;รอ&#39;, &#39;เอีย&#39;, &#39;นอ&#39;, &#39;เรียน&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spelling(&quot;เฝ้า&quot;)</span>
+<span class="sd">        [&#39;ฝอ&#39;, &#39;เอา&#39;, &#39;เฝา&#39;, &#39;ไม้โท&#39;, &#39;เฝ้า&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.date &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.date &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -252,21 +252,17 @@
 <span class="sd">    you should care about the correct calendar.</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import convert_years</span>
-
-<span class="sd">        # Convert Buddhist Era (BE) to Anno Domini (AD)</span>
-<span class="sd">        convert_years(&quot;2566&quot;, src=&quot;be&quot;, target=&quot;ad&quot;)</span>
-<span class="sd">        # output: &#39;2023&#39;</span>
-
-<span class="sd">        # Convert AD to BE</span>
-<span class="sd">        convert_years(&quot;2023&quot;, src=&quot;ad&quot;, target=&quot;be&quot;)</span>
-<span class="sd">        # output: &#39;2566&#39;</span>
-
-<span class="sd">        # Convert BE to Rattanakosin Era (RE)</span>
-<span class="sd">        convert_years(&quot;2566&quot;, src=&quot;be&quot;, target=&quot;re&quot;)</span>
-<span class="sd">        # output: &#39;242&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import convert_years</span>
+<span class="sd">        &gt;&gt;&gt; # Convert Buddhist Era (BE) to Anno Domini (AD)</span>
+<span class="sd">        &gt;&gt;&gt; convert_years(&quot;2566&quot;, src=&quot;be&quot;, target=&quot;ad&quot;)</span>
+<span class="sd">        &#39;2023&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # Convert AD to BE</span>
+<span class="sd">        &gt;&gt;&gt; convert_years(&quot;2023&quot;, src=&quot;ad&quot;, target=&quot;be&quot;)</span>
+<span class="sd">        &#39;2566&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # Convert BE to Rattanakosin Era (RE)</span>
+<span class="sd">        &gt;&gt;&gt; convert_years(&quot;2566&quot;, src=&quot;be&quot;, target=&quot;re&quot;)</span>
+<span class="sd">        &#39;242&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output_year</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">src</span> <span class="o">==</span> <span class="s2">&quot;be&quot;</span><span class="p">:</span>
@@ -355,21 +351,11 @@
 <span class="sd">        * *%f* - Microsecond</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import thai_strptime</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_strptime</span>
 
-<span class="sd">        thai_strptime(&quot;15 ก.ค. 2565 09:00:01&quot;,&quot;%d %B %Y %H:%M:%S&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # datetime.datetime(</span>
-<span class="sd">        #   2022,</span>
-<span class="sd">        #   7,</span>
-<span class="sd">        #   15,</span>
-<span class="sd">        #   9,</span>
-<span class="sd">        #   0,</span>
-<span class="sd">        #   1,</span>
-<span class="sd">        #   tzinfo=zoneinfo.ZoneInfo(key=&#39;Asia/Bangkok&#39;)</span>
-<span class="sd">        # )</span>
+<span class="sd">        &gt;&gt;&gt; thai_strptime(&quot;15 ก.ค. 2565 09:00:01&quot;,&quot;%d %B %Y %H:%M:%S&quot;)</span>
+<span class="sd">        datetime.datetime(2022, 7, 15, 9, 0, 1, tzinfo=zoneinfo.ZoneInfo(key=&#39;Asia/Bangkok&#39;))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;%-m&quot;</span><span class="p">,</span> <span class="s2">&quot;%m&quot;</span><span class="p">)</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -448,18 +434,15 @@
 <span class="sd">    :rtype: int</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import now_reign_year</span>
-
-<span class="sd">        text = &quot;เป็นปีที่ {reign_year} ในรัชกาลปัจจุบัน&quot;\\</span>
-<span class="sd">            .format(reign_year=now_reign_year())</span>
-
-<span class="sd">        print(text)</span>
-<span class="sd">        # output: เป็นปีที่ 4 ในรัชการปัจจุบัน</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import now_reign_year  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;เป็นปีที่ {reign_year} ในรัชกาลปัจจุบัน&quot;\\  # doctest: +SKIP</span>
+<span class="sd">        ...     .format(reign_year=now_reign_year())</span>
+<span class="sd">        &gt;&gt;&gt; print(text)  # doctest: +SKIP</span>
+<span class="sd">        เป็นปีที่ 11 ในรัชกาลปัจจุบัน</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">now_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">now_</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">2015</span></div>
+    <span class="k">return</span> <span class="n">now_</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">2015</span>  <span class="c1"># hard coded</span></div>
 
 
 
@@ -479,17 +462,14 @@
 <span class="sd">    :rtype: int</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import reign_year_to_ad</span>
-
-<span class="sd">        print(&quot;The 4th reign year of the King Rama X is in&quot;, \\</span>
-<span class="sd">            reign_year_to_ad(4, 10))</span>
-<span class="sd">        # output: The 4th reign year of the King Rama X is in 2019</span>
-
-<span class="sd">        print(&quot;The 1st reign year of the King Rama IX is in&quot;, \\</span>
-<span class="sd">            reign_year_to_ad(1, 9))</span>
-<span class="sd">        # output: The 4th reign year of the King Rama X is in 1946</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import reign_year_to_ad</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;The 4th reign year of the King Rama X is in&quot;,</span>
+<span class="sd">        ...     reign_year_to_ad(4, 10))</span>
+<span class="sd">        The 4th reign year of the King Rama X is in 2019</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;The 1st reign year of the King Rama IX is in&quot;,</span>
+<span class="sd">        ...     reign_year_to_ad(1, 9))</span>
+<span class="sd">        The 1st reign year of the King Rama IX is in 1946</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ad</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">reign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>

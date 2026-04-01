@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.lm.text_util &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.lm.text_util &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -123,13 +123,13 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_ngram_counts</span><span class="p">(</span>
     <span class="n">list_words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the counts of n-grams in the list words for the specified range.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate n-gram counts for the given word list.</span>
 
-<span class="sd">    :param List[str] list_words: List of string</span>
-<span class="sd">    :param int n_min: The minimum n-gram size (default: 2).</span>
-<span class="sd">    :param int n_max: The maximum n-gram size (default: 4).</span>
+<span class="sd">    :param list[str] list_words: list of words</span>
+<span class="sd">    :param int n_min: minimum n-gram size (default: 2)</span>
+<span class="sd">    :param int n_max: maximum n-gram size (default: 4)</span>
 
-<span class="sd">    :return: A dictionary where keys are n-grams and values are their counts.</span>
+<span class="sd">    :return: dictionary mapping n-grams to their counts</span>
 <span class="sd">    :rtype: dict[tuple[str, ...], int]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">list_words</span><span class="p">:</span>
@@ -149,20 +149,19 @@
 <div class="viewcode-block" id="remove_repeated_ngrams">
 <a class="viewcode-back" href="../../../api/lm.html#pythainlp.lm.remove_repeated_ngrams">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_repeated_ngrams</span><span class="p">(</span><span class="n">string_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove repeated n-grams</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove repeated n-grams from a word list.</span>
 
-<span class="sd">    :param List[str] string_list: List of string</span>
+<span class="sd">    :param list[str] string_list: list of words</span>
 <span class="sd">    :param int n: n-gram size</span>
-<span class="sd">    :return: List of string</span>
+<span class="sd">    :return: list of words with repeated n-grams removed</span>
 <span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.lm import remove_repeated_ngrams</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.lm import remove_repeated_ngrams  # doctest: +SKIP</span>
 
-<span class="sd">        remove_repeated_ngrams([&quot;เอา&quot;, &quot;เอา&quot;, &quot;แบบ&quot;, &quot;ไหน&quot;], n=1)</span>
-<span class="sd">        # output: [&#39;เอา&#39;, &#39;แบบ&#39;, &#39;ไหน&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; remove_repeated_ngrams([&quot;เอา&quot;, &quot;เอา&quot;, &quot;แบบ&quot;, &quot;ไหน&quot;], n=1)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เอา&#39;, &#39;แบบ&#39;, &#39;ไหน&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">string_list</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">string_list</span>

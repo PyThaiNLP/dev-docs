@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.classify &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -167,7 +167,7 @@ Default is empty string.</p></li>
 <dt class="sig sig-object py" id="pythainlp.classify.GzipModel.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.predict" title="Link to this definition"></a></dt>
 <dd><p>Predict the label for the given text.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the text that we want to predict label for</p></li>
@@ -181,32 +181,34 @@ Default is empty string.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.classify</span><span class="w"> </span><span class="kn">import</span> <span class="n">GzipModel</span>
-
-<span class="n">training_data</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;กลัวพวกมึงหาย อดกินบาบิก้อน&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;บริการแย่มากก เป็นหมอได้ไง😤&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ขับรถแย่มาก&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ดีนะครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ลองแล้วรสนี้อร่อย... ชอบๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ฉันรู้สึกโกรธ เวลามือถือแบตหมด&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เธอภูมิใจที่ได้ทำสิ่งดี ๆ และดีใจกับเด็ก ๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;นี่เป็นบทความหนึ่ง&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
-<span class="p">]</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GzipModel</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;ฉันดีใจ&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="c1"># output: Positive</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.classify</span><span class="w"> </span><span class="kn">import</span> <span class="n">GzipModel</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">training_data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;กลัวพวกมึงหาย อดกินบาบิก้อน&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;บริการแย่มากก เป็นหมอได้ไง😤&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;ขับรถแย่มาก&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;ดีนะครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;ลองแล้วรสนี้อร่อย... ชอบๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;ฉันรู้สึกโกรธ เวลามือถือแบตหมด&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;เธอภูมิใจที่ได้ทำสิ่งดี ๆ และดีใจกับเด็ก ๆ&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="s2">&quot;นี่เป็นบทความหนึ่ง&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">GzipModel</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;ฉันดีใจ&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">    Positive</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.classify.GzipModel.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.save" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Save model to file.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – path to save model</p>
 </dd>
@@ -216,9 +218,10 @@ Default is empty string.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.classify.GzipModel.load">
 <span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/classify/param_free.html#GzipModel.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.classify.GzipModel.load" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Load model from file.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – path to load model</p>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – path to load model from</p>
 </dd>
 </dl>
 </dd></dl>

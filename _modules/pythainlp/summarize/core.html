@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.summarize.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -162,53 +162,55 @@
 <span class="sd">                          (effective for frequency engine only)</span>
 
 <span class="sd">    :return: list of selected sentences</span>
+<span class="sd">    :rtype: list[str]</span>
+
 <span class="sd">    **Options for engine**</span>
-<span class="sd">        * *frequency* (default) - frequency of words</span>
+<span class="sd">        * *frequency* (default) - word frequency</span>
 <span class="sd">        * *mt5* - mT5-small model</span>
 <span class="sd">        * *mt5-small* - mT5-small model</span>
 <span class="sd">        * *mt5-base* - mT5-base model</span>
 <span class="sd">        * *mt5-large* - mT5-large model</span>
 <span class="sd">        * *mt5-xl* - mT5-xl model</span>
 <span class="sd">        * *mt5-xxl* - mT5-xxl model</span>
-<span class="sd">        * *mt5-cpe-kmutt-thai-sentence-sum* - mT5 Thai sentence summarization by CPE KMUTT</span>
+<span class="sd">        * *mt5-cpe-kmutt-thai-sentence-sum* - mT5 Thai sentence</span>
+<span class="sd">          summarization by CPE KMUTT</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.summarize import summarize</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.summarize import summarize  # doctest: +SKIP</span>
 
-<span class="sd">        text = &#39;&#39;&#39;</span>
-<span class="sd">                ทำเนียบท่าช้าง หรือ วังถนนพระอาทิตย์</span>
-<span class="sd">                ตั้งอยู่บนถนนพระอาทิตย์ เขตพระนคร กรุงเทพมหานคร</span>
-<span class="sd">                เดิมเป็นบ้านของเจ้าพระยามหาโยธา (ทอเรียะ คชเสนี)</span>
-<span class="sd">                บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์ (พญาเจ่ง)</span>
-<span class="sd">                ต้นสกุลคชเสนี เชื้อสายมอญ เจ้าพระยามหาโยธา (ทอเรีย)</span>
-<span class="sd">                เป็นปู่ของเจ้าจอมมารดากลิ่นในพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว</span>
-<span class="sd">                และเป็นมรดกตกทอดมาถึง พระเจ้าบรมวงศ์เธอ กรมพระนเรศรวรฤทธิ์</span>
-<span class="sd">                (พระองค์เจ้ากฤดาภินิหาร)</span>
-<span class="sd">                ต่อมาในรัชสมัยพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัวโปรดเกล้าฯ</span>
-<span class="sd">                ให้สร้างตำหนัก 2 ชั้น</span>
-<span class="sd">                เป็นที่ประทับของพระเจ้าบรมวงศ์เธอ</span>
-<span class="sd">                กรมพระนเรศวรฤทิธิ์และเจ้าจอมมารดา</span>
-<span class="sd">                ต่อมาเรียกอาคารหลักนี้ว่า ตำหนักเดิม</span>
-<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;  # doctest: +SKIP</span>
+<span class="sd">        ...         ทำเนียบท่าช้าง หรือ วังถนนพระอาทิตย์</span>
+<span class="sd">        ...         ตั้งอยู่บนถนนพระอาทิตย์ เขตพระนคร กรุงเทพมหานคร</span>
+<span class="sd">        ...         เดิมเป็นบ้านของเจ้าพระยามหาโยธา (ทอเรียะ คชเสนี)</span>
+<span class="sd">        ...         บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์ (พญาเจ่ง)</span>
+<span class="sd">        ...         ต้นสกุลคชเสนี เชื้อสายมอญ เจ้าพระยามหาโยธา (ทอเรีย)</span>
+<span class="sd">        ...         เป็นปู่ของเจ้าจอมมารดากลิ่นในพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว</span>
+<span class="sd">        ...         และเป็นมรดกตกทอดมาถึง พระเจ้าบรมวงศ์เธอ กรมพระนเรศรวรฤทธิ์</span>
+<span class="sd">        ...         (พระองค์เจ้ากฤดาภินิหาร)</span>
+<span class="sd">        ...         ต่อมาในรัชสมัยพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัวโปรดเกล้าฯ</span>
+<span class="sd">        ...         ให้สร้างตำหนัก 2 ชั้น</span>
+<span class="sd">        ...         เป็นที่ประทับของพระเจ้าบรมวงศ์เธอ</span>
+<span class="sd">        ...         กรมพระนเรศวรฤทิธิ์และเจ้าจอมมารดา</span>
+<span class="sd">        ...         ต่อมาเรียกอาคารหลักนี้ว่า ตำหนักเดิม</span>
+<span class="sd">        ...     &#39;&#39;&#39;</span>
 
-<span class="sd">        summarize(text, n=1)</span>
-<span class="sd">        # output: [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, n=1)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;]</span>
 
-<span class="sd">        summarize(text, n=3)</span>
-<span class="sd">        # output: [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;,</span>
-<span class="sd">        # &#39;เดิมเป็นบ้านของเจ้าพระยามหาโยธา&#39;,</span>
-<span class="sd">        # &#39;เจ้าพระยามหาโยธา&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, n=3)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;,</span>
+<span class="sd">        &#39;เดิมเป็นบ้านของเจ้าพระยามหาโยธา&#39;,</span>
+<span class="sd">        &#39;เจ้าพระยามหาโยธา&#39;]</span>
 
-<span class="sd">        summarize(text, engine=&quot;mt5-small&quot;)</span>
-<span class="sd">        # output: [&#39;&lt;extra_id_0&gt; ท่าช้าง หรือ วังถนนพระอาทิตย์</span>
-<span class="sd">        # เขตพระนคร กรุงเทพมหานคร ฯลฯ ดังนี้:</span>
-<span class="sd">        # ที่อยู่ - ศิลปวัฒนธรรม&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, engine=&quot;mt5-small&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;&lt;extra_id_0&gt; ท่าช้าง หรือ วังถนนพระอาทิตย์</span>
+<span class="sd">        เขตพระนคร กรุงเทพมหานคร ฯลฯ ดังนี้:</span>
+<span class="sd">        ที่อยู่ - ศิลปวัฒนธรรม&#39;]</span>
 
-<span class="sd">        text = &quot;ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ&quot;</span>
-<span class="sd">        summarize(text, engine=&quot;mt5-cpe-kmutt-thai-sentence-sum&quot;)</span>
-<span class="sd">        # output: [&#39;น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ&quot;  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, engine=&quot;mt5-cpe-kmutt-thai-sentence-sum&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
@@ -246,68 +248,75 @@
     <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
     <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns most-relevant keywords (and/or keyphrases) from the input document.</span>
-<span class="sd">    Each algorithm may produce completely different keywords from each other,</span>
-<span class="sd">    so please be careful when choosing the algorithm.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the most relevant keywords (and keyphrases) from a document.</span>
 
-<span class="sd">    *Note*: Calling :func: `extract_keywords()` is expensive. For repetitive use of KeyBERT (the default engine),</span>
-<span class="sd">    creating a KeyBERT object is highly recommended.</span>
+<span class="sd">    Each algorithm may produce completely different keywords,</span>
+<span class="sd">    so choose the algorithm carefully.</span>
 
-<span class="sd">    :param str text: text to be summarized</span>
-<span class="sd">    :param Tuple[int, int] keyphrase_ngram_range: Number of token units to be defined as keyword.</span>
-<span class="sd">                            The token unit varies w.r.t. `tokenizer_engine`.</span>
-<span class="sd">                            For instance, (1, 1) means each token (unigram) can be a keyword (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;),</span>
-<span class="sd">                            (1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords</span>
-<span class="sd">                            (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;, &quot;เสาไฟฟ้า&quot;)  (default: (1, 2))</span>
-<span class="sd">    :param int max_keywords: Number of maximum keywords to be returned. (default: 5)</span>
-<span class="sd">    :param int min_df: Minimum frequency required to be a keyword. (default: 1)</span>
-<span class="sd">    :param str engine: Name of algorithm to use for keyword extraction. (default: &#39;keybert&#39;)</span>
-<span class="sd">    :param str tokenizer: Name of tokenizer engine to use.</span>
-<span class="sd">                            Refer to options in :func: `pythainlp.tokenize.word_tokenizer() (default: &#39;newmm&#39;)</span>
-<span class="sd">    :param Optional[Iterable[str]] stop_words: A list of stop words (a.k.a words to be ignored).</span>
-<span class="sd">                            If not specified, :func:`pythainlp.corpus.thai_stopwords` is used. (default: None)</span>
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Calling :func:`extract_keywords` is expensive.</span>
+<span class="sd">        For repeated use of KeyBERT (the default engine),</span>
+<span class="sd">        creating a ``KeyBERT`` object directly is recommended.</span>
+
+<span class="sd">    :param str text: text to extract keywords from</span>
+<span class="sd">    :param tuple[int, int] keyphrase_ngram_range: token range for keywords.</span>
+<span class="sd">        ``(1, 1)`` allows unigrams only (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;);</span>
+<span class="sd">        ``(1, 2)`` allows unigrams and bigrams</span>
+<span class="sd">        (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;, &quot;เสาไฟฟ้า&quot;). Default: ``(1, 2)``.</span>
+<span class="sd">    :param int max_keywords: maximum number of keywords to return.</span>
+<span class="sd">        Default: 5.</span>
+<span class="sd">    :param int min_df: minimum term frequency to qualify as keyword.</span>
+<span class="sd">        Default: 1.</span>
+<span class="sd">    :param str engine: keyword extraction algorithm. Default: ``&#39;keybert&#39;``.</span>
+<span class="sd">    :param str tokenizer: tokenizer engine name.</span>
+<span class="sd">        See :func:`pythainlp.tokenize.word_tokenize` for options.</span>
+<span class="sd">        Default: ``&#39;newmm&#39;``.</span>
+<span class="sd">    :param stop_words: words to ignore. If ``None``,</span>
+<span class="sd">        :func:`pythainlp.corpus.thai_stopwords` is used. Default: ``None``.</span>
+<span class="sd">    :type stop_words: collections.abc.Iterable[str] or None</span>
 
 <span class="sd">    :return: list of keywords</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    **Options for engine**</span>
-<span class="sd">        * *keybert* (default) - KeyBERT keyword extraction algorithm</span>
-<span class="sd">        * *frequency* - frequency of words</span>
+<span class="sd">        * *keybert* (default) - KeyBERT keyword extraction</span>
+<span class="sd">        * *frequency* - word frequency</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.summarize import extract_keywords</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.summarize import extract_keywords  # doctest: +SKIP</span>
 
-<span class="sd">        text = &#39;&#39;&#39;</span>
-<span class="sd">            อาหาร หมายถึง ของแข็งหรือของเหลว</span>
-<span class="sd">            ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
-<span class="sd">            จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
-<span class="sd">            ทำให้ร่างกายเจริญเติบโต</span>
-<span class="sd">            ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
-<span class="sd">            ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
-<span class="sd">            อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;  # doctest: +SKIP</span>
+<span class="sd">        ...     อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="sd">        ...     ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="sd">        ...     จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="sd">        ...     ทำให้ร่างกายเจริญเติบโต</span>
+<span class="sd">        ...     ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="sd">        ...     ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="sd">        ...     อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="sd">        ... &#39;&#39;&#39;</span>
 
-<span class="sd">        keywords = extract_keywords(text)</span>
+<span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(text)  # doctest: +SKIP</span>
 
-<span class="sd">        # output: [&#39;อวัยวะต่างๆ&#39;,</span>
-<span class="sd">        # &#39;ซ่อมแซมส่วน&#39;,</span>
-<span class="sd">        # &#39;เจริญเติบโต&#39;,</span>
-<span class="sd">        # &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
-<span class="sd">        # &#39;มีพิษ&#39;]</span>
+<span class="sd">        [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="sd">        &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="sd">        &#39;เจริญเติบโต&#39;,</span>
+<span class="sd">        &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="sd">        &#39;มีพิษ&#39;]</span>
 
-<span class="sd">        keywords = extract_keywords(text, max_keywords=10)</span>
+<span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(text, max_keywords=10)  # doctest: +SKIP</span>
 
-<span class="sd">        # output: [&#39;อวัยวะต่างๆ&#39;,</span>
-<span class="sd">        # &#39;ซ่อมแซมส่วน&#39;,</span>
-<span class="sd">        # &#39;เจริญเติบโต&#39;,</span>
-<span class="sd">        # &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
-<span class="sd">        # &#39;มีพิษ&#39;,</span>
-<span class="sd">        # &#39;ทำให้ร่างกาย&#39;,</span>
-<span class="sd">        # &#39;ร่างกายเจริญเติบโต&#39;,</span>
-<span class="sd">        # &#39;จะทำให้เกิด&#39;,</span>
-<span class="sd">        # &#39;มีพิษและ&#39;,</span>
-<span class="sd">        # &#39;เกิดโทษ&#39;]</span>
+<span class="sd">        [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="sd">        &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="sd">        &#39;เจริญเติบโต&#39;,</span>
+<span class="sd">        &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="sd">        &#39;มีพิษ&#39;,</span>
+<span class="sd">        &#39;ทำให้ร่างกาย&#39;,</span>
+<span class="sd">        &#39;ร่างกายเจริญเติบโต&#39;,</span>
+<span class="sd">        &#39;จะทำให้เกิด&#39;,</span>
+<span class="sd">        &#39;มีพิษและ&#39;,</span>
+<span class="sd">        &#39;เกิดโทษ&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

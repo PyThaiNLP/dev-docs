@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -138,7 +138,7 @@
 <span class="sd">    :param str text: A Thai word to be romanized. \</span>
 <span class="sd">        The input should not include whitespace because \</span>
 <span class="sd">        the function is support subwords by splitting whitespace.</span>
-<span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;thai2rom_onnx,</span>
+<span class="sd">    :param str engine: One of &#39;royin&#39; (default), &#39;thai2rom&#39;, &#39;thai2rom_onnx&#39;,</span>
 <span class="sd">        &#39;tltk&#39;, and &#39;lookup&#39;. See more in options for engine section.</span>
 <span class="sd">    :param str fallback_engine: If engine equals &#39;lookup&#39;,</span>
 <span class="sd">        use `fallback_engine` for words that are not in the lookup dictionary.</span>
@@ -157,33 +157,24 @@
 <span class="sd">        * *lookup* - Look up on Thai-English Transliteration dictionary v1.4 compiled by Wannaphong.</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.transliterate import romanize</span>
-
-<span class="sd">        romanize(&quot;สามารถ&quot;, engine=&quot;royin&quot;)</span>
-<span class="sd">        # output: &#39;samant&#39;</span>
-
-<span class="sd">        romanize(&quot;สามารถ&quot;, engine=&quot;thai2rom&quot;)</span>
-<span class="sd">        # output: &#39;samat&#39;</span>
-
-<span class="sd">        romanize(&quot;สามารถ&quot;, engine=&quot;tltk&quot;)</span>
-<span class="sd">        # output: &#39;samat&#39;</span>
-
-<span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;royin&quot;)</span>
-<span class="sd">        # output: &#39;phapn&#39;</span>
-
-<span class="sd">        romanize(&quot;รส ดี&quot;, engine=&quot;royin&quot;) # subwords</span>
-<span class="sd">        # output: &#39;rot di&#39;</span>
-
-<span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom&quot;)</span>
-<span class="sd">        # output: &#39;phapphayon&#39;</span>
-
-<span class="sd">        romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom_onnx&quot;)</span>
-<span class="sd">        # output: &#39;phapphayon&#39;</span>
-
-<span class="sd">        romanize(&quot;ก็อปปี้&quot;, engine=&quot;lookup&quot;)</span>
-<span class="sd">        # output: &#39;copy&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.transliterate import romanize</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;สามารถ&quot;, engine=&quot;royin&quot;)</span>
+<span class="sd">        &#39;samant&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;สามารถ&quot;, engine=&quot;thai2rom&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;samat&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;สามารถ&quot;, engine=&quot;tltk&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;samat&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;ภาพยนตร์&quot;, engine=&quot;royin&quot;)</span>
+<span class="sd">        &#39;phapn&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;รส ดี&quot;, engine=&quot;royin&quot;)  # subwords</span>
+<span class="sd">        &#39;rot di&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;phapphayon&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;ภาพยนตร์&quot;, engine=&quot;thai2rom_onnx&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;phapphayon&#39;</span>
+<span class="sd">        &gt;&gt;&gt; romanize(&quot;ก็อปปี้&quot;, engine=&quot;lookup&quot;)</span>
+<span class="sd">        &#39;copy&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -247,39 +238,28 @@
 <span class="sd">          https://huggingface.co/B-K/umt5-thai-g2p-v2-0.5k</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.transliterate import transliterate</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;icu&quot;)</span>
-<span class="sd">        # output: &#39;s̄āmārt̄h&#39;</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;ipa&quot;)</span>
-<span class="sd">        # output: &#39;saːmaːrot&#39;</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;thaig2p&quot;)</span>
-<span class="sd">        # output: &#39;s aː ˩˩˦ . m aː t̚ ˥˩&#39;</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_ipa&quot;)</span>
-<span class="sd">        # output: &#39;saː5.maːt3&#39;</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_g2p&quot;)</span>
-<span class="sd">        # output: &#39;saa4~maat2&#39;</span>
-
-<span class="sd">        transliterate(&quot;สามารถ&quot;, engine=&quot;iso_11940&quot;)</span>
-<span class="sd">        # output: &#39;s̄āmārt̄h&#39;</span>
-
-<span class="sd">        transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;icu&quot;)</span>
-<span class="sd">        # output: &#39;p̣hāphyntr̒&#39;</span>
-
-<span class="sd">        transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;ipa&quot;)</span>
-<span class="sd">        # output: &#39;pʰaːpjanot&#39;</span>
-
-<span class="sd">        transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;thaig2p&quot;)</span>
-<span class="sd">        # output: &#39;pʰ aː p̚ ˥˩ . pʰ a ˦˥ . j o n ˧&#39;</span>
-
-<span class="sd">        transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;iso_11940&quot;)</span>
-<span class="sd">        # output: &#39;p̣hāphyntr&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.transliterate import transliterate</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;icu&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;s̄āmārt̄h&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;ipa&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;saːmaːrot&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;thaig2p&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;s aː ˩˩˦ . m aː t̚ ˥˩&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_ipa&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;saː5.maːt3&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;tltk_g2p&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;saa4~maat2&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;สามารถ&quot;, engine=&quot;iso_11940&quot;)</span>
+<span class="sd">        &#39;s̄āmārt̄h&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;icu&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;p̣hāphyntr̒&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;ipa&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;pʰaːpjanot&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;thaig2p&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;pʰ aː p̚ ˥˩ . pʰ a ˦˥ . j o n ˧&#39;</span>
+<span class="sd">        &gt;&gt;&gt; transliterate(&quot;ภาพยนตร์&quot;, engine=&quot;iso_11940&quot;)</span>
+<span class="sd">        &#39;p̣hāphyntr̒&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
@@ -321,15 +301,12 @@
 <span class="sd">        * *w2p* - Thai Word-to-Phoneme</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.transliterate import pronunciate</span>
-
-<span class="sd">        pronunciate(&quot;สามารถ&quot;, engine=&quot;w2p&quot;)</span>
-<span class="sd">        # output: &#39;สา-มาด&#39;</span>
-
-<span class="sd">        pronunciate(&quot;ภาพยนตร์&quot;, engine=&quot;w2p&quot;)</span>
-<span class="sd">        # output: &#39;พาบ-พะ-ยน&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.transliterate import pronunciate</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate(&quot;สามารถ&quot;, engine=&quot;w2p&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;สา-มาด&#39;</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate(&quot;ภาพยนตร์&quot;, engine=&quot;w2p&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;พาบ-พะ-ยน&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>

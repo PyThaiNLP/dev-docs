@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify.param_free &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.classify.param_free &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -178,24 +178,23 @@
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">                from pythainlp.classify import GzipModel</span>
+<span class="sd">            &gt;&gt;&gt;     from pythainlp.classify import GzipModel  # doctest: +SKIP</span>
 
-<span class="sd">                training_data = [</span>
-<span class="sd">                    (&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;, &quot;Neutral&quot;),</span>
-<span class="sd">                    (&quot;กลัวพวกมึงหาย อดกินบาบิก้อน&quot;, &quot;Neutral&quot;),</span>
-<span class="sd">                    (&quot;บริการแย่มากก เป็นหมอได้ไง😤&quot;, &quot;Negative&quot;),</span>
-<span class="sd">                    (&quot;ขับรถแย่มาก&quot;, &quot;Negative&quot;),</span>
-<span class="sd">                    (&quot;ดีนะครับ&quot;, &quot;Positive&quot;),</span>
-<span class="sd">                    (&quot;ลองแล้วรสนี้อร่อย... ชอบๆ&quot;, &quot;Positive&quot;),</span>
-<span class="sd">                    (&quot;ฉันรู้สึกโกรธ เวลามือถือแบตหมด&quot;, &quot;Negative&quot;),</span>
-<span class="sd">                    (&quot;เธอภูมิใจที่ได้ทำสิ่งดี ๆ และดีใจกับเด็ก ๆ&quot;, &quot;Positive&quot;),</span>
-<span class="sd">                    (&quot;นี่เป็นบทความหนึ่ง&quot;, &quot;Neutral&quot;),</span>
-<span class="sd">                ]</span>
-<span class="sd">                model = GzipModel(training_data)</span>
-<span class="sd">                print(model.predict(&quot;ฉันดีใจ&quot;, k=1))</span>
-<span class="sd">                # output: Positive</span>
+<span class="sd">            &gt;&gt;&gt;     training_data = [  # doctest: +SKIP</span>
+<span class="sd">            ...         (&quot;รายละเอียดตามนี้เลยค่าา ^^&quot;, &quot;Neutral&quot;),</span>
+<span class="sd">            ...         (&quot;กลัวพวกมึงหาย อดกินบาบิก้อน&quot;, &quot;Neutral&quot;),</span>
+<span class="sd">            ...         (&quot;บริการแย่มากก เป็นหมอได้ไง😤&quot;, &quot;Negative&quot;),</span>
+<span class="sd">            ...         (&quot;ขับรถแย่มาก&quot;, &quot;Negative&quot;),</span>
+<span class="sd">            ...         (&quot;ดีนะครับ&quot;, &quot;Positive&quot;),</span>
+<span class="sd">            ...         (&quot;ลองแล้วรสนี้อร่อย... ชอบๆ&quot;, &quot;Positive&quot;),</span>
+<span class="sd">            ...         (&quot;ฉันรู้สึกโกรธ เวลามือถือแบตหมด&quot;, &quot;Negative&quot;),</span>
+<span class="sd">            ...         (&quot;เธอภูมิใจที่ได้ทำสิ่งดี ๆ และดีใจกับเด็ก ๆ&quot;, &quot;Positive&quot;),</span>
+<span class="sd">            ...         (&quot;นี่เป็นบทความหนึ่ง&quot;, &quot;Neutral&quot;),</span>
+<span class="sd">            ...     ]</span>
+<span class="sd">            &gt;&gt;&gt;     model = GzipModel(training_data)  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt;     print(model.predict(&quot;ฉันดีใจ&quot;, k=1))  # doctest: +SKIP</span>
+<span class="sd">                Positive</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -221,7 +220,10 @@
 <div class="viewcode-block" id="GzipModel.save">
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param str path: path to save model&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save model to file.</span>
+
+<span class="sd">        :param str path: path to save model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
                 <span class="p">{</span>
@@ -236,7 +238,10 @@
 <div class="viewcode-block" id="GzipModel.load">
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.load">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param str path: path to load model&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load model from file.</span>
+
+<span class="sd">        :param str path: path to load model from</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>

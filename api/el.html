@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.el &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.el &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -150,7 +150,7 @@
 <dt class="sig sig-object py" id="pythainlp.el.EntityLinker.get_el">
 <span class="sig-name descname"><span class="pre">get_el</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/el/core.html#EntityLinker.get_el"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.el.EntityLinker.get_el" title="Link to this definition"></a></dt>
 <dd><p>Get Entity Linking from Thai Text</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>list_text</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of Thai text or text</p>
 </dd>
@@ -161,19 +161,20 @@
 <dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, Any]], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.el</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntityLinker</span>
-
-<span class="n">el</span> <span class="o">=</span> <span class="n">EntityLinker</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">get_el</span><span class="p">(</span><span class="s2">&quot;จ๊อบเคยเป็นซีอีโอบริษัทแอปเปิล&quot;</span><span class="p">))</span>
-<span class="c1"># output: [{&#39;offsets&#39;: [11, 23],</span>
-<span class="c1"># &#39;lengths&#39;: [6, 7],</span>
-<span class="c1"># &#39;entities&#39;: [&#39;Q484876&#39;, &#39;Q312&#39;],</span>
-<span class="c1"># &#39;md_scores&#39;: [0.30301809310913086, 0.6399497389793396],</span>
-<span class="c1"># &#39;el_scores&#39;: [0.7142490744590759, 0.8657019734382629]}]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.el</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntityLinker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">el</span> <span class="o">=</span> <span class="n">EntityLinker</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">get_el</span><span class="p">(</span><span class="s2">&quot;จ๊อบเคยเป็นซีอีโอบริษัทแอปเปิล&quot;</span><span class="p">))</span>
+<span class="go">    [{&#39;offsets&#39;: [11, 23],</span>
+<span class="go">    &#39;lengths&#39;: [6, 7],</span>
+<span class="go">    &#39;entities&#39;: [&#39;Q484876&#39;, &#39;Q312&#39;],</span>
+<span class="go">    &#39;md_scores&#39;: [0.30301809310913086, 0.6399497389793396],</span>
+<span class="go">    &#39;el_scores&#39;: [0.7142490744590759, 0.8657019734382629]}]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.el.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.el.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -169,17 +169,16 @@
 <span class="sd">        :rtype: Union[list[dict[str, Any]], str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">                from pythainlp.el import EntityLinker</span>
+<span class="sd">            &gt;&gt;&gt;     from pythainlp.el import EntityLinker  # doctest: +SKIP</span>
 
-<span class="sd">                el = EntityLinker(device=&quot;cuda&quot;)</span>
-<span class="sd">                print(el.get_el(&quot;จ๊อบเคยเป็นซีอีโอบริษัทแอปเปิล&quot;))</span>
-<span class="sd">                # output: [{&#39;offsets&#39;: [11, 23],</span>
-<span class="sd">                # &#39;lengths&#39;: [6, 7],</span>
-<span class="sd">                # &#39;entities&#39;: [&#39;Q484876&#39;, &#39;Q312&#39;],</span>
-<span class="sd">                # &#39;md_scores&#39;: [0.30301809310913086, 0.6399497389793396],</span>
-<span class="sd">                # &#39;el_scores&#39;: [0.7142490744590759, 0.8657019734382629]}]</span>
+<span class="sd">            &gt;&gt;&gt;     el = EntityLinker(device=&quot;cuda&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt;     print(el.get_el(&quot;จ๊อบเคยเป็นซีอีโอบริษัทแอปเปิล&quot;))  # doctest: +SKIP</span>
+<span class="sd">                [{&#39;offsets&#39;: [11, 23],</span>
+<span class="sd">                &#39;lengths&#39;: [6, 7],</span>
+<span class="sd">                &#39;entities&#39;: [&#39;Q484876&#39;, &#39;Q312&#39;],</span>
+<span class="sd">                &#39;md_scores&#39;: [0.30301809310913086, 0.6399497389793396],</span>
+<span class="sd">                &#39;el_scores&#39;: [0.7142490744590759, 0.8657019734382629]}]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">process_batch</span><span class="p">(</span><span class="n">list_text</span><span class="p">)</span></div>
 </div>

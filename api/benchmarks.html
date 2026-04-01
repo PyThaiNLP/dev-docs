@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.benchmarks &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -171,28 +171,26 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.word_tokenization.compute_stats">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.word_tokenization.</span></span><span class="sig-name descname"><span class="pre">compute_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TokenizationStat</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#compute_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_tokenization.compute_stats" title="Link to this definition"></a></dt>
-<dd><p>Compute statistics for tokenization quality</p>
+<dd><p>Compute statistics for tokenization quality.</p>
 <p>These statistics include:</p>
 <dl class="simple">
-<dt><strong>Character-Level</strong>:</dt><dd><p>True Positive, False Positive, True Negative, False Negative, Precision, Recall, and f1</p>
+<dt><strong>Character-level</strong>:</dt><dd><p>True Positive, False Positive, True Negative, False Negative</p>
 </dd>
-<dt><strong>Word-Level</strong>:</dt><dd><p>Precision, Recall, and f1</p>
+<dt><strong>Word-level</strong>:</dt><dd><p>Precision, Recall, and F1</p>
 </dd>
-<dt><strong>Other</strong>:</dt><dd><ul class="simple">
-<li><p>Correct tokenization indicator: {0, 1} sequence indicating that the corresponding
-word is tokenized correctly.</p></li>
-</ul>
+<dt><strong>Global</strong>:</dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1}</span></code> sequence indicating whether each word
+is tokenized correctly.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ref_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – ground truth for samples</p></li>
-<li><p><strong>samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – samples that we want to evaluate</p></li>
+<li><p><strong>ref_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – ground truth sample</p></li>
+<li><p><strong>raw_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – sample to evaluate</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>metrics at character- and word-level and indicators of correctly tokenized words</p>
+<dd class="field-even"><p>character-level, word-level, and global tokenization metrics</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TokenizationStat</p>
@@ -205,17 +203,17 @@ word is tokenized correctly.</p></li>
 <dt class="sig sig-object py" id="pythainlp.benchmarks.word_tokenization.benchmark">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.word_tokenization.</span></span><span class="sig-name descname"><span class="pre">benchmark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#benchmark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_tokenization.benchmark" title="Link to this definition"></a></dt>
 <dd><p>Performance benchmarking for samples.</p>
-<p>Please see <a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.compute_stats" title="pythainlp.benchmarks.word_tokenization.compute_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pythainlp.benchmarks.word_tokenization.compute_stats()</span></code></a> for
-the computed metrics.</p>
+<p>See <a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.compute_stats" title="pythainlp.benchmarks.word_tokenization.compute_stats"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.benchmarks.word_tokenization.compute_stats()</span></code></a>
+for computed metrics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ref_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – ground truth for samples</p></li>
-<li><p><strong>samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – samples that we want to evaluate</p></li>
+<li><p><strong>ref_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – ground truth</p></li>
+<li><p><strong>samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – samples to evaluate</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>dataframe with row x col = len(samples) x len(metrics)</p>
+<dd class="field-even"><p>dataframe with shape <code class="docutils literal notranslate"><span class="pre">len(samples)</span> <span class="pre">×</span> <span class="pre">len(metrics)</span></code></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
@@ -260,7 +258,7 @@ the computed metrics.</p>
 <p>This is a pure Python implementation of BLEU (Bilingual Evaluation
 Understudy) metric that automatically tokenizes Thai text using
 PyThaiNLP before calculating the score.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>references</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – reference translations.
@@ -288,25 +286,27 @@ values are <code class="docutils literal notranslate"><span class="pre">float</s
 <dd class="field-odd"><p>BleuScore</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">bleu_score</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">references</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hypotheses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">bleu_score</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">hypotheses</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BLEU score: </span><span class="si">{</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;bleu&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">BLEU score: 28.12</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Multiple references per hypothesis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">references</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;สวัสดีค่ะ&quot;</span><span class="p">],</span>  <span class="c1"># two refs for first hypothesis</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;ลาก่อนครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;ลาก่อนค่ะ&quot;</span><span class="p">],</span>  <span class="c1"># two refs for second hypothesis</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hypotheses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดี&quot;</span><span class="p">,</span> <span class="s2">&quot;ลาก่อน&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">bleu_score</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">hypotheses</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">bleu_score</span>
-
-<span class="n">references</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span><span class="p">]</span>
-<span class="n">hypotheses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span><span class="p">]</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">bleu_score</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">hypotheses</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BLEU score: </span><span class="si">{</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;bleu&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple references per hypothesis</span>
-<span class="n">references</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s2">&quot;สวัสดีครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;สวัสดีค่ะ&quot;</span><span class="p">],</span>  <span class="c1"># two refs for first hypothesis</span>
-    <span class="p">[</span><span class="s2">&quot;ลาก่อนครับ&quot;</span><span class="p">,</span> <span class="s2">&quot;ลาก่อนค่ะ&quot;</span><span class="p">],</span>  <span class="c1"># two refs for second hypothesis</span>
-<span class="p">]</span>
-<span class="n">hypotheses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;สวัสดี&quot;</span><span class="p">,</span> <span class="s2">&quot;ลาก่อน&quot;</span><span class="p">]</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">bleu_score</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">hypotheses</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <p><strong>Example:</strong></p>
@@ -343,7 +343,7 @@ tokenizes Thai text using PyThaiNLP.</p>
 - rouge1: unigram-based scoring
 - rouge2: bigram-based scoring
 - rougeL: longest common subsequence-based scoring</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference text</p></li>
@@ -362,18 +362,22 @@ with <code class="docutils literal notranslate"><span class="pre">'precision'</s
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, RougeScore]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">rouge_score</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="n">rouge_score</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-1 F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rouge1&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-2 F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rouge2&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-L F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rougeL&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">rouge_score</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">rouge_score</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-1 F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rouge1&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">ROUGE-1 F-measure: 0.6000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-2 F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rouge2&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">ROUGE-2 F-measure: 0.2500</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-L F-measure: </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;rougeL&#39;</span><span class="p">][</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">ROUGE-L F-measure: 0.6000</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p><strong>Example:</strong></p>
@@ -406,7 +410,7 @@ reference length.</p>
 - D = number of deletions
 - I = number of insertions
 - N = number of words in reference</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference text</p></li>
@@ -422,16 +426,18 @@ See <code class="xref py py-func docutils literal notranslate"><span class="pre"
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_error_rate</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
-<span class="n">wer</span> <span class="o">=</span> <span class="n">word_error_rate</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WER: </span><span class="si">{</span><span class="n">wer</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_error_rate</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wer</span> <span class="o">=</span> <span class="n">word_error_rate</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WER: </span><span class="si">{</span><span class="n">wer</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">WER: 0.4000</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p><strong>Example:</strong></p>
@@ -462,7 +468,7 @@ normalized by the reference length.</p>
 - D = number of deletions
 - I = number of insertions
 - N = number of characters in reference</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference text</p></li>
@@ -476,16 +482,18 @@ normalized by the reference length.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">character_error_rate</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ&quot;</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ&quot;</span>
-<span class="n">cer</span> <span class="o">=</span> <span class="n">character_error_rate</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CER: </span><span class="si">{</span><span class="n">cer</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">character_error_rate</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีครับ&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;สวัสดีค่ะ&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cer</span> <span class="o">=</span> <span class="n">character_error_rate</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CER: </span><span class="si">{</span><span class="n">cer</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">CER: 0.3000</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p><strong>Example:</strong></p>

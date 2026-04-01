@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.parse &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.parse &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -180,26 +180,26 @@
 </ul>
 </dd>
 </dl>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_parsing</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">dependency_parsing</span><span class="p">(</span><span class="s2">&quot;ผมเป็นคนดี&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;esupar&quot;</span><span class="p">))</span>
-<span class="c1"># output:</span>
-<span class="c1"># 1       ผม      _       PRON    _       _       3       nsubj   _       SpaceAfter=No</span>
-<span class="c1"># 2       เป็น     _       VERB    _       _       3       cop     _       SpaceAfter=No</span>
-<span class="c1"># 3       คน      _       NOUN    _       _       0       root    _       SpaceAfter=No</span>
-<span class="c1"># 4       ดี       _       VERB    _       _       3       acl     _       SpaceAfter=No</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">dependency_parsing</span><span class="p">(</span><span class="s2">&quot;ผมเป็นคนดี&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;spacy_thai&quot;</span><span class="p">))</span>
-<span class="c1"># output:</span>
-<span class="c1"># 1       ผม              PRON    PPRS    _       2       nsubj   _       SpaceAfter=No</span>
-<span class="c1"># 2       เป็น             VERB    VSTA    _       0       ROOT    _       SpaceAfter=No</span>
-<span class="c1"># 3       คนดี             NOUN    NCMN    _       2       obj     _       SpaceAfter=No</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_parsing</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dependency_parsing</span><span class="p">(</span><span class="s2">&quot;ผมเป็นคนดี&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;esupar&quot;</span><span class="p">))</span>
+<span class="go">1       ผม      _       PRON    _       _       3       nsubj   _       SpaceAfter=No</span>
+<span class="go">2       เป็น     _       VERB    _       _       3       cop     _       SpaceAfter=No</span>
+<span class="go">3       คน      _       NOUN    _       _       0       root    _       SpaceAfter=No</span>
+<span class="go">4       ดี       _       VERB    _       _       3       acl     _       SpaceAfter=No</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dependency_parsing</span><span class="p">(</span><span class="s2">&quot;ผมเป็นคนดี&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;spacy_thai&quot;</span><span class="p">))</span>
+<span class="go">1       ผม              PRON    PPRS    _       2       nsubj   _       SpaceAfter=No</span>
+<span class="go">2       เป็น             VERB    VSTA    _       0       ROOT    _       SpaceAfter=No</span>
+<span class="go">3       คนดี             NOUN    NCMN    _       2       obj     _       SpaceAfter=No</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>dependency_parsing</cite> function is the core component of the <cite>pythainlp.parse</cite> module. It offers dependency parsing capabilities for the Thai language. Given a Thai sentence as input, this function parses the sentence to identify the grammatical relationships between words, creating a dependency tree that represents the sentence’s structure.</p>

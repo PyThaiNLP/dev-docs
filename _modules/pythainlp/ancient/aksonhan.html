@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient.aksonhan &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.ancient.aksonhan &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -144,28 +144,24 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">aksonhan_to_current</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert AksonHan words to current Thai words</span>
 
-<span class="sd">    AksonHan (อักษรหัน) writes down two consonants for the \</span>
-<span class="sd">    spelling of the /a/ vowels. (สระ อะ).</span>
+<span class="sd">    AksonHan (อักษรหัน) writes two consonants to spell</span>
+<span class="sd">    the short /a/ vowel (สระ อะ).</span>
 
-<span class="sd">    Today, รร is an aksonHan word that is still used in Thai.</span>
+<span class="sd">    Today, รร is an aksonhan pattern still used in Thai.</span>
 
 <span class="sd">    :param str word: Thai word</span>
 <span class="sd">    :return: Thai AksonHan to be converted to current Thai word</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.ancient import aksonhan_to_current</span>
-
-<span class="sd">        print(aksonhan_to_current(&quot;จกก&quot;))</span>
-<span class="sd">        # output: จัก</span>
-
-<span class="sd">        print(aksonhan_to_current(&quot;บงงคบบ&quot;))</span>
-<span class="sd">        # output: บังคับ</span>
-
-<span class="sd">        print(aksonhan_to_current(&quot;สรรเพชญ&quot;)) # รร is still used.</span>
-<span class="sd">        # output: สรรเพชญ</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.ancient import aksonhan_to_current</span>
+<span class="sd">        &gt;&gt;&gt; print(aksonhan_to_current(&quot;จกก&quot;))</span>
+<span class="sd">        จัก</span>
+<span class="sd">        &gt;&gt;&gt; print(aksonhan_to_current(&quot;บงงคบบ&quot;))</span>
+<span class="sd">        บังคับ</span>
+<span class="sd">        &gt;&gt;&gt; print(aksonhan_to_current(&quot;สรรเพชญ&quot;))  # รร is still used.</span>
+<span class="sd">        สรรเพชญ</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>

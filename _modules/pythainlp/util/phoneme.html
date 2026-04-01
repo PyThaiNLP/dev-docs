@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.phoneme &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.phoneme &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -211,19 +211,17 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import nectec_to_ipa</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import nectec_to_ipa  # doctest: +SKIP</span>
 
-<span class="sd">        print(nectec_to_ipa(&quot;kl-uua-j^-2&quot;))</span>
-<span class="sd">        # output : &#39;kl uua j ˥˩&#39;</span>
-
+<span class="sd">        &gt;&gt;&gt; print(nectec_to_ipa(&quot;kl-uua-j^-2&quot;))  # doctest: +SKIP</span>
+<span class="sd">        &#39;kl uua j ˥˩&#39;</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Pornpimon Palingoon, Sumonmas Thatphithakkul. Chapter 4 Speech processing \</span>
-<span class="sd">        and Speech corpus. In: Handbook of Thai Electronic Corpus. \</span>
-<span class="sd">        1st ed. p. 122–56.</span>
+<span class="sd">    Pornpimon Palingoon, Sumonmas Thatphithakkul. Chapter 4 Speech</span>
+<span class="sd">    processing and Speech corpus. In: Handbook of Thai Electronic</span>
+<span class="sd">    Corpus. 1st ed. p. 122–56.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parts</span> <span class="o">=</span> <span class="n">pronunciation</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
@@ -243,11 +241,11 @@
     <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span>
     <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
     <span class="c1"># The conversion of j depends on its position in the syllable.</span>
-    <span class="c1"># But, unfortunately, the current implementation cannot handle both cases.</span>
-    <span class="c1"># To remove confusions without changing the behavior and breaking existing codes,</span>
-    <span class="c1"># it is suggested that the first key-value mapping of j be simply commented out,</span>
-    <span class="c1"># as it would be overridden by the second one and thus never take effect from the beginning.</span>
-    <span class="c1"># See #846 for a more detailed discussion: https://github.com/PyThaiNLP/pythainlp/issues/846</span>
+    <span class="c1"># The current implementation cannot handle both cases.</span>
+    <span class="c1"># The first mapping (&quot;j&quot;: &quot;y&quot;) is commented out because it is</span>
+    <span class="c1"># overridden by the second one (&quot;j&quot;: &quot;i&quot;) and never takes effect.</span>
+    <span class="c1"># See issue #846:</span>
+    <span class="c1"># https://github.com/PyThaiNLP/pythainlp/issues/846</span>
     <span class="c1"># &quot;j&quot;:&quot;y&quot;,</span>
     <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span>
     <span class="s2">&quot;kʰ&quot;</span><span class="p">:</span> <span class="s2">&quot;kh&quot;</span><span class="p">,</span>
@@ -329,12 +327,11 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import ipa_to_rtgs</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import ipa_to_rtgs  # doctest: +SKIP</span>
 
-<span class="sd">        print(ipa_to_rtgs(&quot;kluaj&quot;))</span>
-<span class="sd">        # output : &#39;kluai&#39;</span>
+<span class="sd">        &gt;&gt;&gt; print(ipa_to_rtgs(&quot;kluaj&quot;))  # doctest: +SKIP</span>
+<span class="sd">        &#39;kluai&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rtgs_parts</span> <span class="o">=</span> <span class="p">[]</span>
@@ -370,12 +367,11 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_tone_ipa</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_tone_ipa  # doctest: +SKIP</span>
 
-<span class="sd">        print(remove_tone_ipa(&quot;laː˦˥.sa˨˩.maj˩˩˦&quot;))</span>
-<span class="sd">        # output : laː.sa.maj</span>
+<span class="sd">        &gt;&gt;&gt; print(remove_tone_ipa(&quot;laː˦˥.sa˨˩.maj˩˩˦&quot;))  # doctest: +SKIP</span>
+<span class="sd">        laː.sa.maj</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_list_tone</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;˩˩˦&quot;</span><span class="p">,</span> <span class="s2">&quot;˥˩&quot;</span><span class="p">,</span> <span class="s2">&quot;˨˩&quot;</span><span class="p">,</span> <span class="s2">&quot;˦˥&quot;</span><span class="p">,</span> <span class="s2">&quot;˧&quot;</span><span class="p">]</span>

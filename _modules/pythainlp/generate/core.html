@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.generate.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.generate.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -180,23 +180,25 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param str start_seq: word to begin sentence with</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a sentence using the unigram model.</span>
+
+<span class="sd">        :param str start_seq: word to begin sentence with</span>
 <span class="sd">        :param int N: number of words</span>
+<span class="sd">        :param float prob: minimum word probability threshold</span>
 <span class="sd">        :param bool output_str: output as string</span>
 <span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
 
 <span class="sd">        :return: list of words or a word string</span>
-<span class="sd">        :rtype: list[str], str</span>
+<span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.generate import Unigram</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.generate import Unigram  # doctest: +SKIP</span>
 
-<span class="sd">            gen = Unigram()</span>
+<span class="sd">            &gt;&gt;&gt; gen = Unigram()  # doctest: +SKIP</span>
 
-<span class="sd">            gen.gen_sentence(&quot;แมว&quot;)</span>
-<span class="sd">            # output: &#39;แมวเวลานะนั้น&#39;</span>
+<span class="sd">            &gt;&gt;&gt; gen.gen_sentence(&quot;แมว&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;แมวเวลานะนั้น&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">start_seq</span><span class="p">:</span>
             <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
@@ -268,10 +270,10 @@
 <div class="viewcode-block" id="Bigram.prob">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.prob">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Probability of word</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute bigram probability P(t2 | t1).</span>
 
-<span class="sd">        :param int t1: text 1</span>
-<span class="sd">        :param int t2: text 2</span>
+<span class="sd">        :param str t1: first word</span>
+<span class="sd">        :param str t2: second word</span>
 
 <span class="sd">        :return: probability value</span>
 <span class="sd">        :rtype: float</span>
@@ -293,23 +295,25 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param str start_seq: word to begin sentence with</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a sentence using the bigram model.</span>
+
+<span class="sd">        :param str start_seq: word to begin sentence with</span>
 <span class="sd">        :param int N: number of words</span>
+<span class="sd">        :param float prob: minimum word probability threshold</span>
 <span class="sd">        :param bool output_str: output as string</span>
 <span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
 
 <span class="sd">        :return: list of words or a word string</span>
-<span class="sd">        :rtype: list[str], str</span>
+<span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.generate import Bigram</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.generate import Bigram  # doctest: +SKIP</span>
 
-<span class="sd">            gen = Bigram()</span>
+<span class="sd">            &gt;&gt;&gt; gen = Bigram()  # doctest: +SKIP</span>
 
-<span class="sd">            gen.gen_sentence(&quot;แมว&quot;)</span>
-<span class="sd">            # output: &#39;แมวไม่ได้รับเชื้อมัน&#39;</span>
+<span class="sd">            &gt;&gt;&gt; gen.gen_sentence(&quot;แมว&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;แมวไม่ได้รับเชื้อมัน&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">start_seq</span><span class="p">:</span>
             <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
@@ -377,11 +381,11 @@
 <div class="viewcode-block" id="Trigram.prob">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.prob">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t3</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Probability of word</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute trigram probability P(t3 | t1, t2).</span>
 
-<span class="sd">        :param int t1: text 1</span>
-<span class="sd">        :param int t2: text 2</span>
-<span class="sd">        :param int t3: text 3</span>
+<span class="sd">        :param str t1: first word</span>
+<span class="sd">        :param str t2: second word</span>
+<span class="sd">        :param str t3: third word</span>
 
 <span class="sd">        :return: probability value</span>
 <span class="sd">        :rtype: float</span>
@@ -404,23 +408,26 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param str start_seq: word to begin sentence with</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a sentence using the trigram model.</span>
+
+<span class="sd">        :param start_seq: word or bigram to begin sentence with</span>
+<span class="sd">        :type start_seq: Union[str, tuple[str, str]]</span>
 <span class="sd">        :param int N: number of words</span>
+<span class="sd">        :param float prob: minimum word probability threshold</span>
 <span class="sd">        :param bool output_str: output as string</span>
 <span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
 
 <span class="sd">        :return: list of words or a word string</span>
-<span class="sd">        :rtype: list[str], str</span>
+<span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.generate import Trigram</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.generate import Trigram  # doctest: +SKIP</span>
 
-<span class="sd">            gen = Trigram()</span>
+<span class="sd">            &gt;&gt;&gt; gen = Trigram()  # doctest: +SKIP</span>
 
-<span class="sd">            gen.gen_sentence()</span>
-<span class="sd">            # output: &#39;ยังทำตัวเป็นเซิร์ฟเวอร์คือ&#39;</span>
+<span class="sd">            &gt;&gt;&gt; gen.gen_sentence()  # doctest: +SKIP</span>
+<span class="sd">            &#39;ยังทำตัวเป็นเซิร์ฟเวอร์คือ&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">late_word</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">start_seq</span><span class="p">:</span>

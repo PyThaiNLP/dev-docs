@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.benchmarks.word_tokenization &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -204,21 +204,22 @@
     <span class="n">my_dict</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten two-dimension dictionary.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten a two-level dictionary.</span>
 
-<span class="sd">    Use keys in the first dimension as a prefix for keys in the second dimension.</span>
-<span class="sd">    For example,</span>
-<span class="sd">    my_dict = { &quot;a&quot;: { &quot;b&quot;: 7 } }</span>
-<span class="sd">    flatten(my_dict)</span>
-<span class="sd">    { &quot;a:b&quot;: 7 }</span>
+<span class="sd">    Uses keys from the first level as a prefix for keys in the second level.</span>
+<span class="sd">    For example::</span>
 
+<span class="sd">        my_dict = {&quot;a&quot;: {&quot;b&quot;: 7}}</span>
+<span class="sd">        _flatten_result(my_dict)</span>
+<span class="sd">        # {&quot;a:b&quot;: 7}</span>
 
 <span class="sd">    :param my_dict: dictionary containing stats</span>
 <span class="sd">    :type my_dict: TokenizationStat or</span>
-<span class="sd">        collections.abc.Mapping[str, collections.abc.Mapping[str, Union[int, str]]]</span>
-<span class="sd">    :param str sep: separator between the two keys (default: &quot;:&quot;)</span>
+<span class="sd">        collections.abc.Mapping[str,</span>
+<span class="sd">        collections.abc.Mapping[str, Union[int, str]]]</span>
+<span class="sd">    :param str sep: separator between the two keys (default: ``&quot;:&quot;``)</span>
 
-<span class="sd">    :return: a one-dimension dictionary with keys combined</span>
+<span class="sd">    :return: a flat dictionary with combined keys</span>
 <span class="sd">    :rtype: dict[str, Union[int, str]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
@@ -233,13 +234,13 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">benchmark</span><span class="p">(</span><span class="n">ref_samples</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">samples</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Performance benchmarking for samples.</span>
 
-<span class="sd">    Please see :meth:`pythainlp.benchmarks.word_tokenization.compute_stats` for</span>
-<span class="sd">    the computed metrics.</span>
+<span class="sd">    See :func:`pythainlp.benchmarks.word_tokenization.compute_stats`</span>
+<span class="sd">    for computed metrics.</span>
 
-<span class="sd">    :param list[str] ref_samples: ground truth for samples</span>
-<span class="sd">    :param list[str] samples: samples that we want to evaluate</span>
+<span class="sd">    :param list[str] ref_samples: ground truth</span>
+<span class="sd">    :param list[str] samples: samples to evaluate</span>
 
-<span class="sd">    :return: dataframe with row x col = len(samples) x len(metrics)</span>
+<span class="sd">    :return: dataframe with shape ``len(samples) × len(metrics)``</span>
 <span class="sd">    :rtype: pandas.DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -307,22 +308,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats</span><span class="p">(</span>
     <span class="n">ref_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">raw_sample</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenizationStat</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute statistics for tokenization quality</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute statistics for tokenization quality.</span>
 
 <span class="sd">    These statistics include:</span>
 
-<span class="sd">    **Character-Level**:</span>
-<span class="sd">      True Positive, False Positive, True Negative, False Negative, Precision, Recall, and f1</span>
-<span class="sd">    **Word-Level**:</span>
-<span class="sd">      Precision, Recall, and f1</span>
-<span class="sd">    **Other**:</span>
-<span class="sd">      - Correct tokenization indicator: {0, 1} sequence indicating that the corresponding</span>
-<span class="sd">        word is tokenized correctly.</span>
+<span class="sd">    **Character-level**:</span>
+<span class="sd">      True Positive, False Positive, True Negative, False Negative</span>
+<span class="sd">    **Word-level**:</span>
+<span class="sd">      Precision, Recall, and F1</span>
+<span class="sd">    **Global**:</span>
+<span class="sd">      A ``{0, 1}`` sequence indicating whether each word</span>
+<span class="sd">      is tokenized correctly.</span>
 
-<span class="sd">    :param str ref_sample: ground truth for samples</span>
-<span class="sd">    :param str samples: samples that we want to evaluate</span>
+<span class="sd">    :param str ref_sample: ground truth sample</span>
+<span class="sd">    :param str raw_sample: sample to evaluate</span>
 
-<span class="sd">    :return: metrics at character- and word-level and indicators of correctly tokenized words</span>
+<span class="sd">    :return: character-level, word-level, and global tokenization metrics</span>
 <span class="sd">    :rtype: TokenizationStat</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -445,10 +446,12 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find whether each word is correctly tokenized.</span>
 
-<span class="sd">    :param list[tuple[int, int]] ref_boundaries: word boundaries of reference tokenization</span>
-<span class="sd">    :param list[tuple[int, int]] predicted_boundaries: word boundaries of predicted tokenization</span>
+<span class="sd">    :param list[tuple[int, int]] ref_boundaries: word boundaries of</span>
+<span class="sd">        the reference tokenization</span>
+<span class="sd">    :param list[tuple[int, int]] predicted_boundaries: word boundaries of</span>
+<span class="sd">        the predicted tokenization</span>
 
-<span class="sd">    :return: binary sequence where 1 indicates the corresponding word is tokenized correctly</span>
+<span class="sd">    :return: binary sequence; 1 means the word is tokenized correctly</span>
 <span class="sd">    :rtype: tuple[int, ...]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ref_b</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ref_boundaries</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref_boundaries</span><span class="p">)))</span>

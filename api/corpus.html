@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.corpus &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -220,7 +220,7 @@
 <p>Whitespace stripped and empty values and duplicates removed.</p>
 <p>If comments is False, any text at any position after the character
 ‘#’ in each line will be discarded.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – filename of the corpus to be read</p></li>
@@ -234,47 +234,19 @@
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#frozenset" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus</span>
-
-<span class="c1"># input file (negations_th.txt):</span>
-<span class="c1"># แต่</span>
-<span class="c1"># ไม่</span>
-
-<span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;negations_th.txt&quot;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># frozenset({&#39;แต่&#39;, &#39;ไม่&#39;})</span>
-
-<span class="c1"># input file (ttc_freq.txt):</span>
-<span class="c1"># ตัวบท&lt;tab&gt;10</span>
-<span class="c1"># โดยนัยนี้&lt;tab&gt;1</span>
-
-<span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;ttc_freq.txt&quot;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># frozenset({&#39;โดยนัยนี้\t1&#39;,</span>
-<span class="c1">#    &#39;ตัวบท\t10&#39;,</span>
-<span class="c1">#     ...})</span>
-
-<span class="c1"># input file (icubrk_th.txt):</span>
-<span class="c1"># # Thai Dictionary for ICU BreakIterator</span>
-<span class="c1"># กก</span>
-<span class="c1"># กกขนาก</span>
-
-<span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;icubrk_th.txt&quot;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># frozenset({&#39;กกขนาก&#39;,</span>
-<span class="c1">#     &#39;# Thai Dictionary for ICU BreakIterator&#39;,</span>
-<span class="c1">#     &#39;กก&#39;,</span>
-<span class="c1">#     ...})</span>
-
-<span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;icubrk_th.txt&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># frozenset({&#39;กกขนาก&#39;,</span>
-<span class="c1">#     &#39;กก&#39;,</span>
-<span class="c1">#     ...})</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;negations_th.txt&quot;</span><span class="p">)</span>
+<span class="go">frozenset({&#39;แต่&#39;, &#39;ไม่&#39;})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;ttc_freq.txt&quot;</span><span class="p">)</span>
+<span class="go">frozenset({&#39;โดยนัยนี้\t1&#39;, &#39;ตัวบท\t10&#39;, ...})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;icubrk_th.txt&quot;</span><span class="p">)</span>
+<span class="go">frozenset({&#39;กกขนาก&#39;, &#39;# Thai Dictionary for ICU BreakIterator&#39;, &#39;กก&#39;, ...})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;icubrk_th.txt&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">frozenset({&#39;กกขนาก&#39;, &#39;กก&#39;, ...})</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -287,7 +259,7 @@
 <p>Each line in the file will be a member of the list.</p>
 <p>No modifications in member values and their orders.</p>
 <p>If strip or comment removal is needed, use get_corpus() instead.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – filename of the corpus to be read</p>
 </dd>
@@ -298,19 +270,13 @@
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus</span>
-
-<span class="c1"># input file (negations_th.txt):</span>
-<span class="c1"># แต่</span>
-<span class="c1"># ไม่</span>
-
-<span class="n">get_corpus_as_is</span><span class="p">(</span><span class="s2">&quot;negations_th.txt&quot;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [&#39;แต่&#39;, &#39;ไม่&#39;]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_as_is</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus_as_is</span><span class="p">(</span><span class="s2">&quot;negations_th.txt&quot;</span><span class="p">)</span>
+<span class="go">[&#39;แต่&#39;, &#39;ไม่&#39;]</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -414,26 +380,21 @@ or <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <p>(Please see the filename in
 <a class="reference external" href="https://pythainlp.org/pythainlp-corpus/db.json">this file</a>)</p>
 <p>If the corpus already exists:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">))</span>
-<span class="c1"># output: /root/pythainlp-data/ttc_freq.txt</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">)</span>
+<span class="go">&#39;/root/pythainlp-data/ttc_freq.txt&#39;</span>
 </pre></div>
 </div>
 <p>If the corpus has not been downloaded yet (online mode):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">))</span>
-<span class="c1"># output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
-<span class="c1"># (downloads automatically on first call)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">)</span>
+<span class="go">&#39;/root/pythainlp-data/thwiki_model_lstm.pth&#39;</span>
 </pre></div>
 </div>
 <p>To download manually:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span><span class="p">,</span> <span class="n">get_corpus_path</span>
-
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">))</span>
-<span class="c1"># output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">)</span>
+<span class="go">&#39;/root/pythainlp-data/thwiki_model_lstm.pth&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -452,7 +413,7 @@ or <code class="docutils literal notranslate"><span class="pre">None</span></cod
 to <code class="docutils literal notranslate"><span class="pre">download()</span></code> is a deliberate user action.
 <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code> only blocks the <em>automatic</em> download triggered
 by <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code>.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus name</p></li>
@@ -469,17 +430,15 @@ Otherwise, it returns <strong>False</strong>.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
-
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># Corpus: wiki_lm_lstm</span>
-<span class="c1"># - Downloading: wiki_lm_lstm 0.1</span>
-<span class="c1"># thwiki_lm.pth:  26%|██▌       | 114k/434k [00:00&lt;00:00, 690kB/s]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;wiki_lm_lstm&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Corpus: wiki_lm_lstm</span>
+<span class="go">- Downloading: wiki_lm_lstm 0.1</span>
+<span class="go">...</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <p>By default, downloaded corpora and models will be saved in
 <code class="docutils literal notranslate"><span class="pre">$HOME/pythainlp-data/</span></code>
 (e.g. <code class="docutils literal notranslate"><span class="pre">/Users/bact/pythainlp-data/wiki_lm_lstm.pth</span></code>).</p>
@@ -492,7 +451,7 @@ Otherwise, it returns <strong>False</strong>.</p>
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.</span></span><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/core.html#remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Remove corpus</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus name</p>
 </dd>
@@ -504,22 +463,15 @@ Otherwise, it returns <strong>False</strong>.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">remove</span><span class="p">,</span> <span class="n">get_corpus_path</span><span class="p">,</span> <span class="n">get_corpus</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">))</span>
-<span class="c1"># output: True</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">))</span>
-<span class="c1"># output: None</span>
-
-<span class="n">get_corpus</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># FileNotFoundError: [Errno 2] No such file or directory:</span>
-<span class="c1"># &#39;/usr/local/lib/python3.6/dist-packages/pythainlp/corpus/ttc&#39;</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">remove</span><span class="p">,</span> <span class="n">get_corpus_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">&quot;ttc&quot;</span><span class="p">)</span>
+<span class="go">None</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -532,7 +484,7 @@ Otherwise, it returns <strong>False</strong>.</p>
 <dt>Return a frozenset of Thailand province names in Thai such as “กระบี่”,</dt><dd><p>“กรุงเทพมหานคร”, “กาญจนบุรี”, and “อุบลราชธานี”.</p>
 </dd>
 </dl>
-<p>(See: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/thailand_provinces_th.txt">dev/pythainlp/corpus/thailand_provinces_th.txt</a>)</p>
+<p>(See: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/thailand_provinces_th.csv">dev/pythainlp/corpus/thailand_provinces_th.csv</a>)</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">param bool details<span class="colon">:</span></dt>
@@ -668,7 +620,7 @@ Commonly misspelled words are included intentionally.</p>
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.</span></span><span class="sig-name descname"><span class="pre">thai_orst_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#frozenset" title="(in Python v3.14)"><span class="pre">frozenset</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/common.html#thai_orst_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Return a frozenset of Thai words from Royal Society of Thailand</p>
-<p>(See: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/orst_words_th.txt">dev/pythainlp/corpus/thai_orst_words.txt</a>)</p>
+<p>(See: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/orst_words_th.txt">dev/pythainlp/corpus/orst_words_th.txt</a>)</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">return<span class="colon">:</span></dt>
@@ -822,11 +774,16 @@ Commonly misspelled words are included intentionally.</p>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.corpus.tnc.</span></span><span class="sig-name descname"><span class="pre">word_freqs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/corpus/tnc.html#word_freqs"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Get word frequency from Thai National Corpus (TNC)</p>
+<dd><p>Get word frequency from Thai National Corpus (TNC).</p>
 <p>(See: <a class="reference external" href="https://github.com/PyThaiNLP/pythainlp/blob/dev/pythainlp/corpus/tnc_freq.txt">dev/pythainlp/corpus/tnc_freq.txt</a>)</p>
-<blockquote>
-<div><p>Credit: Korakot Chaovavanich <a class="reference external" href="https://www.facebook.com/groups/thainlp/posts/434330506948445">https://www.facebook.com/groups/thainlp/posts/434330506948445</a></p>
-</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">See Also<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>Korakot Chaovavanich.
+<a class="reference external" href="https://www.facebook.com/groups/thainlp/posts/434330506948445">https://www.facebook.com/groups/thainlp/posts/434330506948445</a></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -915,15 +872,15 @@ for the provided <cite>training_data</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – a tokenize function</p></li>
+<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – a tokenize function</p></li>
 <li><p><strong>training_data</strong> (<em>Iterable</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – tokenized text, to be used        as a training set</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>words that are considered to make <cite>tokenize</cite> perform badly</p>
+<dd class="field-even"><p>words that do not work well with the <cite>tokenize</cite> function</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Set[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -937,47 +894,40 @@ for the provided <cite>training_data</cite>.</p>
 <dd><p>Revise a set of words that could improve tokenization performance of
 a dictionary-based <cite>tokenize</cite> function.</p>
 <p><cite>orig_words</cite> will be used as a base set for the dictionary.
-Words that do not performed well with <cite>training_data</cite> will be removed.
+Words that do not perform well with <cite>training_data</cite> will be removed.
 The remaining words will be returned.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – a tokenize function, can be        any function that takes a string as input and returns a List[str]</p></li>
-<li><p><strong>orig_words</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words that used by the tokenize function,        will be used as a base for revision</p></li>
+<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – a tokenize function, can be        any function that takes a string as input and returns a list[str]</p></li>
+<li><p><strong>orig_words</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – words used by the tokenize function,        will be used as a base for revision</p></li>
 <li><p><strong>training_data</strong> (<em>Iterable</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – tokenized text, to be used        as a training set</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>words that are considered to make <cite>tokenize</cite> perform badly</p>
+<dd class="field-even"><p>revised set of words with underperforming words removed</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Set[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
-<dt class="field-even">Example:<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_words</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">revise_wordset</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.longest</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
-
-<span class="n">base_words</span> <span class="o">=</span> <span class="n">thai_words</span><span class="p">()</span>
-<span class="n">more_words</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ถวิล อุดล&quot;</span><span class="p">,</span> <span class="s2">&quot;ทองอินทร์ ภูริพัฒน์&quot;</span><span class="p">,</span> <span class="s2">&quot;เตียง ศิริขันธ์&quot;</span><span class="p">,</span> <span class="s2">&quot;จำลอง ดาวเรือง&quot;</span>
-<span class="p">}</span>
-<span class="n">base_words</span> <span class="o">=</span> <span class="n">base_words</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">more_words</span><span class="p">)</span>
-<span class="n">dict_trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
-
-<span class="n">tokenize</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">dict_trie</span><span class="p">)</span>
-
-<span class="n">training_data</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="o">.</span> <span class="o">...</span><span class="p">],</span>
-    <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
-    <span class="o">...</span>
-<span class="p">]</span>
-
-<span class="n">revised_words</span> <span class="o">=</span> <span class="n">revise_wordset</span><span class="p">(</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">wordlist</span><span class="p">,</span> <span class="n">training_data</span><span class="p">)</span>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_words</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">revise_wordset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.longest</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">base_words</span> <span class="o">=</span> <span class="n">thai_words</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">more_words</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;ถวิล อุดล&quot;</span><span class="p">,</span> <span class="s2">&quot;ทองอินทร์ ภูริพัฒน์&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;เตียง ศิริขันธ์&quot;</span><span class="p">,</span> <span class="s2">&quot;จำลอง ดาวเรือง&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">base_words</span> <span class="o">=</span> <span class="n">base_words</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">more_words</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict_trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">base_words</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenize</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">dict_trie</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">training_data</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;word1&quot;</span><span class="p">,</span> <span class="s2">&quot;word2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;word3&quot;</span><span class="p">,</span> <span class="s2">&quot;word4&quot;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">revised_words</span> <span class="o">=</span> <span class="n">revise_wordset</span><span class="p">(</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">base_words</span><span class="p">,</span> <span class="n">training_data</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -990,17 +940,17 @@ The remaining words will be returned.</p>
 <cite>pythainlp.tokenize.newmm</cite>, a dictionary-based tokenizer and a default
 tokenizer for PyThaiNLP.</p>
 <p>Words from <cite>pythainlp.corpus.thai_words()</cite> will be used as a base set
-for the dictionary. Words that do not performed well with <cite>training_data</cite>
+for the dictionary. Words that do not perform well with <cite>training_data</cite>
 will be removed. The remaining words will be returned.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>training_data</strong> (<em>Iterable</em><em>[</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – tokenized text, to be used        as a training set</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>words that are considered to make <cite>tokenize</cite> perform badly</p>
+<dd class="field-even"><p>revised set of words with underperforming words removed</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Set[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>

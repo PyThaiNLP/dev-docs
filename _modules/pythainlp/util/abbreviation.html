@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.abbreviation &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.abbreviation &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -133,21 +133,20 @@
 
 <span class="sd">    :param str text: Thai text</span>
 <span class="sd">    :param int top_k: Top K</span>
-<span class="sd">    :return: Thai full text with abbreviations converted to full text and cos scores (original text - modified text).</span>
-<span class="sd">    :rtype: List[Tuple[str, Union[float, None]]]</span>
+<span class="sd">    :return: list of ``(full_text, cosine_similarity)`` tuples.</span>
+<span class="sd">    :rtype: list[tuple[str, Optional[float]]]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import abbreviation_to_full_text</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import abbreviation_to_full_text  # doctest: +SKIP</span>
 
-<span class="sd">        text = &quot;รร.ของเราน่าอยู่&quot;</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;รร.ของเราน่าอยู่&quot;  # doctest: +SKIP</span>
 
-<span class="sd">        abbreviation_to_full_text(text)</span>
-<span class="sd">        # output: [</span>
-<span class="sd">        # (&#39;โรงเรียนของเราน่าอยู่&#39;, tensor(0.3734)),</span>
-<span class="sd">        # (&#39;โรงแรมของเราน่าอยู่&#39;, tensor(0.2438))</span>
-<span class="sd">        # ]</span>
+<span class="sd">        &gt;&gt;&gt; abbreviation_to_full_text(text)  # doctest: +SKIP</span>
+<span class="sd">        [</span>
+<span class="sd">        (&#39;โรงเรียนของเราน่าอยู่&#39;, tensor(0.3734)),</span>
+<span class="sd">        (&#39;โรงแรมของเราน่าอยู่&#39;, tensor(0.2438))</span>
+<span class="sd">        ]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">khamyo</span><span class="w"> </span><span class="kn">import</span> <span class="n">replace</span> <span class="k">as</span> <span class="n">_replace</span>

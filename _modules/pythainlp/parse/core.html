@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.parse.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.parse.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -194,22 +194,19 @@
 <span class="sd">            `Huggingface &lt;https://huggingface.co/KoichiYasuoka/deberta-base-thai-ud-goeswith&gt;`_</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.parse import dependency_parsing</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.parse import dependency_parsing  # doctest: +SKIP</span>
 
-<span class="sd">        print(dependency_parsing(&quot;ผมเป็นคนดี&quot;, engine=&quot;esupar&quot;))</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # 1       ผม      _       PRON    _       _       3       nsubj   _       SpaceAfter=No</span>
-<span class="sd">        # 2       เป็น     _       VERB    _       _       3       cop     _       SpaceAfter=No</span>
-<span class="sd">        # 3       คน      _       NOUN    _       _       0       root    _       SpaceAfter=No</span>
-<span class="sd">        # 4       ดี       _       VERB    _       _       3       acl     _       SpaceAfter=No</span>
+<span class="sd">        &gt;&gt;&gt; print(dependency_parsing(&quot;ผมเป็นคนดี&quot;, engine=&quot;esupar&quot;))  # doctest: +SKIP</span>
+<span class="sd">        1       ผม      _       PRON    _       _       3       nsubj   _       SpaceAfter=No</span>
+<span class="sd">        2       เป็น     _       VERB    _       _       3       cop     _       SpaceAfter=No</span>
+<span class="sd">        3       คน      _       NOUN    _       _       0       root    _       SpaceAfter=No</span>
+<span class="sd">        4       ดี       _       VERB    _       _       3       acl     _       SpaceAfter=No</span>
 
-<span class="sd">        print(dependency_parsing(&quot;ผมเป็นคนดี&quot;, engine=&quot;spacy_thai&quot;))</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # 1       ผม              PRON    PPRS    _       2       nsubj   _       SpaceAfter=No</span>
-<span class="sd">        # 2       เป็น             VERB    VSTA    _       0       ROOT    _       SpaceAfter=No</span>
-<span class="sd">        # 3       คนดี             NOUN    NCMN    _       2       obj     _       SpaceAfter=No</span>
+<span class="sd">        &gt;&gt;&gt; print(dependency_parsing(&quot;ผมเป็นคนดี&quot;, engine=&quot;spacy_thai&quot;))  # doctest: +SKIP</span>
+<span class="sd">        1       ผม              PRON    PPRS    _       2       nsubj   _       SpaceAfter=No</span>
+<span class="sd">        2       เป็น             VERB    VSTA    _       0       ROOT    _       SpaceAfter=No</span>
+<span class="sd">        3       คนดี             NOUN    NCMN    _       2       obj     _       SpaceAfter=No</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_tagger</span><span class="p">,</span> <span class="n">_tagger_name</span>
 

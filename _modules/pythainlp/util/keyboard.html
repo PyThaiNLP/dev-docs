@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.keyboard &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.keyboard &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -252,12 +252,11 @@
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">    Intentionally type &quot;ธนาคารแห่งประเทศไทย&quot;, but got &quot;Tok8kicsj&#39;xitgmLwmp&quot;::</span>
+<span class="sd">    Intentionally type &quot;ธนาคารแห่งประเทศไทย&quot;, but got &quot;Tok8kicsj&#39;xitgmLwmp&quot;:</span>
 
-<span class="sd">        from pythainlp.util import eng_to_thai</span>
-
-<span class="sd">        eng_to_thai(&quot;Tok8kicsj&#39;xitgmLwmp&quot;)</span>
-<span class="sd">        # output: ธนาคารแห่งประเทศไทย</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import eng_to_thai</span>
+<span class="sd">        &gt;&gt;&gt; eng_to_thai(&quot;Tok8kicsj&#39;xitgmLwmp&quot;)</span>
+<span class="sd">        &#39;ธนาคารแห่งประเทศไทย&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">EN_TH_TRANSLATE_TABLE</span><span class="p">)</span></div>
 
@@ -277,12 +276,11 @@
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">    Intentionally type &quot;Bank of Thailand&quot;, but got &quot;ฺฟืา นด ธ้ฟรสฟืก&quot;::</span>
+<span class="sd">    Intentionally type &quot;Bank of Thailand&quot;, but got &quot;ฺฟืา นด ธ้ฟรสฟืก&quot;:</span>
 
-<span class="sd">        from pythainlp.util import eng_to_thai</span>
-
-<span class="sd">        thai_to_eng(&quot;ฺฟืา นด ธ้ฟรสฟืก&quot;)</span>
-<span class="sd">        # output: &#39;Bank of Thailand&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_to_eng</span>
+<span class="sd">        &gt;&gt;&gt; thai_to_eng(&quot;ฺฟืา นด ธ้ฟรสฟืก&quot;)</span>
+<span class="sd">        &#39;Bank of Thailand&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">TH_EN_TRANSLATE_TABLE</span><span class="p">)</span></div>
 
@@ -308,23 +306,23 @@
 
 <span class="sd">    :param str c1: first character</span>
 <span class="sd">    :param str c2: second character</span>
-<span class="sd">    :param str shift_dist: return value if they&#39;re shifted</span>
+<span class="sd">    :param float shift_dist: return value if they are on shifted keys</span>
 <span class="sd">    :return: Euclidean distance between two characters</span>
 <span class="sd">    :rtype: float</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">        from pythainlp.util import thai_keyboard_dist</span>
-<span class="sd">        thai_keyboard_dist(&quot;ด&quot;, &quot;ะ&quot;)</span>
-<span class="sd">        # output: 1.4142135623730951</span>
-<span class="sd">        thai_keyboard_dist(&quot;ฟ&quot;, &quot;ฤ&quot;)</span>
-<span class="sd">        # output: 0.0</span>
-<span class="sd">        thai_keyboard_dist(&quot;ฟ&quot;, &quot;ห&quot;)</span>
-<span class="sd">        # output: 1.0</span>
-<span class="sd">        thai_keyboard_dist(&quot;ฟ&quot;, &quot;ก&quot;)</span>
-<span class="sd">        # output: 2.0</span>
-<span class="sd">        thai_keyboard_dist(&quot;ฟ&quot;, &quot;ฤ&quot;, 0.5)</span>
-<span class="sd">        # output: 0.5</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_keyboard_dist</span>
+<span class="sd">        &gt;&gt;&gt; thai_keyboard_dist(&quot;ด&quot;, &quot;ะ&quot;)</span>
+<span class="sd">        1.4142135623730951</span>
+<span class="sd">        &gt;&gt;&gt; thai_keyboard_dist(&quot;ฟ&quot;, &quot;ฤ&quot;)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; thai_keyboard_dist(&quot;ฟ&quot;, &quot;ห&quot;)</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; thai_keyboard_dist(&quot;ฟ&quot;, &quot;ก&quot;)</span>
+<span class="sd">        2.0</span>
+<span class="sd">        &gt;&gt;&gt; thai_keyboard_dist(&quot;ฟ&quot;, &quot;ฤ&quot;, 0.5)</span>
+<span class="sd">        0.5</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_char_coord</span><span class="p">(</span>

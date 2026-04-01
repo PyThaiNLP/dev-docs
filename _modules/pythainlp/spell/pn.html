@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.pn &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.spell.pn &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -111,7 +111,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pythainlp.spell.pn</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Spell checker, using Peter Norvig algorithm.</span>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+<span class="c1"># SPDX-FileType: SOURCE</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">&quot;&quot;&quot;Spell checker, using Peter Norvig algorithm.</span>
 <span class="sd">Spelling dictionary can be customized.</span>
 <span class="sd">Default spelling dictionary is based on Phupha: Thai Word Frequency Dataset,</span>
 <span class="sd">filtered with Royal Society of Thailand word list.</span>
@@ -262,17 +265,19 @@
 <span class="sd">        Then, it selects the candidate with</span>
 <span class="sd">        the highest word occurrence probability.</span>
 
-<span class="sd">        :param str custom_dict: A custom spelling dictionary. This can be:</span>
-<span class="sd">                                (1) a dictionary (`dict`), with words (`str`)</span>
-<span class="sd">                                    as keys and frequencies (`int`) as values;</span>
-<span class="sd">                                (2) an iterable (list, tuple, or set) of words</span>
-<span class="sd">                                    (`str`) and frequency (`int`) tuples:</span>
-<span class="sd">                                    `(str, int)`; or</span>
-<span class="sd">                                (3) an iterable of just words (`str`), without</span>
-<span class="sd">                                    frequencies -- in this case `1` will be</span>
-<span class="sd">                                    assigned to every words.</span>
-<span class="sd">                                Default is from Phupha dataset, filtered with</span>
-<span class="sd">                                Royal Society of Thailand word list (38,160 words).</span>
+<span class="sd">        :param custom_dict: A custom spelling dictionary. This can be:</span>
+<span class="sd">                            (1) a dictionary (`dict`), with words (`str`)</span>
+<span class="sd">                                as keys and frequencies (`int`) as values;</span>
+<span class="sd">                            (2) an iterable (list, tuple, or set) of words</span>
+<span class="sd">                                (`str`) and frequency (`int`) tuples:</span>
+<span class="sd">                                ``(str, int)``; or</span>
+<span class="sd">                            (3) an iterable of just words (`str`), without</span>
+<span class="sd">                                frequencies -- in this case ``1`` will be</span>
+<span class="sd">                                assigned to every word.</span>
+<span class="sd">                            Default is from Phupha dataset, filtered with</span>
+<span class="sd">                            Royal Society of Thailand word list (38,160 words).</span>
+<span class="sd">        :type custom_dict: Union[dict[str, int], Iterable[str],</span>
+<span class="sd">            Iterable[tuple[str, int]]], optional</span>
 <span class="sd">        :param int min_freq: Minimum frequency of a word to keep (default = 2)</span>
 <span class="sd">        :param int min_len: Minimum length (in characters) of a word to keep</span>
 <span class="sd">                            (default = 2)</span>
@@ -312,15 +317,14 @@
 <span class="sd">        :rtype: ItemsView[str, int]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            dictionary = [(&quot;หวาน&quot;, 30), (&quot;มะนาว&quot;, 2), (&quot;แอบ&quot;, 3223)]</span>
+<span class="sd">            &gt;&gt;&gt; dictionary = [(&quot;หวาน&quot;, 30), (&quot;มะนาว&quot;, 2), (&quot;แอบ&quot;, 3223)]  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker(custom_dict=dictionary)</span>
-<span class="sd">            checker.dictionary()</span>
-<span class="sd">            # output: dict_items([(&#39;หวาน&#39;, 30), (&#39;มะนาว&#39;, 2), (&#39;แอบ&#39;, 3223)])</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker(custom_dict=dictionary)  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; checker.dictionary()  # doctest: +SKIP</span>
+<span class="sd">            dict_items([(&#39;หวาน&#39;, 30), (&#39;มะนาว&#39;, 2), (&#39;แอบ&#39;, 3223)])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
 
@@ -338,20 +342,19 @@
 <span class="sd">        :rtype: list[str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker()</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker()  # doctest: +SKIP</span>
 
-<span class="sd">            checker.known([&quot;เพยน&quot;, &quot;เพล&quot;, &quot;เพลง&quot;])</span>
-<span class="sd">            # output: [&#39;เพล&#39;, &#39;เพลง&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; checker.known([&quot;เพยน&quot;, &quot;เพล&quot;, &quot;เพลง&quot;])  # doctest: +SKIP</span>
+<span class="sd">            [&#39;เพล&#39;, &#39;เพลง&#39;]</span>
 
-<span class="sd">            checker.known([&quot;ยกไ&quot;, &quot;ไฟล์ม&quot;])</span>
-<span class="sd">            # output: []</span>
+<span class="sd">            &gt;&gt;&gt; checker.known([&quot;ยกไ&quot;, &quot;ไฟล์ม&quot;])  # doctest: +SKIP</span>
+<span class="sd">            []</span>
 
-<span class="sd">            checker.known([])</span>
-<span class="sd">            # output: []</span>
+<span class="sd">            &gt;&gt;&gt; checker.known([])  # doctest: +SKIP</span>
+<span class="sd">            []</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">)</span></div>
 
@@ -368,20 +371,19 @@
 <span class="sd">        :rtype: float</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker()</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker()  # doctest: +SKIP</span>
 
-<span class="sd">            checker.prob(&quot;ครัช&quot;)</span>
-<span class="sd">            # output: 0.0</span>
+<span class="sd">            &gt;&gt;&gt; checker.prob(&quot;ครัช&quot;)  # doctest: +SKIP</span>
+<span class="sd">            0.0</span>
 
-<span class="sd">            checker.prob(&quot;รัก&quot;)</span>
-<span class="sd">            # output: 0.0006959172792052158</span>
+<span class="sd">            &gt;&gt;&gt; checker.prob(&quot;รัก&quot;)  # doctest: +SKIP</span>
+<span class="sd">            0.0006959172792052158</span>
 
-<span class="sd">            checker.prob(&quot;น่ารัก&quot;)</span>
-<span class="sd">            # output: 9.482306849763902e-05</span>
+<span class="sd">            &gt;&gt;&gt; checker.prob(&quot;น่ารัก&quot;)  # doctest: +SKIP</span>
+<span class="sd">            9.482306849763902e-05</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS_TOTAL</span></div>
 
@@ -397,17 +399,16 @@
 <span class="sd">        :rtype: int</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker()</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker()  # doctest: +SKIP</span>
 
-<span class="sd">            checker.freq(&quot;ปัญญา&quot;)</span>
-<span class="sd">            # output: 3639</span>
+<span class="sd">            &gt;&gt;&gt; checker.freq(&quot;ปัญญา&quot;)  # doctest: +SKIP</span>
+<span class="sd">            3639</span>
 
-<span class="sd">            checker.freq(&quot;บิญชา&quot;)</span>
-<span class="sd">            # output: 0</span>
+<span class="sd">            &gt;&gt;&gt; checker.freq(&quot;บิญชา&quot;)  # doctest: +SKIP</span>
+<span class="sd">            0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__WORDS</span><span class="p">[</span><span class="n">word</span><span class="p">]</span></div>
 
@@ -436,19 +437,18 @@
 <span class="sd">        :rtype: list[str]</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker()</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker()  # doctest: +SKIP</span>
 
-<span class="sd">            checker.spell(&quot;เส้นตรบ&quot;)</span>
-<span class="sd">            # output: [&#39;เส้นตรง&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; checker.spell(&quot;เส้นตรบ&quot;)  # doctest: +SKIP</span>
+<span class="sd">            [&#39;เส้นตรง&#39;]</span>
 
-<span class="sd">            checker.spell(&quot;ครัช&quot;)</span>
-<span class="sd">            # output: [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;,</span>
-<span class="sd">            # &#39;วรัช&#39;, &#39;ครัส&#39;, &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;,</span>
-<span class="sd">            #&#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; checker.spell(&quot;ครัช&quot;)  # doctest: +SKIP</span>
+<span class="sd">            [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;,</span>
+<span class="sd">            &#39;วรัช&#39;, &#39;ครัส&#39;, &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;,</span>
+<span class="sd">            &#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
@@ -476,20 +476,19 @@
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.spell import NorvigSpellChecker</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.spell import NorvigSpellChecker  # doctest: +SKIP</span>
 
-<span class="sd">            checker = NorvigSpellChecker()</span>
+<span class="sd">            &gt;&gt;&gt; checker = NorvigSpellChecker()  # doctest: +SKIP</span>
 
-<span class="sd">            checker.correct(&quot;ปัญชา&quot;)</span>
-<span class="sd">            # output: &#39;ปัญหา&#39;</span>
+<span class="sd">            &gt;&gt;&gt; checker.correct(&quot;ปัญชา&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;ปัญหา&#39;</span>
 
-<span class="sd">            checker.correct(&quot;บิญชา&quot;)</span>
-<span class="sd">            # output: &#39;บัญชา&#39;</span>
+<span class="sd">            &gt;&gt;&gt; checker.correct(&quot;บิญชา&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;บัญชา&#39;</span>
 
-<span class="sd">            checker.correct(&quot;มิตรภาบ&quot;)</span>
-<span class="sd">            # output: &#39;มิตรภาพ&#39;</span>
+<span class="sd">            &gt;&gt;&gt; checker.correct(&quot;มิตรภาบ&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;มิตรภาพ&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span>

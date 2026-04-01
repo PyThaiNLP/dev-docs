@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -581,17 +581,14 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpora only.            If you choose other corpora, they will be converted to TNC corpora.)</p></li>
 </ul>
 </p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>the corpus that is used to create the language model for tagger
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the corpus that is used to create the language model for tagger
 * <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
 * <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
 * <em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a>
 * <em>blackboard_ud</em> - blackboard text, with tags mapped to Universal POS tag             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
 * <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
 * <em>tdtb</em> - <a class="reference external" href="https://github.com/nlp-chula/thai-discourse-treebank/tree/main">Thai Discourse Treebank</a>             , natively use Universal POS tags
-* <em>tnc</em> - Thai National Corpus (support tltk engine only)
-* <em>tdtb</em> - <a class="reference external" href="https://github.com/nlp-chula/thai-discourse-treebank">Thai Discourse Treebank</a>
-* <em>tud</em> - <a class="reference external" href="https://github.com/nlp-chula/TUD">Thai Universal Dependency Treebank (TUD)</a>     :return: a list of tuples (word, POS tag)</p>
-</p></li>
+* <em>tud</em> - <a class="reference external" href="https://github.com/nlp-chula/TUD">Thai Universal Dependency Treebank (TUD)</a>     :return: a list of tuples (word, POS tag)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -601,56 +598,58 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>Tag words with corpus <cite>orchid</cite> (default):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
-    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
-<span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [(&#39;ฉัน&#39;, &#39;PPRS&#39;), (&#39;มี&#39;, &#39;VSTA&#39;), (&#39;ชีวิต&#39;, &#39;NCMN&#39;), (&#39;รอด&#39;, &#39;NCMN&#39;),</span>
-<span class="c1">#   (&#39;ใน&#39;, &#39;RPRE&#39;), (&#39;อาคาร&#39;, &#39;NCMN&#39;), (&#39;หลบภัย&#39;, &#39;NCMN&#39;),</span>
-<span class="c1">#   (&#39;ของ&#39;, &#39;RPRE&#39;), (&#39;นายก&#39;, &#39;NCMN&#39;), (&#39;เชอร์ชิล&#39;, &#39;NCMN&#39;)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
+<span class="gp">... </span>    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="go">[(&#39;ฉัน&#39;, &#39;PPRS&#39;), (&#39;มี&#39;, &#39;VSTA&#39;), (&#39;ชีวิต&#39;, &#39;NCMN&#39;), (&#39;รอด&#39;, &#39;NCMN&#39;),</span>
+<span class="go">  (&#39;ใน&#39;, &#39;RPRE&#39;), (&#39;อาคาร&#39;, &#39;NCMN&#39;), (&#39;หลบภัย&#39;, &#39;NCMN&#39;),</span>
+<span class="go">  (&#39;ของ&#39;, &#39;RPRE&#39;), (&#39;นายก&#39;, &#39;NCMN&#39;), (&#39;เชอร์ชิล&#39;, &#39;NCMN&#39;)]</span>
 </pre></div>
 </div>
 <p>Tag words with corpus <cite>orchid_ud</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
-    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
-<span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;orchid_ud&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [(&#39;ฉัน&#39;, &#39;PROPN&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;ชีวิต&#39;, &#39;NOUN&#39;),</span>
-<span class="c1">#   (&#39;รอด&#39;, &#39;NOUN&#39;), (&#39;ใน&#39;, &#39;ADP&#39;),  (&#39;อาคาร&#39;, &#39;NOUN&#39;),</span>
-<span class="c1">#   (&#39;หลบภัย&#39;, &#39;NOUN&#39;), (&#39;ของ&#39;, &#39;ADP&#39;), (&#39;นายก&#39;, &#39;NOUN&#39;),</span>
-<span class="c1">#   (&#39;เชอร์ชิล&#39;, &#39;NOUN&#39;)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
+<span class="gp">... </span>    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;orchid_ud&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;ฉัน&#39;, &#39;PROPN&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;ชีวิต&#39;, &#39;NOUN&#39;),</span>
+<span class="go">  (&#39;รอด&#39;, &#39;NOUN&#39;), (&#39;ใน&#39;, &#39;ADP&#39;),  (&#39;อาคาร&#39;, &#39;NOUN&#39;),</span>
+<span class="go">  (&#39;หลบภัย&#39;, &#39;NOUN&#39;), (&#39;ของ&#39;, &#39;ADP&#39;), (&#39;นายก&#39;, &#39;NOUN&#39;),</span>
+<span class="go">  (&#39;เชอร์ชิล&#39;, &#39;NOUN&#39;)]</span>
 </pre></div>
 </div>
 <p>Tag words with corpus <cite>pud</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
-    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
-<span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud&#39;</span><span class="p">)</span>
-<span class="c1"># [(&#39;ฉัน&#39;, &#39;PRON&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;ชีวิต&#39;, &#39;NOUN&#39;), (&#39;รอด&#39;, &#39;VERB&#39;),</span>
-<span class="c1">#   (&#39;ใน&#39;, &#39;ADP&#39;), (&#39;อาคาร&#39;, &#39;NOUN&#39;), (&#39;หลบภัย&#39;, &#39;NOUN&#39;),</span>
-<span class="c1">#   (&#39;ของ&#39;, &#39;ADP&#39;), (&#39;นายก&#39;, &#39;NOUN&#39;), (&#39;เชอร์ชิล&#39;, &#39;PROPN&#39;)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ฉัน&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;ชีวิต&#39;</span><span class="p">,</span><span class="s1">&#39;รอด&#39;</span><span class="p">,</span><span class="s1">&#39;ใน&#39;</span><span class="p">,</span><span class="s1">&#39;อาคาร&#39;</span><span class="p">,</span><span class="s1">&#39;หลบภัย&#39;</span><span class="p">,</span><span class="s1">&#39;ของ&#39;</span><span class="p">,</span> \
+<span class="gp">... </span>    <span class="s1">&#39;นายก&#39;</span><span class="p">,</span> <span class="s1">&#39;เชอร์ชิล&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># [(&#39;ฉัน&#39;, &#39;PRON&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;ชีวิต&#39;, &#39;NOUN&#39;), (&#39;รอด&#39;, &#39;VERB&#39;),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#   (&#39;ใน&#39;, &#39;ADP&#39;), (&#39;อาคาร&#39;, &#39;NOUN&#39;), (&#39;หลบภัย&#39;, &#39;NOUN&#39;),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#   (&#39;ของ&#39;, &#39;ADP&#39;), (&#39;นายก&#39;, &#39;NOUN&#39;), (&#39;เชอร์ชิล&#39;, &#39;PROPN&#39;)]</span>
 </pre></div>
 </div>
 <p>Tag words with different engines including <em>perceptron</em> and <em>unigram</em>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;เก้าอี้&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;จำนวน&#39;</span><span class="p">,</span><span class="s1">&#39;ขา&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]</span>
-
-<span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;perceptron&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;orchid&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [(&#39;เก้าอี้&#39;, &#39;NCMN&#39;), (&#39;มี&#39;, &#39;VSTA&#39;), (&#39;จำนวน&#39;, &#39;NCMN&#39;),</span>
-<span class="c1">#   (&#39;ขา&#39;, &#39;NCMN&#39;), (&#39; &#39;, &#39;PUNC&#39;),</span>
-<span class="c1">#   (&#39;=&#39;, &#39;PUNC&#39;), (&#39;3&#39;, &#39;NCNM&#39;)]</span>
-
-<span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;unigram&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud&#39;</span><span class="p">)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [(&#39;เก้าอี้&#39;, None), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;จำนวน&#39;, &#39;NOUN&#39;), (&#39;ขา&#39;, None),</span>
-<span class="c1">#   (&#39;&lt;space&gt;&#39;, None), (&#39;&lt;equal&gt;&#39;, None), (&#39;3&#39;, &#39;NUM&#39;)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;เก้าอี้&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;จำนวน&#39;</span><span class="p">,</span><span class="s1">&#39;ขา&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;perceptron&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;orchid&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;เก้าอี้&#39;, &#39;NCMN&#39;), (&#39;มี&#39;, &#39;VSTA&#39;), (&#39;จำนวน&#39;, &#39;NCMN&#39;),</span>
+<span class="go">  (&#39;ขา&#39;, &#39;NCMN&#39;), (&#39; &#39;, &#39;PUNC&#39;),</span>
+<span class="go">  (&#39;=&#39;, &#39;PUNC&#39;), (&#39;3&#39;, &#39;NCNM&#39;)]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;unigram&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;เก้าอี้&#39;, None), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;จำนวน&#39;, &#39;NOUN&#39;), (&#39;ขา&#39;, None),</span>
+<span class="go">  (&#39;&lt;space&gt;&#39;, None), (&#39;&lt;equal&gt;&#39;, None), (&#39;3&#39;, &#39;NUM&#39;)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -689,15 +688,15 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Labels POS for two sentences:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag_sents</span>
-
-<span class="n">sentences</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;เก้าอี้&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;ขา&#39;</span><span class="p">],</span> \
-                    <span class="p">[</span><span class="s1">&#39;นก&#39;</span><span class="p">,</span> <span class="s1">&#39;บิน&#39;</span><span class="p">,</span> <span class="s1">&#39;กลับ&#39;</span><span class="p">,</span> <span class="s1">&#39;รัง&#39;</span><span class="p">]]</span>
-<span class="n">pos_tag_sents</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud)</span>
-<span class="c1"># output:</span>
-<span class="c1"># [[(&#39;เก้าอี้&#39;, &#39;PROPN&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;3&#39;, &#39;NUM&#39;),</span>
-<span class="c1">#   (&#39;ขา&#39;, &#39;NOUN&#39;)], [(&#39;นก&#39;, &#39;NOUN&#39;), (&#39;บิน&#39;, &#39;VERB&#39;),</span>
-<span class="c1">#   (&#39;กลับ&#39;, &#39;VERB&#39;), (&#39;รัง&#39;, &#39;NOUN&#39;)]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag_sents</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentences</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;เก้าอี้&#39;</span><span class="p">,</span><span class="s1">&#39;มี&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;ขา&#39;</span><span class="p">],</span> \
+<span class="gp">... </span>                    <span class="p">[</span><span class="s1">&#39;นก&#39;</span><span class="p">,</span> <span class="s1">&#39;บิน&#39;</span><span class="p">,</span> <span class="s1">&#39;กลับ&#39;</span><span class="p">,</span> <span class="s1">&#39;รัง&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag_sents</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">&#39;pud&#39;</span><span class="p">)</span>
+<span class="go">[[(&#39;เก้าอี้&#39;, &#39;PROPN&#39;), (&#39;มี&#39;, &#39;VERB&#39;), (&#39;3&#39;, &#39;NUM&#39;),</span>
+<span class="go">  (&#39;ขา&#39;, &#39;NOUN&#39;)], [(&#39;นก&#39;, &#39;NOUN&#39;), (&#39;บิน&#39;, &#39;VERB&#39;),</span>
+<span class="go">  (&#39;กลับ&#39;, &#39;VERB&#39;), (&#39;รัง&#39;, &#39;NOUN&#39;)]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -707,7 +706,7 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">tag_provinces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/locations.html#tag_provinces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.tag_provinces" title="Link to this definition"></a></dt>
 <dd><p>This function recognizes Thailand provinces in text.</p>
 <p>Note that it uses exact match and considers no context.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tokens</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – a list of words</p>
 </dd>
@@ -718,15 +717,16 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag_provinces</span>
-
-<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;หนองคาย&quot;</span><span class="p">,</span> <span class="s2">&quot;น่าอยู่&quot;</span><span class="p">]</span>
-<span class="n">tag_provinces</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="c1"># output: [(&#39;หนองคาย&#39;, &#39;B-LOCATION&#39;), (&#39;น่าอยู่&#39;, &#39;O&#39;)]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag_provinces</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;หนองคาย&quot;</span><span class="p">,</span> <span class="s2">&quot;น่าอยู่&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag_provinces</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">[(&#39;หนองคาย&#39;, &#39;B-LOCATION&#39;), (&#39;น่าอยู่&#39;, &#39;O&#39;)]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -966,18 +966,19 @@ This function supports Thai NER 1.4 and 1.5 only.
 :param str version: Thai NER version.</p>
 <blockquote>
 <div><p>It supports Thai NER 1.4 &amp; 1.5.
-The default value is <a href="#id8"><span class="problematic" id="id9">`</span></a>1.4</p>
+The default value is <a href="#id7"><span class="problematic" id="id8">`</span></a>1.4</p>
 </div></blockquote>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
-
-<span class="n">thainer14</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.4&quot;</span><span class="p">)</span>
-<span class="n">thainer14</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thainer14</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thainer14</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">&quot;วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.4'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.__init__" title="Link to this definition"></a></dt>

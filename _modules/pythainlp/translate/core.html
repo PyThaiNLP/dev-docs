@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.translate.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -243,7 +243,7 @@
 <span class="sd">        :param str engine: machine translation engine</span>
 <span class="sd">        :param bool use_gpu: load model using GPU (Default is False)</span>
 
-<span class="sd">        **Options for engine*</span>
+<span class="sd">        **Options for engine**</span>
 <span class="sd">            * *default* - The default engine for each language.</span>
 <span class="sd">            * *small100* - A multilingual machine translation model (covering 100 languages)</span>
 
@@ -258,19 +258,19 @@
 
 <span class="sd">        :Example:</span>
 
-<span class="sd">        Translate text from Thai to English::</span>
+<span class="sd">        Translate text from Thai to English:</span>
 
-<span class="sd">            from pythainlp.translate import Translate</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.translate import Translate  # doctest: +SKIP</span>
 
-<span class="sd">            th2en = Translate(&quot;th&quot;, &quot;en&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; th2en = Translate(&quot;th&quot;, &quot;en&quot;)  # doctest: +SKIP</span>
 
-<span class="sd">            th2en.translate(&quot;ฉันรักแมว&quot;)</span>
-<span class="sd">            # output: I love cat.</span>
+<span class="sd">            &gt;&gt;&gt; th2en.translate(&quot;ฉันรักแมว&quot;)  # doctest: +SKIP</span>
+<span class="sd">            I love cat.</span>
 
-<span class="sd">        Translate text with excluded words::</span>
+<span class="sd">        Translate text with excluded words:</span>
 
-<span class="sd">            th2en.translate(&quot;ฉันรักแมว&quot;, exclude_words=[&quot;แมว&quot;])</span>
-<span class="sd">            # output: I love แมว.</span>
+<span class="sd">            &gt;&gt;&gt; th2en.translate(&quot;ฉันรักแมว&quot;, exclude_words=[&quot;แมว&quot;])  # doctest: +SKIP</span>
+<span class="sd">            I love แมว.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="n">Small100Translator</span><span class="p">,</span>
@@ -354,24 +354,24 @@
 <span class="sd">    :param str src: src language</span>
 <span class="sd">    :param str target: target language</span>
 <span class="sd">    :param str engine: Word translate engine (the default engine is word2word)</span>
-<span class="sd">    :return: return list word translate or None</span>
-<span class="sd">    :rtype: Union[List[str], None]</span>
+<span class="sd">    :return: list of translated words or None</span>
+<span class="sd">    :rtype: list[str] or None</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">    Translate word from Thai to English::</span>
+<span class="sd">    Translate word from Thai to English:</span>
 
-<span class="sd">        from pythainlp.translate import word_translate</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.translate import word_translate  # doctest: +SKIP</span>
 
-<span class="sd">        print(word_translate(&quot;แมว&quot;, &quot;th&quot;, &quot;en&quot;))</span>
-<span class="sd">        # output: [&#39;cat&#39;, &#39;cats&#39;, &#39;kitty&#39;, &#39;kitten&#39;, &#39;Cat&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; print(word_translate(&quot;แมว&quot;, &quot;th&quot;, &quot;en&quot;))  # doctest: +SKIP</span>
+<span class="sd">        [&#39;cat&#39;, &#39;cats&#39;, &#39;kitty&#39;, &#39;kitten&#39;, &#39;Cat&#39;]</span>
 
-<span class="sd">    Translate word from English to Thai::</span>
+<span class="sd">    Translate word from English to Thai:</span>
 
-<span class="sd">        from pythainlp.translate import word_translate</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.translate import word_translate  # doctest: +SKIP</span>
 
-<span class="sd">        print(word_translate(&quot;cat&quot;, &quot;en&quot;, &quot;th&quot;))</span>
-<span class="sd">        # output: [&#39;แมว&#39;, &#39;แมวป่า&#39;, &#39;ข่วน&#39;, &#39;เลี้ยง&#39;, &#39;อาหาร&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; print(word_translate(&quot;cat&quot;, &quot;en&quot;, &quot;th&quot;))  # doctest: +SKIP</span>
+<span class="sd">        [&#39;แมว&#39;, &#39;แมวป่า&#39;, &#39;ข่วน&#39;, &#39;เลี้ยง&#39;, &#39;อาหาร&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;word2word&quot;</span><span class="p">:</span>

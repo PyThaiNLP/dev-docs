@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize.keybert &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.summarize.keybert &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -191,44 +191,43 @@
 <span class="sd">        :return: list of keywords with score</span>
 
 <span class="sd">        :Example:</span>
-<span class="sd">        ::</span>
 
-<span class="sd">            from pythainlp.summarize.keybert import KeyBERT</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.summarize.keybert import KeyBERT  # doctest: +SKIP</span>
 
-<span class="sd">            text = &#39;&#39;&#39;</span>
-<span class="sd">                อาหาร หมายถึง ของแข็งหรือของเหลว</span>
-<span class="sd">                ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
-<span class="sd">                จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
-<span class="sd">                ทำให้ร่างกายเจริญเติบโต</span>
-<span class="sd">                ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
-<span class="sd">                ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
-<span class="sd">                อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
-<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            &gt;&gt;&gt; text = &#39;&#39;&#39;  # doctest: +SKIP</span>
+<span class="sd">            ...     อาหาร หมายถึง ของแข็งหรือของเหลว</span>
+<span class="sd">            ...     ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
+<span class="sd">            ...     จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
+<span class="sd">            ...     ทำให้ร่างกายเจริญเติบโต</span>
+<span class="sd">            ...     ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
+<span class="sd">            ...     ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
+<span class="sd">            ...     อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
+<span class="sd">            ... &#39;&#39;&#39;</span>
 
-<span class="sd">            kb = KeyBERT()</span>
+<span class="sd">            &gt;&gt;&gt; kb = KeyBERT()  # doctest: +SKIP</span>
 
-<span class="sd">            keywords = kb.extract_keyword(text)</span>
+<span class="sd">            &gt;&gt;&gt; keywords = kb.extract_keyword(text)  # doctest: +SKIP</span>
 
-<span class="sd">            # output: [&#39;อวัยวะต่างๆ&#39;,</span>
-<span class="sd">            # &#39;ซ่อมแซมส่วน&#39;,</span>
-<span class="sd">            # &#39;เจริญเติบโต&#39;,</span>
-<span class="sd">            # &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
-<span class="sd">            # &#39;มีพิษ&#39;]</span>
+<span class="sd">            [&#39;อวัยวะต่างๆ&#39;,</span>
+<span class="sd">            &#39;ซ่อมแซมส่วน&#39;,</span>
+<span class="sd">            &#39;เจริญเติบโต&#39;,</span>
+<span class="sd">            &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
+<span class="sd">            &#39;มีพิษ&#39;]</span>
 
-<span class="sd">            keywords = kb.extract_keyword(</span>
-<span class="sd">                text, max_keywords=10, return_similarity=True</span>
-<span class="sd">            )</span>
+<span class="sd">            &gt;&gt;&gt; keywords = kb.extract_keyword(  # doctest: +SKIP</span>
+<span class="sd">            ...     text, max_keywords=10, return_similarity=True</span>
+<span class="sd">            ... )</span>
 
-<span class="sd">            # output: [(&#39;อวัยวะต่างๆ&#39;, 0.3228477063109462),</span>
-<span class="sd">            # (&#39;ซ่อมแซมส่วน&#39;, 0.31320597838000375),</span>
-<span class="sd">            # (&#39;เจริญเติบโต&#39;, 0.29115434699705506),</span>
-<span class="sd">            # (&#39;ควบคุมการเปลี่ยนแปลง&#39;, 0.2678430841321016),</span>
-<span class="sd">            # (&#39;มีพิษ&#39;, 0.24996827960821494),</span>
-<span class="sd">            # (&#39;ทำให้ร่างกาย&#39;, 0.23876962942443258),</span>
-<span class="sd">            # (&#39;ร่างกายเจริญเติบโต&#39;, 0.23191285218852364),</span>
-<span class="sd">            # (&#39;จะทำให้เกิด&#39;, 0.22425422716846247),</span>
-<span class="sd">            # (&#39;มีพิษและ&#39;, 0.22162962875299588),</span>
-<span class="sd">            # (&#39;เกิดโทษ&#39;, 0.20773497763458507)]</span>
+<span class="sd">            [(&#39;อวัยวะต่างๆ&#39;, 0.3228477063109462),</span>
+<span class="sd">            (&#39;ซ่อมแซมส่วน&#39;, 0.31320597838000375),</span>
+<span class="sd">            (&#39;เจริญเติบโต&#39;, 0.29115434699705506),</span>
+<span class="sd">            (&#39;ควบคุมการเปลี่ยนแปลง&#39;, 0.2678430841321016),</span>
+<span class="sd">            (&#39;มีพิษ&#39;, 0.24996827960821494),</span>
+<span class="sd">            (&#39;ทำให้ร่างกาย&#39;, 0.23876962942443258),</span>
+<span class="sd">            (&#39;ร่างกายเจริญเติบโต&#39;, 0.23191285218852364),</span>
+<span class="sd">            (&#39;จะทำให้เกิด&#39;, 0.22425422716846247),</span>
+<span class="sd">            (&#39;มีพิษและ&#39;, 0.22162962875299588),</span>
+<span class="sd">            (&#39;เกิดโทษ&#39;, 0.20773497763458507)]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>

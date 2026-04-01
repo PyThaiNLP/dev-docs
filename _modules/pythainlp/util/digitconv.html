@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.digitconv &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.digitconv &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -195,14 +195,11 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import thai_digit_to_arabic_digit</span>
-
-<span class="sd">        text = &quot;เป็นจำนวน ๑๒๓,๔๐๐.๒๕ บาท&quot;</span>
-
-<span class="sd">        thai_digit_to_arabic_digit(text)</span>
-<span class="sd">        # output: เป็นจำนวน 123,400.25 บาท</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_digit_to_arabic_digit</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;เป็นจำนวน ๑๒๓,๔๐๐.๒๕ บาท&quot;</span>
+<span class="sd">        &gt;&gt;&gt; thai_digit_to_arabic_digit(text)</span>
+<span class="sd">        &#39;เป็นจำนวน 123,400.25 บาท&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
@@ -225,14 +222,11 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import arabic_digit_to_thai_digit</span>
-
-<span class="sd">        text = &quot;เป็นจำนวน 123,400.25 บาท&quot;</span>
-
-<span class="sd">        arabic_digit_to_thai_digit(text)</span>
-<span class="sd">        # output: เป็นจำนวน ๑๒๓,๔๐๐.๒๕ บาท</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import arabic_digit_to_thai_digit</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;เป็นจำนวน 123,400.25 บาท&quot;</span>
+<span class="sd">        &gt;&gt;&gt; arabic_digit_to_thai_digit(text)</span>
+<span class="sd">        &#39;เป็นจำนวน ๑๒๓,๔๐๐.๒๕ บาท&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
@@ -247,22 +241,21 @@
 <div class="viewcode-block" id="digit_to_text">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.digit_to_text">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">digit_to_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;:param str text: Text with digits such as &#39;1&#39;, &#39;2&#39;, &#39;๓&#39;, &#39;๔&#39;</span>
-<span class="sd">    :return: Text with digits spelled out in Thai</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Spell out digits in Thai.</span>
+
+<span class="sd">    :param str text: text with digits such as &#39;1&#39;, &#39;2&#39;, &#39;๓&#39;, &#39;๔&#39;</span>
+<span class="sd">    :return: text with digits spelled out in Thai</span>
+<span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import digit_to_text</span>
-
-<span class="sd">        digit_to_text(&quot;เบอร์โทร 0812345678&quot;)</span>
-<span class="sd">        # output: &#39;เบอร์โทร ศูนย์แปดหนึ่งสองสามสี่ห้าหกเจ็ดแปด&#39;</span>
-
-<span class="sd">        digit_to_text(&quot;123&quot;)</span>
-<span class="sd">        # output: &#39;หนึ่งสองสาม&#39;</span>
-
-<span class="sd">        digit_to_text(&quot;๕๖๗&quot;)</span>
-<span class="sd">        # output: &#39;ห้าหกเจ็ด&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import digit_to_text</span>
+<span class="sd">        &gt;&gt;&gt; digit_to_text(&quot;เบอร์โทร 0812345678&quot;)</span>
+<span class="sd">        &#39;เบอร์โทร ศูนย์แปดหนึ่งสองสามสี่ห้าหกเจ็ดแปด&#39;</span>
+<span class="sd">        &gt;&gt;&gt; digit_to_text(&quot;123&quot;)</span>
+<span class="sd">        &#39;หนึ่งสองสาม&#39;</span>
+<span class="sd">        &gt;&gt;&gt; digit_to_text(&quot;๕๖๗&quot;)</span>
+<span class="sd">        &#39;ห้าหกเจ็ด&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
@@ -289,24 +282,23 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import text_to_arabic_digit</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import text_to_arabic_digit  # doctest: +SKIP</span>
 
-<span class="sd">        text_to_arabic_digit(&quot;ศูนย์&quot;)</span>
-<span class="sd">        # output: 0</span>
-<span class="sd">        text_to_arabic_digit(&quot;หนึ่ง&quot;)</span>
-<span class="sd">        # output: 1</span>
-<span class="sd">        text_to_arabic_digit(&quot;แปด&quot;)</span>
-<span class="sd">        # output: 8</span>
-<span class="sd">        text_to_arabic_digit(&quot;เก้า&quot;)</span>
-<span class="sd">        # output: 9</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;ศูนย์&quot;)  # doctest: +SKIP</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;หนึ่ง&quot;)  # doctest: +SKIP</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;แปด&quot;)  # doctest: +SKIP</span>
+<span class="sd">        8</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;เก้า&quot;)  # doctest: +SKIP</span>
+<span class="sd">        9</span>
 
-<span class="sd">        # For text that is not digit spelled out in Thai</span>
-<span class="sd">        text_to_arabic_digit(&quot;สิบ&quot;) == &quot;&quot;</span>
-<span class="sd">        # output: True</span>
-<span class="sd">        text_to_arabic_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;</span>
-<span class="sd">        # output: True</span>
+<span class="sd">        &gt;&gt;&gt; # For text that is not digit spelled out in Thai</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;สิบ&quot;) == &quot;&quot;  # doctest: +SKIP</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; text_to_arabic_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;  # doctest: +SKIP</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>
@@ -329,24 +321,23 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import text_to_thai_digit</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import text_to_thai_digit  # doctest: +SKIP</span>
 
-<span class="sd">        text_to_thai_digit(&quot;ศูนย์&quot;)</span>
-<span class="sd">        # output: ๐</span>
-<span class="sd">        text_to_thai_digit(&quot;หนึ่ง&quot;)</span>
-<span class="sd">        # output: ๑</span>
-<span class="sd">        text_to_thai_digit(&quot;แปด&quot;)</span>
-<span class="sd">        # output: ๘</span>
-<span class="sd">        text_to_thai_digit(&quot;เก้า&quot;)</span>
-<span class="sd">        # output: ๙</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;ศูนย์&quot;)  # doctest: +SKIP</span>
+<span class="sd">        ๐</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;หนึ่ง&quot;)  # doctest: +SKIP</span>
+<span class="sd">        ๑</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;แปด&quot;)  # doctest: +SKIP</span>
+<span class="sd">        ๘</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;เก้า&quot;)  # doctest: +SKIP</span>
+<span class="sd">        ๙</span>
 
-<span class="sd">        # For text that is not Thai digit spelled out</span>
-<span class="sd">        text_to_thai_digit(&quot;สิบ&quot;) == &quot;&quot;</span>
-<span class="sd">        # output: True</span>
-<span class="sd">        text_to_thai_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;</span>
-<span class="sd">        # output: True</span>
+<span class="sd">        &gt;&gt;&gt; # For text that is not Thai digit spelled out</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;สิบ&quot;) == &quot;&quot;  # doctest: +SKIP</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; text_to_thai_digit(&quot;เก้าร้อย&quot;) == &quot;&quot;  # doctest: +SKIP</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The text must be str type.&quot;</span><span class="p">)</span>

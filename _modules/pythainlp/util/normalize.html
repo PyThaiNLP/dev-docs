@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.normalize &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.normalize &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -200,15 +200,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_dangling</span>
-
-<span class="sd">        remove_dangling(&quot;๊ก&quot;)</span>
-<span class="sd">        # output: &#39;ก&#39;</span>
-
-<span class="sd">        remove_dangling(&quot;คำ ่ที่สอง&quot;)</span>
-<span class="sd">        # output: &#39;คำ ที่สอง&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_dangling</span>
+<span class="sd">        &gt;&gt;&gt; remove_dangling(&quot;๊ก&quot;)</span>
+<span class="sd">        &#39;ก&#39;</span>
+<span class="sd">        &gt;&gt;&gt; remove_dangling(&quot;คำ ่ที่สอง&quot;)</span>
+<span class="sd">        &#39;คำ ที่สอง&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_REMOVE_DANGLINGS</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_REMOVE_DANGLINGS_AFTER_SPACE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
@@ -229,12 +226,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_dup_spaces</span>
-
-<span class="sd">        remove_dup_spaces(&quot;ก    ข    ค&quot;)</span>
-<span class="sd">        # output: &#39;ก ข ค&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_dup_spaces</span>
+<span class="sd">        &gt;&gt;&gt; remove_dup_spaces(&quot;ก    ข    ค&quot;)</span>
+<span class="sd">        &#39;ก ข ค&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="s2">&quot;  &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -265,12 +260,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_tonemark</span>
-
-<span class="sd">        remove_tonemark(&quot;สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด&quot;)</span>
-<span class="sd">        # output: สองพันหนึงรอยสีสิบเจ็ดลานสีแสนแปดหมืนสามพันหกรอยสีสิบเจ็ด</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_tonemark</span>
+<span class="sd">        &gt;&gt;&gt; remove_tonemark(&quot;สองพันหนึ่งร้อยสี่สิบเจ็ดล้านสี่แสนแปดหมื่นสามพันหกร้อยสี่สิบเจ็ด&quot;)</span>
+<span class="sd">        &#39;สองพันหนึงรอยสีสิบเจ็ดลานสีแสนแปดหมืนสามพันหกรอยสีสิบเจ็ด&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">tonemarks</span><span class="p">:</span>
         <span class="k">while</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
@@ -297,15 +290,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_zw</span>
-
-<span class="sd">        remove_zw(&quot;สวัสดี\u200bครับ&quot;)</span>
-<span class="sd">        # output: &#39;สวัสดีครับ&#39;</span>
-
-<span class="sd">        remove_zw(&quot;ภาษา\u200cไทย&quot;)</span>
-<span class="sd">        # output: &#39;ภาษาไทย&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_zw</span>
+<span class="sd">        &gt;&gt;&gt; remove_zw(&quot;สวัสดี\u200bครับ&quot;)</span>
+<span class="sd">        &#39;สวัสดีครับ&#39;</span>
+<span class="sd">        &gt;&gt;&gt; remove_zw(&quot;ภาษา\u200cไทย&quot;)</span>
+<span class="sd">        &#39;ภาษาไทย&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">_ZERO_WIDTH_CHARS</span><span class="p">:</span>
         <span class="k">while</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
@@ -327,12 +317,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_spaces_before_marks</span>
-
-<span class="sd">        remove_spaces_before_marks(&quot;พ ุ่มดอกไม้&quot;)</span>
-<span class="sd">        # output: &#39;พุ่มดอกไม้&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_spaces_before_marks</span>
+<span class="sd">        &gt;&gt;&gt; remove_spaces_before_marks(&quot;พ ุ่มดอกไม้&quot;)</span>
+<span class="sd">        &#39;พุ่มดอกไม้&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_RE_REMOVE_SPACES_BEFORE_NONBASE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\1\2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
@@ -355,17 +343,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import reorder_vowels</span>
-
-<span class="sd">        # Two Sara E become Sara Ae</span>
-<span class="sd">        reorder_vowels(&quot;เเปลก&quot;)</span>
-<span class="sd">        # output: &#39;แปลก&#39;</span>
-
-<span class="sd">        # Reorder tone marks and vowels</span>
-<span class="sd">        reorder_vowels(&quot;ก้ำ&quot;)</span>
-<span class="sd">        # output: &#39;กำ้&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import reorder_vowels</span>
+<span class="sd">        &gt;&gt;&gt; reorder_vowels(&quot;เเปลก&quot;)  # two Sara E become Sara Ae</span>
+<span class="sd">        &#39;แปลก&#39;</span>
+<span class="sd">        &gt;&gt;&gt; reorder_vowels(&quot;ก้ำ&quot;)  # reorder tone marks and vowels</span>
+<span class="sd">        &#39;ก้ำ&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">_REORDER_PAIRS</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">text</span><span class="p">)</span>
@@ -387,15 +370,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import remove_repeat_vowels</span>
-
-<span class="sd">        remove_repeat_vowels(&quot;นานาาา&quot;)</span>
-<span class="sd">        # output: &#39;นานา&#39;</span>
-
-<span class="sd">        remove_repeat_vowels(&quot;ดีีีี&quot;)</span>
-<span class="sd">        # output: &#39;ดี&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import remove_repeat_vowels</span>
+<span class="sd">        &gt;&gt;&gt; remove_repeat_vowels(&quot;นานาาา&quot;)</span>
+<span class="sd">        &#39;นานา&#39;</span>
+<span class="sd">        &gt;&gt;&gt; remove_repeat_vowels(&quot;ดีีีี&quot;)</span>
+<span class="sd">        &#39;ดี&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">reorder_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">_NOREPEAT_PAIRS</span><span class="p">:</span>
@@ -435,15 +415,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import normalize</span>
-
-<span class="sd">        normalize(&quot;เเปลก&quot;)  # starts with two Sara E</span>
-<span class="sd">        # output: แปลก</span>
-
-<span class="sd">        normalize(&quot;นานาาา&quot;)</span>
-<span class="sd">        # output: นานา</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import normalize</span>
+<span class="sd">        &gt;&gt;&gt; normalize(&quot;เเปลก&quot;)  # starts with two Sara E</span>
+<span class="sd">        &#39;แปลก&#39;</span>
+<span class="sd">        &gt;&gt;&gt; normalize(&quot;นานาาา&quot;)</span>
+<span class="sd">        &#39;นานา&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_zw</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">remove_dup_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -462,16 +439,16 @@
 <span class="sd">    repetition. This function preprocesses Thai text by replacing</span>
 <span class="sd">    Maiyamok with a word being repeated.</span>
 
-<span class="sd">    :param Union[str, List[str]] sent: sentence (list or string)</span>
+<span class="sd">    :param sent: sentence (list or string)</span>
+<span class="sd">    :type sent: Union[str, list[str]]</span>
 <span class="sd">    :return: list of words</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
-<span class="sd">        from pythainlp.util import expand_maiyamok</span>
 
-<span class="sd">        expand_maiyamok(&quot;คนๆนก&quot;)</span>
-<span class="sd">        # output: [&#39;คน&#39;, &#39;คน&#39;, &#39;นก&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import expand_maiyamok</span>
+<span class="sd">        &gt;&gt;&gt; expand_maiyamok(&quot;คนๆนก&quot;)</span>
+<span class="sd">        [&#39;คน&#39;, &#39;คน&#39;, &#39;นก&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">sent</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
@@ -519,23 +496,24 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Expand Maiyamok.</span>
 
-<span class="sd">    Deprecated. Use expand_maiyamok() instead.</span>
+<span class="sd">    .. deprecated:: 5.0.5</span>
+<span class="sd">        Use :func:`expand_maiyamok` instead.</span>
 
 <span class="sd">    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word</span>
 <span class="sd">    repetition. This function preprocesses Thai text by replacing</span>
 <span class="sd">    Maiyamok with a word being repeated.</span>
 
-<span class="sd">    :param Union[str, List[str]] sent: sentence (list or string)</span>
+<span class="sd">    :param sent: sentence (list or string)</span>
+<span class="sd">    :type sent: Union[str, list[str]]</span>
 <span class="sd">    :return: list of words</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import expand_maiyamok</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import maiyamok</span>
 
-<span class="sd">        expand_maiyamok(&quot;คนๆนก&quot;)</span>
-<span class="sd">        # output: [&#39;คน&#39;, &#39;คน&#39;, &#39;นก&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maiyamok(&quot;คนๆนก&quot;)</span>
+<span class="sd">        [&#39;คน&#39;, &#39;คน&#39;, &#39;นก&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">warn_deprecation</span><span class="p">(</span>
         <span class="s2">&quot;pythainlp.util.maiyamok&quot;</span><span class="p">,</span>

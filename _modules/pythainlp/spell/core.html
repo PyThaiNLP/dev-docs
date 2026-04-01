@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.spell.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -156,31 +156,30 @@
 <span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.spell import spell</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.spell import spell  # doctest: +SKIP</span>
 
-<span class="sd">        spell(&quot;เส้นตรบ&quot;, engine=&quot;pn&quot;)</span>
-<span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;เส้นตรบ&quot;, engine=&quot;pn&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เส้นตรง&#39;]</span>
 
-<span class="sd">        spell(&quot;เส้นตรบ&quot;)</span>
-<span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;เส้นตรบ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เส้นตรง&#39;]</span>
 
-<span class="sd">        spell(&quot;เส้นตรบ&quot;, engine=&quot;tltk&quot;)</span>
-<span class="sd">        # output: [&#39;เส้นตรง&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;เส้นตรบ&quot;, engine=&quot;tltk&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เส้นตรง&#39;]</span>
 
-<span class="sd">        spell(&quot;ครัช&quot;)</span>
-<span class="sd">        # output: [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;, &#39;วรัช&#39;, &#39;ครัส&#39;,</span>
-<span class="sd">        # &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;, &#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;ครัช&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;, &#39;วรัช&#39;, &#39;ครัส&#39;,</span>
+<span class="sd">        &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;, &#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
 
-<span class="sd">        spell(&quot;กระปิ&quot;)</span>
-<span class="sd">        # output: [&#39;กะปิ&#39;, &#39;กระบิ&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;กระปิ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;กะปิ&#39;, &#39;กระบิ&#39;]</span>
 
-<span class="sd">        spell(&quot;สังเกตุ&quot;)</span>
-<span class="sd">        # output: [&#39;สังเกต&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;สังเกตุ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;สังเกต&#39;]</span>
 
-<span class="sd">        spell(&quot;เหตการณ&quot;)</span>
-<span class="sd">        # output: [&#39;เหตุการณ์&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; spell(&quot;เหตการณ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เหตุการณ์&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phunspell&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell.phunspell</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
@@ -217,24 +216,23 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.spell import correct</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.spell import correct  # doctest: +SKIP</span>
 
-<span class="sd">        correct(&quot;เส้นตรบ&quot;)</span>
-<span class="sd">        # output: &#39;เส้นตรง&#39;</span>
+<span class="sd">        &gt;&gt;&gt; correct(&quot;เส้นตรบ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;เส้นตรง&#39;</span>
 
-<span class="sd">        correct(&quot;ครัช&quot;)</span>
-<span class="sd">        # output: &#39;ครับ&#39;</span>
+<span class="sd">        &gt;&gt;&gt; correct(&quot;ครัช&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;ครับ&#39;</span>
 
-<span class="sd">        correct(&quot;สังเกตุ&quot;)</span>
-<span class="sd">        # output: &#39;สังเกต&#39;</span>
+<span class="sd">        &gt;&gt;&gt; correct(&quot;สังเกตุ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;สังเกต&#39;</span>
 
-<span class="sd">        correct(&quot;กระปิ&quot;)</span>
-<span class="sd">        # output: &#39;กะปิ&#39;</span>
+<span class="sd">        &gt;&gt;&gt; correct(&quot;กระปิ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;กะปิ&#39;</span>
 
-<span class="sd">        correct(&quot;เหตการณ&quot;)</span>
-<span class="sd">        # output: &#39;เหตุการณ์&#39;</span>
+<span class="sd">        &gt;&gt;&gt; correct(&quot;เหตการณ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;เหตุการณ์&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;phunspell&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell.phunspell</span><span class="w"> </span><span class="kn">import</span> <span class="n">correct</span> <span class="k">as</span> <span class="n">SPELL_CHECKER</span>
@@ -272,12 +270,11 @@
 <span class="sd">    :rtype: list[list[str]]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.spell import spell_sent</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.spell import spell_sent  # doctest: +SKIP</span>
 
-<span class="sd">        spell_sent([&quot;เด็&quot;, &quot;อินอร์เน็ต&quot;, &quot;แรง&quot;], engine=&quot;symspellpy&quot;)</span>
-<span class="sd">        # output: [[&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]]</span>
+<span class="sd">        &gt;&gt;&gt; spell_sent([&quot;เด็&quot;, &quot;อินอร์เน็ต&quot;, &quot;แรง&quot;], engine=&quot;symspellpy&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [[&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;symspellpy&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell.symspellpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell_sent</span> <span class="k">as</span> <span class="n">symspellpy_spell</span>
@@ -313,12 +310,11 @@
 <span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.spell import correct_sent</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.spell import correct_sent  # doctest: +SKIP</span>
 
-<span class="sd">        correct_sent([&quot;เด็&quot;, &quot;อินอร์เน็ต&quot;, &quot;แรง&quot;], engine=&quot;symspellpy&quot;)</span>
-<span class="sd">        # output: [&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; correct_sent([&quot;เด็&quot;, &quot;อินอร์เน็ต&quot;, &quot;แรง&quot;], engine=&quot;symspellpy&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">spell_sent</span><span class="p">(</span><span class="n">list_words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 

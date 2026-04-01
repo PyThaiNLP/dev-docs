@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.translate &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -167,7 +167,7 @@
 </dd>
 </dl>
 <dl class="simple">
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>Options for engine*</dt><dd><ul class="simple">
+<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
 <li><p><em>default</em> - The default engine for each language.</p></li>
 <li><p><em>small100</em> - A multilingual machine translation model (covering 100 languages)</p></li>
 </ul>
@@ -188,17 +188,19 @@
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>Translate text from Thai to English:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Translate</span>
-
-<span class="n">th2en</span> <span class="o">=</span> <span class="n">Translate</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-
-<span class="n">th2en</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ฉันรักแมว&quot;</span><span class="p">)</span>
-<span class="c1"># output: I love cat.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Translate</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">th2en</span> <span class="o">=</span> <span class="n">Translate</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">th2en</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ฉันรักแมว&quot;</span><span class="p">)</span>
+<span class="go">I love cat.</span>
 </pre></div>
 </div>
 <p>Translate text with excluded words:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">th2en</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ฉันรักแมว&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;แมว&quot;</span><span class="p">])</span>
-<span class="c1"># output: I love แมว.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">th2en</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ฉันรักแมว&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;แมว&quot;</span><span class="p">])</span>
+<span class="go">I love แมว.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -245,26 +247,28 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>return list word translate or None</p>
+<dd class="field-even"><p>list of translated words or None</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>], None]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>] or None</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Translate word from Thai to English:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_translate</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">word_translate</span><span class="p">(</span><span class="s2">&quot;แมว&quot;</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
-<span class="c1"># output: [&#39;cat&#39;, &#39;cats&#39;, &#39;kitty&#39;, &#39;kitten&#39;, &#39;Cat&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_translate</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">word_translate</span><span class="p">(</span><span class="s2">&quot;แมว&quot;</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
+<span class="go">[&#39;cat&#39;, &#39;cats&#39;, &#39;kitty&#39;, &#39;kitten&#39;, &#39;Cat&#39;]</span>
 </pre></div>
 </div>
 <p>Translate word from English to Thai:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_translate</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">word_translate</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">))</span>
-<span class="c1"># output: [&#39;แมว&#39;, &#39;แมวป่า&#39;, &#39;ข่วน&#39;, &#39;เลี้ยง&#39;, &#39;อาหาร&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_translate</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">word_translate</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">))</span>
+<span class="go">[&#39;แมว&#39;, &#39;แมวป่า&#39;, &#39;ข่วน&#39;, &#39;เลี้ยง&#39;, &#39;อาหาร&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -307,17 +311,19 @@
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Translate text from Thai to Chinese:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThZhTranslator</span>
-
-<span class="n">thzh</span> <span class="o">=</span> <span class="n">ThZhTranslator</span><span class="p">()</span>
-
-<span class="n">thzh</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ผมรักคุณ&quot;</span><span class="p">)</span>
-<span class="c1"># output: 我爱你</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThZhTranslator</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thzh</span> <span class="o">=</span> <span class="n">ThZhTranslator</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thzh</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ผมรักคุณ&quot;</span><span class="p">)</span>
+<span class="go">我爱你</span>
 </pre></div>
 </div>
 <p>Translate text from Thai to Chinese with excluded words:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thzh</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ผมรักคุณ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ผม&quot;</span><span class="p">])</span>
-<span class="c1"># output: ผม爱你</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thzh</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ผมรักคุณ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ผม&quot;</span><span class="p">])</span>
+<span class="go">ผม爱你</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -362,17 +368,19 @@
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Translate text from Chinese to Thai:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZhThTranslator</span>
-
-<span class="n">zhth</span> <span class="o">=</span> <span class="n">ZhThTranslator</span><span class="p">()</span>
-
-<span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">)</span>
-<span class="c1"># output: ผมรักคุณนะ</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZhThTranslator</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zhth</span> <span class="o">=</span> <span class="n">ZhThTranslator</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">)</span>
+<span class="go">ผมรักคุณนะ</span>
 </pre></div>
 </div>
 <p>Translate text from Chinese to Thai with excluded words:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;我&quot;</span><span class="p">])</span>
-<span class="c1"># output: 我รักคุณนะ</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zhth</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;我爱你&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;我&quot;</span><span class="p">])</span>
+<span class="go">我รักคุณนะ</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -433,17 +441,19 @@
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Translate text from Thai to French:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate.th_fr</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThFrTranslator</span>
-
-<span class="n">thfr</span> <span class="o">=</span> <span class="n">ThFrTranslator</span><span class="p">()</span>
-
-<span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &quot;Test du système.&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.translate.th_fr</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThFrTranslator</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thfr</span> <span class="o">=</span> <span class="n">ThFrTranslator</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">)</span>
+<span class="go">&quot;Test du système.&quot;</span>
 </pre></div>
 </div>
 <p>Translate text from Thai to French with excluded words:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ระบบ&quot;</span><span class="p">])</span>
-<span class="c1"># output: &quot;Test du ระบบ.&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thfr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ทดสอบระบบ&quot;</span><span class="p">,</span> <span class="n">exclude_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ระบบ&quot;</span><span class="p">])</span>
+<span class="go">&quot;Test du ระบบ.&quot;</span>
 </pre></div>
 </div>
 </dd></dl>

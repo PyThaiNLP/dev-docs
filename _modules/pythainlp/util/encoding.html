@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.encoding &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.encoding &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -111,7 +111,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pythainlp.util.encoding</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding_utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
@@ -128,12 +128,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import tis620_to_utf8</span>
-
-<span class="sd">        tis620_to_utf8(&quot;¡ÃÐ·ÃÇ§ÍØµÊÒË¡ÃÃÁ&quot;)</span>
-<span class="sd">        # output: &#39;กระทรวงอุตสาหกรรม&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import tis620_to_utf8</span>
+<span class="sd">        &gt;&gt;&gt; tis620_to_utf8(&quot;¡ÃÐ·ÃÇ§ÍØµÊÒË¡ÃÃÁ&quot;)</span>
+<span class="sd">        &#39;กระทรวงอุตสาหกรรม&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;cp1252&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;tis-620&quot;</span><span class="p">)</span></div>
 
@@ -149,12 +147,10 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import to_idna</span>
-
-<span class="sd">        to_idna(&quot;คนละครึ่ง.com&quot;)</span>
-<span class="sd">        # output: &#39;xn--42caj4e6bk1f5b1j.com&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import to_idna</span>
+<span class="sd">        &gt;&gt;&gt; to_idna(&quot;คนละครึ่ง.com&quot;)</span>
+<span class="sd">        &#39;xn--42caj4e6bk1f5b1j.com&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;idna&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
 

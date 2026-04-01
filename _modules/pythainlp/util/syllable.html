@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.syllable &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.util.syllable &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -194,15 +194,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import sound_syllable</span>
-
-<span class="sd">        print(sound_syllable(&quot;มา&quot;))</span>
-<span class="sd">        # output: live</span>
-
-<span class="sd">        print(sound_syllable(&quot;เลข&quot;))</span>
-<span class="sd">        # output: dead</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import sound_syllable</span>
+<span class="sd">        &gt;&gt;&gt; sound_syllable(&quot;มา&quot;)</span>
+<span class="sd">        &#39;live&#39;</span>
+<span class="sd">        &gt;&gt;&gt; sound_syllable(&quot;เลข&quot;)</span>
+<span class="sd">        &#39;dead&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if len of syllable &lt; 2</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -302,15 +299,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import syllable_open_close_detector</span>
-
-<span class="sd">        print(syllable_open_close_detector(&quot;มาก&quot;))</span>
-<span class="sd">        # output: close</span>
-
-<span class="sd">        print(syllable_open_close_detector(&quot;คะ&quot;))</span>
-<span class="sd">        # output: open</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import syllable_open_close_detector</span>
+<span class="sd">        &gt;&gt;&gt; syllable_open_close_detector(&quot;มาก&quot;)</span>
+<span class="sd">        &#39;close&#39;</span>
+<span class="sd">        &gt;&gt;&gt; syllable_open_close_detector(&quot;คะ&quot;)</span>
+<span class="sd">        &#39;open&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">]</span>
 
@@ -336,15 +330,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import syllable_length</span>
-
-<span class="sd">        print(syllable_length(&quot;มาก&quot;))</span>
-<span class="sd">        # output: long</span>
-
-<span class="sd">        print(syllable_length(&quot;คะ&quot;))</span>
-<span class="sd">        # output: short</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import syllable_length</span>
+<span class="sd">        &gt;&gt;&gt; syllable_length(&quot;มาก&quot;)</span>
+<span class="sd">        &#39;long&#39;</span>
+<span class="sd">        &gt;&gt;&gt; syllable_length(&quot;คะ&quot;)</span>
+<span class="sd">        &#39;short&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
@@ -401,15 +392,12 @@
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.util import tone_detector</span>
-
-<span class="sd">        print(tone_detector(&quot;มา&quot;))</span>
-<span class="sd">        # output: m</span>
-
-<span class="sd">        print(tone_detector(&quot;ไม้&quot;))</span>
-<span class="sd">        # output: h</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import tone_detector</span>
+<span class="sd">        &gt;&gt;&gt; tone_detector(&quot;มา&quot;)</span>
+<span class="sd">        &#39;m&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tone_detector(&quot;ไม้&quot;)</span>
+<span class="sd">        &#39;h&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">sound_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
     <span class="c1"># get consonants</span>

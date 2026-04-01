@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.spell &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -159,7 +159,7 @@
 <span class="sig-prename descclassname"><span class="pre">pythainlp.spell.</span></span><span class="sig-name descname"><span class="pre">correct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pn'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/spell/core.html#correct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.correct" title="Link to this definition"></a></dt>
 <dd><p>Corrects the spelling of the given word by returning
 the correctly spelled word.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – word to correct spelling of</p></li>
@@ -179,26 +179,31 @@ the correctly spelled word.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">correct</span>
-
-<span class="n">correct</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;เส้นตรง&#39;</span>
-
-<span class="n">correct</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;ครับ&#39;</span>
-
-<span class="n">correct</span><span class="p">(</span><span class="s2">&quot;สังเกตุ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;สังเกต&#39;</span>
-
-<span class="n">correct</span><span class="p">(</span><span class="s2">&quot;กระปิ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;กะปิ&#39;</span>
-
-<span class="n">correct</span><span class="p">(</span><span class="s2">&quot;เหตการณ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;เหตุการณ์&#39;</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">correct</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
+<span class="go">&#39;เส้นตรง&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
+<span class="go">&#39;ครับ&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;สังเกตุ&quot;</span><span class="p">)</span>
+<span class="go">&#39;สังเกต&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;กระปิ&quot;</span><span class="p">)</span>
+<span class="go">&#39;กะปิ&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;เหตการณ&quot;</span><span class="p">)</span>
+<span class="go">&#39;เหตุการณ์&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>correct</cite> function is designed to correct the spelling of a single Thai word. Given an input word, this function returns the closest correctly spelled word from the dictionary, making it valuable for spell-checking and text correction tasks.</p>
@@ -209,7 +214,7 @@ the correctly spelled word.</p>
 <dt class="sig sig-object py" id="pythainlp.spell.correct_sent">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.spell.</span></span><span class="sig-name descname"><span class="pre">correct_sent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pn'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/spell/core.html#correct_sent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.correct_sent" title="Link to this definition"></a></dt>
 <dd><p>Corrects and returns the spelling of the given sentence</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>list_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words in sentence</p></li>
@@ -229,14 +234,15 @@ the correctly spelled word.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">correct_sent</span>
-
-<span class="n">correct_sent</span><span class="p">([</span><span class="s2">&quot;เด็&quot;</span><span class="p">,</span> <span class="s2">&quot;อินอร์เน็ต&quot;</span><span class="p">,</span> <span class="s2">&quot;แรง&quot;</span><span class="p">],</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;symspellpy&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">correct_sent</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correct_sent</span><span class="p">([</span><span class="s2">&quot;เด็&quot;</span><span class="p">,</span> <span class="s2">&quot;อินอร์เน็ต&quot;</span><span class="p">,</span> <span class="s2">&quot;แรง&quot;</span><span class="p">],</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;symspellpy&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>correct_sent</cite> function is an extension of the <cite>correct</cite> function and is used to correct an entire sentence. It tokenizes the input sentence, corrects each word, and returns the corrected sentence. This is beneficial for proofreading and improving the readability of Thai text.</p>
@@ -249,7 +255,7 @@ the correctly spelled word.</p>
 <dd><p>Get words spell suggestion</p>
 <p>The function is designed to retrieve spelling suggestions         for one or more input Thai words.</p>
 <p>Requirements: numpy and onnxruntime (Install before use this function)</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>list_word</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – list words or a word.</p>
 </dd>
@@ -260,18 +266,20 @@ the correctly spelled word.</p>
 <dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_words_spell_suggestion</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_words_spell_suggestion</span><span class="p">(</span><span class="s2">&quot;คมดี&quot;</span><span class="p">))</span>
-<span class="c1"># output: [&#39;คนดีผีคุ้ม&#39;, &#39;มีดคอม้า&#39;, &#39;คดี&#39;, &#39;มีดสองคม&#39;, &#39;มูลคดี&#39;]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">get_words_spell_suggestion</span><span class="p">([</span><span class="s2">&quot;คมดี&quot;</span><span class="p">,</span><span class="s2">&quot;กระเพาะ&quot;</span><span class="p">]))</span>
-<span class="c1"># output: [[&#39;คนดีผีคุ้ม&#39;, &#39;มีดคอม้า&#39;, &#39;คดี&#39;, &#39;มีดสองคม&#39;, &#39;มูลคดี&#39;],</span>
-<span class="c1"># [&#39;กระเพาะ&#39;, &#39;กระพา&#39;, &#39;กะเพรา&#39;, &#39;กระเพาะปลา&#39;, &#39;พระประธาน&#39;]]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_words_spell_suggestion</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">get_words_spell_suggestion</span><span class="p">(</span><span class="s2">&quot;คมดี&quot;</span><span class="p">))</span>
+<span class="go">[&#39;คนดีผีคุ้ม&#39;, &#39;มีดคอม้า&#39;, &#39;คดี&#39;, &#39;มีดสองคม&#39;, &#39;มูลคดี&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">get_words_spell_suggestion</span><span class="p">([</span><span class="s2">&quot;คมดี&quot;</span><span class="p">,</span><span class="s2">&quot;กระเพาะ&quot;</span><span class="p">]))</span>
+<span class="go">[[&#39;คนดีผีคุ้ม&#39;, &#39;มีดคอม้า&#39;, &#39;คดี&#39;, &#39;มีดสองคม&#39;, &#39;มูลคดี&#39;],</span>
+<span class="go">[&#39;กระเพาะ&#39;, &#39;กระพา&#39;, &#39;กะเพรา&#39;, &#39;กระเพาะปลา&#39;, &#39;พระประธาน&#39;]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>get_words_spell_suggestion</cite> function is designed to retrieve spelling suggestions for one or more input Thai words.</p>
@@ -286,7 +294,7 @@ The list of words is from words in the dictionary
 that have an edit distance value of 1 or 2.
 The result is a list of words sorted by their occurrences
 in the spelling dictionary in descending order.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Word to check spell of</p></li>
@@ -308,33 +316,40 @@ in descending order.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;pn&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เส้นตรง&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เส้นตรง&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tltk&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เส้นตรง&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;, &#39;วรัช&#39;, &#39;ครัส&#39;,</span>
-<span class="c1"># &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;, &#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;กระปิ&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;กะปิ&#39;, &#39;กระบิ&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;สังเกตุ&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;สังเกต&#39;]</span>
-
-<span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เหตการณ&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เหตุการณ์&#39;]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;pn&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เส้นตรง&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เส้นตรง&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tltk&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เส้นตรง&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
+<span class="go">[&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;, &#39;วรัช&#39;, &#39;ครัส&#39;,</span>
+<span class="go">&#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;, &#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;กระปิ&quot;</span><span class="p">)</span>
+<span class="go">[&#39;กะปิ&#39;, &#39;กระบิ&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;สังเกตุ&quot;</span><span class="p">)</span>
+<span class="go">[&#39;สังเกต&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เหตการณ&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เหตุการณ์&#39;]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>spell</cite> function is responsible for identifying spelling errors within a given Thai word. It checks whether the input word is spelled correctly or not and returns a Boolean result. This function is useful for validating the correctness of Thai words.</p>
@@ -345,7 +360,7 @@ in descending order.</p>
 <dt class="sig sig-object py" id="pythainlp.spell.spell_sent">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.spell.</span></span><span class="sig-name descname"><span class="pre">spell_sent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pn'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/spell/core.html#spell_sent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.spell_sent" title="Link to this definition"></a></dt>
 <dd><p>Provides a list of possible correct spellings of sentence</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>list_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words in sentence</p></li>
@@ -364,14 +379,15 @@ in descending order.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell_sent</span>
-
-<span class="n">spell_sent</span><span class="p">([</span><span class="s2">&quot;เด็&quot;</span><span class="p">,</span> <span class="s2">&quot;อินอร์เน็ต&quot;</span><span class="p">,</span> <span class="s2">&quot;แรง&quot;</span><span class="p">],</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;symspellpy&quot;</span><span class="p">)</span>
-<span class="c1"># output: [[&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">spell_sent</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spell_sent</span><span class="p">([</span><span class="s2">&quot;เด็&quot;</span><span class="p">,</span> <span class="s2">&quot;อินอร์เน็ต&quot;</span><span class="p">,</span> <span class="s2">&quot;แรง&quot;</span><span class="p">],</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;symspellpy&quot;</span><span class="p">)</span>
+<span class="go">[[&#39;เด็ก&#39;, &#39;อินเทอร์เน็ต&#39;, &#39;แรง&#39;]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The <cite>spell_sent</cite> function extends the spell-checking functionality to entire sentences. It tokenizes the input sentence and checks the spelling of each word. It returns a list of Booleans indicating whether each word in the sentence is spelled correctly or not.</p>
@@ -397,7 +413,8 @@ the highest word occurrence probability.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>custom_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>A custom spelling dictionary. This can be:
+<li><p><strong>custom_dict</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>,
+</em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – <p>A custom spelling dictionary. This can be:
 (1) a dictionary (<cite>dict</cite>), with words (<cite>str</cite>)</p>
 <blockquote>
 <div><p>as keys and frequencies (<cite>int</cite>) as values;</p>
@@ -405,10 +422,10 @@ the highest word occurrence probability.</p>
 <ol class="arabic simple" start="2">
 <li><p>an iterable (list, tuple, or set) of words
 (<cite>str</cite>) and frequency (<cite>int</cite>) tuples:
-<cite>(str, int)</cite>; or</p></li>
+<code class="docutils literal notranslate"><span class="pre">(str,</span> <span class="pre">int)</span></code>; or</p></li>
 <li><p>an iterable of just words (<cite>str</cite>), without
-frequencies – in this case <cite>1</cite> will be
-assigned to every words.</p></li>
+frequencies – in this case <code class="docutils literal notranslate"><span class="pre">1</span></code> will be
+assigned to every word.</p></li>
 </ol>
 <p>Default is from Phupha dataset, filtered with
 Royal Society of Thailand word list (38,160 words).</p>
@@ -431,7 +448,7 @@ If no filter is required, use None.</p></li>
 <dt class="sig sig-object py" id="pythainlp.spell.NorvigSpellChecker.dictionary">
 <span class="sig-name descname"><span class="pre">dictionary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ItemsView</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/spell/pn.html#NorvigSpellChecker.dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.NorvigSpellChecker.dictionary" title="Link to this definition"></a></dt>
 <dd><p>Returns the spelling dictionary currently used by this spell checker</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>spelling dictionary of this instance</p>
 </dd>
@@ -439,24 +456,26 @@ If no filter is required, use None.</p></li>
 <dd class="field-even"><p>ItemsView[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>]</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">dictionary</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;หวาน&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;มะนาว&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;แอบ&quot;</span><span class="p">,</span> <span class="mi">3223</span><span class="p">)]</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">dictionary</span><span class="p">)</span>
-<span class="n">checker</span><span class="o">.</span><span class="n">dictionary</span><span class="p">()</span>
-<span class="c1"># output: dict_items([(&#39;หวาน&#39;, 30), (&#39;มะนาว&#39;, 2), (&#39;แอบ&#39;, 3223)])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;หวาน&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;มะนาว&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;แอบ&quot;</span><span class="p">,</span> <span class="mi">3223</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">dictionary</span><span class="p">()</span>
+<span class="go">dict_items([(&#39;หวาน&#39;, 30), (&#39;มะนาว&#39;, 2), (&#39;แอบ&#39;, 3223)])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.spell.NorvigSpellChecker.known">
 <span class="sig-name descname"><span class="pre">known</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/spell/pn.html#NorvigSpellChecker.known"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.NorvigSpellChecker.known" title="Link to this definition"></a></dt>
 <dd><p>Returns a list of given words found in the spelling dictionary</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – A list of words to check if they exist
 in the spelling dictionary</p>
@@ -469,22 +488,26 @@ in the spelling dictionary</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([</span><span class="s2">&quot;เพยน&quot;</span><span class="p">,</span> <span class="s2">&quot;เพล&quot;</span><span class="p">,</span> <span class="s2">&quot;เพลง&quot;</span><span class="p">])</span>
-<span class="c1"># output: [&#39;เพล&#39;, &#39;เพลง&#39;]</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([</span><span class="s2">&quot;ยกไ&quot;</span><span class="p">,</span> <span class="s2">&quot;ไฟล์ม&quot;</span><span class="p">])</span>
-<span class="c1"># output: []</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([])</span>
-<span class="c1"># output: []</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([</span><span class="s2">&quot;เพยน&quot;</span><span class="p">,</span> <span class="s2">&quot;เพล&quot;</span><span class="p">,</span> <span class="s2">&quot;เพลง&quot;</span><span class="p">])</span>
+<span class="go">[&#39;เพล&#39;, &#39;เพลง&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([</span><span class="s2">&quot;ยกไ&quot;</span><span class="p">,</span> <span class="s2">&quot;ไฟล์ม&quot;</span><span class="p">])</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">known</span><span class="p">([])</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -492,7 +515,7 @@ in the spelling dictionary</p>
 <span class="sig-name descname"><span class="pre">prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/spell/pn.html#NorvigSpellChecker.prob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.NorvigSpellChecker.prob" title="Link to this definition"></a></dt>
 <dd><p>Returns the probability of an input word,
 according to the spelling dictionary</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A word to check occurrence probability of</p>
 </dd>
@@ -503,22 +526,26 @@ according to the spelling dictionary</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
-<span class="c1"># output: 0.0</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;รัก&quot;</span><span class="p">)</span>
-<span class="c1"># output: 0.0006959172792052158</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;น่ารัก&quot;</span><span class="p">)</span>
-<span class="c1"># output: 9.482306849763902e-05</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;รัก&quot;</span><span class="p">)</span>
+<span class="go">0.0006959172792052158</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s2">&quot;น่ารัก&quot;</span><span class="p">)</span>
+<span class="go">9.482306849763902e-05</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -526,7 +553,7 @@ according to the spelling dictionary</p>
 <span class="sig-name descname"><span class="pre">freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/spell/pn.html#NorvigSpellChecker.freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.NorvigSpellChecker.freq" title="Link to this definition"></a></dt>
 <dd><p>Returns the frequency of an input word,
 according to the spelling dictionary</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A word to check frequency of</p>
 </dd>
@@ -537,19 +564,22 @@ according to the spelling dictionary</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="s2">&quot;ปัญญา&quot;</span><span class="p">)</span>
-<span class="c1"># output: 3639</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="s2">&quot;บิญชา&quot;</span><span class="p">)</span>
-<span class="c1"># output: 0</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="s2">&quot;ปัญญา&quot;</span><span class="p">)</span>
+<span class="go">3639</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="s2">&quot;บิญชา&quot;</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -566,7 +596,7 @@ whose edit distance value is 1 from the input word.
 If there is no such word, then the search expands to
 a list of words whose edit distance value is 2.
 And if that still fails, the list of input words is returned.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A word to check spelling of</p>
 </dd>
@@ -579,21 +609,24 @@ spelling dictionary in descending order.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;เส้นตรง&#39;]</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
-<span class="c1"># output: [&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;,</span>
-<span class="c1"># &#39;วรัช&#39;, &#39;ครัส&#39;, &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;,</span>
-<span class="c1">#&#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;เส้นตรบ&quot;</span><span class="p">)</span>
+<span class="go">[&#39;เส้นตรง&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">spell</span><span class="p">(</span><span class="s2">&quot;ครัช&quot;</span><span class="p">)</span>
+<span class="go">[&#39;ครับ&#39;, &#39;ครัว&#39;, &#39;รัช&#39;, &#39;ครัม&#39;, &#39;ครัน&#39;,</span>
+<span class="go">&#39;วรัช&#39;, &#39;ครัส&#39;, &#39;ปรัช&#39;, &#39;บรัช&#39;, &#39;ครัง&#39;,</span>
+<span class="go">&#39;คัช&#39;, &#39;คลัช&#39;, &#39;ครัย&#39;, &#39;ครัด&#39;]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -601,7 +634,7 @@ spelling dictionary in descending order.</p>
 <span class="sig-name descname"><span class="pre">correct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/spell/pn.html#NorvigSpellChecker.correct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.spell.NorvigSpellChecker.correct" title="Link to this definition"></a></dt>
 <dd><p>Returns the most possible word, using the probability from
 the spelling dictionary</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A word to correct spelling of</p>
 </dd>
@@ -612,22 +645,26 @@ the spelling dictionary</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
-
-<span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;ปัญชา&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;ปัญหา&#39;</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;บิญชา&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;บัญชา&#39;</span>
-
-<span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;มิตรภาบ&quot;</span><span class="p">)</span>
-<span class="c1"># output: &#39;มิตรภาพ&#39;</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.spell</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorvigSpellChecker</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span> <span class="o">=</span> <span class="n">NorvigSpellChecker</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;ปัญชา&quot;</span><span class="p">)</span>
+<span class="go">&#39;ปัญหา&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;บิญชา&quot;</span><span class="p">)</span>
+<span class="go">&#39;บัญชา&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checker</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="s2">&quot;มิตรภาบ&quot;</span><span class="p">)</span>
+<span class="go">&#39;มิตรภาพ&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">

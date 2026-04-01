@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -247,45 +247,16 @@
 <span class="sd">    :rtype: :class:`frozenset`</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.corpus import get_corpus</span>
-
-<span class="sd">        # input file (negations_th.txt):</span>
-<span class="sd">        # แต่</span>
-<span class="sd">        # ไม่</span>
-
-<span class="sd">        get_corpus(&quot;negations_th.txt&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # frozenset({&#39;แต่&#39;, &#39;ไม่&#39;})</span>
-
-<span class="sd">        # input file (ttc_freq.txt):</span>
-<span class="sd">        # ตัวบท&lt;tab&gt;10</span>
-<span class="sd">        # โดยนัยนี้&lt;tab&gt;1</span>
-
-<span class="sd">        get_corpus(&quot;ttc_freq.txt&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # frozenset({&#39;โดยนัยนี้\\t1&#39;,</span>
-<span class="sd">        #    &#39;ตัวบท\\t10&#39;,</span>
-<span class="sd">        #     ...})</span>
-
-<span class="sd">        # input file (icubrk_th.txt):</span>
-<span class="sd">        # # Thai Dictionary for ICU BreakIterator</span>
-<span class="sd">        # กก</span>
-<span class="sd">        # กกขนาก</span>
-
-<span class="sd">        get_corpus(&quot;icubrk_th.txt&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # frozenset({&#39;กกขนาก&#39;,</span>
-<span class="sd">        #     &#39;# Thai Dictionary for ICU BreakIterator&#39;,</span>
-<span class="sd">        #     &#39;กก&#39;,</span>
-<span class="sd">        #     ...})</span>
-
-<span class="sd">        get_corpus(&quot;icubrk_th.txt&quot;, comments=False)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # frozenset({&#39;กกขนาก&#39;,</span>
-<span class="sd">        #     &#39;กก&#39;,</span>
-<span class="sd">        #     ...})</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import get_corpus  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus(&quot;negations_th.txt&quot;)  # doctest: +SKIP</span>
+<span class="sd">        frozenset({&#39;แต่&#39;, &#39;ไม่&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus(&quot;ttc_freq.txt&quot;)  # doctest: +SKIP</span>
+<span class="sd">        frozenset({&#39;โดยนัยนี้\\t1&#39;, &#39;ตัวบท\\t10&#39;, ...})</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus(&quot;icubrk_th.txt&quot;)  # doctest: +SKIP</span>
+<span class="sd">        frozenset({&#39;กกขนาก&#39;, &#39;# Thai Dictionary for ICU BreakIterator&#39;, &#39;กก&#39;, ...})</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus(&quot;icubrk_th.txt&quot;, comments=False)  # doctest: +SKIP</span>
+<span class="sd">        frozenset({&#39;กกขนาก&#39;, &#39;กก&#39;, ...})</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">corpus_files</span> <span class="o">=</span> <span class="n">files</span><span class="p">(</span><span class="s2">&quot;pythainlp.corpus&quot;</span><span class="p">)</span>
@@ -319,17 +290,10 @@
 <span class="sd">    :rtype: :class:`list`</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.corpus import get_corpus</span>
-
-<span class="sd">        # input file (negations_th.txt):</span>
-<span class="sd">        # แต่</span>
-<span class="sd">        # ไม่</span>
-
-<span class="sd">        get_corpus_as_is(&quot;negations_th.txt&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # [&#39;แต่&#39;, &#39;ไม่&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import get_corpus_as_is  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus_as_is(&quot;negations_th.txt&quot;)  # doctest: +SKIP</span>
+<span class="sd">        [&#39;แต่&#39;, &#39;ไม่&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">corpus_files</span> <span class="o">=</span> <span class="n">files</span><span class="p">(</span><span class="s2">&quot;pythainlp.corpus&quot;</span><span class="p">)</span>
     <span class="n">corpus_file</span> <span class="o">=</span> <span class="n">corpus_files</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -430,28 +394,23 @@
 <span class="sd">    (Please see the filename in</span>
 <span class="sd">    `this file &lt;https://pythainlp.org/pythainlp-corpus/db.json&gt;`_)</span>
 
-<span class="sd">    If the corpus already exists::</span>
+<span class="sd">    If the corpus already exists:</span>
 
-<span class="sd">        from pythainlp.corpus import get_corpus_path</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import get_corpus_path  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus_path(&quot;ttc&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;/root/pythainlp-data/ttc_freq.txt&#39;</span>
 
-<span class="sd">        print(get_corpus_path(&quot;ttc&quot;))</span>
-<span class="sd">        # output: /root/pythainlp-data/ttc_freq.txt</span>
+<span class="sd">    If the corpus has not been downloaded yet (online mode):</span>
 
-<span class="sd">    If the corpus has not been downloaded yet (online mode)::</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus_path(&quot;wiki_lm_lstm&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;/root/pythainlp-data/thwiki_model_lstm.pth&#39;</span>
 
-<span class="sd">        from pythainlp.corpus import get_corpus_path</span>
+<span class="sd">    To download manually:</span>
 
-<span class="sd">        print(get_corpus_path(&quot;wiki_lm_lstm&quot;))</span>
-<span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
-<span class="sd">        # (downloads automatically on first call)</span>
-
-<span class="sd">    To download manually::</span>
-
-<span class="sd">        from pythainlp.corpus import download, get_corpus_path</span>
-
-<span class="sd">        download(&quot;wiki_lm_lstm&quot;)</span>
-<span class="sd">        print(get_corpus_path(&quot;wiki_lm_lstm&quot;))</span>
-<span class="sd">        # output: /root/pythainlp-data/thwiki_model_lstm.pth</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import download  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; download(&quot;wiki_lm_lstm&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus_path(&quot;wiki_lm_lstm&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &#39;/root/pythainlp-data/thwiki_model_lstm.pth&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">CUSTOMIZE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1"># &quot;the corpus name&quot;:&quot;path&quot;</span>
@@ -509,8 +468,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_download</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Download helper.</span>
 
-<span class="sd">    @param: URL for downloading file</span>
-<span class="sd">    @param: dst place to put the file into</span>
+<span class="sd">    :param str url: URL for the file to download.</span>
+<span class="sd">    :param str dst: local destination path for the downloaded file.</span>
 
 <span class="sd">    Security Note: Downloads use HTTPS with SSL certificate validation.</span>
 <span class="sd">    Files are verified using MD5 checksums after download.</span>
@@ -546,8 +505,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_hash</span><span class="p">(</span><span class="n">dst</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">md5</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check hash helper.</span>
 
-<span class="sd">    @param: dst place to put the file into</span>
-<span class="sd">    @param: md5 place to file hash (MD5)</span>
+<span class="sd">    :param str dst: local path of the file to verify.</span>
+<span class="sd">    :param str md5: expected MD5 checksum of the file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">md5</span> <span class="ow">and</span> <span class="n">md5</span> <span class="o">!=</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
@@ -564,16 +523,18 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_within_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if target path is within directory (prevent path traversal).</span>
 
-<span class="sd">    @param: directory base directory path</span>
-<span class="sd">    @param: target target file path to check</span>
-<span class="sd">    @return: True if target is within directory, False otherwise</span>
+<span class="sd">    :param str directory: base directory path.</span>
+<span class="sd">    :param str target: target file path to check.</span>
+<span class="sd">    :return: ``True`` if target is within directory, ``False`` otherwise.</span>
+<span class="sd">    :rtype: bool</span>
 
 <span class="sd">    Security Note: This function normalizes paths using os.path.abspath()</span>
 <span class="sd">    to handle relative paths and .. sequences. It does NOT follow symlinks</span>
 <span class="sd">    (unlike os.path.realpath()), because:</span>
-<span class="sd">    - Symlink validation is handled separately in extraction functions</span>
-<span class="sd">    - We want to check if the path string itself is safe, not where it points</span>
-<span class="sd">    - This prevents false negatives when symlinks don&#39;t exist yet</span>
+
+<span class="sd">    - Symlink validation is handled separately in extraction functions.</span>
+<span class="sd">    - We want to check if the path string itself is safe, not where it points.</span>
+<span class="sd">    - This prevents false negatives when symlinks don&#39;t exist yet.</span>
 
 <span class="sd">    For symlink security, use the extraction function&#39;s symlink validation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -594,15 +555,16 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_safe_extract_tar</span><span class="p">(</span><span class="n">tar</span><span class="p">:</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarFile</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely extract tar archive, preventing path traversal attacks.</span>
 
-<span class="sd">    @param: tar tarfile object</span>
-<span class="sd">    @param: path destination path for extraction</span>
+<span class="sd">    :param tarfile.TarFile tar: tarfile object to extract.</span>
+<span class="sd">    :param str path: destination path for extraction.</span>
 
 <span class="sd">    Security Note: This function prevents path traversal attacks including:</span>
-<span class="sd">    - Files with .. in their path</span>
-<span class="sd">    - Symlinks pointing outside the extraction directory</span>
-<span class="sd">    - Files extracted through malicious symlinks</span>
 
-<span class="sd">    For Python 3.12+, uses tarfile.data_filter for additional protection.</span>
+<span class="sd">    - Files with ``..`` in their path.</span>
+<span class="sd">    - Symlinks pointing outside the extraction directory.</span>
+<span class="sd">    - Files extracted through malicious symlinks.</span>
+
+<span class="sd">    For Python 3.12+, uses ``tarfile.data_filter`` for additional protection.</span>
 <span class="sd">    For Python 3.9-3.11, implements custom validation of all members.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check if data_filter is available (Python 3.12+)</span>
@@ -659,12 +621,13 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_safe_extract_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">:</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely extract zip archive, preventing path traversal attacks.</span>
 
-<span class="sd">    @param: zip_file zipfile object</span>
-<span class="sd">    @param: path destination path for extraction</span>
+<span class="sd">    :param zipfile.ZipFile zip_file: zipfile object to extract.</span>
+<span class="sd">    :param str path: destination path for extraction.</span>
 
 <span class="sd">    Security Note: This function prevents path traversal attacks including:</span>
-<span class="sd">    - Files with .. in their path</span>
-<span class="sd">    - Symlinks pointing outside the extraction directory (on Unix systems)</span>
+
+<span class="sd">    - Files with ``..`` in their path.</span>
+<span class="sd">    - Symlinks pointing outside the extraction directory (on Unix systems).</span>
 
 <span class="sd">    Note: ZIP format has limited symlink support. Symlinks are primarily</span>
 <span class="sd">    created by Unix-based archiving tools and may not be portable.</span>
@@ -796,15 +759,12 @@
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.corpus import download</span>
-
-<span class="sd">        download(&quot;wiki_lm_lstm&quot;, force=True)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # Corpus: wiki_lm_lstm</span>
-<span class="sd">        # - Downloading: wiki_lm_lstm 0.1</span>
-<span class="sd">        # thwiki_lm.pth:  26%|██▌       | 114k/434k [00:00&lt;00:00, 690kB/s]</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import download  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; download(&quot;wiki_lm_lstm&quot;, force=True)  # doctest: +SKIP</span>
+<span class="sd">        Corpus: wiki_lm_lstm</span>
+<span class="sd">        - Downloading: wiki_lm_lstm 0.1</span>
+<span class="sd">        ...</span>
 
 <span class="sd">    By default, downloaded corpora and models will be saved in</span>
 <span class="sd">    ``$HOME/pythainlp-data/``</span>
@@ -946,20 +906,12 @@
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.corpus import remove, get_corpus_path, get_corpus</span>
-
-<span class="sd">        print(remove(&quot;ttc&quot;))</span>
-<span class="sd">        # output: True</span>
-
-<span class="sd">        print(get_corpus_path(&quot;ttc&quot;))</span>
-<span class="sd">        # output: None</span>
-
-<span class="sd">        get_corpus(&quot;ttc&quot;)</span>
-<span class="sd">        # output:</span>
-<span class="sd">        # FileNotFoundError: [Errno 2] No such file or directory:</span>
-<span class="sd">        # &#39;/usr/local/lib/python3.6/dist-packages/pythainlp/corpus/ttc&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.corpus import remove, get_corpus_path  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; remove(&quot;ttc&quot;)  # doctest: +SKIP</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; get_corpus_path(&quot;ttc&quot;)  # doctest: +SKIP</span>
+<span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">is_read_only_mode</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyThaiNLP is in read-only mode. It cannot remove corpus.&quot;</span><span class="p">)</span>

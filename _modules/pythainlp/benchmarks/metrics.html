@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP 9dfae5a documentation</title>
+  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP 0207d40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8559df46"></script>
+      <script src="../../../_static/documentation_options.js?v=ec1a47bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -246,24 +246,22 @@
 <span class="sd">    :rtype: BleuScore</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.benchmarks import bleu_score</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.benchmarks import bleu_score</span>
 
-<span class="sd">        references = [&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;]</span>
-<span class="sd">        hypotheses = [&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;]</span>
-<span class="sd">        score = bleu_score(references, hypotheses)</span>
-<span class="sd">        print(f&quot;BLEU score: {score[&#39;bleu&#39;]:.2f}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; references = [&quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; hypotheses = [&quot;สวัสดีค่ะ วันนี้อากาศดี&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; score = bleu_score(references, hypotheses)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;BLEU score: {score[&#39;bleu&#39;]:.2f}&quot;)</span>
+<span class="sd">        BLEU score: 28.12</span>
 
-<span class="sd">    ::</span>
-
-<span class="sd">        # Multiple references per hypothesis</span>
-<span class="sd">        references = [</span>
-<span class="sd">            [&quot;สวัสดีครับ&quot;, &quot;สวัสดีค่ะ&quot;],  # two refs for first hypothesis</span>
-<span class="sd">            [&quot;ลาก่อนครับ&quot;, &quot;ลาก่อนค่ะ&quot;],  # two refs for second hypothesis</span>
-<span class="sd">        ]</span>
-<span class="sd">        hypotheses = [&quot;สวัสดี&quot;, &quot;ลาก่อน&quot;]</span>
-<span class="sd">        score = bleu_score(references, hypotheses)</span>
+<span class="sd">        &gt;&gt;&gt; # Multiple references per hypothesis</span>
+<span class="sd">        &gt;&gt;&gt; references = [</span>
+<span class="sd">        ...     [&quot;สวัสดีครับ&quot;, &quot;สวัสดีค่ะ&quot;],  # two refs for first hypothesis</span>
+<span class="sd">        ...     [&quot;ลาก่อนครับ&quot;, &quot;ลาก่อนค่ะ&quot;],  # two refs for second hypothesis</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; hypotheses = [&quot;สวัสดี&quot;, &quot;ลาก่อน&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; score = bleu_score(references, hypotheses)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 
@@ -400,16 +398,18 @@
 <span class="sd">    :rtype: dict[str, RougeScore]</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.benchmarks import rouge_score</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.benchmarks import rouge_score</span>
 
-<span class="sd">        reference = &quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
-<span class="sd">        hypothesis = &quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
-<span class="sd">        scores = rouge_score(reference, hypothesis)</span>
-<span class="sd">        print(f&quot;ROUGE-1 F-measure: {scores[&#39;rouge1&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
-<span class="sd">        print(f&quot;ROUGE-2 F-measure: {scores[&#39;rouge2&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
-<span class="sd">        print(f&quot;ROUGE-L F-measure: {scores[&#39;rougeL&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; reference = &quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
+<span class="sd">        &gt;&gt;&gt; hypothesis = &quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
+<span class="sd">        &gt;&gt;&gt; scores = rouge_score(reference, hypothesis)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;ROUGE-1 F-measure: {scores[&#39;rouge1&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
+<span class="sd">        ROUGE-1 F-measure: 0.6000</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;ROUGE-2 F-measure: {scores[&#39;rouge2&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
+<span class="sd">        ROUGE-2 F-measure: 0.2500</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;ROUGE-L F-measure: {scores[&#39;rougeL&#39;][&#39;fmeasure&#39;]:.4f}&quot;)</span>
+<span class="sd">        ROUGE-L F-measure: 0.6000</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 
@@ -512,14 +512,14 @@
 <span class="sd">    :rtype: float</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.benchmarks import word_error_rate</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.benchmarks import word_error_rate</span>
 
-<span class="sd">        reference = &quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
-<span class="sd">        hypothesis = &quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
-<span class="sd">        wer = word_error_rate(reference, hypothesis)</span>
-<span class="sd">        print(f&quot;WER: {wer:.4f}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; reference = &quot;สวัสดีครับ วันนี้อากาศดีมาก&quot;</span>
+<span class="sd">        &gt;&gt;&gt; hypothesis = &quot;สวัสดีค่ะ วันนี้อากาศดี&quot;</span>
+<span class="sd">        &gt;&gt;&gt; wer = word_error_rate(reference, hypothesis)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;WER: {wer:.4f}&quot;)</span>
+<span class="sd">        WER: 0.4000</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 
@@ -593,14 +593,14 @@
 <span class="sd">    :rtype: float</span>
 
 <span class="sd">    :Example:</span>
-<span class="sd">    ::</span>
 
-<span class="sd">        from pythainlp.benchmarks import character_error_rate</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.benchmarks import character_error_rate</span>
 
-<span class="sd">        reference = &quot;สวัสดีครับ&quot;</span>
-<span class="sd">        hypothesis = &quot;สวัสดีค่ะ&quot;</span>
-<span class="sd">        cer = character_error_rate(reference, hypothesis)</span>
-<span class="sd">        print(f&quot;CER: {cer:.4f}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; reference = &quot;สวัสดีครับ&quot;</span>
+<span class="sd">        &gt;&gt;&gt; hypothesis = &quot;สวัสดีค่ะ&quot;</span>
+<span class="sd">        &gt;&gt;&gt; cer = character_error_rate(reference, hypothesis)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;CER: {cer:.4f}&quot;)</span>
+<span class="sd">        CER: 0.3000</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Work with characters directly (no tokenization needed)</span>
     <span class="n">ref_chars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
