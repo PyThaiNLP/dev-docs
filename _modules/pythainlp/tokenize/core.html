@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 775279a documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP a836b09 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=96e1d0a9"></script>
+      <script src="../../../_static/documentation_options.js?v=d3df7db0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -284,7 +284,7 @@
 <span class="sd">          `budoux &lt;https://github.com/google/budoux&gt;`_.</span>
 <span class="sd">    :Note:</span>
 <span class="sd">        - The **custom_dict** parameter only works for \</span>
-<span class="sd">          *deepcut*, *longest*, *newmm*, and *newmm-safe* engines.</span>
+<span class="sd">          *longest*, *newmm*, and *newmm-safe* engines.</span>
 <span class="sd">        - Built-in tokenizers (*longest*, *mm*, *newmm*, and *newmm-safe*) \</span>
 <span class="sd">          are thread-safe.</span>
 <span class="sd">        - Wrappers of external tokenizer are designed to be thread-safe \</span>
@@ -379,11 +379,7 @@
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;deepcut&quot;</span><span class="p">:</span>  <span class="c1"># deepcut can optionally use dictionary</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.deepcut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">deepcut_segment</span>  <span class="c1"># noqa: I001</span>
 
-        <span class="k">if</span> <span class="n">custom_dict</span><span class="p">:</span>
-            <span class="n">custom_dict</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">custom_dict</span><span class="p">)</span>  <span class="c1"># type: ignore[assignment]</span>
-            <span class="n">segments</span> <span class="o">=</span> <span class="n">deepcut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">segments</span> <span class="o">=</span> <span class="n">deepcut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">deepcut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;icu&quot;</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.pyicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">pyicu_segment</span>  <span class="c1"># noqa: I001</span>
 
