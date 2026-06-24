@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wangchanberta.core &mdash; PyThaiNLP 3705800 documentation</title>
+  <title>pythainlp.wangchanberta.core &mdash; PyThaiNLP dbc5e3a documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=7303c457"></script>
+      <script src="../../../_static/documentation_options.js?v=5f261433"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -141,7 +141,7 @@
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">CamembertTokenizer</span>
 
         <span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">CamembertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;airesearch/</span><span class="si">{</span><span class="n">_model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="s2">&quot;main&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;airesearch/</span><span class="si">{</span><span class="n">_model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="s2">&quot;main&quot;</span>  <span class="c1"># nosec B615</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">_model_name</span> <span class="o">==</span> <span class="s2">&quot;wangchanberta-base-att-spm-uncased&quot;</span><span class="p">:</span>
             <span class="n">_tokenizer</span><span class="o">.</span><span class="n">additional_special_tokens</span> <span class="o">=</span> <span class="p">[</span>
@@ -290,21 +290,27 @@
 <div class="viewcode-block" id="NamedEntityRecognition.__init__">
 <a class="viewcode-back" href="../../../api/wangchanberta.html#pythainlp.wangchanberta.NamedEntityRecognition.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pythainlp/thainer-corpus-v2-base-model&quot;</span><span class="p">,</span>
+        <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This function tags named entities in text in IOB format.</span>
 
 <span class="sd">        Powered by wangchanberta from VISTEC-depa\</span>
 <span class="sd">             AI Research Institute of Thailand</span>
 <span class="sd">        :param str model: The model that use wangchanberta pretrained.</span>
+<span class="sd">        :param Optional[str] revision: a git revision id (branch, tag, or</span>
+<span class="sd">            commit hash). Pin to a full commit hash for secure downloads.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForTokenClassification</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">:</span> <span class="n">PreTrainedTokenizerBase</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="n">PreTrainedModel</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+            <span class="p">)</span>
         <span class="p">)</span></div>
 
 
