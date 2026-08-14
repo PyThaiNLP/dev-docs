@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.numtoword &mdash; PyThaiNLP 6e2a729 documentation</title>
+  <title>pythainlp.util.numtoword &mdash; PyThaiNLP 7e97cf6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=58723ad1"></script>
+      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -125,7 +125,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bahttext&quot;</span><span class="p">,</span> <span class="s2">&quot;num_to_thaiword&quot;</span><span class="p">]</span>
+<span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bahttext&quot;</span><span class="p">,</span> <span class="s2">&quot;num_to_thaiword&quot;</span><span class="p">,</span> <span class="s2">&quot;num_to_thaiword_float&quot;</span><span class="p">]</span>
 
 <span class="n">_VALUES</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -140,6 +140,18 @@
     <span class="s2">&quot;เก้า&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">_PLACES</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;สิบ&quot;</span><span class="p">,</span> <span class="s2">&quot;ร้อย&quot;</span><span class="p">,</span> <span class="s2">&quot;พัน&quot;</span><span class="p">,</span> <span class="s2">&quot;หมื่น&quot;</span><span class="p">,</span> <span class="s2">&quot;แสน&quot;</span><span class="p">,</span> <span class="s2">&quot;ล้าน&quot;</span><span class="p">]</span>
+<span class="n">_DIGITS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;ศูนย์&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;หนึ่ง&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;สอง&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;สาม&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;สี่&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ห้า&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;หก&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;เจ็ด&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;แปด&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;เก้า&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 <span class="n">_EXCEPTIONS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;หนึ่งสิบ&quot;</span><span class="p">:</span> <span class="s2">&quot;สิบ&quot;</span><span class="p">,</span> <span class="s2">&quot;สองสิบ&quot;</span><span class="p">:</span> <span class="s2">&quot;ยี่สิบ&quot;</span><span class="p">,</span> <span class="s2">&quot;สิบหนึ่ง&quot;</span><span class="p">:</span> <span class="s2">&quot;สิบเอ็ด&quot;</span><span class="p">}</span>
 
 
@@ -196,6 +208,30 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_num_to_thaiword_block</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a positive integer &lt; 1,000,000 to Thai text.</span>
+
+<span class="sd">    This is the core logic for a single block of up to 6 digits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">num_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">place</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">num_str</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">_VALUES</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">+</span> <span class="n">_PLACES</span><span class="p">[</span><span class="n">place</span><span class="p">]</span> <span class="o">+</span> <span class="n">output</span>
+
+    <span class="k">for</span> <span class="n">search</span><span class="p">,</span> <span class="n">replac</span> <span class="ow">in</span> <span class="n">_EXCEPTIONS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">search</span><span class="p">,</span> <span class="n">replac</span><span class="p">)</span>
+
+    <span class="c1"># เอ็ด rule: trailing หนึ่ง in ones place</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">output</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;หนึ่ง&quot;</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;หนึ่ง&quot;</span><span class="p">)]</span> <span class="o">+</span> <span class="s2">&quot;เอ็ด&quot;</span>
+
+    <span class="k">return</span> <span class="n">output</span>
+
+
 <div class="viewcode-block" id="num_to_thaiword">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.num_to_thaiword">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">num_to_thaiword</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -216,30 +252,116 @@
     <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">number_temp</span> <span class="o">=</span> <span class="n">number</span>
     <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;ศูนย์&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;ศูนย์&quot;</span>
 
-    <span class="n">number_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">place</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">number_str</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])):</span>
-        <span class="k">if</span> <span class="n">place</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">place</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">_PLACES</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">output</span>
+    <span class="n">number_abs</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">number_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">number_abs</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">_VALUES</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">+</span> <span class="n">_PLACES</span><span class="p">[</span><span class="n">place</span> <span class="o">%</span> <span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">output</span>
+    <span class="c1"># Split into groups of 6 digits from right side</span>
+    <span class="n">groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">number_str</span><span class="p">:</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">number_str</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span>
+        <span class="n">number_str</span> <span class="o">=</span> <span class="n">number_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">search</span><span class="p">,</span> <span class="n">replac</span> <span class="ow">in</span> <span class="n">_EXCEPTIONS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">search</span><span class="p">,</span> <span class="n">replac</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">group_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">groups</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">group_num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="n">_num_to_thaiword_block</span><span class="p">(</span><span class="n">group_num</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;ล้าน&quot;</span>
 
-    <span class="c1"># เอ็ด rule: trailing หนึ่ง in ones place (after any place marker)</span>
-    <span class="k">if</span> <span class="n">number</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">number</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">output</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;หนึ่ง&quot;</span><span class="p">):</span>
+    <span class="c1"># Global เอ็ด rule: trailing หนึ่ง in the full text</span>
+    <span class="k">if</span> <span class="n">number_abs</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">output</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;หนึ่ง&quot;</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;หนึ่ง&quot;</span><span class="p">)]</span> <span class="o">+</span> <span class="s2">&quot;เอ็ด&quot;</span>
 
-    <span class="k">if</span> <span class="n">number_temp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;ลบ&quot;</span> <span class="o">+</span> <span class="n">output</span>
 
     <span class="k">return</span> <span class="n">output</span></div>
+
+
+
+<div class="viewcode-block" id="num_to_thaiword_float">
+<a class="viewcode-back" href="../../../api/util.html#pythainlp.util.num_to_thaiword_float">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">num_to_thaiword_float</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a floating-point number to Thai text.</span>
+
+<span class="sd">    The integer part is converted using :func:`num_to_thaiword`.</span>
+<span class="sd">    The decimal point is read as &quot;จุด&quot;.</span>
+<span class="sd">    Each digit after the decimal is read individually without place descriptions.</span>
+
+<span class="sd">    :param float number: a floating-point number to be converted to Thai text</span>
+<span class="sd">    :return: text representing the number in Thai</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    :raises TypeError: if *number* is not a numeric type</span>
+
+<span class="sd">    :Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import num_to_thaiword_float</span>
+<span class="sd">        &gt;&gt;&gt; num_to_thaiword_float(123.45)</span>
+<span class="sd">        &#39;หนึ่งร้อยยี่สิบสามจุดสี่ห้า&#39;</span>
+<span class="sd">        &gt;&gt;&gt; num_to_thaiword_float(3.14159)</span>
+<span class="sd">        &#39;สามจุดหนึ่งสี่หนึ่งห้าเก้า&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;number must be a numeric type, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Reject non-finite floats early (nan/inf), since they cannot be rendered.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;number must be a finite float&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Handle whole numbers (including integer types)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">number</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+
+    <span class="c1"># Capture sign for negative floats</span>
+    <span class="n">is_negative</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span>
+    <span class="n">num_abs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">num_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_abs</span><span class="p">)</span>
+
+    <span class="c1"># Handle scientific notation (e.g., &quot;1e-05&quot;, &quot;1.23e-10&quot;)</span>
+    <span class="k">if</span> <span class="s2">&quot;e&quot;</span> <span class="ow">in</span> <span class="n">num_str</span> <span class="ow">or</span> <span class="s2">&quot;E&quot;</span> <span class="ow">in</span> <span class="n">num_str</span><span class="p">:</span>
+        <span class="n">mantissa</span><span class="p">,</span> <span class="n">exp_str</span> <span class="o">=</span> <span class="n">num_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">exponent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exp_str</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">mantissa</span><span class="p">:</span>
+            <span class="n">mant_int</span><span class="p">,</span> <span class="n">mant_frac</span> <span class="o">=</span> <span class="n">mantissa</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="n">mant_int</span> <span class="o">+</span> <span class="n">mant_frac</span>
+            <span class="n">decimal_places</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mant_frac</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="n">mantissa</span>
+            <span class="n">decimal_places</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">shift</span> <span class="o">=</span> <span class="n">exponent</span> <span class="o">-</span> <span class="n">decimal_places</span>
+        <span class="k">if</span> <span class="n">shift</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">num_str</span> <span class="o">=</span> <span class="n">digits</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;0&quot;</span> <span class="o">*</span> <span class="n">shift</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span>
+            <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">num_str</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[:</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">digits</span><span class="p">[</span><span class="n">pos</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_str</span> <span class="o">=</span> <span class="s2">&quot;0.&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;0&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">pos</span><span class="p">))</span> <span class="o">+</span> <span class="n">digits</span>
+    <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">num_str</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_str</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">int_part</span><span class="p">,</span> <span class="n">dec_part</span> <span class="o">=</span> <span class="n">num_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">int_part</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;จุด&quot;</span>
+        <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">dec_part</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">_DIGITS</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">is_negative</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;ลบ&quot;</span> <span class="o">+</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
 
 </pre></div>
 

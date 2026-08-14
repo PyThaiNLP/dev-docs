@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP 6e2a729 documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP 7e97cf6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=58723ad1"></script>
+      <script src="../_static/documentation_options.js?v=91e502bb"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -984,6 +984,40 @@ to be applied, they can choose to call those functions by themselves.</p>
 </dd>
 </dl>
 <p>The <cite>num_to_thaiword</cite> function is a numeral conversion tool for translating Arabic numerals into Thai word form. It is crucial for rendering numbers in a natural Thai textual format.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">num_to_thaiword_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/numtoword.html#num_to_thaiword_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Converts a floating-point number to Thai text.</p>
+<p>The integer part is converted using <code class="xref py py-func docutils literal notranslate"><span class="pre">num_to_thaiword()</span></code>.
+The decimal point is read as “จุด”.
+Each digit after the decimal is read individually without place descriptions.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – a floating-point number to be converted to Thai text</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text representing the number in Thai</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – if <em>number</em> is not a numeric type</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">num_to_thaiword_float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_to_thaiword_float</span><span class="p">(</span><span class="mf">123.45</span><span class="p">)</span>
+<span class="go">&#39;หนึ่งร้อยยี่สิบสามจุดสี่ห้า&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_to_thaiword_float</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span>
+<span class="go">&#39;สามจุดหนึ่งสี่หนึ่งห้าเก้า&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>The <cite>num_to_thaiword_float</cite> function converts a floating-point number to Thai text. The integer part uses <code class="xref py py-func docutils literal notranslate"><span class="pre">num_to_thaiword()</span></code>, the decimal point is read as “จุด”,
+and each digit after the decimal is read individually.</p>
 </dd></dl>
 
 <dl class="py function">
