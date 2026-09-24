@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize &mdash; PyThaiNLP e37892d documentation</title>
+  <title>pythainlp.tokenize &mdash; PyThaiNLP df2e12b documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8397301d"></script>
+      <script src="../_static/documentation_options.js?v=373756b8"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -481,7 +481,8 @@ Otherwise, formatted numerics could be wrongly separated.</p></li>
 <dl>
 <dt><strong>Options for engine</strong></dt><dd><ul>
 <li><p><em>attacut</em> - wrapper for
-<a class="reference external" href="https://github.com/PyThaiNLP/attacut">AttaCut</a>.,
+<a class="reference external" href="https://github.com/PyThaiNLP/attacut">AttaCut</a>
+using ONNX model via <a class="reference external" href="https://github.com/PyThaiNLP/LEKCut">LEKCut</a>.,
 learning-based approach</p></li>
 <li><p><em>deepcut</em> - wrapper for
 <a class="reference external" href="https://github.com/rkcosmos/deepcut">DeepCut</a>,
@@ -506,10 +507,12 @@ breaking points</p></li>
 <a class="reference external" href="https://github.com/PyThaiNLP/nlpo3">nlpO3</a>.,
 adaptation of newmm in Rust (2.5x faster)</p></li>
 <li><p><em>oskut</em> - wrapper for
-<a class="reference external" href="https://github.com/mrpeerat/OSKut">OSKut</a>.,
+<a class="reference external" href="https://github.com/mrpeerat/OSKut">OSKut</a>
+using ONNX model via <a class="reference external" href="https://github.com/PyThaiNLP/LEKCut">LEKCut</a>.,
 Out-of-domain StacKed cut for Word Segmentation</p></li>
 <li><p><em>sefr_cut</em> - wrapper for
-<a class="reference external" href="https://github.com/mrpeerat/SEFR_CUT">SEFR CUT</a>.,
+<a class="reference external" href="https://github.com/mrpeerat/SEFR_CUT">SEFR CUT</a>
+using ONNX model via <a class="reference external" href="https://github.com/PyThaiNLP/LEKCut">LEKCut</a>.,
 Stacked Ensemble Filter and Refine for Word Segmentation</p></li>
 <li><p><em>tltk</em> - wrapper for
 <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a>.,</p>
@@ -622,18 +625,22 @@ and <code class="xref py py-func docutils literal notranslate"><span class="pre"
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_words</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">dict_trie</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">custom_words_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">thai_words</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_words_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'อะเฟเซีย'</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_words_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'Aphasia'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_words_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"อะเฟเซีย"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_words_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Aphasia"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trie</span> <span class="o">=</span> <span class="n">dict_trie</span><span class="p">(</span><span class="n">dict_source</span><span class="o">=</span><span class="n">custom_words_list</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">"อะเฟเซีย (Aphasia*) เป็นอาการผิดปกติของการพูด"</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">trie</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'newmm'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">custom_dict</span><span class="o">=</span><span class="n">trie</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="go">['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิดปกติ', 'ของ', 'การ', 'พูด']</span>
 </pre></div>
 </div>
 <p>Tokenizer object instantiated with a list of words:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">"อะเฟเซีย (Aphasia) เป็นอาการผิดปกติของการพูด"</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">thai_words</span><span class="p">()),</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'newmm'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">custom_dict</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">thai_words</span><span class="p">()),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="go">['อะ', 'เฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิดปกติ', 'ของ', 'การ', 'พูด']</span>
 </pre></div>
@@ -641,15 +648,20 @@ and <code class="xref py py-func docutils literal notranslate"><span class="pre"
 <p>Tokenizer object instantiated with a file path containing a list of
 words separated with <em>newline</em> and explicitly setting a new tokenizer
 after initiation:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PATH_TO_CUSTOM_DICTIONARY</span> <span class="o">=</span> <span class="s1">'./custom_dictionary.txt'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">PATH_TO_CUSTOM_DICTIONARY</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'อะเฟเซีย</span><span class="se">\n</span><span class="s1">Aphasia</span><span class="se">\n</span><span class="s1">ผิด</span><span class="se">\n</span><span class="s1">ปกติ'</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PATH_TO_CUSTOM_DICTIONARY</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">"./custom_dictionary.txt"</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">PATH_TO_CUSTOM_DICTIONARY</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span>
+<span class="gp">... </span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"อะเฟเซีย</span><span class="se">\n</span><span class="s2">Aphasia</span><span class="se">\n</span><span class="s2">ผิด</span><span class="se">\n</span><span class="s2">ปกติ"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">"อะเฟเซีย (Aphasia) เป็นอาการผิดปกติของการพูด"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">custom_dict</span><span class="o">=</span><span class="n">PATH_TO_CUSTOM_DICTIONARY</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'attacut'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">custom_dict</span><span class="o">=</span><span class="n">PATH_TO_CUSTOM_DICTIONARY</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"attacut"</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="go">['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิด', 'ปกติ', 'ของ', 'การ', 'พูด']</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">set_tokenizer_engine</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s1">'newmm'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">set_tokenizer_engine</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="go">['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็นอาการ', 'ผิด', 'ปกติ', 'ของการพูด']</span>
 </pre></div>

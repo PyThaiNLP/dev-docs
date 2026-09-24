@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP e37892d documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP df2e12b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8397301d"></script>
+      <script src="../../../_static/documentation_options.js?v=373756b8"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -193,7 +193,9 @@
                     <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
                     <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
                 <span class="c1"># if previous word is number or other language and is not space</span>
-                <span class="k">elif</span> <span class="n">p_w</span> <span class="ow">and</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+                <span class="k">elif</span> <span class="p">(</span>
+                    <span class="n">p_w</span> <span class="ow">and</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
+                <span class="p">):</span>
                     <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
                     <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
                 <span class="c1"># if word is Thai iteration mark</span>
@@ -247,7 +249,8 @@
 
 <span class="sd">    **Options for engine**</span>
 <span class="sd">        * *attacut* - wrapper for</span>
-<span class="sd">          `AttaCut &lt;https://github.com/PyThaiNLP/attacut&gt;`_.,</span>
+<span class="sd">          `AttaCut &lt;https://github.com/PyThaiNLP/attacut&gt;`_</span>
+<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
 <span class="sd">          learning-based approach</span>
 <span class="sd">        * *deepcut* - wrapper for</span>
 <span class="sd">          `DeepCut &lt;https://github.com/rkcosmos/deepcut&gt;`_,</span>
@@ -272,10 +275,12 @@
 <span class="sd">          `nlpO3 &lt;https://github.com/PyThaiNLP/nlpo3&gt;`_.,</span>
 <span class="sd">          adaptation of newmm in Rust (2.5x faster)</span>
 <span class="sd">        * *oskut* - wrapper for</span>
-<span class="sd">          `OSKut &lt;https://github.com/mrpeerat/OSKut&gt;`_.,</span>
+<span class="sd">          `OSKut &lt;https://github.com/mrpeerat/OSKut&gt;`_</span>
+<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
 <span class="sd">          Out-of-domain StacKed cut for Word Segmentation</span>
 <span class="sd">        * *sefr_cut* - wrapper for</span>
-<span class="sd">          `SEFR CUT &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_.,</span>
+<span class="sd">          `SEFR CUT &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_</span>
+<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
 <span class="sd">          Stacked Ensemble Filter and Refine for Word Segmentation</span>
 <span class="sd">        * *tltk* - wrapper for</span>
 <span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
@@ -950,18 +955,22 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.corpus.common import thai_words  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import dict_trie  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; custom_words_list = set(thai_words())  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; custom_words_list.add('อะเฟเซีย')  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; custom_words_list.add('Aphasia')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; custom_words_list.add("อะเฟเซีย")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; custom_words_list.add("Aphasia")  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; trie = dict_trie(dict_source=custom_words_list)  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; text = "อะเฟเซีย (Aphasia*) เป็นอาการผิดปกติของการพูด"  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; _tokenizer = Tokenizer(custom_dict=trie, engine='newmm')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; _tokenizer = Tokenizer(</span>
+<span class="sd">        ...     custom_dict=trie, engine="newmm"</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิดปกติ', 'ของ', 'การ', 'พูด']</span>
 
 <span class="sd">    Tokenizer object instantiated with a list of words:</span>
 
 <span class="sd">        &gt;&gt;&gt; text = "อะเฟเซีย (Aphasia) เป็นอาการผิดปกติของการพูด"  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; _tokenizer = Tokenizer(custom_dict=list(thai_words()), engine='newmm')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; _tokenizer = Tokenizer(</span>
+<span class="sd">        ...     custom_dict=list(thai_words()), engine="newmm"</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะ', 'เฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิดปกติ', 'ของ', 'การ', 'พูด']</span>
 
@@ -969,15 +978,20 @@
 <span class="sd">    words separated with *newline* and explicitly setting a new tokenizer</span>
 <span class="sd">    after initiation:</span>
 
-<span class="sd">        &gt;&gt;&gt; PATH_TO_CUSTOM_DICTIONARY = './custom_dictionary.txt'  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; with open(PATH_TO_CUSTOM_DICTIONARY, 'w', encoding='utf-8') as f:  # doctest: +SKIP</span>
-<span class="sd">        ...     f.write('อะเฟเซีย\\nAphasia\\nผิด\\nปกติ')</span>
+<span class="sd">        &gt;&gt;&gt; PATH_TO_CUSTOM_DICTIONARY = (</span>
+<span class="sd">        ...     "./custom_dictionary.txt"  # doctest: +SKIP</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; with open(</span>
+<span class="sd">        ...     PATH_TO_CUSTOM_DICTIONARY, "w", encoding="utf-8"</span>
+<span class="sd">        ... ) as f:  # doctest: +SKIP</span>
+<span class="sd">        ...     f.write("อะเฟเซีย\\nAphasia\\nผิด\\nปกติ")</span>
 <span class="sd">        &gt;&gt;&gt; text = "อะเฟเซีย (Aphasia) เป็นอาการผิดปกติของการพูด"  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer = Tokenizer(  # doctest: +SKIP</span>
-<span class="sd">        ...     custom_dict=PATH_TO_CUSTOM_DICTIONARY, engine='attacut')</span>
+<span class="sd">        ...     custom_dict=PATH_TO_CUSTOM_DICTIONARY, engine="attacut"</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิด', 'ปกติ', 'ของ', 'การ', 'พูด']</span>
-<span class="sd">        &gt;&gt;&gt; _tokenizer.set_tokenizer_engine(engine='newmm')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; _tokenizer.set_tokenizer_engine(engine="newmm")  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็นอาการ', 'ผิด', 'ปกติ', 'ของการพูด']</span>
 <span class="sd">    """</span>
