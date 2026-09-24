@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.trie &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.trie &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,10 +114,10 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Trie data structure.</span>
+<span class="sd">"""Trie data structure.</span>
 
-<span class="sd">Designed to be used for tokenizer&#39;s dictionary, but can be for other purposes.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Designed to be used for tokenizer's dictionary, but can be for other purposes.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -128,7 +128,7 @@
 <div class="viewcode-block" id="Trie">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Trie</span><span class="p">(</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trie data structure for efficient prefix-based word search.</span>
+<span class="w">    </span><span class="sd">"""Trie data structure for efficient prefix-based word search.</span>
 
 <span class="sd">    A Trie (prefix tree) is a tree-like data structure used to store</span>
 <span class="sd">    a collection of strings. It enables fast retrieval of words with</span>
@@ -140,15 +140,15 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import Trie</span>
-<span class="sd">        &gt;&gt;&gt; trie = Trie([&quot;สวัสดี&quot;, &quot;สวัส&quot;, &quot;ดี&quot;, &quot;ครับ&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; &quot;สวัสดี&quot; in trie</span>
+<span class="sd">        &gt;&gt;&gt; trie = Trie(["สวัสดี", "สวัส", "ดี", "ครับ"])</span>
+<span class="sd">        &gt;&gt;&gt; "สวัสดี" in trie</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; trie.prefixes(&quot;สวัสดีครับ&quot;)</span>
-<span class="sd">        [&#39;สวัส&#39;, &#39;สวัสดี&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; trie.add(&quot;สวัสดีตอนเช้า&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; trie.prefixes("สวัสดีครับ")</span>
+<span class="sd">        ['สวัส', 'สวัสดี']</span>
+<span class="sd">        &gt;&gt;&gt; trie.add("สวัสดีตอนเช้า")</span>
 <span class="sd">        &gt;&gt;&gt; len(trie)</span>
 <span class="sd">        5</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">root</span><span class="p">:</span> <span class="n">Node</span>
     <span class="n">_word_count</span><span class="p">:</span> <span class="nb">int</span>
@@ -156,7 +156,7 @@
 <div class="viewcode-block" id="Trie.Node">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.Node">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">:</span>
-        <span class="vm">__slots__</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span>
+        <span class="vm">__slots__</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="s2">"children"</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Trie.Node.__init__">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.Node.__init__">[docs]</a>
@@ -179,11 +179,11 @@
 <div class="viewcode-block" id="Trie.add">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.add">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a word to the trie.</span>
+<span class="w">        </span><span class="sd">"""Add a word to the trie.</span>
 <span class="sd">        Spaces in front of and following the word will be removed.</span>
 
 <span class="sd">        :param str word: a word</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
         <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
@@ -202,12 +202,12 @@
 <div class="viewcode-block" id="Trie.remove">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.remove">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove a word from the trie.</span>
+<span class="w">        </span><span class="sd">"""Remove a word from the trie.</span>
 <span class="sd">        If the word is not found, do nothing.</span>
 
 <span class="sd">        :param str word: a word</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Navigate to the word&#39;s end node, recording the path.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Navigate to the word's end node, recording the path.</span>
         <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
         <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
@@ -237,13 +237,13 @@
 <div class="viewcode-block" id="Trie.prefixes">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.Trie.prefixes">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prefixes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all possible words from first sequence of characters in a word.</span>
+<span class="w">        </span><span class="sd">"""List all possible words from first sequence of characters in a word.</span>
 
 <span class="sd">        :param str text: text to search for prefixes</span>
 <span class="sd">        :param int start: starting position in text, defaults to 0</span>
 <span class="sd">        :return: a list of possible words starting at ``start``</span>
 <span class="sd">        :rtype: list[str]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
@@ -278,7 +278,7 @@
         <span class="c1"># O(k²) list copies that a stack-based approach would incur.</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">_dfs</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">ch</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
@@ -295,18 +295,18 @@
 <div class="viewcode-block" id="dict_trie">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.dict_trie">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dict_trie</span><span class="p">(</span><span class="n">dict_source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Trie</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Trie</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a dictionary trie from a file or an iterable.</span>
+<span class="w">    </span><span class="sd">"""Create a dictionary trie from a file or an iterable.</span>
 
 <span class="sd">    :param str|Iterable[str]|pythainlp.util.Trie dict_source: a path to</span>
 <span class="sd">        dictionary file or a list of words or a pythainlp.util.Trie object</span>
 <span class="sd">    :return: a trie object</span>
 <span class="sd">    :rtype: pythainlp.util.Trie</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dict_source</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_source</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># dict_source is a path to dictionary text file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dict_source</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dict_source</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">_vocabs</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
             <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">_vocabs</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dict_source</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -318,8 +318,8 @@
         <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">(</span><span class="n">dict_source</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="s2">&quot;Type of dict_source must be pythainlp.util.Trie, &quot;</span>
-            <span class="s2">&quot;or Iterable[str], or non-empty str (path to source file)&quot;</span>
+            <span class="s2">"Type of dict_source must be pythainlp.util.Trie, "</span>
+            <span class="s2">"or Iterable[str], or non-empty str (path to source file)"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">trie</span></div>

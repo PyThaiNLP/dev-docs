@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.wordtonum &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.wordtonum &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,11 +114,11 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Convert number in words to a computable number value</span>
+<span class="sd">"""Convert number in words to a computable number value</span>
 
-<span class="sd">First version of the code adapted from Korakot Chaovavanich&#39;s notebook</span>
+<span class="sd">First version of the code adapted from Korakot Chaovavanich's notebook</span>
 <span class="sd">https://colab.research.google.com/drive/148WNIeclf0kOU6QxKd6pcfwpSs8l-VKD#scrollTo=EuVDd0nNuI8Q</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -129,70 +129,70 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_words</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
 
-<span class="n">_ptn_digits</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(|หนึ่ง|เอ็ด|สอง|ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)&quot;</span>
+<span class="n">_ptn_digits</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"(|หนึ่ง|เอ็ด|สอง|ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)"</span>
 <span class="n">_ptn_six_figures</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="sa">rf</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">แสน)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">หมื่น)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">พัน)?&quot;</span>
-    <span class="sa">rf</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">ร้อย)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">สิบ)?</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">?&quot;</span>
+    <span class="sa">rf</span><span class="s2">"(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">แสน)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">หมื่น)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">พัน)?"</span>
+    <span class="sa">rf</span><span class="s2">"(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">ร้อย)?(</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">สิบ)?</span><span class="si">{</span><span class="n">_ptn_digits</span><span class="si">}</span><span class="s2">?"</span>
 <span class="p">)</span>
-<span class="n">_ptn_thai_numerals</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;(ลบ)?(</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">ล้าน)*</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">_ptn_thai_numerals</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">"(ลบ)?(</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">ล้าน)*</span><span class="si">{</span><span class="n">_ptn_six_figures</span><span class="si">}</span><span class="s2">"</span>
 <span class="n">_re_thai_numerals</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">_ptn_thai_numerals</span><span class="p">)</span>
 
 <span class="n">_digits</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># &quot;ศูนย์&quot; was excluded as a special case</span>
-    <span class="s2">&quot;หนึ่ง&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;เอ็ด&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;สอง&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;ยี่&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;สาม&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;สี่&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="s2">&quot;ห้า&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">&quot;หก&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">&quot;เจ็ด&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s2">&quot;แปด&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;เก้า&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="c1"># "ศูนย์" was excluded as a special case</span>
+    <span class="s2">"หนึ่ง"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"เอ็ด"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"สอง"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"ยี่"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"สาม"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"สี่"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"ห้า"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"หก"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"เจ็ด"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"แปด"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"เก้า"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">_powers_of_10</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;สิบ&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;ร้อย&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">&quot;พัน&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="s2">&quot;หมื่น&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
-    <span class="s2">&quot;แสน&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
-    <span class="c1"># &quot;ล้าน&quot; was excluded as a special case</span>
+    <span class="s2">"สิบ"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"ร้อย"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"พัน"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s2">"หมื่น"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="s2">"แสน"</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+    <span class="c1"># "ล้าน" was excluded as a special case</span>
 <span class="p">}</span>
 <span class="n">_valid_tokens</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="nb">set</span><span class="p">(</span><span class="n">_digits</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">_powers_of_10</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;ล้าน&quot;</span><span class="p">,</span> <span class="s2">&quot;ลบ&quot;</span><span class="p">}</span>
+    <span class="nb">set</span><span class="p">(</span><span class="n">_digits</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">_powers_of_10</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="p">{</span><span class="s2">"ล้าน"</span><span class="p">,</span> <span class="s2">"ลบ"</span><span class="p">}</span>
 <span class="p">)</span>
 
 
 <span class="nd">@lru_cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_tokenizer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lazy load Thai numeral tokenizer with cache&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Lazy load Thai numeral tokenizer with cache"""</span>
     <span class="k">return</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="n">_valid_tokens</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_is_thainum</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_digits</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;num&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;สิบ&quot;</span><span class="p">,</span> <span class="s2">&quot;ร้อย&quot;</span><span class="p">,</span> <span class="s2">&quot;พัน&quot;</span><span class="p">,</span> <span class="s2">&quot;หมื่น&quot;</span><span class="p">,</span> <span class="s2">&quot;แสน&quot;</span><span class="p">,</span> <span class="s2">&quot;ล้าน&quot;</span><span class="p">,</span> <span class="s2">&quot;จุด&quot;</span><span class="p">,</span> <span class="s2">&quot;ลบ&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"num"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"สิบ"</span><span class="p">,</span> <span class="s2">"ร้อย"</span><span class="p">,</span> <span class="s2">"พัน"</span><span class="p">,</span> <span class="s2">"หมื่น"</span><span class="p">,</span> <span class="s2">"แสน"</span><span class="p">,</span> <span class="s2">"ล้าน"</span><span class="p">,</span> <span class="s2">"จุด"</span><span class="p">,</span> <span class="s2">"ลบ"</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 
 <span class="nd">@lru_cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_tokenizer_thaiwords</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lazy load Thai words tokenizer with cache&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Lazy load Thai words tokenizer with cache"""</span>
     <span class="n">_dict_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_words</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_is_thainum</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="n">_dict_words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_digits</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="n">_dict_words</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;สิบ&quot;</span><span class="p">,</span> <span class="s2">&quot;ร้อย&quot;</span><span class="p">,</span> <span class="s2">&quot;พัน&quot;</span><span class="p">,</span> <span class="s2">&quot;หมื่น&quot;</span><span class="p">,</span> <span class="s2">&quot;แสน&quot;</span><span class="p">,</span> <span class="s2">&quot;ล้าน&quot;</span><span class="p">,</span> <span class="s2">&quot;จุด&quot;</span><span class="p">])</span>
+    <span class="n">_dict_words</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">"สิบ"</span><span class="p">,</span> <span class="s2">"ร้อย"</span><span class="p">,</span> <span class="s2">"พัน"</span><span class="p">,</span> <span class="s2">"หมื่น"</span><span class="p">,</span> <span class="s2">"แสน"</span><span class="p">,</span> <span class="s2">"ล้าน"</span><span class="p">,</span> <span class="s2">"จุด"</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">_dict_words</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="thaiword_to_num">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thaiword_to_num">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_num</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts the spelled-out numerals in Thai scripts into an actual integer.</span>
+<span class="w">    </span><span class="sd">"""Converts the spelled-out numerals in Thai scripts into an actual integer.</span>
 
 <span class="sd">    :param str word: Spelled-out numerals in Thai scripts</span>
 <span class="sd">    :return: Corresponding integer value of the input</span>
@@ -201,27 +201,27 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import thaiword_to_num</span>
-<span class="sd">        &gt;&gt;&gt; thaiword_to_num(&quot;ศูนย์&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; thaiword_to_num("ศูนย์")</span>
 <span class="sd">        0</span>
-<span class="sd">        &gt;&gt;&gt; thaiword_to_num(&quot;สองล้านสามแสนหกร้อยสิบสอง&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; thaiword_to_num("สองล้านสามแสนหกร้อยสิบสอง")</span>
 <span class="sd">        2300612</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The input must be a string; given </span><span class="si">{</span><span class="n">word</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The input must be a string; given </span><span class="si">{</span><span class="n">word</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input string cannot be empty&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s2">&quot;ศูนย์&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The input string cannot be empty"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s2">"ศูนย์"</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_re_thai_numerals</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input string is not a valid Thai numeral&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The input string is not a valid Thai numeral"</span><span class="p">)</span>
 
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">_tokenizer</span><span class="p">()</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
     <span class="n">accumulated</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">next_digit</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="n">is_minus</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ลบ&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ลบ"</span><span class="p">:</span>
         <span class="n">is_minus</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">tokens</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -232,7 +232,7 @@
             <span class="c1"># Absent digit assumed 1 before all powers of 10 (except million)</span>
             <span class="n">accumulated</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">next_digit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">_powers_of_10</span><span class="p">[</span><span class="n">token</span><span class="p">]</span>
             <span class="n">next_digit</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># token == &quot;ล้าน&quot;</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># token == "ล้าน"</span>
             <span class="c1"># Absent digit assumed 0 before word million</span>
             <span class="n">accumulated</span> <span class="o">=</span> <span class="p">(</span><span class="n">accumulated</span> <span class="o">+</span> <span class="n">next_digit</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000000</span>
             <span class="n">next_digit</span> <span class="o">=</span> <span class="mi">0</span>
@@ -257,7 +257,7 @@
 <div class="viewcode-block" id="words_to_num">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.words_to_num">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">words_to_num</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai words to float.</span>
+<span class="w">    </span><span class="sd">"""Thai words to float.</span>
 
 <span class="sd">    :param list[str] words: Thai words (a number broken into tokens)</span>
 <span class="sd">    :return: float value of the words</span>
@@ -266,16 +266,16 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import words_to_num</span>
-<span class="sd">        &gt;&gt;&gt; words_to_num([&quot;ห้า&quot;, &quot;สิบ&quot;, &quot;จุด&quot;, &quot;เก้า&quot;, &quot;ห้า&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; words_to_num(["ห้า", "สิบ", "จุด", "เก้า", "ห้า"])</span>
 <span class="sd">        50.95</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">num</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="s2">&quot;จุด&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">thaiword_to_num</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s2">"จุด"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">thaiword_to_num</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">words_int</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">[:</span> <span class="n">words</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;จุด&quot;</span><span class="p">)])</span>
-        <span class="n">words_float</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">words</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;จุด&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
+        <span class="n">words_int</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">[:</span> <span class="n">words</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"จุด"</span><span class="p">)])</span>
+        <span class="n">words_float</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">words</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"จุด"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">thaiword_to_num</span><span class="p">(</span><span class="n">words_int</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">num</span> <span class="o">-=</span> <span class="n">_decimal_unit</span><span class="p">(</span><span class="n">words_float</span><span class="p">)</span>
@@ -289,7 +289,7 @@
 <div class="viewcode-block" id="text_to_num">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.text_to_num">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">text_to_num</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai text to list of Thai words with floating point numbers</span>
+<span class="w">    </span><span class="sd">"""Thai text to list of Thai words with floating point numbers</span>
 
 <span class="sd">    :param str text: Thai text with the spelled-out numerals</span>
 <span class="sd">    :return: list of Thai words with float values of the input</span>
@@ -298,12 +298,12 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import text_to_num</span>
-<span class="sd">        &gt;&gt;&gt; text_to_num(&quot;เก้าร้อยแปดสิบจุดเก้าห้าบาทนี่คือจำนวนทั้งหมด&quot;)</span>
-<span class="sd">        [&#39;980.95&#39;, &#39;บาท&#39;, &#39;นี่&#39;, &#39;คือ&#39;, &#39;จำนวน&#39;, &#39;ทั้งหมด&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; text_to_num(&quot;สิบล้านสองหมื่นหนึ่งพันแปดร้อยแปดสิบเก้าบาท&quot;)</span>
-<span class="sd">        [&#39;10021889&#39;, &#39;บาท&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; text_to_num("เก้าร้อยแปดสิบจุดเก้าห้าบาทนี่คือจำนวนทั้งหมด")</span>
+<span class="sd">        ['980.95', 'บาท', 'นี่', 'คือ', 'จำนวน', 'ทั้งหมด']</span>
+<span class="sd">        &gt;&gt;&gt; text_to_num("สิบล้านสองหมื่นหนึ่งพันแปดร้อยแปดสิบเก้าบาท")</span>
+<span class="sd">        ['10021889', 'บาท']</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_temp</span> <span class="o">=</span> <span class="n">_tokenizer_thaiwords</span><span class="p">()</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="n">thainum</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">last_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>

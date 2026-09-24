@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thread safety &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>Thread safety &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../_static/documentation_options.js?v=3235de97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -170,9 +170,9 @@ loading when switching models/engines; underlying library thread-safety not guar
 
 <span class="k">def</span><span class="w"> </span><span class="nf">tokenize_worker</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="c1"># Thread-safe for all engines</span>
-    <span class="n">results</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;longest&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"longest"</span><span class="p">)</span>
 
-<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ผมรักประเทศไทย&quot;</span><span class="p">,</span> <span class="s2">&quot;วันนี้อากาศดี&quot;</span><span class="p">,</span> <span class="s2">&quot;เขาไปโรงเรียน&quot;</span><span class="p">]</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ผมรักประเทศไทย"</span><span class="p">,</span> <span class="s2">"วันนี้อากาศดี"</span><span class="p">,</span> <span class="s2">"เขาไปโรงเรียน"</span><span class="p">]</span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
 <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -244,14 +244,14 @@ create a new Trie instance and pass it to subsequent tokenization calls</p></li>
 
 <span class="c1"># SAFE: Create dictionary once before threading</span>
 <span class="n">custom_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">thai_words</span><span class="p">())</span>
-<span class="n">custom_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">)</span>
+<span class="n">custom_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"คำใหม่"</span><span class="p">)</span>
 <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">dict_trie</span><span class="p">(</span><span class="n">custom_words</span><span class="p">)</span>
 
-<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ผมรักประเทศไทย&quot;</span><span class="p">,</span> <span class="s2">&quot;วันนี้อากาศดี&quot;</span><span class="p">,</span> <span class="s2">&quot;เขาไปโรงเรียน&quot;</span><span class="p">]</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ผมรักประเทศไทย"</span><span class="p">,</span> <span class="s2">"วันนี้อากาศดี"</span><span class="p">,</span> <span class="s2">"เขาไปโรงเรียน"</span><span class="p">]</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">worker</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">):</span>
     <span class="c1"># SAFE: Only reading from the dictionary</span>
-    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
 
 <span class="c1"># All threads share the same dictionary (read-only)</span>
 <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
@@ -272,9 +272,9 @@ create a new Trie instance and pass it to subsequent tokenization calls</p></li>
 <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">dict_trie</span><span class="p">(</span><span class="n">thai_words</span><span class="p">())</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">unsafe_worker</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;newmm&quot;</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">)</span>
     <span class="c1"># DANGER: Modifying the shared dictionary</span>
-    <span class="n">custom_dict</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;คำใหม่&quot;</span><span class="p">)</span>  <span class="c1"># This is NOT thread-safe!</span>
+    <span class="n">custom_dict</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"คำใหม่"</span><span class="p">)</span>  <span class="c1"># This is NOT thread-safe!</span>
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 </div>

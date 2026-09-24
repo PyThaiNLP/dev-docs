@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.pronounce &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.pronounce &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -130,7 +130,7 @@
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_single_syllable_thai_words</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return cached list of single-syllable Thai words.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return cached list of single-syllable Thai words."""</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_words</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">syllable_tokenize</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 
 
@@ -138,7 +138,7 @@
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.rhyme">[docs]</a>
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rhyme</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find Thai rhyme</span>
+<span class="w">    </span><span class="sd">"""Find Thai rhyme</span>
 
 <span class="sd">    :param str word: A Thai word</span>
 <span class="sd">    :return: All list Thai rhyme words</span>
@@ -147,9 +147,9 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import rhyme  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; rhyme(&quot;จีบ&quot;)  # doctest: +SKIP</span>
-<span class="sd">        [&#39;กลีบ&#39;, &#39;กีบ&#39;, &#39;ครีบ&#39;, &#39;คีบ&#39;, &#39;งีบ&#39;, ... ]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; rhyme("จีบ")  # doctest: +SKIP</span>
+<span class="sd">        ['กลีบ', 'กีบ', 'ครีบ', 'คีบ', 'งีบ', ... ]</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
         <span class="n">i</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_single_syllable_thai_words</span><span class="p">()</span>
@@ -158,43 +158,43 @@
 
 
 
-<span class="n">_vowel_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="n">_vowel_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="p">(</span>
-        <span class="s2">&quot;อะ,อา,อิ,อี,อึ,อื,อุ,อู,เอะ,เอ,แอะ,แอ,เอียะ,เอีย,เอือะ,เอือ,อัวะ,อัว,โอะ,&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;โอ,เอาะ,ออ,เออะ,เออ,อำ,ใอ,ไอ,เอา,ฤ,ฤๅ,ฦ,ฦๅ&quot;</span><span class="p">,</span>
+        <span class="s2">"อะ,อา,อิ,อี,อึ,อื,อุ,อู,เอะ,เอ,แอะ,แอ,เอียะ,เอีย,เอือะ,เอือ,อัวะ,อัว,โอะ,"</span><span class="p">,</span>
+        <span class="s2">"โอ,เอาะ,ออ,เออะ,เออ,อำ,ใอ,ไอ,เอา,ฤ,ฤๅ,ฦ,ฦๅ"</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">thai_vowel</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_vowel_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">thai_vowel</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_vowel_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
 <span class="n">thai_vowel_all</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;([ก-ฮ])ะ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;([ก-ฮ])า&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อา&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;อิ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">),</span> <span class="s2">&quot;อิ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;อี&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">),</span> <span class="s2">&quot;อี&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;อึ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;อึ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;อื&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;อื&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;อุ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;อุ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;อู&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;อู&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;เอะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;แอะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1แอะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;แอ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1แอ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอียะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอียะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอีย&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอีย&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอือะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอือะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอือ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอือ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;อัวะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อัวะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;อัว&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อัว&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;โอะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1โอะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;โอ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1โอ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอาะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอาะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ออ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1ออ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เออะ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เออะ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เออ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เออ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;อำ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อำ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ใอ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1ใอ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;ไอ&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1ไอ&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;เอา&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอา&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;อั&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;อ&quot;</span><span class="p">,</span> <span class="s2">&quot;([ก-ฮ])&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1อะ&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"([ก-ฮ])ะ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"([ก-ฮ])า"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อา"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"อิ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">),</span> <span class="s2">"อิ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"อี"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">),</span> <span class="s2">"อี"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"อึ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"อึ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"อื"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"อื"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"อุ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"อุ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"อู"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"อู"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"เอะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"แอะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1แอะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"แอ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1แอ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอียะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอียะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอีย"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอีย"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอือะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอือะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอือ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอือ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"อัวะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อัวะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"อัว"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อัว"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"โอะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1โอะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"โอ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1โอ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอาะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอาะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"ออ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1ออ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เออะ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เออะ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เออ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เออ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"อำ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อำ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"ใอ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1ใอ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"ไอ"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1ไอ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"เอา"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอา"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"อั"</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1อะ"</span><span class="p">),</span>
 <span class="p">]</span>
 <span class="n">thai_vowel_all</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -202,7 +202,7 @@
 <div class="viewcode-block" id="thai_consonant_to_spelling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thai_consonant_to_spelling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thai_consonant_to_spelling</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai consonants to spelling</span>
+<span class="w">    </span><span class="sd">"""Thai consonants to spelling</span>
 
 <span class="sd">    :param str c: A Thai consonant</span>
 <span class="sd">    :return: spelling</span>
@@ -211,11 +211,11 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import thai_consonant_to_spelling</span>
-<span class="sd">        &gt;&gt;&gt; print(thai_consonant_to_spelling(&quot;ก&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; print(thai_consonant_to_spelling("ก"))</span>
 <span class="sd">        กอ</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="s2">&quot;อ&quot;</span>
+        <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="s2">"อ"</span>
     <span class="k">return</span> <span class="n">c</span></div>
 
 
@@ -223,7 +223,7 @@
 <div class="viewcode-block" id="tone_to_spelling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.tone_to_spelling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tone_to_spelling</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai tonemarks to spelling</span>
+<span class="w">    </span><span class="sd">"""Thai tonemarks to spelling</span>
 
 <span class="sd">    :param str t: A Thai tonemarks</span>
 <span class="sd">    :return: spelling</span>
@@ -232,40 +232,40 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import tone_to_spelling</span>
-<span class="sd">        &gt;&gt;&gt; print(tone_to_spelling(&quot;่&quot;))  # ไม้เอก</span>
+<span class="sd">        &gt;&gt;&gt; print(tone_to_spelling("่"))  # ไม้เอก</span>
 <span class="sd">        ไม้เอก</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;่&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;ไม้เอก&quot;</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;ไม้โท&quot;</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;ไม้ตรี&quot;</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;ไม้จัตวา&quot;</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ไม้เอก"</span>
+    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ไม้โท"</span>
+    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๊"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ไม้ตรี"</span>
+    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๋"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ไม้จัตวา"</span>
     <span class="k">return</span> <span class="n">t</span></div>
 
 
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_spelling_tokenizer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lazy-load and cache the vowel/consonant tokenizer used by spelling().&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Lazy-load and cache the vowel/consonant tokenizer used by spelling()."""</span>
     <span class="k">return</span> <span class="n">Tokenizer</span><span class="p">(</span>
-        <span class="n">custom_dict</span><span class="o">=</span><span class="n">thai_vowel</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">thai_consonants</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;longest&quot;</span>
+        <span class="n">custom_dict</span><span class="o">=</span><span class="n">thai_vowel</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">thai_consonants</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"longest"</span>
     <span class="p">)</span>
 
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_spelling_impl</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cached implementation of spelling() for valid string inputs.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Cached implementation of spelling() for valid string inputs."""</span>
     <span class="n">thai_vowel_tokenizer</span> <span class="o">=</span> <span class="n">_spelling_tokenizer</span><span class="p">()</span>
-    <span class="n">word_pre</span> <span class="o">=</span> <span class="n">remove_tonemark</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;็&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">word_pre</span> <span class="o">=</span> <span class="n">remove_tonemark</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"็"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
     <span class="n">tone</span> <span class="o">=</span> <span class="p">[</span><span class="n">tone_to_spelling</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span><span class="p">]</span>
     <span class="n">word_output</span> <span class="o">=</span> <span class="n">word_pre</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">thai_vowel_all</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;็&quot;</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;เ([ก-ฮ])&quot;</span><span class="p">:</span>
-                <span class="n">word_output</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1เอะ&quot;</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">"็"</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">"เ([ก-ฮ])"</span><span class="p">:</span>
+                <span class="n">word_output</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอะ"</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">word_output</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">)</span>
             <span class="k">break</span>
@@ -273,20 +273,20 @@
     <span class="n">output</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">i</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="n">thai_consonant_to_spelling</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_word_output</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s2">&quot;์&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span>
+        <span class="k">if</span> <span class="s2">"์"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span>
     <span class="p">]</span>
     <span class="k">if</span> <span class="n">word_pre</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">tone</span> <span class="o">!=</span> <span class="p">[]:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word_pre</span><span class="p">,</span> <span class="n">tone</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">word</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="s2">&quot;็&quot;</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="s2">"็"</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word_pre</span><span class="p">,</span> <span class="n">word</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">spelling</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai word to spelling</span>
+<span class="w">    </span><span class="sd">"""Thai word to spelling</span>
 
 <span class="sd">    This function supports Thai root words only.</span>
 
@@ -297,11 +297,11 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import spelling</span>
-<span class="sd">        &gt;&gt;&gt; spelling(&quot;เรียน&quot;)</span>
-<span class="sd">        [&#39;รอ&#39;, &#39;เอีย&#39;, &#39;นอ&#39;, &#39;เรียน&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; spelling(&quot;เฝ้า&quot;)</span>
-<span class="sd">        [&#39;ฝอ&#39;, &#39;เอา&#39;, &#39;เฝา&#39;, &#39;ไม้โท&#39;, &#39;เฝ้า&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; spelling("เรียน")</span>
+<span class="sd">        ['รอ', 'เอีย', 'นอ', 'เรียน']</span>
+<span class="sd">        &gt;&gt;&gt; spelling("เฝ้า")</span>
+<span class="sd">        ['ฝอ', 'เอา', 'เฝา', 'ไม้โท', 'เฝ้า']</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
     <span class="k">return</span> <span class="n">_spelling_impl</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>

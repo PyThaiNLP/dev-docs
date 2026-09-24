@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient.currency &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.ancient.currency &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -120,7 +120,7 @@
 <div class="viewcode-block" id="convert_currency">
 <a class="viewcode-back" href="../../../api/ancient.html#pythainlp.ancient.convert_currency">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_currency</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">from_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert ancient Thai currency to other units</span>
+<span class="w">    </span><span class="sd">"""Convert ancient Thai currency to other units</span>
 
 <span class="sd">    * เบี้ย (Bia)</span>
 <span class="sd">    * อัฐ (At)</span>
@@ -136,34 +136,34 @@
 
 <span class="sd">    :param float value: value</span>
 <span class="sd">    :param str from_unit: currency unit \</span>
-<span class="sd">        (&#39;เบี้ย&#39;, &#39;อัฐ&#39;, &#39;ไพ&#39;, &#39;เฟื้อง&#39;, &#39;สลึง&#39;, &#39;บาท&#39;, &#39;ตำลึง&#39;, &#39;ชั่ง&#39;)</span>
+<span class="sd">        ('เบี้ย', 'อัฐ', 'ไพ', 'เฟื้อง', 'สลึง', 'บาท', 'ตำลึง', 'ชั่ง')</span>
 <span class="sd">    :return: Thai currency</span>
 <span class="sd">    :rtype: dict[str, float]</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.ancient import convert_currency</span>
-<span class="sd">        &gt;&gt;&gt; print(convert_currency(8, &quot;บาท&quot;))</span>
-<span class="sd">        {&#39;เบี้ย&#39;: 51200.0, &#39;อัฐ&#39;: 512.0, &#39;ไพ&#39;: 256.0, &#39;เฟื้อง&#39;: 64.0, &#39;สลึง&#39;: 32.0, &#39;บาท&#39;: 8.0, &#39;ตำลึง&#39;: 2.0, &#39;ชั่ง&#39;: 0.1}</span>
+<span class="sd">        &gt;&gt;&gt; print(convert_currency(8, "บาท"))</span>
+<span class="sd">        {'เบี้ย': 51200.0, 'อัฐ': 512.0, 'ไพ': 256.0, 'เฟื้อง': 64.0, 'สลึง': 32.0, 'บาท': 8.0, 'ตำลึง': 2.0, 'ชั่ง': 0.1}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">conversion_factors_to_att</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;เบี้ย&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;อัฐ&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 อัฐ = 100 เบี้ย</span>
-        <span class="s2">&quot;ไพ&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ไพ = 2 อัฐ</span>
-        <span class="s2">&quot;เฟื้อง&quot;</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 เฟื้อง = 4 ไพ</span>
-        <span class="s2">&quot;สลึง&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 สลึง = 2 เฟื้อง</span>
-        <span class="s2">&quot;บาท&quot;</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 บาท = 4 สลึง</span>
-        <span class="s2">&quot;ตำลึง&quot;</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ตำลึง = 4 บาท</span>
-        <span class="s2">&quot;ชั่ง&quot;</span><span class="p">:</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ชั่ง = 20 ตำลึง</span>
+        <span class="s2">"เบี้ย"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"อัฐ"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 อัฐ = 100 เบี้ย</span>
+        <span class="s2">"ไพ"</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ไพ = 2 อัฐ</span>
+        <span class="s2">"เฟื้อง"</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 เฟื้อง = 4 ไพ</span>
+        <span class="s2">"สลึง"</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 สลึง = 2 เฟื้อง</span>
+        <span class="s2">"บาท"</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 บาท = 4 สลึง</span>
+        <span class="s2">"ตำลึง"</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ตำลึง = 4 บาท</span>
+        <span class="s2">"ชั่ง"</span><span class="p">:</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># 1 ชั่ง = 20 ตำลึง</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">from_unit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">conversion_factors_to_att</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Currency unit &#39;</span><span class="si">{</span><span class="n">from_unit</span><span class="si">}</span><span class="s2">&#39; is not supported.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Currency unit '</span><span class="si">{</span><span class="n">from_unit</span><span class="si">}</span><span class="s2">' is not supported."</span>
         <span class="p">)</span>
 
-    <span class="c1"># start from &#39;อัฐ&#39;</span>
+    <span class="c1"># start from 'อัฐ'</span>
     <span class="n">value_in_att</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">conversion_factors_to_att</span><span class="p">[</span><span class="n">from_unit</span><span class="p">]</span>
 
     <span class="c1"># Calculate values in other units</span>

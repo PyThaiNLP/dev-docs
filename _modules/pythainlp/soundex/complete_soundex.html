@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.soundex.complete_soundex &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -115,7 +115,7 @@
 <span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Complete Soundex for Thai Words Similarity Analysis</span>
 
 <span class="sd">Original paper:</span>
@@ -135,12 +135,12 @@
 <span class="sd">        from pythainlp.soundex import complete_soundex</span>
 
 <span class="sd">        # Single syllable</span>
-<span class="sd">        complete_soundex(&quot;ก้าน&quot;)  # &#39;กก1Bน2-&#39;</span>
+<span class="sd">        complete_soundex("ก้าน")  # 'กก1Bน2-'</span>
 
 <span class="sd">        # Multi-syllable (automatically handled)</span>
-<span class="sd">        complete_soundex(&quot;ปุญญา&quot;)  # &#39;ปป1B0น-*&#39;</span>
-<span class="sd">        complete_soundex(&quot;สวรรค์&quot;)  # &#39;ซศ1A-0-วว1Aน0-&#39;</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        complete_soundex("ปุญญา")  # 'ปป1B0น-*'</span>
+<span class="sd">        complete_soundex("สวรรค์")  # 'ซศ1A-0-วว1Aน0-'</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -149,184 +149,184 @@
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CompleteSoundex</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Complete Soundex implementation for Thai words similarity analysis.</span>
 
 <span class="sd">    This class implements the Complete Soundex algorithm as described in the paper</span>
 <span class="sd">    by Chalermpol  Tapsai, Phayung  Meesad, and Choochart  Haruechaiyasak (2020).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Thai consonants for pattern matching</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">thai_consonants</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬฮอ&quot;</span>
+            <span class="s2">"กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬฮอ"</span>
         <span class="p">)</span>
 
         <span class="c1"># 1. Maps (Tables 5.1 - 5.4)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;ก&quot;</span><span class="p">:</span> <span class="s2">&quot;กก&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ข&quot;</span><span class="p">:</span> <span class="s2">&quot;คข&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฃ&quot;</span><span class="p">:</span> <span class="s2">&quot;คข&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ค&quot;</span><span class="p">:</span> <span class="s2">&quot;คค&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฅ&quot;</span><span class="p">:</span> <span class="s2">&quot;คค&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฆ&quot;</span><span class="p">:</span> <span class="s2">&quot;คค&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ง&quot;</span><span class="p">:</span> <span class="s2">&quot;งง&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;จ&quot;</span><span class="p">:</span> <span class="s2">&quot;จจ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฉ&quot;</span><span class="p">:</span> <span class="s2">&quot;ชช&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ช&quot;</span><span class="p">:</span> <span class="s2">&quot;ชช&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฌ&quot;</span><span class="p">:</span> <span class="s2">&quot;ชช&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ซ&quot;</span><span class="p">:</span> <span class="s2">&quot;ซซ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ศ&quot;</span><span class="p">:</span> <span class="s2">&quot;ซศ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ษ&quot;</span><span class="p">:</span> <span class="s2">&quot;ซศ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ส&quot;</span><span class="p">:</span> <span class="s2">&quot;ซศ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ญ&quot;</span><span class="p">:</span> <span class="s2">&quot;ยย&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ย&quot;</span><span class="p">:</span> <span class="s2">&quot;ยย&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ด&quot;</span><span class="p">:</span> <span class="s2">&quot;ดด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฎ&quot;</span><span class="p">:</span> <span class="s2">&quot;ดด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ต&quot;</span><span class="p">:</span> <span class="s2">&quot;ตต&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฏ&quot;</span><span class="p">:</span> <span class="s2">&quot;ตต&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ถ&quot;</span><span class="p">:</span> <span class="s2">&quot;ทธ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฐ&quot;</span><span class="p">:</span> <span class="s2">&quot;ทธ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ท&quot;</span><span class="p">:</span> <span class="s2">&quot;ทท&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ธ&quot;</span><span class="p">:</span> <span class="s2">&quot;ทท&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฑ&quot;</span><span class="p">:</span> <span class="s2">&quot;ทท&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฒ&quot;</span><span class="p">:</span> <span class="s2">&quot;ทท&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;น&quot;</span><span class="p">:</span> <span class="s2">&quot;นน&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ณ&quot;</span><span class="p">:</span> <span class="s2">&quot;นน&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;บ&quot;</span><span class="p">:</span> <span class="s2">&quot;บบ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ป&quot;</span><span class="p">:</span> <span class="s2">&quot;ปป&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ผ&quot;</span><span class="p">:</span> <span class="s2">&quot;พผ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฝ&quot;</span><span class="p">:</span> <span class="s2">&quot;ฟฝ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;พ&quot;</span><span class="p">:</span> <span class="s2">&quot;พพ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ภ&quot;</span><span class="p">:</span> <span class="s2">&quot;พพ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฟ&quot;</span><span class="p">:</span> <span class="s2">&quot;ฟฟ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ม&quot;</span><span class="p">:</span> <span class="s2">&quot;มม&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ร&quot;</span><span class="p">:</span> <span class="s2">&quot;รร&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ล&quot;</span><span class="p">:</span> <span class="s2">&quot;รร&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฬ&quot;</span><span class="p">:</span> <span class="s2">&quot;รร&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฤ&quot;</span><span class="p">:</span> <span class="s2">&quot;รร&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;วว&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ห&quot;</span><span class="p">:</span> <span class="s2">&quot;ฮห&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฮ&quot;</span><span class="p">:</span> <span class="s2">&quot;ฮห&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;อ&quot;</span><span class="p">:</span> <span class="s2">&quot;ออ&quot;</span><span class="p">,</span>
+            <span class="s2">"ก"</span><span class="p">:</span> <span class="s2">"กก"</span><span class="p">,</span>
+            <span class="s2">"ข"</span><span class="p">:</span> <span class="s2">"คข"</span><span class="p">,</span>
+            <span class="s2">"ฃ"</span><span class="p">:</span> <span class="s2">"คข"</span><span class="p">,</span>
+            <span class="s2">"ค"</span><span class="p">:</span> <span class="s2">"คค"</span><span class="p">,</span>
+            <span class="s2">"ฅ"</span><span class="p">:</span> <span class="s2">"คค"</span><span class="p">,</span>
+            <span class="s2">"ฆ"</span><span class="p">:</span> <span class="s2">"คค"</span><span class="p">,</span>
+            <span class="s2">"ง"</span><span class="p">:</span> <span class="s2">"งง"</span><span class="p">,</span>
+            <span class="s2">"จ"</span><span class="p">:</span> <span class="s2">"จจ"</span><span class="p">,</span>
+            <span class="s2">"ฉ"</span><span class="p">:</span> <span class="s2">"ชช"</span><span class="p">,</span>
+            <span class="s2">"ช"</span><span class="p">:</span> <span class="s2">"ชช"</span><span class="p">,</span>
+            <span class="s2">"ฌ"</span><span class="p">:</span> <span class="s2">"ชช"</span><span class="p">,</span>
+            <span class="s2">"ซ"</span><span class="p">:</span> <span class="s2">"ซซ"</span><span class="p">,</span>
+            <span class="s2">"ศ"</span><span class="p">:</span> <span class="s2">"ซศ"</span><span class="p">,</span>
+            <span class="s2">"ษ"</span><span class="p">:</span> <span class="s2">"ซศ"</span><span class="p">,</span>
+            <span class="s2">"ส"</span><span class="p">:</span> <span class="s2">"ซศ"</span><span class="p">,</span>
+            <span class="s2">"ญ"</span><span class="p">:</span> <span class="s2">"ยย"</span><span class="p">,</span>
+            <span class="s2">"ย"</span><span class="p">:</span> <span class="s2">"ยย"</span><span class="p">,</span>
+            <span class="s2">"ด"</span><span class="p">:</span> <span class="s2">"ดด"</span><span class="p">,</span>
+            <span class="s2">"ฎ"</span><span class="p">:</span> <span class="s2">"ดด"</span><span class="p">,</span>
+            <span class="s2">"ต"</span><span class="p">:</span> <span class="s2">"ตต"</span><span class="p">,</span>
+            <span class="s2">"ฏ"</span><span class="p">:</span> <span class="s2">"ตต"</span><span class="p">,</span>
+            <span class="s2">"ถ"</span><span class="p">:</span> <span class="s2">"ทธ"</span><span class="p">,</span>
+            <span class="s2">"ฐ"</span><span class="p">:</span> <span class="s2">"ทธ"</span><span class="p">,</span>
+            <span class="s2">"ท"</span><span class="p">:</span> <span class="s2">"ทท"</span><span class="p">,</span>
+            <span class="s2">"ธ"</span><span class="p">:</span> <span class="s2">"ทท"</span><span class="p">,</span>
+            <span class="s2">"ฑ"</span><span class="p">:</span> <span class="s2">"ทท"</span><span class="p">,</span>
+            <span class="s2">"ฒ"</span><span class="p">:</span> <span class="s2">"ทท"</span><span class="p">,</span>
+            <span class="s2">"น"</span><span class="p">:</span> <span class="s2">"นน"</span><span class="p">,</span>
+            <span class="s2">"ณ"</span><span class="p">:</span> <span class="s2">"นน"</span><span class="p">,</span>
+            <span class="s2">"บ"</span><span class="p">:</span> <span class="s2">"บบ"</span><span class="p">,</span>
+            <span class="s2">"ป"</span><span class="p">:</span> <span class="s2">"ปป"</span><span class="p">,</span>
+            <span class="s2">"ผ"</span><span class="p">:</span> <span class="s2">"พผ"</span><span class="p">,</span>
+            <span class="s2">"ฝ"</span><span class="p">:</span> <span class="s2">"ฟฝ"</span><span class="p">,</span>
+            <span class="s2">"พ"</span><span class="p">:</span> <span class="s2">"พพ"</span><span class="p">,</span>
+            <span class="s2">"ภ"</span><span class="p">:</span> <span class="s2">"พพ"</span><span class="p">,</span>
+            <span class="s2">"ฟ"</span><span class="p">:</span> <span class="s2">"ฟฟ"</span><span class="p">,</span>
+            <span class="s2">"ม"</span><span class="p">:</span> <span class="s2">"มม"</span><span class="p">,</span>
+            <span class="s2">"ร"</span><span class="p">:</span> <span class="s2">"รร"</span><span class="p">,</span>
+            <span class="s2">"ล"</span><span class="p">:</span> <span class="s2">"รร"</span><span class="p">,</span>
+            <span class="s2">"ฬ"</span><span class="p">:</span> <span class="s2">"รร"</span><span class="p">,</span>
+            <span class="s2">"ฤ"</span><span class="p">:</span> <span class="s2">"รร"</span><span class="p">,</span>
+            <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">"วว"</span><span class="p">,</span>
+            <span class="s2">"ห"</span><span class="p">:</span> <span class="s2">"ฮห"</span><span class="p">,</span>
+            <span class="s2">"ฮ"</span><span class="p">:</span> <span class="s2">"ฮห"</span><span class="p">,</span>
+            <span class="s2">"อ"</span><span class="p">:</span> <span class="s2">"ออ"</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">vowel_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;ะ&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ั&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;รร&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ำ&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ไ&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ใ&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เา&quot;</span><span class="p">:</span> <span class="s2">&quot;1A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;า&quot;</span><span class="p">:</span> <span class="s2">&quot;1B&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ิ&quot;</span><span class="p">:</span> <span class="s2">&quot;2C&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ี&quot;</span><span class="p">:</span> <span class="s2">&quot;2D&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ึ&quot;</span><span class="p">:</span> <span class="s2">&quot;3E&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ื&quot;</span><span class="p">:</span> <span class="s2">&quot;3F&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ุ&quot;</span><span class="p">:</span> <span class="s2">&quot;4G&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ู&quot;</span><span class="p">:</span> <span class="s2">&quot;4H&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เะ&quot;</span><span class="p">:</span> <span class="s2">&quot;5I&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เ็&quot;</span><span class="p">:</span> <span class="s2">&quot;5I&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เ&quot;</span><span class="p">:</span> <span class="s2">&quot;5J&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;แะ&quot;</span><span class="p">:</span> <span class="s2">&quot;6K&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;แ็&quot;</span><span class="p">:</span> <span class="s2">&quot;6K&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;แ&quot;</span><span class="p">:</span> <span class="s2">&quot;6L&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;โะ&quot;</span><span class="p">:</span> <span class="s2">&quot;7M&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;โ&quot;</span><span class="p">:</span> <span class="s2">&quot;7N&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เาะ&quot;</span><span class="p">:</span> <span class="s2">&quot;8O&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;อ&quot;</span><span class="p">:</span> <span class="s2">&quot;8P&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอะ&quot;</span><span class="p">:</span> <span class="s2">&quot;9Q&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอ&quot;</span><span class="p">:</span> <span class="s2">&quot;9R&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอียะ&quot;</span><span class="p">:</span> <span class="s2">&quot;AS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอีย&quot;</span><span class="p">:</span> <span class="s2">&quot;AT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอือะ&quot;</span><span class="p">:</span> <span class="s2">&quot;BU&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;เอือ&quot;</span><span class="p">:</span> <span class="s2">&quot;BV&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;อัวะ&quot;</span><span class="p">:</span> <span class="s2">&quot;CW&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;อัว&quot;</span><span class="p">:</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span>
+            <span class="s2">"ะ"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"ั"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"รร"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"ำ"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"ไ"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"ใ"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"เา"</span><span class="p">:</span> <span class="s2">"1A"</span><span class="p">,</span>
+            <span class="s2">"า"</span><span class="p">:</span> <span class="s2">"1B"</span><span class="p">,</span>
+            <span class="s2">"ิ"</span><span class="p">:</span> <span class="s2">"2C"</span><span class="p">,</span>
+            <span class="s2">"ี"</span><span class="p">:</span> <span class="s2">"2D"</span><span class="p">,</span>
+            <span class="s2">"ึ"</span><span class="p">:</span> <span class="s2">"3E"</span><span class="p">,</span>
+            <span class="s2">"ื"</span><span class="p">:</span> <span class="s2">"3F"</span><span class="p">,</span>
+            <span class="s2">"ุ"</span><span class="p">:</span> <span class="s2">"4G"</span><span class="p">,</span>
+            <span class="s2">"ู"</span><span class="p">:</span> <span class="s2">"4H"</span><span class="p">,</span>
+            <span class="s2">"เะ"</span><span class="p">:</span> <span class="s2">"5I"</span><span class="p">,</span>
+            <span class="s2">"เ็"</span><span class="p">:</span> <span class="s2">"5I"</span><span class="p">,</span>
+            <span class="s2">"เ"</span><span class="p">:</span> <span class="s2">"5J"</span><span class="p">,</span>
+            <span class="s2">"แะ"</span><span class="p">:</span> <span class="s2">"6K"</span><span class="p">,</span>
+            <span class="s2">"แ็"</span><span class="p">:</span> <span class="s2">"6K"</span><span class="p">,</span>
+            <span class="s2">"แ"</span><span class="p">:</span> <span class="s2">"6L"</span><span class="p">,</span>
+            <span class="s2">"โะ"</span><span class="p">:</span> <span class="s2">"7M"</span><span class="p">,</span>
+            <span class="s2">"โ"</span><span class="p">:</span> <span class="s2">"7N"</span><span class="p">,</span>
+            <span class="s2">"เาะ"</span><span class="p">:</span> <span class="s2">"8O"</span><span class="p">,</span>
+            <span class="s2">"อ"</span><span class="p">:</span> <span class="s2">"8P"</span><span class="p">,</span>
+            <span class="s2">"เอะ"</span><span class="p">:</span> <span class="s2">"9Q"</span><span class="p">,</span>
+            <span class="s2">"เอ"</span><span class="p">:</span> <span class="s2">"9R"</span><span class="p">,</span>
+            <span class="s2">"เอียะ"</span><span class="p">:</span> <span class="s2">"AS"</span><span class="p">,</span>
+            <span class="s2">"เอีย"</span><span class="p">:</span> <span class="s2">"AT"</span><span class="p">,</span>
+            <span class="s2">"เอือะ"</span><span class="p">:</span> <span class="s2">"BU"</span><span class="p">,</span>
+            <span class="s2">"เอือ"</span><span class="p">:</span> <span class="s2">"BV"</span><span class="p">,</span>
+            <span class="s2">"อัวะ"</span><span class="p">:</span> <span class="s2">"CW"</span><span class="p">,</span>
+            <span class="s2">"อัว"</span><span class="p">:</span> <span class="s2">"CX"</span><span class="p">,</span>
+            <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">"CX"</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;ก&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ข&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ค&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฆ&quot;</span><span class="p">:</span> <span class="s2">&quot;ก&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ง&quot;</span><span class="p">:</span> <span class="s2">&quot;ง&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;จ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ช&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ซ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ด&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ต&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ถ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ท&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ธ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ศ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ษ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ส&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฎ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฏ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฐ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฑ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฒ&quot;</span><span class="p">:</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;น&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ณ&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ญ&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ร&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ล&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฬ&quot;</span><span class="p">:</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;บ&quot;</span><span class="p">:</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ป&quot;</span><span class="p">:</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;พ&quot;</span><span class="p">:</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ฟ&quot;</span><span class="p">:</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ภ&quot;</span><span class="p">:</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ม&quot;</span><span class="p">:</span> <span class="s2">&quot;ม&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ย&quot;</span><span class="p">:</span> <span class="s2">&quot;ย&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;ว&quot;</span><span class="p">,</span>
+            <span class="s2">"ก"</span><span class="p">:</span> <span class="s2">"ก"</span><span class="p">,</span>
+            <span class="s2">"ข"</span><span class="p">:</span> <span class="s2">"ก"</span><span class="p">,</span>
+            <span class="s2">"ค"</span><span class="p">:</span> <span class="s2">"ก"</span><span class="p">,</span>
+            <span class="s2">"ฆ"</span><span class="p">:</span> <span class="s2">"ก"</span><span class="p">,</span>
+            <span class="s2">"ง"</span><span class="p">:</span> <span class="s2">"ง"</span><span class="p">,</span>
+            <span class="s2">"จ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ช"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ซ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ด"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ต"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ถ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ท"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ธ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ศ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ษ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ส"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ฎ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ฏ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ฐ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ฑ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"ฒ"</span><span class="p">:</span> <span class="s2">"ด"</span><span class="p">,</span>
+            <span class="s2">"น"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"ณ"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"ญ"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"ร"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"ล"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"ฬ"</span><span class="p">:</span> <span class="s2">"น"</span><span class="p">,</span>
+            <span class="s2">"บ"</span><span class="p">:</span> <span class="s2">"บ"</span><span class="p">,</span>
+            <span class="s2">"ป"</span><span class="p">:</span> <span class="s2">"บ"</span><span class="p">,</span>
+            <span class="s2">"พ"</span><span class="p">:</span> <span class="s2">"บ"</span><span class="p">,</span>
+            <span class="s2">"ฟ"</span><span class="p">:</span> <span class="s2">"บ"</span><span class="p">,</span>
+            <span class="s2">"ภ"</span><span class="p">:</span> <span class="s2">"บ"</span><span class="p">,</span>
+            <span class="s2">"ม"</span><span class="p">:</span> <span class="s2">"ม"</span><span class="p">,</span>
+            <span class="s2">"ย"</span><span class="p">:</span> <span class="s2">"ย"</span><span class="p">,</span>
+            <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">"ว"</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;่&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;้&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;๊&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;๋&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"่"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"้"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"๊"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span> <span class="s2">"๋"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">clean_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove silent characters (karan/thanthakhat) from text.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฮ][ะ-ู]?์&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Remove silent characters (karan/thanthakhat) from text."""</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ก-ฮ][ะ-ู]?์"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">heuristic_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Apply heuristic rules to split syllables.</span>
 
 <span class="sd">        Returns a list of tuples (syllable, implicit_rule) where implicit_rule</span>
-<span class="sd">        can be &#39;a&#39;, &#39;o&#39;, or None.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        can be 'a', 'o', or None.</span>
+<span class="sd">        """</span>
         <span class="c1"># 0. Handle อัต pattern (split as อัต-รา but keep ต with second syllable)</span>
-        <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;อัต&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"อัต"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="c1"># Split as อัต and ตX... (keep ต with the rest)</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="s2">&quot;อัต&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;ต&quot;</span> <span class="o">+</span> <span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="s2">"อัต"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="s2">"ต"</span> <span class="o">+</span> <span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
 
         <span class="c1"># 1. Aksorn Nam with Ro Han (e.g. สวรรค์ -&gt; ส-วรรค์)</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ขฃฉฐถผฝศษสฮกจดตฎฏบปอ]วรร.*&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ขฃฉฐถผฝศษสฮกจดตฎฏบปอ]วรร.*"</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
 
         <span class="c1"># 2. Two consonants without vowel (e.g. กม -&gt; ก-a ม-a)</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฮ]</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ก-ฮ]</span><span class="si">{2}</span><span class="s2">"</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">)]</span>
 
         <span class="c1"># 3. 3 Consonants -&gt; C1-a C2C3-o (e.g. กมล)</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฮ]</span><span class="si">{3}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s2">&quot;o&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ก-ฮ]</span><span class="si">{3}</span><span class="s2">"</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s2">"o"</span><span class="p">)]</span>
 
         <span class="c1"># 4. 3 Consonants + Vowel -&gt; C1-a C2-a C3-V (e.g. กมลา)</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฮ]</span><span class="si">{3}</span><span class="s2">[า-ู]&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ก-ฮ]</span><span class="si">{3}</span><span class="s2">[า-ู]"</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="kc">None</span><span class="p">)]</span>
 
         <span class="k">return</span> <span class="p">[(</span><span class="n">text</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_leading_vowel</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract and process leading vowel.&quot;&quot;&quot;</span>
-        <span class="n">leading_vowel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;เ&quot;</span><span class="p">,</span> <span class="s2">&quot;แ&quot;</span><span class="p">,</span> <span class="s2">&quot;โ&quot;</span><span class="p">,</span> <span class="s2">&quot;ไ&quot;</span><span class="p">,</span> <span class="s2">&quot;ใ&quot;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Extract and process leading vowel."""</span>
+        <span class="n">leading_vowel</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"เ"</span><span class="p">,</span> <span class="s2">"แ"</span><span class="p">,</span> <span class="s2">"โ"</span><span class="p">,</span> <span class="s2">"ไ"</span><span class="p">,</span> <span class="s2">"ใ"</span><span class="p">]:</span>
             <span class="n">leading_vowel</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
             <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">leading_vowel</span><span class="p">,</span> <span class="n">idx</span>
@@ -334,10 +334,10 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_initial_consonant</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process initial consonant and cluster.&quot;&quot;&quot;</span>
-        <span class="n">init_char</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">init_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">cluster_char</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+<span class="w">        </span><span class="sd">"""Process initial consonant and cluster."""</span>
+        <span class="n">init_char</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="n">init_code</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="n">cluster_char</span> <span class="o">=</span> <span class="s2">"-"</span>
 
         <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">init_char</span><span class="p">,</span> <span class="n">init_code</span><span class="p">,</span> <span class="n">cluster_char</span><span class="p">,</span> <span class="n">idx</span>
@@ -345,16 +345,16 @@
         <span class="n">init_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
         <span class="c1"># Special case: ทร- pattern should map to ซ initial</span>
-        <span class="k">if</span> <span class="n">init_char</span> <span class="o">==</span> <span class="s2">&quot;ท&quot;</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ร&quot;</span><span class="p">:</span>
-            <span class="n">init_code</span> <span class="o">=</span> <span class="s2">&quot;ซซ&quot;</span>
+        <span class="k">if</span> <span class="n">init_char</span> <span class="o">==</span> <span class="s2">"ท"</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ร"</span><span class="p">:</span>
+            <span class="n">init_code</span> <span class="o">=</span> <span class="s2">"ซซ"</span>
             <span class="n">idx</span> <span class="o">+=</span> <span class="mi">2</span>
-            <span class="n">cluster_char</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>  <span class="c1"># Don&#39;t output cluster for ทร pattern</span>
+            <span class="n">cluster_char</span> <span class="o">=</span> <span class="s2">"-"</span>  <span class="c1"># Don't output cluster for ทร pattern</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">init_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">init_char</span><span class="p">,</span> <span class="s2">&quot;xx&quot;</span><span class="p">)</span>
+            <span class="n">init_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">init_char</span><span class="p">,</span> <span class="s2">"xx"</span><span class="p">)</span>
             <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="c1"># C. Cluster (Heuristic)</span>
-            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ร&quot;</span><span class="p">,</span> <span class="s2">&quot;ล&quot;</span><span class="p">,</span> <span class="s2">&quot;ว&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ร"</span><span class="p">,</span> <span class="s2">"ล"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">]:</span>
                 <span class="n">is_cluster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_cluster</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">is_cluster</span><span class="p">:</span>
                     <span class="n">cluster_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
@@ -365,18 +365,18 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_detect_cluster</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detect if ร/ล/ว is a cluster.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Detect if ร/ล/ว is a cluster."""</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
             <span class="n">nc</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
             <span class="c1"># Only treat as cluster if followed by combining vowel marks or tones</span>
-            <span class="k">if</span> <span class="n">nc</span> <span class="ow">in</span> <span class="s2">&quot;ะัิีึืุู&quot;</span> <span class="ow">or</span> <span class="n">nc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nc</span> <span class="ow">in</span> <span class="s2">"ะัิีึืุู"</span> <span class="ow">or</span> <span class="n">nc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="c1"># Special for Kruang with leading vowel</span>
             <span class="k">if</span> <span class="p">(</span>
                 <span class="n">leading_vowel</span>
-                <span class="ow">and</span> <span class="n">nc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ร&quot;</span><span class="p">,</span> <span class="s2">&quot;ล&quot;</span><span class="p">,</span> <span class="s2">&quot;ว&quot;</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">nc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ร"</span><span class="p">,</span> <span class="s2">"ล"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">]</span>
                 <span class="ow">and</span> <span class="n">nc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thai_consonants</span>
-                <span class="ow">and</span> <span class="n">nc</span> <span class="o">!=</span> <span class="s2">&quot;า&quot;</span>
+                <span class="ow">and</span> <span class="n">nc</span> <span class="o">!=</span> <span class="s2">"า"</span>
             <span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="c1"># If end of word but has leading vowel (e.g. เกล)</span>
@@ -385,23 +385,23 @@
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_map_leading_vowel_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Map leading vowel to initial vowel and final code.&quot;&quot;&quot;</span>
-        <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+<span class="w">        </span><span class="sd">"""Map leading vowel to initial vowel and final code."""</span>
+        <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="n">final_code</span> <span class="o">=</span> <span class="s2">"-"</span>
 
         <span class="k">if</span> <span class="n">leading_vowel</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;โ&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;7N&quot;</span>
-            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;ไ&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
-                <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;ย&quot;</span>
-            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;ใ&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
-                <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;ย&quot;</span>
-            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;แ&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;6L&quot;</span>
-            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;เ&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;5J&quot;</span>
+            <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"โ"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"7N"</span>
+            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"ไ"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
+                <span class="n">final_code</span> <span class="o">=</span> <span class="s2">"ย"</span>
+            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"ใ"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
+                <span class="n">final_code</span> <span class="o">=</span> <span class="s2">"ย"</span>
+            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"แ"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"6L"</span>
+            <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"เ"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"5J"</span>
 
         <span class="k">return</span> <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span>
 
@@ -413,15 +413,15 @@
         <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">final_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scan remaining characters for vowels, tones, and finals.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Scan remaining characters for vowels, tones, and finals."""</span>
         <span class="n">remaining</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
         <span class="n">final_candidates</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">tone_code</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+        <span class="n">tone_code</span> <span class="o">=</span> <span class="s2">"0"</span>
 
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">remaining</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">:</span>
                 <span class="n">tone_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tone_map</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;ะัาิีึืุู&quot;</span> <span class="ow">or</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;อ&quot;</span> <span class="ow">and</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;เ&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;ำ&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">"ะัาิีึืุู"</span> <span class="ow">or</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">"อ"</span> <span class="ow">and</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"เ"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"ำ"</span><span class="p">:</span>
                 <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_vowel_char</span><span class="p">(</span>
                     <span class="n">c</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span>
                 <span class="p">)</span>
@@ -433,34 +433,34 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_vowel_char</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">leading_vowel</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">final_code</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process a single vowel character.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Process a single vowel character."""</span>
         <span class="c1"># Complex Vowel Checks</span>
-        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;เ&quot;</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;ื&quot;</span><span class="p">:</span>
-            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;BV&quot;</span>  <span class="c1"># Part of uea</span>
-        <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;เ&quot;</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;อ&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">!=</span> <span class="s2">&quot;BV&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;9R&quot;</span>  <span class="c1"># E + O -&gt; Oe</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;ำ&quot;</span><span class="p">:</span>
-            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
-            <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;ม&quot;</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;อ&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">leading_vowel</span> <span class="ow">and</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;8P&quot;</span>  <span class="c1"># &#39;อ&#39; as vowel 8P (Saw)</span>
+        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"เ"</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"ื"</span><span class="p">:</span>
+            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"BV"</span>  <span class="c1"># Part of uea</span>
+        <span class="k">elif</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"เ"</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"อ"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">!=</span> <span class="s2">"BV"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"9R"</span>  <span class="c1"># E + O -&gt; Oe</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"ำ"</span><span class="p">:</span>
+            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
+            <span class="n">final_code</span> <span class="o">=</span> <span class="s2">"ม"</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"อ"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">leading_vowel</span> <span class="ow">and</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"8P"</span>  <span class="c1"># 'อ' as vowel 8P (Saw)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Map standard marker</span>
             <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vowel_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
                 <span class="n">vowel_code</span> <span class="o">=</span> <span class="n">v</span>
 
-        <span class="c1"># Handling &#39;ะ&#39; shortening</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;ะ&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;5J&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;5I&quot;</span>
-            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;6L&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;6K&quot;</span>
-            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;7N&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;7M&quot;</span>
-            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;1B&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
+        <span class="c1"># Handling 'ะ' shortening</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">"ะ"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">"5J"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"5I"</span>
+            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">"6L"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"6K"</span>
+            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">"7N"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"7M"</span>
+            <span class="k">elif</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">"1B"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
 
         <span class="k">return</span> <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span>
 
@@ -471,34 +471,34 @@
         <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process final consonant and detect dropped ร.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Process final consonant and detect dropped ร."""</span>
         <span class="n">dropped_r</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">final_code</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;รร&quot;</span> <span class="ow">in</span> <span class="n">syl</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
+        <span class="k">if</span> <span class="n">final_code</span> <span class="o">==</span> <span class="s2">"-"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"รร"</span> <span class="ow">in</span> <span class="n">syl</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
                 <span class="k">if</span> <span class="n">final_candidates</span><span class="p">:</span>
                     <span class="n">f</span> <span class="o">=</span> <span class="n">final_candidates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">final_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+                    <span class="n">final_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">final_code</span> <span class="o">=</span> <span class="s2">&quot;น&quot;</span>
+                    <span class="n">final_code</span> <span class="o">=</span> <span class="s2">"น"</span>
             <span class="k">elif</span> <span class="n">final_candidates</span><span class="p">:</span>
-                <span class="c1"># Rule: Drop &#39;r&#39; in final cluster</span>
-                <span class="n">raw_final</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">final_candidates</span><span class="p">)</span>
+                <span class="c1"># Rule: Drop 'r' in final cluster</span>
+                <span class="n">raw_final</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">final_candidates</span><span class="p">)</span>
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="nb">len</span><span class="p">(</span><span class="n">raw_final</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
-                    <span class="ow">and</span> <span class="n">raw_final</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ร&quot;</span>
+                    <span class="ow">and</span> <span class="n">raw_final</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ร"</span>
                     <span class="ow">and</span> <span class="n">raw_final</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span>
                 <span class="p">):</span>
                     <span class="n">f</span> <span class="o">=</span> <span class="n">raw_final</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">dropped_r</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">elif</span> <span class="n">raw_final</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;ตร&quot;</span><span class="p">):</span>
-                    <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;ต&quot;</span>
+                <span class="k">elif</span> <span class="n">raw_final</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"ตร"</span><span class="p">):</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="s2">"ต"</span>
                     <span class="n">dropped_r</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">f</span> <span class="o">=</span> <span class="n">final_candidates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-                <span class="n">final_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+                <span class="n">final_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">vowel_code</span><span class="p">,</span> <span class="n">final_code</span><span class="p">,</span> <span class="n">dropped_r</span>
 
@@ -508,19 +508,19 @@
         <span class="n">final_candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if special format (tone before final) should be used.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check if special format (tone before final) should be used."""</span>
         <span class="c1"># Special format (tone before final) is used when:</span>
         <span class="c1"># 1. Initial consonant is ญ, ย, or น</span>
         <span class="c1"># 2. Final consonant is ญ or ณ</span>
         <span class="c1"># 3. Final consonant is น AND vowel is short (1A vowel code)</span>
-        <span class="k">if</span> <span class="n">init_char</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ญ&quot;</span><span class="p">,</span> <span class="s2">&quot;ย&quot;</span><span class="p">,</span> <span class="s2">&quot;น&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">init_char</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ญ"</span><span class="p">,</span> <span class="s2">"ย"</span><span class="p">,</span> <span class="s2">"น"</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="n">final_candidates</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ญ&quot;</span><span class="p">,</span> <span class="s2">&quot;ณ&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">final_candidates</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">final_candidates</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ญ"</span><span class="p">,</span> <span class="s2">"ณ"</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">final_candidates</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="p">(</span>
             <span class="n">final_candidates</span>
-            <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;น&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">final_candidates</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;1A&quot;</span>
+            <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">"น"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">final_candidates</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">"1A"</span>
         <span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -528,14 +528,14 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_apply_implicit_vowel</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">vowel_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply implicit vowel defaults.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">implicit_rule</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;1A&quot;</span>
-            <span class="k">elif</span> <span class="n">implicit_rule</span> <span class="o">==</span> <span class="s2">&quot;o&quot;</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;7M&quot;</span>
+<span class="w">        </span><span class="sd">"""Apply implicit vowel defaults."""</span>
+        <span class="k">if</span> <span class="n">vowel_code</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">implicit_rule</span> <span class="o">==</span> <span class="s2">"a"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"1A"</span>
+            <span class="k">elif</span> <span class="n">implicit_rule</span> <span class="o">==</span> <span class="s2">"o"</span><span class="p">:</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"7M"</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;7M&quot;</span>
+                <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"7M"</span>
         <span class="k">return</span> <span class="n">vowel_code</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_adjust_so_sua_mapping</span><span class="p">(</span>
@@ -545,16 +545,16 @@
         <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Special adjustments for ส (so sua) mapping.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">init_char</span> <span class="o">==</span> <span class="s2">&quot;ส&quot;</span> <span class="ow">and</span> <span class="n">init_code</span> <span class="o">==</span> <span class="s2">&quot;ซศ&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Special adjustments for ส (so sua) mapping."""</span>
+        <span class="k">if</span> <span class="n">init_char</span> <span class="o">==</span> <span class="s2">"ส"</span> <span class="ow">and</span> <span class="n">init_code</span> <span class="o">==</span> <span class="s2">"ซศ"</span><span class="p">:</span>
             <span class="c1"># Only change to ซซ if this is NOT an implicit split</span>
             <span class="k">if</span> <span class="n">implicit_rule</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">syl</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="c1"># Check if this is a simple syllable (just ส + vowel, no other consonants)</span>
-                <span class="n">consonants_after_init</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syl</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="s2">&quot;ก&quot;</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="s2">&quot;ฮ&quot;</span><span class="p">]</span>
+                <span class="n">consonants_after_init</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syl</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="s2">"ก"</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="s2">"ฮ"</span><span class="p">]</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">consonants_after_init</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span>
-                    <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;รลว&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">consonants_after_init</span>
+                    <span class="n">c</span> <span class="ow">in</span> <span class="s2">"รลว"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">consonants_after_init</span>
                 <span class="p">):</span>
-                    <span class="n">init_code</span> <span class="o">=</span> <span class="s2">&quot;ซซ&quot;</span>
+                    <span class="n">init_code</span> <span class="o">=</span> <span class="s2">"ซซ"</span>
         <span class="k">return</span> <span class="n">init_code</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_format_output</span><span class="p">(</span>
@@ -567,32 +567,32 @@
         <span class="n">special_format</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="n">dropped_r</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format the final output.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Format the final output."""</span>
         <span class="k">if</span> <span class="n">special_format</span><span class="p">:</span>
             <span class="c1"># Special format: InitVowelToneFinalCluster</span>
             <span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Standard format: InitVowelFinalToneCluster</span>
             <span class="c1"># Add dash after vowel if ร was dropped AND (final is ก OR no final)</span>
-            <span class="k">if</span> <span class="n">dropped_r</span> <span class="ow">and</span> <span class="p">(</span><span class="n">final_code</span> <span class="o">==</span> <span class="s2">&quot;ก&quot;</span> <span class="ow">or</span> <span class="n">final_code</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">):</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">dropped_r</span> <span class="ow">and</span> <span class="p">(</span><span class="n">final_code</span> <span class="o">==</span> <span class="s2">"ก"</span> <span class="ow">or</span> <span class="n">final_code</span> <span class="o">==</span> <span class="s2">"-"</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">"</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">init_code</span><span class="si">}{</span><span class="n">vowel_code</span><span class="si">}{</span><span class="n">final_code</span><span class="si">}{</span><span class="n">tone_code</span><span class="si">}{</span><span class="n">cluster_char</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">process_syllable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">syl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Process a single syllable and return its soundex code.</span>
 
 <span class="sd">        :param str syl: The syllable to process</span>
-<span class="sd">        :param str implicit_rule: Optional implicit vowel rule (&#39;a&#39; or &#39;o&#39;)</span>
+<span class="sd">        :param str implicit_rule: Optional implicit vowel rule ('a' or 'o')</span>
 <span class="sd">        :return: Soundex code for the syllable</span>
 <span class="sd">        :rtype: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">chars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">syl</span><span class="p">)</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -628,10 +628,10 @@
         <span class="n">vowel_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_implicit_vowel</span><span class="p">(</span><span class="n">vowel_code</span><span class="p">,</span> <span class="n">implicit_rule</span><span class="p">)</span>
 
         <span class="c1"># Specific Fixes</span>
-        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;โ&quot;</span><span class="p">:</span>
-            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;7N&quot;</span>
-        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">&quot;แ&quot;</span><span class="p">:</span>
-            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">&quot;6L&quot;</span>
+        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"โ"</span><span class="p">:</span>
+            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"7N"</span>
+        <span class="k">if</span> <span class="n">leading_vowel</span> <span class="o">==</span> <span class="s2">"แ"</span><span class="p">:</span>
+            <span class="n">vowel_code</span> <span class="o">=</span> <span class="s2">"6L"</span>
 
         <span class="c1"># H. Special adjustments for ส (so sua) mapping</span>
         <span class="n">init_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adjust_so_sua_mapping</span><span class="p">(</span>
@@ -652,7 +652,7 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Encode a Thai word into Complete Soundex code.</span>
 
 <span class="sd">        This method handles both single and multi-syllable words by internally</span>
@@ -665,15 +665,15 @@
 <span class="sd">        :Example:</span>
 
 <span class="sd">            &gt;&gt;&gt; from pythainlp.soundex import complete_soundex</span>
-<span class="sd">            &gt;&gt;&gt; complete_soundex(&quot;ก้าน&quot;)</span>
-<span class="sd">            &#39;กก1Bน2-&#39;</span>
-<span class="sd">            &gt;&gt;&gt; complete_soundex(&quot;ปุญญา&quot;)  # doctest: +SKIP</span>
-<span class="sd">            &#39;ปป1B0น-*&#39;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            &gt;&gt;&gt; complete_soundex("ก้าน")</span>
+<span class="sd">            'กก1Bน2-'</span>
+<span class="sd">            &gt;&gt;&gt; complete_soundex("ปุญญา")  # doctest: +SKIP</span>
+<span class="sd">            'ปป1B0น-*'</span>
+<span class="sd">        """</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">return</span> <span class="s2">""</span>
 
         <span class="c1"># Try to tokenize into syllables for multi-syllable words</span>
         <span class="k">try</span><span class="p">:</span>
@@ -691,7 +691,7 @@
                             <span class="bp">self</span><span class="o">.</span><span class="n">process_syllable</span><span class="p">(</span><span class="n">sub_syl</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
                         <span class="p">)</span>
 
-                <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_parts</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_parts</span><span class="p">)</span>
 
                 <span class="c1"># Add asterisk at the end for specific patterns:</span>
                 <span class="c1"># 1. Contains ญญ (double ญ)</span>
@@ -699,12 +699,12 @@
                 <span class="c1"># 3. Contains ณ and ย together</span>
                 <span class="c1"># 4. Starts with ญ (ญ as initial)</span>
                 <span class="k">if</span> <span class="p">(</span>
-                    <span class="s2">&quot;ญญ&quot;</span> <span class="ow">in</span> <span class="n">text</span>
-                    <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;ญ&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;ย&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
-                    <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;ณ&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;ย&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
-                    <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ญ&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syllables</span><span class="p">)</span>
+                    <span class="s2">"ญญ"</span> <span class="ow">in</span> <span class="n">text</span>
+                    <span class="ow">or</span> <span class="p">(</span><span class="s2">"ญ"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">"ย"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="p">(</span><span class="s2">"ณ"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">"ย"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"ญ"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syllables</span><span class="p">)</span>
                 <span class="p">):</span>
-                    <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;*&quot;</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="s2">"*"</span>
 
                 <span class="k">return</span> <span class="n">result</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ModuleNotFoundError</span><span class="p">):</span>
@@ -719,28 +719,28 @@
         <span class="k">for</span> <span class="n">syl</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">refined</span><span class="p">:</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_syllable</span><span class="p">(</span><span class="n">syl</span><span class="p">,</span> <span class="n">rule</span><span class="p">))</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
         <span class="c1"># Add asterisk at the end for specific patterns</span>
         <span class="k">if</span> <span class="p">(</span>
-            <span class="s2">&quot;ญญ&quot;</span> <span class="ow">in</span> <span class="n">text</span>
-            <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;ญ&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;ย&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
-            <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;ณ&quot;</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">&quot;ย&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
-            <span class="ow">or</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ญ&quot;</span><span class="p">)</span>
+            <span class="s2">"ญญ"</span> <span class="ow">in</span> <span class="n">text</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="s2">"ญ"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">"ย"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="s2">"ณ"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="s2">"ย"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"ญ"</span><span class="p">)</span>
         <span class="p">):</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;*&quot;</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="s2">"*"</span>
 
         <span class="k">return</span> <span class="n">result</span>
 
 
 <span class="c1"># Singleton instance for module-level function</span>
-<span class="n">_complete_soundex_instance</span><span class="p">:</span> <span class="s2">&quot;Optional[CompleteSoundex]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_complete_soundex_instance</span><span class="p">:</span> <span class="s2">"Optional[CompleteSoundex]"</span> <span class="o">=</span> <span class="kc">None</span>
 
 
 <div class="viewcode-block" id="complete_soundex">
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.complete_soundex">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">complete_soundex</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert a Thai word into phonetic code using the Complete Soundex algorithm.</span>
 
 <span class="sd">    This function handles both single and multi-syllable words by internally</span>
@@ -756,26 +756,26 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.soundex import complete_soundex  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; # Single syllable encoding</span>
-<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &#39;กก1Bน2-&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex("ก้าน")  # doctest: +SKIP</span>
+<span class="sd">        'กก1Bน2-'</span>
 
-<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;กลับ&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &#39;กก1Aบ0ล&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex("กลับ")  # doctest: +SKIP</span>
+<span class="sd">        'กก1Aบ0ล'</span>
 
 <span class="sd">        &gt;&gt;&gt; # Multi-syllable words (automatically tokenized)</span>
-<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ปุญญา&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &#39;ปป1B0น-*&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex("ปุญญา")  # doctest: +SKIP</span>
+<span class="sd">        'ปป1B0น-*'</span>
 
-<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;สวรรค์&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &#39;ซศ1A-0-วว1Aน0-&#39;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex("สวรรค์")  # doctest: +SKIP</span>
+<span class="sd">        'ซศ1A-0-วว1Aน0-'</span>
 
-<span class="sd">        &gt;&gt;&gt; complete_soundex(&quot;ปันนา&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &#39;ปป1Bน0-&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; complete_soundex("ปันนา")  # doctest: +SKIP</span>
+<span class="sd">        'ปป1Bน0-'</span>
+<span class="sd">    """</span>
     <span class="k">global</span> <span class="n">_complete_soundex_instance</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
     <span class="k">if</span> <span class="n">_complete_soundex_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_complete_soundex_instance</span> <span class="o">=</span> <span class="n">CompleteSoundex</span><span class="p">()</span>
@@ -787,7 +787,7 @@
 <div class="viewcode-block" id="complete_soundex_similarity">
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.complete_soundex_similarity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">complete_soundex_similarity</span><span class="p">(</span><span class="n">code1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">code2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Calculate similarity between two Complete Soundex codes based on the</span>
 <span class="sd">    character-wise comparison formula defined in Tapsai et al. (2020).</span>
 
@@ -813,25 +813,25 @@
 <span class="sd">        ... )</span>
 
 <span class="sd">        &gt;&gt;&gt; # Encode two words</span>
-<span class="sd">        &gt;&gt;&gt; code1 = complete_soundex(&quot;ข้มขืน&quot;)  # Bitter/Forced (with tone)  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; code2 = complete_soundex(&quot;ขมขืน&quot;)  # Bitter (no tone)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code1 = complete_soundex("ข้มขืน")  # Bitter/Forced (with tone)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code2 = complete_soundex("ขมขืน")  # Bitter (no tone)  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; # Calculate similarity</span>
 <span class="sd">        &gt;&gt;&gt; similarity = complete_soundex_similarity(code1, code2)  # doctest: +SKIP</span>
 <span class="sd">        ~0.93 (13 matches out of 14 characters)</span>
 
 <span class="sd">        &gt;&gt;&gt; # Perfect match</span>
-<span class="sd">        &gt;&gt;&gt; code_a = complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; code_b = complete_soundex(&quot;ก้าน&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_a = complete_soundex("ก้าน")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_b = complete_soundex("ก้าน")  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; complete_soundex_similarity(code_a, code_b)  # doctest: +SKIP</span>
 <span class="sd">        1.0</span>
 
 <span class="sd">        &gt;&gt;&gt; # No match</span>
-<span class="sd">        &gt;&gt;&gt; code_x = complete_soundex(&quot;ทราย&quot;)  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; code_y = complete_soundex(&quot;น้ำ&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_x = complete_soundex("ทราย")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; code_y = complete_soundex("น้ำ")  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; complete_soundex_similarity(code_x, code_y)  # doctest: +SKIP</span>
 <span class="sd">        0.0 (completely different)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">code1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">code2</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">1.0</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">code1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">code2</span><span class="p">:</span>

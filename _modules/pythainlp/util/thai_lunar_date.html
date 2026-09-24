@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,9 +114,9 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;This file is a port from</span>
+<span class="sd">"""This file is a port from</span>
 <span class="sd">&gt; https://gist.github.com/touchiep/99f4f5bb349d6b983ef78697630ab78e</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -321,32 +321,32 @@
 <span class="c1"># Zodiac names in Thai, English, and Numeric representations</span>
 <span class="n">_ZODIAC</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">1</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;ชวด&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ฉลู&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ขาล&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;เถาะ&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;มะโรง&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;มะเส็ง&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;มะเมีย&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;มะแม&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;วอก&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ระกา&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;จอ&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;กุน&quot;</span><span class="p">,</span>
+        <span class="s2">"ชวด"</span><span class="p">,</span>
+        <span class="s2">"ฉลู"</span><span class="p">,</span>
+        <span class="s2">"ขาล"</span><span class="p">,</span>
+        <span class="s2">"เถาะ"</span><span class="p">,</span>
+        <span class="s2">"มะโรง"</span><span class="p">,</span>
+        <span class="s2">"มะเส็ง"</span><span class="p">,</span>
+        <span class="s2">"มะเมีย"</span><span class="p">,</span>
+        <span class="s2">"มะแม"</span><span class="p">,</span>
+        <span class="s2">"วอก"</span><span class="p">,</span>
+        <span class="s2">"ระกา"</span><span class="p">,</span>
+        <span class="s2">"จอ"</span><span class="p">,</span>
+        <span class="s2">"กุน"</span><span class="p">,</span>
     <span class="p">],</span>
     <span class="mi">2</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;RAT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;OX&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;TIGER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;RABBIT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DRAGON&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SNAKE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;HORSE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;GOAT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;MONKEY&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ROOSTER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DOG&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PIG&quot;</span><span class="p">,</span>
+        <span class="s2">"RAT"</span><span class="p">,</span>
+        <span class="s2">"OX"</span><span class="p">,</span>
+        <span class="s2">"TIGER"</span><span class="p">,</span>
+        <span class="s2">"RABBIT"</span><span class="p">,</span>
+        <span class="s2">"DRAGON"</span><span class="p">,</span>
+        <span class="s2">"SNAKE"</span><span class="p">,</span>
+        <span class="s2">"HORSE"</span><span class="p">,</span>
+        <span class="s2">"GOAT"</span><span class="p">,</span>
+        <span class="s2">"MONKEY"</span><span class="p">,</span>
+        <span class="s2">"ROOSTER"</span><span class="p">,</span>
+        <span class="s2">"DOG"</span><span class="p">,</span>
+        <span class="s2">"PIG"</span><span class="p">,</span>
     <span class="p">],</span>
     <span class="mi">3</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)),</span>
 <span class="p">}</span>
@@ -410,7 +410,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">athikasurathin</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a year is a leap year in the Thai lunar calendar&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if a year is a leap year in the Thai lunar calendar"""</span>
     <span class="c1"># Check divisibility by 400 (divisible by 400 is always a leap year)</span>
     <span class="k">if</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
@@ -438,7 +438,7 @@
 <div class="viewcode-block" id="th_zodiac">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.th_zodiac">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">th_zodiac</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thai Zodiac Year Name</span>
+<span class="w">    </span><span class="sd">"""Thai Zodiac Year Name</span>
 <span class="sd">    Converts a Gregorian year to its corresponding Zodiac name.</span>
 
 <span class="sd">    :param int year: The Gregorian year. AD (Anno Domini)</span>
@@ -452,14 +452,14 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import th_zodiac</span>
 <span class="sd">        &gt;&gt;&gt; # Get Thai zodiac name</span>
 <span class="sd">        &gt;&gt;&gt; th_zodiac(2024, output_type=1)</span>
-<span class="sd">        &#39;มะโรง&#39;</span>
+<span class="sd">        'มะโรง'</span>
 <span class="sd">        &gt;&gt;&gt; # Get English zodiac name</span>
 <span class="sd">        &gt;&gt;&gt; th_zodiac(2024, output_type=2)</span>
-<span class="sd">        &#39;DRAGON&#39;</span>
+<span class="sd">        'DRAGON'</span>
 <span class="sd">        &gt;&gt;&gt; # Get zodiac number</span>
 <span class="sd">        &gt;&gt;&gt; th_zodiac(2024, output_type=3)</span>
 <span class="sd">        5</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Calculate zodiac index</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">12</span>
     <span class="k">if</span> <span class="n">result</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -475,7 +475,7 @@
 <div class="viewcode-block" id="to_lunar_date">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.to_lunar_date">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">to_lunar_date</span><span class="p">(</span><span class="n">input_date</span><span class="p">:</span> <span class="n">date</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert the solar date to Thai Lunar Date</span>
+<span class="w">    </span><span class="sd">"""Convert the solar date to Thai Lunar Date</span>
 
 <span class="sd">    :param date input_date: date of the day.</span>
 <span class="sd">    :return: Thai text lunar date</span>
@@ -486,13 +486,13 @@
 <span class="sd">        &gt;&gt;&gt; from datetime import date</span>
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import to_lunar_date</span>
 <span class="sd">        &gt;&gt;&gt; to_lunar_date(date(2024, 1, 1))</span>
-<span class="sd">        &#39;แรม 5 ค่ำ เดือน 1&#39;</span>
+<span class="sd">        'แรม 5 ค่ำ เดือน 1'</span>
 <span class="sd">        &gt;&gt;&gt; to_lunar_date(date(2024, 12, 31))</span>
-<span class="sd">        &#39;ขึ้น 2 ค่ำ เดือน 2&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        'ขึ้น 2 ค่ำ เดือน 2'</span>
+<span class="sd">    """</span>
     <span class="c1"># Check if date is within supported range</span>
     <span class="k">if</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;</span> <span class="mi">1903</span> <span class="ow">or</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2460</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Unsupported date&quot;</span><span class="p">)</span>  <span class="c1"># Unsupported date</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Unsupported date"</span><span class="p">)</span>  <span class="c1"># Unsupported date</span>
 
     <span class="c1"># Choose the nearest begin date</span>
     <span class="n">c_year</span> <span class="o">=</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1</span>
@@ -520,8 +520,8 @@
         <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">_DAYS_384</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Unexpected last_day value: </span><span class="si">{</span><span class="n">last_day</span><span class="si">!r}</span><span class="s2">. &quot;</span>
-            <span class="s2">&quot;Expected 354, 355, or 384.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Unexpected last_day value: </span><span class="si">{</span><span class="n">last_day</span><span class="si">!r}</span><span class="s2">. "</span>
+            <span class="s2">"Expected 354, 355, or 384."</span>
         <span class="p">)</span>
 
     <span class="n">days_of_year</span> <span class="o">=</span> <span class="n">day_from_one</span>
@@ -543,12 +543,12 @@
             <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">days_of_year</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
-        <span class="n">th_s</span> <span class="o">=</span> <span class="s2">&quot;แรม&quot;</span>
+        <span class="n">th_s</span> <span class="o">=</span> <span class="s2">"แรม"</span>
         <span class="n">days_of_year</span> <span class="o">=</span> <span class="n">days_of_year</span> <span class="o">-</span> <span class="mi">15</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">th_s</span> <span class="o">=</span> <span class="s2">&quot;ขึ้น&quot;</span>
+        <span class="n">th_s</span> <span class="o">=</span> <span class="s2">"ขึ้น"</span>
 
-    <span class="n">thai_lunar_date</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">th_s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">days_of_year</span><span class="si">}</span><span class="s2"> ค่ำ เดือน </span><span class="si">{</span><span class="n">th_m</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">thai_lunar_date</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">th_s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">days_of_year</span><span class="si">}</span><span class="s2"> ค่ำ เดือน </span><span class="si">{</span><span class="n">th_m</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="k">return</span> <span class="n">thai_lunar_date</span></div>
 

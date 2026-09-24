@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tools.core &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.tools.core &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Generic support functions for PyThaiNLP.&quot;&quot;&quot;</span>
+<span class="sd">"""Generic support functions for PyThaiNLP."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -124,45 +124,45 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">warn_deprecation</span><span class="p">(</span>
     <span class="n">deprecated_symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">replacing_symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">deprecated_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">removal_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">replacing_symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">deprecated_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">removal_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Warn about the deprecation of a function, class, or other symbol.</span>
+<span class="w">    </span><span class="sd">"""Warn about the deprecation of a function, class, or other symbol.</span>
 
 <span class="sd">    :param str deprecated_symbol: Fully qualified name of the deprecated</span>
-<span class="sd">        symbol (e.g. ``&quot;pythainlp.util.isthaichar&quot;``).</span>
+<span class="sd">        symbol (e.g. ``"pythainlp.util.isthaichar"``).</span>
 <span class="sd">    :param str replacing_symbol: Fully qualified name of the replacement</span>
 <span class="sd">        (optional).</span>
 <span class="sd">    :param str deprecated_version: Version in which the symbol was</span>
 <span class="sd">        deprecated (optional).</span>
 <span class="sd">    :param str removal_version: Version in which the symbol will be</span>
 <span class="sd">        removed (optional).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">deprecated_symbol</span><span class="si">}</span><span class="s2">&#39; is deprecated&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">deprecated_symbol</span><span class="si">}</span><span class="s2">' is deprecated"</span>
     <span class="k">if</span> <span class="n">deprecated_version</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; since </span><span class="si">{</span><span class="n">deprecated_version</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">" since </span><span class="si">{</span><span class="n">deprecated_version</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">removal_version</span><span class="p">:</span>
-        <span class="n">removal_version</span> <span class="o">=</span> <span class="s2">&quot;a future release&quot;</span>
-    <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; and will be removed in </span><span class="si">{</span><span class="n">removal_version</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">removal_version</span> <span class="o">=</span> <span class="s2">"a future release"</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">" and will be removed in </span><span class="si">{</span><span class="n">removal_version</span><span class="si">}</span><span class="s2">."</span>
     <span class="k">if</span> <span class="n">replacing_symbol</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; Use &#39;</span><span class="si">{</span><span class="n">replacing_symbol</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">" Use '</span><span class="si">{</span><span class="n">replacing_symbol</span><span class="si">}</span><span class="s2">' instead."</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="safe_print">
 <a class="viewcode-back" href="../../../api/tools.html#pythainlp.tools.safe_print">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">safe_print</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print text to console, handling UnicodeEncodeError.</span>
+<span class="w">    </span><span class="sd">"""Print text to console, handling UnicodeEncodeError.</span>
 
 <span class="sd">    :param text: Text to print.</span>
 <span class="sd">    :type text: str</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span>
             <span class="p">)</span>
         <span class="p">)</span></div>

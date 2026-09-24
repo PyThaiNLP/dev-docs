@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.morpheme.word_formation &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.morpheme.word_formation &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -122,7 +122,7 @@
 <div class="viewcode-block" id="nighit">
 <a class="viewcode-back" href="../../../api/morpheme.html#pythainlp.morpheme.nighit">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">nighit</span><span class="p">(</span><span class="n">w1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">w2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new word using Nighit (นิคหิต or ํ).</span>
+<span class="w">    </span><span class="sd">"""Create a new word using Nighit (นิคหิต or ํ).</span>
 
 <span class="sd">    Nighit is the niggahita in Thai, used to form new words</span>
 <span class="sd">    from Pali roots. This function applies a simple rule to</span>
@@ -137,59 +137,59 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.morpheme import nighit</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;คีต&quot;)</span>
-<span class="sd">        &#39;สังคีต&#39;</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;จร&quot;)</span>
-<span class="sd">        &#39;สัญจร&#39;</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;ฐาน&quot;)</span>
-<span class="sd">        &#39;สัณฐาน&#39;</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;นิษฐาน&quot;)</span>
-<span class="sd">        &#39;สันนิษฐาน&#39;</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;ปทา&quot;)</span>
-<span class="sd">        &#39;สัมปทา&#39;</span>
-<span class="sd">        &gt;&gt;&gt; nighit(&quot;สํ&quot;, &quot;โยค&quot;)</span>
-<span class="sd">        &#39;สังโยค&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "คีต")</span>
+<span class="sd">        'สังคีต'</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "จร")</span>
+<span class="sd">        'สัญจร'</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "ฐาน")</span>
+<span class="sd">        'สัณฐาน'</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "นิษฐาน")</span>
+<span class="sd">        'สันนิษฐาน'</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "ปทา")</span>
+<span class="sd">        'สัมปทา'</span>
+<span class="sd">        &gt;&gt;&gt; nighit("สํ", "โยค")</span>
+<span class="sd">        'สังโยค'</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Both w1 and w2 must be strings.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Both w1 and w2 must be strings."</span><span class="p">)</span>
     <span class="n">w1</span> <span class="o">=</span> <span class="n">w1</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="n">w2</span> <span class="o">=</span> <span class="n">w2</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">w1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">w2</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">w2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">w1</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;ํ&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The function doesn&#39;t support </span><span class="si">{</span><span class="n">w1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"ํ"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The function doesn't support </span><span class="si">{</span><span class="n">w1</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="n">list_w1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
     <span class="n">list_w2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
     <span class="n">newword</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_w1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ั&quot;</span><span class="p">)</span>
+    <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ั"</span><span class="p">)</span>
     <span class="n">_consonants</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">thai_consonants</span><span class="p">)</span>
     <span class="n">consonants_in_w2</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_w2</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_consonants</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">consonants_in_w2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;w2 </span><span class="si">{</span><span class="n">w2</span><span class="si">!r}</span><span class="s2"> contains no Thai consonants.&quot;</span>
+            <span class="sa">f</span><span class="s2">"w2 </span><span class="si">{</span><span class="n">w2</span><span class="si">!r}</span><span class="s2"> contains no Thai consonants."</span>
         <span class="p">)</span>
     <span class="n">consonant_start</span> <span class="o">=</span> <span class="n">consonants_in_w2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ก&quot;</span><span class="p">,</span> <span class="s2">&quot;ช&quot;</span><span class="p">,</span> <span class="s2">&quot;ค&quot;</span><span class="p">,</span> <span class="s2">&quot;ข&quot;</span><span class="p">,</span> <span class="s2">&quot;ง&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ง&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;จ&quot;</span><span class="p">,</span> <span class="s2">&quot;ฉ&quot;</span><span class="p">,</span> <span class="s2">&quot;ช&quot;</span><span class="p">,</span> <span class="s2">&quot;ฌ&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ญ&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ฎ&quot;</span><span class="p">,</span> <span class="s2">&quot;ฐ&quot;</span><span class="p">,</span> <span class="s2">&quot;ฑ&quot;</span><span class="p">,</span> <span class="s2">&quot;ณ&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ณ&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ด&quot;</span><span class="p">,</span> <span class="s2">&quot;ถ&quot;</span><span class="p">,</span> <span class="s2">&quot;ท&quot;</span><span class="p">,</span> <span class="s2">&quot;ธ&quot;</span><span class="p">,</span> <span class="s2">&quot;น&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;น&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ป&quot;</span><span class="p">,</span> <span class="s2">&quot;ผ&quot;</span><span class="p">,</span> <span class="s2">&quot;พ&quot;</span><span class="p">,</span> <span class="s2">&quot;ภ&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ม&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ย&quot;</span><span class="p">,</span> <span class="s2">&quot;ร&quot;</span><span class="p">,</span> <span class="s2">&quot;ล&quot;</span><span class="p">,</span> <span class="s2">&quot;ฬ&quot;</span><span class="p">,</span> <span class="s2">&quot;ว&quot;</span><span class="p">,</span> <span class="s2">&quot;ศ&quot;</span><span class="p">,</span> <span class="s2">&quot;ษ&quot;</span><span class="p">,</span> <span class="s2">&quot;ส&quot;</span><span class="p">,</span> <span class="s2">&quot;ห&quot;</span><span class="p">]:</span>
-        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ง&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ก"</span><span class="p">,</span> <span class="s2">"ช"</span><span class="p">,</span> <span class="s2">"ค"</span><span class="p">,</span> <span class="s2">"ข"</span><span class="p">,</span> <span class="s2">"ง"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ง"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"จ"</span><span class="p">,</span> <span class="s2">"ฉ"</span><span class="p">,</span> <span class="s2">"ช"</span><span class="p">,</span> <span class="s2">"ฌ"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ญ"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ฎ"</span><span class="p">,</span> <span class="s2">"ฐ"</span><span class="p">,</span> <span class="s2">"ฑ"</span><span class="p">,</span> <span class="s2">"ณ"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ณ"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ด"</span><span class="p">,</span> <span class="s2">"ถ"</span><span class="p">,</span> <span class="s2">"ท"</span><span class="p">,</span> <span class="s2">"ธ"</span><span class="p">,</span> <span class="s2">"น"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"น"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ป"</span><span class="p">,</span> <span class="s2">"ผ"</span><span class="p">,</span> <span class="s2">"พ"</span><span class="p">,</span> <span class="s2">"ภ"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ม"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">consonant_start</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ย"</span><span class="p">,</span> <span class="s2">"ร"</span><span class="p">,</span> <span class="s2">"ล"</span><span class="p">,</span> <span class="s2">"ฬ"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">,</span> <span class="s2">"ศ"</span><span class="p">,</span> <span class="s2">"ษ"</span><span class="p">,</span> <span class="s2">"ส"</span><span class="p">,</span> <span class="s2">"ห"</span><span class="p">]:</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"ง"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        The function doesn&#39;t support </span><span class="si">{</span><span class="n">w1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">w2</span><span class="si">}</span><span class="s2">.</span>
-<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span>
+<span class="s2">        The function doesn't support </span><span class="si">{</span><span class="n">w1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">w2</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">        """</span><span class="p">)</span>
     <span class="n">newword</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">list_w2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">newword</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">newword</span><span class="p">)</span></div>
 
 </pre></div>
 

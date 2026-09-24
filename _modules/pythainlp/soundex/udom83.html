@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.udom83 &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.soundex.udom83 &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Thai soundex - Udom83 system</span>
+<span class="sd">"""Thai soundex - Udom83 system</span>
 
 <span class="sd">Original paper:</span>
 <span class="sd">Wannee Udompanich. String searching for Thai alphabet</span>
@@ -126,7 +126,7 @@
 <span class="sd">Python implementation:</span>
 <span class="sd">by Korakot Chaovavanich</span>
 <span class="sd">https://gist.github.com/korakot/0b772e09340cac2f493868da035597e8</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -135,41 +135,41 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_consonants</span>
 
-<span class="n">_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\u0e4c</span><span class="s2">&quot;</span>
-<span class="n">_RE_1</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;รร([\u0e40-\u0e44])&quot;</span><span class="p">)</span>  <span class="c1"># เ-ไ</span>
+<span class="n">_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\u0e4c</span><span class="s2">"</span>
+<span class="n">_RE_1</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"รร([\u0e40-\u0e44])"</span><span class="p">)</span>  <span class="c1"># เ-ไ</span>
 <span class="n">_RE_2</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;รร([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="se">\u0e40</span><span class="s2">-</span><span class="se">\u0e44</span><span class="s2">])&quot;</span>
+    <span class="sa">f</span><span class="s2">"รร([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="se">\u0e40</span><span class="s2">-</span><span class="se">\u0e44</span><span class="s2">])"</span>
 <span class="p">)</span>
 <span class="n">_RE_3</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;รร([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">][</span><span class="se">\u0e30</span><span class="s2">-</span><span class="se">\u0e39\u0e48</span><span class="s2">-</span><span class="se">\u0e4c</span><span class="s2">])&quot;</span>
+    <span class="sa">f</span><span class="s2">"รร([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">][</span><span class="se">\u0e30</span><span class="s2">-</span><span class="se">\u0e39\u0e48</span><span class="s2">-</span><span class="se">\u0e4c</span><span class="s2">])"</span>
 <span class="p">)</span>
-<span class="n">_RE_4</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;รร&quot;</span><span class="p">)</span>
-<span class="n">_RE_5</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ไ([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]ย)&quot;</span><span class="p">)</span>
-<span class="n">_RE_6</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[ไใ]([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">])&quot;</span><span class="p">)</span>
-<span class="n">_RE_7</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\u0e33(ม[\u0e30-\u0e39])&quot;</span><span class="p">)</span>
-<span class="n">_RE_8</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\u0e33ม&quot;</span><span class="p">)</span>
-<span class="n">_RE_9</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\u0e33&quot;</span><span class="p">)</span>  <span class="c1"># ำ</span>
+<span class="n">_RE_4</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"รร"</span><span class="p">)</span>
+<span class="n">_RE_5</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ไ([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]ย)"</span><span class="p">)</span>
+<span class="n">_RE_6</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ไใ]([</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">])"</span><span class="p">)</span>
+<span class="n">_RE_7</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\u0e33(ม[\u0e30-\u0e39])"</span><span class="p">)</span>
+<span class="n">_RE_8</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\u0e33ม"</span><span class="p">)</span>
+<span class="n">_RE_9</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\u0e33"</span><span class="p">)</span>  <span class="c1"># ำ</span>
 <span class="n">_RE_10</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;จน์|มณ์|ณฑ์|ทร์|ตร์|&quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]</span><span class="si">{</span><span class="n">_THANTHAKHAT</span><span class="si">}</span><span class="s2">|[</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]&quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;[</span><span class="se">\u0e30</span><span class="s2">-</span><span class="se">\u0e39</span><span class="s2">]</span><span class="si">{</span><span class="n">_THANTHAKHAT</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">"จน์|มณ์|ณฑ์|ทร์|ตร์|"</span>
+    <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]</span><span class="si">{</span><span class="n">_THANTHAKHAT</span><span class="si">}</span><span class="s2">|[</span><span class="si">{</span><span class="n">thai_consonants</span><span class="si">}</span><span class="s2">]"</span>
+    <span class="sa">f</span><span class="s2">"[</span><span class="se">\u0e30</span><span class="s2">-</span><span class="se">\u0e39</span><span class="s2">]</span><span class="si">{</span><span class="n">_THANTHAKHAT</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
-<span class="n">_RE_11</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\u0e30-\u0e4c]&quot;</span><span class="p">)</span>
+<span class="n">_RE_11</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\u0e30-\u0e4c]"</span><span class="p">)</span>
 
 <span class="n">_TRANS1</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span>
-    <span class="s2">&quot;กขฃคฅฆงจฉชฌซศษสฎดฏตฐฑฒถทธณนบปผพภฝฟมญยรลฬฤฦวอหฮ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;กขขขขขงจชชชสสสสดดตตททททททนนบปพพพฟฟมยยรรรรรวอฮฮ&quot;</span><span class="p">,</span>
+    <span class="s2">"กขฃคฅฆงจฉชฌซศษสฎดฏตฐฑฒถทธณนบปผพภฝฟมญยรลฬฤฦวอหฮ"</span><span class="p">,</span>
+    <span class="s2">"กขขขขขงจชชชสสสสดดตตททททททนนบปพพพฟฟมยยรรรรรวอฮฮ"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">_TRANS2</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span>
-    <span class="s2">&quot;มวำกขฃคฅฆงยญณนฎฏดตศษสบปพภผฝฟหอฮจฉชซฌฐฑฒถทธรฤลฦ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;0001111112233344444445555666666777778888889999&quot;</span><span class="p">,</span>
+    <span class="s2">"มวำกขฃคฅฆงยญณนฎฏดตศษสบปพภผฝฟหอฮจฉชซฌฐฑฒถทธรฤลฦ"</span><span class="p">,</span>
+    <span class="s2">"0001111112233344444445555666666777778888889999"</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <div class="viewcode-block" id="udom83">
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.udom83">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">udom83</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts Thai text into phonetic code with the</span>
+<span class="w">    </span><span class="sd">"""Converts Thai text into phonetic code with the</span>
 <span class="sd">    Thai soundex algorithm named **Udom83** [#udom83]_.</span>
 
 <span class="sd">    :param str text: Thai word</span>
@@ -180,37 +180,37 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.soundex import udom83</span>
-<span class="sd">        &gt;&gt;&gt; udom83(&quot;ลัก&quot;)</span>
-<span class="sd">        &#39;ร100000&#39;</span>
-<span class="sd">        &gt;&gt;&gt; udom83(&quot;รัก&quot;)</span>
-<span class="sd">        &#39;ร100000&#39;</span>
-<span class="sd">        &gt;&gt;&gt; udom83(&quot;รักษ์&quot;)</span>
-<span class="sd">        &#39;ร100000&#39;</span>
-<span class="sd">        &gt;&gt;&gt; udom83(&quot;บูรณการ&quot;)</span>
-<span class="sd">        &#39;บ931900&#39;</span>
-<span class="sd">        &gt;&gt;&gt; udom83(&quot;ปัจจุบัน&quot;)</span>
-<span class="sd">        &#39;ป775300&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; udom83("ลัก")</span>
+<span class="sd">        'ร100000'</span>
+<span class="sd">        &gt;&gt;&gt; udom83("รัก")</span>
+<span class="sd">        'ร100000'</span>
+<span class="sd">        &gt;&gt;&gt; udom83("รักษ์")</span>
+<span class="sd">        'ร100000'</span>
+<span class="sd">        &gt;&gt;&gt; udom83("บูรณการ")</span>
+<span class="sd">        'บ931900'</span>
+<span class="sd">        &gt;&gt;&gt; udom83("ปัจจุบัน")</span>
+<span class="sd">        'ป775300'</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_1</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ัน</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_2</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ั</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_3</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ัน</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_4</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ัน&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_5</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_6</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1ย&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_7</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ม</span><span class="se">\\</span><span class="s2">1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_8</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ม&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_9</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;ม&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_10</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_11</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_1</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ัน</span><span class="se">\\</span><span class="s2">1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_2</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ั</span><span class="se">\\</span><span class="s2">1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_3</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ัน</span><span class="se">\\</span><span class="s2">1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_4</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ัน"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_5</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_6</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">1ย"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_7</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ม</span><span class="se">\\</span><span class="s2">1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_8</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ม"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_9</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"ม"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_10</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_RE_11</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
-    <span class="n">sd</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_TRANS1</span><span class="p">),</span> <span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_TRANS2</span><span class="p">),</span> <span class="s2">&quot;000000&quot;</span><span class="p">]</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_TRANS1</span><span class="p">),</span> <span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_TRANS2</span><span class="p">),</span> <span class="s2">"000000"</span><span class="p">]</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">sd</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span></div>

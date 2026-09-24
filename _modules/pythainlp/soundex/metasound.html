@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.metasound &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.soundex.metasound &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Thai soundex - MetaSound system</span>
+<span class="sd">"""Thai soundex - MetaSound system</span>
 
 <span class="sd">References:</span>
 <span class="sd">Snae &amp; Brückner. (2009). Novel Phonetic Name Matching Algorithm with</span>
@@ -122,26 +122,26 @@
 <span class="sd">with Thai Astrology.</span>
 <span class="sd">https://pdfs.semanticscholar.org/3983/963e87ddc6dfdbb291099aa3927a0e3e4ea6.pdf</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="n">_CONS_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ์&quot;</span>
-<span class="n">_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;์&quot;</span>  <span class="c1"># \u0e4c</span>
-<span class="n">_C1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;กขฃคฆฅ&quot;</span>  <span class="c1"># sound K -&gt; coded letter 1</span>
-<span class="n">_C2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;จฉชฌซฐฏทฑฒถธดฎตสศษ&quot;</span>  <span class="c1"># D -&gt; 2</span>
-<span class="n">_C3</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ฟฝพผภบป&quot;</span>  <span class="c1"># B -&gt; 3</span>
-<span class="n">_C4</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ง&quot;</span>  <span class="c1"># NG -&gt; 4</span>
-<span class="n">_C5</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ลฬรนณฦญ&quot;</span>  <span class="c1"># N -&gt; 5</span>
-<span class="n">_C6</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ม&quot;</span>  <span class="c1"># M -&gt; 6</span>
-<span class="n">_C7</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ย&quot;</span>  <span class="c1"># Y -&gt; 7</span>
-<span class="n">_C8</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ว&quot;</span>  <span class="c1"># W -&gt; 8</span>
+<span class="n">_CONS_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ์"</span>
+<span class="n">_THANTHAKHAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"์"</span>  <span class="c1"># \u0e4c</span>
+<span class="n">_C1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"กขฃคฆฅ"</span>  <span class="c1"># sound K -&gt; coded letter 1</span>
+<span class="n">_C2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"จฉชฌซฐฏทฑฒถธดฎตสศษ"</span>  <span class="c1"># D -&gt; 2</span>
+<span class="n">_C3</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ฟฝพผภบป"</span>  <span class="c1"># B -&gt; 3</span>
+<span class="n">_C4</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ง"</span>  <span class="c1"># NG -&gt; 4</span>
+<span class="n">_C5</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ลฬรนณฦญ"</span>  <span class="c1"># N -&gt; 5</span>
+<span class="n">_C6</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ม"</span>  <span class="c1"># M -&gt; 6</span>
+<span class="n">_C7</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ย"</span>  <span class="c1"># Y -&gt; 7</span>
+<span class="n">_C8</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ว"</span>  <span class="c1"># W -&gt; 8</span>
 
 
 <div class="viewcode-block" id="metasound">
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.metasound">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">metasound</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts Thai text into phonetic code with the</span>
+<span class="w">    </span><span class="sd">"""Converts Thai text into phonetic code with the</span>
 <span class="sd">    matching technique called **MetaSound**</span>
 <span class="sd">    [#metasound]_ (combination between Soundex and Metaphone algorithms).</span>
 <span class="sd">    MetaSound algorithm was developed specifically for the Thai language.</span>
@@ -155,21 +155,21 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.soundex.metasound import metasound</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;ลัก&quot;)</span>
-<span class="sd">        &#39;ล100&#39;</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;รัก&quot;)</span>
-<span class="sd">        &#39;ร100&#39;</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;รักษ์&quot;)</span>
-<span class="sd">        &#39;ร100&#39;</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;บูรณการ&quot;, 5)</span>
-<span class="sd">        &#39;บ5515&#39;</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;บูรณการ&quot;, 6)</span>
-<span class="sd">        &#39;บ55150&#39;</span>
-<span class="sd">        &gt;&gt;&gt; metasound(&quot;บูรณการ&quot;, 4)</span>
-<span class="sd">        &#39;บ551&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; metasound("ลัก")</span>
+<span class="sd">        'ล100'</span>
+<span class="sd">        &gt;&gt;&gt; metasound("รัก")</span>
+<span class="sd">        'ร100'</span>
+<span class="sd">        &gt;&gt;&gt; metasound("รักษ์")</span>
+<span class="sd">        'ร100'</span>
+<span class="sd">        &gt;&gt;&gt; metasound("บูรณการ", 5)</span>
+<span class="sd">        'บ5515'</span>
+<span class="sd">        &gt;&gt;&gt; metasound("บูรณการ", 6)</span>
+<span class="sd">        'บ55150'</span>
+<span class="sd">        &gt;&gt;&gt; metasound("บูรณการ", 4)</span>
+<span class="sd">        'บ551'</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
     <span class="c1"># keep only consonants and thanthakhat</span>
     <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
@@ -182,39 +182,39 @@
     <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">_THANTHAKHAT</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">chars</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+                <span class="n">chars</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">" "</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">" "</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># filter out spaces left by karan removal, then truncate</span>
-    <span class="n">chars</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chars</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span><span class="p">]</span>
+    <span class="n">chars</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chars</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">" "</span><span class="p">]</span>
     <span class="n">chars</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[:</span><span class="n">length</span><span class="p">]</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C1</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C2</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"2"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C3</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;3&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"3"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C4</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;4&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"4"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C5</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;5&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"5"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C6</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;6&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"6"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C7</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;7&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"7"</span>
         <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C8</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;8&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"8"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"0"</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
-        <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span></div>
 
 </pre></div>
 

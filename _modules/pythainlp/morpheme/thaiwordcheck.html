@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.morpheme.thaiwordcheck &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.morpheme.thaiwordcheck &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Check if a word is a &quot;native Thai word&quot;</span>
+<span class="sd">"""Check if a word is a "native Thai word"</span>
 
 <span class="sd">Adapted from</span>
 <span class="sd">https://github.com/wannaphong/open-thai-nlp-document/blob/master/check_thai_word.md</span>
@@ -125,65 +125,65 @@
 <span class="sd">    https://www.trueplookpanya.com/learning/detail/30589-043067</span>
 <span class="sd">- วารุณี บำรุงรส 2010. คำไทยแท้ https://www.gotoknow.org/posts/377619</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
-<span class="n">_THANTHAKHAT_CHAR</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\u0e4c</span><span class="s2">&quot;</span>  <span class="c1"># Thanthakhat (cancellation of sound)</span>
+<span class="n">_THANTHAKHAT_CHAR</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\u0e4c</span><span class="s2">"</span>  <span class="c1"># Thanthakhat (cancellation of sound)</span>
 
 <span class="c1"># Non-native Thai characters</span>
 <span class="n">_TH_NON_NATIVE_CHARS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ฆ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ณ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฌ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฎ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฏ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฐ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฑ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฒ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ธ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ศ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ษ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฬ&quot;</span><span class="p">,</span>
+    <span class="s2">"ฆ"</span><span class="p">,</span>
+    <span class="s2">"ณ"</span><span class="p">,</span>
+    <span class="s2">"ฌ"</span><span class="p">,</span>
+    <span class="s2">"ฎ"</span><span class="p">,</span>
+    <span class="s2">"ฏ"</span><span class="p">,</span>
+    <span class="s2">"ฐ"</span><span class="p">,</span>
+    <span class="s2">"ฑ"</span><span class="p">,</span>
+    <span class="s2">"ฒ"</span><span class="p">,</span>
+    <span class="s2">"ธ"</span><span class="p">,</span>
+    <span class="s2">"ศ"</span><span class="p">,</span>
+    <span class="s2">"ษ"</span><span class="p">,</span>
+    <span class="s2">"ฬ"</span><span class="p">,</span>
     <span class="n">_THANTHAKHAT_CHAR</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1"># Native Thai final consonants</span>
-<span class="n">_TH_NATIVE_FINALS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ก&quot;</span><span class="p">,</span> <span class="s2">&quot;ด&quot;</span><span class="p">,</span> <span class="s2">&quot;บ&quot;</span><span class="p">,</span> <span class="s2">&quot;น&quot;</span><span class="p">,</span> <span class="s2">&quot;ง&quot;</span><span class="p">,</span> <span class="s2">&quot;ม&quot;</span><span class="p">,</span> <span class="s2">&quot;ย&quot;</span><span class="p">,</span> <span class="s2">&quot;ว&quot;</span><span class="p">}</span>
+<span class="n">_TH_NATIVE_FINALS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ก"</span><span class="p">,</span> <span class="s2">"ด"</span><span class="p">,</span> <span class="s2">"บ"</span><span class="p">,</span> <span class="s2">"น"</span><span class="p">,</span> <span class="s2">"ง"</span><span class="p">,</span> <span class="s2">"ม"</span><span class="p">,</span> <span class="s2">"ย"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">}</span>
 
 <span class="c1"># Known native Thai words (exceptions)</span>
 <span class="n">_TH_NATIVE_WORDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ฆ่า&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;เฆี่ยน&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ศึก&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ศอก&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;เศิก&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;เศร้า&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ธ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ณ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฯพณฯ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ใหญ่&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;หญ้า&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ควาย&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ความ&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;กริ่งเกรง&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ผลิ&quot;</span><span class="p">,</span>
+    <span class="s2">"ฆ่า"</span><span class="p">,</span>
+    <span class="s2">"เฆี่ยน"</span><span class="p">,</span>
+    <span class="s2">"ศึก"</span><span class="p">,</span>
+    <span class="s2">"ศอก"</span><span class="p">,</span>
+    <span class="s2">"เศิก"</span><span class="p">,</span>
+    <span class="s2">"เศร้า"</span><span class="p">,</span>
+    <span class="s2">"ธ"</span><span class="p">,</span>
+    <span class="s2">"ณ"</span><span class="p">,</span>
+    <span class="s2">"ฯพณฯ"</span><span class="p">,</span>
+    <span class="s2">"ใหญ่"</span><span class="p">,</span>
+    <span class="s2">"หญ้า"</span><span class="p">,</span>
+    <span class="s2">"ควาย"</span><span class="p">,</span>
+    <span class="s2">"ความ"</span><span class="p">,</span>
+    <span class="s2">"กริ่งเกรง"</span><span class="p">,</span>
+    <span class="s2">"ผลิ"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1"># Diphthong prefixes (can start native Thai word)</span>
-<span class="n">_TH_PREFIX_DIPHTHONG</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;กะ&quot;</span><span class="p">,</span> <span class="s2">&quot;กระ&quot;</span><span class="p">,</span> <span class="s2">&quot;ปะ&quot;</span><span class="p">,</span> <span class="s2">&quot;ประ&quot;</span><span class="p">}</span>
+<span class="n">_TH_PREFIX_DIPHTHONG</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"กะ"</span><span class="p">,</span> <span class="s2">"กระ"</span><span class="p">,</span> <span class="s2">"ปะ"</span><span class="p">,</span> <span class="s2">"ประ"</span><span class="p">}</span>
 
 <span class="c1"># Thai consonant filter</span>
 <span class="c1"># O ANG (U+0E2D) is omitted, as it can be considered as vowel</span>
-<span class="n">_TH_CONSONANTS_PATTERN</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[ก-ฬฮ]&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
+<span class="n">_TH_CONSONANTS_PATTERN</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ก-ฬฮ]"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="is_native_thai">
 <a class="viewcode-back" href="../../../api/morpheme.html#pythainlp.morpheme.is_native_thai">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_native_thai</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a word is an &quot;native Thai word&quot; (Thai: &quot;คำไทยแท้&quot;)</span>
+<span class="w">    </span><span class="sd">"""Check if a word is an "native Thai word" (Thai: "คำไทยแท้")</span>
 <span class="sd">    This function is based on a simple heuristic algorithm</span>
 <span class="sd">    and cannot be entirely reliable.</span>
 
@@ -194,17 +194,17 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.morpheme import is_native_thai</span>
-<span class="sd">        &gt;&gt;&gt; is_native_thai(&quot;Avocado&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_native_thai("Avocado")</span>
 <span class="sd">        False</span>
-<span class="sd">        &gt;&gt;&gt; is_native_thai(&quot;มะม่วง&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_native_thai("มะม่วง")</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; is_native_thai(&quot;ตะวัน&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_native_thai("ตะวัน")</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; is_native_thai(&quot;สามารถ&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_native_thai("สามารถ")</span>
 <span class="sd">        False</span>
-<span class="sd">        &gt;&gt;&gt; is_native_thai(&quot;อิสริยาภรณ์&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_native_thai("อิสริยาภรณ์")</span>
 <span class="sd">        False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">False</span>
 
@@ -223,7 +223,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">chs</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="c1"># If there&#39;s only one Thai consonant -&gt; it can be a native Thai</span>
+    <span class="c1"># If there's only one Thai consonant -&gt; it can be a native Thai</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
 

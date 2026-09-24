@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.chunk &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.chunk &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Thai phrase structure (chunking) module.</span>
+<span class="sd">"""Thai phrase structure (chunking) module.</span>
 
 <span class="sd">This module provides chunk parsing for Thai text, following the</span>
 <span class="sd">NLTK :mod:`nltk.chunk` naming convention.</span>
@@ -126,24 +126,24 @@
 <span class="sd">        from pythainlp.chunk import chunk_parse, CRFChunkParser</span>
 <span class="sd">        from pythainlp.tag import pos_tag</span>
 
-<span class="sd">        tokens = [&quot;ผม&quot;, &quot;รัก&quot;, &quot;คุณ&quot;]</span>
-<span class="sd">        tokens_pos = pos_tag(tokens, engine=&quot;perceptron&quot;, corpus=&quot;orchid&quot;)</span>
+<span class="sd">        tokens = ["ผม", "รัก", "คุณ"]</span>
+<span class="sd">        tokens_pos = pos_tag(tokens, engine="perceptron", corpus="orchid")</span>
 
 <span class="sd">        # Using the convenience function</span>
 <span class="sd">        print(chunk_parse(tokens_pos))</span>
-<span class="sd">        # output: [&#39;B-NP&#39;, &#39;B-VP&#39;, &#39;I-VP&#39;]</span>
+<span class="sd">        # output: ['B-NP', 'B-VP', 'I-VP']</span>
 
 <span class="sd">        # Using the class directly</span>
 <span class="sd">        with CRFChunkParser() as parser:</span>
 <span class="sd">            print(parser.parse(tokens_pos))</span>
-<span class="sd">        # output: [&#39;B-NP&#39;, &#39;B-VP&#39;, &#39;I-VP&#39;]</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        # output: ['B-NP', 'B-VP', 'I-VP']</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;CRFChunkParser&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;chunk_parse&quot;</span><span class="p">,</span>
+    <span class="s2">"CRFChunkParser"</span><span class="p">,</span>
+    <span class="s2">"chunk_parse"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.chunk.crfchunk</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRFChunkParser</span>
@@ -153,16 +153,16 @@
 <a class="viewcode-back" href="../../api/chunk.html#pythainlp.chunk.chunk_parse">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chunk_parse</span><span class="p">(</span>
     <span class="n">sent</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
-    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;crf&quot;</span><span class="p">,</span>
-    <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;orchidpp&quot;</span><span class="p">,</span>
+    <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"crf"</span><span class="p">,</span>
+    <span class="n">corpus</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"orchidpp"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a Thai sentence into phrase-structure chunks (IOB format).</span>
+<span class="w">    </span><span class="sd">"""Parse a Thai sentence into phrase-structure chunks (IOB format).</span>
 
 <span class="sd">    :param list[tuple[str, str]] sent: list of (word, POS-tag) pairs.</span>
-<span class="sd">    :param str engine: chunking engine; currently only ``&quot;crf&quot;`` is</span>
+<span class="sd">    :param str engine: chunking engine; currently only ``"crf"`` is</span>
 <span class="sd">        supported.</span>
 <span class="sd">    :param str corpus: corpus name for the CRF model; currently only</span>
-<span class="sd">        ``&quot;orchidpp&quot;`` is supported.</span>
+<span class="sd">        ``"orchidpp"`` is supported.</span>
 <span class="sd">    :return: list of IOB chunk labels, one per token.</span>
 <span class="sd">    :rtype: list[str]</span>
 
@@ -173,12 +173,12 @@
 <span class="sd">        from pythainlp.chunk import chunk_parse</span>
 <span class="sd">        from pythainlp.tag import pos_tag</span>
 
-<span class="sd">        tokens = [&quot;ผม&quot;, &quot;รัก&quot;, &quot;คุณ&quot;]</span>
-<span class="sd">        tokens_pos = pos_tag(tokens, engine=&quot;perceptron&quot;, corpus=&quot;orchid&quot;)</span>
+<span class="sd">        tokens = ["ผม", "รัก", "คุณ"]</span>
+<span class="sd">        tokens_pos = pos_tag(tokens, engine="perceptron", corpus="orchid")</span>
 
 <span class="sd">        print(chunk_parse(tokens_pos))</span>
-<span class="sd">        # output: [&#39;B-NP&#39;, &#39;B-VP&#39;, &#39;I-VP&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        # output: ['B-NP', 'B-VP', 'I-VP']</span>
+<span class="sd">    """</span>
     <span class="n">_parser</span> <span class="o">=</span> <span class="n">CRFChunkParser</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span></div>
 

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize.core &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.summarize.core &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Text summarization and keyword extraction&quot;&quot;&quot;</span>
+<span class="sd">"""Text summarization and keyword extraction"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -138,9 +138,9 @@
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SUMMARIZE_ENGINE</span><span class="p">,</span>
-    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summarizes text based on frequency of words.</span>
+<span class="w">    </span><span class="sd">"""Summarizes text based on frequency of words.</span>
 
 <span class="sd">    Under the hood, this function first tokenizes sentences from the given</span>
 <span class="sd">    text with :func:`pythainlp.tokenize.sent_tokenize`.</span>
@@ -179,7 +179,7 @@
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.summarize import summarize  # doctest: +SKIP</span>
 
-<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; text = '''  # doctest: +SKIP</span>
 <span class="sd">        ...         ทำเนียบท่าช้าง หรือ วังถนนพระอาทิตย์</span>
 <span class="sd">        ...         ตั้งอยู่บนถนนพระอาทิตย์ เขตพระนคร กรุงเทพมหานคร</span>
 <span class="sd">        ...         เดิมเป็นบ้านของเจ้าพระยามหาโยธา (ทอเรียะ คชเสนี)</span>
@@ -193,25 +193,25 @@
 <span class="sd">        ...         เป็นที่ประทับของพระเจ้าบรมวงศ์เธอ</span>
 <span class="sd">        ...         กรมพระนเรศวรฤทิธิ์และเจ้าจอมมารดา</span>
 <span class="sd">        ...         ต่อมาเรียกอาคารหลักนี้ว่า ตำหนักเดิม</span>
-<span class="sd">        ...     &#39;&#39;&#39;</span>
+<span class="sd">        ...     '''</span>
 
 <span class="sd">        &gt;&gt;&gt; summarize(text, n=1)  # doctest: +SKIP</span>
-<span class="sd">        [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;]</span>
+<span class="sd">        ['บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์']</span>
 
 <span class="sd">        &gt;&gt;&gt; summarize(text, n=3)  # doctest: +SKIP</span>
-<span class="sd">        [&#39;บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์&#39;,</span>
-<span class="sd">        &#39;เดิมเป็นบ้านของเจ้าพระยามหาโยธา&#39;,</span>
-<span class="sd">        &#39;เจ้าพระยามหาโยธา&#39;]</span>
+<span class="sd">        ['บุตรเจ้าพระยามหาโยธานราธิบดีศรีพิชัยณรงค์',</span>
+<span class="sd">        'เดิมเป็นบ้านของเจ้าพระยามหาโยธา',</span>
+<span class="sd">        'เจ้าพระยามหาโยธา']</span>
 
-<span class="sd">        &gt;&gt;&gt; summarize(text, engine=&quot;mt5-small&quot;)  # doctest: +SKIP</span>
-<span class="sd">        [&#39;&lt;extra_id_0&gt; ท่าช้าง หรือ วังถนนพระอาทิตย์</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, engine="mt5-small")  # doctest: +SKIP</span>
+<span class="sd">        ['&lt;extra_id_0&gt; ท่าช้าง หรือ วังถนนพระอาทิตย์</span>
 <span class="sd">        เขตพระนคร กรุงเทพมหานคร ฯลฯ ดังนี้:</span>
-<span class="sd">        ที่อยู่ - ศิลปวัฒนธรรม&#39;]</span>
+<span class="sd">        ที่อยู่ - ศิลปวัฒนธรรม']</span>
 
-<span class="sd">        &gt;&gt;&gt; text = &quot;ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ&quot;  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; summarize(text, engine=&quot;mt5-cpe-kmutt-thai-sentence-sum&quot;)  # doctest: +SKIP</span>
-<span class="sd">        [&#39;น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; text = "ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ"  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; summarize(text, engine="mt5-cpe-kmutt-thai-sentence-sum")  # doctest: +SKIP</span>
+<span class="sd">        ['น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด']</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
     <span class="n">sents</span> <span class="o">=</span> <span class="p">[]</span>
@@ -224,14 +224,14 @@
         <span class="n">sents</span> <span class="o">=</span> <span class="n">mT5Summarizer</span><span class="p">(</span>
             <span class="n">pretrained_mt5_model_name</span><span class="o">=</span><span class="n">CPE_KMUTT_THAI_SENTENCE_SUM</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">5</span>
         <span class="p">)</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mt5-&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;mt5&quot;</span><span class="p">:</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;mt5-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"mt5-"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"mt5"</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"mt5-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.mt5</span><span class="w"> </span><span class="kn">import</span> <span class="n">mT5Summarizer</span>
 
         <span class="n">sents</span> <span class="o">=</span> <span class="n">mT5Summarizer</span><span class="p">(</span><span class="n">model_size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># if engine not found, return first n sentences</span>
         <span class="c1"># sent_tokenize with str input returns list[str]</span>
-        <span class="n">sents</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;whitespace+newline&quot;</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>  <span class="c1"># type: ignore[assignment]</span>
+        <span class="n">sents</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"whitespace+newline"</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>  <span class="c1"># type: ignore[assignment]</span>
 
     <span class="k">return</span> <span class="n">sents</span></div>
 
@@ -245,10 +245,10 @@
     <span class="n">max_keywords</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
     <span class="n">min_df</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_KEYWORD_EXTRACTION_ENGINE</span><span class="p">,</span>
-    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
     <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the most relevant keywords (and keyphrases) from a document.</span>
+<span class="w">    </span><span class="sd">"""Return the most relevant keywords (and keyphrases) from a document.</span>
 
 <span class="sd">    Each algorithm may produce completely different keywords,</span>
 <span class="sd">    so choose the algorithm carefully.</span>
@@ -261,17 +261,17 @@
 
 <span class="sd">    :param str text: text to extract keywords from</span>
 <span class="sd">    :param tuple[int, int] keyphrase_ngram_range: token range for keywords.</span>
-<span class="sd">        ``(1, 1)`` allows unigrams only (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;);</span>
+<span class="sd">        ``(1, 1)`` allows unigrams only (e.g. "เสา", "ไฟฟ้า");</span>
 <span class="sd">        ``(1, 2)`` allows unigrams and bigrams</span>
-<span class="sd">        (e.g. &quot;เสา&quot;, &quot;ไฟฟ้า&quot;, &quot;เสาไฟฟ้า&quot;). Default: ``(1, 2)``.</span>
+<span class="sd">        (e.g. "เสา", "ไฟฟ้า", "เสาไฟฟ้า"). Default: ``(1, 2)``.</span>
 <span class="sd">    :param int max_keywords: maximum number of keywords to return.</span>
 <span class="sd">        Default: 5.</span>
 <span class="sd">    :param int min_df: minimum term frequency to qualify as keyword.</span>
 <span class="sd">        Default: 1.</span>
-<span class="sd">    :param str engine: keyword extraction algorithm. Default: ``&#39;keybert&#39;``.</span>
+<span class="sd">    :param str engine: keyword extraction algorithm. Default: ``'keybert'``.</span>
 <span class="sd">    :param str tokenizer: tokenizer engine name.</span>
 <span class="sd">        See :func:`pythainlp.tokenize.word_tokenize` for options.</span>
-<span class="sd">        Default: ``&#39;newmm&#39;``.</span>
+<span class="sd">        Default: ``'newmm'``.</span>
 <span class="sd">    :param stop_words: words to ignore. If ``None``,</span>
 <span class="sd">        :func:`pythainlp.corpus.thai_stopwords` is used. Default: ``None``.</span>
 <span class="sd">    :type stop_words: collections.abc.Iterable[str] or None</span>
@@ -287,7 +287,7 @@
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.summarize import extract_keywords  # doctest: +SKIP</span>
 
-<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; text = '''  # doctest: +SKIP</span>
 <span class="sd">        ...     อาหาร หมายถึง ของแข็งหรือของเหลว</span>
 <span class="sd">        ...     ที่กินหรือดื่มเข้าสู่ร่างกายแล้ว</span>
 <span class="sd">        ...     จะทำให้เกิดพลังงานและความร้อนแก่ร่างกาย</span>
@@ -295,36 +295,36 @@
 <span class="sd">        ...     ซ่อมแซมส่วนที่สึกหรอ ควบคุมการเปลี่ยนแปลงต่างๆ ในร่างกาย</span>
 <span class="sd">        ...     ช่วยทำให้อวัยวะต่างๆ ทำงานได้อย่างปกติ</span>
 <span class="sd">        ...     อาหารจะต้องไม่มีพิษและไม่เกิดโทษต่อร่างกาย</span>
-<span class="sd">        ... &#39;&#39;&#39;</span>
+<span class="sd">        ... '''</span>
 
 <span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(text)  # doctest: +SKIP</span>
 
-<span class="sd">        [&#39;อวัยวะต่างๆ&#39;,</span>
-<span class="sd">        &#39;ซ่อมแซมส่วน&#39;,</span>
-<span class="sd">        &#39;เจริญเติบโต&#39;,</span>
-<span class="sd">        &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
-<span class="sd">        &#39;มีพิษ&#39;]</span>
+<span class="sd">        ['อวัยวะต่างๆ',</span>
+<span class="sd">        'ซ่อมแซมส่วน',</span>
+<span class="sd">        'เจริญเติบโต',</span>
+<span class="sd">        'ควบคุมการเปลี่ยนแปลง',</span>
+<span class="sd">        'มีพิษ']</span>
 
 <span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(text, max_keywords=10)  # doctest: +SKIP</span>
 
-<span class="sd">        [&#39;อวัยวะต่างๆ&#39;,</span>
-<span class="sd">        &#39;ซ่อมแซมส่วน&#39;,</span>
-<span class="sd">        &#39;เจริญเติบโต&#39;,</span>
-<span class="sd">        &#39;ควบคุมการเปลี่ยนแปลง&#39;,</span>
-<span class="sd">        &#39;มีพิษ&#39;,</span>
-<span class="sd">        &#39;ทำให้ร่างกาย&#39;,</span>
-<span class="sd">        &#39;ร่างกายเจริญเติบโต&#39;,</span>
-<span class="sd">        &#39;จะทำให้เกิด&#39;,</span>
-<span class="sd">        &#39;มีพิษและ&#39;,</span>
-<span class="sd">        &#39;เกิดโทษ&#39;]</span>
+<span class="sd">        ['อวัยวะต่างๆ',</span>
+<span class="sd">        'ซ่อมแซมส่วน',</span>
+<span class="sd">        'เจริญเติบโต',</span>
+<span class="sd">        'ควบคุมการเปลี่ยนแปลง',</span>
+<span class="sd">        'มีพิษ',</span>
+<span class="sd">        'ทำให้ร่างกาย',</span>
+<span class="sd">        'ร่างกายเจริญเติบโต',</span>
+<span class="sd">        'จะทำให้เกิด',</span>
+<span class="sd">        'มีพิษและ',</span>
+<span class="sd">        'เกิดโทษ']</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">rank_by_frequency</span><span class="p">(</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">max_keywords</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
         <span class="n">min_df</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;newmm&quot;</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
         <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
@@ -350,13 +350,13 @@
 
         <span class="k">return</span> <span class="n">keywords</span>
 
-    <span class="n">engines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;keybert&quot;</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span>
+    <span class="n">engines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"keybert"</span><span class="p">,</span> <span class="s2">"frequency"</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;keybert&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"keybert"</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.keybert</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeyBERT</span>
 
         <span class="n">keywords</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
-            <span class="s2">&quot;list[str]&quot;</span><span class="p">,</span>
+            <span class="s2">"list[str]"</span><span class="p">,</span>
             <span class="n">KeyBERT</span><span class="p">()</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span>
                 <span class="n">text</span><span class="p">,</span>
                 <span class="n">keyphrase_ngram_range</span><span class="o">=</span><span class="n">keyphrase_ngram_range</span><span class="p">,</span>
@@ -367,7 +367,7 @@
                 <span class="n">stop_words</span><span class="o">=</span><span class="n">stop_words</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;frequency&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"frequency"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">rank_by_frequency</span><span class="p">(</span>
             <span class="n">text</span><span class="p">,</span>
             <span class="n">max_keywords</span><span class="o">=</span><span class="n">max_keywords</span><span class="p">,</span>
@@ -379,8 +379,8 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># currently not supported</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Keyword extractor </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="si">}</span><span class="s2"> is currently not supported. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Use one of </span><span class="si">{</span><span class="n">engines</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Keyword extractor </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="si">}</span><span class="s2"> is currently not supported. "</span>
+            <span class="sa">f</span><span class="s2">"Use one of </span><span class="si">{</span><span class="n">engines</span><span class="si">}</span><span class="s2">."</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">keywords</span></div>

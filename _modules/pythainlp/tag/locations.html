@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.locations &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.tag.locations &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Recognizes locations in text&quot;&quot;&quot;</span>
+<span class="sd">"""Recognizes locations in text"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -124,7 +124,7 @@
 <div class="viewcode-block" id="tag_provinces">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.tag_provinces">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tag_provinces</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function recognizes Thailand provinces in text.</span>
+<span class="w">    </span><span class="sd">"""This function recognizes Thailand provinces in text.</span>
 
 <span class="sd">    Note that it uses exact match and considers no context.</span>
 
@@ -136,13 +136,13 @@
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tag import tag_provinces  # doctest: +SKIP</span>
 
-<span class="sd">        &gt;&gt;&gt; text = [&quot;หนองคาย&quot;, &quot;น่าอยู่&quot;]  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; text = ["หนองคาย", "น่าอยู่"]  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; tag_provinces(text)  # doctest: +SKIP</span>
-<span class="sd">        [(&#39;หนองคาย&#39;, &#39;B-LOCATION&#39;), (&#39;น่าอยู่&#39;, &#39;O&#39;)]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        [('หนองคาย', 'B-LOCATION'), ('น่าอยู่', 'O')]</span>
+<span class="sd">    """</span>
     <span class="n">province_list</span> <span class="o">=</span> <span class="n">provinces</span><span class="p">()</span>
     <span class="n">output</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;B-LOCATION&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">province_list</span> <span class="k">else</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">"B-LOCATION"</span><span class="p">)</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">province_list</span> <span class="k">else</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">output</span></div>

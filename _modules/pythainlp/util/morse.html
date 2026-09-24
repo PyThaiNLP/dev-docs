@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.morse &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.morse &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -117,121 +117,121 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="n">THAI_MORSE_CODE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ก&quot;</span><span class="p">:</span> <span class="s2">&quot;--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ข&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ค&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฆ&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ง&quot;</span><span class="p">:</span> <span class="s2">&quot;-.--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;จ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฉ&quot;</span><span class="p">:</span> <span class="s2">&quot;----&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ช&quot;</span><span class="p">:</span> <span class="s2">&quot;-..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฌ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ซ&quot;</span><span class="p">:</span> <span class="s2">&quot;--..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ญ&quot;</span><span class="p">:</span> <span class="s2">&quot;.---&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ด&quot;</span><span class="p">:</span> <span class="s2">&quot;-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ถ&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฐ&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฑ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฒ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ท&quot;</span><span class="p">:</span> <span class="s2">&quot;-..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ธ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ณ&quot;</span><span class="p">:</span> <span class="s2">&quot;-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;น&quot;</span><span class="p">:</span> <span class="s2">&quot;-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;บ&quot;</span><span class="p">:</span> <span class="s2">&quot;-...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ป&quot;</span><span class="p">:</span> <span class="s2">&quot;.--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ผ&quot;</span><span class="p">:</span> <span class="s2">&quot;--.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฝ&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;พ&quot;</span><span class="p">:</span> <span class="s2">&quot;.--..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ภ&quot;</span><span class="p">:</span> <span class="s2">&quot;.--..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฟ&quot;</span><span class="p">:</span> <span class="s2">&quot;..-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ม&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ย&quot;</span><span class="p">:</span> <span class="s2">&quot;-.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ร&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ล&quot;</span><span class="p">:</span> <span class="s2">&quot;.-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฬ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ว&quot;</span><span class="p">:</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ศ&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ษ&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ส&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ห&quot;</span><span class="p">:</span> <span class="s2">&quot;....&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฮ&quot;</span><span class="p">:</span> <span class="s2">&quot;--.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฎ&quot;</span><span class="p">:</span> <span class="s2">&quot;-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ต&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฏ&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฤ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;่&quot;</span><span class="p">:</span> <span class="s2">&quot;..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;้&quot;</span><span class="p">:</span> <span class="s2">&quot;...-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;๊&quot;</span><span class="p">:</span> <span class="s2">&quot;--...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;๋&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ั&quot;</span><span class="p">:</span> <span class="s2">&quot;.--.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;็&quot;</span><span class="p">:</span> <span class="s2">&quot;---..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;์&quot;</span><span class="p">:</span> <span class="s2">&quot;--..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ั้&quot;</span><span class="p">:</span> <span class="s2">&quot;.---.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฯ&quot;</span><span class="p">:</span> <span class="s2">&quot;--.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ฯลฯ&quot;</span><span class="p">:</span> <span class="s2">&quot;---.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ๆ&quot;</span><span class="p">:</span> <span class="s2">&quot;---.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ะ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;า&quot;</span><span class="p">:</span> <span class="s2">&quot;.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ิ&quot;</span><span class="p">:</span> <span class="s2">&quot;..-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ี&quot;</span><span class="p">:</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ึ&quot;</span><span class="p">:</span> <span class="s2">&quot;..--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ื&quot;</span><span class="p">:</span> <span class="s2">&quot;..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ุ&quot;</span><span class="p">:</span> <span class="s2">&quot;..-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ู&quot;</span><span class="p">:</span> <span class="s2">&quot;---.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;เ&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;แ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;โ&quot;</span><span class="p">:</span> <span class="s2">&quot;---&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ไ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ใ&quot;</span><span class="p">:</span> <span class="s2">&quot;.-..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ำ&quot;</span><span class="p">:</span> <span class="s2">&quot;...-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;อ&quot;</span><span class="p">:</span> <span class="s2">&quot;-...-&quot;</span><span class="p">,</span>
+    <span class="s2">"ก"</span><span class="p">:</span> <span class="s2">"--."</span><span class="p">,</span>
+    <span class="s2">"ข"</span><span class="p">:</span> <span class="s2">"-.-."</span><span class="p">,</span>
+    <span class="s2">"ค"</span><span class="p">:</span> <span class="s2">"-.-"</span><span class="p">,</span>
+    <span class="s2">"ฆ"</span><span class="p">:</span> <span class="s2">"-.-"</span><span class="p">,</span>
+    <span class="s2">"ง"</span><span class="p">:</span> <span class="s2">"-.--."</span><span class="p">,</span>
+    <span class="s2">"จ"</span><span class="p">:</span> <span class="s2">"-..-."</span><span class="p">,</span>
+    <span class="s2">"ฉ"</span><span class="p">:</span> <span class="s2">"----"</span><span class="p">,</span>
+    <span class="s2">"ช"</span><span class="p">:</span> <span class="s2">"-..-"</span><span class="p">,</span>
+    <span class="s2">"ฌ"</span><span class="p">:</span> <span class="s2">"-..-"</span><span class="p">,</span>
+    <span class="s2">"ซ"</span><span class="p">:</span> <span class="s2">"--.."</span><span class="p">,</span>
+    <span class="s2">"ญ"</span><span class="p">:</span> <span class="s2">".---"</span><span class="p">,</span>
+    <span class="s2">"ด"</span><span class="p">:</span> <span class="s2">"-.."</span><span class="p">,</span>
+    <span class="s2">"ถ"</span><span class="p">:</span> <span class="s2">"-.-.."</span><span class="p">,</span>
+    <span class="s2">"ฐ"</span><span class="p">:</span> <span class="s2">"-.-.."</span><span class="p">,</span>
+    <span class="s2">"ฑ"</span><span class="p">:</span> <span class="s2">"-..--"</span><span class="p">,</span>
+    <span class="s2">"ฒ"</span><span class="p">:</span> <span class="s2">"-..--"</span><span class="p">,</span>
+    <span class="s2">"ท"</span><span class="p">:</span> <span class="s2">"-..--"</span><span class="p">,</span>
+    <span class="s2">"ธ"</span><span class="p">:</span> <span class="s2">"-..--"</span><span class="p">,</span>
+    <span class="s2">"ณ"</span><span class="p">:</span> <span class="s2">"-."</span><span class="p">,</span>
+    <span class="s2">"น"</span><span class="p">:</span> <span class="s2">"-."</span><span class="p">,</span>
+    <span class="s2">"บ"</span><span class="p">:</span> <span class="s2">"-..."</span><span class="p">,</span>
+    <span class="s2">"ป"</span><span class="p">:</span> <span class="s2">".--."</span><span class="p">,</span>
+    <span class="s2">"ผ"</span><span class="p">:</span> <span class="s2">"--.-"</span><span class="p">,</span>
+    <span class="s2">"ฝ"</span><span class="p">:</span> <span class="s2">"-.-.-"</span><span class="p">,</span>
+    <span class="s2">"พ"</span><span class="p">:</span> <span class="s2">".--.."</span><span class="p">,</span>
+    <span class="s2">"ภ"</span><span class="p">:</span> <span class="s2">".--.."</span><span class="p">,</span>
+    <span class="s2">"ฟ"</span><span class="p">:</span> <span class="s2">"..-."</span><span class="p">,</span>
+    <span class="s2">"ม"</span><span class="p">:</span> <span class="s2">"--"</span><span class="p">,</span>
+    <span class="s2">"ย"</span><span class="p">:</span> <span class="s2">"-.--"</span><span class="p">,</span>
+    <span class="s2">"ร"</span><span class="p">:</span> <span class="s2">".-."</span><span class="p">,</span>
+    <span class="s2">"ล"</span><span class="p">:</span> <span class="s2">".-.."</span><span class="p">,</span>
+    <span class="s2">"ฬ"</span><span class="p">:</span> <span class="s2">".-.."</span><span class="p">,</span>
+    <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">".--"</span><span class="p">,</span>
+    <span class="s2">"ศ"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+    <span class="s2">"ษ"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+    <span class="s2">"ส"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+    <span class="s2">"ห"</span><span class="p">:</span> <span class="s2">"...."</span><span class="p">,</span>
+    <span class="s2">"ฮ"</span><span class="p">:</span> <span class="s2">"--.--"</span><span class="p">,</span>
+    <span class="s2">"ฎ"</span><span class="p">:</span> <span class="s2">"-.."</span><span class="p">,</span>
+    <span class="s2">"ต"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"ฏ"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"ฤ"</span><span class="p">:</span> <span class="s2">".-.--"</span><span class="p">,</span>
+    <span class="s2">"่"</span><span class="p">:</span> <span class="s2">"..-"</span><span class="p">,</span>
+    <span class="s2">"้"</span><span class="p">:</span> <span class="s2">"...-"</span><span class="p">,</span>
+    <span class="s2">"๊"</span><span class="p">:</span> <span class="s2">"--..."</span><span class="p">,</span>
+    <span class="s2">"๋"</span><span class="p">:</span> <span class="s2">".-.-."</span><span class="p">,</span>
+    <span class="s2">"ั"</span><span class="p">:</span> <span class="s2">".--.-"</span><span class="p">,</span>
+    <span class="s2">"็"</span><span class="p">:</span> <span class="s2">"---.."</span><span class="p">,</span>
+    <span class="s2">"์"</span><span class="p">:</span> <span class="s2">"--..-"</span><span class="p">,</span>
+    <span class="s2">"ั้"</span><span class="p">:</span> <span class="s2">".---."</span><span class="p">,</span>
+    <span class="s2">"ฯ"</span><span class="p">:</span> <span class="s2">"--.-."</span><span class="p">,</span>
+    <span class="s2">"ฯลฯ"</span><span class="p">:</span> <span class="s2">"---.-"</span><span class="p">,</span>
+    <span class="s2">"ๆ"</span><span class="p">:</span> <span class="s2">"---.-"</span><span class="p">,</span>
+    <span class="s2">"ะ"</span><span class="p">:</span> <span class="s2">".-..."</span><span class="p">,</span>
+    <span class="s2">"า"</span><span class="p">:</span> <span class="s2">".-"</span><span class="p">,</span>
+    <span class="s2">"ิ"</span><span class="p">:</span> <span class="s2">"..-.."</span><span class="p">,</span>
+    <span class="s2">"ี"</span><span class="p">:</span> <span class="s2">".."</span><span class="p">,</span>
+    <span class="s2">"ึ"</span><span class="p">:</span> <span class="s2">"..--."</span><span class="p">,</span>
+    <span class="s2">"ื"</span><span class="p">:</span> <span class="s2">"..--"</span><span class="p">,</span>
+    <span class="s2">"ุ"</span><span class="p">:</span> <span class="s2">"..-.-"</span><span class="p">,</span>
+    <span class="s2">"ู"</span><span class="p">:</span> <span class="s2">"---."</span><span class="p">,</span>
+    <span class="s2">"เ"</span><span class="p">:</span> <span class="s2">"."</span><span class="p">,</span>
+    <span class="s2">"แ"</span><span class="p">:</span> <span class="s2">".-.-"</span><span class="p">,</span>
+    <span class="s2">"โ"</span><span class="p">:</span> <span class="s2">"---"</span><span class="p">,</span>
+    <span class="s2">"ไ"</span><span class="p">:</span> <span class="s2">".-..-"</span><span class="p">,</span>
+    <span class="s2">"ใ"</span><span class="p">:</span> <span class="s2">".-..-"</span><span class="p">,</span>
+    <span class="s2">"ำ"</span><span class="p">:</span> <span class="s2">"...-."</span><span class="p">,</span>
+    <span class="s2">"อ"</span><span class="p">:</span> <span class="s2">"-...-"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">ENGLISH_MORSE_CODE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="s2">&quot;-...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="s2">&quot;-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="s2">&quot;..-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="s2">&quot;....&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="s2">&quot;.---&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="s2">&quot;.-..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="s2">&quot;-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="s2">&quot;---&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="s2">&quot;.--.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="s2">&quot;--.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;U&quot;</span><span class="p">:</span> <span class="s2">&quot;..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V&quot;</span><span class="p">:</span> <span class="s2">&quot;...-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;W&quot;</span><span class="p">:</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="s2">&quot;-..-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="s2">&quot;-.--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="s2">&quot;--..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;-----&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;,&quot;</span><span class="p">:</span> <span class="s2">&quot;--..--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;.----&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;.&quot;</span><span class="p">:</span> <span class="s2">&quot;.-.-.-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;..---&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;?&quot;</span><span class="p">:</span> <span class="s2">&quot;..--..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;...--&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;;&quot;</span><span class="p">:</span> <span class="s2">&quot;-.-.-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;....-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;:&quot;</span><span class="p">:</span> <span class="s2">&quot;---...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;.....&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span> <span class="s2">&quot;.----.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;-....&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;-&quot;</span><span class="p">:</span> <span class="s2">&quot;-....-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="s2">&quot;--...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;/&quot;</span><span class="p">:</span> <span class="s2">&quot;-..-.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="s2">&quot;---..&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;(&quot;</span><span class="p">:</span> <span class="s2">&quot;-.--.-&quot;</span><span class="p">,</span>
+    <span class="s2">"A"</span><span class="p">:</span> <span class="s2">".-"</span><span class="p">,</span>
+    <span class="s2">"B"</span><span class="p">:</span> <span class="s2">"-..."</span><span class="p">,</span>
+    <span class="s2">"C"</span><span class="p">:</span> <span class="s2">"-.-."</span><span class="p">,</span>
+    <span class="s2">"D"</span><span class="p">:</span> <span class="s2">"-.."</span><span class="p">,</span>
+    <span class="s2">"E"</span><span class="p">:</span> <span class="s2">"."</span><span class="p">,</span>
+    <span class="s2">"F"</span><span class="p">:</span> <span class="s2">"..-."</span><span class="p">,</span>
+    <span class="s2">"G"</span><span class="p">:</span> <span class="s2">"--."</span><span class="p">,</span>
+    <span class="s2">"H"</span><span class="p">:</span> <span class="s2">"...."</span><span class="p">,</span>
+    <span class="s2">"I"</span><span class="p">:</span> <span class="s2">".."</span><span class="p">,</span>
+    <span class="s2">"J"</span><span class="p">:</span> <span class="s2">".---"</span><span class="p">,</span>
+    <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"-.-"</span><span class="p">,</span>
+    <span class="s2">"L"</span><span class="p">:</span> <span class="s2">".-.."</span><span class="p">,</span>
+    <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"--"</span><span class="p">,</span>
+    <span class="s2">"N"</span><span class="p">:</span> <span class="s2">"-."</span><span class="p">,</span>
+    <span class="s2">"O"</span><span class="p">:</span> <span class="s2">"---"</span><span class="p">,</span>
+    <span class="s2">"P"</span><span class="p">:</span> <span class="s2">".--."</span><span class="p">,</span>
+    <span class="s2">"Q"</span><span class="p">:</span> <span class="s2">"--.-"</span><span class="p">,</span>
+    <span class="s2">"R"</span><span class="p">:</span> <span class="s2">".-."</span><span class="p">,</span>
+    <span class="s2">"S"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+    <span class="s2">"T"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"U"</span><span class="p">:</span> <span class="s2">"..-"</span><span class="p">,</span>
+    <span class="s2">"V"</span><span class="p">:</span> <span class="s2">"...-"</span><span class="p">,</span>
+    <span class="s2">"W"</span><span class="p">:</span> <span class="s2">".--"</span><span class="p">,</span>
+    <span class="s2">"X"</span><span class="p">:</span> <span class="s2">"-..-"</span><span class="p">,</span>
+    <span class="s2">"Y"</span><span class="p">:</span> <span class="s2">"-.--"</span><span class="p">,</span>
+    <span class="s2">"Z"</span><span class="p">:</span> <span class="s2">"--.."</span><span class="p">,</span>
+    <span class="s2">"0"</span><span class="p">:</span> <span class="s2">"-----"</span><span class="p">,</span>
+    <span class="s2">","</span><span class="p">:</span> <span class="s2">"--..--"</span><span class="p">,</span>
+    <span class="s2">"1"</span><span class="p">:</span> <span class="s2">".----"</span><span class="p">,</span>
+    <span class="s2">"."</span><span class="p">:</span> <span class="s2">".-.-.-"</span><span class="p">,</span>
+    <span class="s2">"2"</span><span class="p">:</span> <span class="s2">"..---"</span><span class="p">,</span>
+    <span class="s2">"?"</span><span class="p">:</span> <span class="s2">"..--.."</span><span class="p">,</span>
+    <span class="s2">"3"</span><span class="p">:</span> <span class="s2">"...--"</span><span class="p">,</span>
+    <span class="s2">";"</span><span class="p">:</span> <span class="s2">"-.-.-."</span><span class="p">,</span>
+    <span class="s2">"4"</span><span class="p">:</span> <span class="s2">"....-"</span><span class="p">,</span>
+    <span class="s2">":"</span><span class="p">:</span> <span class="s2">"---..."</span><span class="p">,</span>
+    <span class="s2">"5"</span><span class="p">:</span> <span class="s2">"....."</span><span class="p">,</span>
+    <span class="s2">"'"</span><span class="p">:</span> <span class="s2">".----."</span><span class="p">,</span>
+    <span class="s2">"6"</span><span class="p">:</span> <span class="s2">"-...."</span><span class="p">,</span>
+    <span class="s2">"-"</span><span class="p">:</span> <span class="s2">"-....-"</span><span class="p">,</span>
+    <span class="s2">"7"</span><span class="p">:</span> <span class="s2">"--..."</span><span class="p">,</span>
+    <span class="s2">"/"</span><span class="p">:</span> <span class="s2">"-..-."</span><span class="p">,</span>
+    <span class="s2">"8"</span><span class="p">:</span> <span class="s2">"---.."</span><span class="p">,</span>
+    <span class="s2">"("</span><span class="p">:</span> <span class="s2">"-.--.-"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">decodingeng</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -242,16 +242,16 @@
 
 <span class="n">decodingthai</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">THAI_MORSE_CODE</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">decodingthai</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">key</span>
+    <span class="n">decodingthai</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)]</span> <span class="o">=</span> <span class="n">key</span>
 
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">THAI_MORSE_CODE</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">THAI_MORSE_CODE</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">THAI_MORSE_CODE</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="morse_encode">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.morse.morse_encode">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">morse_encode</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert text to Morse code (support Thai and English)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">morse_encode</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"th"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Convert text to Morse code (support Thai and English)</span>
 
 <span class="sd">    :param str text: Text</span>
 <span class="sd">    :param str lang: Language Code (*th* is Thai and *en* is English)</span>
@@ -261,57 +261,57 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util.morse import morse_encode</span>
-<span class="sd">        &gt;&gt;&gt; morse_encode(&quot;แมว&quot;, lang=&quot;th&quot;)</span>
-<span class="sd">        &#39;.-.- -- .--&#39;</span>
-<span class="sd">        &gt;&gt;&gt; morse_encode(&quot;cat&quot;, lang=&quot;en&quot;)</span>
-<span class="sd">        &#39;-.-. .- -&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>  <span class="c1"># Thai</span>
-        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">THAI_MORSE_CODE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="sd">        &gt;&gt;&gt; morse_encode("แมว", lang="th")</span>
+<span class="sd">        '.-.- -- .--'</span>
+<span class="sd">        &gt;&gt;&gt; morse_encode("cat", lang="en")</span>
+<span class="sd">        '-.-. .- -'</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">"th"</span><span class="p">:</span>  <span class="c1"># Thai</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">THAI_MORSE_CODE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span>  <span class="c1"># English</span>
-        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">ENGLISH_MORSE_CODE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">"en"</span><span class="p">:</span>  <span class="c1"># English</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">ENGLISH_MORSE_CODE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This function doesn&#39;t support </span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"This function doesn't support </span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="morse_decode">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.morse.morse_decode">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">morse_decode</span><span class="p">(</span><span class="n">morse_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;th&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Morse code to text.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">morse_decode</span><span class="p">(</span><span class="n">morse_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"th"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Convert Morse code to text.</span>
 
 <span class="sd">    Thai decoding may produce incorrect characters</span>
 <span class="sd">    that can be fixed with a spell corrector.</span>
 
 <span class="sd">    :param str morse_text: Morse code</span>
-<span class="sd">    :param str lang: language code (``&#39;th&#39;`` for Thai, ``&#39;en&#39;`` for English)</span>
+<span class="sd">    :param str lang: language code (``'th'`` for Thai, ``'en'`` for English)</span>
 <span class="sd">    :return: decoded text</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util.morse import morse_decode</span>
-<span class="sd">        &gt;&gt;&gt; morse_decode(&quot;.-.- -- .--&quot;, lang=&quot;th&quot;)</span>
-<span class="sd">        &#39;แมว&#39;</span>
-<span class="sd">        &gt;&gt;&gt; morse_decode(&quot;-.-. .- -&quot;, lang=&quot;en&quot;)</span>
-<span class="sd">        &#39;CAT&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">decodingthai</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">morse_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="sd">        &gt;&gt;&gt; morse_decode(".-.- -- .--", lang="th")</span>
+<span class="sd">        'แมว'</span>
+<span class="sd">        &gt;&gt;&gt; morse_decode("-.-. .- -", lang="en")</span>
+<span class="sd">        'CAT'</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">"th"</span><span class="p">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">decodingthai</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">morse_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-    <span class="k">elif</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">decodingeng</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">morse_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">"en"</span><span class="p">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">decodingeng</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">morse_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This function doesn&#39;t support </span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"This function doesn't support </span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span></div>
 
 </pre></div>
 

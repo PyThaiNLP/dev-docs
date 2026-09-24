@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.khuap_klam &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.khuap_klam &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">&quot;&quot;&quot;Thai consonant cluster (Kham Khuap Klam) checker.&quot;&quot;&quot;</span>
+<span class="sd">"""Thai consonant cluster (Kham Khuap Klam) checker."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -123,25 +123,25 @@
 
 <span class="c1"># Regex for true consonant clusters (คำควบกล้ำแท้):</span>
 <span class="c1"># initial consonants ก ข ค ต ป ผ พ ฟ บ followed by ร ล ว</span>
-<span class="n">_TRUE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[กขคตปผพฟบ][รลว]&quot;</span><span class="p">)</span>
+<span class="n">_TRUE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^[กขคตปผพฟบ][รลว]"</span><span class="p">)</span>
 
 <span class="c1"># Regex for false consonant clusters (คำควบกล้ำไม่แท้):</span>
 <span class="c1"># written forms that look like clusters but are not pronounced as such</span>
-<span class="n">_FALSE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(ทร|จร|ศร|สร|ซร)&quot;</span><span class="p">)</span>
+<span class="n">_FALSE_CLUSTER_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^(ทร|จร|ศร|สร|ซร)"</span><span class="p">)</span>
 
 <span class="c1"># Leading vowels that appear before the initial consonant in written Thai</span>
-<span class="n">_LEAD_VOWEL_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[เแโใไ]+&quot;</span><span class="p">)</span>
+<span class="n">_LEAD_VOWEL_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^[เแโใไ]+"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_strip_lead_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove leading vowels (เ แ โ ใ ไ) from the start of *text*.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_LEAD_VOWEL_RE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Remove leading vowels (เ แ โ ใ ไ) from the start of *text*."""</span>
+    <span class="k">return</span> <span class="n">_LEAD_VOWEL_RE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="check_khuap_klam">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.check_khuap_klam">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_khuap_klam</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a Thai word is a consonant cluster (Kham Khuap Klam).</span>
+<span class="w">    </span><span class="sd">"""Check whether a Thai word is a consonant cluster (Kham Khuap Klam).</span>
 
 <span class="sd">    :param str word: Thai word to check.</span>
 <span class="sd">    :return: ``True`` if the word is a *true* consonant cluster</span>
@@ -154,30 +154,30 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import check_khuap_klam  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; # True consonant clusters (คำควบกล้ำแท้)</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;กราบ&quot;))  # True  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;ปลา&quot;))  # True  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;เพราะ&quot;))  # True  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;ตรง&quot;))  # True  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("กราบ"))  # True  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("ปลา"))  # True  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("เพราะ"))  # True  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("ตรง"))  # True  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; # False consonant clusters (คำควบกล้ำไม่แท้)</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;จริง&quot;))  # False  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;ทราย&quot;))  # False  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;เศร้า&quot;))  # False  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("จริง"))  # False  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("ทราย"))  # False  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("เศร้า"))  # False  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; # Not a consonant cluster</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;แม่&quot;))  # None  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam(&quot;ตา&quot;))  # None  # doctest: +SKIP</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("แม่"))  # None  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(check_khuap_klam("ตา"))  # None  # doctest: +SKIP</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">..transliterate</span><span class="w"> </span><span class="kn">import</span> <span class="n">pronunciate</span>
 
     <span class="c1"># Convert to pronunciation; remove sub-consonant marker (พินทุ ฺ)</span>
-    <span class="n">reading</span> <span class="o">=</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;w2p&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u0e3a</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">reading</span> <span class="o">=</span> <span class="n">pronunciate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"w2p"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\u0e3a</span><span class="s2">"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
     <span class="c1"># Use only the first syllable of the reading</span>
-    <span class="n">first_syll_reading</span> <span class="o">=</span> <span class="n">reading</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">first_syll_reading</span> <span class="o">=</span> <span class="n">reading</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"-"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">written_core</span> <span class="o">=</span> <span class="n">_strip_lead_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
     <span class="n">reading_core</span> <span class="o">=</span> <span class="n">_strip_lead_vowels</span><span class="p">(</span><span class="n">first_syll_reading</span><span class="p">)</span>

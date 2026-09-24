@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.lcs &mdash; PyThaiNLP 7e97cf6 documentation</title>
+  <title>pythainlp.util.lcs &mdash; PyThaiNLP b45cdec documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91e502bb"></script>
+      <script src="../../../_static/documentation_options.js?v=3235de97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -120,7 +120,7 @@
 <div class="viewcode-block" id="longest_common_subsequence">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.longest_common_subsequence">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">longest_common_subsequence</span><span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the longest common subsequence between two strings.</span>
+<span class="w">    </span><span class="sd">"""Find the longest common subsequence between two strings.</span>
 
 <span class="sd">    :param str str1: The first string.</span>
 <span class="sd">    :param str str2: The second string.</span>
@@ -130,9 +130,9 @@
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util.lcs import longest_common_subsequence</span>
-<span class="sd">        &gt;&gt;&gt; longest_common_subsequence(&quot;ABCBDAB&quot;, &quot;BDCAB&quot;)</span>
-<span class="sd">        &#39;BDAB&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; longest_common_subsequence("ABCBDAB", "BDCAB")</span>
+<span class="sd">        'BDAB'</span>
+<span class="sd">    """</span>
     <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span>
 
@@ -153,8 +153,8 @@
     <span class="n">index</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
 
     <span class="c1"># Create a character array to store the lcs string</span>
-    <span class="n">lcs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">lcs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">lcs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">lcs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
 
     <span class="c1"># Start from the right-most-bottom-most corner and</span>
     <span class="c1"># one by one store characters in lcs[]</span>
@@ -176,7 +176,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lcs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lcs</span><span class="p">)</span></div>
 
 </pre></div>
 
