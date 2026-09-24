@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks &mdash; PyThaiNLP df2e12b documentation</title>
+  <title>pythainlp.benchmarks &mdash; PyThaiNLP 1370c15 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=373756b8"></script>
+      <script src="../_static/documentation_options.js?v=7a5f11dd"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -68,6 +68,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.compute_stats"><code class="docutils literal notranslate"><span class="pre">compute_stats()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.benchmark"><code class="docutils literal notranslate"><span class="pre">benchmark()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.preprocessing"><code class="docutils literal notranslate"><span class="pre">preprocessing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.evaluate_word_tokenization"><code class="docutils literal notranslate"><span class="pre">evaluate_word_tokenization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.word_eval_function"><code class="docutils literal notranslate"><span class="pre">word_eval_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.benchmarks.char_eval_function"><code class="docutils literal notranslate"><span class="pre">char_eval_function()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -243,6 +246,110 @@ for computed metrics.</p>
 <p>Preprocessing is a crucial step in NLP tasks. The <cite>preprocessing</cite> function assists in preparing text data for tokenization, which is essential for accurate and consistent benchmarking.</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.benchmarks.evaluate_word_tokenization">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">evaluate_word_tokenization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TokenizationScore</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#evaluate_word_tokenization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.evaluate_word_tokenization" title="Link to this definition"></a></dt>
+<dd><p>Evaluate word tokenization performance at character and word levels.</p>
+<p>Computes character-level F1 score and word-level F1 score between
+the ground truth (<code class="docutils literal notranslate"><span class="pre">x_true</span></code>) and predicted segmentation (<code class="docutils literal notranslate"><span class="pre">x_pred</span></code>).
+Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
+<p>Supports multiple input representations:</p>
+<ul class="simple">
+<li><p>Strings delimited by <code class="docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;สวัสดี|ประเทศไทย&quot;</span></code>)</p></li>
+<li><p>Single-element lists of delimited strings (e.g., <code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี|ประเทศไทย&quot;]</span></code>)</p></li>
+<li><p>2D lists of strings (e.g., <code class="docutils literal notranslate"><span class="pre">[[&quot;สวัสดี|&quot;],</span> <span class="pre">[&quot;ประเทศไทย&quot;]]</span></code>)</p></li>
+<li><p>1D lists of token strings with <code class="docutils literal notranslate"><span class="pre">sep=&quot;|&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี&quot;,</span> <span class="pre">&quot;ประเทศไทย&quot;]</span></code>)</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – ground truth text or tokens</p></li>
+<li><p><strong>x_pred</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – predicted text or tokens</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – separator to join sub-elements when input is a list of
+tokens without boundaries (default: <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tokenization score containing character score and word score</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TokenizationScore</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate_word_tokenization</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="s2">"สวัสดี|ประเทศไทย"</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="s2">"สวัสดี|ประเทศ|ไทย"</span>
+<span class="n">char_score</span><span class="p">,</span> <span class="n">word_score</span> <span class="o">=</span> <span class="n">evaluate_word_tokenization</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Char Score: </span><span class="si">{</span><span class="n">char_score</span><span class="si">}</span><span class="s2">, Word Score: </span><span class="si">{</span><span class="n">word_score</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Char Score: 0.8, Word Score: 0.4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.benchmarks.word_eval_function">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">word_eval_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#word_eval_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_eval_function" title="Link to this definition"></a></dt>
+<dd><p>Compute word-level F1 score for tokenized word lists.</p>
+<p>Calculates the F1 score based on word boundary span overlap between
+the ground truth word tokens and predicted word tokens.
+Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – ground truth word tokens</p></li>
+<li><p><strong>test</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – predicted word tokens</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>word-level F1 score</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.benchmarks.char_eval_function">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">char_eval_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#char_eval_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.char_eval_function" title="Link to this definition"></a></dt>
+<dd><p>Compute character-level F1 score for boundary indicators.</p>
+<p>Calculates precision, recall, and binary F1 score for boundary (1)
+labels between true and predicted character boundary sequences.
+Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – ground truth binary boundary sequence</p></li>
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – predicted binary boundary sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>character-level F1 score</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example for Word Tokenization Evaluation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate_word_tokenization</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="s2">"สวัสดี|ประเทศไทย"</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="s2">"สวัสดี|ประเทศ|ไทย"</span>
+<span class="n">char_score</span><span class="p">,</span> <span class="n">word_score</span> <span class="o">=</span> <span class="n">evaluate_word_tokenization</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Char Score: </span><span class="si">{</span><span class="n">char_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Word Score: </span><span class="si">{</span><span class="n">word_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Char Score: 0.8000, Word Score: 0.4000</span>
+
+<span class="c1"># Also supports word tokens with sep='|'</span>
+<span class="n">char_score</span><span class="p">,</span> <span class="n">word_score</span> <span class="o">=</span> <span class="n">evaluate_word_tokenization</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">"สวัสดี"</span><span class="p">,</span> <span class="s2">"ประเทศไทย"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"สวัสดี"</span><span class="p">,</span> <span class="s2">"ประเทศ"</span><span class="p">,</span> <span class="s2">"ไทย"</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"|"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="evaluation-metrics">
