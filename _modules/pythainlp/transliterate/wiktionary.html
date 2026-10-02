@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.wiktionary &mdash; PyThaiNLP 4be1140 documentation</title>
+  <title>pythainlp.transliterate.wiktionary &mdash; PyThaiNLP 889e32b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d7e8eda8"></script>
+      <script src="../../../_static/documentation_options.js?v=1c90c78f"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -503,11 +503,11 @@
             <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"paiboon"</span><span class="p">:</span>
                 <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
                     <span class="sa">r</span><span class="s2">"^([^aiʉueɛoɔə]*)([aiʉueɛoɔə])"</span><span class="p">,</span>
-                    <span class="sa">f</span><span class="s2">"</span><span class="se">\\</span><span class="s2">g&lt;1&gt;</span><span class="se">\\</span><span class="s2">g&lt;2&gt;</span><span class="si">{</span><span class="n">_TONE_ROM_MARKS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tone</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="se">\\</span><span class="s2">g&lt;1&gt;</span><span class="se">\\</span><span class="s2">g&lt;2&gt;</span><span class="si">{</span><span class="n">_TONE_ROM_MARKS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tone</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                     <span class="n">v</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"ipa"</span><span class="p">:</span>
-                <span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">+</span> <span class="n">_TONE_LEVELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tone</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+                <span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">+</span> <span class="p">(</span><span class="n">_TONE_LEVELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tone</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">if</span> <span class="n">tone</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">ini</span> <span class="o">+</span> <span class="n">g</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="n">c2</span>
 
