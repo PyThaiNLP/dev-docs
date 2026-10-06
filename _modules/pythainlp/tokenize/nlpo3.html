@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tokenize.nlpo3 &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Wrap nlpo3, a Rust implementation of the Thai word tokenizer."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
@@ -138,14 +141,15 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_default_dict_loaded</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Ensure the default dictionary is loaded.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Ensure the default dictionary is loaded.</span>
 
 <span class="sd">    This function uses a lock to ensure thread-safe initialization.</span>
 <span class="sd">    The context manager is kept alive for the lifetime of the program</span>
 <span class="sd">    to prevent cleanup of temporary files while the dictionary is in use.</span>
 
-<span class="sd">    :raises ImportError: If nlpo3 is not installed.</span>
-<span class="sd">    :raises RuntimeError: If dictionary loading fails.</span>
+<span class="sd">    :raises ImportError: if nlpo3 is not installed</span>
+<span class="sd">    :raises RuntimeError: if dictionary loading fails</span>
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">nlpo3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict</span> <span class="k">as</span> <span class="n">nlpo3_load_dict</span>
@@ -176,21 +180,20 @@
 <div class="viewcode-block" id="load_dict">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.nlpo3.load_dict">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_dict</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dict_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Load a dictionary file into an in-memory dictionary collection.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Load a dictionary file into an in-memory dictionary collection.</span>
 
-<span class="sd">    The loaded dictionary will be accessible through the assigned dict_name.</span>
-<span class="sd">    **Note: This function will not override an existing dict name.**</span>
+<span class="sd">    The loaded dictionary is accessible through the assigned ``dict_name``.</span>
+<span class="sd">    This function does not override an existing dictionary name.</span>
 
-<span class="sd">    :param file_path: Path to a dictionary file</span>
-<span class="sd">    :type file_path: str</span>
-<span class="sd">    :param dict_name: A unique dictionary name, used for reference.</span>
-<span class="sd">    :type dict_name: str</span>
-<span class="sd">    :return success: True if loaded successfully, False otherwise.</span>
+<span class="sd">    :param str file_path: path to a dictionary file</span>
+<span class="sd">    :param str dict_name: unique dictionary name, used for reference</span>
+<span class="sd">    :return: True if the dictionary loaded successfully, False otherwise</span>
 <span class="sd">    :rtype: bool</span>
+<span class="sd">    :raises ImportError: if nlpo3 is not installed</span>
 
 <span class="sd">    :See Also:</span>
-<span class="sd">        * \</span>
-<span class="sd">            https://github.com/PyThaiNLP/nlpo3</span>
+<span class="sd">        * https://github.com/PyThaiNLP/nlpo3</span>
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">nlpo3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict</span> <span class="k">as</span> <span class="n">nlpo3_load_dict</span>
@@ -216,23 +219,27 @@
     <span class="n">safe_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">parallel_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Break text into tokens.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into words with nlpO3.</span>
 
-<span class="sd">    Python binding for nlpO3. It is newmm engine in Rust.</span>
+<span class="sd">    This function is the Python binding for nlpO3, a Rust implementation</span>
+<span class="sd">    of the newmm engine.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str custom_dict: dictionary name, as assigned with load_dict(),\</span>
-<span class="sd">        defaults to pythainlp/corpus/common/words_th.txt</span>
-<span class="sd">    :param bool safe_mode: reduce chance for long processing time for long text\</span>
-<span class="sd">        with many ambiguous breaking points, defaults to False</span>
-<span class="sd">    :param bool parallel_mode: Use multithread mode, defaults to False</span>
-
-<span class="sd">    :return: list of tokens</span>
+<span class="sd">    :param str custom_dict: dictionary name, as assigned with</span>
+<span class="sd">        :func:`load_dict` (default: the dictionary from</span>
+<span class="sd">        ``pythainlp/corpus/words_th.txt``)</span>
+<span class="sd">    :param bool safe_mode: True to reduce the chance of long processing</span>
+<span class="sd">        time for long text with many ambiguous breaking points</span>
+<span class="sd">        (default: False)</span>
+<span class="sd">    :param bool parallel_mode: True to use multithread mode</span>
+<span class="sd">        (default: False)</span>
+<span class="sd">    :return: list of words</span>
 <span class="sd">    :rtype: list[str]</span>
+<span class="sd">    :raises ImportError: if nlpo3 is not installed</span>
 
 <span class="sd">    :See Also:</span>
-<span class="sd">        * \</span>
-<span class="sd">            https://github.com/PyThaiNLP/nlpo3</span>
+<span class="sd">        * https://github.com/PyThaiNLP/nlpo3</span>
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">nlpo3</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">nlpo3_segment</span>

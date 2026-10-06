@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.util &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.corpus.util &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,14 +114,16 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Tool for creating word lists</span>
-<span class="sd">codes are from Korakot Chaovavanich.</span>
+<span class="sd">"""</span>
+<span class="sd">Tools for creating word lists.</span>
+
+<span class="sd">The code is from Korakot Chaovavanich.</span>
 
 <span class="sd">:See also:</span>
-<span class="sd">    * `Facebook post \</span>
-<span class="sd">        &lt;https://www.facebook.com/groups/colab.thailand/permalink/1667821073393244&gt;`_</span>
-<span class="sd">    * `Google Colab \</span>
-<span class="sd">        &lt;https://colab.research.google.com/drive/19kY2jCHONuxmTJM0U8PIE_I5OK1rO-x_&gt;`_</span>
+<span class="sd">    * `Facebook post</span>
+<span class="sd">      &lt;https://www.facebook.com/groups/colab.thailand/permalink/1667821073393244&gt;`_</span>
+<span class="sd">    * `Google Colab</span>
+<span class="sd">      &lt;https://colab.research.google.com/drive/19kY2jCHONuxmTJM0U8PIE_I5OK1rO-x_&gt;`_</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -137,7 +140,13 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">index_pairs</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Return beginning and ending indexes of word pairs"""</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return beginning and ending indexes of word pairs.</span>
+
+<span class="sd">    :param list[str] words: list of words</span>
+<span class="sd">    :return: iterator of tuples of beginning and ending index of each word</span>
+<span class="sd">    :rtype: Iterator[tuple[int, int]]</span>
+<span class="sd">    """</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
@@ -150,13 +159,13 @@
     <span class="n">tokenize</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">training_data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Find words that do not work well with the `tokenize` function</span>
-<span class="sd">    for the provided `training_data`.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Find words that do not work well with a tokenize function.</span>
 
-<span class="sd">    :param Callable[[str], list[str]] tokenize: a tokenize function</span>
-<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
-<span class="sd">        as a training set</span>
-<span class="sd">    :return: words that do not work well with the `tokenize` function</span>
+<span class="sd">    :param Callable[[str], list[str]] tokenize: tokenize function</span>
+<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be</span>
+<span class="sd">        used as a training set</span>
+<span class="sd">    :return: words that do not work well with the tokenize function</span>
 <span class="sd">    :rtype: set[str]</span>
 <span class="sd">    """</span>
     <span class="n">right</span><span class="p">:</span> <span class="n">Counter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
@@ -190,19 +199,19 @@
     <span class="n">orig_words</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">training_data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Revise a set of words that could improve tokenization performance of</span>
-<span class="sd">    a dictionary-based `tokenize` function.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Revise a set of words to improve a dictionary-based tokenize function.</span>
 
-<span class="sd">    `orig_words` will be used as a base set for the dictionary.</span>
-<span class="sd">    Words that do not perform well with `training_data` will be removed.</span>
-<span class="sd">    The remaining words will be returned.</span>
+<span class="sd">    The function uses *orig_words* as a base set for the dictionary.</span>
+<span class="sd">    It removes words that do not perform well with *training_data* and</span>
+<span class="sd">    returns the remaining words.</span>
 
-<span class="sd">    :param Callable[[str], list[str]] tokenize: a tokenize function, can be\</span>
-<span class="sd">        any function that takes a string as input and returns a list[str]</span>
-<span class="sd">    :param Iterable[str] orig_words: words used by the tokenize function,\</span>
-<span class="sd">        will be used as a base for revision</span>
-<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
-<span class="sd">        as a training set</span>
+<span class="sd">    :param Callable[[str], list[str]] tokenize: tokenize function, which</span>
+<span class="sd">        can be any function that takes text and returns a list of words</span>
+<span class="sd">    :param Iterable[str] orig_words: words used by the tokenize function,</span>
+<span class="sd">        used as a base for the revision</span>
+<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be</span>
+<span class="sd">        used as a training set</span>
 <span class="sd">    :return: revised set of words with underperforming words removed</span>
 <span class="sd">    :rtype: set[str]</span>
 
@@ -213,14 +222,21 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tokenize.longest import segment  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; base_words = thai_words()  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; more_words = {  # doctest: +SKIP</span>
-<span class="sd">        ...     "ถวิล อุดล", "ทองอินทร์ ภูริพัฒน์",</span>
-<span class="sd">        ...     "เตียง ศิริขันธ์", "จำลอง ดาวเรือง",</span>
+<span class="sd">        ...     "ถวิล อุดล",</span>
+<span class="sd">        ...     "ทองอินทร์ ภูริพัฒน์",</span>
+<span class="sd">        ...     "เตียง ศิริขันธ์",</span>
+<span class="sd">        ...     "จำลอง ดาวเรือง",</span>
 <span class="sd">        ... }</span>
 <span class="sd">        &gt;&gt;&gt; base_words = base_words.union(more_words)  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; dict_trie = Trie(base_words)  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; tokenize = lambda text: segment(text, dict_trie)  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; training_data = [["word1", "word2"], ["word3", "word4"]]  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; revised_words = revise_wordset(tokenize, base_words, training_data)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; training_data = [</span>
+<span class="sd">        ...     ["word1", "word2"],</span>
+<span class="sd">        ...     ["word3", "word4"],</span>
+<span class="sd">        ... ]  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; revised_words = revise_wordset(</span>
+<span class="sd">        ...     tokenize, base_words, training_data</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">    """</span>
     <span class="n">bad_words</span> <span class="o">=</span> <span class="n">find_badwords</span><span class="p">(</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">training_data</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">orig_words</span><span class="p">)</span> <span class="o">-</span> <span class="n">bad_words</span></div>
@@ -232,16 +248,18 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">revise_newmm_default_wordset</span><span class="p">(</span>
     <span class="n">training_data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Revise a set of word that could improve tokenization performance of</span>
-<span class="sd">    `pythainlp.tokenize.newmm`, a dictionary-based tokenizer and a default</span>
-<span class="sd">    tokenizer for PyThaiNLP.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Revise the default word set to improve newmm tokenization.</span>
 
-<span class="sd">    Words from `pythainlp.corpus.thai_words()` will be used as a base set</span>
-<span class="sd">    for the dictionary. Words that do not perform well with `training_data`</span>
-<span class="sd">    will be removed. The remaining words will be returned.</span>
+<span class="sd">    newmm (:func:`pythainlp.tokenize.newmm.segment`) is a dictionary-based</span>
+<span class="sd">    tokenizer and the default tokenizer of PyThaiNLP.</span>
 
-<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be used\</span>
-<span class="sd">        as a training set</span>
+<span class="sd">    The function uses words from :func:`pythainlp.corpus.thai_words` as a</span>
+<span class="sd">    base set for the dictionary. It removes words that do not perform well</span>
+<span class="sd">    with *training_data* and returns the remaining words.</span>
+
+<span class="sd">    :param Iterable[Iterable[str]] training_data: tokenized text, to be</span>
+<span class="sd">        used as a training set</span>
 <span class="sd">    :return: revised set of words with underperforming words removed</span>
 <span class="sd">    :rtype: set[str]</span>
 <span class="sd">    """</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.braille.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.braille.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Thai braille conversion core functionality."""</span>
+<span class="sd">"""Core functions for converting Thai text to braille."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -263,19 +264,18 @@
     <span class="o">+</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">2"</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_v1</span>
 <span class="p">]</span>
-<span class="n">_vowel_patterns</span> <span class="o">+=</span> <span class="p">[</span>
-    <span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">",</span><span class="se">\\</span><span class="s2">1"</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_dict_2</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="p">]</span>
+<span class="n">_vowel_patterns</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"([ก-ฮ])"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">",</span><span class="se">\\</span><span class="s2">1"</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_dict_2</span><span class="p">]</span>
 <span class="n">_VOWELS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_vowel_patterns</span>
 <span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">replace_number</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Add number prefix if word starts with a digit.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add a number prefix if a word starts with a digit.</span>
 
-<span class="sd">    :param str word: Word to check</span>
-<span class="sd">    :return: Word with number prefix if applicable</span>
+<span class="sd">    :param str word: word to check</span>
+<span class="sd">    :return: word with a number prefix if it starts with a digit</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">word</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">"1234567890๐๑๒๓๔๕๖๗๘๙"</span><span class="p">:</span>
@@ -284,10 +284,11 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_replace_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Replace complex Thai vowel patterns for braille conversion.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Replace complex Thai vowel patterns for braille conversion.</span>
 
-<span class="sd">    :param str word: Word containing Thai vowels</span>
-<span class="sd">    :return: Word with vowels replaced for braille processing</span>
+<span class="sd">    :param str word: word containing Thai vowels</span>
+<span class="sd">    :return: word with vowels replaced for braille processing</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    """</span>
     <span class="k">for</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span> <span class="ow">in</span> <span class="n">_VOWELS</span><span class="p">:</span>
@@ -298,10 +299,11 @@
 <div class="viewcode-block" id="thai_word_braille">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.thai_word_braille">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thai_word_braille</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Convert a Thai word to braille representation.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Thai word to braille representation.</span>
 
 <span class="sd">    :param str word: Thai word to convert</span>
-<span class="sd">    :return: Braille representation of the word</span>
+<span class="sd">    :return: braille representation of the word</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -335,10 +337,11 @@
 <div class="viewcode-block" id="thai_text_braille">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.thai_text_braille">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thai_text_braille</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Convert Thai text to braille representation by word.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert Thai text to braille representation, word by word.</span>
 
 <span class="sd">    :param str text: Thai text to convert</span>
-<span class="sd">    :return: List of braille representations for each word</span>
+<span class="sd">    :return: list of braille representations, one per word</span>
 <span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
@@ -357,17 +360,20 @@
 <div class="viewcode-block" id="Braille">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.Braille">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Braille</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Braille pattern converter.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert braille dot patterns to Unicode braille characters.</span>
 
-<span class="sd">    Converts dot number patterns to Unicode braille characters.</span>
+<span class="sd">    :param data: braille dot patterns as a list or a string</span>
+<span class="sd">    :type data: Union[list[list[str]], list[str], str]</span>
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="Braille.__init__">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.Braille.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Initialize Braille converter.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the braille converter.</span>
 
-<span class="sd">        :param data: Braille dot patterns as list or string</span>
+<span class="sd">        :param data: braille dot patterns as a list or a string</span>
 <span class="sd">        :type data: Union[list[list[str]], list[str], str]</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inputdata</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
@@ -378,11 +384,11 @@
                     <span class="n">nested_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">nested_data</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">if</span> <span class="n">data</span> <span class="k">else</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">data</span> <span class="k">else</span> <span class="p">[]</span>
 
         <span class="c1"># International standard Braille mapping</span>
         <span class="c1"># Dots 1,2,3 = left column (top, middle, bottom)</span>
@@ -652,7 +658,8 @@
 <div class="viewcode-block" id="Braille.tobraille">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.Braille.tobraille">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">tobraille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Convert dot patterns to braille Unicode characters.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert dot patterns to braille Unicode characters.</span>
 
 <span class="sd">        :return: Unicode braille representation</span>
 <span class="sd">        :rtype: str</span>
@@ -666,19 +673,19 @@
                 <span class="k">if</span> <span class="n">pattern_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">:</span>
                     <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">pattern_str</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">result</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">pattern_str</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="s2">"list[str]"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pattern_str</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span></div>
+        <span class="n">pattern_str</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="s2">"list[str]"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pattern_str</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Braille.printbraille">
 <a class="viewcode-back" href="../../../api/braille.html#pythainlp.braille.Braille.printbraille">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">printbraille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Mirror dot patterns for physical braille printing.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Mirror dot patterns for physical braille printing.</span>
 
-<span class="sd">        International standard: swap 1↔4, 2↔5, 3↔6, 7↔8</span>
+<span class="sd">        Follow the international standard: swap dots 1↔4, 2↔5, 3↔6, 7↔8.</span>
 
-<span class="sd">        :return: Mirrored braille for printing</span>
+<span class="sd">        :return: mirrored braille for printing</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        """</span>
         <span class="n">mirror_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
@@ -700,12 +707,11 @@
                 <span class="n">mirrored_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">mirrored_sorted</span><span class="p">])</span>
             <span class="n">mirrored_patterns</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
             <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mirrored_patterns</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">mirrored</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">mirror_map</span><span class="p">[</span><span class="n">dot</span><span class="p">]</span> <span class="k">for</span> <span class="n">dot</span> <span class="ow">in</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"list[str]"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">mirrored_sorted</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">mirrored</span><span class="p">))</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">mirrored_sorted</span><span class="p">]</span></div>
+        <span class="n">mirrored</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">mirror_map</span><span class="p">[</span><span class="n">dot</span><span class="p">]</span> <span class="k">for</span> <span class="n">dot</span> <span class="ow">in</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"list[str]"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">mirrored_sorted</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">mirrored</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">mirrored_sorted</span><span class="p">]</span></div>
 </div>
 
 </pre></div>

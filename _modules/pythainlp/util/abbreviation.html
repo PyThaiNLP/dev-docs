@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.abbreviation &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.abbreviation &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Thai abbreviation tools"""</span>
+<span class="sd">"""Thai abbreviation tools."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -125,19 +126,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">abbreviation_to_full_text</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]:</span>
-<span class="w">    </span><span class="sd">"""Converts Thai text (with abbreviations) to full text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert Thai text with abbreviations to full text.</span>
 
 <span class="sd">    Uses KhamYo to handle abbreviations.</span>
 <span class="sd">    See more: `KhamYo &lt;https://github.com/wannaphong/KhamYo&gt;`_.</span>
 
-<span class="sd">    :param str text: Thai text</span>
-<span class="sd">    :param int top_k: Top K</span>
-<span class="sd">    :return: list of ``(full_text, cosine_similarity)`` tuples.</span>
+<span class="sd">    :param str text: Thai text with abbreviations</span>
+<span class="sd">    :param int top_k: number of top candidates to return</span>
+<span class="sd">    :return: list of ``(full_text, cosine_similarity)`` tuples</span>
 <span class="sd">    :rtype: list[tuple[str, Optional[float]]]</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from pythainlp.util import abbreviation_to_full_text  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.util import (</span>
+<span class="sd">        ...     abbreviation_to_full_text,</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; text = "รร.ของเราน่าอยู่"  # doctest: +SKIP</span>
 
@@ -155,7 +159,9 @@
             <span class="s2">" Install it with: pip install khamyo"</span>
             <span class="s2">" or pip install pythainlp[abbreviation]"</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]]],</span> <span class="n">_replace</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span>
+        <span class="s2">"list[tuple[str, Optional[float]]]"</span><span class="p">,</span> <span class="n">_replace</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">)</span>
+    <span class="p">)</span></div>
 
 </pre></div>
 

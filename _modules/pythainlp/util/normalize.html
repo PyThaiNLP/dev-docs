@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.normalize &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.normalize &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Text normalization"""</span>
+<span class="sd">"""Text normalization."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -183,19 +184,21 @@
 <div class="viewcode-block" id="remove_dangling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_dangling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_dangling</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove Thai non-base characters at the beginning of text and after spaces.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove Thai non-base characters at the beginning of text and after spaces.</span>
 
-<span class="sd">    This is a common "typo", especially for input field in a form,</span>
-<span class="sd">    as these non-base characters can be visually hidden from user</span>
-<span class="sd">    who may accidentally typed them in.</span>
+<span class="sd">    This is a common typo, especially in input fields of a form,</span>
+<span class="sd">    as these non-base characters can be visually hidden from the user</span>
+<span class="sd">    who may type them in accidentally.</span>
 
-<span class="sd">    A character to be removed should be both:</span>
+<span class="sd">    A character to be removed must meet both conditions:</span>
 
-<span class="sd">        * tone mark, above vowel, below vowel, or non-base sign AND</span>
-<span class="sd">        * located at the beginning of the text or after spaces</span>
+<span class="sd">        * it is a tone mark, above vowel, below vowel, or non-base sign</span>
+<span class="sd">        * it is at the beginning of the text or after spaces</span>
 
-<span class="sd">    :param str text: input text</span>
-<span class="sd">    :return: text without dangling Thai characters at the beginning and after spaces</span>
+<span class="sd">    :param str text: text to be normalized</span>
+<span class="sd">    :return: text without dangling Thai characters at the beginning</span>
+<span class="sd">        and after spaces</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -215,12 +218,13 @@
 <div class="viewcode-block" id="remove_dup_spaces">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_dup_spaces">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_dup_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove duplicate spaces. Replace multiple spaces with one space.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove duplicate spaces.</span>
 
-<span class="sd">    Multiple newline characters and empty lines will be replaced</span>
-<span class="sd">    with one newline character.</span>
+<span class="sd">    Replace multiple spaces with one space. Replace multiple newline</span>
+<span class="sd">    characters and empty lines with one newline character.</span>
 
-<span class="sd">    :param str text: input text</span>
+<span class="sd">    :param str text: text to be normalized</span>
 <span class="sd">    :return: text without duplicated spaces and newlines</span>
 <span class="sd">    :rtype: str</span>
 
@@ -241,7 +245,8 @@
 <div class="viewcode-block" id="remove_tonemark">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_tonemark">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_tonemark</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove all Thai tone marks from the text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove all Thai tone marks from text.</span>
 
 <span class="sd">    Thai script has four tone marks indicating four tones as follows:</span>
 
@@ -250,11 +255,10 @@
 <span class="sd">        * High tone (Thai: ไม้ตรี  _๊ )</span>
 <span class="sd">        * Rising tone (Thai: ไม้จัตวา _๋ )</span>
 
-<span class="sd">    Putting wrong tone mark is a common mistake in Thai writing.</span>
-<span class="sd">    By removing tone marks from the string, it could be used to</span>
-<span class="sd">    for a approximate string matching.</span>
+<span class="sd">    Using a wrong tone mark is a common mistake in Thai writing.</span>
+<span class="sd">    Text without tone marks can be used for approximate string matching.</span>
 
-<span class="sd">    :param str text: input text</span>
+<span class="sd">    :param str text: text to be normalized</span>
 <span class="sd">    :return: text without Thai tone marks</span>
 <span class="sd">    :rtype: str</span>
 
@@ -274,17 +278,18 @@
 <div class="viewcode-block" id="remove_zw">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_zw">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_zw</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove zero-width characters.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove zero-width characters.</span>
 
-<span class="sd">    These non-visible characters may cause unexpected result from the</span>
-<span class="sd">    user's point of view. Removing them can make string matching more robust.</span>
+<span class="sd">    These invisible characters may cause unexpected results from the</span>
+<span class="sd">    user's point of view. Removing them makes string matching more robust.</span>
 
 <span class="sd">    Characters to be removed:</span>
 
 <span class="sd">        * Zero-width space (ZWSP)</span>
-<span class="sd">        * Zero-width non-joiner (ZWJP)</span>
+<span class="sd">        * Zero-width non-joiner (ZWNJ)</span>
 
-<span class="sd">    :param str text: input text</span>
+<span class="sd">    :param str text: text to be normalized</span>
 <span class="sd">    :return: text without zero-width characters</span>
 <span class="sd">    :rtype: str</span>
 
@@ -305,14 +310,16 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_spaces_before_marks</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove spaces before Thai tone marks and non-base characters.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove spaces before Thai tone marks and non-base characters.</span>
 
 <span class="sd">    Spaces before tone marks, above vowels, below vowels, and other</span>
 <span class="sd">    non-base characters are often unintentional typos. This function</span>
 <span class="sd">    removes such spaces to normalize the text.</span>
 
-<span class="sd">    :param str text: input text</span>
-<span class="sd">    :return: text without spaces before Thai tone marks and non-base characters</span>
+<span class="sd">    :param str text: text to be normalized</span>
+<span class="sd">    :return: text without spaces before Thai tone marks and</span>
+<span class="sd">        non-base characters</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -327,9 +334,10 @@
 <div class="viewcode-block" id="reorder_vowels">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.reorder_vowels">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">reorder_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Reorder vowels and tone marks to the standard logical order/spelling.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Reorder vowels and tone marks to the standard logical order.</span>
 
-<span class="sd">    Characters in input text will be reordered/transformed,</span>
+<span class="sd">    This function reorders or transforms characters in text</span>
 <span class="sd">    according to these rules:</span>
 
 <span class="sd">        * Sara E + Sara E -&gt; Sara Ae</span>
@@ -337,7 +345,7 @@
 <span class="sd">        * tone mark + non-base vowel -&gt; non-base vowel + tone mark</span>
 <span class="sd">        * follow vowel + tone mark -&gt; tone mark + follow vowel</span>
 
-<span class="sd">    :param str text: input text</span>
+<span class="sd">    :param str text: text to be normalized</span>
 <span class="sd">    :return: text with vowels and tone marks in the standard logical order</span>
 <span class="sd">    :rtype: str</span>
 
@@ -359,12 +367,13 @@
 <div class="viewcode-block" id="remove_repeat_vowels">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.remove_repeat_vowels">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_repeat_vowels</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Remove repeating vowels, tone marks, and signs.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove repeating vowels, tone marks, and signs.</span>
 
-<span class="sd">    Calls reorder_vowels() first to ensure that</span>
-<span class="sd">    double Sara E will be converted to Sara Ae and not be removed.</span>
+<span class="sd">    This function calls :func:`reorder_vowels` first, so that</span>
+<span class="sd">    a double Sara E becomes Sara Ae and is not removed.</span>
 
-<span class="sd">    :param str text: input text</span>
+<span class="sd">    :param str text: text to be normalized</span>
 <span class="sd">    :return: text without repeating Thai vowels, tone marks, and signs</span>
 <span class="sd">    :rtype: str</span>
 
@@ -390,7 +399,10 @@
 <div class="viewcode-block" id="normalize">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.normalize">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Normalize and clean Thai text with normalizing rules as follows:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Normalize and clean Thai text.</span>
+
+<span class="sd">    This function applies these rules:</span>
 
 <span class="sd">        * Remove zero-width spaces</span>
 <span class="sd">        * Remove duplicate spaces</span>
@@ -400,17 +412,17 @@
 <span class="sd">        * Remove duplicate tone marks</span>
 <span class="sd">        * Remove dangling non-base characters at the beginning of text</span>
 
-<span class="sd">    normalize() simply call remove_zw(), remove_dup_spaces(),</span>
-<span class="sd">    remove_spaces_before_marks(), remove_repeat_vowels(), and</span>
-<span class="sd">    remove_dangling(), in that order.</span>
+<span class="sd">    This function calls :func:`remove_zw`, :func:`remove_dup_spaces`,</span>
+<span class="sd">    :func:`remove_spaces_before_marks`, :func:`remove_repeat_vowels`,</span>
+<span class="sd">    and :func:`remove_dangling`, in that order.</span>
 
-<span class="sd">    If a user wants to customize the selection or the order of rules</span>
-<span class="sd">    to be applied, they can choose to call those functions by themselves.</span>
+<span class="sd">    To customize the selection or the order of rules,</span>
+<span class="sd">    call those functions separately.</span>
 
-<span class="sd">    Note: for Unicode normalization, see unicodedata.normalize().</span>
+<span class="sd">    Note: for Unicode normalization, see :func:`unicodedata.normalize`.</span>
 
-<span class="sd">    :param str text: input text</span>
-<span class="sd">    :return: normalized text according to the rules</span>
+<span class="sd">    :param str text: text to be normalized</span>
+<span class="sd">    :return: normalized text</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -431,15 +443,31 @@
 
 
 
+<span class="n">_MAIYAMOK</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ๆ"</span>
+<span class="n">_RE_MAIYAMOK</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">_MAIYAMOK</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_split_maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Split Maiyamok that is attached to other text.</span>
+
+<span class="sd">    Examples of such text are "นกๆๆ", "นกๆ ๆ", and "นกๆคน".</span>
+<span class="sd">    """</span>
+    <span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">:</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">_RE_MAIYAMOK</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">token</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">expand_maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Expand Maiyamok.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Expand Maiyamok.</span>
 
 <span class="sd">    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word</span>
 <span class="sd">    repetition. This function preprocesses Thai text by replacing</span>
-<span class="sd">    Maiyamok with a word being repeated.</span>
+<span class="sd">    Maiyamok with the repeated word.</span>
 
-<span class="sd">    :param sent: sentence (list or string)</span>
-<span class="sd">    :type sent: Union[str, list[str]]</span>
+<span class="sd">    :param Union[str, list[str]] sent: sentence, as text or list of words</span>
 <span class="sd">    :return: list of words</span>
 <span class="sd">    :rtype: list[str]</span>
 
@@ -452,40 +480,16 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">sent</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
 
-    <span class="n">yamok</span> <span class="o">=</span> <span class="s2">"ๆ"</span>
-
-    <span class="c1"># Breaks Maiyamok that attached to others, e.g. "นกๆๆ", "นกๆ ๆ", "นกๆคน"</span>
-    <span class="n">re_yamok</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rf</span><span class="s2">"(</span><span class="si">{</span><span class="n">yamok</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-    <span class="n">temp_toks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">:</span>
-        <span class="n">toks</span> <span class="o">=</span> <span class="n">re_yamok</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-        <span class="n">toks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">toks</span><span class="p">))</span>  <span class="c1"># remove empty string ("")</span>
-        <span class="n">temp_toks</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span>
-    <span class="n">sent</span> <span class="o">=</span> <span class="n">temp_toks</span>
-    <span class="k">del</span> <span class="n">temp_toks</span>
-
     <span class="n">output_toks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">yamok_count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">len_sent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_sent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># do it backward</span>
-        <span class="k">if</span> <span class="n">yamok_count</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">len_sent</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">yamok</span><span class="p">:</span>
-                <span class="n">yamok_count</span> <span class="o">=</span> <span class="n">yamok_count</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">output_toks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if</span> <span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">yamok</span><span class="p">:</span>
-            <span class="n">yamok_count</span> <span class="o">=</span> <span class="n">yamok_count</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">yamok_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># remove space before yamok</span>
-                    <span class="k">continue</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># with preprocessing above, this should not happen</span>
-                    <span class="n">output_toks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">output_toks</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="p">(</span><span class="n">yamok_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-                <span class="n">yamok_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">_split_maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">)):</span>  <span class="c1"># do it backward</span>
+        <span class="k">if</span> <span class="n">tok</span> <span class="o">==</span> <span class="n">_MAIYAMOK</span><span class="p">:</span>
+            <span class="n">yamok_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">yamok_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output_toks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">tok</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>  <span class="c1"># drop space before Maiyamok</span>
+            <span class="n">output_toks</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">tok</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">yamok_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">yamok_count</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">return</span> <span class="n">output_toks</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
@@ -493,17 +497,17 @@
 <div class="viewcode-block" id="maiyamok">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.maiyamok">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">maiyamok</span><span class="p">(</span><span class="n">sent</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Expand Maiyamok.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Expand Maiyamok.</span>
 
 <span class="sd">    .. deprecated:: 5.0.5</span>
 <span class="sd">        Use :func:`expand_maiyamok` instead.</span>
 
 <span class="sd">    Maiyamok (ๆ) (Unicode U+0E46) is a Thai character indicating word</span>
 <span class="sd">    repetition. This function preprocesses Thai text by replacing</span>
-<span class="sd">    Maiyamok with a word being repeated.</span>
+<span class="sd">    Maiyamok with the repeated word.</span>
 
-<span class="sd">    :param sent: sentence (list or string)</span>
-<span class="sd">    :type sent: Union[str, list[str]]</span>
+<span class="sd">    :param Union[str, list[str]] sent: sentence, as text or list of words</span>
 <span class="sd">    :return: list of words</span>
 <span class="sd">    :rtype: list[str]</span>
 

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.profanity &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.profanity &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,9 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""</span>
-<span class="sd">Profanity detection for Thai language</span>
-<span class="sd">"""</span>
+<span class="sd">"""Profanity detection for Thai."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -132,12 +131,13 @@
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Check if the given text contains profanity words.</span>
+<span class="sd">    Check whether text contains profanity words.</span>
 
 <span class="sd">    :param str text: Thai text to check</span>
-<span class="sd">    :param set custom_words: additional profanity words to check (default: None)</span>
-<span class="sd">    :param str engine: tokenization engine (default: "newmm")</span>
-<span class="sd">    :return: True if text contains profanity, False otherwise</span>
+<span class="sd">    :param Optional[set[str]] custom_words: additional profanity words</span>
+<span class="sd">        (default is None)</span>
+<span class="sd">    :param str engine: word tokenization engine (default is *newmm*)</span>
+<span class="sd">    :return: True if the text contains profanity, False otherwise</span>
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
@@ -151,7 +151,9 @@
 <span class="sd">        True if the word is in the profanity list</span>
 
 <span class="sd">        &gt;&gt;&gt; # Add custom profanity words</span>
-<span class="sd">        &gt;&gt;&gt; print(contains_profanity("คำใหม่", custom_words={"คำใหม่"}))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     contains_profanity("คำใหม่", custom_words={"คำใหม่"})</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        True</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
@@ -169,11 +171,7 @@
 
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">custom_dict</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">profanity_set</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="k">return</span> <span class="kc">False</span></div>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">token</span> <span class="ow">in</span> <span class="n">profanity_set</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">)</span></div>
 
 
 
@@ -183,11 +181,12 @@
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Find all profanity words in the given text.</span>
+<span class="sd">    Find all profanity words in text.</span>
 
 <span class="sd">    :param str text: Thai text to check</span>
-<span class="sd">    :param set custom_words: additional profanity words to check (default: None)</span>
-<span class="sd">    :param str engine: tokenization engine (default: "newmm")</span>
+<span class="sd">    :param Optional[set[str]] custom_words: additional profanity words</span>
+<span class="sd">        (default is None)</span>
+<span class="sd">    :param str engine: word tokenization engine (default is *newmm*)</span>
 <span class="sd">    :return: list of profanity words found in the text</span>
 <span class="sd">    :rtype: list[str]</span>
 
@@ -198,11 +197,15 @@
 <span class="sd">        &gt;&gt;&gt; print(find_profanity("สวัสดีครับ"))  # doctest: +SKIP</span>
 <span class="sd">        []</span>
 
-<span class="sd">        &gt;&gt;&gt; print(find_profanity("text with profanity words"))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     find_profanity("text with profanity words")</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['profanity_word1', 'profanity_word2']</span>
 
 <span class="sd">        &gt;&gt;&gt; # Add custom profanity words</span>
-<span class="sd">        &gt;&gt;&gt; print(find_profanity("คำใหม่", custom_words={"คำใหม่"}))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     find_profanity("คำใหม่", custom_words={"คำใหม่"})</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['คำใหม่']</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
@@ -238,13 +241,15 @@
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Replace profanity words in the text with a replacement character.</span>
+<span class="sd">    Replace profanity words in text with a replacement character.</span>
 
 <span class="sd">    :param str text: Thai text to censor</span>
-<span class="sd">    :param str replacement: character to replace profanity with (default: "*")</span>
-<span class="sd">    :param set custom_words: additional profanity words to censor (default: None)</span>
-<span class="sd">    :param str engine: tokenization engine (default: "newmm")</span>
-<span class="sd">    :return: Text with profanity words censored</span>
+<span class="sd">    :param str replacement: character to replace profanity with</span>
+<span class="sd">        (default is ``"*"``)</span>
+<span class="sd">    :param Optional[set[str]] custom_words: additional profanity words</span>
+<span class="sd">        (default is None)</span>
+<span class="sd">    :param str engine: word tokenization engine (default is *newmm*)</span>
+<span class="sd">    :return: text with profanity words censored</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -254,11 +259,15 @@
 <span class="sd">        &gt;&gt;&gt; print(censor_profanity("สวัสดีครับ"))  # doctest: +SKIP</span>
 <span class="sd">        สวัสดีครับ</span>
 
-<span class="sd">        &gt;&gt;&gt; print(censor_profanity("text with profanity word"))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     censor_profanity("text with profanity word")</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        text with *** word</span>
 
 <span class="sd">        &gt;&gt;&gt; # Add custom profanity words</span>
-<span class="sd">        &gt;&gt;&gt; print(censor_profanity("คำใหม่", custom_words={"คำใหม่"}))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     censor_profanity("คำใหม่", custom_words={"คำใหม่"})</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ******</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.thai &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.thai &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,14 +114,14 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Check if it is Thai text"""</span>
+<span class="sd">"""Check whether text is Thai."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">MappingProxyType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">thai_above_vowels</span><span class="p">,</span>
@@ -135,6 +136,9 @@
     <span class="n">thai_vowels</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn_deprecation</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
 
 <span class="n">_DEFAULT_IGNORE_CHARS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
@@ -193,11 +197,11 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">is_thai_char</span><span class="p">(</span><span class="n">ch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check if a character is a Thai character.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check whether a character is a Thai character.</span>
 
-<span class="sd">    :param ch: input character</span>
-<span class="sd">    :type ch: str</span>
-<span class="sd">    :return: True if ch is a Thai character, otherwise False.</span>
+<span class="sd">    :param str ch: character to check</span>
+<span class="sd">    :return: True if the character is a Thai character, otherwise False</span>
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
@@ -209,22 +213,20 @@
 <span class="sd">        True</span>
 <span class="sd">    """</span>
     <span class="n">ch_val</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">_TH_FIRST_CHAR_ASCII</span> <span class="o">&lt;=</span> <span class="n">ch_val</span> <span class="o">&lt;=</span> <span class="n">_TH_LAST_CHAR_ASCII</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">_TH_FIRST_CHAR_ASCII</span> <span class="o">&lt;=</span> <span class="n">ch_val</span> <span class="o">&lt;=</span> <span class="n">_TH_LAST_CHAR_ASCII</span>
 
 
 <div class="viewcode-block" id="isthaichar">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.isthaichar">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">isthaichar</span><span class="p">(</span><span class="n">ch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check if a character is a Thai character.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check whether a character is a Thai character.</span>
 
 <span class="sd">    .. deprecated:: 5.3.2</span>
 <span class="sd">        Use :func:`is_thai_char` instead.</span>
 
-<span class="sd">    :param ch: input character</span>
-<span class="sd">    :type ch: str</span>
-<span class="sd">    :return: True if ch is a Thai character, otherwise False.</span>
+<span class="sd">    :param str ch: character to check</span>
+<span class="sd">    :return: True if the character is a Thai character, otherwise False</span>
 <span class="sd">    :rtype: bool</span>
 <span class="sd">    """</span>
     <span class="n">warn_deprecation</span><span class="p">(</span>
@@ -238,14 +240,12 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">is_thai</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check if every character in a string is a Thai character.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check whether every character in text is a Thai character.</span>
 
-<span class="sd">    :param text: input text</span>
-<span class="sd">    :type text: str</span>
-<span class="sd">    :param ignore_chars: characters to be ignored, defaults to "."</span>
-<span class="sd">    :type ignore_chars: str, optional</span>
-<span class="sd">    :return: True if every character in the input string is Thai,</span>
-<span class="sd">             otherwise False.</span>
+<span class="sd">    :param str text: text to check</span>
+<span class="sd">    :param str ignore_chars: characters to be ignored (default is ".")</span>
+<span class="sd">    :return: True if every character in the text is Thai, otherwise False</span>
 <span class="sd">    :rtype: bool</span>
 
 <span class="sd">    :Example:</span>
@@ -273,17 +273,15 @@
 <div class="viewcode-block" id="isthai">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.isthai">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">isthai</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check if every character in a string is a Thai character.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check whether every character in text is a Thai character.</span>
 
 <span class="sd">    .. deprecated:: 5.3.2</span>
 <span class="sd">        Use :func:`is_thai` instead.</span>
 
-<span class="sd">    :param text: input text</span>
-<span class="sd">    :type text: str</span>
-<span class="sd">    :param ignore_chars: characters to be ignored, defaults to "."</span>
-<span class="sd">    :type ignore_chars: str, optional</span>
-<span class="sd">    :return: True if every character in the input string is Thai,</span>
-<span class="sd">             otherwise False.</span>
+<span class="sd">    :param str text: text to check</span>
+<span class="sd">    :param str ignore_chars: characters to be ignored (default is ".")</span>
+<span class="sd">    :return: True if every character in the text is Thai, otherwise False</span>
 <span class="sd">    :rtype: bool</span>
 <span class="sd">    """</span>
     <span class="n">warn_deprecation</span><span class="p">(</span>
@@ -297,13 +295,12 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">count_thai</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_IGNORE_CHARS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Find proportion of Thai characters in a given text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculate the proportion of Thai characters in text.</span>
 
-<span class="sd">    :param text: input text</span>
-<span class="sd">    :type text: str</span>
-<span class="sd">    :param ignore_chars: characters to be ignored, defaults to whitespace,\\</span>
-<span class="sd">        digits, and punctuation marks.</span>
-<span class="sd">    :type ignore_chars: str, optional</span>
+<span class="sd">    :param str text: text to check</span>
+<span class="sd">    :param str ignore_chars: characters to be ignored</span>
+<span class="sd">        (default is whitespace, digits, and punctuation marks)</span>
 <span class="sd">    :return: proportion of Thai characters in the text (percentage)</span>
 <span class="sd">    :rtype: float</span>
 
@@ -345,16 +342,15 @@
 <div class="viewcode-block" id="countthai">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.countthai">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">countthai</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_IGNORE_CHARS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Find proportion of Thai characters in a given text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculate the proportion of Thai characters in text.</span>
 
 <span class="sd">    .. deprecated:: 5.3.2</span>
 <span class="sd">        Use :func:`count_thai` instead.</span>
 
-<span class="sd">    :param text: input text</span>
-<span class="sd">    :type text: str</span>
-<span class="sd">    :param ignore_chars: characters to be ignored, defaults to whitespace,\\</span>
-<span class="sd">        digits, and punctuation marks.</span>
-<span class="sd">    :type ignore_chars: str, optional</span>
+<span class="sd">    :param str text: text to check</span>
+<span class="sd">    :param str ignore_chars: characters to be ignored</span>
+<span class="sd">        (default is whitespace, digits, and punctuation marks)</span>
 <span class="sd">    :return: proportion of Thai characters in the text (percentage)</span>
 <span class="sd">    :rtype: float</span>
 <span class="sd">    """</span>
@@ -371,12 +367,14 @@
 <div class="viewcode-block" id="display_thai_char">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.display_thai_char">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">display_thai_char</span><span class="p">(</span><span class="n">ch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Prefix an underscore (_) to a high-position vowel or a tone mark,</span>
-<span class="sd">    to ease readability.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Prefix an underscore (_) to a high-position vowel or a tone mark.</span>
 
-<span class="sd">    :param ch: input character</span>
-<span class="sd">    :type ch: str</span>
-<span class="sd">    :return: "_" + ch</span>
+<span class="sd">    The underscore eases readability.</span>
+
+<span class="sd">    :param str ch: character to be displayed</span>
+<span class="sd">    :return: "_" + ch for a high-position vowel or a tone mark,</span>
+<span class="sd">        otherwise the character itself</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -392,26 +390,25 @@
     <span class="p">):</span>
         <span class="c1"># last condition is Sra Aum, Thanthakhat, Nikhahit, Yamakkan</span>
         <span class="k">return</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="n">ch</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">ch</span></div>
+    <span class="k">return</span> <span class="n">ch</span></div>
 
 
 
 <div class="viewcode-block" id="thai_word_tone_detector">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thai_word_tone_detector">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thai_word_tone_detector</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Thai tone detector for word.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detect the tone of each syllable in a Thai word.</span>
 
-<span class="sd">    It uses pythainlp.transliterate.pronunciate for converting word to\</span>
-<span class="sd">        pronunciation.</span>
+<span class="sd">    This function converts the word to pronunciation with</span>
+<span class="sd">    :func:`pythainlp.transliterate.pronunciate`.</span>
 
-<span class="sd">    :param word: Thai word, or None</span>
-<span class="sd">    :type word: str, optional</span>
-<span class="sd">    :return: list of tuples (syllable, tone) for each syllable.</span>
-<span class="sd">        Tone values: ``l`` (low), ``m`` (mid), ``h`` (high),</span>
-<span class="sd">        ``r`` (rising), ``f`` (falling), or empty string</span>
+<span class="sd">    :param Optional[str] word: Thai word, or None</span>
+<span class="sd">    :return: list of (syllable, tone) tuples, one for each syllable.</span>
+<span class="sd">        Tone values are ``l`` (low), ``m`` (mid), ``h`` (high),</span>
+<span class="sd">        ``r`` (rising), ``f`` (falling), or an empty string</span>
 <span class="sd">        if it cannot be detected.</span>
-<span class="sd">        Returns ``[]`` if word is None or empty.</span>
+<span class="sd">        Return ``[]`` if the word is None or empty.</span>
 <span class="sd">    :rtype: list[tuple[str, str]]</span>
 
 <span class="sd">    :Example:</span>
@@ -435,87 +432,112 @@
 
 
 
+<span class="c1"># Character types for count_thai_chars(), checked in this order.</span>
+<span class="n">_CHAR_TYPES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s2">"lead_vowels"</span><span class="p">,</span> <span class="n">thai_lead_vowels</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"follow_vowels"</span><span class="p">,</span> <span class="n">thai_follow_vowels</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"above_vowels"</span><span class="p">,</span> <span class="n">thai_above_vowels</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"below_vowels"</span><span class="p">,</span> <span class="n">thai_below_vowels</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"consonants"</span><span class="p">,</span> <span class="n">thai_consonants</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"tonemarks"</span><span class="p">,</span> <span class="n">thai_tonemarks</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"signs"</span><span class="p">,</span> <span class="n">thai_signs</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"thai_digits"</span><span class="p">,</span> <span class="n">thai_digits</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"punctuations"</span><span class="p">,</span> <span class="n">thai_punctuations</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">_COUNT_KEYS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"vowels"</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">_CHAR_TYPES</span><span class="p">),</span>
+    <span class="s2">"non_thai"</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_char_type_table</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Map each character to its type; the first matching type wins."""</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">chars</span> <span class="ow">in</span> <span class="n">_CHAR_TYPES</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span>
+
+
+<span class="n">_CHAR_TYPE_TABLE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_char_type_table</span><span class="p">()</span>
+<span class="n">_VOWEL_SET</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">thai_vowels</span><span class="p">)</span>
+<span class="c1"># Below this length, a direct loop is faster than counting with Counter.</span>
+<span class="n">_COUNTER_MIN_LEN</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_char_type</span><span class="p">(</span><span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return the name of the first character type containing ``char``."""</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">chars</span> <span class="ow">in</span> <span class="n">_CHAR_TYPES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="s2">"non_thai"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_count_iterable</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Count the items of a non-string iterable, as ``str`` containment."""</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_vowels</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="s2">"vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">_char_type</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counts</span>
+
+
 <div class="viewcode-block" id="count_thai_chars">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.count_thai_chars">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">count_thai_chars</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Count Thai characters by type.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Count Thai characters by type.</span>
 
-<span class="sd">    Count Thai characters by type: consonants, vowels, lead_vowels,</span>
-<span class="sd">    follow_vowels, above_vowels, below_vowels, tonemarks, signs,</span>
-<span class="sd">    thai_digits, punctuations, and non_thai.</span>
+<span class="sd">    The types are consonants, vowels, lead_vowels, follow_vowels,</span>
+<span class="sd">    above_vowels, below_vowels, tonemarks, signs, thai_digits,</span>
+<span class="sd">    punctuations, and non_thai.</span>
 
-<span class="sd">    :param str text: input text</span>
-<span class="sd">    :return: dict with counts of Thai characters by type</span>
+<span class="sd">    :param str text: text to be counted</span>
+<span class="sd">    :return: dictionary of character counts by type</span>
 <span class="sd">    :rtype: dict[str, int]</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.util import count_thai_chars</span>
 <span class="sd">        &gt;&gt;&gt; count_thai_chars("ทดสอบภาษาไทย")  # doctest: +NORMALIZE_WHITESPACE</span>
-<span class="sd">        {</span>
-<span class="sd">        'vowels': 3,</span>
-<span class="sd">        'lead_vowels': 1,</span>
-<span class="sd">        'follow_vowels': 2,</span>
-<span class="sd">        'above_vowels': 0,</span>
-<span class="sd">        'below_vowels': 0,</span>
-<span class="sd">        'consonants': 9,</span>
-<span class="sd">        'tonemarks': 0,</span>
-<span class="sd">        'signs': 0,</span>
-<span class="sd">        'thai_digits': 0,</span>
-<span class="sd">        'punctuations': 0,</span>
-<span class="sd">        'non_thai': 0</span>
-<span class="sd">        }</span>
+<span class="sd">        {'vowels': 3, 'lead_vowels': 1, 'follow_vowels': 2,</span>
+<span class="sd">        'above_vowels': 0, 'below_vowels': 0, 'consonants': 9,</span>
+<span class="sd">        'tonemarks': 0, 'signs': 0, 'thai_digits': 0,</span>
+<span class="sd">        'punctuations': 0, 'non_thai': 0}</span>
 <span class="sd">    """</span>
-    <span class="n">_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"vowels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"lead_vowels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"follow_vowels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"above_vowels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"below_vowels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"consonants"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"tonemarks"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"signs"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"thai_digits"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"punctuations"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"non_thai"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_vowels</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_lead_vowels</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"lead_vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_follow_vowels</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"follow_vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_above_vowels</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"above_vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_below_vowels</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"below_vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"consonants"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"tonemarks"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_signs</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"signs"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_digits</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"thai_digits"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">thai_punctuations</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"punctuations"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="s2">"non_thai"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">_dict</span></div>
+    <span class="n">counts</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">_COUNT_KEYS</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Tolerate non-str iterables.</span>
+        <span class="k">return</span> <span class="n">_count_iterable</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>  <span class="c1"># type: ignore[unreachable]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_COUNTER_MIN_LEN</span><span class="p">:</span>
+        <span class="n">type_of</span> <span class="o">=</span> <span class="n">_CHAR_TYPE_TABLE</span><span class="o">.</span><span class="n">get</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">type_of</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">"non_thai"</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">_VOWEL_SET</span><span class="p">:</span>
+                <span class="n">counts</span><span class="p">[</span><span class="s2">"vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">counts</span>
+    <span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">_VOWEL_SET</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="s2">"vowels"</span><span class="p">]</span> <span class="o">+=</span> <span class="n">num</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">_CHAR_TYPE_TABLE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s2">"non_thai"</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">counts</span></div>
 
 
 
 <div class="viewcode-block" id="analyze_thai_text">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.analyze_thai_text">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_thai_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Analyze Thai text and return a character count by descriptive name.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Count characters in Thai text by descriptive name.</span>
 
 <span class="sd">    Process the text character by character and map each Thai character</span>
-<span class="sd">    to its descriptive name or to itself (for consonants and digits).</span>
+<span class="sd">    to its descriptive name, or to itself (for consonants and digits).</span>
 
-<span class="sd">    :param str text: Thai text string to be analyzed</span>
-<span class="sd">    :return: dict mapping character names to their count in the text</span>
+<span class="sd">    :param str text: Thai text to be analyzed</span>
+<span class="sd">    :return: dictionary mapping character names to their counts</span>
 <span class="sd">    :rtype: dict[str, int]</span>
 
 <span class="sd">    :Example:</span>
@@ -529,15 +551,9 @@
 <span class="sd">    """</span>
     <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-    <span class="c1"># Iterate over each character in the input string</span>
     <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
-        <span class="c1"># Check if the character is in our mapping</span>
-        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">_THAI_CHAR_NAMES</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">_THAI_CHAR_NAMES</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
-            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># If the character is not a known Thai character, classify it as character</span>
-            <span class="n">results</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Unknown characters are counted as themselves.</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">_THAI_CHAR_NAMES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">char</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 

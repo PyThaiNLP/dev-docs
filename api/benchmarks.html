@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.benchmarks &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../_static/documentation_options.js?v=48730577"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -175,19 +176,17 @@
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.word_tokenization.</span></span><span class="sig-name descname"><span class="pre">compute_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TokenizationStat</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#compute_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_tokenization.compute_stats" title="Link to this definition"></a></dt>
 <dd><p>Compute statistics for tokenization quality.</p>
 <p>These statistics include:</p>
-<dl class="simple">
-<dt><strong>Character-level</strong>:</dt><dd><p>True Positive, False Positive, True Negative, False Negative</p>
-</dd>
-<dt><strong>Word-level</strong>:</dt><dd><p>Precision, Recall, and F1</p>
-</dd>
-<dt><strong>Global</strong>:</dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1}</span></code> sequence indicating whether each word
-is tokenized correctly.</p>
-</dd>
-</dl>
+<ul class="simple">
+<li><p><em>Character-level</em> - true positive, false positive, true negative,
+false negative</p></li>
+<li><p><em>Word-level</em> - precision, recall, and F1</p></li>
+<li><p><em>Global</em> - a <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1}</span></code> sequence indicating whether each word
+is tokenized correctly</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ref_sample</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – ground truth sample</p></li>
+<li><p><strong>ref_sample</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference (ground truth) sample</p></li>
 <li><p><strong>raw_sample</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – sample to evaluate</p></li>
 </ul>
 </dd>
@@ -204,13 +203,13 @@ is tokenized correctly.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.word_tokenization.benchmark">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.word_tokenization.</span></span><span class="sig-name descname"><span class="pre">benchmark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#benchmark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_tokenization.benchmark" title="Link to this definition"></a></dt>
-<dd><p>Performance benchmarking for samples.</p>
+<dd><p>Benchmark tokenized samples against reference samples.</p>
 <p>See <a class="reference internal" href="#pythainlp.benchmarks.word_tokenization.compute_stats" title="pythainlp.benchmarks.word_tokenization.compute_stats"><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.benchmarks.word_tokenization.compute_stats()</span></code></a>
 for computed metrics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ref_samples</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – ground truth</p></li>
+<li><p><strong>ref_samples</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – reference (ground truth) samples</p></li>
 <li><p><strong>samples</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – samples to evaluate</p></li>
 </ul>
 </dd>
@@ -231,8 +230,8 @@ for computed metrics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text to be preprocessed</p></li>
-<li><p><strong>remove_space</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – whether to remove white space</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text to preprocess</p></li>
+<li><p><strong>remove_space</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – remove white space</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -248,24 +247,26 @@ for computed metrics.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.evaluate_word_tokenization">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">evaluate_word_tokenization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TokenizationScore</span></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#evaluate_word_tokenization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.evaluate_word_tokenization" title="Link to this definition"></a></dt>
-<dd><p>Evaluate word tokenization performance at character and word levels.</p>
-<p>Computes character-level F1 score and word-level F1 score between
-the ground truth (<code class="docutils literal notranslate"><span class="pre">x_true</span></code>) and predicted segmentation (<code class="docutils literal notranslate"><span class="pre">x_pred</span></code>).
-Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
-<p>Supports multiple input representations:</p>
+<dd><p>Evaluate word tokenization at character and word levels.</p>
+<p>Compute the character-level F1 score and the word-level F1 score
+between the reference (<code class="docutils literal notranslate"><span class="pre">x_true</span></code>) and predicted (<code class="docutils literal notranslate"><span class="pre">x_pred</span></code>)
+segmentation. Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
+<p>Supported input representations:</p>
 <ul class="simple">
-<li><p>Strings delimited by <code class="docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;สวัสดี|ประเทศไทย&quot;</span></code>)</p></li>
-<li><p>Single-element lists of delimited strings (e.g., <code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี|ประเทศไทย&quot;]</span></code>)</p></li>
-<li><p>2D lists of strings (e.g., <code class="docutils literal notranslate"><span class="pre">[[&quot;สวัสดี|&quot;],</span> <span class="pre">[&quot;ประเทศไทย&quot;]]</span></code>)</p></li>
-<li><p>1D lists of token strings with <code class="docutils literal notranslate"><span class="pre">sep=&quot;|&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี&quot;,</span> <span class="pre">&quot;ประเทศไทย&quot;]</span></code>)</p></li>
+<li><p>strings delimited by <code class="docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code>, such as <code class="docutils literal notranslate"><span class="pre">&quot;สวัสดี|ประเทศไทย&quot;</span></code></p></li>
+<li><p>single-element lists of delimited strings, such as
+<code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี|ประเทศไทย&quot;]</span></code></p></li>
+<li><p>2D lists of strings, such as <code class="docutils literal notranslate"><span class="pre">[[&quot;สวัสดี|&quot;],</span> <span class="pre">[&quot;ประเทศไทย&quot;]]</span></code></p></li>
+<li><p>1D lists of tokens with <code class="docutils literal notranslate"><span class="pre">sep=&quot;|&quot;</span></code>, such as
+<code class="docutils literal notranslate"><span class="pre">[&quot;สวัสดี&quot;,</span> <span class="pre">&quot;ประเทศไทย&quot;]</span></code></p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – ground truth text or tokens</p></li>
+<li><p><strong>x_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – reference (ground truth) text or tokens</p></li>
 <li><p><strong>x_pred</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – predicted text or tokens</p></li>
-<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – separator to join sub-elements when input is a list of
-tokens without boundaries (default: <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – separator to join sub-elements when the input is a
+list of tokens without boundaries (default is <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -291,15 +292,15 @@ tokens without boundaries (default: <code class="docutils literal notranslate"><
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.word_eval_function">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">word_eval_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#word_eval_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_eval_function" title="Link to this definition"></a></dt>
-<dd><p>Compute word-level F1 score for tokenized word lists.</p>
-<p>Calculates the F1 score based on word boundary span overlap between
-the ground truth word tokens and predicted word tokens.
+<dd><p>Compute the word-level F1 score for lists of words.</p>
+<p>Calculate the F1 score based on word boundary span overlap between
+the reference (ground truth) words and the predicted words.
 Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>train</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – ground truth word tokens</p></li>
-<li><p><strong>test</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – predicted word tokens</p></li>
+<li><p><strong>train</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – reference (ground truth) list of words</p></li>
+<li><p><strong>test</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – predicted list of words</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -314,14 +315,14 @@ Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pr
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.char_eval_function">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">char_eval_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/word_tokenization.html#char_eval_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.char_eval_function" title="Link to this definition"></a></dt>
-<dd><p>Compute character-level F1 score for boundary indicators.</p>
-<p>Calculates precision, recall, and binary F1 score for boundary (1)
-labels between true and predicted character boundary sequences.
+<dd><p>Compute the character-level F1 score for boundary indicators.</p>
+<p>Calculate precision, recall, and binary F1 score for boundary (1)
+labels between reference and predicted character boundary sequences.
 Ported from SEFR CUT (<code class="docutils literal notranslate"><span class="pre">sefr_cut.evaluation</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – ground truth binary boundary sequence</p></li>
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – reference (ground truth) binary boundary sequence</p></li>
 <li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – predicted binary boundary sequence</p></li>
 </ul>
 </dd>
@@ -367,22 +368,22 @@ PyThaiNLP before calculating the score.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>references</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – reference translations.
-Can be:
-- A list of strings (one reference per hypothesis)
-- A list of lists of strings (multiple references per hypothesis)</p></li>
+<li><p><strong>references</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – reference
+translations, either a list of strings (one reference per
+hypothesis) or a list of lists of strings (multiple references
+per hypothesis)</p></li>
 <li><p><strong>hypotheses</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – hypothesis translations to evaluate</p></li>
-<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine to use (default: “newmm”).
-See <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines.</p></li>
-<li><p><strong>lowercase</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – whether to lowercase text before evaluation
-(default: False)</p></li>
-<li><p><strong>max_ngram</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – maximum n-gram order (default: 4)</p></li>
-<li><p><strong>smooth</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – whether to use smoothing for zero counts
-(default: True)</p></li>
+<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to tokenize text with. See
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines
+(default is <code class="docutils literal notranslate"><span class="pre">&quot;newmm&quot;</span></code>)</p></li>
+<li><p><strong>lowercase</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – lowercase text before evaluation
+(default is False)</p></li>
+<li><p><strong>max_ngram</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – maximum n-gram order (default is 4)</p></li>
+<li><p><strong>smooth</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – smooth zero counts (default is True)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a <code class="xref py py-class docutils literal notranslate"><span class="pre">BleuScore</span></code> typed dict with <code class="docutils literal notranslate"><span class="pre">'bleu'</span></code>,
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BleuScore</span></code> typed dict with <code class="docutils literal notranslate"><span class="pre">'bleu'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">'precisions'</span></code>, <code class="docutils literal notranslate"><span class="pre">'bp'</span></code>, <code class="docutils literal notranslate"><span class="pre">'length_ratio'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hyp_length'</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">'ref_length'</span></code>. <code class="docutils literal notranslate"><span class="pre">'precisions'</span></code> is <code class="docutils literal notranslate"><span class="pre">list[float]</span></code>;
 <code class="docutils literal notranslate"><span class="pre">'hyp_length'</span></code> and <code class="docutils literal notranslate"><span class="pre">'ref_length'</span></code> are <code class="docutils literal notranslate"><span class="pre">int</span></code>; all other
@@ -391,8 +392,12 @@ values are <code class="docutils literal notranslate"><span class="pre">float</s
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>BleuScore</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">bleu_score</span>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – if the number of references and the number of
+hypotheses differ</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">bleu_score</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">references</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"สวัสดีครับ วันนี้อากาศดีมาก"</span><span class="p">]</span>
@@ -445,24 +450,28 @@ values are <code class="docutils literal notranslate"><span class="pre">float</s
 <p>This is a pure Python implementation of ROUGE (Recall-Oriented
 Understudy for Gisting Evaluation) metric that automatically
 tokenizes Thai text using PyThaiNLP.</p>
-<p>Supported ROUGE types:
-- rouge1: unigram-based scoring
-- rouge2: bigram-based scoring
-- rougeL: longest common subsequence-based scoring</p>
+<p>Supported ROUGE types:</p>
+<ul class="simple">
+<li><p><em>rouge1</em> - unigram-based scoring</p></li>
+<li><p><em>rouge2</em> - bigram-based scoring</p></li>
+<li><p><em>rougeL</em> - longest common subsequence-based scoring</p></li>
+</ul>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference text</p></li>
 <li><p><strong>hypothesis</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – hypothesis text to evaluate</p></li>
-<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine to use (default: “newmm”).
-See <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines.</p></li>
-<li><p><strong>rouge_types</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – list of ROUGE types to calculate.
-Default is [“rouge1”, “rouge2”, “rougeL”]</p></li>
+<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to tokenize text with. See
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines
+(default is <code class="docutils literal notranslate"><span class="pre">&quot;newmm&quot;</span></code>)</p></li>
+<li><p><strong>rouge_types</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – ROUGE types to calculate
+(default is <code class="docutils literal notranslate"><span class="pre">[&quot;rouge1&quot;,</span> <span class="pre">&quot;rouge2&quot;,</span> <span class="pre">&quot;rougeL&quot;]</span></code>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>dictionary mapping ROUGE type to a <code class="xref py py-class docutils literal notranslate"><span class="pre">RougeScore</span></code> typed dict
-with <code class="docutils literal notranslate"><span class="pre">'precision'</span></code>, <code class="docutils literal notranslate"><span class="pre">'recall'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'fmeasure'</span></code> keys.</p>
+<dd class="field-even"><p>dictionary mapping each ROUGE type to a <code class="xref py py-class docutils literal notranslate"><span class="pre">RougeScore</span></code>
+typed dict with <code class="docutils literal notranslate"><span class="pre">'precision'</span></code>, <code class="docutils literal notranslate"><span class="pre">'recall'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'fmeasure'</span></code>
+keys</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, RougeScore]</p>
@@ -504,29 +513,32 @@ with <code class="docutils literal notranslate"><span class="pre">'precision'</s
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.word_error_rate">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">word_error_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'newmm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/metrics.html#word_error_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.word_error_rate" title="Link to this definition"></a></dt>
-<dd><p>Calculate Word Error Rate (WER) for Thai text with automatic tokenization.</p>
-<p>Word Error Rate is a common metric for evaluating speech recognition
+<dd><p>Calculate word error rate (WER) for Thai text.</p>
+<p>Word error rate is a common metric for evaluating speech recognition
 and machine translation systems. It measures the minimum number of
 word-level edits (insertions, deletions, substitutions) needed to
 transform the hypothesis into the reference, normalized by the
 reference length.</p>
 <p>WER = (S + D + I) / N</p>
-<p>where:
-- S = number of substitutions
-- D = number of deletions
-- I = number of insertions
-- N = number of words in reference</p>
+<p>where:</p>
+<ul class="simple">
+<li><p>S = number of substitutions</p></li>
+<li><p>D = number of deletions</p></li>
+<li><p>I = number of insertions</p></li>
+<li><p>N = number of words in the reference</p></li>
+</ul>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – reference text</p></li>
 <li><p><strong>hypothesis</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – hypothesis text to evaluate</p></li>
-<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – tokenization engine to use (default: “newmm”).
-See <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines.</p></li>
+<li><p><strong>tokenize</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to tokenize text with. See
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.tokenize.word_tokenize()</span></code> for available engines
+(default is <code class="docutils literal notranslate"><span class="pre">&quot;newmm&quot;</span></code>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>word error rate as a float (0.0 = perfect, &gt;1.0 = very poor)</p>
+<dd class="field-even"><p>word error rate (0.0 is perfect, above 1.0 is very poor)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
@@ -562,18 +574,20 @@ See <code class="xref py py-func docutils literal notranslate"><span class="pre"
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.benchmarks.character_error_rate">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.benchmarks.</span></span><span class="sig-name descname"><span class="pre">character_error_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/benchmarks/metrics.html#character_error_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.benchmarks.character_error_rate" title="Link to this definition"></a></dt>
-<dd><p>Calculate Character Error Rate (CER) for Thai text.</p>
-<p>Character Error Rate is a metric for evaluating speech recognition
+<dd><p>Calculate character error rate (CER) for Thai text.</p>
+<p>Character error rate is a metric for evaluating speech recognition
 and optical character recognition (OCR) systems. It measures the
 minimum number of character-level edits (insertions, deletions,
 substitutions) needed to transform the hypothesis into the reference,
 normalized by the reference length.</p>
 <p>CER = (S + D + I) / N</p>
-<p>where:
-- S = number of substitutions
-- D = number of deletions
-- I = number of insertions
-- N = number of characters in reference</p>
+<p>where:</p>
+<ul class="simple">
+<li><p>S = number of substitutions</p></li>
+<li><p>D = number of deletions</p></li>
+<li><p>I = number of insertions</p></li>
+<li><p>N = number of characters in the reference</p></li>
+</ul>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -582,7 +596,7 @@ normalized by the reference length.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>character error rate as a float (0.0 = perfect, &gt;1.0 = very poor)</p>
+<dd class="field-even"><p>character error rate (0.0 is perfect, above 1.0 is very poor)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>

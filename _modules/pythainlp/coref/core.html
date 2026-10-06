@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.coref.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.coref.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Coreference resolution for Thai text."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
@@ -129,22 +132,26 @@
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"han-coref-v1.0"</span><span class="p">,</span>
     <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"cpu"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CorefResult</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Coreference Resolution</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Resolve coreferences in texts.</span>
 
-<span class="sd">    :param Union[str, list[str]] texts: list of texts to apply coreference resolution to</span>
-<span class="sd">    :param str model_name: coreference resolution model</span>
-<span class="sd">    :param str device: device for running coreference resolution model on\</span>
+<span class="sd">    :param Union[str, list[str]] texts: text, or list of texts, to be</span>
+<span class="sd">        resolved</span>
+<span class="sd">    :param str model_name: model to use for coreference resolution.</span>
+<span class="sd">        Options are:</span>
+
+<span class="sd">        * *han-coref-v1.0* - Han-Coref: Thai coreference resolution</span>
+<span class="sd">          by PyThaiNLP v1.0 (default)</span>
+<span class="sd">    :param str device: device to run the model on</span>
 <span class="sd">        ("cpu", "cuda", and others)</span>
-<span class="sd">    :return: List of texts with coreference resolution</span>
+<span class="sd">    :return: list of results with coreference clusters, one per text</span>
 <span class="sd">    :rtype: list[CorefResult]</span>
-
-<span class="sd">    :Options for model_name:</span>
-<span class="sd">        * *han-coref-v1.0* - (default) Han-Coref: Thai coreference resolution\</span>
-<span class="sd">            by PyThaiNLP v1.0</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from pythainlp.coref import coreference_resolution  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.coref import (</span>
+<span class="sd">        ...     coreference_resolution,</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; print(  # doctest: +SKIP</span>
 <span class="sd">        ...     coreference_resolution(</span>
@@ -168,7 +175,7 @@
 
     <span class="n">model</span> <span class="o">=</span> <span class="n">_MODEL_CACHE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_key</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">CorefResult</span><span class="p">],</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"list[CorefResult]"</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="p">[</span>
         <span class="n">CorefResult</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">clusters_string</span><span class="o">=</span><span class="p">[],</span> <span class="n">clusters</span><span class="o">=</span><span class="p">[])</span>

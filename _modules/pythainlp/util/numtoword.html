@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.numtoword &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.numtoword &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,15 +114,18 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Convert number value to Thai read out</span>
+<span class="sd">"""</span>
+<span class="sd">Convert numbers to Thai text read out.</span>
 
-<span class="sd">Adapted from</span>
-<span class="sd">https://justmindthought.blogspot.com/2012/12/code-php.html</span>
-<span class="sd">https://suksit.com/post/writing-bahttext-in-php/</span>
+<span class="sd">Adapted from:</span>
+
+<span class="sd">* https://justmindthought.blogspot.com/2012/12/code-php.html</span>
+<span class="sd">* https://suksit.com/post/writing-bahttext-in-php/</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bahttext"</span><span class="p">,</span> <span class="s2">"num_to_thaiword"</span><span class="p">,</span> <span class="s2">"num_to_thaiword_float"</span><span class="p">]</span>
@@ -157,15 +161,17 @@
 <div class="viewcode-block" id="bahttext">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.bahttext">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bahttext</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Converts a number to Thai text and adds</span>
-<span class="sd">    a suffix "บาท" (Baht).</span>
-<span class="sd">    The precision will be fixed at two decimal places (0.00)</span>
-<span class="sd">    to fit "สตางค์" (Satang) unit.</span>
-<span class="sd">    This function works similarly to the ``BAHTTEXT`` function in Microsoft Excel.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a number to Thai text in Baht currency format.</span>
 
-<span class="sd">    :param float number: number to be converted into Thai Baht currency format</span>
-<span class="sd">    :return: text representing the amount of money in the format</span>
-<span class="sd">             of Thai currency</span>
+<span class="sd">    Add the suffix "บาท" (Baht). The precision is fixed at two decimal</span>
+<span class="sd">    places (0.00) to fit the "สตางค์" (Satang) unit.</span>
+<span class="sd">    This function works similarly to the ``BAHTTEXT`` function in</span>
+<span class="sd">    Microsoft Excel.</span>
+
+<span class="sd">    :param float number: number to be converted</span>
+<span class="sd">    :return: text representing the amount of money in Thai currency</span>
+<span class="sd">        format</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    :raises TypeError: if *number* is not a numeric type</span>
 
@@ -208,7 +214,8 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_num_to_thaiword_block</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Convert a positive integer &lt; 1,000,000 to Thai text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a positive integer &lt; 1,000,000 to Thai text.</span>
 
 <span class="sd">    This is the core logic for a single block of up to 6 digits.</span>
 <span class="sd">    """</span>
@@ -234,9 +241,10 @@
 <div class="viewcode-block" id="num_to_thaiword">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.num_to_thaiword">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">num_to_thaiword</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Converts a number to Thai text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert an integer to Thai text.</span>
 
-<span class="sd">    :param int number: an integer number to be converted to Thai text</span>
+<span class="sd">    :param Optional[int] number: integer to be converted</span>
 <span class="sd">    :return: text representing the number in Thai</span>
 <span class="sd">    :rtype: str</span>
 
@@ -283,19 +291,40 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_expand_exponent</span><span class="p">(</span><span class="n">num_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Rewrite scientific notation (such as "1e-05") as a decimal string."""</span>
+    <span class="k">if</span> <span class="s2">"e"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">num_str</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">num_str</span>
+
+    <span class="n">mantissa</span><span class="p">,</span> <span class="n">exp_str</span> <span class="o">=</span> <span class="n">num_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"e"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">mant_int</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mant_frac</span> <span class="o">=</span> <span class="n">mantissa</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+    <span class="n">digits</span> <span class="o">=</span> <span class="n">mant_int</span> <span class="o">+</span> <span class="n">mant_frac</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exp_str</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">mant_frac</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shift</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">digits</span> <span class="o">+</span> <span class="p">(</span><span class="s2">"0"</span> <span class="o">*</span> <span class="n">shift</span><span class="p">)</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">digits</span><span class="p">[:</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"."</span> <span class="o">+</span> <span class="n">digits</span><span class="p">[</span><span class="n">pos</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="s2">"0."</span> <span class="o">+</span> <span class="p">(</span><span class="s2">"0"</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">pos</span><span class="p">))</span> <span class="o">+</span> <span class="n">digits</span>
+
+
 <div class="viewcode-block" id="num_to_thaiword_float">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.num_to_thaiword_float">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">num_to_thaiword_float</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Converts a floating-point number to Thai text.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a floating-point number to Thai text.</span>
 
-<span class="sd">    The integer part is converted using :func:`num_to_thaiword`.</span>
-<span class="sd">    The decimal point is read as "จุด".</span>
-<span class="sd">    Each digit after the decimal is read individually without place descriptions.</span>
+<span class="sd">    Convert the integer part with :func:`num_to_thaiword`.</span>
+<span class="sd">    Read the decimal point as "จุด".</span>
+<span class="sd">    Read each digit after the decimal point individually, without place</span>
+<span class="sd">    descriptions.</span>
 
-<span class="sd">    :param float number: a floating-point number to be converted to Thai text</span>
+<span class="sd">    :param float number: number to be converted</span>
 <span class="sd">    :return: text representing the number in Thai</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    :raises TypeError: if *number* is not a numeric type</span>
+<span class="sd">    :raises ValueError: if *number* is not finite</span>
 
 <span class="sd">    :Example:</span>
 
@@ -311,56 +340,21 @@
         <span class="p">)</span>
 
     <span class="c1"># Reject non-finite floats early (nan/inf), since they cannot be rendered.</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"number must be a finite float"</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"number must be a finite float"</span><span class="p">)</span>
-
-    <span class="c1"># Handle whole numbers (including integer types)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">number</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">number</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
 
-    <span class="c1"># Capture sign for negative floats</span>
-    <span class="n">is_negative</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span>
-    <span class="n">num_abs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-    <span class="n">num_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_abs</span><span class="p">)</span>
-
-    <span class="c1"># Handle scientific notation (e.g., "1e-05", "1.23e-10")</span>
-    <span class="k">if</span> <span class="s2">"e"</span> <span class="ow">in</span> <span class="n">num_str</span> <span class="ow">or</span> <span class="s2">"E"</span> <span class="ow">in</span> <span class="n">num_str</span><span class="p">:</span>
-        <span class="n">mantissa</span><span class="p">,</span> <span class="n">exp_str</span> <span class="o">=</span> <span class="n">num_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"e"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">exponent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exp_str</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="s2">"."</span> <span class="ow">in</span> <span class="n">mantissa</span><span class="p">:</span>
-            <span class="n">mant_int</span><span class="p">,</span> <span class="n">mant_frac</span> <span class="o">=</span> <span class="n">mantissa</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">digits</span> <span class="o">=</span> <span class="n">mant_int</span> <span class="o">+</span> <span class="n">mant_frac</span>
-            <span class="n">decimal_places</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mant_frac</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">digits</span> <span class="o">=</span> <span class="n">mantissa</span>
-            <span class="n">decimal_places</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="n">shift</span> <span class="o">=</span> <span class="n">exponent</span> <span class="o">-</span> <span class="n">decimal_places</span>
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">num_str</span> <span class="o">=</span> <span class="n">digits</span> <span class="o">+</span> <span class="p">(</span><span class="s2">"0"</span> <span class="o">*</span> <span class="n">shift</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">pos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span>
-            <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">num_str</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[:</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"."</span> <span class="o">+</span> <span class="n">digits</span><span class="p">[</span><span class="n">pos</span><span class="p">:]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">num_str</span> <span class="o">=</span> <span class="s2">"0."</span> <span class="o">+</span> <span class="p">(</span><span class="s2">"0"</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">pos</span><span class="p">))</span> <span class="o">+</span> <span class="n">digits</span>
-    <span class="k">if</span> <span class="s2">"."</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">num_str</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_str</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="n">num_str</span> <span class="o">=</span> <span class="n">_expand_exponent</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">number</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="s2">"."</span> <span class="ow">in</span> <span class="n">num_str</span><span class="p">:</span>
         <span class="n">int_part</span><span class="p">,</span> <span class="n">dec_part</span> <span class="o">=</span> <span class="n">num_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">int_part</span><span class="p">))</span>
-        <span class="n">result</span> <span class="o">+=</span> <span class="s2">"จุด"</span>
-        <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">dec_part</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="n">_DIGITS</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">int_part</span><span class="p">))</span> <span class="o">+</span> <span class="s2">"จุด"</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_DIGITS</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)]</span> <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">dec_part</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_str</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">is_negative</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">"ลบ"</span> <span class="o">+</span> <span class="n">result</span>
-
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="k">return</span> <span class="s2">"ลบ"</span> <span class="o">+</span> <span class="n">result</span> <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
 
 </pre></div>
 

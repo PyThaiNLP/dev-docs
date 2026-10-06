@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.word_vector &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.word_vector &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../_static/documentation_options.js?v=48730577"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -143,34 +144,43 @@ The <cite>pythainlp.word_vector</cite> module is a valuable resource for working
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.word_vector.</span></span><span class="sig-name descname"><span class="pre">WordVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai2fit_wv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector" title="Link to this definition"></a></dt>
-<dd><p>Word Vector class</p>
+<dd><p>Provide Thai word vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – model name</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt><strong>Options for model_name</strong></dt><dd><ul class="simple">
-<li><p><em>thai2fit_wv</em> (default) - word vector from thai2fit</p></li>
-<li><p><em>ltw2v</em> - word vector from LTW2V: The Large Thai Word2Vec v0.1</p></li>
-<li><p><em>ltw2v_v1.0_15_window</em> - word vector from LTW2V v1.0 and 15 window</p></li>
-<li><p><em>ltw2v_v1.0_5_window</em> - word vector from LTW2V v1.0 and 5 window</p></li>
+<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>name of the word vector model</p>
+<ul class="simple">
+<li><p><em>thai2fit_wv</em> - word vectors from thai2fit (default)</p></li>
+<li><p><em>ltw2v</em> - word vectors from LTW2V: The Large Thai Word2Vec v0.1</p></li>
+<li><p><em>ltw2v_v1.0_15_window</em> - word vectors from LTW2V v1.0 with a
+window size of 15</p></li>
+<li><p><em>ltw2v_v1.0_5_window</em> - word vectors from LTW2V v1.0 with a
+window size of 5</p></li>
 </ul>
+</p>
 </dd>
 </dl>
 <p>The <cite>WordVector</cite> class encapsulates word vector operations and functions. It provides a convenient interface for loading models, finding word similarities, and generating sentence vectors.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai2fit_wv'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.__init__" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the word vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – name of the word vector model</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.load_wordvector">
 <span class="sig-name descname"><span class="pre">load_wordvector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.load_wordvector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.load_wordvector" title="Link to this definition"></a></dt>
-<dd><p>Load word vector model.</p>
+<dd><p>Load a word vector model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – model name</p>
+<dd class="field-odd"><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – name of the word vector model</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – if the model corpus is not found</p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,7 +188,7 @@ The <cite>pythainlp.word_vector</cite> module is a valuable resource for working
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.get_model">
 <span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Word2VecKeyedVectors</span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.get_model" title="Link to this definition"></a></dt>
-<dd><p>Get word vector model.</p>
+<dd><p>Return the word vector model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>gensim</cite> word2vec model</p>
@@ -192,22 +202,21 @@ The <cite>pythainlp.word_vector</cite> module is a valuable resource for working
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.doesnt_match">
 <span class="sig-name descname"><span class="pre">doesnt_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.doesnt_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.doesnt_match" title="Link to this definition"></a></dt>
-<dd><p>This function returns one word that is mostly unrelated to other words
-in the list. We use the function <a class="reference internal" href="#pythainlp.word_vector.WordVector.doesnt_match" title="pythainlp.word_vector.WordVector.doesnt_match"><code class="xref py py-func docutils literal notranslate"><span class="pre">doesnt_match()</span></code></a>
-from <code class="xref py py-mod docutils literal notranslate"><span class="pre">gensim</span></code>.</p>
+<dd><p>Return the word that is the most unrelated to other words.</p>
+<p>Use the function <a class="reference internal" href="#pythainlp.word_vector.WordVector.doesnt_match" title="pythainlp.word_vector.WordVector.doesnt_match"><code class="xref py py-func docutils literal notranslate"><span class="pre">doesnt_match()</span></code></a> from <code class="xref py py-mod docutils literal notranslate"><span class="pre">gensim</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – a list of words</p>
+<dd class="field-odd"><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the most unrelated word</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if there is any word in <cite>positive</cite> or <cite>negative</cite> that is
-not in the vocabulary of the model.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the word that is mostly unrelated</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if a word in <strong>words</strong> is not in the vocabulary
+of the model</p>
 </dd>
 <dt class="field-odd">Note<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -219,13 +228,15 @@ will be raised.</p></li>
 <dd class="field-even"><p></p></dd>
 </dl>
 <p>Pick the word “พริกไทย” (name of food) out of the list of meals
-(“อาหารเช้า”, “อาหารเที่ยง”, “อาหารเย็น”).
-&gt;&gt;&gt; from pythainlp.word_vector import WordVector
-&gt;&gt;&gt;
-&gt;&gt;&gt; wv = WordVector()
-&gt;&gt;&gt; words = [“อาหารเช้า”, “อาหารเที่ยง”, “อาหารเย็น”, “พริกไทย”]
-&gt;&gt;&gt; wv.doesnt_match(words)
-‘พริกไทย’</p>
+(“อาหารเช้า”, “อาหารเที่ยง”, “อาหารเย็น”).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.word_vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordVector</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"อาหารเช้า"</span><span class="p">,</span> <span class="s2">"อาหารเที่ยง"</span><span class="p">,</span> <span class="s2">"อาหารเย็น"</span><span class="p">,</span> <span class="s2">"พริกไทย"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="go">'พริกไทย'</span>
+</pre></div>
+</div>
 <p>Pick the word “เรือ” (name of vehicle) out of the list of words
 related to occupation (“ดีไซน์เนอร์”, “พนักงานเงินเดือน”, “หมอ”).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.word_vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordVector</span>
@@ -241,34 +252,35 @@ related to occupation (“ดีไซน์เนอร์”, “พนัก�
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.most_similar_cosmul">
 <span class="sig-name descname"><span class="pre">most_similar_cosmul</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.most_similar_cosmul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.most_similar_cosmul" title="Link to this definition"></a></dt>
-<dd><p>This function finds the top-10 words that are most similar with respect
-to two lists of words labeled as positive and negative.
-The top-10 most similar words are obtained using multiplication
+<dd><p>Find the top-10 words most similar to two lists of words.</p>
+<p>The two lists are labeled as positive and negative. The top-10
+most similar words are obtained using the multiplication
 combination objective from Omer Levy and Yoav Goldberg
 <span id="id1">[OmerLevy_YoavGoldberg_2014]</span>.</p>
-<p>We use the function <code class="xref py py-func docutils literal notranslate"><span class="pre">gensim.most_similar_cosmul()</span></code> directly from
+<p>Use the function <code class="xref py py-func docutils literal notranslate"><span class="pre">gensim.most_similar_cosmul()</span></code> directly from
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">gensim</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>positive</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – a list of words to add</p></li>
-<li><p><strong>negative</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – a list of words to subtract</p></li>
+<li><p><strong>positive</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words to add</p></li>
+<li><p><strong>negative</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words to subtract</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of the top-10 most similar words and their
+similarity scores</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a>]]</p>
+</dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if there is any word in <cite>positive</cite> or <cite>negative</cite> that is
-not in the vocabulary of the model.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of top-10 most similar words and its similarity score</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a>]]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if a word in <strong>positive</strong> or <strong>negative</strong> is not
+in the vocabulary of the model</p>
 </dd>
 <dt class="field-odd">Note<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>With a single word in the positive list, it will find the
-most similar words to the word given (similar
+<li><p>With a single word in the positive list, it finds the
+most similar words to the given word (similar
 to <code class="xref py py-func docutils literal notranslate"><span class="pre">gensim.most_similar()</span></code>)</p></li>
 <li><p>If a word in <cite>positive</cite> or <cite>negative</cite> is not in the vocabulary,
 <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></a> will be raised.</p></li>
@@ -336,7 +348,7 @@ list and <strong>both</strong> positive and negative lists.</p>
 <span class="go">('เวียดนาม', 0.2878379821777344), ('ชาวไทย', 0.28480708599090576)]</span>
 </pre></div>
 </div>
-<p>The function returns <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></a> when the term “เมนูอาหารไทย”
+<p>The function raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></a> when the term “เมนูอาหารไทย”
 is not in the vocabulary.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.word_vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordVector</span>
 <span class="gp">&gt;&gt;&gt;</span>
@@ -352,23 +364,23 @@ is not in the vocabulary.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.similarity">
 <span class="sig-name descname"><span class="pre">similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.similarity" title="Link to this definition"></a></dt>
-<dd><p>This function computes cosine similarity between two words.</p>
+<dd><p>Compute the cosine similarity between two words.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>word1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – first word to be compared with</p></li>
-<li><p><strong>word2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – second word to be compared with</p></li>
+<li><p><strong>word1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – first word to be compared</p></li>
+<li><p><strong>word2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – second word to be compared</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>cosine similarity between the two word vectors</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if either <cite>word1</cite> or <cite>word2</cite> is not in the
-vocabulary of the model.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the cosine similarity between the two word vectors</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – if <strong>word1</strong> or <strong>word2</strong> is not in the
+vocabulary of the model</p>
 </dd>
 <dt class="field-odd">Note<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -379,7 +391,7 @@ vocabulary of the model.</p>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<p>Compute consine similarity between two words: “รถไฟ” and “รถไฟฟ้า”
+<p>Compute cosine similarity between two words: “รถไฟ” and “รถไฟฟ้า”
 (train and electric train).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.word_vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordVector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">WordVector</span><span class="p">()</span>
@@ -387,7 +399,7 @@ vocabulary of the model.</p>
 <span class="go">0.43387136</span>
 </pre></div>
 </div>
-<p>Compute consine similarity between two words: “เสือดาว” and “รถไฟฟ้า”
+<p>Compute cosine similarity between two words: “เสือดาว” and “รถไฟฟ้า”
 (leopard and electric train).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.word_vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordVector</span>
 <span class="gp">&gt;&gt;&gt;</span>
@@ -401,23 +413,21 @@ vocabulary of the model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.word_vector.WordVector.sentence_vectorizer">
 <span class="sig-name descname"><span class="pre">sentence_vectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">np.float32</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/word_vector/core.html#WordVector.sentence_vectorizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.word_vector.WordVector.sentence_vectorizer" title="Link to this definition"></a></dt>
-<dd><p>Converts a Thai sentence into a vector.
-Specifically, it first tokenizes that text and maps each tokenized word
-with the word vectors from the model.
-Then, word vectors are aggregated into one vector of 300 dimensions
-by calculating either the mean or summation of all word vectors.</p>
+<dd><p>Convert Thai text into a vector.</p>
+<p>First tokenize the text and map each word to its word vector
+from the model. Then aggregate the word vectors into one vector
+of 300 dimensions, by the mean or the sum of all word vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text input</p></li>
-<li><p><strong>use_mean</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – if <cite>True</cite> aggregate word vectors with mean of all
-word vectors. Otherwise, aggregate with
-summation of all word vectors</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text to be vectorized</p></li>
+<li><p><strong>use_mean</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – if True, aggregate word vectors by their
+mean; otherwise, aggregate by their sum</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> of dtype <code class="docutils literal notranslate"><span class="pre">numpy.float32</span></code> and
-shape <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">300)</span></code> representing the given sentence</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> of dtype <code class="docutils literal notranslate"><span class="pre">numpy.float32</span></code> and
+shape <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">300)</span></code> representing the given text</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>numpy.typing.NDArray[numpy.float32]</p>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.soundex &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../_static/documentation_options.js?v=48730577"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -159,17 +160,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.soundex">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">soundex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'udom83'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/core.html#soundex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.soundex" title="Link to this definition"></a></dt>
-<dd><p>Converts Thai text into phonetic code.</p>
+<dd><p>Convert text into phonetic code.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – word</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – soundex engine</p></li>
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – preferred length of the Soundex code (default is 4)        for metasound and prayut_and_somchaip only</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word to be encoded</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – soundex engine
+(see the options below)</p></li>
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – preferred length of the soundex code (default is 4),
+used by the <em>metasound</em> and <em>prayut_and_somchaip</em> engines only</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Soundex code</p>
+<dd class="field-even"><p>soundex code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -177,9 +180,9 @@
 <dt class="field-even">Options for engine<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><em>udom83</em> (default) - Thai soundex algorithm proposed
-by Vichit Lorchirachoonkul <a class="footnote-reference brackets" href="#id11" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></li>
+by Wannee Udompanich <a class="footnote-reference brackets" href="#id11" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></li>
 <li><p><em>lk82</em> - Thai soundex algorithm proposed by
-Wannee Udompanich <a class="footnote-reference brackets" href="#id13" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+Vichit Lorchirachoonkul <a class="footnote-reference brackets" href="#id13" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
 <li><p><em>metasound</em> - Thai soundex algorithm based on a combination
 of Metaphone and Soundex proposed by Snae &amp; Brückner <a class="footnote-reference brackets" href="#id10" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
 <li><p><em>prayut_and_somchaip</em> - Thai-English Cross-Language Transliterated
@@ -192,33 +195,33 @@ Analysis <a class="footnote-reference brackets" href="#id15" id="id5" role="doc-
 <dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.soundex</span><span class="w"> </span><span class="kn">import</span> <span class="n">soundex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ลัก"</span><span class="p">)</span>
 <span class="go">'ร100000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ลัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'lk82'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ลัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"lk82"</span><span class="p">)</span>
 <span class="go">'ร1000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ลัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'metasound'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ลัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"metasound"</span><span class="p">)</span>
 <span class="go">'ล100'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รัก"</span><span class="p">)</span>
 <span class="go">'ร100000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'lk82'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"lk82"</span><span class="p">)</span>
 <span class="go">'ร1000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'metasound'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รัก"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"metasound"</span><span class="p">)</span>
 <span class="go">'ร100'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รักษ์"</span><span class="p">)</span>
 <span class="go">'ร100000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รักษ์"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'lk82'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รักษ์"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"lk82"</span><span class="p">)</span>
 <span class="go">'ร1000'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รักษ์"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'metasound'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"รักษ์"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"metasound"</span><span class="p">)</span>
 <span class="go">'ร100'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"บูรณการ"</span><span class="p">)</span>
 <span class="go">'บ931900'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"บูรณการ"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'lk82'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"บูรณการ"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"lk82"</span><span class="p">)</span>
 <span class="go">'บE419'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"บูรณการ"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'metasound'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"บูรณการ"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"metasound"</span><span class="p">)</span>
 <span class="go">'บ551'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ปัจจุบัน"</span><span class="p">)</span>
 <span class="go">'ป775300'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ปัจจุบัน"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'lk82'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ปัจจุบัน"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"lk82"</span><span class="p">)</span>
 <span class="go">'ป3E54'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ปัจจุบัน"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'metasound'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"ปัจจุบัน"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"metasound"</span><span class="p">)</span>
 <span class="go">'ป223'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soundex</span><span class="p">(</span><span class="s2">"vp"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"prayut_and_somchaip"</span><span class="p">)</span>
 <span class="go">'11'</span>
@@ -241,14 +244,14 @@ Analysis <a class="footnote-reference brackets" href="#id15" id="id5" role="doc-
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.lk82">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">lk82</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/lk82.html#lk82"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.lk82" title="Link to this definition"></a></dt>
-<dd><p>Converts Thai text into phonetic code with the
-Thai soundex algorithm named <strong>LK82</strong> <a class="footnote-reference brackets" href="#id13" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
+<dd><p>Convert text into phonetic code with the Thai soundex algorithm
+named <strong>LK82</strong> <a class="footnote-reference brackets" href="#id13" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word to be encoded</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>LK82 soundex of the given Thai word</p>
+<dd class="field-even"><p>LK82 soundex code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -278,14 +281,14 @@ Thai soundex algorithm named <strong>LK82</strong> <a class="footnote-reference 
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.udom83">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">udom83</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/udom83.html#udom83"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.udom83" title="Link to this definition"></a></dt>
-<dd><p>Converts Thai text into phonetic code with the
-Thai soundex algorithm named <strong>Udom83</strong> <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<dd><p>Convert text into phonetic code with the Thai soundex algorithm
+named <strong>Udom83</strong> <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word to be encoded</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Udom83 soundex</p>
+<dd class="field-even"><p>Udom83 soundex code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -315,19 +318,19 @@ Thai soundex algorithm named <strong>Udom83</strong> <a class="footnote-referenc
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.metasound">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">metasound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/metasound.html#metasound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.metasound" title="Link to this definition"></a></dt>
-<dd><p>Converts Thai text into phonetic code with the
-matching technique called <strong>MetaSound</strong>
-<a class="footnote-reference brackets" href="#id10" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> (combination between Soundex and Metaphone algorithms).
-MetaSound algorithm was developed specifically for the Thai language.</p>
+<dd><p>Convert text into phonetic code with the matching technique called
+<strong>MetaSound</strong> <a class="footnote-reference brackets" href="#id10" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> (a combination of the Soundex and
+Metaphone algorithms).</p>
+<p>The MetaSound algorithm was developed specifically for Thai.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word to be encoded</p></li>
 <li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – preferred length of the MetaSound code (default is 4)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>MetaSound for the given text</p>
+<dd class="field-even"><p>MetaSound code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -359,23 +362,26 @@ MetaSound algorithm was developed specifically for the Thai language.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.prayut_and_somchaip">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">prayut_and_somchaip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/prayut_and_somchaip.html#prayut_and_somchaip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.prayut_and_somchaip" title="Link to this definition"></a></dt>
-<dd><p>Converts English-Thai Cross-Language Transliterated Words into
-phonetic code with the matching technique called <strong>Soundex</strong> <a class="footnote-reference brackets" href="#id14" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
+<dd><p>Convert a Thai-English cross-language transliterated word into
+phonetic code with the matching technique called <strong>Soundex</strong>
+<a class="footnote-reference brackets" href="#id14" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – English-Thai Cross-Language Transliterated Word</p></li>
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – preferred length of the Soundex code (default is 4)</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – English or Thai transliterated word to be encoded</p></li>
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – preferred length of the soundex code (default is 4)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Soundex for the given text</p>
+<dd class="field-even"><p>soundex code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.soundex.prayut_and_somchaip</span><span class="w"> </span><span class="kn">import</span> <span class="n">prayut_and_somchaip</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.soundex.prayut_and_somchaip</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">prayut_and_somchaip</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prayut_and_somchaip</span><span class="p">(</span><span class="s2">"king"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="go">'52'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prayut_and_somchaip</span><span class="p">(</span><span class="s2">"คิง"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -393,12 +399,13 @@ phonetic code with the matching technique called <strong>Soundex</strong> <a cla
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.complete_soundex">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">complete_soundex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/complete_soundex.html#complete_soundex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.complete_soundex" title="Link to this definition"></a></dt>
-<dd><p>Convert a Thai word into phonetic code using the Complete Soundex algorithm.</p>
-<p>This function handles both single and multi-syllable words by internally
-tokenizing multi-syllable words when the syllable_tokenize dependency is available.</p>
+<dd><p>Convert a Thai word into phonetic code using Complete Soundex.</p>
+<p>This function handles both single and multi-syllable words by
+internally tokenizing multi-syllable words when the syllable_tokenize
+dependency is available.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word to be encoded</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Complete Soundex code</p>
@@ -452,22 +459,23 @@ tokenizing multi-syllable words when the syllable_tokenize dependency is availab
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.soundex.complete_soundex_similarity">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.soundex.</span></span><span class="sig-name descname"><span class="pre">complete_soundex_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">code2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/soundex/complete_soundex.html#complete_soundex_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.soundex.complete_soundex_similarity" title="Link to this definition"></a></dt>
-<dd><p>Calculate similarity between two Complete Soundex codes based on the
-character-wise comparison formula defined in Tapsai et al. (2020).</p>
-<p>The similarity is calculated character-by-character using the formula:
+<dd><p>Calculate the similarity between two Complete Soundex codes.</p>
+<p>The calculation follows the character-wise comparison formula
+defined in Tapsai et al. (2020), character by character:
 S(X,Y) = Sum(sim(c_xi, c_yi)) / max(len(X), len(Y))</p>
 <p>Where sim(c_xi, c_yi) = 1 if characters match, else 0.</p>
 <p>This implements Equation (1) from the paper (Section 3.3, page 55),
-which compares codes position-by-position rather than by syllable blocks.</p>
+which compares codes position by position rather than by syllable
+blocks.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The full concatenated soundex code for word 1</p></li>
-<li><p><strong>code2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The full concatenated soundex code for word 2</p></li>
+<li><p><strong>code1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – full concatenated soundex code of the first word</p></li>
+<li><p><strong>code2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – full concatenated soundex code of the second word</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Similarity score between 0.0 and 1.0</p>
+<dd class="field-even"><p>similarity score between 0.0 and 1.0</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
@@ -480,12 +488,18 @@ which compares codes position-by-position rather than by syllable blocks.</p>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Encode two words</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">code1</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span><span class="s2">"ข้มขืน"</span><span class="p">)</span>  <span class="c1"># Bitter/Forced (with tone)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">code2</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span><span class="s2">"ขมขืน"</span><span class="p">)</span>  <span class="c1"># Bitter (no tone)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code1</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">"ข้มขืน"</span>
+<span class="gp">... </span><span class="p">)</span>  <span class="c1"># Bitter/Forced (with tone)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code2</span> <span class="o">=</span> <span class="n">complete_soundex</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">"ขมขืน"</span>
+<span class="gp">... </span><span class="p">)</span>  <span class="c1"># Bitter (no tone)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculate similarity</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">similarity</span> <span class="o">=</span> <span class="n">complete_soundex_similarity</span><span class="p">(</span><span class="n">code1</span><span class="p">,</span> <span class="n">code2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">similarity</span> <span class="o">=</span> <span class="n">complete_soundex_similarity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">code1</span><span class="p">,</span> <span class="n">code2</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="go">~0.93 (13 matches out of 14 characters)</span>
 </pre></div>
 </div>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.pronounce &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.pronounce &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Functions for finding rhymes of Thai words."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -137,11 +140,12 @@
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.rhyme">[docs]</a>
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rhyme</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Find Thai rhyme</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Find Thai words that rhyme with a word.</span>
 
-<span class="sd">    :param str word: A Thai word</span>
-<span class="sd">    :return: All list Thai rhyme words</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :param str word: Thai word</span>
+<span class="sd">    :return: list of rhyming Thai words</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
 
@@ -201,9 +205,10 @@
 <div class="viewcode-block" id="thai_consonant_to_spelling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thai_consonant_to_spelling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thai_consonant_to_spelling</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai consonants to spelling</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Thai consonant to its spelling.</span>
 
-<span class="sd">    :param str c: A Thai consonant</span>
+<span class="sd">    :param str c: Thai consonant</span>
 <span class="sd">    :return: spelling</span>
 <span class="sd">    :rtype: str</span>
 
@@ -222,9 +227,10 @@
 <div class="viewcode-block" id="tone_to_spelling">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.tone_to_spelling">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tone_to_spelling</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai tonemarks to spelling</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Thai tone mark to its spelling.</span>
 
-<span class="sd">    :param str t: A Thai tonemarks</span>
+<span class="sd">    :param str t: Thai tone mark</span>
 <span class="sd">    :return: spelling</span>
 <span class="sd">    :rtype: str</span>
 
@@ -236,11 +242,11 @@
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ไม้เอก"</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ไม้โท"</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๊"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๊"</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ไม้ตรี"</span>
-    <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๋"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">"๋"</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ไม้จัตวา"</span>
     <span class="k">return</span> <span class="n">t</span></div>
 
@@ -248,7 +254,7 @@
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_spelling_tokenizer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Lazy-load and cache the vowel/consonant tokenizer used by spelling()."""</span>
+<span class="w">    </span><span class="sd">"""Load and cache the vowel and consonant tokenizer for spelling."""</span>
     <span class="k">return</span> <span class="n">Tokenizer</span><span class="p">(</span>
         <span class="n">custom_dict</span><span class="o">=</span><span class="n">thai_vowel</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">thai_consonants</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"longest"</span>
     <span class="p">)</span>
@@ -256,13 +262,13 @@
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_spelling_impl</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Cached implementation of spelling() for valid string inputs."""</span>
+<span class="w">    </span><span class="sd">"""Cached implementation of :func:`spelling` for valid text."""</span>
     <span class="n">thai_vowel_tokenizer</span> <span class="o">=</span> <span class="n">_spelling_tokenizer</span><span class="p">()</span>
     <span class="n">word_pre</span> <span class="o">=</span> <span class="n">remove_tonemark</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"็"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
     <span class="n">tone</span> <span class="o">=</span> <span class="p">[</span><span class="n">tone_to_spelling</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span><span class="p">]</span>
     <span class="n">word_output</span> <span class="o">=</span> <span class="n">word_pre</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">thai_vowel_all</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">"็"</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">"เ([ก-ฮ])"</span><span class="p">:</span>
                 <span class="n">word_output</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">1เอะ"</span><span class="p">,</span> <span class="n">word_pre</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -276,22 +282,22 @@
     <span class="p">]</span>
     <span class="k">if</span> <span class="n">word_pre</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">tone</span> <span class="o">!=</span> <span class="p">[]:</span>
+    <span class="k">if</span> <span class="n">tone</span> <span class="o">!=</span> <span class="p">[]:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word_pre</span><span class="p">,</span> <span class="n">tone</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">word</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="s2">"็"</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">"็"</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word_pre</span><span class="p">,</span> <span class="n">word</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="p">[</span><span class="n">word_pre</span><span class="p">,</span> <span class="n">word</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">spelling</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Thai word to spelling</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Thai word to its spelling.</span>
 
 <span class="sd">    This function supports Thai root words only.</span>
 
-<span class="sd">    :param str word: A Thai word</span>
+<span class="sd">    :param str word: Thai word</span>
 <span class="sd">    :return: spelling</span>
-<span class="sd">    :rtype: List[str]</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
 

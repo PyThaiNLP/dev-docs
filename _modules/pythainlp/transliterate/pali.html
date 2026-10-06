@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.pali &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.transliterate.pali &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Thai pronunciation of Pali words."""</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 
@@ -120,23 +123,22 @@
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.pronunciate_pali">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pronunciate_pali</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Convert pali word to Thai pronunciation</span>
+<span class="sd">    Convert a Pali word to its Thai pronunciation.</span>
 
-<span class="sd">    :param str word: Pali word (written in Thai script) to be pronunciated.</span>
-
-<span class="sd">    :return: A string of Thai letters indicating</span>
-<span class="sd">             how the input text should be pronounced.</span>
+<span class="sd">    :param str word: Pali word, written in Thai script</span>
+<span class="sd">    :return: Thai letters indicating how the word is pronounced</span>
+<span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.transliterate import pronunciate_pali</span>
-<span class="sd">        &gt;&gt;&gt; pronunciate_pali('ภควา')</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate_pali("ภควา")</span>
 <span class="sd">        'ภะคะวา'</span>
-<span class="sd">        &gt;&gt;&gt; pronunciate_pali('สมฺมา')</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate_pali("สมฺมา")</span>
 <span class="sd">        'สัมมา'</span>
-<span class="sd">        &gt;&gt;&gt; pronunciate_pali('มยํ')</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate_pali("มยํ")</span>
 <span class="sd">        'มะยัง'</span>
-<span class="sd">        &gt;&gt;&gt; pronunciate_pali('สฺวากฺขา')</span>
+<span class="sd">        &gt;&gt;&gt; pronunciate_pali("สฺวากฺขา")</span>
 <span class="sd">        'สวากขาโต'</span>
 
 <span class="sd">    """</span>
@@ -145,30 +147,30 @@
 
     <span class="c1"># --- กฎข้อ 3: นฤคหิต (ํ) ---</span>
     <span class="c1"># แบบมีสระหน้า (เ-ไ) เช่น โกํ -&gt; โกง</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([เ-ไ][ก-ฮ])ํ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1ง_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([เ-ไ][ก-ฮ])ํ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1ง_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
     <span class="c1"># แบบมีสระบน/ล่าง (ะ-ู) เช่น สุ ํ -&gt; สุง</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([ก-ฮ][ะ-ู])ํ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1ง_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ก-ฮ][ะ-ู])ํ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1ง_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
     <span class="c1"># แบบพยัญชนะเดี่ยว เช่น หํ -&gt; หัง</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([ก-ฮ])ํ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1ัง_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ก-ฮ])ํ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1ัง_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
 
     <span class="c1"># --- กฎข้อ 4 &amp; 5: พินทุ (ฺ) เป็นตัวควบกล้ำ (ต้นคำ) ---</span>
     <span class="c1"># ถ้าพินทุอยู่พยัญชนะตัวแรกของคำ (ไม่มีตัวอื่นนำหน้า) ให้มาร์คเป็นตัวควบกล้ำ (_C_)</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(^|\s)([ก-ฮ])ฺ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1\2_C_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(^|\s)([ก-ฮ])ฺ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1\2_C_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
 
     <span class="c1"># --- กฎข้อ 2: พินทุ (ฺ) เป็นตัวสะกด ---</span>
     <span class="c1"># แบบมีสระนำหน้า เช่น เนยฺ -&gt; เนย</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([เ-ไ][ก-ฮ])([ก-ฮ])ฺ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1\2_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([เ-ไ][ก-ฮ])([ก-ฮ])ฺ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1\2_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
     <span class="c1"># แบบมีสระบน/ล่าง เช่น ทิฏฺ -&gt; ทิฏ</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([ก-ฮ][ะ-ู])([ก-ฮ])ฺ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1\2_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ก-ฮ][ะ-ู])([ก-ฮ])ฺ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1\2_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
     <span class="c1"># แบบพยัญชนะเดี่ยว (สะกด) เช่น สมฺ -&gt; สัม (เพิ่มไม้หันอากาศ)</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'([ก-ฮ])([ก-ฮ])ฺ'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1ั\2_F_'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ก-ฮ])([ก-ฮ])ฺ"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1ั\2_F_"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
 
     <span class="c1"># --- กฎข้อ 1: พยัญชนะที่ไม่มีเครื่องหมาย ให้อ่านเสียง "อะ" ---</span>
     <span class="c1"># หาพยัญชนะที่: ไม่ได้ตามหลัง เ-ไ และ ไม่ได้นำหน้าสระ, ไม่ใช่ตัวสะกด(_F_), ไม่ใช่ตัวควบ(_C_)</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(?&lt;![เ-ไ])([ก-ฮ])(?![ะ-ู็-์]|_F_|_C_)'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\1ะ'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?&lt;![เ-ไ])([ก-ฮ])(?![ะ-ู็-์]|_F_|_C_)"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1ะ"</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
 
     <span class="c1"># ทำความสะอาด Marker ที่เราใช้ทดไว้ตอนประมวลผล (_F_ = Final, _C_ = Cluster)</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_F_'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_C_'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_F_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_C_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">word</span></div>
 

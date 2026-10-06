@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.wsd.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.wsd.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Thai word sense disambiguation."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
@@ -177,42 +180,47 @@
     <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">custom_tokenizer</span><span class="p">:</span> <span class="n">Tokenizer</span> <span class="o">=</span> <span class="n">_word_cut</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Get word sense from the sentence.</span>
-<span class="sd">    Gets definition and distance from context in sentence.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the sense of a word in a sentence.</span>
+
+<span class="sd">    This function returns the definitions of the word and their distances</span>
+<span class="sd">    from the context in the sentence.</span>
 
 <span class="sd">    :param str sentence: Thai sentence</span>
 <span class="sd">    :param str word: Thai word</span>
-<span class="sd">    :param str device: device for running model on.</span>
-<span class="sd">    :param Optional[dict[str, list[str]]] custom_dict: Thai dictionary in the</span>
-<span class="sd">        form {"word": ["definition", ...]}</span>
-<span class="sd">    :param Tokenizer custom_tokenizer: Tokenizer used to tokenize words in \</span>
-<span class="sd">        sentence.</span>
-<span class="sd">    :return: a list of definitions and distances (1 - cos_sim) or \</span>
-<span class="sd">        an empty list (if word is not in the dictionary)</span>
+<span class="sd">    :param str device: device to run the model on</span>
+<span class="sd">    :param Optional[dict[str, list[str]]] custom_dict: Thai dictionary in</span>
+<span class="sd">        the form {"word": ["definition", ...]}</span>
+<span class="sd">    :param pythainlp.tokenize.Tokenizer custom_tokenizer: tokenizer to</span>
+<span class="sd">        tokenize the sentence</span>
+<span class="sd">    :return: list of definitions and distances (1 - cosine similarity),</span>
+<span class="sd">        or an empty list if the word is not in the dictionary</span>
 <span class="sd">    :rtype: list[tuple[str, float]]</span>
 
-<span class="sd">    We get the ideas from `Context-Aware Semantic Similarity Measurement for \</span>
-<span class="sd">        Unsupervised Word Sense Disambiguation \</span>
-<span class="sd">        &lt;https://arxiv.org/abs/2305.03520&gt;`_ to build get_sense function.</span>
+<span class="sd">    This function is based on the ideas in `Context-Aware Semantic</span>
+<span class="sd">    Similarity Measurement for Unsupervised Word Sense Disambiguation</span>
+<span class="sd">    &lt;https://arxiv.org/abs/2305.03520&gt;`_.</span>
 
-<span class="sd">    Use Thai dictionary from wiktionary.</span>
+<span class="sd">    It uses the Thai dictionary from Wiktionary.</span>
 <span class="sd">    See `thai_dict &lt;https://pythainlp.org/pythainlp-corpus/thai_dict.html&gt;`_.</span>
 
-<span class="sd">    Use sentence transformers model from \</span>
-<span class="sd">        `sentence-transformers/paraphrase-multilingual-mpnet-base-v2 \</span>
-<span class="sd">        &lt;https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2&gt;`_ \</span>
-<span class="sd">        for unsupervised word sense disambiguation.</span>
+<span class="sd">    It uses the sentence transformers model</span>
+<span class="sd">    `sentence-transformers/paraphrase-multilingual-mpnet-base-v2</span>
+<span class="sd">    &lt;https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2&gt;`_</span>
+<span class="sd">    for unsupervised word sense disambiguation.</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.wsd import get_sense  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; print(get_sense("เขากำลังอบขนมคุกกี้","คุกกี้"))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(get_sense("เขากำลังอบขนมคุกกี้", "คุกกี้"))  # doctest: +SKIP</span>
 <span class="sd">        [('โปรแกรมคอมพิวเตอร์ใช้ในทางอินเทอร์เน็ตสำหรับเก็บข้อมูลของผู้ใช้งาน',</span>
 <span class="sd">          0.0974416732788086),</span>
 <span class="sd">         ('ชื่อขนมชนิดหนึ่งจำพวกขนมเค้ก แต่ทำเป็นชิ้นเล็ก ๆ แบน ๆ แล้วอบให้กรอบ',</span>
 <span class="sd">          0.09319090843200684)]</span>
 
-<span class="sd">        &gt;&gt;&gt; print(get_sense("เว็บนี้ต้องการคุกกี้ในการทำงาน","คุกกี้"))  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(</span>
+<span class="sd">        ...     get_sense("เว็บนี้ต้องการคุกกี้ในการทำงาน", "คุกกี้")</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        [('โปรแกรมคอมพิวเตอร์ใช้ในทางอินเทอร์เน็ตสำหรับเก็บข้อมูลของผู้ใช้งาน',</span>
 <span class="sd">          0.1005704402923584),</span>
 <span class="sd">         ('ชื่อขนมชนิดหนึ่งจำพวกขนมเค้ก แต่ทำเป็นชิ้นเล็ก ๆ แบน ๆ แล้วอบให้กรอบ',</span>

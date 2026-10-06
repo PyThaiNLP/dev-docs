@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.ancient &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../_static/documentation_options.js?v=48730577"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -126,16 +127,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ancient.aksonhan_to_current">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ancient.</span></span><span class="sig-name descname"><span class="pre">aksonhan_to_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/ancient/aksonhan.html#aksonhan_to_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ancient.aksonhan_to_current" title="Link to this definition"></a></dt>
-<dd><p>Convert AksonHan words to current Thai words</p>
+<dd><p>Convert an AksonHan word to the current Thai word.</p>
 <p>AksonHan (อักษรหัน) writes two consonants to spell
 the short /a/ vowel (สระ อะ).</p>
-<p>Today, รร is an aksonhan pattern still used in Thai.</p>
+<p>Today, รร is an AksonHan pattern still used in Thai.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word</p>
+<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai word in AksonHan spelling</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Thai AksonHan to be converted to current Thai word</p>
+<dd class="field-even"><p>word in current Thai spelling</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -157,7 +158,8 @@ the short /a/ vowel (สระ อะ).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.ancient.convert_currency">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.ancient.</span></span><span class="sig-name descname"><span class="pre">convert_currency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/ancient/currency.html#convert_currency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.ancient.convert_currency" title="Link to this definition"></a></dt>
-<dd><p>Convert ancient Thai currency to other units</p>
+<dd><p>Convert a value in an ancient Thai currency unit to other units.</p>
+<p>Supported units:</p>
 <ul class="simple">
 <li><p>เบี้ย (Bia)</p></li>
 <li><p>อัฐ (At)</p></li>
@@ -168,25 +170,27 @@ the short /a/ vowel (สระ อะ).</p>
 <li><p>ตำลึง (Tamleung)</p></li>
 <li><p>ชั่ง (Chang)</p></li>
 </ul>
-<dl class="simple">
-<dt>See more:</dt><dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/History_of_Thai_money">Thai money</a>.</p>
-</dd>
-</dl>
+<p>See more:
+<a class="reference external" href="https://en.wikipedia.org/wiki/History_of_Thai_money">Thai money</a>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – value</p></li>
-<li><p><strong>from_unit</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – currency unit         (‘เบี้ย’, ‘อัฐ’, ‘ไพ’, ‘เฟื้อง’, ‘สลึง’, ‘บาท’, ‘ตำลึง’, ‘ชั่ง’)</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – value in the unit given by <code class="docutils literal notranslate"><span class="pre">from_unit</span></code></p></li>
+<li><p><strong>from_unit</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – currency unit, one of ‘เบี้ย’, ‘อัฐ’, ‘ไพ’,
+‘เฟื้อง’, ‘สลึง’, ‘บาท’, ‘ตำลึง’, ‘ชั่ง’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Thai currency</p>
+<dd class="field-even"><p>value in each unit, keyed by unit name</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.ancient</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_currency</span>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#NotImplementedError" title="(in Python v3.14)"><strong>NotImplementedError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">from_unit</span></code> is not supported</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.ancient</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_currency</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">convert_currency</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">"บาท"</span><span class="p">))</span>
 <span class="go">{'เบี้ย': 51200.0, 'อัฐ': 512.0, 'ไพ': 256.0, 'เฟื้อง': 64.0, 'สลึง': 32.0, 'บาท': 8.0, 'ตำลึง': 2.0, 'ชั่ง': 0.1}</span>
 </pre></div>

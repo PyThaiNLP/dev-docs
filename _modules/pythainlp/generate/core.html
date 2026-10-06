@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.generate.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.generate.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,16 +114,20 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Text generator using n-gram language model</span>
+<span class="sd">"""</span>
+<span class="sd">Generate text using an n-gram language model.</span>
 
-<span class="sd">codes are from</span>
+<span class="sd">The code is from</span>
 <span class="sd">https://towardsdatascience.com/understanding-word-n-grams-and-n-gram-probability-in-natural-language-processing-9d9eef0fa058</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.oscar</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">oscar_word_freqs_unigram</span><span class="p">,</span>
@@ -132,13 +137,39 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.tnc</span><span class="w"> </span><span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">tnc_word_freqs_unigram</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus.ttc</span><span class="w"> </span><span class="kn">import</span> <span class="n">unigram_word_freqs</span> <span class="k">as</span> <span class="n">ttc_word_freqs_unigram</span>
 
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_T"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pick_next</span><span class="p">(</span>
+    <span class="n">candidates</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">probs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pick a random candidate whose probability is at least ``prob``.</span>
+
+<span class="sd">    The pick is by probability value, so candidates with equal</span>
+<span class="sd">    probability resolve to the first of them.</span>
+
+<span class="sd">    :param Sequence[_T] candidates: candidates, parallel to ``probs``</span>
+<span class="sd">    :param Sequence[float] probs: probability of each candidate</span>
+<span class="sd">    :param float prob: minimum probability</span>
+<span class="sd">    :return: picked candidate, or None if no probability passes</span>
+<span class="sd">    :rtype: Optional[_T]</span>
+<span class="sd">    """</span>
+    <span class="n">passed</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">probs</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">prob</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">passed</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
+    <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">probs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">passed</span><span class="p">))]</span>  <span class="c1"># noqa: S311  # nosec B311  # NOSONAR</span>
+
 
 <div class="viewcode-block" id="Unigram">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Unigram</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Text generator using Unigram</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate text using the unigram model.</span>
 
 <span class="sd">    :param str name: corpus name</span>
+
 <span class="sd">        * *tnc* - Thai National Corpus (default)</span>
 <span class="sd">        * *ttc* - Thai Textbook Corpus (TTC)</span>
 <span class="sd">        * *oscar* - OSCAR Corpus</span>
@@ -153,6 +184,7 @@
 <div class="viewcode-block" id="Unigram.__init__">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Unigram.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"tnc"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the unigram model."""</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"tnc"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"ttc"</span><span class="p">:</span>
@@ -179,15 +211,16 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Generate a sentence using the unigram model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a sentence using the unigram model.</span>
 
-<span class="sd">        :param str start_seq: word to begin sentence with</span>
+<span class="sd">        :param str start_seq: word to begin the sentence with</span>
 <span class="sd">        :param int N: number of words</span>
-<span class="sd">        :param float prob: minimum word probability threshold</span>
-<span class="sd">        :param bool output_str: output as string</span>
-<span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
+<span class="sd">        :param float prob: minimum word probability</span>
+<span class="sd">        :param bool output_str: return a string instead of a list of words</span>
+<span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
-<span class="sd">        :return: list of words or a word string</span>
+<span class="sd">        :return: generated sentence as a string or a list of words</span>
 <span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
@@ -224,7 +257,7 @@
         <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">word_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_word_prob</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
             <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
             <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
@@ -243,9 +276,11 @@
 <div class="viewcode-block" id="Bigram">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Bigram</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Text generator using Bigram</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate text using the bigram model.</span>
 
 <span class="sd">    :param str name: corpus name</span>
+
 <span class="sd">        * *tnc* - Thai National Corpus (default)</span>
 <span class="sd">    """</span>
 
@@ -258,6 +293,7 @@
 <div class="viewcode-block" id="Bigram.__init__">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"tnc"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the bigram model."""</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"tnc"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">uni</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnc_word_freqs_bigram</span><span class="p">()</span>
@@ -269,7 +305,8 @@
 <div class="viewcode-block" id="Bigram.prob">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Bigram.prob">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute bigram probability P(t2 | t1).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute bigram probability P(t2 | t1).</span>
 
 <span class="sd">        :param str t1: first word</span>
 <span class="sd">        :param str t2: second word</span>
@@ -294,15 +331,16 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Generate a sentence using the bigram model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a sentence using the bigram model.</span>
 
-<span class="sd">        :param str start_seq: word to begin sentence with</span>
+<span class="sd">        :param str start_seq: word to begin the sentence with</span>
 <span class="sd">        :param int N: number of words</span>
-<span class="sd">        :param float prob: minimum word probability threshold</span>
-<span class="sd">        :param bool output_str: output as string</span>
-<span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
+<span class="sd">        :param float prob: minimum word probability</span>
+<span class="sd">        :param bool output_str: return a string instead of a list of words</span>
+<span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
-<span class="sd">        :return: list of words or a word string</span>
+<span class="sd">        :return: generated sentence as a string or a list of words</span>
 <span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
@@ -331,11 +369,9 @@
                     <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">late_word</span> <span class="ow">and</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_word</span>
                 <span class="p">]</span>
             <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">late_word</span><span class="p">,</span> <span class="n">next_word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">next_word</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">]</span>
-            <span class="n">p2</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">probs</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">prob</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="n">_pick_next</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">probs</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
-            <span class="n">items</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">probs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">p2</span><span class="p">))]</span>  <span class="c1"># noqa: S311  # nosec B311  # NOSONAR</span>
             <span class="n">late_word</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">late_word</span><span class="p">)</span>
 
@@ -350,9 +386,11 @@
 <div class="viewcode-block" id="Trigram">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Trigram</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Text generator using Trigram</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate text using the trigram model.</span>
 
 <span class="sd">    :param str name: corpus name</span>
+
 <span class="sd">        * *tnc* - Thai National Corpus (default)</span>
 <span class="sd">    """</span>
 
@@ -367,6 +405,7 @@
 <div class="viewcode-block" id="Trigram.__init__">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"tnc"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the trigram model."""</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"tnc"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">uni</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnc_word_freqs_unigram</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnc_word_freqs_bigram</span><span class="p">()</span>
@@ -380,7 +419,8 @@
 <div class="viewcode-block" id="Trigram.prob">
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.prob">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t3</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute trigram probability P(t3 | t1, t2).</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute trigram probability P(t3 | t1, t2).</span>
 
 <span class="sd">        :param str t1: first word</span>
 <span class="sd">        :param str t2: second word</span>
@@ -407,16 +447,17 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Generate a sentence using the trigram model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a sentence using the trigram model.</span>
 
-<span class="sd">        :param start_seq: word or bigram to begin sentence with</span>
+<span class="sd">        :param start_seq: word or bigram to begin the sentence with</span>
 <span class="sd">        :type start_seq: Union[str, tuple[str, str]]</span>
 <span class="sd">        :param int N: number of words</span>
-<span class="sd">        :param float prob: minimum word probability threshold</span>
-<span class="sd">        :param bool output_str: output as string</span>
-<span class="sd">        :param bool duplicate: allow duplicate words in sentence</span>
+<span class="sd">        :param float prob: minimum word probability</span>
+<span class="sd">        :param bool output_str: return a string instead of a list of words</span>
+<span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
-<span class="sd">        :return: list of words or a word string</span>
+<span class="sd">        :return: generated sentence as a string or a list of words</span>
 <span class="sd">        :rtype: Union[list[str], str]</span>
 
 <span class="sd">        :Example:</span>
@@ -437,38 +478,53 @@
         <span class="n">list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_seq</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">duplicate</span><span class="p">:</span>
-                <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ti_keys</span> <span class="k">if</span> <span class="n">j</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">late_word</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="n">j</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ti_keys</span>
-                    <span class="k">if</span> <span class="n">j</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">late_word</span> <span class="ow">and</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_word</span>
-                <span class="p">]</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_candidates</span><span class="p">(</span><span class="n">late_word</span><span class="p">,</span> <span class="n">list_word</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">)</span>
             <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">word</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">]</span>
-            <span class="n">p2</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">probs</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">prob</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="n">_pick_next</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">probs</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
-            <span class="n">items</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">probs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">p2</span><span class="p">))]</span>  <span class="c1"># noqa: S311  # nosec B311  # NOSONAR</span>
             <span class="n">late_word</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="n">list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">late_word</span><span class="p">)</span>
 
-        <span class="n">listdata</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_word</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">j</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">listdata</span><span class="p">:</span>
-                        <span class="n">listdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">listdata</span><span class="p">:</span>
-                <span class="n">listdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">listdata</span> <span class="o">=</span> <span class="n">_flatten_unique</span><span class="p">(</span><span class="n">list_word</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">output_str</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">listdata</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">listdata</span></div>
-</div>
 
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_candidates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">late_word</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
+        <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span>
+        <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""Return the trigrams that can follow ``late_word``."""</span>
+        <span class="k">if</span> <span class="n">duplicate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ti_keys</span> <span class="k">if</span> <span class="n">j</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">late_word</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">j</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ti_keys</span>
+            <span class="k">if</span> <span class="n">j</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">late_word</span> <span class="ow">and</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_word</span>
+        <span class="p">]</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_flatten_unique</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Flatten words and word tuples into a list without repeated words."""</span>
+    <span class="n">listdata</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">words</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="p">,)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">listdata</span><span class="p">:</span>
+                <span class="n">listdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">listdata</span>
 </pre></div>
 
            </div>

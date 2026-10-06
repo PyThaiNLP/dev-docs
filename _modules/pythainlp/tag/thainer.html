@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.thainer &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tag.thainer &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Named-entity recognizer"""</span>
+<span class="sd">"""Named entity recognizer."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -123,6 +124,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span><span class="p">,</span> <span class="n">thai_stopwords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_iob_to_markup</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.pos_tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_thai</span>
@@ -196,18 +198,22 @@
 <div class="viewcode-block" id="ThaiNameTagger">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.thainer.ThaiNameTagger">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThaiNameTagger</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai named-entity recognizer or Thai NER.</span>
-<span class="sd">    This function supports Thai NER 1.4 and 1.5 only.</span>
-<span class="sd">    :param str version: Thai NER version.</span>
-<span class="sd">        It supports Thai NER 1.4 &amp; 1.5.</span>
-<span class="sd">        The default value is `1.4</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Thai named entity recognizer (Thai NER).</span>
+
+<span class="sd">    This class supports Thai NER 1.4 and 1.5 only.</span>
+
+<span class="sd">    :param str version: Thai NER version, ``"1.4"`` (default)</span>
+<span class="sd">        or ``"1.5"``</span>
 
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tag.thainer import ThaiNameTagger  # doctest: +SKIP</span>
 
 <span class="sd">        &gt;&gt;&gt; thainer14 = ThaiNameTagger(version="1.4")  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; thainer14.get_ner("วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น.")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; thainer14.get_ner(</span>
+<span class="sd">        ...     "วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น."</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">    """</span>
 
     <span class="n">crf</span><span class="p">:</span> <span class="n">CRFTagger</span>
@@ -216,11 +222,11 @@
 <div class="viewcode-block" id="ThaiNameTagger.__init__">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.thainer.ThaiNameTagger.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"1.4"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Thai named-entity recognizer.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the Thai named entity recognizer.</span>
 
-<span class="sd">        :param str version: Thai NER version.</span>
-<span class="sd">                            It's support Thai NER 1.4 &amp; 1.5.</span>
-<span class="sd">                            The default value is `1.4`</span>
+<span class="sd">        :param str version: Thai NER version, ``"1.4"`` (default)</span>
+<span class="sd">            or ``"1.5"``</span>
 <span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pycrfsuite</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
             <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span><span class="p">,</span>  <span class="c1"># pyright: ignore[reportAttributeAccessIssue]  # pyrefly: ignore[missing-module-attribute]</span>
@@ -257,18 +263,17 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ner</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""This function tags named-entities in text in IOB format.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Tag named entities in text in IOB format.</span>
 
-<span class="sd">        :param str text: text in Thai to be tagged</span>
-<span class="sd">        :param bool pos: To include POS tags in the results (`True`) or</span>
-<span class="sd">                            exclude (`False`). The default value is `True`</span>
-<span class="sd">        :param bool tag: output HTML-like tags.</span>
-<span class="sd">        :return: a list of tuples associated with tokenized words, NER tags,</span>
-<span class="sd">                 POS tags (if the parameter `pos` is specified as `True`),</span>
-<span class="sd">                 and output HTML-like tags (if the parameter `tag` is</span>
-<span class="sd">                 specified as `True`).</span>
-<span class="sd">                 Otherwise, return a list of tuples associated with tokenized</span>
-<span class="sd">                 words and NER tags</span>
+<span class="sd">        :param str text: Thai text to be tagged</span>
+<span class="sd">        :param bool pos: include POS tags in the results (``True``,</span>
+<span class="sd">            default) or exclude them (``False``)</span>
+<span class="sd">        :param bool tag: return the text with HTML-like tags</span>
+<span class="sd">            instead of a list of tuples</span>
+<span class="sd">        :return: list of tuples of word, POS tag (if ``pos`` is ``True``),</span>
+<span class="sd">            and named entity tag; or the text with HTML-like tags</span>
+<span class="sd">            (if ``tag`` is ``True``)</span>
 <span class="sd">        :rtype: Union[list[tuple[str, str]], list[tuple[str, str, str]], str]</span>
 
 <span class="sd">        :Note:</span>
@@ -317,25 +322,7 @@
         <span class="n">sent_ner</span> <span class="o">=</span> <span class="p">[(</span><span class="n">pos_tags</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span>
 
         <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="s2">""</span>
-            <span class="n">sent</span> <span class="o">=</span> <span class="s2">""</span>
-            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">ner</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sent_ner</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">ner</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"B-"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
-                    <span class="n">sent</span> <span class="o">+=</span> <span class="s2">"&lt;/"</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">"&gt;"</span>
-                    <span class="n">temp</span> <span class="o">=</span> <span class="n">ner</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-                    <span class="n">sent</span> <span class="o">+=</span> <span class="s2">"&lt;"</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">"&gt;"</span>
-                <span class="k">elif</span> <span class="n">ner</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"B-"</span><span class="p">):</span>
-                    <span class="n">temp</span> <span class="o">=</span> <span class="n">ner</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-                    <span class="n">sent</span> <span class="o">+=</span> <span class="s2">"&lt;"</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">"&gt;"</span>
-                <span class="k">elif</span> <span class="n">ner</span> <span class="o">==</span> <span class="s2">"O"</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
-                    <span class="n">sent</span> <span class="o">+=</span> <span class="s2">"&lt;/"</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">"&gt;"</span>
-                    <span class="n">temp</span> <span class="o">=</span> <span class="s2">""</span>
-                <span class="n">sent</span> <span class="o">+=</span> <span class="n">word</span>
-
-                <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent_ner</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
-                    <span class="n">sent</span> <span class="o">+=</span> <span class="s2">"&lt;/"</span> <span class="o">+</span> <span class="n">temp</span> <span class="o">+</span> <span class="s2">"&gt;"</span>
-
-            <span class="k">return</span> <span class="n">sent</span>
+            <span class="k">return</span> <span class="n">_iob_to_markup</span><span class="p">(</span><span class="n">sent_ner</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">pos</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span>

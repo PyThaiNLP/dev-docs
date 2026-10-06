@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient.currency &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.ancient.currency &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,13 +114,18 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Convert values between ancient Thai currency units."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 
 <div class="viewcode-block" id="convert_currency">
 <a class="viewcode-back" href="../../../api/ancient.html#pythainlp.ancient.convert_currency">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_currency</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">from_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Convert ancient Thai currency to other units</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a value in an ancient Thai currency unit to other units.</span>
+
+<span class="sd">    Supported units:</span>
 
 <span class="sd">    * เบี้ย (Bia)</span>
 <span class="sd">    * อัฐ (At)</span>
@@ -131,13 +137,14 @@
 <span class="sd">    * ชั่ง (Chang)</span>
 
 <span class="sd">    See more:</span>
-<span class="sd">        `Thai money &lt;https://en.wikipedia.org/wiki/History_of_Thai_money&gt;`_.</span>
+<span class="sd">    `Thai money &lt;https://en.wikipedia.org/wiki/History_of_Thai_money&gt;`_.</span>
 
-<span class="sd">    :param float value: value</span>
-<span class="sd">    :param str from_unit: currency unit \</span>
-<span class="sd">        ('เบี้ย', 'อัฐ', 'ไพ', 'เฟื้อง', 'สลึง', 'บาท', 'ตำลึง', 'ชั่ง')</span>
-<span class="sd">    :return: Thai currency</span>
+<span class="sd">    :param float value: value in the unit given by ``from_unit``</span>
+<span class="sd">    :param str from_unit: currency unit, one of 'เบี้ย', 'อัฐ', 'ไพ',</span>
+<span class="sd">        'เฟื้อง', 'สลึง', 'บาท', 'ตำลึง', 'ชั่ง'</span>
+<span class="sd">    :return: value in each unit, keyed by unit name</span>
 <span class="sd">    :rtype: dict[str, float]</span>
+<span class="sd">    :raises NotImplementedError: if ``from_unit`` is not supported</span>
 
 <span class="sd">    :Example:</span>
 

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.syllable &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.syllable &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,12 +114,13 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Syllable tools"""</span>
+<span class="sd">"""Syllable tools."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pattern</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Pattern</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_consonants</span><span class="p">,</span> <span class="n">thai_tonemarks</span>
 
@@ -144,9 +146,11 @@
 <span class="c1"># vowel's short sound</span>
 <span class="n">short</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ะัิึุ"</span>
 <span class="n">re_short</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-    <span class="s2">"เ(.*)ะ|แ(.*)ะ|เ(.*)อะ|โ(.*)ะ|เ(.*)าะ"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span>
+    <span class="s2">"เ(.*)ะ|แ(.*)ะ|เ(.*)อะ|โ(.*)ะ|เ(.*)าะ"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span>
 <span class="p">)</span>
-<span class="n">pattern</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"เ(.*)า"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>  <span class="c1"># เ-า is live syllable</span>
+<span class="n">pattern</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="s2">"เ(.*)า"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span>
+<span class="p">)</span>  <span class="c1"># เ-า is live syllable</span>
 
 <span class="n">_check_1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># These spelling consonants are live syllables.</span>
@@ -180,16 +184,63 @@
         <span class="n">thai_initial_consonant_to_type</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
 
 
+<span class="n">_SHORT_SET</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">short</span><span class="p">)</span>
+<span class="n">_VOWELS_ANY_1</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="s2">"าีืแูเโไใำ"</span><span class="p">)</span>
+<span class="n">_VOWELS_ANY_2</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="s2">"าีืแูาเโ"</span><span class="p">)</span>
+<span class="n">_VOWELS_ANY_3</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="s2">"าีืแูาโ"</span><span class="p">)</span>
+<span class="n">_VOWELS_ANY_4</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="s2">"ำใไ"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check whether the syllable has any of the given characters."""</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">chars</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_has_short_sound</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check whether the syllable has a short vowel sound."""</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span> <span class="ow">or</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_SHORT_SET</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sound_vowel_only</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Classify a syllable with อ but no other consonant."""</span>
+    <span class="k">if</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_VOWELS_ANY_1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"live"</span>
+    <span class="k">if</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_SHORT_SET</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"dead"</span>
+    <span class="k">return</span> <span class="s2">"live"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sound_with_long_vowel</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spelling_consonant</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Classify a syllable with า, ี, ื, แ, ู, or โ."""</span>
+    <span class="n">has_re_short</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">has_re_short</span> <span class="ow">and</span> <span class="p">(</span>
+        <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_1</span> <span class="ow">or</span> <span class="n">spelling_consonant</span> <span class="o">!=</span> <span class="n">syllable</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"live"</span>
+    <span class="k">if</span> <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"dead"</span>
+    <span class="k">if</span> <span class="n">_has_short_sound</span><span class="p">(</span><span class="n">syllable</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"dead"</span>
+    <span class="k">return</span> <span class="s2">"live"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sound_live_final</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">consonant_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Classify a syllable whose final consonant is a live final."""</span>
+    <span class="k">if</span> <span class="n">_has_short_sound</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span> <span class="ow">and</span> <span class="n">consonant_count</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"dead"</span>
+    <span class="k">if</span> <span class="n">syllable</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_SHORT_SET</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"dead"</span>
+    <span class="k">return</span> <span class="s2">"live"</span>
+
+
 <div class="viewcode-block" id="sound_syllable">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.sound_syllable">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sound_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Sound syllable classification</span>
-
-<span class="sd">    This function is sound syllable classification.</span>
-<span class="sd">    The syllable is a live syllable or dead syllable.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Classify the sound of a Thai syllable as live or dead.</span>
 
 <span class="sd">    :param str syllable: Thai syllable</span>
-<span class="sd">    :return: syllable's type ("live" or "dead")</span>
+<span class="sd">    :return: type of the syllable ("live" or "dead")</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -199,88 +250,37 @@
 <span class="sd">        'live'</span>
 <span class="sd">        &gt;&gt;&gt; sound_syllable("เลข")</span>
 <span class="sd">        'dead'</span>
+<span class="sd">        &gt;&gt;&gt; sound_syllable("ฤๅ")</span>
+<span class="sd">        'live'</span>
 <span class="sd">    """</span>
-    <span class="c1"># if len of syllable &lt; 2</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"dead"</span>
 
-    <span class="c1"># get consonants</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_consonants_all</span><span class="p">]</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="ow">and</span> <span class="p">(</span><span class="s2">"อ"</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">)</span>
-        <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"เ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">)</span>
-        <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"live"</span>
-
-    <span class="c1"># Handle syllables with only อ (no other consonants from thai_consonants_all)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">"อ"</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">:</span>
-        <span class="c1"># Syllables with only อ and long vowels are live</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"าีืแูเโไใำ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"live"</span>
-        <span class="c1"># Short vowels or special cases</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"dead"</span>
-        <span class="c1"># Default to live for vowel-only syllables</span>
-        <span class="k">return</span> <span class="s2">"live"</span>
+        <span class="k">return</span> <span class="n">_sound_vowel_only</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
 
-    <span class="c1"># get spelling consonants</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">consonants</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"dead"</span> <span class="k">if</span> <span class="n">_has_short_sound</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"live"</span>
+
     <span class="n">spelling_consonant</span> <span class="o">=</span> <span class="n">consonants</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
-        <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"าีืแูาเโ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span>
-        <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"ำใไ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span>
-        <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_2</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_VOWELS_ANY_2</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_VOWELS_ANY_4</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="ow">not</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="s2">"dead"</span>
 
-    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"าีืแูาโ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>  <span class="c1"># in syllable:</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_1</span>
-            <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"live"</span>
+    <span class="k">if</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_VOWELS_ANY_3</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_sound_with_long_vowel</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">spelling_consonant</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="n">spelling_consonant</span> <span class="o">!=</span> <span class="n">syllable</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"live"</span>
-
-        <span class="k">if</span> <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_2</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">"dead"</span>
-
-        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"dead"</span>
-
-        <span class="k">return</span> <span class="s2">"live"</span>
-
-    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"ำใไ"</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"live"</span>  <span class="c1"># if these vowel's long sounds are live syllables</span>
-
-    <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">)):</span>  <span class="c1"># if it is เ-า</span>
+    <span class="c1"># ำ, ใ, ไ and เ-า are live</span>
+    <span class="k">if</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_VOWELS_ANY_4</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">"live"</span>
 
     <span class="k">if</span> <span class="n">spelling_consonant</span> <span class="ow">in</span> <span class="n">_check_1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">))</span>
-            <span class="ow">or</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">)</span>
-        <span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">"dead"</span>
-
-        <span class="k">if</span> <span class="n">syllable</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s2">"dead"</span>
-
-        <span class="k">return</span> <span class="s2">"live"</span>
-
-    <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span>
-        <span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-    <span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>  <span class="c1"># if vowel's short sound is found</span>
-        <span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span>
-    <span class="p">):</span>  <span class="c1"># consonant in short</span>
-        <span class="k">return</span> <span class="s2">"dead"</span>
+        <span class="k">return</span> <span class="n">_sound_live_final</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="s2">"dead"</span></div>
 
@@ -289,12 +289,11 @@
 <div class="viewcode-block" id="syllable_open_close_detector">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.syllable_open_close_detector">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">syllable_open_close_detector</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Open/close Thai syllables detector</span>
-
-<span class="sd">    This function is used for finding Thai syllables that are open or closed sound.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detect whether a Thai syllable is open or closed.</span>
 
 <span class="sd">    :param str syllable: Thai syllable</span>
-<span class="sd">    :return: open / close</span>
+<span class="sd">    :return: "open" or "close"</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -320,12 +319,11 @@
 <div class="viewcode-block" id="syllable_length">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.syllable_length">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">syllable_length</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai syllable length</span>
-
-<span class="sd">    This function is used for finding syllable's length. (long or short)</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detect the vowel length of a Thai syllable.</span>
 
 <span class="sd">    :param str syllable: Thai syllable</span>
-<span class="sd">    :return: syllable's length (long or short)</span>
+<span class="sd">    :return: length of the syllable ("long" or "short")</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -337,7 +335,7 @@
 <span class="sd">        'short'</span>
 <span class="sd">    """</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">short</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">syllable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">_has_any</span><span class="p">(</span><span class="n">syllable</span><span class="p">,</span> <span class="n">_SHORT_SET</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">"short"</span>
 
     <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_short</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">syllable</span><span class="p">)):</span>
@@ -366,18 +364,85 @@
     <span class="k">if</span> <span class="n">_sonorant</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">consonants</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">if</span> <span class="n">_sonorant</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">consonants</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">_sonorant</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">consonants</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_tone_ah_sonorant</span><span class="p">(</span><span class="n">initial</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sound</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tone_mark</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Tone rules for อ or ห followed by a sonorant ending."""</span>
+    <span class="k">if</span> <span class="n">sound</span> <span class="o">==</span> <span class="s2">"live"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">"l"</span> <span class="k">if</span> <span class="n">initial</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"ห"</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="k">if</span> <span class="n">initial</span> <span class="o">==</span> <span class="s2">"ห"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">"f"</span> <span class="k">if</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"้"</span> <span class="k">else</span> <span class="s2">"r"</span>
+        <span class="k">return</span> <span class="s2">""</span>
+    <span class="k">return</span> <span class="s2">"l"</span>
+
+
+<span class="c1"># Ordered rules: (initial type, tone mark, sound, length, open/close, tone).</span>
+<span class="c1"># None matches any value. The first matching rule wins.</span>
+<span class="n">_TONE_RULES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span>
+    <span class="nb">tuple</span><span class="p">[</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="nb">str</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="o">...</span><span class="p">,</span>
+<span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s2">"high"</span><span class="p">,</span> <span class="s2">"่"</span><span class="p">,</span> <span class="s2">"live"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"l"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="s2">"่"</span><span class="p">,</span> <span class="s2">"live"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"l"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="s2">"้"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="s2">"๋"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="s2">"๊"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="s2">"่"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="s2">"้"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"high"</span><span class="p">,</span> <span class="s2">"้"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">,</span> <span class="s2">"short"</span><span class="p">,</span> <span class="s2">"close"</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">,</span> <span class="s2">"long"</span><span class="p">,</span> <span class="s2">"close"</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"short"</span><span class="p">,</span> <span class="s2">"open"</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">,</span> <span class="s2">"long"</span><span class="p">,</span> <span class="s2">"open"</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"l"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"high"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"l"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"low"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"live"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"m"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"mid"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"live"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"m"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"high"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"live"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_match_tone_rule</span><span class="p">(</span><span class="n">actual</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return the tone of the first rule that matches; "" if none does."""</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">_TONE_RULES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">actual</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">rule</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">""</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_tone_table</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Expand ``_TONE_RULES`` into a table for every possible input."""</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+        <span class="n">thai_initial_consonant_type</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="o">*</span><span class="n">thai_tonemarks</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"live"</span><span class="p">,</span> <span class="s2">"dead"</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"short"</span><span class="p">,</span> <span class="s2">"long"</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"open"</span><span class="p">,</span> <span class="s2">"close"</span><span class="p">),</span>
+    <span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_match_tone_rule</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span>
+
+
+<span class="n">_TONE_TABLE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_tone_table</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="tone_detector">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.tone_detector">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tone_detector</span><span class="p">(</span><span class="n">syllable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai tone detector for syllables</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detect the tone of a Thai syllable.</span>
 
-<span class="sd">    Return tone of a syllable.</span>
+<span class="sd">    The tone is one of:</span>
 
 <span class="sd">    - l: low</span>
 <span class="sd">    - m: mid</span>
@@ -387,7 +452,8 @@
 <span class="sd">    - empty string: cannot be detected</span>
 
 <span class="sd">    :param str syllable: Thai syllable</span>
-<span class="sd">    :return: syllable's tone (l, m, h, r, f) or empty if it cannot be detected</span>
+<span class="sd">    :return: tone of the syllable (l, m, h, r, f),</span>
+<span class="sd">        or an empty string if it cannot be detected</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -398,108 +464,31 @@
 <span class="sd">        &gt;&gt;&gt; tone_detector("ไม้")</span>
 <span class="sd">        'h'</span>
 <span class="sd">    """</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">sound_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-    <span class="c1"># get consonants</span>
+    <span class="n">sound</span> <span class="o">=</span> <span class="n">sound_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
     <span class="n">consonants</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">syllable</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">thai_consonants</span><span class="p">]</span>
 
-    <span class="c1"># Handle syllables with no consonants (e.g., ฤ, ฦ)</span>
+    <span class="c1"># Syllables with no consonants (e.g., ฤ, ฦ)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">""</span>
 
     <span class="n">initial_consonant</span> <span class="o">=</span> <span class="n">consonants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">tone_mark</span> <span class="o">=</span> <span class="n">_tone_mark_detector</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-    <span class="n">syllable_check</span> <span class="o">=</span> <span class="n">syllable_open_close_detector</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-    <span class="n">syllable_check_length</span> <span class="o">=</span> <span class="n">syllable_length</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-    <span class="n">initial_consonant_type</span> <span class="o">=</span> <span class="n">thai_initial_consonant_to_type</span><span class="p">[</span><span class="n">initial_consonant</span><span class="p">]</span>
-    <span class="c1"># r for store value</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="c1"># Special handling for อ and ห with sonorants</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">initial_consonant</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"ห"</span><span class="p">)):</span>
-        <span class="n">consonant_ending</span> <span class="o">=</span> <span class="n">_check_sonorant_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">consonant_ending</span><span class="p">:</span>
-            <span class="c1"># Only apply special rules if there are sonorants</span>
-            <span class="k">if</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"อ"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-            <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"ห"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-            <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"อ"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-            <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"ห"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-            <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"ห"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-            <span class="k">elif</span> <span class="n">initial_consonant</span> <span class="o">==</span> <span class="s2">"ห"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="s2">"r"</span>
-    <span class="c1"># If r is still empty, apply general tone rules</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"high"</span>
-        <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span>
-        <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span>
-        <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span>
-        <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"h"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"๋"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"r"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"๊"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"h"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"่"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"high"</span> <span class="ow">and</span> <span class="n">tone_mark</span> <span class="o">==</span> <span class="s2">"้"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span>
-        <span class="ow">and</span> <span class="n">syllable_check_length</span> <span class="o">==</span> <span class="s2">"short"</span>
-        <span class="ow">and</span> <span class="n">syllable_check</span> <span class="o">==</span> <span class="s2">"close"</span>
-        <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"h"</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span>
-        <span class="ow">and</span> <span class="n">syllable_check_length</span> <span class="o">==</span> <span class="s2">"long"</span>
-        <span class="ow">and</span> <span class="n">syllable_check</span> <span class="o">==</span> <span class="s2">"close"</span>
-        <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span>
-        <span class="ow">and</span> <span class="n">syllable_check_length</span> <span class="o">==</span> <span class="s2">"short"</span>
-        <span class="ow">and</span> <span class="n">syllable_check</span> <span class="o">==</span> <span class="s2">"open"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"h"</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span>
-        <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span>
-        <span class="ow">and</span> <span class="n">syllable_check_length</span> <span class="o">==</span> <span class="s2">"long"</span>
-        <span class="ow">and</span> <span class="n">syllable_check</span> <span class="o">==</span> <span class="s2">"open"</span>
-        <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span>
-    <span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"f"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"high"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"dead"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"l"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"low"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"m"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"mid"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"m"</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">initial_consonant_type</span> <span class="o">==</span> <span class="s2">"high"</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"live"</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s2">"r"</span>
 
-    <span class="k">return</span> <span class="n">r</span></div>
+    <span class="c1"># Special handling for อ and ห with sonorants</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="ow">and</span> <span class="n">initial_consonant</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"อ"</span><span class="p">,</span> <span class="s2">"ห"</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">_check_sonorant_syllable</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">_tone_ah_sonorant</span><span class="p">(</span><span class="n">initial_consonant</span><span class="p">,</span> <span class="n">sound</span><span class="p">,</span> <span class="n">tone_mark</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+    <span class="n">initial_type</span> <span class="o">=</span> <span class="n">thai_initial_consonant_to_type</span><span class="p">[</span><span class="n">initial_consonant</span><span class="p">]</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">syllable_length</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
+    <span class="n">open_close</span> <span class="o">=</span> <span class="n">syllable_open_close_detector</span><span class="p">(</span><span class="n">syllable</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="p">(</span><span class="n">initial_type</span><span class="p">,</span> <span class="n">tone_mark</span><span class="p">,</span> <span class="n">sound</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">open_close</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_TONE_TABLE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span></div>
 
 </pre></div>
 

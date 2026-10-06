@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.tcc &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tokenize.tcc &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,15 +114,19 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""The implementation of tokenizer according to Thai Character Clusters (TCCs)</span>
-<span class="sd">rules proposed by `Theeramunkong et al. 2000. \</span>
-<span class="sd">    &lt;https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548&gt;`_</span>
+<span class="sd">"""</span>
+<span class="sd">Tokenize text into Thai Character Clusters (TCCs).</span>
+
+<span class="sd">The implementation follows the TCC rules proposed by Theeramunkong et al.</span>
+<span class="sd">2000:</span>
+<span class="sd">https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.2548</span>
 
 <span class="sd">Credits:</span>
-<span class="sd">    * TCC: Jakkrit TeCho</span>
-<span class="sd">    * Grammar: Wittawat Jitkrittum (`link to the source file \</span>
-<span class="sd">      &lt;https://github.com/wittawatj/jtcc/blob/master/TCC.g&gt;`_)</span>
-<span class="sd">    * Python code: Korakot Chaovavanich</span>
+
+<span class="sd">* TCC: Jakkrit TeCho</span>
+<span class="sd">* Grammar: Wittawat Jitkrittum</span>
+<span class="sd">  (https://github.com/wittawatj/jtcc/blob/master/TCC.g)</span>
+<span class="sd">* Python code: Korakot Chaovavanich</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -177,11 +182,12 @@
 <div class="viewcode-block" id="tcc">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.tcc">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tcc</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""TCC generator which generates Thai Character Clusters</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate Thai Character Clusters (TCCs) from text.</span>
 
-<span class="sd">    :param str text: text to be tokenized into character clusters</span>
-<span class="sd">    :return: subwords (character clusters)</span>
-<span class="sd">    :rtype: Iterator[str]</span>
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :return: iterator of character clusters</span>
+<span class="sd">    :rtype: collections.abc.Iterator[str]</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span>
@@ -202,10 +208,11 @@
 <div class="viewcode-block" id="tcc_pos">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.tcc_pos">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tcc_pos</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""TCC positions</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the ending positions of Thai Character Clusters (TCCs) in text.</span>
 
-<span class="sd">    :param str text: text to be tokenized into character clusters</span>
-<span class="sd">    :return: set of the ending positions of character clusters</span>
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :return: set of ending positions of character clusters</span>
 <span class="sd">    :rtype: set[int]</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -224,12 +231,12 @@
 <div class="viewcode-block" id="segment">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.tcc.segment">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Subword segmentation</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into Thai Character Clusters (TCCs).</span>
 
-<span class="sd">    :param str text: text to be tokenized into character clusters</span>
-<span class="sd">    :return: list of subwords (character clusters), tokenized from the text</span>
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :return: list of character clusters</span>
 <span class="sd">    :rtype: list[str]</span>
-
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">tcc</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></div>
 

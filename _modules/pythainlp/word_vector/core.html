@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.word_vector.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.word_vector.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,16 +114,19 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Provide Thai word vectors."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai2fit_tokenizer</span><span class="p">,</span> <span class="n">word_tokenize</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models.keyedvectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2VecKeyedVectors</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
@@ -145,20 +149,27 @@
 <div class="viewcode-block" id="WordVector">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WordVector</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Word Vector class</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Provide Thai word vectors.</span>
 
-<span class="sd">    :param str model_name: model name</span>
+<span class="sd">    :param str model_name: name of the word vector model</span>
 
-<span class="sd">    **Options for model_name**</span>
-<span class="sd">        * *thai2fit_wv* (default) - word vector from thai2fit</span>
-<span class="sd">        * *ltw2v* - word vector from LTW2V: The Large Thai Word2Vec v0.1</span>
-<span class="sd">        * *ltw2v_v1.0_15_window* - word vector from LTW2V v1.0 and 15 window</span>
-<span class="sd">        * *ltw2v_v1.0_5_window* - word vector from LTW2V v1.0 and 5 window</span>
+<span class="sd">        * *thai2fit_wv* - word vectors from thai2fit (default)</span>
+<span class="sd">        * *ltw2v* - word vectors from LTW2V: The Large Thai Word2Vec v0.1</span>
+<span class="sd">        * *ltw2v_v1.0_15_window* - word vectors from LTW2V v1.0 with a</span>
+<span class="sd">          window size of 15</span>
+<span class="sd">        * *ltw2v_v1.0_5_window* - word vectors from LTW2V v1.0 with a</span>
+<span class="sd">          window size of 5</span>
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="WordVector.__init__">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"thai2fit_wv"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the word vector.</span>
+
+<span class="sd">        :param str model_name: name of the word vector model</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="s2">"Word2VecKeyedVectors"</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">WV_DIM</span><span class="p">:</span> <span class="nb">int</span>
@@ -169,9 +180,11 @@
 <div class="viewcode-block" id="WordVector.load_wordvector">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.load_wordvector">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_wordvector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Load word vector model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Load a word vector model.</span>
 
-<span class="sd">        :param str model_name: model name</span>
+<span class="sd">        :param str model_name: name of the word vector model</span>
+<span class="sd">        :raises FileNotFoundError: if the model corpus is not found</span>
 <span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeyedVectors</span>
 
@@ -206,7 +219,8 @@
 <div class="viewcode-block" id="WordVector.get_model">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.get_model">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Word2VecKeyedVectors</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Get word vector model.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Return the word vector model.</span>
 
 <span class="sd">        :return: `gensim` word2vec model</span>
 <span class="sd">        :rtype: gensim.models.keyedvectors.Word2VecKeyedVectors</span>
@@ -217,23 +231,26 @@
 <div class="viewcode-block" id="WordVector.doesnt_match">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.doesnt_match">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">doesnt_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""This function returns one word that is mostly unrelated to other words</span>
-<span class="sd">        in the list. We use the function :func:`doesnt_match`</span>
-<span class="sd">        from :mod:`gensim`.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Return the word that is the most unrelated to other words.</span>
 
-<span class="sd">        :param list[str] words: a list of words</span>
-<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
-<span class="sd">                          not in the vocabulary of the model.</span>
-<span class="sd">        :return: the word that is mostly unrelated</span>
+<span class="sd">        Use the function :func:`doesnt_match` from :mod:`gensim`.</span>
+
+<span class="sd">        :param list[str] words: list of words</span>
+<span class="sd">        :return: the most unrelated word</span>
 <span class="sd">        :rtype: str</span>
+<span class="sd">        :raises KeyError: if a word in **words** is not in the vocabulary</span>
+<span class="sd">            of the model</span>
 
 <span class="sd">        :Note:</span>
 <span class="sd">            * If a word in `words` is not in the vocabulary, :class:`KeyError`</span>
 <span class="sd">              will be raised.</span>
 
 <span class="sd">        :Example:</span>
+
 <span class="sd">        Pick the word "พริกไทย" (name of food) out of the list of meals</span>
 <span class="sd">        ("อาหารเช้า", "อาหารเที่ยง", "อาหารเย็น").</span>
+
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; wv = WordVector()</span>
@@ -251,7 +268,7 @@
 <span class="sd">        &gt;&gt;&gt; wv.doesnt_match(words)</span>
 <span class="sd">        'เรือ'</span>
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"str"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">words</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="WordVector.most_similar_cosmul">
@@ -259,26 +276,28 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">most_similar_cosmul</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">positive</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">negative</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">"""This function finds the top-10 words that are most similar with respect</span>
-<span class="sd">        to two lists of words labeled as positive and negative.</span>
-<span class="sd">        The top-10 most similar words are obtained using multiplication</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Find the top-10 words most similar to two lists of words.</span>
+
+<span class="sd">        The two lists are labeled as positive and negative. The top-10</span>
+<span class="sd">        most similar words are obtained using the multiplication</span>
 <span class="sd">        combination objective from Omer Levy and Yoav Goldberg</span>
 <span class="sd">        [OmerLevy_YoavGoldberg_2014]_.</span>
 
-<span class="sd">        We use the function :func:`gensim.most_similar_cosmul` directly from</span>
+<span class="sd">        Use the function :func:`gensim.most_similar_cosmul` directly from</span>
 <span class="sd">        :mod:`gensim`.</span>
 
-<span class="sd">        :param list[str] positive: a list of words to add</span>
-<span class="sd">        :param list[str] negative: a list of words to subtract</span>
-
-<span class="sd">        :raises KeyError: if there is any word in `positive` or `negative` that is</span>
-<span class="sd">                          not in the vocabulary of the model.</span>
-<span class="sd">        :return: list of top-10 most similar words and its similarity score</span>
-<span class="sd">        :rtype:  list[tuple[str, float]]</span>
+<span class="sd">        :param list[str] positive: list of words to add</span>
+<span class="sd">        :param list[str] negative: list of words to subtract</span>
+<span class="sd">        :return: list of the top-10 most similar words and their</span>
+<span class="sd">            similarity scores</span>
+<span class="sd">        :rtype: list[tuple[str, float]]</span>
+<span class="sd">        :raises KeyError: if a word in **positive** or **negative** is not</span>
+<span class="sd">            in the vocabulary of the model</span>
 
 <span class="sd">        :Note:</span>
-<span class="sd">            *  With a single word in the positive list, it will find the</span>
-<span class="sd">               most similar words to the word given (similar</span>
+<span class="sd">            *  With a single word in the positive list, it finds the</span>
+<span class="sd">               most similar words to the given word (similar</span>
 <span class="sd">               to :func:`gensim.most_similar`)</span>
 <span class="sd">            *  If a word in `positive` or `negative` is not in the vocabulary,</span>
 <span class="sd">               :class:`KeyError` will be raised.</span>
@@ -344,7 +363,7 @@
 <span class="sd">        ('ลาว', 0.2995176911354065), ('คนไทย', 0.2885020673274994),</span>
 <span class="sd">        ('เวียดนาม', 0.2878379821777344), ('ชาวไทย', 0.28480708599090576)]</span>
 
-<span class="sd">        The function returns :class:`KeyError` when the term "เมนูอาหารไทย"</span>
+<span class="sd">        The function raises :class:`KeyError` when the term "เมนูอาหารไทย"</span>
 <span class="sd">        is not in the vocabulary.</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
@@ -356,7 +375,7 @@
 <span class="sd">        KeyError: "word 'เมนูอาหารไทย' not in vocabulary"</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span>
-            <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+            <span class="s2">"list[tuple[str, float]]"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">most_similar_cosmul</span><span class="p">(</span>
                 <span class="n">positive</span><span class="o">=</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="n">negative</span>
             <span class="p">),</span>
@@ -366,15 +385,15 @@
 <div class="viewcode-block" id="WordVector.similarity">
 <a class="viewcode-back" href="../../../api/word_vector.html#pythainlp.word_vector.WordVector.similarity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""This function computes cosine similarity between two words.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the cosine similarity between two words.</span>
 
-<span class="sd">        :param str word1: first word to be compared with</span>
-<span class="sd">        :param str word2: second word to be compared with</span>
-
-<span class="sd">        :raises KeyError: if either `word1` or `word2` is not in the</span>
-<span class="sd">                          vocabulary of the model.</span>
-<span class="sd">        :return: the cosine similarity between the two word vectors</span>
+<span class="sd">        :param str word1: first word to be compared</span>
+<span class="sd">        :param str word2: second word to be compared</span>
+<span class="sd">        :return: cosine similarity between the two word vectors</span>
 <span class="sd">        :rtype: float</span>
+<span class="sd">        :raises KeyError: if **word1** or **word2** is not in the</span>
+<span class="sd">            vocabulary of the model</span>
 
 <span class="sd">        :Note:</span>
 <span class="sd">            *  If a word in `word1` or `word2` is not in the vocabulary,</span>
@@ -382,7 +401,7 @@
 
 <span class="sd">        :Example:</span>
 
-<span class="sd">        Compute consine similarity between two words: "รถไฟ" and "รถไฟฟ้า"</span>
+<span class="sd">        Compute cosine similarity between two words: "รถไฟ" and "รถไฟฟ้า"</span>
 <span class="sd">        (train and electric train).</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
@@ -391,7 +410,7 @@
 <span class="sd">        0.43387136</span>
 
 
-<span class="sd">        Compute consine similarity between two words: "เสือดาว" and "รถไฟฟ้า"</span>
+<span class="sd">        Compute cosine similarity between two words: "เสือดาว" and "รถไฟฟ้า"</span>
 <span class="sd">        (leopard and electric train).</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.word_vector import WordVector</span>
@@ -401,7 +420,7 @@
 <span class="sd">        0.04300258</span>
 
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"float"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="WordVector.sentence_vectorizer">
@@ -409,21 +428,19 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">sentence_vectorizer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_mean</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"NDArray[np.float32]"</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Converts a Thai sentence into a vector.</span>
-<span class="sd">        Specifically, it first tokenizes that text and maps each tokenized word</span>
-<span class="sd">        with the word vectors from the model.</span>
-<span class="sd">        Then, word vectors are aggregated into one vector of 300 dimensions</span>
-<span class="sd">        by calculating either the mean or summation of all word vectors.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert Thai text into a vector.</span>
 
-<span class="sd">        :param str text: text input</span>
-<span class="sd">        :param bool use_mean: if `True` aggregate word vectors with mean of all</span>
-<span class="sd">                                 word vectors. Otherwise, aggregate with</span>
-<span class="sd">                                 summation of all word vectors</span>
+<span class="sd">        First tokenize the text and map each word to its word vector</span>
+<span class="sd">        from the model. Then aggregate the word vectors into one vector</span>
+<span class="sd">        of 300 dimensions, by the mean or the sum of all word vectors.</span>
 
-<span class="sd">        :return: a :class:`numpy.ndarray` of dtype ``numpy.float32`` and</span>
-<span class="sd">               shape ``(1, 300)`` representing the given sentence</span>
+<span class="sd">        :param str text: text to be vectorized</span>
+<span class="sd">        :param bool use_mean: if True, aggregate word vectors by their</span>
+<span class="sd">            mean; otherwise, aggregate by their sum</span>
+<span class="sd">        :return: :class:`numpy.ndarray` of dtype ``numpy.float32`` and</span>
+<span class="sd">            shape ``(1, 300)`` representing the given text</span>
 <span class="sd">        :rtype: numpy.typing.NDArray[numpy.float32]</span>
-
 
 <span class="sd">        :Example:</span>
 

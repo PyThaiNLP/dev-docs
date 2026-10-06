@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.thai_lunar_date &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,8 +114,11 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""This file is a port from</span>
-<span class="sd">&gt; https://gist.github.com/touchiep/99f4f5bb349d6b983ef78697630ab78e</span>
+<span class="sd">"""</span>
+<span class="sd">Thai lunar date conversion.</span>
+
+<span class="sd">This file is a port from</span>
+<span class="sd">https://gist.github.com/touchiep/99f4f5bb349d6b983ef78697630ab78e</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -360,11 +364,25 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">athikamas</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check if a year is a leap month year (อธิกมาส).</span>
+
+<span class="sd">    :param int year: year in the Buddhist Era or Common Era</span>
+<span class="sd">    :return: True if the year has an extra month</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    """</span>
     <span class="n">athi</span> <span class="o">=</span> <span class="p">((</span><span class="n">year</span> <span class="o">-</span> <span class="mi">78</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.45222</span><span class="p">)</span> <span class="o">%</span> <span class="mf">2.7118886</span>
     <span class="k">return</span> <span class="n">athi</span> <span class="o">&lt;</span> <span class="mi">1</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">athikavar</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check if a year is a leap day year (อธิกวาร).</span>
+
+<span class="sd">    :param int year: year in the Buddhist Era or Common Era</span>
+<span class="sd">    :return: True if the year has an extra day</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">athikamas</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
 
@@ -376,6 +394,13 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">deviation</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return the deviation of a year from the lunar calendar.</span>
+
+<span class="sd">    :param int year: year in the Buddhist Era or Common Era</span>
+<span class="sd">    :return: deviation value of the year</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    """</span>
     <span class="n">curr_dev</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">last_dev</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">f_year</span><span class="p">,</span> <span class="n">f_dev</span> <span class="o">=</span> <span class="n">_calculate_f_year_f_dev</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
@@ -400,34 +425,38 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">last_day_in_year</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return the number of days in a lunar year.</span>
+
+<span class="sd">    :param int year: year in the Buddhist Era or Common Era</span>
+<span class="sd">    :return: number of days (354, 355, or 384)</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">athikamas</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">384</span>
-    <span class="k">elif</span> <span class="n">athikavar</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">athikavar</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">355</span>
 
     <span class="k">return</span> <span class="mi">354</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">athikasurathin</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check if a year is a leap year in the Thai lunar calendar"""</span>
-    <span class="c1"># Check divisibility by 400 (divisible by 400 is always a leap year)</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check if a year is a solar leap year (อธิกสุรทิน, with 29 February).</span>
+
+<span class="sd">    :param int year: Gregorian year (Common Era)</span>
+<span class="sd">    :return: True if the year is a leap year in the Gregorian calendar</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="c1"># Check divisibility by 100 (divisible by 100 but not 400 is not a leap</span>
-    <span class="c1"># year)</span>
-    <span class="k">elif</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="c1"># Check divisibility by 4 (divisible by 4 but not by 100 is a leap year)</span>
-    <span class="k">elif</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="c1"># All other cases are not leap years</span>
-    <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">number_day_in_year</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return the number of days (365 or 366) in a Gregorian year (CE)."""</span>
     <span class="k">if</span> <span class="n">athikasurathin</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">366</span>
 
@@ -437,13 +466,13 @@
 <div class="viewcode-block" id="th_zodiac">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.th_zodiac">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">th_zodiac</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Thai Zodiac Year Name</span>
-<span class="sd">    Converts a Gregorian year to its corresponding Zodiac name.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Gregorian year to its Thai zodiac year name.</span>
 
-<span class="sd">    :param int year: The Gregorian year. AD (Anno Domini)</span>
-<span class="sd">    :param int output_type: Output type (1 = Thai, 2 = English, 3 = Number).</span>
-
-<span class="sd">    :return: The Zodiac name or number corresponding to the input year.</span>
+<span class="sd">    :param int year: Gregorian year (Anno Domini)</span>
+<span class="sd">    :param int output_type: output type</span>
+<span class="sd">        (1 for Thai name, 2 for English name, 3 for number)</span>
+<span class="sd">    :return: zodiac name or number of the year</span>
 <span class="sd">    :rtype: Union[str, int]</span>
 
 <span class="sd">    :Example:</span>
@@ -459,25 +488,78 @@
 <span class="sd">        &gt;&gt;&gt; th_zodiac(2024, output_type=3)</span>
 <span class="sd">        5</span>
 <span class="sd">    """</span>
-    <span class="c1"># Calculate zodiac index</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">12</span>
     <span class="k">if</span> <span class="n">result</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">12</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">-</span> <span class="mi">3</span>
 
-    <span class="c1"># Return the zodiac based on the output type</span>
     <span class="k">return</span> <span class="n">_ZODIAC</span><span class="p">[</span><span class="n">output_type</span><span class="p">][</span><span class="n">result</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span></div>
 
+
+
+<span class="n">_DAYS_IN_MONTHS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">354</span><span class="p">:</span> <span class="n">_DAYS_354</span><span class="p">,</span>
+    <span class="mi">355</span><span class="p">:</span> <span class="n">_DAYS_355</span><span class="p">,</span>
+    <span class="mi">384</span><span class="p">:</span> <span class="n">_DAYS_384</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_nearest_begin_date</span><span class="p">(</span><span class="n">input_year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">date</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Find the latest begin date before the year preceding ``input_year``."""</span>
+    <span class="n">c_year</span> <span class="o">=</span> <span class="n">input_year</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">begin_date</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">_BEGIN_DATES</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c_year</span> <span class="o">&gt;</span> <span class="n">begin_date</span><span class="o">.</span><span class="n">year</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">begin_date</span>
+    <span class="k">return</span> <span class="n">_BEGIN_DATES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_day_from_one</span><span class="p">(</span><span class="n">input_date</span><span class="p">:</span> <span class="n">date</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Count the days since the lunar year began (1-based)."""</span>
+    <span class="n">begin_date</span> <span class="o">=</span> <span class="n">_nearest_begin_date</span><span class="p">(</span><span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">current_date</span> <span class="o">=</span> <span class="n">begin_date</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">begin_date</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">):</span>
+        <span class="n">current_date</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">last_day_in_year</span><span class="p">(</span><span class="n">year</span><span class="p">))</span>
+
+    <span class="n">r_day_prev</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="n">current_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="o">-</span> <span class="n">current_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+    <span class="n">day_of_year</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_date</span> <span class="o">-</span> <span class="n">date</span><span class="p">(</span><span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">days</span>
+    <span class="k">return</span> <span class="n">r_day_prev</span> <span class="o">+</span> <span class="n">day_of_year</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_month_and_day</span><span class="p">(</span>
+    <span class="n">days_of_year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Find the month index (1-based) and the day within that month."""</span>
+    <span class="n">th_m</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">th_m</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">days_of_year</span> <span class="o">&lt;=</span> <span class="n">days</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">days_of_year</span> <span class="o">-=</span> <span class="n">days</span>
+    <span class="k">return</span> <span class="n">th_m</span><span class="p">,</span> <span class="n">days_of_year</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_adjust_month</span><span class="p">(</span><span class="n">th_m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last_day</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Map the month index to the month number, skipping the leap month."""</span>
+    <span class="k">if</span> <span class="n">last_day</span> <span class="o">&lt;=</span> <span class="mi">355</span><span class="p">:</span>  <span class="c1"># 354 or 355</span>
+        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">12</span>
+    <span class="k">elif</span> <span class="n">last_day</span> <span class="o">==</span> <span class="mi">384</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;</span> <span class="mi">13</span><span class="p">:</span>
+            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">13</span>
+        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">th_m</span> <span class="o">&lt;=</span> <span class="mi">13</span><span class="p">:</span>
+            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">th_m</span>
 
 
 <div class="viewcode-block" id="to_lunar_date">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.to_lunar_date">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">to_lunar_date</span><span class="p">(</span><span class="n">input_date</span><span class="p">:</span> <span class="n">date</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Convert the solar date to Thai Lunar Date</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a solar date to a Thai lunar date.</span>
 
-<span class="sd">    :param date input_date: date of the day.</span>
-<span class="sd">    :return: Thai text lunar date</span>
+<span class="sd">    :param datetime.date input_date: solar date</span>
+<span class="sd">    :return: Thai lunar date text</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -489,57 +571,21 @@
 <span class="sd">        &gt;&gt;&gt; to_lunar_date(date(2024, 12, 31))</span>
 <span class="sd">        'ขึ้น 2 ค่ำ เดือน 2'</span>
 <span class="sd">    """</span>
-    <span class="c1"># Check if date is within supported range</span>
     <span class="k">if</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;</span> <span class="mi">1903</span> <span class="ow">or</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2460</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Unsupported date"</span><span class="p">)</span>  <span class="c1"># Unsupported date</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Unsupported date"</span><span class="p">)</span>
 
-    <span class="c1"># Choose the nearest begin date</span>
-    <span class="n">c_year</span> <span class="o">=</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">begin_date</span> <span class="o">=</span> <span class="n">_BEGIN_DATES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">_date</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">_BEGIN_DATES</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">c_year</span> <span class="o">&gt;</span> <span class="n">_date</span><span class="o">.</span><span class="n">year</span><span class="p">:</span>
-            <span class="n">begin_date</span> <span class="o">=</span> <span class="n">_date</span>
-            <span class="k">break</span>
-
-    <span class="n">current_date</span> <span class="o">=</span> <span class="n">begin_date</span>
-    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">begin_date</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">):</span>
-        <span class="n">day_in_year</span> <span class="o">=</span> <span class="n">last_day_in_year</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-        <span class="n">current_date</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">day_in_year</span><span class="p">)</span>
-
-    <span class="n">r_day_prev</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="n">current_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="o">-</span> <span class="n">current_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
-    <span class="n">day_of_year</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_date</span> <span class="o">-</span> <span class="n">date</span><span class="p">(</span><span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">days</span>
-    <span class="n">day_from_one</span> <span class="o">=</span> <span class="n">r_day_prev</span> <span class="o">+</span> <span class="n">day_of_year</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">day_from_one</span> <span class="o">=</span> <span class="n">_day_from_one</span><span class="p">(</span><span class="n">input_date</span><span class="p">)</span>
     <span class="n">last_day</span> <span class="o">=</span> <span class="n">last_day_in_year</span><span class="p">(</span><span class="n">input_date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">last_day</span> <span class="o">==</span> <span class="mi">354</span><span class="p">:</span>
-        <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">_DAYS_354</span>
-    <span class="k">elif</span> <span class="n">last_day</span> <span class="o">==</span> <span class="mi">355</span><span class="p">:</span>
-        <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">_DAYS_355</span>
-    <span class="k">elif</span> <span class="n">last_day</span> <span class="o">==</span> <span class="mi">384</span><span class="p">:</span>
-        <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">_DAYS_384</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">_DAYS_IN_MONTHS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">last_day</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">days_in_month</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"Unexpected last_day value: </span><span class="si">{</span><span class="n">last_day</span><span class="si">!r}</span><span class="s2">. "</span>
             <span class="s2">"Expected 354, 355, or 384."</span>
         <span class="p">)</span>
 
-    <span class="n">days_of_year</span> <span class="o">=</span> <span class="n">day_from_one</span>
-    <span class="n">th_m</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">th_m</span> <span class="o">=</span> <span class="n">j</span>
-        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">days_of_year</span> <span class="o">&lt;=</span> <span class="n">days</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">days_of_year</span> <span class="o">-=</span> <span class="n">days</span>
-
-    <span class="k">if</span> <span class="n">last_day</span> <span class="o">&lt;=</span> <span class="mi">355</span><span class="p">:</span>  <span class="c1"># 354 or 355</span>
-        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
-            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">12</span>
-    <span class="k">elif</span> <span class="n">last_day</span> <span class="o">==</span> <span class="mi">384</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;</span> <span class="mi">13</span><span class="p">:</span>
-            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">13</span>
-        <span class="k">if</span> <span class="n">th_m</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">th_m</span> <span class="o">&lt;=</span> <span class="mi">13</span><span class="p">:</span>
-            <span class="n">th_m</span> <span class="o">=</span> <span class="n">th_m</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">th_m</span><span class="p">,</span> <span class="n">days_of_year</span> <span class="o">=</span> <span class="n">_month_and_day</span><span class="p">(</span><span class="n">day_from_one</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">)</span>
+    <span class="n">th_m</span> <span class="o">=</span> <span class="n">_adjust_month</span><span class="p">(</span><span class="n">th_m</span><span class="p">,</span> <span class="n">last_day</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">days_of_year</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
         <span class="n">th_s</span> <span class="o">=</span> <span class="s2">"แรม"</span>
@@ -547,9 +593,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">th_s</span> <span class="o">=</span> <span class="s2">"ขึ้น"</span>
 
-    <span class="n">thai_lunar_date</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">th_s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">days_of_year</span><span class="si">}</span><span class="s2"> ค่ำ เดือน </span><span class="si">{</span><span class="n">th_m</span><span class="si">}</span><span class="s2">"</span>
-
-    <span class="k">return</span> <span class="n">thai_lunar_date</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">th_s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">days_of_year</span><span class="si">}</span><span class="s2"> ค่ำ เดือน </span><span class="si">{</span><span class="n">th_m</span><span class="si">}</span><span class="s2">"</span></div>
 
 </pre></div>
 

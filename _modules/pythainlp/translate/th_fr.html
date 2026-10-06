@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.translate.th_fr &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,15 +114,15 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Thai-French Machine Translation</span>
+<span class="sd">"""</span>
+<span class="sd">Translate Thai to French using a Helsinki-NLP model.</span>
 
-<span class="sd">Trained by OPUS Corpus</span>
-
-<span class="sd">Model is from Language Technology Research Group at the University of Helsinki</span>
+<span class="sd">The model is trained on the OPUS corpus. It is from the Language</span>
+<span class="sd">Technology Research Group at the University of Helsinki.</span>
 
 <span class="sd">BLEU 20.4</span>
 
-<span class="sd">- Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
+<span class="sd">- Hugging Face: https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -136,17 +137,17 @@
 <div class="viewcode-block" id="ThFrTranslator">
 <a class="viewcode-back" href="../../../api/translate.html#pythainlp.translate.th_fr.ThFrTranslator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThFrTranslator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai-French Machine Translation</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Translate Thai to French.</span>
 
-<span class="sd">    Trained by OPUS Corpus</span>
-
-<span class="sd">    Model is from Language Technology Research Group at the University of Helsinki</span>
+<span class="sd">    The model is trained on the OPUS corpus. It is from the Language</span>
+<span class="sd">    Technology Research Group at the University of Helsinki.</span>
 
 <span class="sd">    BLEU 20.4</span>
 
-<span class="sd">    - Huggingface https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
+<span class="sd">    - Hugging Face: https://huggingface.co/Helsinki-NLP/opus-mt-th-fr</span>
 
-<span class="sd">    :param bool use_gpu : load model using GPU (Default is False)</span>
+<span class="sd">    :param bool use_gpu: load the model on a GPU (default: False)</span>
 <span class="sd">    """</span>
 
     <span class="n">tokenizer_thfr</span><span class="p">:</span> <span class="n">AutoTokenizer</span>
@@ -161,13 +162,22 @@
         <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Helsinki-NLP/opus-mt-th-fr"</span><span class="p">,</span>
         <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the Thai-to-French translator.</span>
+
+<span class="sd">        :param bool use_gpu: load the model on a GPU</span>
+<span class="sd">        :param str pretrained: name of the pretrained model</span>
+<span class="sd">        :param Optional[str] revision: revision of the pretrained model</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer_thfr</span><span class="p">:</span> <span class="n">AutoTokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
             <span class="n">pretrained</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span><span class="p">:</span> <span class="n">AutoModelForSeq2SeqLM</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span><span class="p">)</span>
+            <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+                <span class="n">pretrained</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+            <span class="p">)</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_thfr</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span></div>
@@ -178,19 +188,22 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">translate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">exclude_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Translate text from Thai to French</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Translate text from Thai to French.</span>
 
-<span class="sd">        :param str text: input text in source language</span>
-<span class="sd">        :param list[str] exclude_words: words to exclude from translation</span>
-<span class="sd">                                        (optional)</span>
-<span class="sd">        :return: translated text in target language</span>
+<span class="sd">        :param str text: text to translate</span>
+<span class="sd">        :param Optional[list[str]] exclude_words: words to exclude from</span>
+<span class="sd">            translation</span>
+<span class="sd">        :return: translated text</span>
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        :Example:</span>
 
 <span class="sd">        Translate text from Thai to French:</span>
 
-<span class="sd">            &gt;&gt;&gt; from pythainlp.translate.th_fr import ThFrTranslator  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.translate.th_fr import (</span>
+<span class="sd">            ...     ThFrTranslator,</span>
+<span class="sd">            ... )  # doctest: +SKIP</span>
 
 <span class="sd">            &gt;&gt;&gt; thfr = ThFrTranslator()  # doctest: +SKIP</span>
 
@@ -199,7 +212,9 @@
 
 <span class="sd">        Translate text from Thai to French with excluded words:</span>
 
-<span class="sd">            &gt;&gt;&gt; thfr.translate("ทดสอบระบบ", exclude_words=["ระบบ"])  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; thfr.translate(</span>
+<span class="sd">            ...     "ทดสอบระบบ", exclude_words=["ระบบ"]</span>
+<span class="sd">            ... )  # doctest: +SKIP</span>
 <span class="sd">            "Test du ระบบ."</span>
 
 <span class="sd">        """</span>

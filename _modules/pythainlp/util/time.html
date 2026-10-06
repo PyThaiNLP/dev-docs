@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.time &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.util.time &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,16 +114,18 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Spell out time as Thai words.</span>
+<span class="sd">"""</span>
+<span class="sd">Spell out time as Thai words.</span>
 
-<span class="sd">Convert time string or time object to Thai words.</span>
+<span class="sd">Convert a time string or a time object to Thai words.</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">time</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util.numtoword</span><span class="w"> </span><span class="kn">import</span> <span class="n">num_to_thaiword</span>
@@ -161,7 +164,7 @@
 
 <span class="nd">@lru_cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_thai_time_cut</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Lazy load Thai time tokenizer with cache"""</span>
+<span class="w">    </span><span class="sd">"""Load the Thai time tokenizer lazily, with cache."""</span>
     <span class="k">return</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">custom_dict</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"newmm"</span><span class="p">)</span>
 
 
@@ -180,7 +183,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_format_6h</span><span class="p">(</span><span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai time (6-hour clock)."""</span>
+<span class="w">    </span><span class="sd">"""Spell out an hour on the Thai 6-hour clock."""</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
 
     <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -205,7 +208,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_format_m6h</span><span class="p">(</span><span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai time (modified 6-hour clock)."""</span>
+<span class="w">    </span><span class="sd">"""Spell out an hour on the Thai modified 6-hour clock."""</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
 
     <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -225,8 +228,42 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_format_24h</span><span class="p">(</span><span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Thai time (24-hour clock)."""</span>
+<span class="w">    </span><span class="sd">"""Spell out an hour on the 24-hour clock."""</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"นาฬิกา"</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+
+<span class="c1"># Hour formatters by output format name; looked up with ``==``</span>
+<span class="n">_HOUR_FORMATTERS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]],</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s2">"6h"</span><span class="p">,</span> <span class="n">_format_6h</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"m6h"</span><span class="p">,</span> <span class="n">_format_m6h</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"24h"</span><span class="p">,</span> <span class="n">_format_24h</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">_HALF_HOUR_FORMATS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"6h"</span><span class="p">,</span> <span class="s2">"m6h"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_with_precision</span><span class="p">(</span>
+    <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Spell out minutes and seconds when precision is "m" or "s"."""</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">"m"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">_HALF_HOUR_FORMATS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ครึ่ง"</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"นาที"</span>
+    <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">"s"</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"วินาที"</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_non_zero</span><span class="p">(</span><span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Spell out only the non-zero minutes and seconds."""</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">_HALF_HOUR_FORMATS</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">"ครึ่ง"</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"นาที"</span>
+    <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"วินาที"</span>
     <span class="k">return</span> <span class="n">text</span>
 
 
@@ -237,33 +274,16 @@
     <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"24h"</span><span class="p">,</span>
     <span class="n">precision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">"6h"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">_format_6h</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">"m6h"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">_format_m6h</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">"24h"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">_format_24h</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">formatter</span> <span class="ow">in</span> <span class="n">_HOUR_FORMATTERS</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">formatter</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+            <span class="k">break</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Time format not supported: </span><span class="si">{</span><span class="n">fmt</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"m"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">"m"</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"6h"</span><span class="p">,</span> <span class="s2">"m6h"</span><span class="p">)):</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="s2">"ครึ่ง"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"นาที"</span>
-            <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="s2">"s"</span><span class="p">:</span>
-                <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"วินาที"</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"6h"</span><span class="p">,</span> <span class="s2">"m6h"</span><span class="p">)):</span>
-                <span class="n">text</span> <span class="o">+=</span> <span class="s2">"ครึ่ง"</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"นาที"</span>
-        <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="n">num_to_thaiword</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"วินาที"</span>
-
-    <span class="k">return</span> <span class="n">text</span>
+        <span class="k">return</span> <span class="n">text</span> <span class="o">+</span> <span class="n">_format_with_precision</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span> <span class="o">+</span> <span class="n">_format_non_zero</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="time_to_thaiword">
@@ -273,21 +293,26 @@
     <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"24h"</span><span class="p">,</span>
     <span class="n">precision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Spell out time as Thai words.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Spell out time as Thai words.</span>
 
-<span class="sd">    :param time_data: time input; a :class:`datetime.time` object,</span>
-<span class="sd">        a :class:`datetime.datetime` object, or a string</span>
-<span class="sd">        in ``H:M`` or ``H:M:S`` format (24-hour clock)</span>
-<span class="sd">    :type time_data: datetime.time or datetime.datetime or str</span>
-<span class="sd">    :param str fmt: time output format</span>
+<span class="sd">    :param Union[datetime.time, datetime.datetime, str] time_data:</span>
+<span class="sd">        a :class:`datetime.time` object, a :class:`datetime.datetime`</span>
+<span class="sd">        object, or a string in ``H:M`` or ``H:M:S`` format</span>
+<span class="sd">        (24-hour clock)</span>
+<span class="sd">    :param str fmt: output format</span>
+
 <span class="sd">        * *24h* - 24-hour clock (default)</span>
 <span class="sd">        * *6h* - 6-hour clock</span>
-<span class="sd">        * *m6h* - Modified 6-hour clock</span>
-<span class="sd">    :param str precision: precision of the spell out time</span>
-<span class="sd">        * *m* - always spell out at minute level</span>
-<span class="sd">        * *s* - always spell out at second level</span>
-<span class="sd">        * None - spell out only non-zero parts</span>
-<span class="sd">    :return: Time spelled out as Thai words</span>
+<span class="sd">        * *m6h* - modified 6-hour clock</span>
+
+<span class="sd">    :param Optional[str] precision: precision of the spelled-out time</span>
+
+<span class="sd">        * *m* - always spell out to the minute</span>
+<span class="sd">        * *s* - always spell out to the second</span>
+<span class="sd">        * None - spell out only non-zero parts (default)</span>
+
+<span class="sd">    :return: time spelled out as Thai words</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -324,10 +349,8 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="n">_TIME_FORMAT_WITH_SEC</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
                 <span class="n">_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="n">_TIME_FORMAT_WITHOUT_SEC</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="k">pass</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_time</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -340,16 +363,126 @@
 
 
 
+<span class="n">_TI_HOURS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"ตีหนึ่ง"</span><span class="p">,</span>
+    <span class="s2">"ตีสอง"</span><span class="p">,</span>
+    <span class="s2">"ตีสาม"</span><span class="p">,</span>
+    <span class="s2">"ตีสี่"</span><span class="p">,</span>
+    <span class="s2">"ตีห้า"</span><span class="p">,</span>
+    <span class="s2">"ตีหก"</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_mark_affix</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Insert "|" after the hour affix; return "" if none is found.</span>
+
+<span class="sd">    Affixes are tried in order. A non-"ตี" affix ends the search;</span>
+<span class="sd">    a "ตี" match does not, so a later affix can override it.</span>
+<span class="sd">    """</span>
+    <span class="n">marked</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">for</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">_THAI_TIME_AFFIX</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">affix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">affix</span> <span class="o">!=</span> <span class="s2">"ตี"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">affix</span><span class="p">,</span> <span class="n">affix</span> <span class="o">+</span> <span class="s2">"|"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ti_hour</span> <span class="ow">in</span> <span class="n">_TI_HOURS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ti_hour</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+                <span class="n">marked</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ti_hour</span><span class="p">,</span> <span class="n">ti_hour</span> <span class="o">+</span> <span class="s2">"|"</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">marked</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_evening</span><span class="p">(</span><span class="n">last</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">last</span> <span class="o">==</span> <span class="s2">"โมงเย็น"</span> <span class="ow">or</span> <span class="n">last</span> <span class="o">==</span> <span class="s2">"โมง"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hour_from_morning_six</span><span class="p">(</span><span class="n">hour</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="mi">6</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">6</span> <span class="k">else</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hour_from_thum</span><span class="p">(</span><span class="n">hour</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Convert hours ending in ทุ่ม; None if the first token is unknown."""</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"19"</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hour_from_unit</span><span class="p">(</span><span class="n">hour</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Convert hours ending in นาฬิกา, ตี, โมง; None if no rule matches."""</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"นาฬิกา"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">thaiword_to_num</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hour</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ตี"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมงเช้า"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_hour_from_morning_six</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_evening</span><span class="p">(</span><span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"บ่าย"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_evening</span><span class="p">(</span><span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hour_from_name</span><span class="p">(</span><span class="n">hour</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Convert named hours (เที่ยง, บ่ายโมง, ทุ่ม); None if no rule matches."""</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยงคืน"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"0"</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยงวัน"</span> <span class="ow">or</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยง"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"12"</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"บ่ายโมง"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"13"</span>
+    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ทุ่ม"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_hour_from_thum</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hour_text</span><span class="p">(</span><span class="n">hour</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert hour tokens to the hour number; "" if no rule matches.</span>
+
+<span class="sd">    The first matching rule wins; an earlier rule shadows a later one.</span>
+<span class="sd">    """</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_hour_from_unit</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">_hour_from_name</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span> <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_minute_text</span><span class="p">(</span><span class="n">minute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Convert minute tokens to a two-digit (or longer) minute string."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">minute</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">minute</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="s2">"00"</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">minute</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">affix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_DICT_THAI_TIME</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">affix</span> <span class="o">!=</span> <span class="s2">"สิบ"</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">affix</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">*=</span> <span class="mi">10</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">10</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">"0"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="thaiword_to_time">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.thaiword_to_time">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thaiword_to_time</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Convert Thai time in words into time (H:M).</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert Thai time in words to a time string (H:M).</span>
 
 <span class="sd">    :param str text: Thai time in words</span>
-<span class="sd">    :param bool padding: Zero pad the hour if True</span>
-
+<span class="sd">    :param bool padding: zero-pad the hour if True</span>
 <span class="sd">    :return: time string</span>
 <span class="sd">    :rtype: str</span>
+<span class="sd">    :raises ValueError: if the text is not a valid Thai time</span>
 
 <span class="sd">    :Example:</span>
 
@@ -357,88 +490,27 @@
 <span class="sd">        &gt;&gt;&gt; thaiword_to_time("บ่ายโมงครึ่ง")</span>
 <span class="sd">        '13:30'</span>
 <span class="sd">    """</span>
-    <span class="n">keys_dict</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"กว่า"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"ๆ"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
-    <span class="n">_i</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ตีหนึ่ง"</span><span class="p">,</span> <span class="s2">"ตีสอง"</span><span class="p">,</span> <span class="s2">"ตีสาม"</span><span class="p">,</span> <span class="s2">"ตีสี่"</span><span class="p">,</span> <span class="s2">"ตีห้า"</span><span class="p">]</span>
-    <span class="n">_time</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="k">for</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">_THAI_TIME_AFFIX</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="n">affix</span> <span class="o">!=</span> <span class="s2">"ตี"</span><span class="p">:</span>
-            <span class="n">_time</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">affix</span><span class="p">,</span> <span class="n">affix</span> <span class="o">+</span> <span class="s2">"|"</span><span class="p">)</span>
-            <span class="k">break</span>
-        <span class="k">elif</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="n">affix</span> <span class="o">==</span> <span class="s2">"ตี"</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_i</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
-                    <span class="n">_time</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="s2">"|"</span><span class="p">)</span>
-                    <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">pass</span>
-    <span class="k">if</span> <span class="s2">"|"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_time</span><span class="p">:</span>
+    <span class="n">marked</span> <span class="o">=</span> <span class="n">_mark_affix</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"|"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">marked</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot find any Thai word for time affix."</span><span class="p">)</span>
 
-    <span class="n">_LIST_THAI_TIME</span> <span class="o">=</span> <span class="n">_time</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"|"</span><span class="p">)</span>
-    <span class="k">del</span> <span class="n">_time</span>
-
-    <span class="n">hour</span> <span class="o">=</span> <span class="n">_thai_time_cut</span><span class="p">()</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">_LIST_THAI_TIME</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">minute_raw</span> <span class="o">=</span> <span class="n">_LIST_THAI_TIME</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">hour_raw</span><span class="p">,</span> <span class="n">minute_raw</span> <span class="o">=</span> <span class="n">marked</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"|"</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">hour</span> <span class="o">=</span> <span class="n">_thai_time_cut</span><span class="p">()</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">hour_raw</span><span class="p">)</span>
     <span class="n">minute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">minute_raw</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">minute</span> <span class="o">=</span> <span class="n">_thai_time_cut</span><span class="p">()</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">minute_raw</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">minute</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
 
-    <span class="c1"># determine hour</span>
-    <span class="k">if</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"นาฬิกา"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">keys_dict</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">thaiword_to_num</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hour</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ตี"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">keys_dict</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมงเช้า"</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">keys_dict</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมงเย็น"</span> <span class="ow">or</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมง"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"บ่าย"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมงเย็น"</span> <span class="ow">or</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"โมง"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">keys_dict</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยงคืน"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="s2">"0"</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยงวัน"</span> <span class="ow">or</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"เที่ยง"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="s2">"12"</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"บ่ายโมง"</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="s2">"13"</span>
-    <span class="k">elif</span> <span class="n">hour</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ทุ่ม"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="s2">"19"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">hour</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+    <span class="n">hour_text</span> <span class="o">=</span> <span class="n">_hour_text</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hour_text</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot find any Thai word for hour."</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">padding</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="s2">"0"</span> <span class="o">+</span> <span class="n">text</span>
-    <span class="n">text</span> <span class="o">+=</span> <span class="s2">":"</span>
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">hour_text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">hour_text</span> <span class="o">=</span> <span class="s2">"0"</span> <span class="o">+</span> <span class="n">hour_text</span>
 
-    <span class="c1"># determine minute</span>
-    <span class="k">if</span> <span class="n">minute</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">minute</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">minute</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">affix</span> <span class="ow">in</span> <span class="n">keys_dict</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">affix</span> <span class="o">!=</span> <span class="s2">"สิบ"</span><span class="p">:</span>
-                    <span class="n">n</span> <span class="o">+=</span> <span class="n">_DICT_THAI_TIME</span><span class="p">[</span><span class="n">affix</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="n">affix</span> <span class="o">==</span> <span class="s2">"สิบ"</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">n</span> <span class="o">*=</span> <span class="mi">10</span>
-                <span class="k">elif</span> <span class="n">affix</span> <span class="o">==</span> <span class="s2">"สิบ"</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">n</span> <span class="o">+=</span> <span class="mi">10</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">text</span> <span class="o">+=</span> <span class="s2">"0"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="s2">"00"</span>
-
-    <span class="k">return</span> <span class="n">text</span></div>
+    <span class="k">return</span> <span class="n">hour_text</span> <span class="o">+</span> <span class="s2">":"</span> <span class="o">+</span> <span class="n">_minute_text</span><span class="p">(</span><span class="n">minute</span><span class="p">)</span></div>
 
 </pre></div>
 

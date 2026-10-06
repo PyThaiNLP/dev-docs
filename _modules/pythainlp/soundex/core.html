@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.soundex.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,10 +114,11 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Thai soundex</span>
+<span class="sd">"""</span>
+<span class="sd">Thai soundex.</span>
 
 <span class="sd">Has multiple systems to choose from: Udom83 (default), LK82, MetaSound,</span>
-<span class="sd">Complete Soundex, and Prayut &amp; Somchaip</span>
+<span class="sd">Complete Soundex, and Prayut &amp; Somchaip.</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -137,20 +139,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">soundex</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SOUNDEX_ENGINE</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Converts Thai text into phonetic code.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert text into phonetic code.</span>
 
-<span class="sd">    :param str text: word</span>
+<span class="sd">    :param str text: Thai word to be encoded</span>
 <span class="sd">    :param str engine: soundex engine</span>
-<span class="sd">    :param int length: preferred length of the Soundex code (default is 4)\</span>
-<span class="sd">        for metasound and prayut_and_somchaip only</span>
-<span class="sd">    :return: Soundex code</span>
+<span class="sd">        (see the options below)</span>
+<span class="sd">    :param int length: preferred length of the soundex code (default is 4),</span>
+<span class="sd">        used by the *metasound* and *prayut_and_somchaip* engines only</span>
+<span class="sd">    :return: soundex code</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Options for engine:</span>
 <span class="sd">        * *udom83* (default) - Thai soundex algorithm proposed</span>
-<span class="sd">          by Vichit Lorchirachoonkul [#udom83]_</span>
+<span class="sd">          by Wannee Udompanich [#udom83]_</span>
 <span class="sd">        * *lk82* - Thai soundex algorithm proposed by</span>
-<span class="sd">          Wannee Udompanich [#lk82]_</span>
+<span class="sd">          Vichit Lorchirachoonkul [#lk82]_</span>
 <span class="sd">        * *metasound* - Thai soundex algorithm based on a combination</span>
 <span class="sd">          of Metaphone and Soundex proposed by Snae &amp; Brückner [#metasound]_</span>
 <span class="sd">        * *prayut_and_somchaip* - Thai-English Cross-Language Transliterated</span>
@@ -163,33 +167,33 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.soundex import soundex</span>
 <span class="sd">        &gt;&gt;&gt; soundex("ลัก")</span>
 <span class="sd">        'ร100000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("ลัก", engine='lk82')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("ลัก", engine="lk82")</span>
 <span class="sd">        'ร1000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("ลัก", engine='metasound')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("ลัก", engine="metasound")</span>
 <span class="sd">        'ล100'</span>
 <span class="sd">        &gt;&gt;&gt; soundex("รัก")</span>
 <span class="sd">        'ร100000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("รัก", engine='lk82')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("รัก", engine="lk82")</span>
 <span class="sd">        'ร1000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("รัก", engine='metasound')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("รัก", engine="metasound")</span>
 <span class="sd">        'ร100'</span>
 <span class="sd">        &gt;&gt;&gt; soundex("รักษ์")</span>
 <span class="sd">        'ร100000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("รักษ์", engine='lk82')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("รักษ์", engine="lk82")</span>
 <span class="sd">        'ร1000'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("รักษ์", engine='metasound')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("รักษ์", engine="metasound")</span>
 <span class="sd">        'ร100'</span>
 <span class="sd">        &gt;&gt;&gt; soundex("บูรณการ")</span>
 <span class="sd">        'บ931900'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("บูรณการ", engine='lk82')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("บูรณการ", engine="lk82")</span>
 <span class="sd">        'บE419'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("บูรณการ", engine='metasound')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("บูรณการ", engine="metasound")</span>
 <span class="sd">        'บ551'</span>
 <span class="sd">        &gt;&gt;&gt; soundex("ปัจจุบัน")</span>
 <span class="sd">        'ป775300'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("ปัจจุบัน", engine='lk82')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("ปัจจุบัน", engine="lk82")</span>
 <span class="sd">        'ป3E54'</span>
-<span class="sd">        &gt;&gt;&gt; soundex("ปัจจุบัน", engine='metasound')</span>
+<span class="sd">        &gt;&gt;&gt; soundex("ปัจจุบัน", engine="metasound")</span>
 <span class="sd">        'ป223'</span>
 <span class="sd">        &gt;&gt;&gt; soundex("vp", engine="prayut_and_somchaip")</span>
 <span class="sd">        '11'</span>

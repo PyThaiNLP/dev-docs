@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tokenize.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,12 +114,13 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Generic tokenizer functions for word, sentence, paragraph, and subword."""</span>
+<span class="sd">"""Tokenize text into words, sentences, paragraphs, and subwords."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>  <span class="c1"># noqa: TC003  # for get_type_hints()</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -129,8 +131,19 @@
     <span class="n">DEFAULT_SUBWORD_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">DEFAULT_SYLLABLE_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">DEFAULT_WORD_TOKENIZE_ENGINE</span><span class="p">,</span>
-    <span class="n">syllable_dict_trie</span><span class="p">,</span>
     <span class="n">word_dict_trie</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize._registry</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SUBWORD_ENGINES</span><span class="p">,</span>
+    <span class="n">SYLLABLE_ENGINES</span><span class="p">,</span>
+    <span class="n">WORD_ENGINES</span><span class="p">,</span>
+    <span class="n">WORD_ENGINES_WITHOUT_CUSTOM_DICT</span><span class="p">,</span>
+    <span class="n">EngineTable</span><span class="p">,</span>
+    <span class="n">engine_not_found</span><span class="p">,</span>
+    <span class="n">find_engine</span><span class="p">,</span>
+    <span class="n">get_engine</span><span class="p">,</span>
+    <span class="n">segment_sentences</span><span class="p">,</span>
+    <span class="n">wtp_size</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize._utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">apply_postprocessors</span><span class="p">,</span>
@@ -148,22 +161,24 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">word_detokenize</span><span class="p">(</span>
     <span class="n">segments</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"str"</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Word detokenizer.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detokenize lists of words into text.</span>
 
-<span class="sd">    Detokenizes the list of words in each sentence into text.</span>
+<span class="sd">    Join the words in each sentence into text.</span>
 
-<span class="sd">    :param str segments: List of sentences, each with a list of words.</span>
-<span class="sd">    :param str output: the output type (str or list)</span>
-<span class="sd">    :return: the Thai text</span>
+<span class="sd">    :param segments: list of words, or list of sentences each</span>
+<span class="sd">        with a list of words</span>
+<span class="sd">    :type segments: Union[list[list[str]], list[str]]</span>
+<span class="sd">    :param str output: output type, ``"str"`` or ``"list"``</span>
+<span class="sd">    :return: Thai text</span>
 <span class="sd">    :rtype: Union[list[list[str]], str]</span>
+
 <span class="sd">    :Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tokenize import word_detokenize</span>
 <span class="sd">        &gt;&gt;&gt; word_detokenize(["เรา", "เล่น"])</span>
 <span class="sd">        'เราเล่น'</span>
 <span class="sd">    """</span>
-    <span class="n">list_all</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-
     <span class="k">if</span> <span class="ow">not</span> <span class="n">segments</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">""</span> <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">"str"</span> <span class="k">else</span> <span class="p">[]</span>
 
@@ -172,51 +187,75 @@
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_characters</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
-        <span class="n">list_sents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">add_index</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">space_index</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">mark_index</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="c1"># previous word</span>
-                <span class="n">p_w</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="c1"># if w is number or other language and is not space</span>
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-                <span class="p">):</span>
-                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
-                    <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="c1"># if previous word is number or other language and is not space</span>
-                <span class="k">elif</span> <span class="p">(</span>
-                    <span class="n">p_w</span> <span class="ow">and</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-                <span class="p">):</span>
-                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
-                    <span class="n">add_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="c1"># if word is Thai iteration mark</span>
-                <span class="k">elif</span> <span class="n">w</span> <span class="o">==</span> <span class="s2">"ๆ"</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
-                        <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
-                    <span class="n">mark_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">space_index</span><span class="p">:</span>
-                    <span class="n">space_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">mark_index</span><span class="p">:</span>
-                    <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
-            <span class="n">list_sents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-        <span class="n">list_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_sents</span><span class="p">)</span>
+    <span class="n">list_all</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">_detokenize_words</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">thai_characters</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"list[list[str]]"</span><span class="p">,</span> <span class="n">segments</span><span class="p">)</span>
+    <span class="p">]</span>
 
     <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">"list"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">list_all</span>
 
-    <span class="n">text</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">sent_tokens</span> <span class="ow">in</span> <span class="n">list_all</span><span class="p">:</span>
-        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent_tokens</span><span class="p">))</span>
-    <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_tokens</span> <span class="ow">in</span> <span class="n">list_all</span><span class="p">)</span></div>
 
+
+
+<span class="c1"># Role of a word in word_detokenize, used by the next word.</span>
+<span class="n">_PLAIN</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">_SPACE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># whitespace word that follows a non-whitespace word</span>
+<span class="n">_MARK</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Thai iteration mark "ๆ"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_detokenize_words</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">thai_characters</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Insert spaces between the words of one sentence.</span>
+
+<span class="sd">    :param list[str] words: list of words in one sentence</span>
+<span class="sd">    :param str thai_characters: characters that count as Thai</span>
+<span class="sd">    :return: list of words with spaces inserted</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    """</span>
+    <span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">prev_role</span> <span class="o">=</span> <span class="n">_PLAIN</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span><span class="p">:</span>
+            <span class="n">prev_role</span> <span class="o">=</span> <span class="n">_PLAIN</span>
+            <span class="k">continue</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">_PLAIN</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">add_space</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">_space_before</span><span class="p">(</span>
+                <span class="n">w</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">prev_role</span><span class="p">,</span> <span class="n">thai_characters</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">add_space</span><span class="p">:</span>
+                <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">prev_role</span> <span class="o">=</span> <span class="n">role</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_space_before</span><span class="p">(</span>
+    <span class="n">w</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">p_w</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prev_role</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">thai_characters</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Decide whether a space goes before a word, and find its role.</span>
+
+<span class="sd">    :param str w: word</span>
+<span class="sd">    :param str p_w: previous word</span>
+<span class="sd">    :param int prev_role: role of the previous word</span>
+<span class="sd">    :param str thai_characters: characters that count as Thai</span>
+<span class="sd">    :return: whether to add a space, and the role of the word</span>
+<span class="sd">    :rtype: tuple[bool, int]</span>
+<span class="sd">    """</span>
+    <span class="c1"># w is a number or another language, and neither word is whitespace</span>
+    <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">_PLAIN</span>
+    <span class="c1"># p_w is a number or another language and is not whitespace</span>
+    <span class="k">if</span> <span class="n">p_w</span> <span class="ow">and</span> <span class="n">p_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">_PLAIN</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="s2">"ๆ"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">p_w</span><span class="o">.</span><span class="n">isspace</span><span class="p">(),</span> <span class="n">_MARK</span>
+    <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">prev_role</span> <span class="o">!=</span> <span class="n">_SPACE</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">_SPACE</span>
+    <span class="k">return</span> <span class="n">prev_role</span> <span class="o">==</span> <span class="n">_MARK</span><span class="p">,</span> <span class="n">_PLAIN</span>
 
 
 <div class="viewcode-block" id="word_tokenize">
@@ -228,76 +267,77 @@
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Word tokenizer.</span>
-
-<span class="sd">    Tokenizes running text into words (list of strings).</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into words.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: name of the tokenizer to be used</span>
-<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie</span>
-<span class="sd">        (some engines may not support this)</span>
-<span class="sd">    :param bool keep_whitespace: True to keep whitespace, a common</span>
-<span class="sd">        marker for end of phrase in Thai.</span>
-<span class="sd">        Otherwise, whitespace is omitted.</span>
-<span class="sd">    :param bool join_broken_num: True to rejoin formatted numerics</span>
-<span class="sd">        that could be wrongly separated (e.g., time, IP addresses).</span>
-<span class="sd">        Otherwise, formatted numerics could be wrongly separated.</span>
+<span class="sd">    :param str engine: name of the word tokenizer engine.</span>
+<span class="sd">        Options:</span>
 
-<span class="sd">    :return: list of words</span>
-<span class="sd">    :rtype: list[str]</span>
-
-<span class="sd">    **Options for engine**</span>
 <span class="sd">        * *attacut* - wrapper for</span>
-<span class="sd">          `AttaCut &lt;https://github.com/PyThaiNLP/attacut&gt;`_</span>
-<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
+<span class="sd">          `AttaCut &lt;https://github.com/PyThaiNLP/attacut&gt;`_,</span>
+<span class="sd">          learning-based approach, as an ONNX model via</span>
+<span class="sd">          `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_,</span>
 <span class="sd">          learning-based approach</span>
+<span class="sd">        * *budoux* - wrapper for</span>
+<span class="sd">          `budoux &lt;https://github.com/google/budoux&gt;`_</span>
 <span class="sd">        * *deepcut* - wrapper for</span>
 <span class="sd">          `DeepCut &lt;https://github.com/rkcosmos/deepcut&gt;`_,</span>
 <span class="sd">          learning-based approach</span>
 <span class="sd">        * *icu* - wrapper for a word tokenizer in</span>
-<span class="sd">          `PyICU &lt;https://gitlab.pyicu.org/main/pyicu&gt;`_.,</span>
-<span class="sd">          from ICU (International Components for Unicode),</span>
-<span class="sd">          dictionary-based</span>
-<span class="sd">        * *longest* - dictionary-based, longest matching</span>
-<span class="sd">        * *mm* - "multi-cut", dictionary-based, maximum matching</span>
-<span class="sd">        * *nercut* - dictionary-based, maximal matching,</span>
-<span class="sd">          constrained by Thai Character Cluster (TCC) boundaries,</span>
-<span class="sd">          combining tokens that are parts of the same named-entity</span>
-<span class="sd">        * *newmm* (default) - "new multi-cut",</span>
-<span class="sd">          dictionary-based, maximum matching,</span>
+<span class="sd">          `PyICU &lt;https://gitlab.pyicu.org/main/pyicu&gt;`_,</span>
+<span class="sd">          from International Components for Unicode (ICU),</span>
+<span class="sd">          dictionary-based approach</span>
+<span class="sd">        * *longest* - dictionary-based approach, longest matching</span>
+<span class="sd">        * *mm* (alias *multi_cut*) - "multi-cut",</span>
+<span class="sd">          dictionary-based approach, maximum matching</span>
+<span class="sd">        * *nercut* - named entity tagger-based approach, combining</span>
+<span class="sd">          words that are parts of the same named entity</span>
+<span class="sd">        * *newmm* (default, alias *onecut*) - "new multi-cut",</span>
+<span class="sd">          dictionary-based approach, maximum matching,</span>
 <span class="sd">          constrained by Thai Character Cluster (TCC) boundaries</span>
-<span class="sd">          with improved TCC rules.</span>
+<span class="sd">          with improved TCC rules</span>
 <span class="sd">        * *newmm-safe* - newmm with a mechanism to avoid long</span>
 <span class="sd">          processing time for text with continuously ambiguous</span>
 <span class="sd">          breaking points</span>
 <span class="sd">        * *nlpo3* - wrapper for a word tokenizer in</span>
-<span class="sd">          `nlpO3 &lt;https://github.com/PyThaiNLP/nlpo3&gt;`_.,</span>
+<span class="sd">          `nlpO3 &lt;https://github.com/PyThaiNLP/nlpo3&gt;`_,</span>
 <span class="sd">          adaptation of newmm in Rust (2.5x faster)</span>
 <span class="sd">        * *oskut* - wrapper for</span>
-<span class="sd">          `OSKut &lt;https://github.com/mrpeerat/OSKut&gt;`_</span>
-<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
-<span class="sd">          Out-of-domain StacKed cut for Word Segmentation</span>
+<span class="sd">          `OSKut &lt;https://github.com/mrpeerat/OSKut&gt;`_,</span>
+<span class="sd">          Out-of-domain StacKed cut for Word Segmentation,</span>
+<span class="sd">          as an ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_</span>
 <span class="sd">        * *sefr_cut* - wrapper for</span>
-<span class="sd">          `SEFR CUT &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_</span>
-<span class="sd">          using ONNX model via `LEKCut &lt;https://github.com/PyThaiNLP/LEKCut&gt;`_.,</span>
+<span class="sd">          `SEFR CUT &lt;https://github.com/mrpeerat/SEFR_CUT&gt;`_,</span>
 <span class="sd">          Stacked Ensemble Filter and Refine for Word Segmentation</span>
 <span class="sd">        * *tltk* - wrapper for</span>
-<span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_.,</span>
-<span class="sd">           maximum collocation approach</span>
-<span class="sd">        * *budoux* - wrapper for</span>
-<span class="sd">          `budoux &lt;https://github.com/google/budoux&gt;`_.</span>
+<span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_,</span>
+<span class="sd">          maximum collocation approach</span>
+
+<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie</span>
+<span class="sd">        (some engines do not support this)</span>
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace, a common</span>
+<span class="sd">        marker for end of phrase in Thai; otherwise omit whitespace</span>
+<span class="sd">    :param bool join_broken_num: True to rejoin formatted numbers</span>
+<span class="sd">        that a tokenizer could wrongly split (e.g., times and</span>
+<span class="sd">        IP addresses); otherwise leave them as split</span>
+<span class="sd">    :return: list of words</span>
+<span class="sd">    :rtype: list[str]</span>
+
 <span class="sd">    :Note:</span>
-<span class="sd">        - The **custom_dict** parameter only works for \</span>
-<span class="sd">          *longest*, *newmm*, and *newmm-safe* engines.</span>
-<span class="sd">        - Built-in tokenizers (*longest*, *mm*, *newmm*, and *newmm-safe*) \</span>
-<span class="sd">          are thread-safe.</span>
-<span class="sd">        - Wrappers of external tokenizer are designed to be thread-safe \</span>
-<span class="sd">          but depend on the external tokenizer.</span>
-<span class="sd">        - **WARNING**: When using custom_dict in multi-threaded environments, \</span>
-<span class="sd">          do NOT modify the Trie object (via add/remove methods) while \</span>
-<span class="sd">          tokenization is in progress. The Trie data structure is not \</span>
-<span class="sd">          thread-safe for concurrent modifications. Create your dictionary \</span>
-<span class="sd">          before starting threads and only read from it during tokenization.</span>
+<span class="sd">        * The ``custom_dict`` parameter works only with the *longest*,</span>
+<span class="sd">          *mm*, *newmm*, and *newmm-safe* engines.</span>
+<span class="sd">        * The built-in tokenizers (*longest*, *mm*, *newmm*, and</span>
+<span class="sd">          *newmm-safe*) are thread-safe.</span>
+<span class="sd">        * The wrappers of external tokenizers are designed to be</span>
+<span class="sd">          thread-safe, but thread-safety depends on the external tokenizer.</span>
+<span class="sd">        * **WARNING**: When using ``custom_dict`` in a multi-threaded</span>
+<span class="sd">          environment, do NOT modify the trie (with its add or remove</span>
+<span class="sd">          methods) while tokenization is in progress. The trie is not</span>
+<span class="sd">          thread-safe for concurrent modification. Create the dictionary</span>
+<span class="sd">          before starting threads, and only read from it during</span>
+<span class="sd">          tokenization.</span>
+
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Tokenize text with different tokenizers:</span>
@@ -306,7 +346,7 @@
 <span class="sd">        &gt;&gt;&gt; text = "โอเคบ่พวกเรารักภาษาบ้านเกิด"</span>
 <span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="newmm")</span>
 <span class="sd">        ['โอเค', 'บ่', 'พวกเรา', 'รัก', 'ภาษา', 'บ้านเกิด']</span>
-<span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine='attacut')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="attacut")  # doctest: +SKIP</span>
 <span class="sd">        ['โอเค', 'บ่', 'พวกเรา', 'รัก', 'ภาษา', 'บ้านเกิด']</span>
 
 <span class="sd">    Tokenize text with whitespace omitted:</span>
@@ -320,116 +360,45 @@
 <span class="sd">    Join broken formatted numeric (e.g. time, decimals, IP addresses):</span>
 
 <span class="sd">        &gt;&gt;&gt; text = "เงิน1,234บาท19:32น 127.0.0.1"</span>
-<span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="attacut", join_broken_num=False)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; word_tokenize(</span>
+<span class="sd">        ...     text, engine="attacut", join_broken_num=False</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['เงิน', '1', ',', '234', 'บาท', '19', ':', '32น', ' ', '127', '.', '0', '.', '0', '.', '1']</span>
-<span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="attacut", join_broken_num=True)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; word_tokenize(</span>
+<span class="sd">        ...     text, engine="attacut", join_broken_num=True</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['เงิน', '1,234', 'บาท', '19:32น', ' ', '127.0.0.1']</span>
 
 <span class="sd">    Tokenize with default and custom dictionaries:</span>
 
 <span class="sd">        &gt;&gt;&gt; from pythainlp.corpus.common import thai_words  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tokenize import dict_trie  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; text = 'ชินโซ อาเบะ เกิด 21 กันยายน'</span>
+<span class="sd">        &gt;&gt;&gt; text = "ชินโซ อาเบะ เกิด 21 กันยายน"</span>
 <span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="newmm")</span>
 <span class="sd">        ['ชิน', 'โซ', ' ', 'อา', 'เบะ', ' ', 'เกิด', ' ', '21', ' ', 'กันยายน']</span>
 <span class="sd">        &gt;&gt;&gt; custom_dict_japanese_name = set(thai_words())  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; custom_dict_japanese_name.add('ชินโซ')  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; custom_dict_japanese_name.add('อาเบะ')  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; trie = dict_trie(dict_source=custom_dict_japanese_name)  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; word_tokenize(text, engine="newmm", custom_dict=trie)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; custom_dict_japanese_name.add("ชินโซ")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; custom_dict_japanese_name.add("อาเบะ")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; trie = dict_trie(</span>
+<span class="sd">        ...     dict_source=custom_dict_japanese_name</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; word_tokenize(</span>
+<span class="sd">        ...     text, engine="newmm", custom_dict=trie</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['ชินโซ', ' ', 'อาเบะ', ' ', 'เกิด', ' ', '21', ' ', 'กันยายน']</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
-
     <span class="k">if</span> <span class="n">custom_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">custom_dict</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
 
-    <span class="k">if</span> <span class="n">custom_dict</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span>
-        <span class="s2">"attacut"</span><span class="p">,</span>
-        <span class="s2">"icu"</span><span class="p">,</span>
-        <span class="s2">"nercut"</span><span class="p">,</span>
-        <span class="s2">"sefr_cut"</span><span class="p">,</span>
-        <span class="s2">"tltk"</span><span class="p">,</span>
-        <span class="s2">"oskut"</span><span class="p">,</span>
-        <span class="s2">"budoux"</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="k">if</span> <span class="n">custom_dict</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">WORD_ENGINES_WITHOUT_CUSTOM_DICT</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"The </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine does not support custom dictionaries."</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"newmm"</span><span class="p">,</span> <span class="s2">"onecut"</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.newmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"newmm-safe"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.newmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">,</span> <span class="n">safe_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"attacut"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.attacut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">attacut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">attacut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"longest"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.longest</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">longest_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">longest_segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"mm"</span><span class="p">,</span> <span class="s2">"multi_cut"</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.multi_cut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">multi_cut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">multi_cut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"deepcut"</span><span class="p">:</span>  <span class="c1"># deepcut can optionally use dictionary</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.deepcut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">deepcut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">deepcut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"icu"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.pyicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">pyicu_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">pyicu_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"budoux"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.budoux</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">budoux_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">budoux_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"nercut"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.nercut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">nercut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">nercut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"sefr_cut"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.sefr_cut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">sefrcut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">sefrcut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"tltk"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">tltk_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tltk_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"oskut"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.oskut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">oskut_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">oskut_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"nlpo3"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.nlpo3</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">nlpo3_segment</span>  <span class="c1"># noqa: I001</span>
-
-        <span class="c1"># Currently cannot handle custom_dict from inside word_tokenize(),</span>
-        <span class="c1"># due to difference in type.</span>
-        <span class="c1"># if isinstance(custom_dict, str):</span>
-        <span class="c1">#    segments = nlpo3_segment(text, custom_dict=custom_dict)</span>
-        <span class="c1"># elif not isinstance(custom_dict, str) and not custom_dict:</span>
-        <span class="c1">#    raise ValueError(</span>
-        <span class="c1">#        f"""Tokenizer \"{engine}\":</span>
-        <span class="c1">#        custom_dict must be a str.</span>
-        <span class="c1">#        It is a dictionary name as assigned with load_dict().</span>
-        <span class="c1">#        See pythainlp.tokenize.nlpo3.load_dict()"""</span>
-        <span class="c1">#    )</span>
-        <span class="c1"># else:</span>
-        <span class="c1">#    segments = nlpo3_segment(text)</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">nlpo3_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"""Tokenizer </span><span class="se">\"</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\"</span><span class="s2"> not found.</span>
-<span class="s2">            It might be a typo; if not, please consult our document."""</span>
-        <span class="p">)</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="n">WORD_ENGINES</span><span class="p">,</span> <span class="n">engine</span><span class="p">)(</span><span class="n">text</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
 
     <span class="n">postprocessors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">join_broken_num</span><span class="p">:</span>
@@ -438,20 +407,19 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
         <span class="n">postprocessors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strip_whitespace</span><span class="p">)</span>
 
-    <span class="n">segments</span> <span class="o">=</span> <span class="n">apply_postprocessors</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">postprocessors</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">segments</span></div>
+    <span class="k">return</span> <span class="n">apply_postprocessors</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">postprocessors</span><span class="p">)</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">indices_words</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Convert a list of words to a list of character index pairs.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a list of words to a list of character index pairs.</span>
 
-<span class="sd">    This function takes a list of words and returns the start and end</span>
-<span class="sd">    character indices for each word in the original text.</span>
+<span class="sd">    The function returns the start and end character indices of each word</span>
+<span class="sd">    in the original text.</span>
 
-<span class="sd">    :param list words: list of words</span>
-<span class="sd">    :return: list of tuples (start_index, end_index) for each word</span>
+<span class="sd">    :param list[str] words: list of words</span>
+<span class="sd">    :return: list of (start_index, end_index) pairs, one per word</span>
 <span class="sd">    :rtype: list[tuple[int, int]]</span>
 
 <span class="sd">    :Example:</span>
@@ -475,14 +443,16 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">map_indices_to_words</span><span class="p">(</span>
     <span class="n">index_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">sentences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Map character index pairs to actual words from sentences.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Map character index pairs to words in sentences.</span>
 
-<span class="sd">    This function takes a list of character index pairs and a list of</span>
-<span class="sd">    sentences, then extracts the corresponding words from the sentences.</span>
+<span class="sd">    The function extracts the words that the index pairs point to</span>
+<span class="sd">    from the sentences.</span>
 
-<span class="sd">    :param list index_list: list of tuples (start_index, end_index)</span>
-<span class="sd">    :param list sentences: list of sentences (strings)</span>
-<span class="sd">    :return: list of lists containing extracted words for each sentence</span>
+<span class="sd">    :param list[tuple[int, int]] index_list: list of</span>
+<span class="sd">        (start_index, end_index) pairs</span>
+<span class="sd">    :param list[str] sentences: list of sentences</span>
+<span class="sd">    :return: list of sentences, each a list of extracted words</span>
 <span class="sd">    :rtype: list[list[str]]</span>
 
 <span class="sd">    :Example:</span>
@@ -503,10 +473,9 @@
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">n_sum</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">c</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
-                <span class="n">word</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="n">n_sum</span> <span class="p">:</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n_sum</span><span class="p">]</span>
-                <span class="n">sentence_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="n">n_sum</span> <span class="p">:</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n_sum</span><span class="p">]</span>
+            <span class="n">sentence_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence_result</span><span class="p">)</span>
         <span class="n">n_sum</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
@@ -520,34 +489,37 @@
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SENT_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
-<span class="w">    </span><span class="sd">"""Sentence tokenizer.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into sentences.</span>
 
-<span class="sd">    Tokenizes running text into sentences.</span>
-<span class="sd">    Supports both string and list of strings as input.</span>
+<span class="sd">    The text can be a string or a list of words.</span>
 
-<span class="sd">    :param text: text string or list of word tokens to be tokenized</span>
+<span class="sd">    :param text: text, or list of words, to be tokenized</span>
 <span class="sd">    :type text: Union[str, list[str]]</span>
-<span class="sd">    :param str engine: choose among *'crfcut'*, *'whitespace'*,</span>
-<span class="sd">        *'whitespace+newline'*</span>
+<span class="sd">    :param str engine: name of the sentence tokenizer engine.</span>
+<span class="sd">        Options:</span>
+
+<span class="sd">        * *crfcut* - (default) split by a CRF trained on the TED dataset</span>
+<span class="sd">        * *thaisum* - sentence segmentor from</span>
+<span class="sd">          Nakhun Chumpolsathien, 2020</span>
+<span class="sd">        * *tltk* - split by `TLTK &lt;https://pypi.org/project/tltk/&gt;`_</span>
+<span class="sd">        * *wtp* - split by</span>
+<span class="sd">          `wtpsplit &lt;https://github.com/bminixhofer/wtpsplit&gt;`_.</span>
+<span class="sd">          Supports many model sizes:</span>
+<span class="sd">          ``wtp`` uses the mini model (default),</span>
+<span class="sd">          ``wtp-tiny`` uses ``wtp-bert-tiny``,</span>
+<span class="sd">          ``wtp-mini`` uses ``wtp-bert-mini``,</span>
+<span class="sd">          ``wtp-base`` uses ``wtp-canine-s-1l``,</span>
+<span class="sd">          ``wtp-large`` uses ``wtp-canine-s-12l``</span>
+<span class="sd">        * *whitespace+newline* - split by whitespace and newline</span>
+<span class="sd">        * *whitespace* - split by whitespace,</span>
+<span class="sd">          using the regular expression ``r" +"``</span>
+
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace;</span>
+<span class="sd">        otherwise omit whitespace</span>
 <span class="sd">    :return: list of sentences</span>
 <span class="sd">    :rtype: Union[list[str], list[list[str]]]</span>
 
-<span class="sd">    **Options for engine**</span>
-<span class="sd">        * *crfcut* - (default) split by CRF trained on TED dataset</span>
-<span class="sd">        * *thaisum* - sentence segmenter from</span>
-<span class="sd">            Nakhun Chumpolsathien, 2020</span>
-<span class="sd">        * *tltk* - split by `TLTK &lt;https://pypi.org/project/tltk/&gt;`_</span>
-<span class="sd">        * *wtp* - split by</span>
-<span class="sd">            `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_.</span>
-<span class="sd">            Supports many model sizes:</span>
-<span class="sd">            ``wtp`` uses mini model (default),</span>
-<span class="sd">            ``wtp-tiny`` uses ``wtp-bert-tiny``,</span>
-<span class="sd">            ``wtp-mini`` uses ``wtp-bert-mini``,</span>
-<span class="sd">            ``wtp-base`` uses ``wtp-canine-s-1l``,</span>
-<span class="sd">            ``wtp-large`` uses ``wtp-canine-s-12l``.</span>
-<span class="sd">        * *whitespace+newline* - split by whitespace and newline</span>
-<span class="sd">        * *whitespace* - split by whitespace,</span>
-<span class="sd">            using :class:`regex` pattern ``r" +"``</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Split the text based on *whitespace*:</span>
@@ -571,91 +543,90 @@
         <span class="k">return</span> <span class="p">[]</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">original_text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">original_text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_sent_tokenize_words</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="p">)</span>
 
-    <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"crfcut"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.crfcut</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="n">original_text</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">word_indices</span> <span class="o">=</span> <span class="n">indices_words</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">map_indices_to_words</span><span class="p">(</span><span class="n">word_indices</span><span class="p">,</span> <span class="p">[</span><span class="n">original_text</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">result</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"whitespace"</span><span class="p">:</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">" +"</span><span class="p">,</span> <span class="n">original_text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">_temp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-                <span class="k">if</span> <span class="s2">" "</span> <span class="ow">in</span> <span class="n">w</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_RE_WORD_CHAR</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">_temp</span><span class="p">:</span>
-                        <span class="k">continue</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
-                    <span class="n">_temp</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">result</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"whitespace+newline"</span><span class="p">:</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">original_text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">_temp</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">_RE_WHITESPACE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_RE_WORD_CHAR</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">_temp</span><span class="p">:</span>
-                        <span class="k">continue</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
-                    <span class="n">_temp</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_temp</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">result</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"tltk"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">sent_tokenize</span> <span class="k">as</span> <span class="n">tltk_sent_tokenize</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tltk_sent_tokenize</span><span class="p">(</span><span class="n">original_text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"thaisum"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.thaisumcut</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiSentenceSegmentor</span>
-
-        <span class="n">segmentor</span> <span class="o">=</span> <span class="n">ThaiSentenceSegmentor</span><span class="p">()</span>
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segmentor</span><span class="o">.</span><span class="n">split_into_sentences</span><span class="p">(</span><span class="n">original_text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"wtp"</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s2">"-"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
-            <span class="n">_size</span> <span class="o">=</span> <span class="s2">"mini"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">_size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"-"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.wtsplit</span><span class="w"> </span><span class="kn">import</span> <span class="n">tokenize</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="n">original_text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">_size</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="s2">"sentence"</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"""Tokenizer </span><span class="se">\"</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\"</span><span class="s2"> not found.</span>
-<span class="s2">            It might be a typo; if not, please consult our document."""</span>
-        <span class="p">)</span>
-
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">segment_sentences</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">engine</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">strip_whitespace</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">segments</span></div>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"crfcut"</span><span class="p">]:</span>
-        <span class="n">word_indices</span> <span class="o">=</span> <span class="n">indices_words</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">map_indices_to_words</span><span class="p">(</span><span class="n">word_indices</span><span class="p">,</span> <span class="n">segments</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">segments</span></div>
 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sent_tokenize_words</span><span class="p">(</span>
+    <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Group a list of words into sentences.</span>
+
+<span class="sd">    :param list[str] words: list of words</span>
+<span class="sd">    :param str engine: name of the sentence tokenizer engine</span>
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace;</span>
+<span class="sd">        otherwise omit whitespace</span>
+<span class="sd">    :return: list of sentences, each a list of words</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">original_text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">is_separator</span> <span class="o">=</span> <span class="n">find_engine</span><span class="p">(</span><span class="n">_SENT_SEPARATORS</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_separator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_split_at_separators</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">is_separator</span><span class="p">)</span>
+
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">segment_sentences</span><span class="p">(</span><span class="n">original_text</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"crfcut"</span><span class="p">:</span>
+        <span class="c1"># BUG-LEDGER: sent-tokenize-crfcut-segments</span>
+        <span class="c1"># The crfcut result is not used; all words go in one sentence.</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">original_text</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">strip_whitespace</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">map_indices_to_words</span><span class="p">(</span><span class="n">indices_words</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="n">segments</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_space_separator</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">" "</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_RE_WORD_CHAR</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_whitespace_separator</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">_RE_WHITESPACE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">word</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_RE_WORD_CHAR</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+
+<span class="c1"># Sentence tokenizers that split a list of words at separator words.</span>
+<span class="c1"># Keep the names in step with the whitespace engines in SENT_ENGINES.</span>
+<span class="n">_SENT_SEPARATORS</span><span class="p">:</span> <span class="n">EngineTable</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">((</span><span class="s2">"whitespace"</span><span class="p">,),</span> <span class="n">_is_space_separator</span><span class="p">),</span>
+    <span class="p">((</span><span class="s2">"whitespace+newline"</span><span class="p">,),</span> <span class="n">_is_whitespace_separator</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_split_at_separators</span><span class="p">(</span>
+    <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">is_separator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Split a list of words into sentences at separator words.</span>
+
+<span class="sd">    :param list[str] words: list of words</span>
+<span class="sd">    :param is_separator: function that tells whether a word is a separator</span>
+<span class="sd">    :return: list of sentences, each a list of words</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    """</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sentence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_separator</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">sentence</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+            <span class="n">sentence</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sentence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+            <span class="c1"># BUG-LEDGER: whitespace-trailing-append</span>
+            <span class="c1"># A trailing separator also appends an empty sentence.</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
 
 <div class="viewcode-block" id="paragraph_tokenize">
@@ -666,24 +637,28 @@
     <span class="n">paragraph_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newline"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Paragraph tokenizer.</span>
-
-<span class="sd">    Tokenizes text into paragraphs.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into paragraphs.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name of paragraph tokenizer</span>
-<span class="sd">    :return: list of paragraphs</span>
-<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    :param str engine: name of the paragraph tokenizer engine.</span>
+<span class="sd">        Options:</span>
 
-<span class="sd">    **Options for engine**</span>
 <span class="sd">        * *wtp* - split by</span>
-<span class="sd">            `wtpsplitaxe &lt;https://github.com/bminixhofer/wtpsplit&gt;`_.</span>
-<span class="sd">            Supports many model sizes:</span>
-<span class="sd">            ``wtp`` uses mini model (default),</span>
-<span class="sd">            ``wtp-tiny`` uses ``wtp-bert-tiny``,</span>
-<span class="sd">            ``wtp-mini`` uses ``wtp-bert-mini``,</span>
-<span class="sd">            ``wtp-base`` uses ``wtp-canine-s-1l``,</span>
-<span class="sd">            ``wtp-large`` uses ``wtp-canine-s-12l``.</span>
+<span class="sd">          `wtpsplit &lt;https://github.com/bminixhofer/wtpsplit&gt;`_.</span>
+<span class="sd">          Supports many model sizes:</span>
+<span class="sd">          ``wtp`` uses the mini model (default),</span>
+<span class="sd">          ``wtp-tiny`` uses ``wtp-bert-tiny``,</span>
+<span class="sd">          ``wtp-mini`` uses ``wtp-bert-mini``,</span>
+<span class="sd">          ``wtp-base`` uses ``wtp-canine-s-1l``,</span>
+<span class="sd">          ``wtp-large`` uses ``wtp-canine-s-12l``</span>
+
+<span class="sd">    :param float paragraph_threshold: threshold for paragraph boundaries</span>
+<span class="sd">    :param str style: paragraph style passed to the engine,</span>
+<span class="sd">        ``"newline"`` (default) or ``"opus100"``</span>
+<span class="sd">    :return: list of paragraphs, each a list of sentences</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    :raises ValueError: if the engine is unknown</span>
 
 <span class="sd">    :Example:</span>
 
@@ -698,28 +673,20 @@
 <span class="sd">        &gt;&gt;&gt; paragraph_tokenize(sent)  # doctest: +SKIP</span>
 <span class="sd">        [['(1) '], ['บทความนี้ผู้เขียนสังเคราะห์ขึ้นมาจากผลงานวิจัยที่เคยทำมาในอดีต  ', 'มิได้ทำการศึกษาค้นคว้าใหม่อย่างกว้างขวางแต่อย่างใด ', 'จึงใคร่ขออภัยในความบกพร่องทั้งปวงมา ', 'ณ ที่นี้']]</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"wtp"</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s2">"-"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">engine</span><span class="p">:</span>
-            <span class="n">size</span> <span class="o">=</span> <span class="s2">"mini"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">size</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"-"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">engine</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"wtp"</span><span class="p">):</span>
+        <span class="n">engine_not_found</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
 
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.wtsplit</span><span class="w"> </span><span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">wtp_size</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.wtsplit</span><span class="w"> </span><span class="kn">import</span> <span class="n">tokenize</span> <span class="k">as</span> <span class="n">segment</span>
 
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span>
-            <span class="n">text</span><span class="p">,</span>
-            <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
-            <span class="n">tokenize</span><span class="o">=</span><span class="s2">"paragraph"</span><span class="p">,</span>
-            <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
-            <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"""Tokenizer </span><span class="se">\"</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\"</span><span class="s2"> not found.</span>
-<span class="s2">            It might be a typo; if not, please consult our document."""</span>
-        <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">segments</span><span class="p">)</span></div>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+        <span class="n">tokenize</span><span class="o">=</span><span class="s2">"paragraph"</span><span class="p">,</span>
+        <span class="n">paragraph_threshold</span><span class="o">=</span><span class="n">paragraph_threshold</span><span class="p">,</span>
+        <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"list[list[str]]"</span><span class="p">,</span> <span class="n">segments</span><span class="p">)</span></div>
 
 
 
@@ -730,42 +697,47 @@
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SUBWORD_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Subword tokenizer for tokenizing text into units smaller than syllables.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into subwords, units smaller than syllables.</span>
 
-<span class="sd">    Tokenizes text into inseparable units of</span>
-<span class="sd">    Thai contiguous characters, namely</span>
-<span class="sd">    `Thai Character Clusters (TCCs) \</span>
-<span class="sd">    &lt;https://www.researchgate.net/publication/2853284_Character_Cluster_Based_Thai_Information_Retrieval&gt;`_</span>
-<span class="sd">    TCCs are units based on Thai spelling features that could not be</span>
-<span class="sd">    separated any character further such as 'ก็', 'จะ', 'ไม่', and 'ฝา'.</span>
-<span class="sd">    If the following units are separated, they could not be spelled out.</span>
-<span class="sd">    This function applies TCC rules to tokenize the text into</span>
+<span class="sd">    The function tokenizes text into inseparable units of contiguous Thai</span>
+<span class="sd">    characters, namely Thai Character Clusters (TCCs). See</span>
+<span class="sd">    https://www.researchgate.net/publication/2853284_Character_Cluster_Based_Thai_Information_Retrieval</span>
+
+<span class="sd">    TCCs are units based on Thai spelling features. A TCC cannot be</span>
+<span class="sd">    separated any further, such as 'ก็', 'จะ', 'ไม่', and 'ฝา'.</span>
+<span class="sd">    If the units are separated, they cannot be spelled out.</span>
+<span class="sd">    The function applies TCC rules to tokenize the text into</span>
 <span class="sd">    the smallest units.</span>
 
-<span class="sd">    For example, the word 'ขนมชั้น' would be tokenized</span>
+<span class="sd">    For example, the function tokenizes the word 'ขนมชั้น'</span>
 <span class="sd">    into 'ข', 'น', 'ม', and 'ชั้น'.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name of subword tokenizer</span>
-<span class="sd">    :param bool keep_whitespace: keep whitespace</span>
+<span class="sd">    :param str engine: name of the subword tokenizer engine.</span>
+<span class="sd">        Options:</span>
+
+<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
+<span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
+<span class="sd">        * *han_solo* - CRF syllable tokenizer for Thai that can work</span>
+<span class="sd">          in the Thai social media domain. See</span>
+<span class="sd">          `PyThaiNLP/Han-solo &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_</span>
+<span class="sd">        * *phayathai* - tokenizer from the PhayaThaiBERT model</span>
+<span class="sd">        * *ssg* - CRF syllable tokenizer for Thai. See</span>
+<span class="sd">          `ponrawee/ssg &lt;https://github.com/ponrawee/ssg&gt;`_</span>
+<span class="sd">        * *tcc* (default) - Thai Character Cluster</span>
+<span class="sd">          (Theeramunkong et al. 2000)</span>
+<span class="sd">        * *tcc_p* - Thai Character Cluster with improved rules</span>
+<span class="sd">          used in newmm</span>
+<span class="sd">        * *tltk* - syllable tokenizer from tltk. See</span>
+<span class="sd">          `tltk &lt;https://pypi.org/project/tltk/&gt;`_</span>
+<span class="sd">        * *wangchanberta* - SentencePiece from the WangChanBERTa model</span>
+
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace;</span>
+<span class="sd">        otherwise omit whitespace</span>
 <span class="sd">    :return: list of subwords</span>
 <span class="sd">    :rtype: list[str]</span>
 
-<span class="sd">    **Options for engine**</span>
-<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
-<span class="sd">        * *etcc* - Enhanced Thai Character Cluster (Inrut et al. 2001)</span>
-<span class="sd">        * *han_solo* - CRF syllable segmenter for Thai that can work</span>
-<span class="sd">            in the Thai social media domain. See</span>
-<span class="sd">            `PyThaiNLP/Han-solo &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_.</span>
-<span class="sd">        * *ssg* - CRF syllable segmenter for Thai. See</span>
-<span class="sd">            `ponrawee/ssg &lt;https://github.com/ponrawee/ssg&gt;`_.</span>
-<span class="sd">        * *tcc* (default) - Thai Character Cluster</span>
-<span class="sd">            (Theeramunkong et al. 2000)</span>
-<span class="sd">        * *tcc_p* - Thai Character Cluster with improved rules</span>
-<span class="sd">            used in newmm</span>
-<span class="sd">        * *tltk* - syllable tokenizer from tltk. See</span>
-<span class="sd">            `tltk &lt;https://pypi.org/project/tltk/&gt;`_.</span>
-<span class="sd">        * *wangchanberta* - SentencePiece from wangchanberta model</span>
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Tokenize text into subwords based on *tcc*:</span>
@@ -773,73 +745,29 @@
 <span class="sd">        &gt;&gt;&gt; from pythainlp.tokenize import subword_tokenize</span>
 <span class="sd">        &gt;&gt;&gt; text_1 = "ยุคเริ่มแรกของ ราชวงศ์หมิง"</span>
 <span class="sd">        &gt;&gt;&gt; text_2 = "ความแปลกแยกและพัฒนาการ"</span>
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine='tcc')</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine="tcc")</span>
 <span class="sd">        ['ยุ', 'ค', 'เริ่ม', 'แร', 'ก', 'ข', 'อ', 'ง', ' ', 'รา', 'ช', 'วงศ์', 'ห', 'มิ', 'ง']</span>
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine='tcc')</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine="tcc")</span>
 <span class="sd">        ['ค', 'วา', 'ม', 'แป', 'ล', 'ก', 'แย', 'ก', 'และ', 'พั', 'ฒ', 'นา', 'กา', 'ร']</span>
 
 <span class="sd">    Tokenize text into subwords based on *etcc*:</span>
 
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine='etcc')</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine="etcc")</span>
 <span class="sd">        ['ยุ', 'ค', 'เริ่', 'ม', 'แร', 'ก', 'ข', 'อ', 'ง', ' ', 'รา', 'ช', 'ว', 'งศ์', 'ห', 'มิง']</span>
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine='etcc')</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine="etcc")</span>
 <span class="sd">        ['ค', 'วา', 'ม', 'แป', 'ล', 'ก', 'แย', 'ก', 'และ', 'พัฒ', 'นา', 'กา', 'ร']</span>
 
 <span class="sd">    Tokenize text into subwords based on *wangchanberta*:</span>
 
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine='wangchanberta')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_1, engine="wangchanberta")  # doctest: +SKIP</span>
 <span class="sd">        ['▁', 'ยุค', 'เริ่มแรก', 'ของ', '▁', 'ราชวงศ์', 'หมิง']</span>
-<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine='wangchanberta')  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; subword_tokenize(text_2, engine="wangchanberta")  # doctest: +SKIP</span>
 <span class="sd">        ['▁ความ', 'แปลก', 'แยก', 'และ', 'พัฒนาการ']</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"tcc"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tcc</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">tcc_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tcc_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"tcc_p"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tcc_p</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">tcc_p_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tcc_p_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"etcc"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.etcc</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">etcc_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">etcc_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"wangchanberta"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.wangchanberta</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">wangchanberta_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">wangchanberta_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"dict"</span><span class="p">:</span>  <span class="c1"># use syllable dictionary</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-            <span class="n">segments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-                <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">word</span><span class="p">,</span> <span class="n">custom_dict</span><span class="o">=</span><span class="n">syllable_dict_trie</span><span class="p">())</span>
-            <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"ssg"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.ssg</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">ssg_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">ssg_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"tltk"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.tltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">syllable_tokenize</span> <span class="k">as</span> <span class="n">tltk_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">tltk_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"han_solo"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize.han_solo</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">han_solo_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">han_solo_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"phayathai"</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.phayathaibert</span><span class="w"> </span><span class="kn">import</span> <span class="n">segment</span> <span class="k">as</span> <span class="n">phayathai_segment</span>
-
-        <span class="n">segments</span> <span class="o">=</span> <span class="n">phayathai_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"""Tokenizer </span><span class="se">\"</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\"</span><span class="s2"> not found.</span>
-<span class="s2">            It might be a typo; if not, please consult our document."""</span>
-        <span class="p">)</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="n">SUBWORD_ENGINES</span><span class="p">,</span> <span class="n">engine</span><span class="p">)(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_whitespace</span><span class="p">:</span>
         <span class="n">segments</span> <span class="o">=</span> <span class="n">strip_whitespace</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
@@ -855,26 +783,29 @@
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SYLLABLE_TOKENIZE_ENGINE</span><span class="p">,</span>
     <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Syllable tokenizer</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into syllables.</span>
 
-<span class="sd">    Tokenizes text into inseparable units of</span>
-<span class="sd">    Thai syllables.</span>
+<span class="sd">    The function tokenizes text into inseparable units of Thai syllables.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
-<span class="sd">    :param str engine: the name of syllable tokenizer</span>
-<span class="sd">    :param bool keep_whitespace: keep whitespace</span>
+<span class="sd">    :param str engine: name of the syllable tokenizer engine.</span>
+<span class="sd">        Options:</span>
+
+<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
+<span class="sd">        * *han_solo* - (default) CRF syllable tokenizer for Thai that can</span>
+<span class="sd">          work in the Thai social media domain. See</span>
+<span class="sd">          `PyThaiNLP/Han-solo &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_</span>
+<span class="sd">        * *ssg* - CRF syllable tokenizer for Thai. See</span>
+<span class="sd">          `ponrawee/ssg &lt;https://github.com/ponrawee/ssg&gt;`_</span>
+<span class="sd">        * *tltk* - syllable tokenizer from tltk. See</span>
+<span class="sd">          `tltk &lt;https://pypi.org/project/tltk/&gt;`_</span>
+
+<span class="sd">    :param bool keep_whitespace: True to keep whitespace;</span>
+<span class="sd">        otherwise omit whitespace</span>
 <span class="sd">    :return: list of syllables</span>
 <span class="sd">    :rtype: list[str]</span>
-
-<span class="sd">    **Options for engine**</span>
-<span class="sd">        * *dict* - newmm word tokenizer with a syllable dictionary</span>
-<span class="sd">        * *han_solo* - CRF syllable segmenter for Thai that can work</span>
-<span class="sd">            in the Thai social media domain. See</span>
-<span class="sd">            `PyThaiNLP/Han-solo &lt;https://github.com/PyThaiNLP/Han-solo&gt;`_.</span>
-<span class="sd">        * *ssg* - CRF syllable segmenter for Thai. See</span>
-<span class="sd">            `ponrawee/ssg &lt;https://github.com/ponrawee/ssg&gt;`_.</span>
-<span class="sd">        * *tltk* - syllable tokenizer from tltk. See</span>
-<span class="sd">            `tltk &lt;https://pypi.org/project/tltk/&gt;`_.</span>
+<span class="sd">    :raises ValueError: if the engine is unknown</span>
 
 <span class="sd">    :Example:</span>
 
@@ -884,11 +815,8 @@
 <span class="sd">        &gt;&gt;&gt; syllable_tokenize("ประเทศไทย", engine="dict")</span>
 <span class="sd">        ['ประ', 'เทศ', 'ไทย']</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"dict"</span><span class="p">,</span> <span class="s2">"han_solo"</span><span class="p">,</span> <span class="s2">"ssg"</span><span class="p">,</span> <span class="s2">"tltk"</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"""Tokenizer </span><span class="se">\"</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="se">\"</span><span class="s2"> not found.</span>
-<span class="s2">            It might be a typo; if not, please consult our document."""</span>
-        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">engine</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SYLLABLE_ENGINES</span><span class="p">:</span>
+        <span class="n">engine_not_found</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">subword_tokenize</span><span class="p">(</span>
         <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="n">keep_whitespace</span>
     <span class="p">)</span></div>
@@ -898,13 +826,15 @@
 <div class="viewcode-block" id="display_cell_tokenize">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.display_cell_tokenize">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">display_cell_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Display cell tokenizer.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize Thai text into display cells.</span>
 
-<span class="sd">    Tokenizes Thai text into display cells without splitting tone marks.</span>
+<span class="sd">    The function does not split tone marks from their base characters.</span>
 
 <span class="sd">    :param str text: text to be tokenized</span>
 <span class="sd">    :return: list of display cells</span>
 <span class="sd">    :rtype: list[str]</span>
+
 <span class="sd">    :Example:</span>
 
 <span class="sd">    Tokenize Thai text into display cells:</span>
@@ -939,11 +869,11 @@
 <div class="viewcode-block" id="Tokenizer">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Tokenizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Tokenizer class for a custom tokenizer.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Bundle a custom dictionary and a word tokenizer engine in one object.</span>
 
 <span class="sd">    This class allows users to pre-define a custom dictionary along with</span>
-<span class="sd">    a tokenizer and encapsulate them into one single object.</span>
-<span class="sd">    It is a wrapper for both :func:`pythainlp.tokenize.word_tokenize`</span>
+<span class="sd">    an engine. It wraps both :func:`pythainlp.tokenize.word_tokenize`</span>
 <span class="sd">    and :func:`pythainlp.util.dict_trie`.</span>
 
 <span class="sd">    :Example:</span>
@@ -990,7 +920,7 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็น', 'อาการ', 'ผิด', 'ปกติ', 'ของ', 'การ', 'พูด']</span>
-<span class="sd">        &gt;&gt;&gt; _tokenizer.set_tokenizer_engine(engine="newmm")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; _tokenizer.set_tokenize_engine(engine="newmm")  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; _tokenizer.word_tokenize(text)  # doctest: +SKIP</span>
 <span class="sd">        ['อะเฟเซีย', ' ', '(', 'Aphasia', ')', ' ', 'เป็นอาการ', 'ผิด', 'ปกติ', 'ของการพูด']</span>
 <span class="sd">    """</span>
@@ -1004,16 +934,21 @@
         <span class="n">keep_whitespace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">join_broken_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Initialize tokenizer object.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the tokenizer object.</span>
 
-<span class="sd">        :param custom_dict: a file path, a list of vocabularies to be</span>
-<span class="sd">                    used to create a trie, or an instantiated</span>
-<span class="sd">                    :class:`pythainlp.util.Trie` object.</span>
-<span class="sd">        :type custom_dict: Union[Trie, Iterable[str], str, None]</span>
-<span class="sd">        :param str engine: tokenizer engine</span>
-<span class="sd">            (i.e. *newmm*, *mm*, *longest*, *deepcut*)</span>
+<span class="sd">        :param custom_dict: file path, list of words to create a trie</span>
+<span class="sd">            from, or :class:`pythainlp.util.Trie` object</span>
+<span class="sd">        :type custom_dict: Union[pythainlp.util.Trie, Iterable[str], str,</span>
+<span class="sd">            None]</span>
+<span class="sd">        :param str engine: name of the word tokenizer engine</span>
+<span class="sd">            (*newmm*, *mm*, *longest*, or *deepcut*)</span>
 <span class="sd">        :param bool keep_whitespace: True to keep whitespace, a common</span>
-<span class="sd">            marker for end of phrase in Thai</span>
+<span class="sd">            marker for end of phrase in Thai; otherwise omit whitespace</span>
+<span class="sd">        :param bool join_broken_num: True to rejoin formatted numbers</span>
+<span class="sd">            that a tokenizer could wrongly split; otherwise leave them</span>
+<span class="sd">            as split</span>
+<span class="sd">        :raises NotImplementedError: if the engine is not supported</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__trie_dict</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">([])</span>
         <span class="k">if</span> <span class="n">custom_dict</span><span class="p">:</span>
@@ -1033,10 +968,11 @@
 <div class="viewcode-block" id="Tokenizer.word_tokenize">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer.word_tokenize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">word_tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">"""Main tokenization function.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Tokenize text into words.</span>
 
 <span class="sd">        :param str text: text to be tokenized</span>
-<span class="sd">        :return: list of words, tokenized from the text</span>
+<span class="sd">        :return: list of words</span>
 <span class="sd">        :rtype: list[str]</span>
 
 <span class="sd">        :Example:</span>
@@ -1058,10 +994,11 @@
 <div class="viewcode-block" id="Tokenizer.set_tokenize_engine">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.Tokenizer.set_tokenize_engine">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_tokenize_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Set the tokenizer's engine.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Set the word tokenizer engine.</span>
 
-<span class="sd">        :param str engine: choose between different options of tokenizer engines</span>
-<span class="sd">                           (i.e. *newmm*, *mm*, *longest*, *deepcut*)</span>
+<span class="sd">        :param str engine: name of the word tokenizer engine</span>
+<span class="sd">            (*newmm*, *mm*, *longest*, or *deepcut*)</span>
 
 <span class="sd">        :Example:</span>
 

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize.core &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.summarize.core &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,7 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Text summarization and keyword extraction"""</span>
+<span class="sd">"""Text summarization and keyword extraction."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -139,32 +140,25 @@
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_SUMMARIZE_ENGINE</span><span class="p">,</span>
     <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Summarizes text based on frequency of words.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Summarize text based on word frequency.</span>
 
 <span class="sd">    Under the hood, this function first tokenizes sentences from the given</span>
 <span class="sd">    text with :func:`pythainlp.tokenize.sent_tokenize`.</span>
 <span class="sd">    Then, it computes frequencies of tokenized words</span>
 <span class="sd">    (with :func:`pythainlp.tokenize.word_tokenize`) in all sentences</span>
-<span class="sd">    and normalizes them with maximum word frequency. The words with normalized</span>
-<span class="sd">    frequencies that are less than 0.1 or greater than 0.9 will be</span>
-<span class="sd">    filtered out from frequency dictionary. Finally, it picks *n* sentences</span>
-<span class="sd">    with highest sum of normalized frequency from all words which are</span>
-<span class="sd">    in the sentence and also appear in the frequency dictionary.</span>
+<span class="sd">    and normalizes them with the maximum word frequency. It filters out</span>
+<span class="sd">    the words with normalized frequencies that are less than 0.1 or</span>
+<span class="sd">    greater than 0.9 from the frequency dictionary. Finally, it picks *n*</span>
+<span class="sd">    sentences with the highest sum of normalized frequency from all words</span>
+<span class="sd">    that are in the sentence and also appear in the frequency dictionary.</span>
 
-<span class="sd">    :param str text: text to be summarized</span>
-<span class="sd">    :param int n: number of sentences to be included in the summary</span>
-<span class="sd">                  By default, n is *1* (effective for frequency engine only)</span>
-<span class="sd">    :param str engine: text summarization engine (By default: *frequency*).</span>
-<span class="sd">    :param str tokenizer: word tokenizer engine name (refer to</span>
-<span class="sd">                          :func:`pythainlp.tokenize.word_tokenize`).</span>
-<span class="sd">                          By default, tokenizer is *newmm*</span>
-<span class="sd">                          (effective for frequency engine only)</span>
+<span class="sd">    :param str text: text to summarize</span>
+<span class="sd">    :param int n: number of sentences in the summary (default is 1,</span>
+<span class="sd">        effective for the frequency engine only)</span>
+<span class="sd">    :param str engine: text summarization engine</span>
 
-<span class="sd">    :return: list of selected sentences</span>
-<span class="sd">    :rtype: list[str]</span>
-
-<span class="sd">    **Options for engine**</span>
-<span class="sd">        * *frequency* (default) - word frequency</span>
+<span class="sd">        * *frequency* - word frequency (default)</span>
 <span class="sd">        * *mt5* - mT5-small model</span>
 <span class="sd">        * *mt5-small* - mT5-small model</span>
 <span class="sd">        * *mt5-base* - mT5-base model</span>
@@ -173,6 +167,13 @@
 <span class="sd">        * *mt5-xxl* - mT5-xxl model</span>
 <span class="sd">        * *mt5-cpe-kmutt-thai-sentence-sum* - mT5 Thai sentence</span>
 <span class="sd">          summarization by CPE KMUTT</span>
+
+<span class="sd">    :param str tokenizer: engine to tokenize text with. See</span>
+<span class="sd">        :func:`pythainlp.tokenize.word_tokenize` for available engines</span>
+<span class="sd">        (default is ``"newmm"``, effective for the frequency engine only)</span>
+
+<span class="sd">    :return: list of selected sentences</span>
+<span class="sd">    :rtype: list[str]</span>
 
 <span class="sd">    :Example:</span>
 
@@ -208,7 +209,9 @@
 <span class="sd">        ที่อยู่ - ศิลปวัฒนธรรม']</span>
 
 <span class="sd">        &gt;&gt;&gt; text = "ถ้าพูดถึงขนมหวานในตำนานที่ชื่นใจที่สุดแล้วละก็ต้องไม่พ้น น้ำแข็งใส แน่ๆ เพราะว่าเป็นอะไรที่ชื่นใจสุดๆ"  # doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; summarize(text, engine="mt5-cpe-kmutt-thai-sentence-sum")  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; summarize(</span>
+<span class="sd">        ...     text, engine="mt5-cpe-kmutt-thai-sentence-sum"</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 <span class="sd">        ['น้ําแข็งใสเป็นอะไรที่ชื่นใจที่สุด']</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -247,7 +250,8 @@
     <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
     <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Return the most relevant keywords (and keyphrases) from a document.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return the most relevant keywords (and keyphrases) from a document.</span>
 
 <span class="sd">    Each algorithm may produce completely different keywords,</span>
 <span class="sd">    so choose the algorithm carefully.</span>
@@ -259,28 +263,28 @@
 <span class="sd">        creating a ``KeyBERT`` object directly is recommended.</span>
 
 <span class="sd">    :param str text: text to extract keywords from</span>
-<span class="sd">    :param tuple[int, int] keyphrase_ngram_range: token range for keywords.</span>
-<span class="sd">        ``(1, 1)`` allows unigrams only (e.g. "เสา", "ไฟฟ้า");</span>
+<span class="sd">    :param tuple[int, int] keyphrase_ngram_range: range of words per</span>
+<span class="sd">        keyword. ``(1, 1)`` allows unigrams only (e.g. "เสา", "ไฟฟ้า");</span>
 <span class="sd">        ``(1, 2)`` allows unigrams and bigrams</span>
-<span class="sd">        (e.g. "เสา", "ไฟฟ้า", "เสาไฟฟ้า"). Default: ``(1, 2)``.</span>
-<span class="sd">    :param int max_keywords: maximum number of keywords to return.</span>
-<span class="sd">        Default: 5.</span>
-<span class="sd">    :param int min_df: minimum term frequency to qualify as keyword.</span>
-<span class="sd">        Default: 1.</span>
-<span class="sd">    :param str engine: keyword extraction algorithm. Default: ``'keybert'``.</span>
-<span class="sd">    :param str tokenizer: tokenizer engine name.</span>
-<span class="sd">        See :func:`pythainlp.tokenize.word_tokenize` for options.</span>
-<span class="sd">        Default: ``'newmm'``.</span>
-<span class="sd">    :param stop_words: words to ignore. If ``None``,</span>
-<span class="sd">        :func:`pythainlp.corpus.thai_stopwords` is used. Default: ``None``.</span>
-<span class="sd">    :type stop_words: collections.abc.Iterable[str] or None</span>
+<span class="sd">        (e.g. "เสา", "ไฟฟ้า", "เสาไฟฟ้า") (default is ``(1, 2)``)</span>
+<span class="sd">    :param int max_keywords: maximum number of keywords to return</span>
+<span class="sd">        (default is 5)</span>
+<span class="sd">    :param int min_df: minimum word frequency to qualify as a keyword</span>
+<span class="sd">        (default is 1)</span>
+<span class="sd">    :param str engine: keyword extraction engine</span>
+
+<span class="sd">        * *keybert* - KeyBERT keyword extraction (default)</span>
+<span class="sd">        * *frequency* - word frequency</span>
+
+<span class="sd">    :param str tokenizer: engine to tokenize text with. See</span>
+<span class="sd">        :func:`pythainlp.tokenize.word_tokenize` for available engines</span>
+<span class="sd">        (default is ``"newmm"``)</span>
+<span class="sd">    :param Optional[collections.abc.Iterable[str]] stop_words: words to</span>
+<span class="sd">        ignore. If None, use :func:`pythainlp.corpus.thai_stopwords`</span>
+<span class="sd">        (default is None)</span>
 
 <span class="sd">    :return: list of keywords</span>
 <span class="sd">    :rtype: list[str]</span>
-
-<span class="sd">    **Options for engine**</span>
-<span class="sd">        * *keybert* (default) - KeyBERT keyword extraction</span>
-<span class="sd">        * *frequency* - word frequency</span>
 
 <span class="sd">    :Example:</span>
 
@@ -304,7 +308,9 @@
 <span class="sd">        'ควบคุมการเปลี่ยนแปลง',</span>
 <span class="sd">        'มีพิษ']</span>
 
-<span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(text, max_keywords=10)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; keywords = extract_keywords(</span>
+<span class="sd">        ...     text, max_keywords=10</span>
+<span class="sd">        ... )  # doctest: +SKIP</span>
 
 <span class="sd">        ['อวัยวะต่างๆ',</span>
 <span class="sd">        'ซ่อมแซมส่วน',</span>

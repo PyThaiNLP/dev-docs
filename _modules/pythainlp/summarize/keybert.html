@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.summarize.keybert &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.summarize.keybert &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,7 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Minimal re-implementation of KeyBERT.</span>
+<span class="sd">"""</span>
+<span class="sd">Re-implement KeyBERT in a minimal form.</span>
 
 <span class="sd">KeyBERT is a minimal and easy-to-use keyword extraction technique</span>
 <span class="sd">that leverages BERT embeddings to create keywords and keyphrases</span>
@@ -141,6 +143,8 @@
 <div class="viewcode-block" id="KeyBERT">
 <a class="viewcode-back" href="../../../api/summarize.html#pythainlp.summarize.keybert.KeyBERT">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KeyBERT</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Extract keywords and keyphrases with the KeyBERT algorithm."""</span>
+
     <span class="n">ft_pipeline</span><span class="p">:</span> <span class="s2">"Pipeline"</span>
 
 <div class="viewcode-block" id="KeyBERT.__init__">
@@ -148,6 +152,11 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"airesearch/wangchanberta-base-att-spm-uncased"</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the KeyBERT feature extraction pipeline.</span>
+
+<span class="sd">        :param str model_name: name of the model to extract features with</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ft_pipeline</span><span class="p">:</span> <span class="s2">"Pipeline"</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
@@ -170,28 +179,40 @@
         <span class="n">return_similarity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">stop_words</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]:</span>
-<span class="w">        </span><span class="sd">"""Extract Thai keywords and/or keyphrases with KeyBERT algorithm.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Extract Thai keywords and keyphrases with the KeyBERT algorithm.</span>
+
 <span class="sd">        See https://github.com/MaartenGr/KeyBERT.</span>
 
-<span class="sd">        :param str text: text to be summarized</span>
-<span class="sd">        :param Tuple[int, int] keyphrase_ngram_range: Number of token units to be defined as keyword.</span>
-<span class="sd">                                The token unit varies w.r.t. `tokenizer_engine`.</span>
-<span class="sd">                                For instance, (1, 1) means each token (unigram) can be a keyword (e.g. "เสา", "ไฟฟ้า"),</span>
-<span class="sd">                                (1, 2) means one and two consecutive tokens (unigram and bigram) can be keywords</span>
-<span class="sd">                                (e.g. "เสา", "ไฟฟ้า", "เสาไฟฟ้า")  (default: (1, 2))</span>
-<span class="sd">        :param int max_keywords: Number of maximum keywords to be returned. (default: 5)</span>
-<span class="sd">        :param int min_df: Minimum frequency required to be a keyword. (default: 1)</span>
-<span class="sd">        :param str tokenizer: Name of tokenizer engine to use.</span>
-<span class="sd">                                Refer to options in :func: `pythainlp.tokenize.word_tokenizer() (default: 'newmm')</span>
-<span class="sd">        :param bool return_similarity: If `True`, return keyword scores. (default: False)</span>
-<span class="sd">        :param Optional[Iterable[str]] stop_words: A list of stop words (a.k.a words to be ignored).</span>
-<span class="sd">                                If not specified, :func:`pythainlp.corpus.thai_stopwords` is used. (default: None)</span>
+<span class="sd">        :param str text: text to extract keywords from</span>
+<span class="sd">        :param tuple[int, int] keyphrase_ngram_range: range of words per</span>
+<span class="sd">            keyword. The word unit depends on the ``tokenizer`` engine.</span>
+<span class="sd">            For example, ``(1, 1)`` means each word (unigram) can be a</span>
+<span class="sd">            keyword (e.g. "เสา", "ไฟฟ้า"), and ``(1, 2)`` means one or two</span>
+<span class="sd">            consecutive words (unigram and bigram) can be keywords</span>
+<span class="sd">            (e.g. "เสา", "ไฟฟ้า", "เสาไฟฟ้า") (default is ``(1, 2)``)</span>
+<span class="sd">        :param int max_keywords: maximum number of keywords to return</span>
+<span class="sd">            (default is 5)</span>
+<span class="sd">        :param int min_df: minimum word frequency to qualify as a keyword</span>
+<span class="sd">            (default is 1)</span>
+<span class="sd">        :param str tokenizer: engine to tokenize text with. See</span>
+<span class="sd">            :func:`pythainlp.tokenize.word_tokenize` for available engines</span>
+<span class="sd">            (default is ``"newmm"``)</span>
+<span class="sd">        :param bool return_similarity: return keywords with their</span>
+<span class="sd">            similarity scores (default is False)</span>
+<span class="sd">        :param Optional[collections.abc.Iterable[str]] stop_words: words to</span>
+<span class="sd">            ignore. If None, use :func:`pythainlp.corpus.thai_stopwords`</span>
+<span class="sd">            (default is None)</span>
 
-<span class="sd">        :return: list of keywords with score</span>
+<span class="sd">        :return: list of keywords, or list of (keyword, score) tuples if</span>
+<span class="sd">            ``return_similarity`` is True</span>
+<span class="sd">        :rtype: Union[list[str], list[tuple[str, float]]]</span>
 
 <span class="sd">        :Example:</span>
 
-<span class="sd">            &gt;&gt;&gt; from pythainlp.summarize.keybert import KeyBERT  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; from pythainlp.summarize.keybert import (</span>
+<span class="sd">            ...     KeyBERT,</span>
+<span class="sd">            ... )  # doctest: +SKIP</span>
 
 <span class="sd">            &gt;&gt;&gt; text = '''  # doctest: +SKIP</span>
 <span class="sd">            ...     อาหาร หมายถึง ของแข็งหรือของเหลว</span>
@@ -241,7 +262,7 @@
             <span class="k">return</span> <span class="p">[]</span>
 
         <span class="c1"># generate all lists of keywords / keyphrases</span>
-        <span class="n">stop_words_</span> <span class="o">=</span> <span class="n">stop_words</span> <span class="k">if</span> <span class="n">stop_words</span> <span class="k">else</span> <span class="n">thai_stopwords</span><span class="p">()</span>
+        <span class="n">stop_words_</span> <span class="o">=</span> <span class="n">stop_words</span> <span class="ow">or</span> <span class="n">thai_stopwords</span><span class="p">()</span>
         <span class="n">kw_candidates</span> <span class="o">=</span> <span class="n">_generate_ngrams</span><span class="p">(</span>
             <span class="n">text</span><span class="p">,</span> <span class="n">keyphrase_ngram_range</span><span class="p">,</span> <span class="n">min_df</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">stop_words_</span>
         <span class="p">)</span>
@@ -257,17 +278,17 @@
 
         <span class="k">if</span> <span class="n">return_similarity</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">keywords</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">kw</span> <span class="k">for</span> <span class="n">kw</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">kw</span> <span class="k">for</span> <span class="n">kw</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="KeyBERT.embed">
 <a class="viewcode-back" href="../../../api/summarize.html#pythainlp.summarize.keybert.KeyBERT.embed">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">embed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s2">"NDArray[np.float32]"</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Create embeddings by averaging vectors from the last hidden layer.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Create embeddings by averaging vectors from the last hidden layer.</span>
 
-<span class="sd">        :param Union[str, list[str]] docs: input document or documents</span>
-<span class="sd">        :return: embeddings as a float32 array with one row per input document</span>
+<span class="sd">        :param Union[str, list[str]] docs: document or list of documents</span>
+<span class="sd">        :return: embeddings as a float32 array, one row per document</span>
 <span class="sd">        :rtype: numpy.typing.NDArray[numpy.float32]</span>
 <span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -364,7 +385,9 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"NDArray[np.float32]"</span><span class="p">:</span>
         <span class="c1"># `a` has one row (document embedding), so flatten to get 1-D scores.</span>
         <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">"NDArray[np.float32]"</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="s2">"NDArray[np.float32]"</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="n">doc_vector</span> <span class="o">=</span> <span class="n">l2_norm</span><span class="p">(</span><span class="n">doc_vector</span><span class="p">)</span>
     <span class="n">word_vectors</span> <span class="o">=</span> <span class="n">l2_norm</span><span class="p">(</span><span class="n">word_vectors</span><span class="p">)</span>

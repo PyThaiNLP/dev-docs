@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.prayut_and_somchaip &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.soundex.prayut_and_somchaip &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,8 +114,9 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Thai-English Cross-Language Transliterated Word Retrieval</span>
-<span class="sd">using Soundex Technique</span>
+<span class="sd">"""</span>
+<span class="sd">Thai-English Cross-Language Transliterated Word Retrieval</span>
+<span class="sd">using Soundex Technique.</span>
 
 <span class="sd">References:</span>
 <span class="sd">Prayut Suwanvisat, Somchai Prasitjutrakul.</span>
@@ -142,21 +144,62 @@
 <span class="n">_C52</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ง"</span>
 
 
+<span class="n">_VALID_CHARS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">thai_characters</span> <span class="o">+</span> <span class="s2">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_table</span><span class="p">(</span>
+    <span class="n">groups</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Map each character to a code; the first matching group wins."""</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">chars</span><span class="p">,</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span>
+
+
+<span class="n">_FIRST_GROUPS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">_C0</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C1</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C2</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C3</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C4</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C5</span><span class="p">,</span> <span class="s2">"5"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C6</span><span class="p">,</span> <span class="s2">"6"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">_C52</span><span class="p">,</span> <span class="s2">"52"</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="c1"># Codes for the first character</span>
+<span class="n">_FIRST_CODES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_table</span><span class="p">(</span><span class="n">_FIRST_GROUPS</span><span class="p">)</span>
+<span class="c1"># Codes for the other characters</span>
+<span class="n">_REST_CODES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_table</span><span class="p">(</span>
+    <span class="n">_FIRST_GROUPS</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="o">+</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">_C7</span><span class="p">,</span> <span class="s2">"7"</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">_C8</span><span class="p">,</span> <span class="s2">"8"</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">_C1_1</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">_C9</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+
 <div class="viewcode-block" id="prayut_and_somchaip">
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.prayut_and_somchaip">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">prayut_and_somchaip</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Converts English-Thai Cross-Language Transliterated Words into</span>
-<span class="sd">    phonetic code with the matching technique called **Soundex** [#prayut_and_somchaip]_.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert a Thai-English cross-language transliterated word into</span>
+<span class="sd">    phonetic code with the matching technique called **Soundex**</span>
+<span class="sd">    [#prayut_and_somchaip]_.</span>
 
-<span class="sd">    :param str text: English-Thai Cross-Language Transliterated Word</span>
-<span class="sd">    :param int length: preferred length of the Soundex code (default is 4)</span>
-
-<span class="sd">    :return: Soundex for the given text</span>
+<span class="sd">    :param str text: English or Thai transliterated word to be encoded</span>
+<span class="sd">    :param int length: preferred length of the soundex code (default is 4)</span>
+<span class="sd">    :return: soundex code</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from pythainlp.soundex.prayut_and_somchaip import prayut_and_somchaip</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.soundex.prayut_and_somchaip import (</span>
+<span class="sd">        ...     prayut_and_somchaip,</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; prayut_and_somchaip("king", 2)</span>
 <span class="sd">        '52'</span>
 <span class="sd">        &gt;&gt;&gt; prayut_and_somchaip("คิง", 2)</span>
@@ -166,42 +209,12 @@
         <span class="k">return</span> <span class="s2">""</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
     <span class="c1"># keep only consonants (English-Thai)</span>
-    <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">thai_characters</span> <span class="o">+</span> <span class="s2">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="p">:</span>
-            <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+    <span class="n">chars</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">_VALID_CHARS</span><span class="p">]</span>
 
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C0</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"0"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C1</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C2</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"2"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C3</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"3"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C4</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"4"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C5</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"5"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C6</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"6"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C52</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"52"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C7</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"7"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C8</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"8"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C1_1</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1"</span>
-        <span class="k">elif</span> <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_C9</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"9"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: ignore[call-overload]</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">chars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">chars</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="o">-</span><span class="n">length</span><span class="p">:])</span></div>
+    <span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">_FIRST_CODES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">""</span><span class="p">)]</span> <span class="k">if</span> <span class="n">chars</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">codes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_REST_CODES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="c1"># BUG-LEDGER: prayut-last-length (keeps the last `length` characters)</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">codes</span><span class="p">)[</span><span class="o">-</span><span class="n">length</span><span class="p">:]</span></div>
 
 </pre></div>
 

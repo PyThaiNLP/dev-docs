@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.longest &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tokenize.longest &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,13 +114,14 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
-<span class="sd">"""Dictionary-based longest-matching Thai word segmentation.</span>
-<span class="sd">Implementation based on code from Patorn Utenpattanun.</span>
+<span class="sd">"""</span>
+<span class="sd">Tokenize Thai text into words with dictionary-based longest matching.</span>
+
+<span class="sd">The implementation is based on code from Patorn Utenpattanun.</span>
 
 <span class="sd">:See Also:</span>
-<span class="sd">    * `GitHub Repository \</span>
-<span class="sd">       &lt;https://github.com/patorn/thaitokenizer/blob/master/thaitokenizer/tokenizer.py&gt;`_</span>
-
+<span class="sd">    * GitHub repository:</span>
+<span class="sd">      https://github.com/patorn/thaitokenizer/blob/master/thaitokenizer/tokenizer.py</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -159,14 +161,54 @@
 <span class="n">_UNKNOWN</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_include_trailing</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Append a trailing character (such as "ๆ") that follows a word."""</span>
+    <span class="n">len_word</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">len_word</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">len_word</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_TRAILING_CHAR</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">len_word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">word</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_dependent_char</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">token_statuses</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check if an unknown character joins the previous token."""</span>
+    <span class="k">if</span> <span class="n">begin_pos</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_FRONT_DEP_CHAR</span>
+        <span class="ow">or</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_REAR_DEP_CHAR</span>
+        <span class="ow">or</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">token_statuses</span> <span class="ow">and</span> <span class="n">token_statuses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">_UNKNOWN</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_group_spaces</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Group consecutive space tokens into one token."""</span>
+    <span class="n">grouped_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">grouped_tokens</span> <span class="ow">and</span> <span class="n">grouped_tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
+            <span class="n">grouped_tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">token</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">grouped_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped_tokens</span>
+
+
 <div class="viewcode-block" id="LongestMatchTokenizer">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.longest.LongestMatchTokenizer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LongestMatchTokenizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Tokenize text into words with dictionary-based longest matching."""</span>
+
     <span class="n">__trie</span><span class="p">:</span> <span class="n">Trie</span>
 
 <div class="viewcode-block" id="LongestMatchTokenizer.__init__">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.longest.LongestMatchTokenizer.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trie</span><span class="p">:</span> <span class="n">Trie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the tokenizer.</span>
+
+<span class="sd">        :param pythainlp.util.Trie trie: dictionary trie</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__trie</span><span class="p">:</span> <span class="n">Trie</span> <span class="o">=</span> <span class="n">trie</span></div>
 
 
@@ -189,11 +231,7 @@
         <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pos</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trie</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">True</span>
-
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pos</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trie</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__longest_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">:]</span>
@@ -212,20 +250,10 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_next_word_valid</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
                     <span class="n">word_valid</span> <span class="o">=</span> <span class="n">w</span>
 
-        <span class="k">if</span> <span class="n">word</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">word_valid</span><span class="p">:</span>
-                <span class="n">word_valid</span> <span class="o">=</span> <span class="n">word</span>
-
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">len_word_valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_valid</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">len_word_valid</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_TRAILING_CHAR</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">len_word_valid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">word_valid</span>
-            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">word_valid</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">""</span>
+
+        <span class="k">return</span> <span class="n">_include_trailing</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">word_valid</span> <span class="ow">or</span> <span class="n">word</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="n">begin_pos</span> <span class="o">=</span> <span class="mi">0</span>
@@ -235,16 +263,7 @@
         <span class="k">while</span> <span class="n">begin_pos</span> <span class="o">&lt;</span> <span class="n">len_text</span><span class="p">:</span>
             <span class="n">match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__longest_matching</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">begin_pos</span> <span class="o">!=</span> <span class="mi">0</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-                    <span class="ow">and</span> <span class="p">(</span>
-                        <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_FRONT_DEP_CHAR</span>
-                        <span class="ow">or</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_REAR_DEP_CHAR</span>
-                        <span class="ow">or</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span> <span class="ow">in</span> <span class="n">thai_tonemarks</span>
-                        <span class="ow">or</span> <span class="p">(</span><span class="n">token_statuses</span> <span class="ow">and</span> <span class="n">token_statuses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">_UNKNOWN</span><span class="p">)</span>
-                    <span class="p">)</span>
-                <span class="p">):</span>
+                <span class="k">if</span> <span class="n">_is_dependent_char</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">begin_pos</span><span class="p">,</span> <span class="n">token_statuses</span><span class="p">):</span>
                     <span class="n">tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">]</span>
                     <span class="n">token_statuses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">_UNKNOWN</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -259,23 +278,18 @@
                     <span class="n">token_statuses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_KNOWN</span><span class="p">)</span>
                 <span class="n">begin_pos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
 
-        <span class="c1"># Group consecutive spaces into one token</span>
-        <span class="n">grouped_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">token</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-                <span class="ow">and</span> <span class="n">grouped_tokens</span>
-                <span class="ow">and</span> <span class="n">grouped_tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
-            <span class="p">):</span>
-                <span class="n">grouped_tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">token</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">grouped_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">grouped_tokens</span>
+        <span class="k">return</span> <span class="n">_group_spaces</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LongestMatchTokenizer.tokenize">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.longest.LongestMatchTokenizer.tokenize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Tokenize text into words.</span>
+
+<span class="sd">        :param str text: text to be tokenized</span>
+<span class="sd">        :return: list of words</span>
+<span class="sd">        :rtype: list[str]</span>
+<span class="sd">        """</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__segment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tokens</span></div>
 </div>
@@ -289,14 +303,17 @@
 <div class="viewcode-block" id="segment">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.longest.segment">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">segment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Trie</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Dictionary-based longest matching word segmentation.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenize text into words with dictionary-based longest matching.</span>
 
 <span class="sd">    This function is thread-safe. It uses a lock to protect access to the</span>
 <span class="sd">    internal tokenizer cache.</span>
 
-<span class="sd">    :param str text: text to be tokenized into words</span>
-<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary for tokenization</span>
-<span class="sd">    :return: list of words, tokenized from the text</span>
+<span class="sd">    :param str text: text to be tokenized</span>
+<span class="sd">    :param pythainlp.util.Trie custom_dict: dictionary trie</span>
+<span class="sd">        (default: the default word trie)</span>
+<span class="sd">    :return: list of words</span>
+<span class="sd">    :rtype: list[str]</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>

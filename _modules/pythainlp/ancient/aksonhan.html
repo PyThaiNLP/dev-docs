@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.ancient.aksonhan &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.ancient.aksonhan &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../../../_static/documentation_options.js?v=48730577"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
@@ -113,6 +114,8 @@
 <span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""Convert AksonHan (อักษรหัน) words to current Thai spelling."""</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span>
@@ -141,15 +144,16 @@
 <div class="viewcode-block" id="aksonhan_to_current">
 <a class="viewcode-back" href="../../../api/ancient.html#pythainlp.ancient.aksonhan_to_current">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">aksonhan_to_current</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Convert AksonHan words to current Thai words</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert an AksonHan word to the current Thai word.</span>
 
 <span class="sd">    AksonHan (อักษรหัน) writes two consonants to spell</span>
 <span class="sd">    the short /a/ vowel (สระ อะ).</span>
 
-<span class="sd">    Today, รร is an aksonhan pattern still used in Thai.</span>
+<span class="sd">    Today, รร is an AksonHan pattern still used in Thai.</span>
 
-<span class="sd">    :param str word: Thai word</span>
-<span class="sd">    :return: Thai AksonHan to be converted to current Thai word</span>
+<span class="sd">    :param str word: Thai word in AksonHan spelling</span>
+<span class="sd">    :return: word in current Thai spelling</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Example:</span>
@@ -165,9 +169,9 @@
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">word</span>
-    <span class="k">elif</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_set_aksonhan</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_set_aksonhan</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_dict_aksonhan</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_dict_thai</span><span class="p">:</span>  <span class="c1"># word in Thai words</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">_dict_thai</span><span class="p">:</span>  <span class="c1"># word in Thai words</span>
         <span class="k">return</span> <span class="n">word</span>
 
     <span class="n">_seg</span> <span class="o">=</span> <span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP 9f4e5cf documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP e20a59c documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b2a6f09b"></script>
+      <script src="../_static/documentation_options.js?v=48730577"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="braille.html">pythainlp.braille</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunk.html">pythainlp.chunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pythainlp.cli</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coref.html">pythainlp.coref</a></li>
 <li class="toctree-l1"><a class="reference internal" href="corpus.html">pythainlp.corpus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="el.html">pythainlp.el</a></li>
@@ -568,33 +569,46 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tag.pos_tag">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">pos_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'perceptron'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'orchid'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/pos_tag.html#pos_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.pos_tag" title="Link to this definition"></a></dt>
-<dd><p>Marks words with part-of-speech (POS) tags, such as ‘NOUN’ and ‘VERB’.</p>
+<dd><p>Tag words with part-of-speech (POS) tags, such as ‘NOUN’ and ‘VERB’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – a list of tokenized words</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <ul>
+<li><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words to be tagged</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>engine to use for tagging. Options are:</p>
+<ul>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
-<li><p><em>wangchanberta</em> - wangchanberta model.</p></li>
-<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpora only.            If you choose other corpora, they will be converted to TNC corpora.)</p></li>
+<li><p><em>wangchanberta</em> - WangchanBERTa model</p></li>
+<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (supports the TNC corpus
+only; other corpora are converted to the TNC corpus)</p></li>
 </ul>
 </p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the corpus that is used to create the language model for tagger
-* <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
-* <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
-* <em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a>
-* <em>blackboard_ud</em> - blackboard text, with tags mapped to Universal POS tag             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
-* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
-* <em>tdtb</em> - <a class="reference external" href="https://github.com/nlp-chula/thai-discourse-treebank/tree/main">Thai Discourse Treebank</a>             , natively use Universal POS tags
-* <em>tud</em> - <a class="reference external" href="https://github.com/nlp-chula/TUD">Thai Universal Dependency Treebank (TUD)</a>     :return: a list of tuples (word, POS tag)</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>corpus used to train the tagger model. Options are:</p>
+<ul>
+<li><p><em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,
+text from Thai academic articles (default)</p></li>
+<li><p><em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags</p></li>
+<li><p><em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a></p></li>
+<li><p><em>blackboard_ud</em> - blackboard text, with tags mapped to
+Universal POS tags from
+<a class="reference external" href="https://universaldependencies.org/">Universal Dependencies</a></p></li>
+<li><p><em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>
+treebank, natively uses Universal POS tags</p></li>
+<li><p><em>tdtb</em> - <a class="reference external" href="https://github.com/nlp-chula/thai-discourse-treebank/tree/main">Thai Discourse Treebank</a>,
+natively uses Universal POS tags</p></li>
+<li><p><em>tud</em> - <a class="reference external" href="https://github.com/nlp-chula/TUD">Thai Universal Dependency Treebank (TUD)</a></p></li>
+</ul>
+</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of tuples (word, POS tag)</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
 <p>Tag words with corpus <cite>orchid</cite> (default):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
@@ -614,7 +628,7 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ฉัน'</span><span class="p">,</span><span class="s1">'มี'</span><span class="p">,</span><span class="s1">'ชีวิต'</span><span class="p">,</span><span class="s1">'รอด'</span><span class="p">,</span><span class="s1">'ใน'</span><span class="p">,</span><span class="s1">'อาคาร'</span><span class="p">,</span><span class="s1">'หลบภัย'</span><span class="p">,</span><span class="s1">'ของ'</span><span class="p">,</span> \
 <span class="gp">... </span>    <span class="s1">'นายก'</span><span class="p">,</span> <span class="s1">'เชอร์ชิล'</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">'orchid_ud'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"orchid_ud"</span><span class="p">)</span>
 <span class="go">[('ฉัน', 'PROPN'), ('มี', 'VERB'), ('ชีวิต', 'NOUN'),</span>
 <span class="go">  ('รอด', 'NOUN'), ('ใน', 'ADP'),  ('อาคาร', 'NOUN'),</span>
 <span class="go">  ('หลบภัย', 'NOUN'), ('ของ', 'ADP'), ('นายก', 'NOUN'),</span>
@@ -627,7 +641,7 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ฉัน'</span><span class="p">,</span><span class="s1">'มี'</span><span class="p">,</span><span class="s1">'ชีวิต'</span><span class="p">,</span><span class="s1">'รอด'</span><span class="p">,</span><span class="s1">'ใน'</span><span class="p">,</span><span class="s1">'อาคาร'</span><span class="p">,</span><span class="s1">'หลบภัย'</span><span class="p">,</span><span class="s1">'ของ'</span><span class="p">,</span> \
 <span class="gp">... </span>    <span class="s1">'นายก'</span><span class="p">,</span> <span class="s1">'เชอร์ชิล'</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">'pud'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"pud"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># [('ฉัน', 'PRON'), ('มี', 'VERB'), ('ชีวิต', 'NOUN'), ('รอด', 'VERB'),</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#   ('ใน', 'ADP'), ('อาคาร', 'NOUN'), ('หลบภัย', 'NOUN'),</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#   ('ของ', 'ADP'), ('นายก', 'NOUN'), ('เชอร์ชิล', 'PROPN')]</span>
@@ -637,16 +651,26 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'เก้าอี้'</span><span class="p">,</span><span class="s1">'มี'</span><span class="p">,</span><span class="s1">'จำนวน'</span><span class="p">,</span><span class="s1">'ขา'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s2">"เก้าอี้"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"มี"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"จำนวน"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"ขา"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">" "</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"="</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"3"</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'perceptron'</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">'orchid'</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"perceptron"</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"orchid"</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="go">[('เก้าอี้', 'NCMN'), ('มี', 'VSTA'), ('จำนวน', 'NCMN'),</span>
 <span class="go">  ('ขา', 'NCMN'), (' ', 'PUNC'),</span>
 <span class="go">  ('=', 'PUNC'), ('3', 'NCNM')]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'unigram'</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">'pud'</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"unigram"</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"pud"</span><span class="p">)</span>
 <span class="go">[('เก้าอี้', None), ('มี', 'VERB'), ('จำนวน', 'NOUN'), ('ขา', None),</span>
 <span class="go">  ('&lt;space&gt;', None), ('&lt;equal&gt;', None), ('3', 'NUM')]</span>
 </pre></div>
@@ -656,29 +680,37 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tag.pos_tag_sents">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">pos_tag_sents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentences</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'perceptron'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'orchid'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/pos_tag.html#pos_tag_sents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.pos_tag_sents" title="Link to this definition"></a></dt>
-<dd><p>Marks sentences with part-of-speech (POS) tags.</p>
+<dd><p>Tag sentences with part-of-speech (POS) tags.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sentences</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – a list of lists of tokenized words</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <ul>
+<li><p><strong>sentences</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – list of lists of words to be tagged</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>engine to use for tagging. Options are:</p>
+<ul>
 <li><p><em>perceptron</em> - perceptron tagger (default)</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
-<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (support TNC corpus only.            If you choose other corpora, they will be converted to TNC corpora.)</p></li>
+<li><p><em>tltk</em> - TLTK: Thai Language Toolkit (supports the TNC corpus
+only; other corpora are converted to the TNC corpus)</p></li>
 </ul>
 </p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>the corpus that is used to create the language model for tagger
-* <em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,             text from Thai academic articles (default)
-* <em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags
-* <em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a>
-* <em>blackboard_ud</em> - blackboard text, with tags mapped to Universal POS tag             from <cite>Universal Dependencies &lt;https://universaldependencies.org/&gt;</cite>
-* <em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>             treebanks, natively use Universal POS tags
-* <em>tnc</em> - Thai National Corpus (support tltk engine only)</p>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>corpus used to train the tagger model. Options are:</p>
+<ul>
+<li><p><em>orchid</em> - <a class="reference external" href="https://www.academia.edu/9127599/Thai_Treebank">ORCHID</a> corpus,
+text from Thai academic articles (default)</p></li>
+<li><p><em>orchid_ud</em> - ORCHID text, with tags mapped to Universal POS tags</p></li>
+<li><p><em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a></p></li>
+<li><p><em>blackboard_ud</em> - blackboard text, with tags mapped to
+Universal POS tags from
+<a class="reference external" href="https://universaldependencies.org/">Universal Dependencies</a></p></li>
+<li><p><em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>
+treebank, natively uses Universal POS tags</p></li>
+<li><p><em>tnc</em> - Thai National Corpus (supports the tltk engine only)</p></li>
+</ul>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of lists of tuples (word, POS tag)</p>
+<dd class="field-even"><p>list of lists of tuples (word, POS tag)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]]]</p>
@@ -692,7 +724,7 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentences</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'เก้าอี้'</span><span class="p">,</span><span class="s1">'มี'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">,</span><span class="s1">'ขา'</span><span class="p">],</span> \
 <span class="gp">... </span>                    <span class="p">[</span><span class="s1">'นก'</span><span class="p">,</span> <span class="s1">'บิน'</span><span class="p">,</span> <span class="s1">'กลับ'</span><span class="p">,</span> <span class="s1">'รัง'</span><span class="p">]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag_sents</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s1">'pud'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag_sents</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"pud"</span><span class="p">)</span>
 <span class="go">[[('เก้าอี้', 'PROPN'), ('มี', 'VERB'), ('3', 'NUM'),</span>
 <span class="go">  ('ขา', 'NOUN')], [('นก', 'NOUN'), ('บิน', 'VERB'),</span>
 <span class="go">  ('กลับ', 'VERB'), ('รัง', 'NOUN')]]</span>
@@ -703,14 +735,15 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pythainlp.tag.tag_provinces">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">tag_provinces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/locations.html#tag_provinces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.tag_provinces" title="Link to this definition"></a></dt>
-<dd><p>This function recognizes Thailand provinces in text.</p>
-<p>Note that it uses exact match and considers no context.</p>
+<dd><p>Tag Thailand provinces in text.</p>
+<p>This function uses exact match and considers no context.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tokens</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – a list of words</p>
+<dd class="field-odd"><p><strong>tokens</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – list of words to be tagged</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of tuples indicating NER for <cite>LOCATION</cite> in IOB format</p>
+<dd class="field-even"><p>list of tuples (word, IOB tag), where the tag is
+<code class="docutils literal notranslate"><span class="pre">B-LOCATION</span></code> for a province and <code class="docutils literal notranslate"><span class="pre">O</span></code> otherwise</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
@@ -738,13 +771,14 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sent</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – list of (word, POS-tag) pairs.</p></li>
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – chunking engine (default: <code class="docutils literal notranslate"><span class="pre">&quot;crf&quot;</span></code>).</p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus name (default: <code class="docutils literal notranslate"><span class="pre">&quot;orchidpp&quot;</span></code>).</p></li>
+<li><p><strong>sent</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – list of (word, POS tag) pairs</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – chunking engine (default: <code class="docutils literal notranslate"><span class="pre">&quot;crf&quot;</span></code>)</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus used to train the chunker model
+(default: <code class="docutils literal notranslate"><span class="pre">&quot;orchidpp&quot;</span></code>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of IOB chunk labels, one per token.</p>
+<dd class="field-even"><p>list of IOB chunk labels, one per word</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
@@ -755,33 +789,36 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.tag.NER">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">NER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer-v2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER" title="Link to this definition"></a></dt>
-<dd><p>Class of named-entity recognizer</p>
+<dd><p>Named entity recognizer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine of named-entity recognizer</p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>engine to use for recognition. Options are:</p>
+<ul>
 <li><p><em>phayathaibert</em> - PhayaThaiBERT-based Thai NER engine</p></li>
 <li><p><em>thainer</em> - Thai NER engine</p></li>
-<li><p><em>thai-nner</em> - Thai Nested NER engine</p></li>
+<li><p><em>thai-nner</em> - Thai nested NER engine</p></li>
 <li><p><em>thainer-v2</em> - Thai NER engine v2.0 for Thai NER 2.0 (default)</p></li>
-<li><p><em>tltk</em> - wrapper for <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a>.</p></li>
+<li><p><em>tltk</em> - wrapper for <a class="reference external" href="https://pypi.org/project/tltk/">TLTK</a></p></li>
 <li><p><em>wangchanberta</em> - WangchanBERTa-based Thai NER engine</p></li>
 </ul>
-</dd>
-<dt><strong>Options for corpus</strong></dt><dd><ul class="simple">
+</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>corpus used to train the engine model.
+Options are:</p>
+<ul>
 <li><p><em>thainer</em> - Thai NER corpus (default)</p></li>
 <li><p><em>thainer-v2</em> - Thai NER v2 corpus</p></li>
 </ul>
-</dd>
-<dt><strong>Note</strong>: The tltk engine supports NER models from tltk only.</dt><dd><p>The thai-nner engine supports nested NER and ignores corpus parameter.</p>
+</p></li>
+</ul>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The tltk engine supports NER models from tltk only.
+The thai-nner engine supports nested NER and ignores the corpus
+parameter.</p>
+</div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.name_engine">
 <span class="sig-name descname"><span class="pre">name_engine</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#pythainlp.tag.NER.name_engine" title="Link to this definition"></a></dt>
@@ -795,32 +832,49 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer-v2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.__init__" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the named entity recognizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to use for recognition</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus used to train the engine model</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.load_engine">
 <span class="sig-name descname"><span class="pre">load_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.load_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.load_engine" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load the named entity recognition engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to use for recognition</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus used to train the engine model</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NER.tag">
 <span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER.tag" title="Link to this definition"></a></dt>
-<dd><p>This function tags named entities in text in IOB format.</p>
+<dd><p>Tag named entities in text in IOB format.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text in Thai to be tagged</p></li>
-<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – output with part-of-speech tags.            (wangchanberta is not supported)</p></li>
-<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – output HTML-like tags.</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to be tagged</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – include part-of-speech (POS) tags in the results
+(not supported by wangchanberta)</p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – return the text with HTML-like tags
+instead of a list of tuples</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of tuples associated with tokenized words, NER tags,
-POS tags (if the parameter <cite>pos</cite> is specified as <cite>True</cite>),
-and output HTML-like tags (if the parameter <cite>tag</cite> is
-specified as <cite>True</cite>).
-Otherwise, return a list of tuples associated with tokenized
-words and NER tags</p>
+<dd class="field-even"><p>list of tuples of word, POS tag (if <code class="docutils literal notranslate"><span class="pre">pos</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>),
+and named entity tag; or the text with HTML-like tags
+(if <code class="docutils literal notranslate"><span class="pre">tag</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
@@ -851,18 +905,16 @@ words and NER tags</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">NNER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai_nner'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER" title="Link to this definition"></a></dt>
-<dd><p>Nested Named Entity Recognition</p>
+<dd><p>Nested named entity recognizer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine of nested named entity recognizer</p></li>
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>engine to use for recognition. Options are:</p>
+<ul>
+<li><p><em>thai_nner</em> - Thai nested NER engine (default)</p></li>
 </ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt><strong>Options for engine</strong></dt><dd><ul class="simple">
-<li><p><em>thai_nner</em> - Thai NER engine</p></li>
+</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – corpus used to train the engine model</p></li>
 </ul>
 </dd>
 </dl>
@@ -874,30 +926,40 @@ words and NER tags</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai_nner'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.__init__" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the nested named entity recognizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to use for recognition</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER.load_engine">
 <span class="sig-name descname"><span class="pre">load_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thai_nner'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.load_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.load_engine" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load the nested named entity recognition engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – engine to use for recognition</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.NNER.tag">
 <span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_level_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">EntitySpan</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NNER.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NNER.tag" title="Link to this definition"></a></dt>
-<dd><p>This function tags nested named entities.</p>
+<dd><p>Tag nested named entities in text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text in Thai to be tagged</p></li>
-<li><p><strong>top_level_only</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, return only top-level (outermost)
-entities. If False, return all nested
-entities. Default is False.</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to be tagged</p></li>
+<li><p><strong>top_level_only</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – return only top-level (outermost)
+entities (<code class="docutils literal notranslate"><span class="pre">True</span></code>) or all nested entities (<code class="docutils literal notranslate"><span class="pre">False</span></code>, default)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a tuple of (tokens, entities) where tokens is a list of
-tokenized strings and entities is a list of dictionaries
-containing ‘text’, ‘span’, and ‘entity_type’ keys.</p>
+<dd class="field-even"><p>tuple of (words, entities), where entities is a list of
+dicts with <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">span</span></code>, and <code class="docutils literal notranslate"><span class="pre">entity_type</span></code> keys</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[EntitySpan]]</p>
@@ -905,8 +967,8 @@ containing ‘text’, ‘span’, and ‘entity_type’ keys.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The tokenized output may include empty strings as part of the
-tokenization process from the underlying Thai-NNER model.</p>
+<p>The list of words may include empty strings as part of the
+tokenization process of the underlying Thai-NNER model.</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd">Example<span class="colon">:</span></dt>
@@ -960,20 +1022,21 @@ tokenization process from the underlying Thai-NNER model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.thainer.</span></span><span class="sig-name descname"><span class="pre">ThaiNameTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.4'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger" title="Link to this definition"></a></dt>
-<dd><p>Thai named-entity recognizer or Thai NER.
-This function supports Thai NER 1.4 and 1.5 only.
-:param str version: Thai NER version.</p>
-<blockquote>
-<div><p>It supports Thai NER 1.4 &amp; 1.5.
-The default value is <a href="#id7"><span class="problematic" id="id8">`</span></a>1.4</p>
-</div></blockquote>
+<dd><p>Thai named entity recognizer (Thai NER).</p>
+<p>This class supports Thai NER 1.4 and 1.5 only.</p>
 <dl class="field-list">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai NER version, <code class="docutils literal notranslate"><span class="pre">&quot;1.4&quot;</span></code> (default)
+or <code class="docutils literal notranslate"><span class="pre">&quot;1.5&quot;</span></code></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.thainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiNameTagger</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thainer14</span> <span class="o">=</span> <span class="n">ThaiNameTagger</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">"1.4"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">thainer14</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">"วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thainer14</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">"วันที่ 15 ก.ย. 61 ทดสอบระบบเวลา 14:49 น."</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -981,12 +1044,11 @@ The default value is <a href="#id7"><span class="problematic" id="id8">`</span><
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1.4'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.__init__" title="Link to this definition"></a></dt>
-<dd><p>Thai named-entity recognizer.</p>
+<dd><p>Initialize the Thai named entity recognizer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai NER version.
-It’s support Thai NER 1.4 &amp; 1.5.
-The default value is <cite>1.4</cite></p>
+<dd class="field-odd"><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai NER version, <code class="docutils literal notranslate"><span class="pre">&quot;1.4&quot;</span></code> (default)
+or <code class="docutils literal notranslate"><span class="pre">&quot;1.5&quot;</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1004,23 +1066,21 @@ The default value is <cite>1.4</cite></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.get_ner">
 <span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/thainer.html#ThaiNameTagger.get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.get_ner" title="Link to this definition"></a></dt>
-<dd><p>This function tags named-entities in text in IOB format.</p>
+<dd><p>Tag named entities in text in IOB format.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – text in Thai to be tagged</p></li>
-<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – To include POS tags in the results (<cite>True</cite>) or
-exclude (<cite>False</cite>). The default value is <cite>True</cite></p></li>
-<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – output HTML-like tags.</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Thai text to be tagged</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – include POS tags in the results (<code class="docutils literal notranslate"><span class="pre">True</span></code>,
+default) or exclude them (<code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – return the text with HTML-like tags
+instead of a list of tuples</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of tuples associated with tokenized words, NER tags,
-POS tags (if the parameter <cite>pos</cite> is specified as <cite>True</cite>),
-and output HTML-like tags (if the parameter <cite>tag</cite> is
-specified as <cite>True</cite>).
-Otherwise, return a list of tuples associated with tokenized
-words and NER tags</p>
+<dd class="field-even"><p>list of tuples of word, POS tag (if <code class="docutils literal notranslate"><span class="pre">pos</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>),
+and named entity tag; or the text with HTML-like tags
+(if <code class="docutils literal notranslate"><span class="pre">tag</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
