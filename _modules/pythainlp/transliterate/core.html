@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 4cefec1 documentation</title>
+  <title>pythainlp.transliterate.core &mdash; PyThaiNLP 8f8cc44 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
+      <script src="../../../_static/documentation_options.js?v=cce71bef"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -222,20 +222,21 @@
 <span class="sd">    :param str text: Thai text to be transliterated</span>
 <span class="sd">    :param str engine: transliteration engine</span>
 <span class="sd">        (see the options below)</span>
-<span class="sd">    :return: text in a phonetic alphabet, indicating how the input text</span>
-<span class="sd">        is pronounced</span>
+<span class="sd">    :return: transliterated text: a phonetic alphabet (such as IPA)</span>
+<span class="sd">        for the phonetic engines, or Latin script for *icu* and</span>
+<span class="sd">        *iso_11940*</span>
 <span class="sd">    :rtype: str</span>
 
 <span class="sd">    :Options for engine:</span>
 <span class="sd">        * *thaig2p* (default) - Thai Grapheme-to-Phoneme,</span>
 <span class="sd">          output is IPA (requires PyTorch)</span>
 <span class="sd">        * *icu* - pyicu, based on International Components for Unicode</span>
-<span class="sd">          (ICU)</span>
+<span class="sd">          (ICU), output is Latin script</span>
 <span class="sd">        * *ipa* - epitran, output is International Phonetic Alphabet</span>
 <span class="sd">          (IPA)</span>
 <span class="sd">        * *tltk_g2p* - Thai Grapheme-to-Phoneme from</span>
 <span class="sd">          `TLTK &lt;https://pypi.org/project/tltk/&gt;`_</span>
-<span class="sd">        * *iso_11940* - Thai text into Latin characters with ISO 11940</span>
+<span class="sd">        * *iso_11940* - Thai text into Latin script with ISO 11940</span>
 <span class="sd">        * *tltk_ipa* - tltk, output is International Phonetic Alphabet</span>
 <span class="sd">          (IPA)</span>
 <span class="sd">        * *thaig2p_v2* - Thai Grapheme-to-Phoneme, output is IPA.</span>
