@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize.thaisumcut &mdash; PyThaiNLP e20a59c documentation</title>
+  <title>pythainlp.tokenize.thaisumcut &mdash; PyThaiNLP 4cefec1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=48730577"></script>
+      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -311,15 +311,15 @@
 
 <div class="viewcode-block" id="list_to_string">
 <a class="viewcode-back" href="../../../api/tokenize.html#pythainlp.tokenize.thaisumcut.list_to_string">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">list_to_string</span><span class="p">(</span><span class="nb">list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_to_string</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Join a list of strings and collapse the whitespace.</span>
 
-<span class="sd">    :param list[str] list: list of strings</span>
+<span class="sd">    :param list[str] tokens: list of strings</span>
 <span class="sd">    :return: joined string</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    """</span>
-    <span class="n">string</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
     <span class="n">string</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">string</span></div>
 
@@ -370,11 +370,11 @@
     <span class="n">result_parts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
         <span class="n">sentence_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">keep_whitespace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-        <span class="n">sentence</span> <span class="o">=</span> <span class="n">_remove_digit_spaces</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="n">cleaned</span> <span class="o">=</span> <span class="n">_remove_digit_spaces</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sentence_size</span> <span class="o">&gt;</span> <span class="n">_MIDDLE_CUT_WORDS</span><span class="p">:</span>
-            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_mark_middle_cuts</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">sentence_size</span><span class="p">))</span>
+            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_mark_middle_cuts</span><span class="p">(</span><span class="n">cleaned</span><span class="p">,</span> <span class="n">sentence_size</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+            <span class="n">result_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
 
     <span class="n">all_sentences</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">result_parts</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"&lt;stop&gt;"</span><span class="p">)</span>

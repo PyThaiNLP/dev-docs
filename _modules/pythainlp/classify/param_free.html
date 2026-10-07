@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify.param_free &mdash; PyThaiNLP e20a59c documentation</title>
+  <title>pythainlp.classify.param_free &mdash; PyThaiNLP 4cefec1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=48730577"></script>
+      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -144,7 +144,7 @@
 <span class="sd">    """</span>
 
     <span class="n">cx2_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="n">training_data</span><span class="p">:</span> <span class="s2">"NDArray[Any]"</span>
+    <span class="n">training_data</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 
 <div class="viewcode-block" id="GzipModel.__init__">
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.GzipModel.__init__">[docs]</a>
@@ -178,12 +178,10 @@
 <span class="sd">        :return: compressed length of each training text</span>
 <span class="sd">        :rtype: list[int]</span>
 <span class="sd">        """</span>
-        <span class="n">temp_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="p">)):</span>
-            <span class="n">temp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">gzip</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)))</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">temp_list</span></div>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">gzip</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span>
+        <span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="GzipModel.predict">
@@ -223,7 +221,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cx2_list</span><span class="p">)):</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">cx2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cx2_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">x1x2</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">])</span>
+            <span class="n">x1x2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x1</span><span class="si">}{</span><span class="n">x2</span><span class="si">}</span><span class="s2">"</span>
             <span class="n">cx1x2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gzip</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">x1x2</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)))</span>
             <span class="c1"># normalized compression distance</span>
             <span class="n">ncd</span> <span class="o">=</span> <span class="p">(</span><span class="n">cx1x2</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">cx1</span><span class="p">,</span> <span class="n">cx2</span><span class="p">))</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">cx1</span><span class="p">,</span> <span class="n">cx2</span><span class="p">)</span>
@@ -266,7 +264,7 @@
 <span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cx2_list</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"cx2_list"</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"training_data"</span><span class="p">])</span></div>

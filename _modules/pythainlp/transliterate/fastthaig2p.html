@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.transliterate.fastthaig2p &mdash; PyThaiNLP e20a59c documentation</title>
+  <title>pythainlp.transliterate.fastthaig2p &mdash; PyThaiNLP 4cefec1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=48730577"></script>
+      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -140,6 +140,7 @@
 <span class="sd">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="sd">See the License for the specific language governing permissions and</span>
 <span class="sd">limitations under the License.</span>
+
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -147,19 +148,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">re</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pattern</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">expand_maiyamok</span> <span class="k">as</span> <span class="n">_expand_maiyamok_pythainlp</span>
 
-<span class="n">__all__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">__all__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"FastThaiG2P"</span><span class="p">,</span>
     <span class="s2">"fallback_g2p"</span><span class="p">,</span>
     <span class="s2">"normalize"</span><span class="p">,</span>
     <span class="s2">"transliterate"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">THAI_DIGITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">THAI_DIGITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"0"</span><span class="p">:</span> <span class="s2">"ศูนย์"</span><span class="p">,</span>
     <span class="s2">"1"</span><span class="p">:</span> <span class="s2">"หนึ่ง"</span><span class="p">,</span>
     <span class="s2">"2"</span><span class="p">:</span> <span class="s2">"สอง"</span><span class="p">,</span>
@@ -172,7 +174,7 @@
     <span class="s2">"9"</span><span class="p">:</span> <span class="s2">"เก้า"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">THAI_NUMERAL_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">THAI_NUMERAL_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"๐"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="s2">"๑"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
     <span class="s2">"๒"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
@@ -185,7 +187,7 @@
     <span class="s2">"๙"</span><span class="p">:</span> <span class="s2">"9"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">LETTER_TO_THAI</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">LETTER_TO_THAI</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"A"</span><span class="p">:</span> <span class="s2">"เอ"</span><span class="p">,</span>
     <span class="s2">"B"</span><span class="p">:</span> <span class="s2">"บี"</span><span class="p">,</span>
     <span class="s2">"C"</span><span class="p">:</span> <span class="s2">"ซี"</span><span class="p">,</span>
@@ -214,7 +216,7 @@
     <span class="s2">"Z"</span><span class="p">:</span> <span class="s2">"แซด"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">ABBREVIATIONS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">ABBREVIATIONS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Months</span>
     <span class="s2">"ม.ค."</span><span class="p">:</span> <span class="s2">"มกราคม"</span><span class="p">,</span>
     <span class="s2">"ก.พ."</span><span class="p">:</span> <span class="s2">"กุมภาพันธ์"</span><span class="p">,</span>
@@ -310,7 +312,7 @@
     <span class="s2">"ฯลฯ"</span><span class="p">:</span> <span class="s2">"เป็นต้น"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">SYMBOLS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">SYMBOLS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"%"</span><span class="p">:</span> <span class="s2">"เปอร์เซ็นต์"</span><span class="p">,</span>
     <span class="s2">"°C"</span><span class="p">:</span> <span class="s2">"องศาเซลเซียส"</span><span class="p">,</span>
     <span class="s2">"°F"</span><span class="p">:</span> <span class="s2">"องศาฟาเรนไฮต์"</span><span class="p">,</span>
@@ -319,7 +321,7 @@
     <span class="s2">"/"</span><span class="p">:</span> <span class="s2">" ทับ "</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">ENGLISH_ABBREVS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">ENGLISH_ABBREVS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Finance</span>
     <span class="s2">"thb"</span><span class="p">:</span> <span class="s2">"บาท"</span><span class="p">,</span>
     <span class="s2">"usd"</span><span class="p">:</span> <span class="s2">"ดอลลาร์"</span><span class="p">,</span>
@@ -359,7 +361,7 @@
     <span class="s2">"truemoney"</span><span class="p">:</span> <span class="s2">"ทรูมันนี่"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">UNITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">UNITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"km"</span><span class="p">:</span> <span class="s2">"กิโลเมตร"</span><span class="p">,</span>
     <span class="s2">"cm"</span><span class="p">:</span> <span class="s2">"เซนติเมตร"</span><span class="p">,</span>
     <span class="s2">"mm"</span><span class="p">:</span> <span class="s2">"มิลลิเมตร"</span><span class="p">,</span>
@@ -389,14 +391,14 @@
     <span class="s2">"mg"</span><span class="p">:</span> <span class="s2">"มิลลิกรัม"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">_EMAIL_SEPARATORS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_EMAIL_SEPARATORS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"@"</span><span class="p">:</span> <span class="s2">" แอท "</span><span class="p">,</span>
     <span class="s2">"."</span><span class="p">:</span> <span class="s2">" ดอท "</span><span class="p">,</span>
     <span class="s2">"-"</span><span class="p">:</span> <span class="s2">" ขีด "</span><span class="p">,</span>
     <span class="s2">"_"</span><span class="p">:</span> <span class="s2">" ขีดล่าง "</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">_EMAIL_WORDS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_EMAIL_WORDS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"gmail"</span><span class="p">:</span> <span class="s2">"จีเมล"</span><span class="p">,</span>
     <span class="s2">"hotmail"</span><span class="p">:</span> <span class="s2">"ฮอตเมล"</span><span class="p">,</span>
     <span class="s2">"yahoo"</span><span class="p">:</span> <span class="s2">"ยาฮู"</span><span class="p">,</span>
@@ -408,7 +410,7 @@
     <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"อีเมล"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">_PLACE_UNITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_PLACE_UNITS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">100000</span><span class="p">:</span> <span class="s2">"แสน"</span><span class="p">,</span>
     <span class="mi">10000</span><span class="p">:</span> <span class="s2">"หมื่น"</span><span class="p">,</span>
     <span class="mi">1000</span><span class="p">:</span> <span class="s2">"พัน"</span><span class="p">,</span>
@@ -462,7 +464,7 @@
 
 <span class="n">_TLTK_PHON_RE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"&lt;tr/&gt;(.+?)\|&lt;s/&gt;"</span><span class="p">)</span>
 
-<span class="n">_TONE_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_TONE_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"0"</span><span class="p">:</span> <span class="s2">"˧"</span><span class="p">,</span>
     <span class="s2">"1"</span><span class="p">:</span> <span class="s2">"˨˩"</span><span class="p">,</span>
     <span class="s2">"2"</span><span class="p">:</span> <span class="s2">"˥˩"</span><span class="p">,</span>
@@ -470,7 +472,7 @@
     <span class="s2">"4"</span><span class="p">:</span> <span class="s2">"˩˩˦"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">_CONSONANT_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">_CONSONANT_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">"kh"</span><span class="p">,</span> <span class="s2">"kʰ"</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">"ph"</span><span class="p">,</span> <span class="s2">"pʰ"</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">"th"</span><span class="p">,</span> <span class="s2">"tʰ"</span><span class="p">),</span>
@@ -480,7 +482,7 @@
     <span class="p">(</span><span class="s2">"?"</span><span class="p">,</span> <span class="s2">"ʔ"</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="n">_VOWEL_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">_VOWEL_MAP</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">"UUa"</span><span class="p">,</span> <span class="s2">"ɯa̯"</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">"Ua"</span><span class="p">,</span> <span class="s2">"ɯa̯"</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">"iia"</span><span class="p">,</span> <span class="s2">"ia̯"</span><span class="p">),</span>
@@ -507,13 +509,13 @@
     <span class="p">(</span><span class="s2">"U"</span><span class="p">,</span> <span class="s2">"ɯ"</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="n">_VOWEL_CHARS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"aeiouɔɛɯɤː̯"</span><span class="p">)</span>
+<span class="n">_VOWEL_CHARS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">"aeiouɔɛɯɤː̯"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_number_group_to_thai</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">""</span>
-    <span class="n">parts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">remaining</span> <span class="o">=</span> <span class="n">n</span>
     <span class="k">for</span> <span class="n">place</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">digit</span> <span class="o">=</span> <span class="n">remaining</span> <span class="o">//</span> <span class="n">place</span>
@@ -542,7 +544,7 @@
         <span class="k">return</span> <span class="s2">"ศูนย์"</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">"ลบ"</span> <span class="o">+</span> <span class="n">_integer_to_thai</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">parts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">million_count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">group</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">1000000</span>
@@ -582,7 +584,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_email_to_thai</span><span class="p">(</span><span class="n">match</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">out</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">chunk</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">_EMAIL_SEPARATORS</span><span class="p">:</span>
@@ -613,7 +615,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_alphanum_to_thai</span><span class="p">(</span><span class="n">match</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">token</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">THAI_DIGITS</span><span class="p">[</span><span class="n">char</span><span class="p">])</span>
@@ -692,8 +694,11 @@
 <div class="viewcode-block" id="normalize">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.fastthaig2p.normalize">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Normalize text for Thai TTS/G2P: convert numbers, abbreviations, and</span>
-<span class="sd">    special characters to speakable Thai words.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Normalize text for Thai TTS/G2P.</span>
+
+<span class="sd">    Convert numbers, abbreviations, and special characters to speakable</span>
+<span class="sd">    Thai words.</span>
 
 <span class="sd">    :param str text: Thai text to normalize</span>
 <span class="sd">    :return: Normalized speakable Thai text</span>
@@ -754,7 +759,8 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">fallback_g2p</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Generate IPA for a word using rule-based G2P fallback.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate IPA for a word using rule-based G2P fallback.</span>
 
 <span class="sd">    Uses TLTK if installed to generate syllable phonemes and converts</span>
 <span class="sd">    them to Wiktionary IPA format. When TLTK is not available, returns</span>
@@ -776,24 +782,25 @@
             <span class="k">return</span> <span class="n">word</span>
 
         <span class="n">tltk_phon</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">syllables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">syllables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[|~^]"</span><span class="p">,</span> <span class="n">tltk_phon</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"'"</span><span class="p">):</span>
-                <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">sp</span><span class="p">:</span>
-                    <span class="n">syllables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_tltk_syllable_to_ipa</span><span class="p">(</span><span class="n">sp</span><span class="p">))</span>
+                <span class="n">stripped</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">stripped</span><span class="p">:</span>
+                    <span class="n">syllables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_tltk_syllable_to_ipa</span><span class="p">(</span><span class="n">stripped</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">syllables</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">syllables</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
         <span class="k">return</span> <span class="n">word</span>
-    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - fall back to the word on any error</span>
         <span class="k">return</span> <span class="n">word</span>
 
 
 <div class="viewcode-block" id="FastThaiG2P">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.fastthaig2p.FastThaiG2P">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FastThaiG2P</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""FastThaiG2P: Lightning-fast Thai grapheme-to-phoneme conversion.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    FastThaiG2P: Lightning-fast Thai grapheme-to-phoneme conversion.</span>
 
 <span class="sd">    Uses a 4-stage pipeline:</span>
 <span class="sd">    1. Text normalization: expands numbers, units, abbreviations, emails, etc.</span>
@@ -802,13 +809,14 @@
 <span class="sd">    4. Fallback G2P: handles out-of-vocabulary words using rule-based fallback.</span>
 <span class="sd">    """</span>
 
-    <span class="n">_ipa</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+    <span class="n">_ipa</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
     <span class="n">_tokenizer</span><span class="p">:</span> <span class="n">Tokenizer</span>
 
 <div class="viewcode-block" id="FastThaiG2P.__init__">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.fastthaig2p.FastThaiG2P.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipa_dict_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Initialize FastThaiG2P engine.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize FastThaiG2P engine.</span>
 
 <span class="sd">        :param Optional[str] ipa_dict_path: Optional path to custom IPA dictionary JSON.</span>
 <span class="sd">            If None, loads the default dictionary from pythainlp.corpus.</span>
@@ -818,7 +826,7 @@
             <span class="n">corpus_file</span> <span class="o">=</span> <span class="n">corpus_files</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">"fastthaig2p_ipa.json"</span><span class="p">)</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">corpus_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ipa_dict_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ipa_dict_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_ipa</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -830,7 +838,8 @@
 <div class="viewcode-block" id="FastThaiG2P.convert">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.fastthaig2p.FastThaiG2P.convert">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Convert Thai text to IPA phonemes.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert Thai text to IPA phonemes.</span>
 
 <span class="sd">        :param str text: Thai text to convert.</span>
 <span class="sd">        :return: String of IPA phonemes separated by spaces.</span>
@@ -848,7 +857,7 @@
 
         <span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span>
-        <span class="n">phonemes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">phonemes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
             <span class="n">cleaned</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">cleaned</span><span class="p">:</span>
@@ -869,7 +878,8 @@
 <div class="viewcode-block" id="transliterate">
 <a class="viewcode-back" href="../../../api/transliterate.html#pythainlp.transliterate.fastthaig2p.transliterate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">transliterate</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Transliterate Thai text to IPA phonemes using FastThaiG2P.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transliterate Thai text to IPA phonemes using FastThaiG2P.</span>
 
 <span class="sd">    :param str text: Thai text to transliterate</span>
 <span class="sd">    :return: IPA phonemes</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP e20a59c documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP 4cefec1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=48730577"></script>
+      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -118,7 +118,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_consonants</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">subword_tokenize</span>
@@ -286,7 +286,7 @@
 
     <span class="c1"># check_sara: vowel sound of each vowel sign (สระเดี่ยว).</span>
     <span class="c1"># "ั" maps to "อัว" instead when the word ends with "ว".</span>
-    <span class="n">_SARA_OF_SIGN</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">_SARA_OF_SIGN</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">"ะ"</span><span class="p">:</span> <span class="s2">"อะ"</span><span class="p">,</span>
         <span class="s2">"ั"</span><span class="p">:</span> <span class="s2">"อะ"</span><span class="p">,</span>
         <span class="s2">"ิ"</span><span class="p">:</span> <span class="s2">"อิ"</span><span class="p">,</span>
@@ -342,9 +342,9 @@
 
     <span class="c1"># check_marttra: last character -&gt; vowel sign that makes the syllable open</span>
     <span class="c1"># (เสีย, เมีย; เรือ, เสือ; ตัว, ชั่ว, กลัว, อัว)</span>
-    <span class="n">_SIGN_OF_FINAL</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ย"</span><span class="p">:</span> <span class="s2">"ี"</span><span class="p">,</span> <span class="s2">"อ"</span><span class="p">:</span> <span class="s2">"ื"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">"ั"</span><span class="p">}</span>
+    <span class="n">_SIGN_OF_FINAL</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ย"</span><span class="p">:</span> <span class="s2">"ี"</span><span class="p">,</span> <span class="s2">"อ"</span><span class="p">:</span> <span class="s2">"ื"</span><span class="p">,</span> <span class="s2">"ว"</span><span class="p">:</span> <span class="s2">"ั"</span><span class="p">}</span>
     <span class="c1"># check_marttra: spelling section (มาตราตัวสะกด) of each final consonant</span>
-    <span class="n">_MARTTRA_OF_FINAL</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">_MARTTRA_OF_FINAL</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">char</span><span class="p">:</span> <span class="n">marttra</span>
         <span class="k">for</span> <span class="n">marttra</span><span class="p">,</span> <span class="n">chars</span> <span class="ow">in</span> <span class="n">spelling_class</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">chars</span>
@@ -1037,7 +1037,6 @@
 <span class="sd">            ... ))</span>
 <span class="sd">            The poem is correct according to the principle.</span>
 <span class="sd">        """</span>
-
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">__import__</span><span class="p">(</span><span class="s2">"ssg"</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>

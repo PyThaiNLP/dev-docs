@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.soundex.prayut_and_somchaip &mdash; PyThaiNLP e20a59c documentation</title>
+  <title>pythainlp.soundex.prayut_and_somchaip &mdash; PyThaiNLP 4cefec1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=48730577"></script>
+      <script src="../../../_static/documentation_options.js?v=3828b624"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -115,8 +115,7 @@
 <span class="c1"># SPDX-FileType: SOURCE</span>
 <span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="sd">"""</span>
-<span class="sd">Thai-English Cross-Language Transliterated Word Retrieval</span>
-<span class="sd">using Soundex Technique.</span>
+<span class="sd">Soundex for Thai-English cross-language transliterated word retrieval.</span>
 
 <span class="sd">References:</span>
 <span class="sd">Prayut Suwanvisat, Somchai Prasitjutrakul.</span>
@@ -124,6 +123,7 @@
 <span class="sd">Technique. In 1998 [cited 2022 Sep 8].</span>
 <span class="sd">Available from:</span>
 <span class="sd">https://www.cp.eng.chula.ac.th/~somchai/spj/papers/ThaiText/ncsec98-clir.pdf</span>
+
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -172,13 +172,7 @@
 <span class="n">_FIRST_CODES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_table</span><span class="p">(</span><span class="n">_FIRST_GROUPS</span><span class="p">)</span>
 <span class="c1"># Codes for the other characters</span>
 <span class="n">_REST_CODES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_table</span><span class="p">(</span>
-    <span class="n">_FIRST_GROUPS</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="o">+</span> <span class="p">(</span>
-        <span class="p">(</span><span class="n">_C7</span><span class="p">,</span> <span class="s2">"7"</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">_C8</span><span class="p">,</span> <span class="s2">"8"</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">_C1_1</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">_C9</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">),</span>
-    <span class="p">)</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">_FIRST_GROUPS</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">(</span><span class="n">_C7</span><span class="p">,</span> <span class="s2">"7"</span><span class="p">),</span> <span class="p">(</span><span class="n">_C8</span><span class="p">,</span> <span class="s2">"8"</span><span class="p">),</span> <span class="p">(</span><span class="n">_C1_1</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span> <span class="p">(</span><span class="n">_C9</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">))</span>
 <span class="p">)</span>
 
 
@@ -186,8 +180,9 @@
 <a class="viewcode-back" href="../../../api/soundex.html#pythainlp.soundex.prayut_and_somchaip">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">prayut_and_somchaip</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Convert a Thai-English cross-language transliterated word into</span>
-<span class="sd">    phonetic code with the matching technique called **Soundex**</span>
+<span class="sd">    Convert a Thai-English transliterated word into a phonetic code.</span>
+
+<span class="sd">    The code uses the Soundex matching technique</span>
 <span class="sd">    [#prayut_and_somchaip]_.</span>
 
 <span class="sd">    :param str text: English or Thai transliterated word to be encoded</span>
