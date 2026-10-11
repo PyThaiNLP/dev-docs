@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP 9cc0f90 documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP f628689 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b0427105"></script>
+      <script src="../_static/documentation_options.js?v=9695af9a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -83,6 +83,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.pos_tag_sents"><code class="docutils literal notranslate"><span class="pre">pos_tag_sents()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.tag_provinces"><code class="docutils literal notranslate"><span class="pre">tag_provinces()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.chunk_parse"><code class="docutils literal notranslate"><span class="pre">chunk_parse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.CRFTagger"><code class="docutils literal notranslate"><span class="pre">CRFTagger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.CRFTagger.__init__"><code class="docutils literal notranslate"><span class="pre">CRFTagger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.CRFTagger.labels"><code class="docutils literal notranslate"><span class="pre">CRFTagger.labels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.CRFTagger.open"><code class="docutils literal notranslate"><span class="pre">CRFTagger.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.CRFTagger.tag"><code class="docutils literal notranslate"><span class="pre">CRFTagger.tag()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.CRFTagger.close"><code class="docutils literal notranslate"><span class="pre">CRFTagger.close()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.NER"><code class="docutils literal notranslate"><span class="pre">NER</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.name_engine"><code class="docutils literal notranslate"><span class="pre">NER.name_engine</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.NER.engine"><code class="docutils literal notranslate"><span class="pre">NER.engine</span></code></a></li>
@@ -786,6 +794,74 @@ treebank, natively uses Universal POS tags</p></li>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">CRFTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/crf.html#CRFTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.CRFTagger" title="Link to this definition"></a></dt>
+<dd><p>Linear-Chain Conditional Random Field (CRF) tagger.</p>
+<p>Uses pure-Python Viterbi decoding to predict optimal label sequences
+from pre-trained CRF weights without requiring external C libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – Path to the CRF model weights file
+(<cite>.json</cite> or <cite>.json.gz</cite>).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/crf.html#CRFTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.CRFTagger.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the CRF tagger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – Path to model weights file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#pythainlp.tag.CRFTagger.labels" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/crf.html#CRFTagger.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.CRFTagger.open" title="Link to this definition"></a></dt>
+<dd><p>Load model weights from a JSON or gzipped JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Path to the model weights file.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.15)"><strong>FileNotFoundError</strong></a> – If the model file cannot be found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xseq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/crf.html#CRFTagger.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.CRFTagger.tag" title="Link to this definition"></a></dt>
+<dd><p>Predict the optimal label sequence for an item sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xseq</strong> (<em>Sequence</em><em>[</em><em>Union</em><em>[</em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>, </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em><em>]</em>) – Sequence of item features, where each item is either
+a sequence of string feature names or a dictionary of features.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predicted sequence of labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.CRFTagger.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/crf.html#CRFTagger.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.CRFTagger.close" title="Link to this definition"></a></dt>
+<dd><p>Close the tagger and release internal model structures.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="pythainlp.tag.NER">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">NER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer-v2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'thainer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/named_entity.html#NER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.NER" title="Link to this definition"></a></dt>
 <dd><p>Named entity recognizer.</p>
@@ -1051,7 +1127,7 @@ or <code class="docutils literal notranslate"><span class="pre">&quot;1.5&quot;<
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pythainlp.tag.thainer.ThaiNameTagger.crf">
-<span class="sig-name descname"><span class="pre">crf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CRFTagger</span></span><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.crf" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">crf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pythainlp.tag.CRFTagger" title="pythainlp.tag.crf.CRFTagger"><span class="pre">CRFTagger</span></a></span><a class="headerlink" href="#pythainlp.tag.thainer.ThaiNameTagger.crf" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

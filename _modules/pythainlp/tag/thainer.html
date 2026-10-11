@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.thainer &mdash; PyThaiNLP 9cc0f90 documentation</title>
+  <title>pythainlp.tag.thainer &mdash; PyThaiNLP f628689 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b0427105"></script>
+      <script src="../../../_static/documentation_options.js?v=9695af9a"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -121,18 +121,14 @@
 <span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ThaiNameTagger"</span><span class="p">]</span>
 
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_corpus_path</span><span class="p">,</span> <span class="n">thai_stopwords</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_iob_to_markup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.crf</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRFTagger</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.pos_tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_thai</span>
-
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">pycrfsuite</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-        <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span><span class="p">,</span>  <span class="c1"># pyright: ignore[reportAttributeAccessIssue]  # pyrefly: ignore[missing-module-attribute]</span>
-    <span class="p">)</span>
 
 <span class="n">_TOKENIZER_ENGINE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"mm"</span>
 
@@ -228,10 +224,6 @@
 <span class="sd">        :param str version: Thai NER version, ``"1.4"`` (default)</span>
 <span class="sd">            or ``"1.5"``</span>
 <span class="sd">        """</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pycrfsuite</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-            <span class="n">Tagger</span> <span class="k">as</span> <span class="n">CRFTagger</span><span class="p">,</span>  <span class="c1"># pyright: ignore[reportAttributeAccessIssue]  # pyrefly: ignore[missing-module-attribute]</span>
-        <span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="p">:</span> <span class="n">CRFTagger</span> <span class="o">=</span> <span class="n">CRFTagger</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">"1.4"</span><span class="p">:</span>
@@ -245,8 +237,10 @@
                 <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pos_tag_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"orchid_ud"</span>
-        <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">"1.5"</span><span class="p">:</span>
-            <span class="n">model_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">"thainer"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">"1.5"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">version</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1.5.1"</span><span class="p">):</span>
+            <span class="n">model_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">"thainer"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">"1.5.1"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">model_path</span><span class="p">:</span>
+                <span class="n">model_path</span> <span class="o">=</span> <span class="n">get_corpus_path</span><span class="p">(</span><span class="s2">"thainer"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">"1.5"</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">model_path</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
                     <span class="s2">"corpus-not-found name='thainer'</span><span class="se">\n</span><span class="s2">"</span>

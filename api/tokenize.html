@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tokenize &mdash; PyThaiNLP 9cc0f90 documentation</title>
+  <title>pythainlp.tokenize &mdash; PyThaiNLP f628689 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b0427105"></script>
+      <script src="../_static/documentation_options.js?v=9695af9a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -91,6 +91,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tokenization-engines">Tokenization Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sentence-level">Sentence level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.crfcut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.list_to_string"><code class="docutils literal notranslate"><span class="pre">list_to_string()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.middle_cut"><code class="docutils literal notranslate"><span class="pre">middle_cut()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.thaisumcut.ThaiSentenceSegmentor"><code class="docutils literal notranslate"><span class="pre">ThaiSentenceSegmentor</span></code></a><ul>
@@ -118,6 +119,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.longest.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.nercut.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.newmm.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
@@ -130,6 +132,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.tcc_p.tcc_pos_array"><code class="docutils literal notranslate"><span class="pre">tcc_pos_array()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.tcc_p.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.etcc.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer"><code class="docutils literal notranslate"><span class="pre">Featurizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.__init__"><code class="docutils literal notranslate"><span class="pre">Featurizer.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.N"><code class="docutils literal notranslate"><span class="pre">Featurizer.N</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.delimiter"><code class="docutils literal notranslate"><span class="pre">Featurizer.delimiter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.radius"><code class="docutils literal notranslate"><span class="pre">Featurizer.radius</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.pad"><code class="docutils literal notranslate"><span class="pre">Featurizer.pad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tokenize.han_solo.Featurizer.featurize"><code class="docutils literal notranslate"><span class="pre">Featurizer.featurize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tokenize.han_solo.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -745,6 +757,36 @@ as split</p></li>
 <section id="sentence-level">
 <h2>Sentence level<a class="headerlink" href="#sentence-level" title="Link to this heading"></a></h2>
 <p><strong>crfcut</strong></p>
+<p id="module-pythainlp.tokenize.crfcut">Segment Thai text into sentences with CRFCut.</p>
+<p>CRFCut uses a conditional random field (CRF). The default model is trained
+on the TED dataset.</p>
+<p>Performance:</p>
+<ul class="simple">
+<li><p>ORCHID - space-correct accuracy 87% vs 95% state-of-the-art
+(Zhou et al, 2016; <a class="reference external" href="https://www.aclweb.org/anthology/C16-1031.pdf">https://www.aclweb.org/anthology/C16-1031.pdf</a>)</p></li>
+<li><p>TED dataset - space-correct accuracy 82%</p></li>
+</ul>
+<p>See the development notebooks at <a class="reference external" href="https://github.com/vistec-AI/ted_crawler">https://github.com/vistec-AI/ted_crawler</a>;
+the model does not use part-of-speech (POS) features, because the available
+POS tagging is unreliable.</p>
+<p>A tokenizer that operates at the sentence level using Conditional Random Fields (CRF). It is suitable for segmenting text into sentences accurately.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.crfcut.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.crfcut.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/crfcut.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.crfcut.segment" title="Link to this definition"></a></dt>
+<dd><p>Tokenize text into sentences with a CRF model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to be tokenized</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of sentences</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>thaisumcut</strong></p>
 <p id="module-pythainlp.tokenize.thaisumcut">Tokenize Thai text into sentences with the ThaiSum sentence segmentor.</p>
 <p>This is an implementation of the sentence segmentor by
@@ -1077,6 +1119,32 @@ internal tokenizer cache.</p>
 
 <p><strong>pyicu</strong></p>
 <p><strong>nercut</strong></p>
+<p id="module-pythainlp.tokenize.nercut">Tokenize Thai text into words with nercut 0.2.</p>
+<p>The tokenizer uses a named entity tagger and combines words that are parts
+of the same named entity.</p>
+<p>The code is by Wannaphong Phatthiyaphaibun.</p>
+<p>A tokenizer optimized for Named Entity Recognition (NER) tasks, ensuring accurate tokenization for entity recognition.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.nercut.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.nercut.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">text:</span> <span class="pre">str,</span> <span class="pre">taglist:</span> <span class="pre">Iterable[str]</span> <span class="pre">=</span> <span class="pre">['ORGANIZATION',</span> <span class="pre">'PERSON',</span> <span class="pre">'PHONE',</span> <span class="pre">'EMAIL',</span> <span class="pre">'DATE',</span> <span class="pre">'TIME'],</span> <span class="pre">tagger:</span> <span class="pre">NER</span> <span class="pre">=</span> <span class="pre">&lt;pythainlp.tag.named_entity.NER</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/nercut.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.nercut.segment" title="Link to this definition"></a></dt>
+<dd><p>Tokenize text into words, combining words of the same named entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to be tokenized</p></li>
+<li><p><strong>taglist</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – named entity tags to combine</p></li>
+<li><p><strong>tagger</strong> (<a class="reference internal" href="tag.html#pythainlp.tag.NER" title="pythainlp.tag.named_entity.NER"><em>pythainlp.tag.named_entity.NER</em></a>) – named entity tagger</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of words</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>sefr_cut</strong></p>
 <p><strong>oskut</strong></p>
 <p><strong>newmm (Default)</strong></p>
@@ -1318,6 +1386,104 @@ Communications and Information Technology (ISCIT), pp. 37-40. 2001.</p>
 </dd></dl>
 
 <p><strong>han_solo</strong></p>
+<p id="module-pythainlp.tokenize.han_solo">🪿 Han-solo: Thai syllable tokenizer.</p>
+<p>GitHub: <a class="reference external" href="https://github.com/PyThaiNLP/Han-solo">https://github.com/PyThaiNLP/Han-solo</a></p>
+<p>A subword tokenizer specialized for Han characters and mixed scripts, suitable for various text processing scenarios.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.han_solo.</span></span><span class="sig-name descname"><span class="pre">Featurizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer" title="Link to this definition"></a></dt>
+<dd><p>Extract character n-gram features for Han-solo.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the featurizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a>) – size of the character n-gram</p></li>
+<li><p><strong>sequence_size</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a>) – size of the character sequence</p></li>
+<li><p><strong>delimiter</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – delimiter character in the text</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.N">
+<span class="sig-name descname"><span class="pre">N</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.N" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.delimiter">
+<span class="sig-name descname"><span class="pre">delimiter</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.delimiter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.radius" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.pad">
+<span class="sig-name descname"><span class="pre">pad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">padder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'#'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.pad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.pad" title="Link to this definition"></a></dt>
+<dd><p>Pad a sentence with a padding character on both sides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – sentence to pad</p></li>
+<li><p><strong>padder</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – padding character</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>padded sentence</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.Featurizer.featurize">
+<span class="sig-name descname"><span class="pre">featurize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indiv_char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'list'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#Featurizer.featurize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.Featurizer.featurize" title="Link to this definition"></a></dt>
+<dd><p>Extract features and labels from a sentence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – sentence to featurize</p></li>
+<li><p><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><em>bool</em></a>) – pad the sentence first</p></li>
+<li><p><strong>indiv_char</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><em>bool</em></a>) – include features of individual characters</p></li>
+<li><p><strong>return_type</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – type of the features (list or dict)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>features (X) and labels (Y)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)">dict</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><em>Any</em></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tokenize.han_solo.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tokenize.han_solo.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tokenize/han_solo.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tokenize.han_solo.segment" title="Link to this definition"></a></dt>
+<dd><p>Tokenize text into words with Han-solo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to be tokenized</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of words</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 

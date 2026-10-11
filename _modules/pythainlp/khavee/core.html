@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP 9cc0f90 documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP f628689 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b0427105"></script>
+      <script src="../../../_static/documentation_options.js?v=9695af9a"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -138,8 +138,8 @@
 <span class="sd">    syllable weight (ครุ/ลหุ), and full Thai klon 4/8 poem structure (กลอน).</span>
 
 <span class="sd">    This class is designed to be deterministic according to the Royal</span>
-<span class="sd">    Society of Thailand's orthographic standards. The only exception is</span>
-<span class="sd">    the use of "ssg" for syllable segmentation in :meth:`check_klon`.</span>
+<span class="sd">    Society of Thailand's orthographic standards. It uses bundled SSG</span>
+<span class="sd">    weights for syllable segmentation in :meth:`check_klon`.</span>
 
 <span class="sd">    Key capabilities:</span>
 
@@ -176,9 +176,6 @@
 <span class="sd">            ...     k_type=4</span>
 <span class="sd">            ... )</span>
 <span class="sd">            'The poem is correct according to the principle.'</span>
-
-<span class="sd">    :Note:</span>
-<span class="sd">        The method :meth:`check_klon` requires the external ``ssg`` library.</span>
 <span class="sd">    """</span>
 
     <span class="c1"># ฤ and ฦ act as initial consonants but are not in thai_consonants</span>
@@ -994,7 +991,6 @@
 <span class="sd">        :return: check results of the poem, a message that the poem is</span>
 <span class="sd">            correct or a list of error messages</span>
 <span class="sd">        :rtype: Union[list[str], str]</span>
-<span class="sd">        :raises ImportError: if the ``ssg`` library is not installed</span>
 
 <span class="sd">        ══════════════════════════════════════════════════════════════════════</span>
 
@@ -1037,14 +1033,6 @@
 <span class="sd">            ... ))</span>
 <span class="sd">            The poem is correct according to the principle.</span>
 <span class="sd">        """</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="nb">__import__</span><span class="p">(</span><span class="s2">"ssg"</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s2">"The 'ssg' library is required for comprehensive poem analysis (check_klon). "</span>
-                <span class="s2">"Please install it using: pip install ssg"</span>
-            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
-
         <span class="k">if</span> <span class="n">k_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">}:</span>
             <span class="k">return</span> <span class="s2">"Something went wrong. Make sure you enter it in the correct form (k_type 4 or 8)."</span>
 
