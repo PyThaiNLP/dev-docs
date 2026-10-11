@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.phayathaibert &mdash; PyThaiNLP 99179e4 documentation</title>
+  <title>pythainlp.lm.phayathaibert &mdash; PyThaiNLP 9cc0f90 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=d9ac4e39"></script>
+      <script src="../_static/documentation_options.js?v=b0427105"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,8 +73,40 @@
 <li class="toctree-l1"><a class="reference internal" href="lm.html">pythainlp.lm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="morpheme.html">pythainlp.morpheme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parse.html">pythainlp.parse</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.phayathaibert</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.lm.phayathaibert</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.__init__"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_url"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.replace_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_brackets"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.rm_brackets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_newlines"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.replace_newlines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_useless_spaces"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.rm_useless_spaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_spaces"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.replace_spaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_rep_after"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.replace_rep_after()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_wrep_post"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.replace_wrep_post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.remove_space"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.remove_space()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.preprocess"><code class="docutils literal notranslate"><span class="pre">ThaiTextProcessor.preprocess()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter"><code class="docutils literal notranslate"><span class="pre">ThaiTextAugmenter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.__init__"><code class="docutils literal notranslate"><span class="pre">ThaiTextAugmenter.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.generate"><code class="docutils literal notranslate"><span class="pre">ThaiTextAugmenter.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.augment"><code class="docutils literal notranslate"><span class="pre">ThaiTextAugmenter.augment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger"><code class="docutils literal notranslate"><span class="pre">PartOfSpeechTagger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger.__init__"><code class="docutils literal notranslate"><span class="pre">PartOfSpeechTagger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger.get_tag"><code class="docutils literal notranslate"><span class="pre">PartOfSpeechTagger.get_tag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.lm.phayathaibert.NamedEntityTagger"><code class="docutils literal notranslate"><span class="pre">NamedEntityTagger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.NamedEntityTagger.__init__"><code class="docutils literal notranslate"><span class="pre">NamedEntityTagger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.lm.phayathaibert.NamedEntityTagger.get_ner"><code class="docutils literal notranslate"><span class="pre">NamedEntityTagger.get_ner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.lm.phayathaibert.segment"><code class="docutils literal notranslate"><span class="pre">segment()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="soundex.html">pythainlp.soundex</a></li>
@@ -85,9 +117,9 @@
 <li class="toctree-l1"><a class="reference internal" href="tools.html">pythainlp.tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="translate.html">pythainlp.translate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transliterate.html">pythainlp.transliterate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ulmfit.html">pythainlp.ulmfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulmfit.html">pythainlp.lm.ulmfit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util.html">pythainlp.util</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.wangchanberta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wangchanberta.html">pythainlp.lm.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="word_vector.html">pythainlp.word_vector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wsd.html">pythainlp.wsd</a></li>
 </ul>
@@ -106,7 +138,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">pythainlp.phayathaibert</li>
+      <li class="breadcrumb-item active">pythainlp.lm.phayathaibert</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/phayathaibert.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -116,11 +148,394 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pythainlp-phayathaibert">
-<h1>pythainlp.phayathaibert<a class="headerlink" href="#pythainlp-phayathaibert" title="Link to this heading"></a></h1>
-<p>The <cite>pythainlp.phayathaibert</cite> module is built upon the phayathaibert base model.</p>
+  <section id="pythainlp-lm-phayathaibert">
+<h1>pythainlp.lm.phayathaibert<a class="headerlink" href="#pythainlp-lm-phayathaibert" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp.phayathaibert</span></code> has moved to <code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp.lm.phayathaibert</span></code>.
+Importing from <code class="xref py py-mod docutils literal notranslate"><span class="pre">pythainlp.phayathaibert</span></code> still works but emits a
+<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#DeprecationWarning" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> and will be removed in 6.0.</p>
+</div>
+<p>The <cite>pythainlp.lm.phayathaibert</cite> module is built upon the phayathaibert base model.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.lm.phayathaibert.</span></span><span class="sig-name descname"><span class="pre">ThaiTextProcessor</span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor" title="Link to this definition"></a></dt>
+<dd><p>Preprocess Thai text for PhayaThaiBERT.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the text processor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_url">
+<span class="sig-name descname"><span class="pre">replace_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.replace_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_url" title="Link to this definition"></a></dt>
+<dd><p>Replace URLs in text with the URL token.</p>
+<p>See <a class="reference external" href="https://stackoverflow.com/a/6041965">https://stackoverflow.com/a/6041965</a></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to replace url</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text where urls are replaced</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replace_url</span><span class="p">(</span><span class="s2">"go to https://github.com"</span><span class="p">)</span>
+<span class="go">'go to &lt;url&gt;'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_brackets">
+<span class="sig-name descname"><span class="pre">rm_brackets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.rm_brackets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_brackets" title="Link to this definition"></a></dt>
+<dd><p>Remove empty brackets and artifacts within brackets from text.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to remove useless brackets</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text where all useless brackets are removed</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rm_brackets</span><span class="p">(</span><span class="s2">"hey() whats[;] up{*&amp;} man(hey)"</span><span class="p">)</span>
+<span class="go">'hey whats up man(hey)'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_newlines">
+<span class="sig-name descname"><span class="pre">replace_newlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.replace_newlines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_newlines" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Replace newlines in text with spaces.</p>
+<dl class="field-list">
+<dt class="field-odd">param str text<span class="colon">:</span></dt>
+<dd class="field-odd"><p>text to replace all newlines with spaces</p>
+</dd>
+<dt class="field-even">return<span class="colon">:</span></dt>
+<dd class="field-even"><p>text where all newlines are replaced with spaces</p>
+</dd>
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rm_useless_spaces</span><span class="p">(</span><span class="s2">"hey whats</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>up”)</dt><dd><p>hey whats  up</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_useless_spaces">
+<span class="sig-name descname"><span class="pre">rm_useless_spaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.rm_useless_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.rm_useless_spaces" title="Link to this definition"></a></dt>
+<dd><p>Collapse repeated spaces in text (code from <cite>fastai</cite>).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to replace useless spaces</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text where all spaces are reduced to one</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rm_useless_spaces</span><span class="p">(</span><span class="s2">"oh         no"</span><span class="p">)</span>
+<span class="go">oh no</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_spaces">
+<span class="sig-name descname"><span class="pre">replace_spaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">space_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;_&gt;'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.replace_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_spaces" title="Link to this definition"></a></dt>
+<dd><p>Replace spaces in text with a space token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to replace spaces</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text where all spaces replaced with _</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replace_spaces</span><span class="p">(</span><span class="s2">"oh no"</span><span class="p">)</span>
+<span class="go">oh_no</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_rep_after">
+<span class="sig-name descname"><span class="pre">replace_rep_after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.replace_rep_after"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_rep_after" title="Link to this definition"></a></dt>
+<dd><p>Remove character repetitions in text.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – input text to replace character repetition</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>text with repetitive tokens removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">"กาาาาาาา"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replace_rep_after</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">'กา'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_wrep_post">
+<span class="sig-name descname"><span class="pre">replace_wrep_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.replace_wrep_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.replace_wrep_post" title="Link to this definition"></a></dt>
+<dd><p>Remove repeated words after tokenization.</p>
+<p>The <cite>replace_wrep</cite> function of <cite>fastai</cite> does not work well with Thai.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>toks</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – list of tokens</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of tokens where repetitive words are removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">toks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"กา"</span><span class="p">,</span> <span class="s2">"น้ำ"</span><span class="p">,</span> <span class="s2">"น้ำ"</span><span class="p">,</span> <span class="s2">"น้ำ"</span><span class="p">,</span> <span class="s2">"น้ำ"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replace_wrep_post</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span>
+<span class="go">['กา', 'น้ำ']</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.remove_space">
+<span class="sig-name descname"><span class="pre">remove_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.remove_space"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.remove_space" title="Link to this definition"></a></dt>
+<dd><p>Remove spaces from a list of words for bag-of-words models.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>toks</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – list of tokens</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tokens where space tokens (” “) are filtered out</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">toks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ฉัน"</span><span class="p">,</span> <span class="s2">"เดิน"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="s2">"กลับ"</span><span class="p">,</span> <span class="s2">"บ้าน"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_space</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span>
+<span class="go">['ฉัน', 'เดิน', 'กลับ', 'บ้าน']</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextProcessor.preprocess">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_rules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional[list[Callable[...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]]]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tok_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable[...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list[str]]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">word_tokenize&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextProcessor.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextProcessor.preprocess" title="Link to this definition"></a></dt>
+<dd><p>Apply preprocessing rules, tokenize text, and join the words.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextAugmenter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.lm.phayathaibert.</span></span><span class="sig-name descname"><span class="pre">ThaiTextAugmenter</span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextAugmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter" title="Link to this definition"></a></dt>
+<dd><p>Generate and augment text with PhayaThaiBERT.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextAugmenter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextAugmenter.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the text augmenter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextAugmenter.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextAugmenter.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.generate" title="Link to this definition"></a></dt>
+<dd><p>Generate text from PhayaThaiBERT.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.ThaiTextAugmenter.augment">
+<span class="sig-name descname"><span class="pre">augment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_augs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#ThaiTextAugmenter.augment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.ThaiTextAugmenter.augment" title="Link to this definition"></a></dt>
+<dd><p>Text augmentation from PhayaThaiBERT.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Thai text</p></li>
+<li><p><strong>num_augs</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a>) – an amount of augmentation text needed as an output</p></li>
+<li><p><strong>sample</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><em>bool</em></a>) – whether to sample the text as an output or not,              true if more word diversity is needed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of text augment</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.augment.lm</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThaiTextAugmenter</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">ThaiTextAugmenter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="s2">"ช้างมีทั้งหมด 50 ตัว บน"</span><span class="p">,</span> <span class="n">num_args</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>[‘ช้างมีทั้งหมด 50 ตัว บนโลกใบนี้ครับ.’,</dt><dd><p>‘ช้างมีทั้งหมด 50 ตัว บนพื้นดินครับ…’,
+‘ช้างมีทั้งหมด 50 ตัว บนท้องฟ้าครับ…’,
+‘ช้างมีทั้งหมด 50 ตัว บนดวงจันทร์.‼’,
+‘ช้างมีทั้งหมด 50 ตัว บนเขาค่ะ😁’]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.PartOfSpeechTagger">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.lm.phayathaibert.</span></span><span class="sig-name descname"><span class="pre">PartOfSpeechTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lunarlist/pos_thai_phayathai'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#PartOfSpeechTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger" title="Link to this definition"></a></dt>
+<dd><p>Tag Thai text with part-of-speech labels using PhayaThaiBERT.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.PartOfSpeechTagger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lunarlist/pos_thai_phayathai'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#PartOfSpeechTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the part-of-speech tagger.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.PartOfSpeechTagger.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'simple'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#PartOfSpeechTagger.get_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.PartOfSpeechTagger.get_tag" title="Link to this definition"></a></dt>
+<dd><p>Tag sentences with part-of-speech (POS) labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – a list of lists of tokenized words</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of lists of tuples (word, POS tag)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]]]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>Labels POS for given sentence:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.lm.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">PartOfSpeechTagger</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tagger</span> <span class="o">=</span> <span class="n">PartOfSpeechTagger</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tagger</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="s2">"แมวทำอะไรตอนห้าโมงเช้า"</span><span class="p">)</span>
+<span class="go">[[('แมว', 'NOUN'), ('ทําอะไร', 'VERB'), ('ตอนห้าโมงเช้า', 'NOUN')]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.NamedEntityTagger">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.lm.phayathaibert.</span></span><span class="sig-name descname"><span class="pre">NamedEntityTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pavarissy/phayathaibert-thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#NamedEntityTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.NamedEntityTagger" title="Link to this definition"></a></dt>
+<dd><p>Tag named entities with PhayaThaiBERT.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.NamedEntityTagger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pavarissy/phayathaibert-thainer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#NamedEntityTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.NamedEntityTagger.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the named entity tagger.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.NamedEntityTagger.get_ner">
+<span class="sig-name descname"><span class="pre">get_ner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'simple'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#NamedEntityTagger.get_ner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.NamedEntityTagger.get_ner" title="Link to this definition"></a></dt>
+<dd><p>Tag named entities in text.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text in Thai to be tagged</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><em>bool</em></a>) – output with part-of-speech tags.            (PhayaThaiBERT is supported in PartOfSpeechTagger)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of tuples associated with tokenized words, NER tags,
+POS tags (if the parameter <cite>pos</cite> is specified as <cite>True</cite>),
+and output HTML-like tags (if the parameter <cite>tag</cite> is
+specified as <cite>True</cite>).
+Otherwise, return a list of tuples associated with tokenized
+words and NER tags</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.lm.phayathaibert.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedEntityTagger</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tagger</span> <span class="o">=</span> <span class="n">NamedEntityTagger</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tagger</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="s2">"ทดสอบนายปวริศ เรืองจุติโพธิ์พานจากประเทศไทย"</span><span class="p">)</span>
+<span class="go">[('นายปวริศ เรืองจุติโพธิ์พานจากประเทศไทย', 'PERSON'),</span>
+<span class="go">('จาก', 'LOCATION'),</span>
+<span class="go">('ประเทศไทย', 'LOCATION')]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ner</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">"ทดสอบนายปวริศ เรืองจุติโพธิ์พานจากประเทศไทย"</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">'ทดสอบ&lt;PERSON&gt;นายปวริศ เรืองจุติโพธิ์พาน&lt;/PERSON&gt;                &lt;LOCATION&gt;จาก&lt;/LOCATION&gt;&lt;LOCATION&gt;ประเทศไทย&lt;/LOCATION&gt;'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.lm.phayathaibert.segment">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.lm.phayathaibert.</span></span><span class="sig-name descname"><span class="pre">segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/lm/phayathaibert/core.html#segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.lm.phayathaibert.segment" title="Link to this definition"></a></dt>
+<dd><p>Tokenize text into subwords with the PhayaThaiBERT tokenizer.</p>
+<p>The tokenizer is a SentencePiece model with vocabulary expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – text to be tokenized</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of subwords</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 

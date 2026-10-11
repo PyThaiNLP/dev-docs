@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; PyThaiNLP 99179e4 documentation</title>
+  <title>Installation &mdash; PyThaiNLP 9cc0f90 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=d9ac4e39"></script>
+      <script src="../_static/documentation_options.js?v=b0427105"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../api/lm.html">pythainlp.lm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/morpheme.html">pythainlp.morpheme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/parse.html">pythainlp.parse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/phayathaibert.html">pythainlp.phayathaibert</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/phayathaibert.html">pythainlp.lm.phayathaibert</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/soundex.html">pythainlp.soundex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/spell.html">pythainlp.spell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/summarize.html">pythainlp.summarize</a></li>
@@ -96,9 +96,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../api/tools.html">pythainlp.tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/translate.html">pythainlp.translate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/transliterate.html">pythainlp.transliterate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/ulmfit.html">pythainlp.ulmfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/ulmfit.html">pythainlp.lm.ulmfit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/util.html">pythainlp.util</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/wangchanberta.html">pythainlp.wangchanberta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/wangchanberta.html">pythainlp.lm.wangchanberta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/word_vector.html">pythainlp.word_vector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/wsd.html">pythainlp.wsd</a></li>
 </ul>
@@ -285,8 +285,8 @@
 <span class="sig-name descname"><span class="pre">PYTHAINLP_DATA_DIR</span></span><a class="headerlink" href="#envvar-PYTHAINLP_DATA_DIR" title="Link to this definition"></a></dt>
 <dd><div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version Use: </span><span class="target" id="index-0"></span><a class="reference internal" href="#envvar-PYTHAINLP_DATA"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code></a> instead. Setting <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code> triggers a
-<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#DeprecationWarning" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> at runtime. If both <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code>
-are set simultaneously, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#DeprecationWarning" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> at runtime. If both <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_DATA_DIR</span></code>
+are set simultaneously, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -295,7 +295,7 @@ are set simultaneously, PyThaiNLP raises <a class="reference external" href="htt
 <span class="sig-name descname"><span class="pre">PYTHAINLP_OFFLINE</span></span><a class="headerlink" href="#envvar-PYTHAINLP_OFFLINE" title="Link to this definition"></a></dt>
 <dd><p>When set to a truthy value (<code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">yes</span></code>, <code class="docutils literal notranslate"><span class="pre">on</span></code>), PyThaiNLP operates in
 <em>offline mode</em>: automatic corpus downloads are disabled, and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code> raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code> raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>
 for any corpus that is not already cached locally.</p>
 <p>Explicit calls to <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.download()</span></code> or <code class="docutils literal notranslate"><span class="pre">thainlp</span> <span class="pre">data</span> <span class="pre">get</span></code>
 still work normally, because those are deliberate user actions.</p>
@@ -334,7 +334,7 @@ destination path.</p></li>
 <code class="docutils literal notranslate"><span class="pre">download()</span></code> calls working, use <span class="target" id="index-2"></span><a class="reference internal" href="#envvar-PYTHAINLP_OFFLINE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_OFFLINE</span></code></a> instead.</p>
 </div>
 <p>If both <span class="target" id="index-3"></span><a class="reference internal" href="#envvar-PYTHAINLP_READ_ONLY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code></a> and <span class="target" id="index-4"></span><a class="reference internal" href="#envvar-PYTHAINLP_READ_MODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE</span></code></a> are set at the
-same time, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+same time, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std envvar">
@@ -342,8 +342,8 @@ same time, PyThaiNLP raises <a class="reference external" href="https://docs.pyt
 <span class="sig-name descname"><span class="pre">PYTHAINLP_READ_MODE</span></span><a class="headerlink" href="#envvar-PYTHAINLP_READ_MODE" title="Link to this definition"></a></dt>
 <dd><div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version Use: </span><span class="target" id="index-5"></span><a class="reference internal" href="#envvar-PYTHAINLP_READ_ONLY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code></a> instead. Setting <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE</span></code> triggers a
-<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#DeprecationWarning" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> at runtime. If both <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code> and
-<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE</span></code> are set simultaneously, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#DeprecationWarning" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> at runtime. If both <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY</span></code> and
+<code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE</span></code> are set simultaneously, PyThaiNLP raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_MODE=1</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">PYTHAINLP_READ_ONLY=1</span></code>.</p>
 </div>
 </dd></dl>
@@ -370,8 +370,8 @@ affect the two main corpus operations:</p>
 <td><p>Succeeds (no write needed)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.get_corpus_path()</span></code> — corpus <strong>not</strong> cached locally</p></td>
-<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
-<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
+<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
+<td><p>Fails (<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#FileNotFoundError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.corpus.download()</span></code> — corpus already in local catalog</p></td>
 <td><p>Succeeds (download is an explicit user action)</p></td>
