@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pythainlp.classify.laya &mdash; PyThaiNLP 8b2b9a6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=eea1f72d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=c1a6842f"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PyThaiNLP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/start.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/start.html#tutorial-notebooks">Tutorial notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/command.html">Command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/threadsafe.html">Thread safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/license.html">License</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/ancient.html">pythainlp.ancient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/augment.html">pythainlp.augment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/benchmarks.html">pythainlp.benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/braille.html">pythainlp.braille</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/chunk.html">pythainlp.chunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/classify.html">pythainlp.classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cli.html">pythainlp.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/coref.html">pythainlp.coref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/corpus.html">pythainlp.corpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/el.html">pythainlp.el</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/generate.html">pythainlp.generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/khavee.html">pythainlp.khavee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/lm.html">pythainlp.lm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/morpheme.html">pythainlp.morpheme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/parse.html">pythainlp.parse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/phayathaibert.html">pythainlp.lm.phayathaibert</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/soundex.html">pythainlp.soundex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/spell.html">pythainlp.spell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/summarize.html">pythainlp.summarize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/tag.html">pythainlp.tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/tokenize.html">pythainlp.tokenize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/tools.html">pythainlp.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/translate.html">pythainlp.translate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/transliterate.html">pythainlp.transliterate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/ulmfit.html">pythainlp.lm.ulmfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/util.html">pythainlp.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/wangchanberta.html">pythainlp.lm.wangchanberta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/word_vector.html">pythainlp.word_vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/wsd.html">pythainlp.wsd</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyThaiNLP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pythainlp.classify.laya</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pythainlp.classify.laya</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2016-2026 PyThaiNLP Project</span>
+<span class="c1"># SPDX-FileType: SOURCE</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">"""</span>
+<span class="sd">Laya Multilingual model for zero-shot text classification and decision making.</span>
+
+<span class="sd">Laya is a non-autoregressive decision model designed for System 1 thinking</span>
+<span class="sd">that performs typed choices, scoring, and binary decisions over text</span>
+<span class="sd">in a single forward pass without task-specific fine-tuning.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_hf_hub</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_path_join</span>
+
+<span class="n">_DEFAULT_REPO_ID</span> <span class="o">=</span> <span class="s2">"pythainlp/laya-multilingual-onnx"</span>
+
+<span class="n">_QTYPES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"choice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"noul"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">_QTYPE_NAMES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">"choice"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">"score"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">"noul"</span><span class="p">}</span>
+
+<span class="n">_TEMP_MIN</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">_TEMP_MAX</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_clamp_temperature</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">lo</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_TEMP_MIN</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_TEMP_MAX</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Clamp temperature to a valid range [lo, hi].</span>
+
+<span class="sd">    :param Any temperature: Temperature value to clamp.</span>
+<span class="sd">    :param float lo: Minimum allowed temperature.</span>
+<span class="sd">    :param float hi: Maximum allowed temperature.</span>
+<span class="sd">    :return: Clamped temperature float.</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_confidence_from_probs</span><span class="p">(</span><span class="n">probs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">num_options</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculate normalized Shannon entropy confidence: 1 - H(p) / log(k).</span>
+
+<span class="sd">    :param Any probs: 1D probability array.</span>
+<span class="sd">    :param int num_options: Number of active options.</span>
+<span class="sd">    :return: Confidence value between 0.0 and 1.0.</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+    <span class="k">if</span> <span class="n">num_options</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">probs</span><span class="p">[:</span><span class="n">num_options</span><span class="p">]</span>
+    <span class="n">entropy</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">confidence</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">entropy</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">num_options</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">confidence</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_temp_bucket</span><span class="p">(</span><span class="n">qtype</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_options</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return temperature bucket string for given question type and option count.</span>
+
+<span class="sd">    :param int qtype: Question type integer (0: choice, 1: score, 2: noul).</span>
+<span class="sd">    :param int num_options: Number of options.</span>
+<span class="sd">    :return: Bucket name string, e.g. 'choice:3-5'.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">num_options</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="s2">"2"</span>
+    <span class="k">elif</span> <span class="n">num_options</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="s2">"3-5"</span>
+    <span class="k">elif</span> <span class="n">num_options</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="s2">"6-10"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="s2">"11+"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">_QTYPE_NAMES</span><span class="p">[</span><span class="n">qtype</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_serialize_state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Serialize text or structured state to string.</span>
+
+<span class="sd">    :param Union[str, dict[str, Any], list[Any]] state: State to serialize.</span>
+<span class="sd">    :return: String representation.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_render_criterion</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Render one criterion value as a clean string.</span>
+
+<span class="sd">    :param Any value: Criterion text, dictionary, list, or number.</span>
+<span class="sd">    :return: Rendered text representation.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+        <span class="n">value</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="s2">": "</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_render_options</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Render option texts for a question definition.</span>
+
+<span class="sd">    :param dict[str, Any] q: Question dictionary with keys 't' and 'crit'.</span>
+<span class="sd">    :return: List of rendered option strings.</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    """</span>
+    <span class="n">q_type</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">]</span>
+    <span class="n">criteria</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"crit"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">q_type</span> <span class="o">==</span> <span class="s2">"choice"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">k</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s2">""</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">_render_criterion</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">criteria</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">]</span>
+    <span class="k">if</span> <span class="n">q_type</span> <span class="o">==</span> <span class="s2">"score"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">"level </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">_render_criterion</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="c1"># noul (yes/no)</span>
+    <span class="n">crit_dict</span> <span class="o">=</span> <span class="n">criteria</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">false_crit</span> <span class="o">=</span> <span class="n">crit_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"false"</span><span class="p">)</span>
+    <span class="n">true_crit</span> <span class="o">=</span> <span class="n">crit_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"true"</span><span class="p">)</span>
+    <span class="n">false_desc</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_render_criterion</span><span class="p">(</span><span class="n">false_crit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">false_crit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s2">"no, the statement does not hold"</span>
+    <span class="p">)</span>
+    <span class="n">true_desc</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_render_criterion</span><span class="p">(</span><span class="n">true_crit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">true_crit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s2">"yes, the statement holds"</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"false: </span><span class="si">{</span><span class="n">false_desc</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"true: </span><span class="si">{</span><span class="n">true_desc</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_TokenizerWrapper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Lightweight wrapper around FastTokenizer (tokenizers or transformers)."""</span>
+
+    <span class="n">cls_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">cls_token_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">sep_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">sep_token_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">pad_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">pad_token_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">mask_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">mask_token_id</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tok_json_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tok_config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tokenizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span> <span class="k">as</span> <span class="n">FastTokenizer</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">FastTokenizer</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">tok_json_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">no_padding</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">no_truncation</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_hf_tokenizer</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+                <span class="n">tok_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">tok_json_path</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>  <span class="c1"># nosec B615</span>
+                    <span class="n">tok_dir</span><span class="p">,</span> <span class="n">local_files_only</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_is_hf_tokenizer</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span>
+                    <span class="s2">"Please install tokenizers or transformers via "</span>
+                    <span class="s2">"'pip install tokenizers' or 'pip install transformers'."</span>
+                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tok_config_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"cls_token"</span><span class="p">,</span> <span class="s2">"sep_token"</span><span class="p">,</span> <span class="s2">"pad_token"</span><span class="p">,</span> <span class="s2">"mask_token"</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tokenizer configuration is missing </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_hf_tokenizer</span><span class="p">:</span>
+                <span class="n">token_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">token_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">token_to_id</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">token_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tokenizer cannot map token </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_id"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">token_id</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_hf_tokenizer</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="n">add_special_tokens</span>
+            <span class="p">)[</span><span class="s2">"input_ids"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="n">add_special_tokens</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">ids</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"input_ids"</span><span class="p">:</span> <span class="n">tokens</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_prefix</span><span class="p">(</span>
+    <span class="n">tok</span><span class="p">:</span> <span class="n">_TokenizerWrapper</span><span class="p">,</span>
+    <span class="n">q</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">head_max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Build question prefix tokens and marker positions.</span>
+
+<span class="sd">    :param _TokenizerWrapper tok: Tokenizer wrapper.</span>
+<span class="sd">    :param dict[str, Any] q: Internal question definition.</span>
+<span class="sd">    :param int head_max_len: Maximum length for question header.</span>
+<span class="sd">    :return: Tuple of (input_ids, marker_positions).</span>
+<span class="sd">    :rtype: tuple[list[int], list[int]]</span>
+<span class="sd">    """</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="n">_render_options</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">ins</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="s2">"ins"</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">mask_token</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span>
+    <span class="n">head_ids</span> <span class="o">=</span> <span class="n">tok</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">q</span><span class="p">[</span><span class="s1">'t'</span><span class="p">]</span><span class="si">}</span><span class="s2"> question: </span><span class="si">{</span><span class="n">ins</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span>
+        <span class="s2">"input_ids"</span>
+    <span class="p">]</span>
+    <span class="n">opt_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">opt_text</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+        <span class="n">encoded_opt</span> <span class="o">=</span> <span class="n">tok</span><span class="p">(</span>
+            <span class="s2">" "</span> <span class="o">+</span> <span class="n">opt_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">mask_token</span><span class="p">,</span> <span class="s2">" "</span><span class="p">),</span>
+            <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)[</span><span class="s2">"input_ids"</span><span class="p">][:</span><span class="mi">48</span><span class="p">]</span>
+        <span class="n">opt_ids</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tok</span><span class="o">.</span><span class="n">mask_token_id</span><span class="p">,</span> <span class="o">*</span><span class="n">encoded_opt</span><span class="p">])</span>
+
+    <span class="n">opt_budget</span> <span class="o">=</span> <span class="n">head_max_len</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">opt_ids</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">opt_budget</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="n">per</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="n">head_max_len</span> <span class="o">-</span> <span class="mi">16</span><span class="p">)</span> <span class="o">//</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt_ids</span><span class="p">)))</span>
+        <span class="n">opt_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span><span class="p">[:</span><span class="n">per</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">opt_ids</span><span class="p">]</span>
+        <span class="n">opt_budget</span> <span class="o">=</span> <span class="n">head_max_len</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">opt_ids</span><span class="p">)</span>
+
+    <span class="n">head_ids</span> <span class="o">=</span> <span class="n">head_ids</span><span class="p">[:</span> <span class="nb">max</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">opt_budget</span><span class="p">)]</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">cls_token_id</span><span class="p">,</span> <span class="o">*</span><span class="n">head_ids</span><span class="p">,</span> <span class="n">tok</span><span class="o">.</span><span class="n">sep_token_id</span><span class="p">]</span>
+    <span class="n">markers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">opt_ids</span><span class="p">:</span>
+        <span class="n">markers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span>
+        <span class="n">ids</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+    <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">sep_token_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ids</span><span class="p">,</span> <span class="n">markers</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_sequence</span><span class="p">(</span>
+    <span class="n">tok</span><span class="p">:</span> <span class="n">_TokenizerWrapper</span><span class="p">,</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">q</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="n">head_max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+    <span class="n">truncate_left</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Build token sequence: [CLS] &lt;type&gt; ins [SEP] [MASK] opt0 ... [SEP] state [SEP].</span>
+
+<span class="sd">    :param _TokenizerWrapper tok: Tokenizer instance.</span>
+<span class="sd">    :param Union[str, dict[str, Any], list[Any]] state: Input state/text.</span>
+<span class="sd">    :param dict[str, Any] q: Question definition.</span>
+<span class="sd">    :param int max_len: Maximum total sequence length.</span>
+<span class="sd">    :param int head_max_len: Maximum prefix/header length.</span>
+<span class="sd">    :param bool truncate_left: Whether to truncate state from left instead of right.</span>
+<span class="sd">    :return: Tuple of (input_ids, marker_positions).</span>
+<span class="sd">    :rtype: tuple[list[int], list[int]]</span>
+<span class="sd">    """</span>
+    <span class="n">ids</span><span class="p">,</span> <span class="n">markers</span> <span class="o">=</span> <span class="n">_build_prefix</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">head_max_len</span><span class="p">)</span>
+    <span class="n">room</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">state_str</span> <span class="o">=</span> <span class="n">_serialize_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">mask_token</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">tok</span><span class="p">(</span><span class="n">state_str</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s2">"input_ids"</span><span class="p">]</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="o">-</span><span class="n">room</span><span class="p">:]</span> <span class="k">if</span> <span class="n">truncate_left</span> <span class="k">else</span> <span class="n">st</span><span class="p">[:</span><span class="n">room</span><span class="p">]</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="n">ids</span> <span class="o">+</span> <span class="n">st</span> <span class="o">+</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">sep_token_id</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ids</span><span class="p">[:</span><span class="n">max_len</span><span class="p">],</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">markers</span> <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">max_len</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_collate_items</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">pad_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Collate sequence items into numpy batch feed dict for ONNX Runtime.</span>
+
+<span class="sd">    :param list[dict[str, Any]] items: List of prepared items.</span>
+<span class="sd">    :param int pad_id: Padding token ID.</span>
+<span class="sd">    :return: Batch feed dictionary.</span>
+<span class="sd">    :rtype: dict[str, Any]</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot collate an empty batch."</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"ids"</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"markers"</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">))</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"input_ids"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">length</span><span class="p">),</span> <span class="n">pad_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span>
+        <span class="s2">"attention_mask"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span>
+        <span class="s2">"marker_pos"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">count</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span>
+        <span class="s2">"marker_mask"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">count</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+        <span class="s2">"qtype"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="s2">"qtype"</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+        <span class="n">item_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"ids"</span><span class="p">])</span>
+        <span class="n">item_cnt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"markers"</span><span class="p">])</span>
+        <span class="n">batch</span><span class="p">[</span><span class="s2">"input_ids"</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">item_len</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">"ids"</span><span class="p">]</span>
+        <span class="n">batch</span><span class="p">[</span><span class="s2">"attention_mask"</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">item_len</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">batch</span><span class="p">[</span><span class="s2">"marker_pos"</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">item_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">"markers"</span><span class="p">]</span>
+        <span class="n">batch</span><span class="p">[</span><span class="s2">"marker_mask"</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">item_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">batch</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_choice_criteria</span><span class="p">(</span><span class="n">criteria</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Validate and normalize choice criteria."""</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">criteria</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Choice criteria list must not be empty."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Choice labels must be strings."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">criteria</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Choice labels must be unique."</span><span class="p">)</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">criteria</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Choice criteria must be a non-empty dictionary or list."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Choice labels must be strings."</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">criteria</span>
+
+
+<div class="viewcode-block" id="LayaModel">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LayaModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Laya Multilingual model for zero-shot text classification and decision making.</span>
+
+<span class="sd">    Laya is a non-autoregressive decision model designed for fast, calibrated,</span>
+<span class="sd">    and reliable decision making. It supports over 100 languages including Thai,</span>
+<span class="sd">    allowing zero-shot classification using an instruction prompt and candidate</span>
+<span class="sd">    choices without any task-specific fine-tuning.</span>
+
+<span class="sd">    :param Optional[str] model_path: Hugging Face model repository ID or</span>
+<span class="sd">        local directory path containing the ONNX model files.</span>
+<span class="sd">        Default is ``"pythainlp/laya-multilingual-onnx"``.</span>
+<span class="sd">    :param Optional[list[str]] providers: List of ONNX Runtime execution</span>
+<span class="sd">        providers (e.g. ``["CPUExecutionProvider"]``,</span>
+<span class="sd">        ``["CUDAExecutionProvider"]``). Default is ``["CPUExecutionProvider"]``.</span>
+<span class="sd">    :param Optional[str] revision: Git revision (branch, tag, or commit hash)</span>
+<span class="sd">        on Hugging Face Hub (optional).</span>
+<span class="sd">    :param int batch_size: Batch size for batched inference (default: 16).</span>
+<span class="sd">    :param Optional[int] max_length: Maximum sequence length in tokens</span>
+<span class="sd">        (default from configuration, typically 1024).</span>
+<span class="sd">    :param Optional[int] head_max_length: Maximum token length for the question</span>
+<span class="sd">        header and candidate options (default from configuration, typically 256).</span>
+
+<span class="sd">    :Example:</span>
+<span class="sd">        &gt;&gt;&gt; from pythainlp.classify import LayaModel  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; model = LayaModel()  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; model.classify(  # doctest: +SKIP</span>
+<span class="sd">        ...     "อาหารอร่อยมาก บรรยากาศดี พนักงานบริการยอดเยี่ยม",</span>
+<span class="sd">        ...     choices=["Positive", "Negative", "Neutral"],</span>
+<span class="sd">        ...     prompt="What is the sentiment of the text?",</span>
+<span class="sd">        ... )</span>
+<span class="sd">        'Positive'</span>
+<span class="sd">    """</span>
+
+    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">providers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span>
+
+<div class="viewcode-block" id="LayaModel.__init__">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">providers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">head_max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the Laya ONNX model and tokenizer."""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># noqa: F401</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">onnxruntime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ort</span>
+        <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span>
+                <span class="s2">"Please install the required packages via "</span>
+                <span class="s2">"'pip install numpy onnxruntime huggingface-hub tokenizers'."</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">batch_size</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"batch_size must be a positive integer."</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">providers</span> <span class="k">if</span> <span class="n">providers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[</span><span class="s2">"CPUExecutionProvider"</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">model_file</span><span class="p">,</span> <span class="n">rl_cfg_file</span><span class="p">,</span> <span class="n">tok_file</span><span class="p">,</span> <span class="n">tok_cfg_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_files</span><span class="p">(</span>
+            <span class="n">model_path</span><span class="p">,</span> <span class="n">revision</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_path</span> <span class="o">=</span> <span class="n">model_file</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">ort</span><span class="o">.</span><span class="n">InferenceSession</span><span class="p">(</span>
+            <span class="n">model_file</span><span class="p">,</span> <span class="n">providers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">providers</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">_TokenizerWrapper</span><span class="p">(</span><span class="n">tok_file</span><span class="p">,</span> <span class="n">tok_cfg_file</span><span class="p">)</span>
+
+        <span class="n">cfg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">rl_cfg_file</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">rl_cfg_file</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">rl_cfg_file</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>
+                <span class="n">cfg</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">max_length</span>
+            <span class="k">if</span> <span class="n">max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"max_len"</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_head_max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">head_max_length</span>
+            <span class="k">if</span> <span class="n">head_max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"head_max_len"</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="n">raw_temps</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temperature</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_clamp_temperature</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">raw_temps</span>
+        <span class="p">]</span>
+        <span class="n">raw_opt_temps</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"temperature_by_options"</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temperature_by_options</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">k</span><span class="p">:</span> <span class="n">_clamp_temperature</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">raw_opt_temps</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_files</span><span class="p">(</span>
+        <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Resolve file paths for model, configs, and tokenizer."""</span>
+        <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+            <span class="n">model_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">"model.onnx"</span><span class="p">)</span>
+            <span class="n">rl_cfg_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span>
+                <span class="n">model_path</span><span class="p">,</span> <span class="s2">"rl_agent_config.json"</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">rl_cfg_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">rl_cfg_file</span><span class="p">):</span>
+                <span class="n">rl_cfg_file</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">tok_dir</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">"tokenizer"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">tok_dir</span><span class="p">):</span>
+                <span class="n">tok_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">tok_dir</span><span class="p">,</span> <span class="s2">"tokenizer.json"</span><span class="p">)</span>
+                <span class="n">tok_cfg_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">tok_dir</span><span class="p">,</span> <span class="s2">"tokenizer_config.json"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tok_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">"tokenizer.json"</span><span class="p">)</span>
+                <span class="n">tok_cfg_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span>
+                    <span class="n">model_path</span><span class="p">,</span> <span class="s2">"tokenizer_config.json"</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">rl_cfg_file</span><span class="p">,</span> <span class="n">tok_file</span><span class="p">,</span> <span class="n">tok_cfg_file</span>
+
+        <span class="n">repo_id</span> <span class="o">=</span> <span class="n">model_path</span> <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_DEFAULT_REPO_ID</span>
+        <span class="n">model_file</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="p">,</span> <span class="s2">"model.onnx"</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryNotFoundError</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">rl_cfg_file</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span>
+                <span class="n">repo_id</span><span class="p">,</span> <span class="s2">"rl_agent_config.json"</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">EntryNotFoundError</span><span class="p">:</span>
+            <span class="n">rl_cfg_file</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">tok_file</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span>
+            <span class="n">repo_id</span><span class="p">,</span> <span class="s2">"tokenizer/tokenizer.json"</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+        <span class="p">)</span>
+        <span class="n">tok_cfg_file</span> <span class="o">=</span> <span class="n">get_hf_hub</span><span class="p">(</span>
+            <span class="n">repo_id</span><span class="p">,</span> <span class="s2">"tokenizer/tokenizer_config.json"</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">rl_cfg_file</span><span class="p">,</span> <span class="n">tok_file</span><span class="p">,</span> <span class="n">tok_cfg_file</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_internal</span><span class="p">(</span><span class="n">qdef</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Validate and convert user question definition to internal format."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qdef</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Each question definition must be a dictionary."</span><span class="p">)</span>
+        <span class="n">qtype</span> <span class="o">=</span> <span class="n">qdef</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_QTYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Unknown question type </span><span class="si">{</span><span class="n">qtype</span><span class="si">!r}</span><span class="s2">; expected 'choice', 'score', or 'noul'."</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"instructions"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">qdef</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Question definition is missing 'instructions'."</span><span class="p">)</span>
+
+        <span class="n">criteria</span> <span class="o">=</span> <span class="n">qdef</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"criteria"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qtype</span> <span class="o">==</span> <span class="s2">"choice"</span><span class="p">:</span>
+            <span class="n">criteria</span> <span class="o">=</span> <span class="n">_normalize_choice_criteria</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">qtype</span> <span class="o">==</span> <span class="s2">"score"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">criteria</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Score criteria must be a non-empty list."</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">criteria</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Noul criteria must be a dictionary with false/true descriptions."</span>
+            <span class="p">)</span>
+
+        <span class="n">instructions</span> <span class="o">=</span> <span class="n">qdef</span><span class="p">[</span><span class="s2">"instructions"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instructions</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">instructions</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">instructions</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"t"</span><span class="p">:</span> <span class="n">qtype</span><span class="p">,</span> <span class="s2">"ins"</span><span class="p">:</span> <span class="n">instructions</span><span class="p">,</span> <span class="s2">"crit"</span><span class="p">:</span> <span class="n">criteria</span><span class="p">}</span>
+
+<div class="viewcode-block" id="LayaModel.system_one">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.system_one">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">system_one</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+        <span class="n">questions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Execute typed-decision questions over state (upstream Laya System 1 interface).</span>
+
+<span class="sd">        Supports question types:</span>
+<span class="sd">        - ``choice``: Select best option among criteria.</span>
+<span class="sd">        - ``score``: Ordinal evaluation across score criteria.</span>
+<span class="sd">        - ``noul``: Binary yes/no statement evaluation.</span>
+
+<span class="sd">        :param Union[str, dict[str, Any], list[Any]] state: Context or document to evaluate.</span>
+<span class="sd">        :param dict[str, Any] questions: Dictionary of question definitions keyed by question ID.</span>
+<span class="sd">        :return: Dictionary containing ``"model"``, ``"answers"``, and token ``"usage"``.</span>
+<span class="sd">        :rtype: dict[str, Any]</span>
+<span class="sd">        """</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">questions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"questions must be a non-empty dictionary."</span><span class="p">)</span>
+
+        <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">internal</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">qids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">questions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">qid</span> <span class="ow">in</span> <span class="n">qids</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_internal</span><span class="p">(</span><span class="n">questions</span><span class="p">[</span><span class="n">qid</span><span class="p">])</span>
+            <span class="n">ids</span><span class="p">,</span> <span class="n">markers</span> <span class="o">=</span> <span class="n">_build_sequence</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="p">,</span>
+                <span class="n">state</span><span class="p">,</span>
+                <span class="n">q</span><span class="p">,</span>
+                <span class="n">max_len</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_len</span><span class="p">,</span>
+                <span class="n">head_max_len</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_head_max_len</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">markers</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_render_options</span><span class="p">(</span><span class="n">q</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Question </span><span class="si">{</span><span class="n">qid</span><span class="si">!r}</span><span class="s2"> has too many options for token budget."</span>
+                <span class="p">)</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">"ids"</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span> <span class="s2">"markers"</span><span class="p">:</span> <span class="n">markers</span><span class="p">,</span> <span class="s2">"qtype"</span><span class="p">:</span> <span class="n">_QTYPES</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">]]}</span>
+            <span class="p">)</span>
+            <span class="n">internal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+        <span class="n">answers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">):</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">]</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="n">_collate_items</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">)</span>
+            <span class="n">logits_out</span><span class="p">,</span> <span class="n">act_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">logits_out</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">act_out</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+            <span class="n">exp_act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">act</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="n">act_probs</span> <span class="o">=</span> <span class="n">exp_act</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_act</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunk</span><span class="p">):</span>
+                <span class="n">qid</span> <span class="o">=</span> <span class="n">qids</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">row</span><span class="p">]</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">internal</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">row</span><span class="p">]</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"markers"</span><span class="p">])</span>
+                <span class="n">qt</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">"qtype"</span><span class="p">]</span>
+                <span class="n">bucket</span> <span class="o">=</span> <span class="n">_temp_bucket</span><span class="p">(</span><span class="n">qt</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temperature_by_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="n">bucket</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temperature</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">logits</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">scale</span>
+                <span class="n">exp_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">exp_z</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_z</span><span class="p">)</span>
+
+                <span class="n">answer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">"type"</span><span class="p">:</span> <span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span>
+                    <span class="s2">"confidence"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">_confidence_from_probs</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+                    <span class="s2">"action"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"act_probability"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">act_probs</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span>
+                    <span class="p">},</span>
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"choice"</span><span class="p">:</span>
+                    <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="s2">"crit"</span><span class="p">])</span>
+                    <span class="n">answer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                        <span class="n">choice</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">argmax</span><span class="p">())],</span>
+                        <span class="n">probabilities</span><span class="o">=</span><span class="p">{</span>
+                            <span class="n">label</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+                        <span class="p">},</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"score"</span><span class="p">:</span>
+                    <span class="n">answer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                        <span class="n">score</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="mi">4</span><span class="p">),</span>
+                        <span class="n">legend</span><span class="o">=</span><span class="p">{</span>
+                            <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">value</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="s2">"crit"</span><span class="p">])</span>
+                        <span class="p">},</span>
+                        <span class="n">probabilities</span><span class="o">=</span><span class="p">{</span>
+                            <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                        <span class="p">},</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">true_prob</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">answer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                        <span class="n">noul</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">true_prob</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                        <span class="n">confidence</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">true_prob</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">true_prob</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+                    <span class="p">)</span>
+                <span class="n">answers</span><span class="p">[</span><span class="n">qid</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"laya-multilingual-onnx"</span><span class="p">,</span>
+            <span class="s2">"answers"</span><span class="p">:</span> <span class="n">answers</span><span class="p">,</span>
+            <span class="s2">"usage"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"input_tokens"</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="s2">"ids"</span><span class="p">])</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">items</span><span class="p">),</span>
+                <span class="s2">"output_tokens"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="LayaModel.classify">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.classify">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">classify</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
+        <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Classify text into one of candidate choices using prompt guidance.</span>
+
+<span class="sd">        :param Union[str, dict[str, Any], list[Any]] text: Input text or structured state.</span>
+<span class="sd">        :param Union[list[str], dict[str, Any]] choices: List of candidate choice labels</span>
+<span class="sd">            or dictionary mapping each choice label to its description.</span>
+<span class="sd">        :param str prompt: Instruction prompt guiding the classification task.</span>
+<span class="sd">            Default is ``"Select the best choice for the given text."``.</span>
+<span class="sd">        :param bool return_details: If True, returns full details dictionary including</span>
+<span class="sd">            choice, confidence, probabilities, and action probability.</span>
+<span class="sd">            If False (default), returns the selected choice label string.</span>
+<span class="sd">        :return: Selected choice string or detailed answer dictionary.</span>
+<span class="sd">        :rtype: Union[str, dict[str, Any]]</span>
+<span class="sd">        """</span>
+        <span class="n">questions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"classification"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"choice"</span><span class="p">,</span>
+                <span class="s2">"instructions"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">,</span>
+                <span class="s2">"criteria"</span><span class="p">:</span> <span class="n">choices</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">questions</span><span class="p">)</span>
+        <span class="n">ans</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">"answers"</span><span class="p">][</span><span class="s2">"classification"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">return_details</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ans</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="s2">"choice"</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="LayaModel.classify_batch">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.classify_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">classify_batch</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]]],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
+        <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Classify multiple texts in batches.</span>
+
+<span class="sd">        :param list[Union[str, dict[str, Any], list[Any]]] texts: List of texts or states.</span>
+<span class="sd">        :param Union[list[str], dict[str, Any]] choices: Candidate choices.</span>
+<span class="sd">        :param str prompt: Instruction prompt.</span>
+<span class="sd">        :param bool return_details: Whether to return full details.</span>
+<span class="sd">        :return: List of predicted choices or detailed dictionaries.</span>
+<span class="sd">        :rtype: list[Union[str, dict[str, Any]]]</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">texts</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span>
+                <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">,</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                <span class="n">return_details</span><span class="o">=</span><span class="n">return_details</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="LayaModel.predict">
+<a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
+        <span class="n">questions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Predict classification choice or structured decisions.</span>
+
+<span class="sd">        If ``choices`` is provided, executes choice classification.</span>
+<span class="sd">        If ``questions`` is provided, executes structured decision tasks.</span>
+
+<span class="sd">        :param Union[str, dict[str, Any], list[Any]] text: Input text or state.</span>
+<span class="sd">        :param Optional[Union[list[str], dict[str, Any]]] choices: Candidate choices.</span>
+<span class="sd">        :param str prompt: Instruction prompt when using choices.</span>
+<span class="sd">        :param Optional[dict[str, Any]] questions: Question dictionary.</span>
+<span class="sd">        :param bool return_details: Whether to return detailed output.</span>
+<span class="sd">        :return: Predicted choice or questions output.</span>
+<span class="sd">        :rtype: Any</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">questions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">questions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">choices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span>
+                <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">,</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                <span class="n">return_details</span><span class="o">=</span><span class="n">return_details</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Either 'choices' or 'questions' must be specified."</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="n">Laya</span> <span class="o">=</span> <span class="n">LayaModel</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2026, PyThaiNLP (Apache Software License 2.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
