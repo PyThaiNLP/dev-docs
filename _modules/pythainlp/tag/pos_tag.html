@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.pos_tag &mdash; PyThaiNLP f6d9cdc documentation</title>
+  <title>pythainlp.tag.pos_tag &mdash; PyThaiNLP 2b0a1aa documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=91c48c1a"></script>
+      <script src="../../../_static/documentation_options.js?v=06d13980"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -136,6 +136,11 @@
 <span class="sd">        * *unigram* - unigram tagger</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit (supports the TNC corpus</span>
 <span class="sd">          only; other corpora are converted to the TNC corpus)</span>
+<span class="sd">        * *phayathaibert* - `PhayaThaiBERT POS tagger</span>
+<span class="sd">          &lt;https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger&gt;`_</span>
+<span class="sd">          fine-tuned on the TUD corpus, run with ONNX Runtime (supports</span>
+<span class="sd">          the TUD corpus only; other corpora are ignored). Requires</span>
+<span class="sd">          ``pip install "pythainlp[phayathaibert_onnx]"``</span>
 <span class="sd">    :param str corpus: corpus used to train the tagger model. Options are:</span>
 
 <span class="sd">        * *orchid* - `ORCHID</span>
@@ -240,6 +245,10 @@
         <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"tnc"</span>
     <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"unigram"</span> <span class="ow">and</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">_support_corpus</span><span class="p">:</span>  <span class="c1"># default</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.unigram</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag</span> <span class="k">as</span> <span class="n">tag_</span>
+    <span class="k">elif</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">"phayathaibert"</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag.phayathaibert_onnx</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag</span> <span class="k">as</span> <span class="n">tag_</span>
+
+        <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"tud"</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"pos_tag not support </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine or </span><span class="si">{</span><span class="n">corpus</span><span class="si">}</span><span class="s2"> corpus."</span>
@@ -268,6 +277,11 @@
 <span class="sd">        * *unigram* - unigram tagger</span>
 <span class="sd">        * *tltk* - TLTK: Thai Language Toolkit (supports the TNC corpus</span>
 <span class="sd">          only; other corpora are converted to the TNC corpus)</span>
+<span class="sd">        * *phayathaibert* - `PhayaThaiBERT POS tagger</span>
+<span class="sd">          &lt;https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger&gt;`_</span>
+<span class="sd">          fine-tuned on the TUD corpus, run with ONNX Runtime (supports</span>
+<span class="sd">          the TUD corpus only; other corpora are ignored). Requires</span>
+<span class="sd">          ``pip install "pythainlp[phayathaibert_onnx]"``</span>
 <span class="sd">    :param str corpus: corpus used to train the tagger model. Options are:</span>
 
 <span class="sd">        * *orchid* - `ORCHID</span>
@@ -306,6 +320,8 @@
 
 
 
+<div class="viewcode-block" id="pos_tag_transformers">
+<a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.pos_tag_transformers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pos_tag_transformers</span><span class="p">(</span>
     <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"bert"</span><span class="p">,</span>
@@ -325,6 +341,10 @@
 <span class="sd">          (supports the PUD corpus only)</span>
 <span class="sd">        * *phayathai* - fine-tuned version of clicknext/phayathaibert</span>
 <span class="sd">          on the blackboard corpus (supports the blackboard corpus only)</span>
+<span class="sd">        * *phayathaibert* - `nlp-chula/phayathaibert-thai-pos-tagger</span>
+<span class="sd">          &lt;https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger&gt;`_,</span>
+<span class="sd">          fine-tuned version of clicknext/phayathaibert on the TUD corpus</span>
+<span class="sd">          (supports the TUD corpus only)</span>
 <span class="sd">        * *mdeberta* - mDeBERTa: Multilingual Decoding-enhanced BERT</span>
 <span class="sd">          with disentangled attention (supports the PUD corpus only)</span>
 <span class="sd">    :param str corpus: corpus used to train the tagger model. Options are:</span>
@@ -336,6 +356,9 @@
 <span class="sd">          &lt;https://github.com/UniversalDependencies/UD_Thai-PUD&gt;`_</span>
 <span class="sd">          treebank, natively uses Universal POS tags</span>
 <span class="sd">          (supports the wangchanberta and mdeberta engines)</span>
+<span class="sd">        * *tud* - `Thai Universal Dependency Treebank (TUD)</span>
+<span class="sd">          &lt;https://github.com/nlp-chula/TUD&gt;`_, natively uses Universal</span>
+<span class="sd">          POS tags (supports the phayathaibert engine)</span>
 <span class="sd">    :param Optional[str] revision: git revision (branch, tag, or commit</span>
 <span class="sd">        hash) of the model. Pin to a full commit hash for secure downloads</span>
 <span class="sd">    :return: list of lists of tuples (word, POS tag)</span>
@@ -367,36 +390,29 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">sentence</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="n">_blackboard_support_engine</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"bert"</span><span class="p">:</span> <span class="s2">"lunarlist/pos_thai"</span><span class="p">,</span>
-        <span class="s2">"phayathai"</span><span class="p">:</span> <span class="s2">"lunarlist/pos_thai_phayathai"</span><span class="p">,</span>
+    <span class="n">_support_engine</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"blackboard"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"bert"</span><span class="p">:</span> <span class="s2">"lunarlist/pos_thai"</span><span class="p">,</span>
+            <span class="s2">"phayathai"</span><span class="p">:</span> <span class="s2">"lunarlist/pos_thai_phayathai"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"pud"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"mdeberta"</span><span class="p">:</span> <span class="s2">"Pavarissy/mdeberta-v3-ud-thai-pud-upos"</span><span class="p">,</span>
+            <span class="s2">"wangchanberta"</span><span class="p">:</span> <span class="s2">"Pavarissy/wangchanberta-ud-thai-pud-upos"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"tud"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"phayathaibert"</span><span class="p">:</span> <span class="s2">"nlp-chula/phayathaibert-thai-pos-tagger"</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="n">_pud_support_engine</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"wangchanberta"</span><span class="p">:</span> <span class="s2">"Pavarissy/wangchanberta-ud-thai-pud-upos"</span><span class="p">,</span>
-        <span class="s2">"mdeberta"</span><span class="p">:</span> <span class="s2">"Pavarissy/mdeberta-v3-ud-thai-pud-upos"</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">"blackboard"</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_blackboard_support_engine</span><span class="p">:</span>
-        <span class="n">base_model</span> <span class="o">=</span> <span class="n">_blackboard_support_engine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
-        <span class="p">)</span>
-        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
-        <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">corpus</span> <span class="o">==</span> <span class="s2">"pud"</span> <span class="ow">and</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_pud_support_engine</span><span class="p">:</span>
-        <span class="n">base_model</span> <span class="o">=</span> <span class="n">_pud_support_engine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
-        <span class="p">)</span>
-        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-            <span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="n">base_model</span> <span class="o">=</span> <span class="n">_support_engine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">base_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"pos_tag_transformers not support </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> engine or </span><span class="si">{</span><span class="n">corpus</span><span class="si">}</span><span class="s2"> corpus."</span>
         <span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForTokenClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span>
+    <span class="p">)</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">base_model</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="n">revision</span><span class="p">)</span>
 
     <span class="n">pipeline</span> <span class="o">=</span> <span class="n">TokenClassificationPipeline</span><span class="p">(</span>
         <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
@@ -406,7 +422,8 @@
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
     <span class="n">word_tags</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">tag</span><span class="p">[</span><span class="s2">"word"</span><span class="p">],</span> <span class="n">tag</span><span class="p">[</span><span class="s2">"entity_group"</span><span class="p">])</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">]]</span>
-    <span class="k">return</span> <span class="n">word_tags</span>
+    <span class="k">return</span> <span class="n">word_tags</span></div>
+
 </pre></div>
 
            </div>

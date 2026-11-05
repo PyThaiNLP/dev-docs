@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag &mdash; PyThaiNLP f6d9cdc documentation</title>
+  <title>pythainlp.tag &mdash; PyThaiNLP 2b0a1aa documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=91c48c1a"></script>
+      <script src="../_static/documentation_options.js?v=06d13980"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -81,6 +81,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.pos_tag"><code class="docutils literal notranslate"><span class="pre">pos_tag()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.pos_tag_sents"><code class="docutils literal notranslate"><span class="pre">pos_tag_sents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.pos_tag_transformers"><code class="docutils literal notranslate"><span class="pre">pos_tag_transformers()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.tag_provinces"><code class="docutils literal notranslate"><span class="pre">tag_provinces()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.chunk_parse"><code class="docutils literal notranslate"><span class="pre">chunk_parse()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.tag.CRFTagger"><code class="docutils literal notranslate"><span class="pre">CRFTagger</span></code></a><ul>
@@ -118,6 +119,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#tagger-engines">Tagger Engines</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#perceptron">perceptron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#unigram">unigram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phayathaibert">phayathaibert</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger"><code class="docutils literal notranslate"><span class="pre">PhayaThaiBERTTagger</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
@@ -588,6 +593,10 @@ part-of-speech (POS) tags and named entity (NE) tags.</p>
 <li><p><em>unigram</em> - unigram tagger</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit (supports the TNC corpus
 only; other corpora are converted to the TNC corpus)</p></li>
+<li><p><em>phayathaibert</em> - <a class="reference external" href="https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger">PhayaThaiBERT POS tagger</a>
+fine-tuned on the TUD corpus, run with ONNX Runtime (supports
+the TUD corpus only; other corpora are ignored). Requires
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;pythainlp[phayathaibert_onnx]&quot;</span></code></p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – <p>corpus used to train the tagger model. Options are:</p>
@@ -698,6 +707,10 @@ natively uses Universal POS tags</p></li>
 <li><p><em>unigram</em> - unigram tagger</p></li>
 <li><p><em>tltk</em> - TLTK: Thai Language Toolkit (supports the TNC corpus
 only; other corpora are converted to the TNC corpus)</p></li>
+<li><p><em>phayathaibert</em> - <a class="reference external" href="https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger">PhayaThaiBERT POS tagger</a>
+fine-tuned on the TUD corpus, run with ONNX Runtime (supports
+the TUD corpus only; other corpora are ignored). Requires
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;pythainlp[phayathaibert_onnx]&quot;</span></code></p></li>
 </ul>
 </p></li>
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – <p>corpus used to train the tagger model. Options are:</p>
@@ -735,6 +748,67 @@ treebank, natively uses Universal POS tags</p></li>
 <span class="go">[[('เก้าอี้', 'PROPN'), ('มี', 'VERB'), ('3', 'NUM'),</span>
 <span class="go">  ('ขา', 'NOUN')], [('นก', 'NOUN'), ('บิน', 'VERB'),</span>
 <span class="go">  ('กลับ', 'VERB'), ('รัง', 'NOUN')]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.tag.pos_tag_transformers">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.tag.</span></span><span class="sig-name descname"><span class="pre">pos_tag_transformers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bert'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blackboard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/pos_tag.html#pos_tag_transformers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.pos_tag_transformers" title="Link to this definition"></a></dt>
+<dd><p>Tag a sentence with part-of-speech (POS) tags using a transformer model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sentence</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – sentence to be tagged</p></li>
+<li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – <p>engine to use for tagging. Options are:</p>
+<ul>
+<li><p><em>bert</em> - BERT: Bidirectional Encoder Representations from
+Transformers (default)</p></li>
+<li><p><em>wangchanberta</em> - fine-tuned version of
+airesearch/wangchanberta-base-att-spm-uncased on the PUD corpus
+(supports the PUD corpus only)</p></li>
+<li><p><em>phayathai</em> - fine-tuned version of clicknext/phayathaibert
+on the blackboard corpus (supports the blackboard corpus only)</p></li>
+<li><p><em>phayathaibert</em> - <a class="reference external" href="https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger">nlp-chula/phayathaibert-thai-pos-tagger</a>,
+fine-tuned version of clicknext/phayathaibert on the TUD corpus
+(supports the TUD corpus only)</p></li>
+<li><p><em>mdeberta</em> - mDeBERTa: Multilingual Decoding-enhanced BERT
+with disentangled attention (supports the PUD corpus only)</p></li>
+</ul>
+</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – <p>corpus used to train the tagger model. Options are:</p>
+<ul>
+<li><p><em>blackboard</em> - <a class="reference external" href="https://bitbucket.org/kaamanita/blackboard-treebank/src/master/">blackboard treebank</a>
+(supports the bert engine only) (default)</p></li>
+<li><p><em>pud</em> - <a class="reference external" href="https://github.com/UniversalDependencies/UD_Thai-PUD">Parallel Universal Dependencies (PUD)</a>
+treebank, natively uses Universal POS tags
+(supports the wangchanberta and mdeberta engines)</p></li>
+<li><p><em>tud</em> - <a class="reference external" href="https://github.com/nlp-chula/TUD">Thai Universal Dependency Treebank (TUD)</a>, natively uses Universal
+POS tags (supports the phayathaibert engine)</p></li>
+</ul>
+</p></li>
+<li><p><strong>revision</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – git revision (branch, tag, or commit
+hash) of the model. Pin to a full commit hash for secure downloads</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of lists of tuples (word, POS tag)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]]]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>Labels POS for given sentence:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tag</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag_transformers</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentences</span> <span class="o">=</span> <span class="s2">"แมวทำอะไรตอนห้าโมงเช้า"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_tag_transformers</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">sentences</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"bert"</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="s2">"blackboard"</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">[[('แมว', 'NOUN'), ('ทําอะไร', 'VERB'), ('ตอนห้าโมงเช้า', 'NOUN')]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1212,6 +1286,96 @@ and corpus <cite>orchid_ud</cite>.</p></li>
 <h3>unigram<a class="headerlink" href="#unigram" title="Link to this heading"></a></h3>
 <p>Unigram tagger doesn’t take the ordering of words in the list into account.</p>
 </section>
+<section id="phayathaibert">
+<h3>phayathaibert<a class="headerlink" href="#phayathaibert" title="Link to this heading"></a></h3>
+<p>PhayaThaiBERT tagger <a class="footnote-reference brackets" href="#sriwirote-2025" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> uses
+<a class="reference external" href="https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger">nlp-chula/phayathaibert-thai-pos-tagger</a>,
+fine-tuned on the TUD treebank, and tags words with Universal POS tags.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pythainlp.tag.pos_tag" title="pythainlp.tag.pos_tag"><code class="xref py py-func docutils literal notranslate"><span class="pre">pos_tag()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">engine=&quot;phayathaibert&quot;</span></code> runs an ONNX export of the
+model with ONNX Runtime and does not need PyTorch.
+Install the dependencies with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;pythainlp[phayathaibert_onnx]&quot;</span></code>.
+The model (about 530 MB) is downloaded from the Hugging Face Hub on first use.</p></li>
+<li><p><a class="reference internal" href="#pythainlp.tag.pos_tag_transformers" title="pythainlp.tag.pos_tag_transformers"><code class="xref py py-func docutils literal notranslate"><span class="pre">pos_tag_transformers()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">engine=&quot;phayathaibert&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">corpus=&quot;tud&quot;</span></code> runs the original model with Transformers.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pythainlp.tag.phayathaibert_onnx.</span></span><span class="sig-name descname"><span class="pre">PhayaThaiBERTTagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wiriyabot/phayathaibert-thai-pos-tagger-onnx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pythainlp/tag/phayathaibert_onnx.html#PhayaThaiBERTTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger" title="Link to this definition"></a></dt>
+<dd><p>Universal POS tagger using PhayaThaiBERT with ONNX Runtime.</p>
+<p>The model is an ONNX export of
+<a class="reference external" href="https://huggingface.co/nlp-chula/phayathaibert-thai-pos-tagger">nlp-chula/phayathaibert-thai-pos-tagger</a>,
+fine-tuned on the UD Thai-TUD treebank.</p>
+<p>Requires <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">onnxruntime</span></code>, <code class="docutils literal notranslate"><span class="pre">tokenizers</span></code> and
+<code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>. The model (about 530 MB) is downloaded from
+the Hugging Face Hub on first use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repo_id</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Hugging Face Hub repository of the ONNX model</p></li>
+<li><p><strong>revision</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – git revision of the repository.
+The default repository is pinned to a commit when this is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wiriyabot/phayathaibert-thai-pos-tagger-onnx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/tag/phayathaibert_onnx.html#PhayaThaiBERTTagger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.__init__" title="Link to this definition"></a></dt>
+<dd><p>Download the model and load it with ONNX Runtime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repo_id</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Hugging Face Hub repository of the ONNX model</p></li>
+<li><p><strong>revision</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – git revision of the repository.
+The default repository is pinned to a commit when this is
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ImportError" title="(in Python v3.15)"><strong>ImportError</strong></a> – if a required dependency is not installed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.session">
+<span class="sig-name descname"><span class="pre">session</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">InferenceSession</span></span><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.session" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.tokenizer">
+<span class="sig-name descname"><span class="pre">tokenizer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="tokenize.html#pythainlp.tokenize.Tokenizer" title="pythainlp.tokenize.Tokenizer"><span class="pre">Tokenizer</span></a></span><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.tokenizer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.id2label">
+<span class="sig-name descname"><span class="pre">id2label</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.id2label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pythainlp/tag/phayathaibert_onnx.html#PhayaThaiBERTTagger.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.tag.phayathaibert_onnx.PhayaThaiBERTTagger.tag" title="Link to this definition"></a></dt>
+<dd><p>Tag a list of words with Universal POS tags.</p>
+<p>Words with only whitespace or format characters (such as the
+zero-width space) are tagged <code class="docutils literal notranslate"><span class="pre">PUNCT</span></code> without being passed to the
+model. Input longer than the model limit is tagged in consecutive
+chunks of whole words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – list of words to be tagged</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of tuples (word, POS tag)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
@@ -1228,6 +1392,13 @@ The Journal of the Acoustical Society of Japan (E), Vol.20, No.3, pp 189-198, Ma
 <p>Prachya Boonkwan and Vorapon Luantangsrisuk and Sitthaa Phaholphinyo and Kanyanat Kriengket and Dhanon Leenoi and Charun Phrombut and Monthika Boriboon and Krit Kosawat and Thepchai Supnithi. (2020).
 The Annotation Guideline of LST20 Corpus.
 arXiv:2008.05055</p>
+</aside>
+<aside class="footnote brackets" id="sriwirote-2025" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">3</a><span class="fn-bracket">]</span></span>
+<p>Panyut Sriwirote, Attapol T. Rutherford, Jalinee Thapiang and Vasan Timtong. (2025).
+PhayaThaiBERT: Enhancing a Pretrained Thai Language Model with Unassimilated Loanwords.
+ACM Transactions on Asian and Low-Resource Language Information Processing, Vol. 24, No. 11, pp 1-17.
+doi:10.1145/3765962</p>
 </aside>
 </aside>
 </section>
