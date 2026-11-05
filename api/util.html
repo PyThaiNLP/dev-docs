@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP c598a2a documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP f6d9cdc documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fa703775"></script>
+      <script src="../_static/documentation_options.js?v=91c48c1a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -85,6 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="ulmfit.html">pythainlp.lm.ulmfit</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">pythainlp.util</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_name_to_char"><code class="docutils literal notranslate"><span class="pre">thai_name_to_char()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_char_to_name"><code class="docutils literal notranslate"><span class="pre">thai_char_to_name()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.thai_consonant_to_spelling"><code class="docutils literal notranslate"><span class="pre">thai_consonant_to_spelling()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.tone_to_spelling"><code class="docutils literal notranslate"><span class="pre">tone_to_spelling()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pythainlp.util.Trie"><code class="docutils literal notranslate"><span class="pre">Trie</span></code></a><ul>
@@ -1653,6 +1655,38 @@ such as ‘1’, ‘2’, ‘3’</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.thai_name_to_char">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_name_to_char</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai_char_name.html#thai_name_to_char"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.thai_name_to_char" title="Link to this definition"></a></dt>
+<dd><p>Get a Thai vowel, mark, or symbol from its Thai name.</p>
+<p>Useful for typing characters that are not on a Thai keyboard,
+such as Yamakkan, Fongman, Angkhankhu, and Khomut.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Thai name of the character, such as “ยามักการ”
+or “ไม้ยามักการ”</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the character</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><strong>ValueError</strong></a> – if the name is unknown</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_name_to_char</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thai_name_to_char</span><span class="p">(</span><span class="s2">"โคมูตร"</span><span class="p">)</span>
+<span class="go">'๛'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thai_name_to_char</span><span class="p">(</span><span class="s2">"ฟองมัน"</span><span class="p">)</span>
+<span class="go">'๏'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_strftime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><span class="pre">datetime</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%-d</span> <span class="pre">%b</span> <span class="pre">%y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thaidigit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/strftime.html#thai_strftime"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Convert <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> into Thai date and time format.</p>
@@ -2169,6 +2203,36 @@ or an empty string if it cannot be detected</p>
 </dd>
 </dl>
 <p>The <cite>words_to_num</cite> function is a numeral conversion utility that translates Thai word numerals into numerical form. It is important for numerical data extraction and computation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythainlp.util.thai_char_to_name">
+<span class="sig-prename descclassname"><span class="pre">pythainlp.util.</span></span><span class="sig-name descname"><span class="pre">thai_char_to_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/pythainlp/util/thai_char_name.html#thai_char_to_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythainlp.util.thai_char_to_name" title="Link to this definition"></a></dt>
+<dd><p>Get the Thai name of a Thai vowel, mark, or symbol.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ch</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – a single Thai vowel, mark, or symbol, without
+a placeholder such as “◌”</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Thai name of the character</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><strong>ValueError</strong></a> – if the character has no name in the dictionary</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_char_to_name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thai_char_to_name</span><span class="p">(</span><span class="s2">"๛"</span><span class="p">)</span>
+<span class="go">'โคมูตร'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thai_char_to_name</span><span class="p">(</span><span class="s2">"่"</span><span class="p">)</span>
+<span class="go">'ไม้เอก'</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
