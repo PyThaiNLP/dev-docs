@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.tag.crf &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.tag.crf &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -134,8 +134,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">TYPE_CHECKING</span><span class="p">,</span>
     <span class="n">Any</span><span class="p">,</span>
-    <span class="n">Optional</span><span class="p">,</span>
-    <span class="n">Union</span><span class="p">,</span>
     <span class="n">cast</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -144,14 +142,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_extract_item_features</span><span class="p">(</span>
-    <span class="n">item</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">item</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract (feature_name, feature_value) pairs from an observation.</span>
 
 <span class="sd">    :param item: Observation features, either as a sequence of feature names</span>
 <span class="sd">        or as a dictionary mapping feature names to values.</span>
-<span class="sd">    :type item: Union[Sequence[str], Dict[str, Any]]</span>
+<span class="sd">    :type item: Sequence[str] | Dict[str, Any]</span>
 <span class="sd">    :return: List of (feature_name, float_weight) tuples.</span>
 <span class="sd">    :rtype: List[Tuple[str, float]]</span>
 <span class="sd">    """</span>
@@ -179,7 +177,7 @@
 <span class="sd">    Uses pure-Python Viterbi decoding to predict optimal label sequences</span>
 <span class="sd">    from pre-trained CRF weights without requiring external C libraries.</span>
 
-<span class="sd">    :param Optional[str] model_path: Path to the CRF model weights file</span>
+<span class="sd">    :param str | None model_path: Path to the CRF model weights file</span>
 <span class="sd">        (`.json` or `.json.gz`).</span>
 <span class="sd">    """</span>
 
@@ -191,11 +189,11 @@
 
 <div class="viewcode-block" id="CRFTagger.__init__">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.CRFTagger.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the CRF tagger.</span>
 
-<span class="sd">        :param Optional[str] model_path: Path to model weights file.</span>
+<span class="sd">        :param str | None model_path: Path to model weights file.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_labels</span> <span class="o">=</span> <span class="mi">0</span>
@@ -333,13 +331,13 @@
         <span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_state_scores</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Compute state scores for all labels at a single sequence position.</span>
 
 <span class="sd">        :param item: Observation features at current position.</span>
-<span class="sd">        :type item: Union[Sequence[str], Dict[str, Any]]</span>
+<span class="sd">        :type item: Sequence[str] | Dict[str, Any]</span>
 <span class="sd">        :return: State score per label index.</span>
 <span class="sd">        :rtype: List[float]</span>
 <span class="sd">        """</span>
@@ -353,15 +351,13 @@
 
 <div class="viewcode-block" id="CRFTagger.tag">
 <a class="viewcode-back" href="../../../api/tag.html#pythainlp.tag.CRFTagger.tag">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">xseq</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xseq</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Predict the optimal label sequence for an item sequence.</span>
 
 <span class="sd">        :param xseq: Sequence of item features, where each item is either</span>
 <span class="sd">            a sequence of string feature names or a dictionary of features.</span>
-<span class="sd">        :type xseq: Sequence[Union[Sequence[str], Dict[str, Any]]]</span>
+<span class="sd">        :type xseq: Sequence[Sequence[str] | Dict[str, Any]]</span>
 <span class="sd">        :return: Predicted sequence of labels.</span>
 <span class="sd">        :rtype: List[str]</span>
 <span class="sd">        """</span>
@@ -420,9 +416,9 @@
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">exc_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]],</span>
-        <span class="n">exc_val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">],</span>
-        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">TracebackType</span><span class="p">],</span>
+        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exc_val</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Context manager exit."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>

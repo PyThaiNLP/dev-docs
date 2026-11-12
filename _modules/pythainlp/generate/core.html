@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.generate.core &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.generate.core &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
@@ -142,7 +142,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_pick_next</span><span class="p">(</span>
     <span class="n">candidates</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">probs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_T</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Pick a random candidate whose probability is at least ``prob``.</span>
 
@@ -153,7 +153,7 @@
 <span class="sd">    :param Sequence[float] probs: probability of each candidate</span>
 <span class="sd">    :param float prob: minimum probability</span>
 <span class="sd">    :return: picked candidate, or None if no probability passes</span>
-<span class="sd">    :rtype: Optional[_T]</span>
+<span class="sd">    :rtype: _T | None</span>
 <span class="sd">    """</span>
     <span class="n">passed</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">probs</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">prob</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">passed</span><span class="p">:</span>
@@ -210,7 +210,7 @@
         <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a sentence using the unigram model.</span>
 
@@ -221,7 +221,7 @@
 <span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
 <span class="sd">        :return: generated sentence as a string or a list of words</span>
-<span class="sd">        :rtype: Union[list[str], str]</span>
+<span class="sd">        :rtype: list[str] | str</span>
 
 <span class="sd">        :Example:</span>
 
@@ -253,7 +253,7 @@
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">word_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_word_prob</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -330,7 +330,7 @@
         <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a sentence using the bigram model.</span>
 
@@ -341,7 +341,7 @@
 <span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
 <span class="sd">        :return: generated sentence as a string or a list of words</span>
-<span class="sd">        :rtype: Union[list[str], str]</span>
+<span class="sd">        :rtype: list[str] | str</span>
 
 <span class="sd">        :Example:</span>
 
@@ -441,24 +441,24 @@
 <a class="viewcode-back" href="../../../api/generate.html#pythainlp.generate.Trigram.gen_sentence">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">gen_sentence</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">start_seq</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">start_seq</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
         <span class="n">prob</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
         <span class="n">output_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a sentence using the trigram model.</span>
 
 <span class="sd">        :param start_seq: word or bigram to begin the sentence with</span>
-<span class="sd">        :type start_seq: Union[str, tuple[str, str]]</span>
+<span class="sd">        :type start_seq: str | tuple[str, str]</span>
 <span class="sd">        :param int N: number of words</span>
 <span class="sd">        :param float prob: minimum word probability</span>
 <span class="sd">        :param bool output_str: return a string instead of a list of words</span>
 <span class="sd">        :param bool duplicate: allow duplicate words in the sentence</span>
 
 <span class="sd">        :return: generated sentence as a string or a list of words</span>
-<span class="sd">        :rtype: Union[list[str], str]</span>
+<span class="sd">        :rtype: list[str] | str</span>
 
 <span class="sd">        :Example:</span>
 
@@ -469,12 +469,12 @@
 <span class="sd">            &gt;&gt;&gt; gen.gen_sentence()  # doctest: +SKIP</span>
 <span class="sd">            'ยังทำตัวเป็นเซิร์ฟเวอร์คือ'</span>
 <span class="sd">        """</span>
-        <span class="n">late_word</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+        <span class="n">late_word</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">start_seq</span><span class="p">:</span>
             <span class="c1"># Non-cryptographic use, pseudo-random generator is acceptable here</span>
             <span class="n">start_seq</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bi_keys</span><span class="p">)</span>  <span class="c1"># noqa: S311  # nosec B311  # NOSONAR</span>
         <span class="n">late_word</span> <span class="o">=</span> <span class="n">start_seq</span>
-        <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">list_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_seq</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -496,8 +496,8 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_candidates</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">late_word</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
-        <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span>
+        <span class="n">late_word</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">list_word</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
         <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""Return the trigrams that can follow ``late_word``."""</span>

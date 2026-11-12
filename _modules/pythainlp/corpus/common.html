@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.common &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.corpus.common &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"countries"</span><span class="p">,</span>
@@ -179,8 +179,8 @@
 <span class="n">_THAI_ORST_WORDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
 
 <span class="n">_THAI_DICT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">_THAI_WSD_DICT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">_THAI_SYNONYMS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">_THAI_WSD_DICT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">_THAI_SYNONYMS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <div class="viewcode-block" id="countries">
@@ -208,7 +208,7 @@
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.provinces">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">provinces</span><span class="p">(</span>
     <span class="n">details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return a frozenset of Thailand province names in Thai.</span>
 
@@ -221,7 +221,7 @@
 <span class="sd">        or list of dict of province names and details such as</span>
 <span class="sd">        ``{'name_th': 'นนทบุรี', 'abbr_th': 'นบ', 'name_en': 'Nonthaburi',</span>
 <span class="sd">        'abbr_en': 'NBI'}`` (if details is True)</span>
-<span class="sd">    :rtype: Union[frozenset[str], list[dict[str, str]]]</span>
+<span class="sd">    :rtype: frozenset[str] | list[dict[str, str]]</span>
 <span class="sd">    """</span>
     <span class="k">global</span> <span class="n">_THAI_THAILAND_PROVINCES</span><span class="p">,</span> <span class="n">_THAI_THAILAND_PROVINCES_DETAILS</span>
 
@@ -508,7 +508,7 @@
 
 <div class="viewcode-block" id="thai_wsd_dict">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_wsd_dict">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">thai_wsd_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_wsd_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return a Thai word sense disambiguation dictionary.</span>
 
@@ -517,7 +517,7 @@
 <span class="sd">    &lt;https://pythainlp.org/pythainlp-corpus/thai_dict.html&gt;`_.</span>
 
 <span class="sd">    :return: Thai words with their senses</span>
-<span class="sd">    :rtype: dict[str, Union[list[str], list[list[str]]]]</span>
+<span class="sd">    :rtype: dict[str, list[str] | list[list[str]]]</span>
 <span class="sd">    """</span>
     <span class="k">global</span> <span class="n">_THAI_WSD_DICT</span>
     <span class="k">if</span> <span class="n">_THAI_WSD_DICT</span><span class="p">:</span>
@@ -526,7 +526,9 @@
     <span class="n">thai_wsd</span> <span class="o">=</span> <span class="n">thai_dict</span><span class="p">()</span>
     <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">meanings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">meaning</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">thai_wsd</span><span class="p">[</span><span class="s2">"word"</span><span class="p">],</span> <span class="n">thai_wsd</span><span class="p">[</span><span class="s2">"meaning"</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">meaning</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">thai_wsd</span><span class="p">[</span><span class="s2">"word"</span><span class="p">],</span> <span class="n">thai_wsd</span><span class="p">[</span><span class="s2">"meaning"</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">parsed</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">meaning</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
@@ -559,7 +561,7 @@
 
 <div class="viewcode-block" id="thai_synonyms">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.thai_synonyms">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">thai_synonyms</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_synonyms</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return Thai synonyms.</span>
 
@@ -567,7 +569,7 @@
 <span class="sd">    &lt;https://pythainlp.org/pythainlp-corpus/thai_synonym.html&gt;`_.</span>
 
 <span class="sd">    :return: Thai words with part-of-speech (POS) type and synonyms</span>
-<span class="sd">    :rtype: dict[str, Union[list[str], list[list[str]]]]</span>
+<span class="sd">    :rtype: dict[str, list[str] | list[list[str]]]</span>
 <span class="sd">    """</span>
     <span class="k">global</span> <span class="n">_THAI_SYNONYMS</span>
     <span class="k">if</span> <span class="n">_THAI_SYNONYMS</span><span class="p">:</span>
@@ -615,14 +617,14 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">thai_synonym</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thai_synonym</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return Thai synonyms (deprecated).</span>
 
 <span class="sd">    Use :func:`thai_synonyms` instead.</span>
 
 <span class="sd">    :return: words, parts of speech, and synonym groups</span>
-<span class="sd">    :rtype: dict[str, Union[list[str], list[list[str]]]]</span>
+<span class="sd">    :rtype: dict[str, list[str] | list[list[str]]]</span>
 <span class="sd">    """</span>
     <span class="n">warn_deprecation</span><span class="p">(</span>
         <span class="s2">"pythainlp.corpus.thai_synonym"</span><span class="p">,</span>

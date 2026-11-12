@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.benchmarks.metrics &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -125,7 +125,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">TypedDict</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util.lcs</span><span class="w"> </span><span class="kn">import</span> <span class="n">_lcs_lengths</span>
 
@@ -241,7 +241,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_references</span><span class="p">(</span>
-    <span class="n">references</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">references</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Wrap each reference in a list if each hypothesis has one reference."""</span>
     <span class="k">if</span> <span class="n">references</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">references</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
@@ -311,7 +311,7 @@
 <div class="viewcode-block" id="bleu_score">
 <a class="viewcode-back" href="../../../api/benchmarks.html#pythainlp.benchmarks.bleu_score">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bleu_score</span><span class="p">(</span>
-    <span class="n">references</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">references</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">hypotheses</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">tokenize</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
     <span class="n">lowercase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -325,7 +325,7 @@
 <span class="sd">    Understudy) metric that automatically tokenizes Thai text using</span>
 <span class="sd">    PyThaiNLP before calculating the score.</span>
 
-<span class="sd">    :param Union[list[str], list[list[str]]] references: reference</span>
+<span class="sd">    :param list[str] | list[list[str]] references: reference</span>
 <span class="sd">        translations, either a list of strings (one reference per</span>
 <span class="sd">        hypothesis) or a list of lists of strings (multiple references</span>
 <span class="sd">        per hypothesis)</span>
@@ -385,7 +385,9 @@
     <span class="n">clipped_counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_ngram</span>
     <span class="n">total_counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_ngram</span>
 
-    <span class="k">for</span> <span class="n">hyp_tokens</span><span class="p">,</span> <span class="n">ref_tokens_group</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hyp_tokens_list</span><span class="p">,</span> <span class="n">refs_tokens_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">hyp_tokens</span><span class="p">,</span> <span class="n">ref_tokens_group</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">hyp_tokens_list</span><span class="p">,</span> <span class="n">refs_tokens_list</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
         <span class="n">total_hyp_length</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyp_tokens</span><span class="p">)</span>
 
         <span class="c1"># Find the reference length closest to hypothesis length</span>
@@ -433,7 +435,7 @@
     <span class="n">reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">tokenize</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"newmm"</span><span class="p">,</span>
-    <span class="n">rouge_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rouge_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RougeScore</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Calculate ROUGE scores for Thai text with automatic tokenization.</span>
@@ -453,7 +455,7 @@
 <span class="sd">    :param str tokenize: engine to tokenize text with. See</span>
 <span class="sd">        :func:`pythainlp.tokenize.word_tokenize` for available engines</span>
 <span class="sd">        (default is ``"newmm"``)</span>
-<span class="sd">    :param Optional[list[str]] rouge_types: ROUGE types to calculate</span>
+<span class="sd">    :param list[str] | None rouge_types: ROUGE types to calculate</span>
 <span class="sd">        (default is ``["rouge1", "rouge2", "rougeL"]``)</span>
 
 <span class="sd">    :return: dictionary mapping each ROUGE type to a :class:`RougeScore`</span>

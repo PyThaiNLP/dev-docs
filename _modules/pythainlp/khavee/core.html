@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.khavee.core &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.khavee.core &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -118,7 +118,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">thai_consonants</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">subword_tokenize</span>
@@ -827,14 +827,14 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_marttra_of_open_form</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">original_word</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Classify words that cannot have a final consonant.</span>
 
 <span class="sd">        :param str word: Thai word without tone marks</span>
 <span class="sd">        :param str original_word: Thai word with tone marks</span>
 <span class="sd">        :return: "กา" or "กง", or None if not decided here</span>
-<span class="sd">        :rtype: Optional[str]</span>
+<span class="sd">        :rtype: str | None</span>
 <span class="sd">        """</span>
         <span class="c1"># Single-character words</span>
         <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_SINGLE_CHAR_WORDS</span><span class="p">:</span>
@@ -944,7 +944,7 @@
 
 <div class="viewcode-block" id="KhaveeVerifier.check_karu_lahu">
 <a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_karu_lahu">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_karu_lahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_karu_lahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Classify a Thai syllable as heavy (ครุ karu) or light (ลหุ lahu).</span>
 
@@ -960,7 +960,7 @@
 <span class="sd">        :param str text: single Thai syllable or word to be classified</span>
 <span class="sd">        :return: "karu" for a heavy syllable, "lahu" for a light syllable,</span>
 <span class="sd">            or ``False`` if the text is empty</span>
-<span class="sd">        :rtype: Union[str, bool]</span>
+<span class="sd">        :rtype: str | bool</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -982,7 +982,7 @@
 
 <div class="viewcode-block" id="KhaveeVerifier.check_klon">
 <a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_klon">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_klon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_klon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check the suitability of the poem according to Thai principles.</span>
 
@@ -990,7 +990,7 @@
 <span class="sd">        :param int k_type: type of Thai poem (4 or 8)</span>
 <span class="sd">        :return: check results of the poem, a message that the poem is</span>
 <span class="sd">            correct or a list of error messages</span>
-<span class="sd">        :rtype: Union[list[str], str]</span>
+<span class="sd">        :rtype: list[str] | str</span>
 
 <span class="sd">        ══════════════════════════════════════════════════════════════════════</span>
 
@@ -1150,17 +1150,17 @@
 <div class="viewcode-block" id="KhaveeVerifier.check_aek_too">
 <a class="viewcode-back" href="../../../api/khavee.html#pythainlp.khavee.KhaveeVerifier.check_aek_too">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_aek_too</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">dead_syllable_as_aek</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dead_syllable_as_aek</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check if Thai words carry the tone mark เอก (aek) or โท (too).</span>
 
-<span class="sd">        :param Union[list[str], str] text: Thai word or list of Thai words</span>
+<span class="sd">        :param list[str] | str text: Thai word or list of Thai words</span>
 <span class="sd">        :param bool dead_syllable_as_aek: if ``True``, treat a dead</span>
 <span class="sd">            syllable as aek</span>
 <span class="sd">        :return: "aek" or "too" if the word has exactly that tone mark,</span>
 <span class="sd">            otherwise ``False``; a list of results if ``text`` is a list</span>
-<span class="sd">        :rtype: Union[list[Union[bool, str]], bool, str]</span>
+<span class="sd">        :rtype: list[bool | str] | bool | str</span>
 <span class="sd">        :raises TypeError: if ``text`` is neither a string nor a list</span>
 
 <span class="sd">        :Example:</span>

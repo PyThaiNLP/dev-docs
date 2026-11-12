@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.util &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -182,7 +182,7 @@ See more: <a class="reference external" href="https://github.com/wannaphong/Kham
 <dd class="field-even"><p>list of <code class="docutils literal notranslate"><span class="pre">(full_text,</span> <span class="pre">cosine_similarity)</span></code> tuples</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, Optional[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)">float</a>]]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)">float</a> | None]]</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -287,7 +287,7 @@ format</p>
 (คำควบกล้ำไม่แท้), or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it is not a consonant cluster</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)">bool</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)">bool</a> | None</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_khuap_klam</span>
@@ -326,7 +326,7 @@ format</p>
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Thai text to censor</p></li>
 <li><p><strong>replacement</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – character to replace profanity with
 (default is <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code>)</p></li>
-<li><p><strong>custom_words</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>]</em>) – additional profanity words
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – additional profanity words
 (default is None)</p></li>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – word tokenization engine (default is <em>newmm</em>)</p></li>
 </ul>
@@ -406,7 +406,7 @@ order</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Thai text to check</p></li>
-<li><p><strong>custom_words</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>]</em>) – additional profanity words
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – additional profanity words
 (default is None)</p></li>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – word tokenization engine (default is <em>newmm</em>)</p></li>
 </ul>
@@ -563,7 +563,7 @@ punctuations, and non_thai.</p>
 <dd><p>Create a dictionary trie from a file or an iterable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dict_source</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>, </em><a class="reference internal" href="#pythainlp.util.Trie" title="pythainlp.util.Trie"><em>pythainlp.util.Trie</em></a><em>]</em>) – path to a dictionary file, an iterable of words, or a
+<dd class="field-odd"><p><strong>dict_source</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> | </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>] </em><em>| </em><a class="reference internal" href="#pythainlp.util.Trie" title="pythainlp.util.Trie"><em>pythainlp.util.Trie</em></a>) – path to a dictionary file, an iterable of words, or a
 <a class="reference internal" href="#pythainlp.util.Trie" title="pythainlp.util.Trie"><code class="xref py py-class docutils literal notranslate"><span class="pre">pythainlp.util.Trie</span></code></a> object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -763,7 +763,7 @@ each Thai meaning (default is a colon for both)</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Thai text to check</p></li>
-<li><p><strong>custom_words</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>]</em>) – additional profanity words
+<li><p><strong>custom_words</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#set" title="(in Python v3.15)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – additional profanity words
 (default is None)</p></li>
 <li><p><strong>engine</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – word tokenization engine (default is <em>newmm</em>)</p></li>
 </ul>
@@ -886,7 +886,7 @@ repetition. This function preprocesses Thai text by replacing
 Maiyamok with the repeated word.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sent</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em><em>]</em>) – sentence, as text or list of words</p>
+<dd class="field-odd"><p><strong>sent</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – sentence, as text or list of words</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of words</p>
@@ -1015,7 +1015,7 @@ call those functions separately.</p>
 <dd><p>Convert an integer to Thai text.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>number</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em>]</em>) – integer to be converted</p>
+<dd class="field-odd"><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em> | </em><em>None</em>) – integer to be converted</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>text representing the number in Thai</p>
@@ -1091,7 +1091,7 @@ and each digit after the decimal is read individually.</p>
 <dd class="field-even"><p>counter of word frequencies, or None if <code class="docutils literal notranslate"><span class="pre">words</span></code> is empty</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.Counter" title="(in Python v3.15)">collections.Counter</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.Counter" title="(in Python v3.15)">collections.Counter</a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>] | None</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
@@ -1829,9 +1829,9 @@ due to the change in Thai New Year’s Day).</p>
 <li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – string containing date and time directives</p></li>
 <li><p><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – era of the year in the text
 (<em>ad</em> for Anno Domini, <em>be</em> for Buddhist Era)</p></li>
-<li><p><strong>add_year</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em>]</em>) – year to add to a two-digit year
+<li><p><strong>add_year</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em> | </em><em>None</em>) – year to add to a two-digit year
 (default is None)</p></li>
-<li><p><strong>tzinfo</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/zoneinfo.html#zoneinfo.ZoneInfo" title="(in Python v3.15)"><em>zoneinfo.ZoneInfo</em></a><em>]</em>) – time zone
+<li><p><strong>tzinfo</strong> (<a class="reference external" href="https://docs.python.org/3/library/zoneinfo.html#zoneinfo.ZoneInfo" title="(in Python v3.15)"><em>zoneinfo.ZoneInfo</em></a><em> | </em><em>None</em>) – time zone
 (default is Asia/Bangkok)</p></li>
 </ul>
 </dd>
@@ -1929,7 +1929,7 @@ due to the change in Thai New Year’s Day).</p>
 <code class="xref py py-func docutils literal notranslate"><span class="pre">pythainlp.transliterate.pronunciate()</span></code>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>word</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – Thai word, or None</p>
+<dd class="field-odd"><p><strong>word</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> | </em><em>None</em>) – Thai word, or None</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of (syllable, tone) tuples, one for each syllable.
@@ -1972,7 +1972,7 @@ Return <code class="docutils literal notranslate"><span class="pre">[]</span></c
 <dd class="field-even"><p>date and time if it can be calculated, otherwise None</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)">datetime.datetime</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)">datetime.datetime</a> | None</p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
@@ -2063,7 +2063,7 @@ Return <code class="docutils literal notranslate"><span class="pre">[]</span></c
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>time_data</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.15)"><em>datetime.time</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><em>datetime.datetime</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> object, a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>
+<li><p><strong>time_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.15)"><em>datetime.time</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><em>datetime.datetime</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> object, a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>
 object, or a string in <code class="docutils literal notranslate"><span class="pre">H:M</span></code> or <code class="docutils literal notranslate"><span class="pre">H:M:S</span></code> format
 (24-hour clock)</p></li>
 <li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – <p>output format</p>
@@ -2073,7 +2073,7 @@ object, or a string in <code class="docutils literal notranslate"><span class="p
 <li><p><em>m6h</em> - modified 6-hour clock</p></li>
 </ul>
 </p></li>
-<li><p><strong>precision</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – <p>precision of the spelled-out time</p>
+<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> | </em><em>None</em>) – <p>precision of the spelled-out time</p>
 <ul>
 <li><p><em>m</em> - always spell out to the minute</p></li>
 <li><p><em>s</em> - always spell out to the second</p></li>
@@ -2314,7 +2314,7 @@ a placeholder such as “◌”</p>
 <dd><p>Spell out a word in Thai word distribution form.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>]</em>) – Thai word, or None</p>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> | </em><em>None</em>) – Thai word, or None</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of spelled-out word components,
@@ -2380,7 +2380,7 @@ empty list if text is None or empty</p>
 <dd class="field-even"><p>zodiac name or number of the year</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)">int</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a> | <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)">int</a></p>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">th_zodiac</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.util.trie &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.util.trie &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -123,7 +123,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="Trie">
@@ -168,7 +167,7 @@
 <span class="w">            </span><span class="sd">"""Initialize an empty node."""</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="c1"># Children dict is created on demand to reduce memory for leaf nodes.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Trie</span><span class="o">.</span><span class="n">Node</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></div>
 </div>
 
 
@@ -329,11 +328,11 @@
 
 <div class="viewcode-block" id="dict_trie">
 <a class="viewcode-back" href="../../../api/util.html#pythainlp.util.dict_trie">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">dict_trie</span><span class="p">(</span><span class="n">dict_source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Trie</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Trie</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dict_trie</span><span class="p">(</span><span class="n">dict_source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">Trie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Trie</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a dictionary trie from a file or an iterable.</span>
 
-<span class="sd">    :param Union[str, Iterable[str], pythainlp.util.Trie] dict_source:</span>
+<span class="sd">    :param str | Iterable[str] | pythainlp.util.Trie dict_source:</span>
 <span class="sd">        path to a dictionary file, an iterable of words, or a</span>
 <span class="sd">        :class:`pythainlp.util.Trie` object</span>
 <span class="sd">    :return: trie object</span>

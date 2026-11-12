@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.spell.words_spelling_correction &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -119,7 +119,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_hf_hub</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_path_join</span>
@@ -389,18 +389,18 @@
     <span class="c1"># --- Nearest Neighbor Method ---</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_word_suggestion</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">list_word</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">list_word</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Find the nearest neighbor words of a word or a list of words.</span>
 
 <span class="sd">        This method queries the ONNX model.</span>
 
-<span class="sd">        :param Union[str, list[str]] list_word: word, or list of words,</span>
+<span class="sd">        :param str | list[str] list_word: word, or list of words,</span>
 <span class="sd">            to get suggestions for</span>
 <span class="sd">        :return: nearest neighbor words from the suggestion list, one list</span>
 <span class="sd">            per input word; a single list if the input is a word</span>
-<span class="sd">        :rtype: Union[list[str], list[list[str]]]</span>
+<span class="sd">        :rtype: list[str] | list[list[str]]</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">input_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_word</span><span class="p">]</span>
@@ -462,8 +462,8 @@
 <div class="viewcode-block" id="get_words_spell_suggestion">
 <a class="viewcode-back" href="../../../api/spell.html#pythainlp.spell.get_words_spell_suggestion">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_words_spell_suggestion</span><span class="p">(</span>
-    <span class="n">list_words</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+    <span class="n">list_words</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get spelling suggestions for Thai words.</span>
 
@@ -471,11 +471,11 @@
 
 <span class="sd">    It requires numpy and onnxruntime. Install them before use.</span>
 
-<span class="sd">    :param Union[str, list[str]] list_words: word, or list of words,</span>
+<span class="sd">    :param str | list[str] list_words: word, or list of words,</span>
 <span class="sd">        to get suggestions for</span>
 <span class="sd">    :return: spelling suggestions (at most 5 per word); a list of lists</span>
 <span class="sd">        if the input is a list of words</span>
-<span class="sd">    :rtype: Union[list[str], list[list[str]]]</span>
+<span class="sd">    :rtype: list[str] | list[list[str]]</span>
 
 <span class="sd">    :Example:</span>
 

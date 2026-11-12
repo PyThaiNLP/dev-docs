@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.corpus.core &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.corpus.core &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -133,7 +133,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">BinaryIO</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">BinaryIO</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">corpus_db_path</span><span class="p">,</span> <span class="n">corpus_db_url</span><span class="p">,</span> <span class="n">corpus_path</span>
@@ -178,7 +178,7 @@
 
 <div class="viewcode-block" id="get_corpus_db">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_db">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_db</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_ResponseWrapper</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_db</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ResponseWrapper</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get the corpus catalog from a server.</span>
 
@@ -187,7 +187,7 @@
 
 <span class="sd">    :param str url: URL of the corpus catalog</span>
 <span class="sd">    :return: response wrapper, or None if the request fails</span>
-<span class="sd">    :rtype: Optional[pythainlp.corpus.core._ResponseWrapper]</span>
+<span class="sd">    :rtype: pythainlp.corpus.core._ResponseWrapper | None</span>
 <span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPError</span><span class="p">,</span> <span class="n">URLError</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">urlopen</span>
@@ -323,7 +323,7 @@
 
 <div class="viewcode-block" id="get_corpus_default_db">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_default_db">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_default_db</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get the corpus path from default_db.json.</span>
 
@@ -333,7 +333,7 @@
 <span class="sd">    :param str version: corpus version (empty string means latest)</span>
 <span class="sd">    :return: path to the corpus, or None if the corpus does not exist</span>
 <span class="sd">        on the device</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    """</span>
     <span class="n">corpus_db</span> <span class="o">=</span> <span class="n">_load_default_db</span><span class="p">()</span>
 
@@ -356,7 +356,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_corpus_file_path</span><span class="p">(</span>
     <span class="n">corpus_db_detail</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Resolve the local file system path of a corpus catalog entry.</span>
 
@@ -364,7 +364,7 @@
 <span class="sd">        local catalog</span>
 <span class="sd">    :return: full local path to the corpus file or folder, or None if</span>
 <span class="sd">        required path information is missing</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"is_folder"</span><span class="p">):</span>
         <span class="n">foldername</span> <span class="o">=</span> <span class="n">corpus_db_detail</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"foldername"</span><span class="p">)</span>
@@ -400,7 +400,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_redownload_missing_corpus</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Download again a corpus that is in the catalog but missing on disk.</span>
 
@@ -408,7 +408,7 @@
 <span class="sd">    :param str version: corpus version (empty string means latest)</span>
 <span class="sd">    :param str path: expected local path of the corpus</span>
 <span class="sd">    :return: *path* if it exists after the download, otherwise None</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    :raises FileNotFoundError: if ``PYTHAINLP_OFFLINE`` is set</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">is_offline_mode</span><span class="p">():</span>
@@ -427,7 +427,7 @@
 
 <div class="viewcode-block" id="get_corpus_path">
 <a class="viewcode-back" href="../../../api/corpus.html#pythainlp.corpus.get_corpus_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corpus_path</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get the local path of a corpus.</span>
 
@@ -447,7 +447,7 @@
 <span class="sd">    :param str version: corpus version (empty string means latest)</span>
 <span class="sd">    :return: full local path if the corpus exists, or None if the corpus</span>
 <span class="sd">        cannot be found or downloaded</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    :raises FileNotFoundError: if the corpus is missing locally and</span>
 <span class="sd">        ``PYTHAINLP_OFFLINE`` is set to a truthy value</span>
 
@@ -945,7 +945,7 @@
     <span class="k">return</span> <span class="n">best</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_select_version</span><span class="p">(</span><span class="n">corpus</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_select_version</span><span class="p">(</span><span class="n">corpus</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Select the corpus version to download and check that it is supported.</span>
 
@@ -956,7 +956,7 @@
 <span class="sd">    :param str version: requested version (empty string means any)</span>
 <span class="sd">    :return: selected version, or None (with a printed message) if it is</span>
 <span class="sd">        missing or not supported</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    """</span>
     <span class="n">versions</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="s2">"versions"</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">version</span><span class="p">:</span>
@@ -971,9 +971,7 @@
     <span class="k">return</span> <span class="n">version</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_find_local_corpus_no</span><span class="p">(</span>
-    <span class="n">local_db</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_find_local_corpus_no</span><span class="p">(</span><span class="n">local_db</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return the local catalog key of the first entry named *name*.</span>
 
@@ -1000,7 +998,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_extract_corpus_archive</span><span class="p">(</span>
     <span class="n">corpus_versions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract a downloaded tar or zip corpus into its own folder.</span>
 
@@ -1010,7 +1008,7 @@
 <span class="sd">    again; an existing corpus folder stays as it was.</span>
 
 <span class="sd">    :return: folder name, or None if the corpus is not an archive</span>
-<span class="sd">    :rtype: Optional[str]</span>
+<span class="sd">    :rtype: str | None</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">corpus_versions</span><span class="p">[</span><span class="s2">"is_tar_gz"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"True"</span><span class="p">:</span>
         <span class="n">is_tar</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1106,7 +1104,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_sweep_stale_temp_paths</span><span class="p">(</span>
-    <span class="n">max_age</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">max_age</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Remove abandoned hidden temporary entries from the data directory.</span>
@@ -1119,9 +1117,9 @@
 <span class="sd">    ``&lt;name&gt;`` next to it: it is then the only copy of a corpus that failed</span>
 <span class="sd">    to swap in. Errors are ignored.</span>
 
-<span class="sd">    :param Optional[float] max_age: age in seconds after which an entry is</span>
+<span class="sd">    :param float | None max_age: age in seconds after which an entry is</span>
 <span class="sd">        stale (default: 24 hours)</span>
-<span class="sd">    :param Optional[float] now: current time in seconds</span>
+<span class="sd">    :param float | None now: current time in seconds</span>
 <span class="sd">        (default: ``time.time()``)</span>
 <span class="sd">    """</span>
     <span class="n">max_age</span> <span class="o">=</span> <span class="n">_STALE_TEMP_SECONDS</span> <span class="k">if</span> <span class="n">max_age</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">max_age</span>
@@ -1177,7 +1175,7 @@
     <span class="n">os</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_file_mode</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_file_mode</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the permission bits of *path*, or None if missing."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">stat</span><span class="o">.</span><span class="n">S_IMODE</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">st_mode</span><span class="p">)</span>
@@ -1213,11 +1211,11 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_save_local_db_entry</span><span class="p">(</span>
     <span class="n">local_db</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-    <span class="n">found</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">found</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">foldername</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">foldername</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Add or update a corpus entry and write the local catalog."""</span>
     <span class="n">is_folder</span> <span class="o">=</span> <span class="n">foldername</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -1247,7 +1245,7 @@
     <span class="n">corpus_versions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">local_db</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-    <span class="n">found</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">found</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Download, verify, and extract a corpus, then record it locally."""</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Downloading: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -1453,7 +1451,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_hf_hub</span><span class="p">(</span>
-    <span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Download a Hugging Face Hub repository into the PyThaiNLP data directory.</span>
@@ -1461,7 +1459,7 @@
 <span class="sd">    :param str repo_id: repository ID</span>
 <span class="sd">    :param str filename: name of the file to download</span>
 <span class="sd">        (if empty, download the entire snapshot)</span>
-<span class="sd">    :param Optional[str] revision: git revision ID, which can be a branch</span>
+<span class="sd">    :param str | None revision: git revision ID, which can be a branch</span>
 <span class="sd">        name, a tag, or a commit hash (default is None).</span>
 <span class="sd">        Pin to a full commit hash for reproducible and secure downloads.</span>
 <span class="sd">    :return: path to the downloaded file or snapshot</span>

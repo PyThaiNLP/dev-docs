@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pythainlp.classify.laya &mdash; PyThaiNLP bc3a50c documentation</title>
+  <title>pythainlp.classify.laya &mdash; PyThaiNLP 2a2b414 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=1ed9ccb7"></script>
+      <script src="../../../_static/documentation_options.js?v=7a00c6fa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -127,7 +127,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_hf_hub</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pythainlp.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_path_join</span>
@@ -201,11 +201,11 @@
     <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">_QTYPE_NAMES</span><span class="p">[</span><span class="n">qtype</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_serialize_state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_serialize_state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Serialize text or structured state to string.</span>
 
-<span class="sd">    :param Union[str, dict[str, Any], list[Any]] state: State to serialize.</span>
+<span class="sd">    :param str | dict[str, Any] | list[Any] state: State to serialize.</span>
 <span class="sd">    :return: String representation.</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    """</span>
@@ -382,7 +382,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_sequence</span><span class="p">(</span>
     <span class="n">tok</span><span class="p">:</span> <span class="n">_TokenizerWrapper</span><span class="p">,</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">q</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="n">head_max_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
@@ -392,7 +392,7 @@
 <span class="sd">    Build token sequence: [CLS] &lt;type&gt; ins [SEP] [MASK] opt0 ... [SEP] state [SEP].</span>
 
 <span class="sd">    :param _TokenizerWrapper tok: Tokenizer instance.</span>
-<span class="sd">    :param Union[str, dict[str, Any], list[Any]] state: Input state/text.</span>
+<span class="sd">    :param str | dict[str, Any] | list[Any] state: Input state/text.</span>
 <span class="sd">    :param dict[str, Any] q: Question definition.</span>
 <span class="sd">    :param int max_len: Maximum total sequence length.</span>
 <span class="sd">    :param int head_max_len: Maximum prefix/header length.</span>
@@ -473,18 +473,18 @@
 <span class="sd">    allowing zero-shot classification using an instruction prompt and candidate</span>
 <span class="sd">    choices without any task-specific fine-tuning.</span>
 
-<span class="sd">    :param Optional[str] model_path: Hugging Face model repository ID or</span>
+<span class="sd">    :param str | None model_path: Hugging Face model repository ID or</span>
 <span class="sd">        local directory path containing the ONNX model files.</span>
 <span class="sd">        Default is ``"pythainlp/laya-multilingual-onnx"``.</span>
-<span class="sd">    :param Optional[list[str]] providers: List of ONNX Runtime execution</span>
+<span class="sd">    :param list[str] | None providers: List of ONNX Runtime execution</span>
 <span class="sd">        providers (e.g. ``["CPUExecutionProvider"]``,</span>
 <span class="sd">        ``["CUDAExecutionProvider"]``). Default is ``["CPUExecutionProvider"]``.</span>
-<span class="sd">    :param Optional[str] revision: Git revision (branch, tag, or commit hash)</span>
+<span class="sd">    :param str | None revision: Git revision (branch, tag, or commit hash)</span>
 <span class="sd">        on Hugging Face Hub (optional).</span>
 <span class="sd">    :param int batch_size: Batch size for batched inference (default: 16).</span>
-<span class="sd">    :param Optional[int] max_length: Maximum sequence length in tokens</span>
+<span class="sd">    :param int | None max_length: Maximum sequence length in tokens</span>
 <span class="sd">        (default from configuration, typically 1024).</span>
-<span class="sd">    :param Optional[int] head_max_length: Maximum token length for the question</span>
+<span class="sd">    :param int | None head_max_length: Maximum token length for the question</span>
 <span class="sd">        header and candidate options (default from configuration, typically 256).</span>
 
 <span class="sd">    :Example:</span>
@@ -506,12 +506,12 @@
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">providers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">providers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
-        <span class="n">max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">head_max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">head_max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Initialize the Laya ONNX model and tokenizer."""</span>
         <span class="k">try</span><span class="p">:</span>
@@ -572,12 +572,12 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_files</span><span class="p">(</span>
-        <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">revision</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""Resolve file paths for model, configs, and tokenizer."""</span>
         <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
             <span class="n">model_file</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">"model.onnx"</span><span class="p">)</span>
-            <span class="n">rl_cfg_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span>
+            <span class="n">rl_cfg_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">safe_path_join</span><span class="p">(</span>
                 <span class="n">model_path</span><span class="p">,</span> <span class="s2">"rl_agent_config.json"</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">rl_cfg_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">rl_cfg_file</span><span class="p">):</span>
@@ -647,7 +647,7 @@
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.system_one">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">system_one</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+        <span class="n">state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
         <span class="n">questions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -658,7 +658,7 @@
 <span class="sd">        - ``score``: Ordinal evaluation across score criteria.</span>
 <span class="sd">        - ``noul``: Binary yes/no statement evaluation.</span>
 
-<span class="sd">        :param Union[str, dict[str, Any], list[Any]] state: Context or document to evaluate.</span>
+<span class="sd">        :param str | dict[str, Any] | list[Any] state: Context or document to evaluate.</span>
 <span class="sd">        :param dict[str, Any] questions: Dictionary of question definitions keyed by question ID.</span>
 <span class="sd">        :return: Dictionary containing ``"model"``, ``"answers"``, and token ``"usage"``.</span>
 <span class="sd">        :rtype: dict[str, Any]</span>
@@ -728,7 +728,7 @@
                         <span class="n">choice</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">argmax</span><span class="p">())],</span>
                         <span class="n">probabilities</span><span class="o">=</span><span class="p">{</span>
                             <span class="n">label</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
-                            <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                         <span class="p">},</span>
                     <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">q</span><span class="p">[</span><span class="s2">"t"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"score"</span><span class="p">:</span>
@@ -763,16 +763,16 @@
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.classify">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">classify</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
-        <span class="n">choices</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
         <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
         <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Classify text into one of candidate choices using prompt guidance.</span>
 
-<span class="sd">        :param Union[str, dict[str, Any], list[Any]] text: Input text or structured state.</span>
-<span class="sd">        :param Union[list[str], dict[str, Any]] choices: List of candidate choice labels</span>
+<span class="sd">        :param str | dict[str, Any] | list[Any] text: Input text or structured state.</span>
+<span class="sd">        :param list[str] | dict[str, Any] choices: List of candidate choice labels</span>
 <span class="sd">            or dictionary mapping each choice label to its description.</span>
 <span class="sd">        :param str prompt: Instruction prompt guiding the classification task.</span>
 <span class="sd">            Default is ``"Select the best choice for the given text."``.</span>
@@ -780,7 +780,7 @@
 <span class="sd">            choice, confidence, probabilities, and action probability.</span>
 <span class="sd">            If False (default), returns the selected choice label string.</span>
 <span class="sd">        :return: Selected choice string or detailed answer dictionary.</span>
-<span class="sd">        :rtype: Union[str, dict[str, Any]]</span>
+<span class="sd">        :rtype: str | dict[str, Any]</span>
 <span class="sd">        """</span>
         <span class="n">questions</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"classification"</span><span class="p">:</span> <span class="p">{</span>
@@ -800,25 +800,25 @@
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.classify_batch">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">classify_batch</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]]],</span>
-        <span class="n">choices</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
         <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
         <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Classify multiple texts in batches.</span>
 
-<span class="sd">        :param list[Union[str, dict[str, Any], list[Any]]] texts: List of texts or states.</span>
-<span class="sd">        :param Union[list[str], dict[str, Any]] choices: Candidate choices.</span>
+<span class="sd">        :param list[str | dict[str, Any] | list[Any]] texts: List of texts or states.</span>
+<span class="sd">        :param list[str] | dict[str, Any] choices: Candidate choices.</span>
 <span class="sd">        :param str prompt: Instruction prompt.</span>
 <span class="sd">        :param bool return_details: Whether to return full details.</span>
 <span class="sd">        :return: List of predicted choices or detailed dictionaries.</span>
-<span class="sd">        :rtype: list[Union[str, dict[str, Any]]]</span>
+<span class="sd">        :rtype: list[str | dict[str, Any]]</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">texts</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
 
-        <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span>
                 <span class="n">text</span><span class="p">,</span>
@@ -834,10 +834,10 @@
 <a class="viewcode-back" href="../../../api/classify.html#pythainlp.classify.LayaModel.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
-        <span class="n">choices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">choices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Select the best choice for the given text."</span><span class="p">,</span>
-        <span class="n">questions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">questions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">return_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
@@ -846,10 +846,10 @@
 <span class="sd">        If ``choices`` is provided, executes choice classification.</span>
 <span class="sd">        If ``questions`` is provided, executes structured decision tasks.</span>
 
-<span class="sd">        :param Union[str, dict[str, Any], list[Any]] text: Input text or state.</span>
-<span class="sd">        :param Optional[Union[list[str], dict[str, Any]]] choices: Candidate choices.</span>
+<span class="sd">        :param str | dict[str, Any] | list[Any] text: Input text or state.</span>
+<span class="sd">        :param list[str] | dict[str, Any] | None choices: Candidate choices.</span>
 <span class="sd">        :param str prompt: Instruction prompt when using choices.</span>
-<span class="sd">        :param Optional[dict[str, Any]] questions: Question dictionary.</span>
+<span class="sd">        :param dict[str, Any] | None questions: Question dictionary.</span>
 <span class="sd">        :param bool return_details: Whether to return detailed output.</span>
 <span class="sd">        :return: Predicted choice or questions output.</span>
 <span class="sd">        :rtype: Any</span>
